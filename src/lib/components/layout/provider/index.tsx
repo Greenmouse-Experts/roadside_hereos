@@ -2,6 +2,15 @@ import React from 'react'
 import SidebarLayout from './section/sidebar'
 import { BiBell } from 'react-icons/bi';
 import { RiArrowDropDownLine } from 'react-icons/ri';
+import {
+  Button,
+  Menu,
+  MenuHandler,
+  MenuItem,
+  MenuList,
+} from "@material-tailwind/react";
+import { BsGear } from "react-icons/bs";
+import { IoLogOutOutline } from "react-icons/io5";
 
 interface Props {
   children: React.ReactNode
@@ -33,7 +42,26 @@ const ProviderDashboardLayout:React.FC<Props> = ({children}) => {
               />
               <div className="flex gap-x-4 items-center cursor-pointer">
                 <p className="fw-500">Ursula Okolie</p>
-                <RiArrowDropDownLine className="text-3xl" />
+                <Menu placement="bottom-start">
+                  <MenuHandler>
+                    <Button className="p-0 m-0 bg-transparent !shadow-none">
+                      <RiArrowDropDownLine className="cursor-pointer text-black text-3xl" />
+                    </Button>
+                  </MenuHandler>
+                  <MenuList className="index-30 text-black w-44">
+                    <MenuItem className="flex gap-x-2 items-center fw-500">
+                      <BsGear className="text-2xl" />
+                      Settings
+                    </MenuItem>
+                    <MenuItem
+                      className="flex gap-x-2 items-center fw-500"
+                      // onClick={logout}
+                    >
+                      <IoLogOutOutline className="text-2xl" />
+                      Logout
+                    </MenuItem>
+                  </MenuList>
+                </Menu>
               </div>
             </div>
           </div>
