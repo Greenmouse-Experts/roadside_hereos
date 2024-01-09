@@ -1,4 +1,3 @@
-import React from "react";
 import { FaRegUser } from "react-icons/fa";
 import { GrTransaction } from "react-icons/gr";
 import { MdOutlineLocationOn } from "react-icons/md";

@@ -1,4 +1,3 @@
-import React from "react";
 import { MdCrisisAlert } from "react-icons/md";
 
 const Alerts = () => {

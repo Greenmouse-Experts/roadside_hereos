@@ -1,4 +1,3 @@
-import React from 'react'
 import LandingLayout from '../../lib/components/layout/landing'
 
 const HomePage = () => {

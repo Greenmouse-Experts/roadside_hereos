@@ -1,5 +1,4 @@
-import React, { FC, useState } from "react";
-import logo from "../../../../../public/logo.svg";
+import { FC, useState } from "react";
 import { HiMenuAlt3 } from "react-icons/hi";
 import CallOutMenu from "./CallOut";
 import { AiOutlineClose } from "react-icons/ai";

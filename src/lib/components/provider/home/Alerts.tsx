@@ -1,4 +1,3 @@
-import React from "react";
 import { IoExpand } from "react-icons/io5";
 import { MdCrisisAlert } from "react-icons/md";
 

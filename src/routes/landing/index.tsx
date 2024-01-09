@@ -1,6 +1,5 @@
 import { landingRoutes } from "./routes";
-import { Route, Routes } from "react-router-dom";
-import LandingLayout from "../../lib/components/layout/landing";
+import { Route} from "react-router-dom";
 
 const LandingRouting = () => {
   return (

@@ -1,7 +1,5 @@
 import React from "react";
 import SidebarLayout from "./section/sidebar";
-import { BiBell } from "react-icons/bi";
-import { RiArrowDropDownLine } from "react-icons/ri";
 import { Tooltip, Button } from "@material-tailwind/react";
 import { MdHomeRepairService } from "react-icons/md";
 import UserRequests from "../../user/UserRequests";
