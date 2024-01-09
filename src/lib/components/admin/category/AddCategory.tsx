@@ -20,8 +20,14 @@ const AddCategory = () => {
       pricing: ""
     },
   });
-  const onSubmit = () => {
+  const onSubmit = (data: any) => {
     setIsBusy(true);
+    const payload = {
+      ...data,
+      image: imageValue
+    }
+    console.log(payload);
+    
   };
   return (
     <>
