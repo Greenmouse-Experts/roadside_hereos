@@ -64,7 +64,7 @@ const TextInput: React.FC<Props> = ({
   className = 'w-full border-0  outline-none py-2 px-2 rounded',
   labelClassName,
   placeholder,
-  disabled = false,
+  disabled,
   maxLength,
   autoFocus,
   fullWidth,

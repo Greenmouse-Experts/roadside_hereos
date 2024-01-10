@@ -4,6 +4,10 @@ import TextInput, { InputType } from "../../ui/TextInput";
 import Button from "../../ui/Button";
 import { ScaleSpinner } from "../../ui/Loading";
 import ImageInput from "../../ui/ImageInput";
+import { useMutation } from "@tanstack/react-query";
+import { uploadFile } from "../../../services/api/routineApi";
+import { toast } from "react-toastify";
+import { createCategory } from "../../../services/api/serviceApi";
 
 const AddCategory = () => {
   const [isBusy, setIsBusy] = useState(false);
@@ -11,23 +15,56 @@ const AddCategory = () => {
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
     defaultValues: {
       name: "",
       image: "",
-      pricing: ""
+      pricing: "",
     },
   });
-  const onSubmit = (data: any) => {
+  const addCat = useMutation({
+    mutationFn: createCategory,
+    onSuccess: () => {
+      toast.success('Category Created Successfuly');
+      setIsBusy(false)
+      reset()
+      setImageValue([])
+    },
+    onError: () => {
+      toast.error("error dey");
+      setIsBusy(false);
+    },
+  });
+  const upload = useMutation({
+    mutationFn: uploadFile,
+  });
+  const onSubmit = (datas: any) => {
     setIsBusy(true);
-    const payload = {
-      ...data,
-      image: imageValue
+    if (imageValue) {
+      const fd = new FormData();
+      fd.append("image", imageValue[0]);
+      upload.mutateAsync(fd, {
+        onSuccess: (data) => {
+          console.log(data);
+          const payload = {
+            name: datas.name,
+            icon: data[0],
+            slug: datas.pricing
+          }
+          addCat.mutate(payload)
+        },
+        onError: () => {
+          toast.error("error dey");
+          setIsBusy(false);
+        },
+      });
+    }else {
+      toast.info('Please add a cover photo')
+      setIsBusy(false)
     }
-    console.log(payload);
-    
   };
   return (
     <>
@@ -84,12 +121,12 @@ const AddCategory = () => {
           </div>
           <div className="mt-12 flex justify-center">
             <div className="lg:w-5/12">
-            <Button
-              title={
-                isBusy ? <ScaleSpinner size={14} color="white" /> : "Continue"
-              }
-              disabled={!isValid}
-            />
+              <Button
+                title={
+                  isBusy ? <ScaleSpinner size={14} color="white" /> : "Continue"
+                }
+                disabled={!isValid}
+              />
             </div>
           </div>
         </form>

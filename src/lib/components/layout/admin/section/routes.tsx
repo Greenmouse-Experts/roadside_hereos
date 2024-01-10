@@ -42,7 +42,7 @@ export const Routes = [
     submenu: [],
   },
   {
-    name: 'Service Reuests',
+    name: 'Service Requests',
     icon: <BiGitPullRequest className="text-xl" />,
     route: '/admin/requests',
     submenu: [],

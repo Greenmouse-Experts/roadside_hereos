@@ -129,13 +129,13 @@ input[type="checkbox"]:checked {
   transition: 0.3s;
 }
 .index-10 {
-  z-index: 10000;
+  z-index: 1000;
 }
 .index-20 {
-  z-index: 20000;
+  z-index: 2000;
 }
 .index-30 {
-  z-index: 20000;
+  z-index: 3000;
 }
 .Toastify__toast-container {
   z-index: 30000 !important;

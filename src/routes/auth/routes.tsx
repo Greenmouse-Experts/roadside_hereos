@@ -1,3 +1,4 @@
+import AdminLogin from "../../pages/auth/AdminLogin";
 import ForgetPassword from "../../pages/auth/ForgetPassword";
 import ProviderRegister from "../../pages/auth/ProviderRegister";
 import UserLogin from "../../pages/auth/UserLogin";
@@ -22,5 +23,10 @@ export const authRoutes = [
         id: 'auth-4',
         path: 'verify/:id',
         component: <ForgetPassword/>
+    },
+    {
+        id: 'auth-5',
+        path: 'admin',
+        component: <AdminLogin/>
     },
 ]

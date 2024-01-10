@@ -1,11 +1,15 @@
-import { Menu, MenuItem, Sidebar, SubMenu } from 'react-pro-sidebar';
-import { RouteType, Routes } from './routes';
-import { Link, useLocation } from 'react-router-dom';
+import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
+import { RouteType, Routes } from "./routes";
+import { Link, useLocation } from "react-router-dom";
+import useModal from "../../../../hooks/useModal";
+import LogoutModal from "../../../auth/LogoutModal";
+import { BiLogOutCircle } from "react-icons/bi";
+import { BsGear } from "react-icons/bs";
 
 const SidebarLayout = () => {
   const path = useLocation();
-  console.log(path.pathname);
-  
+  const { Modal, setShowModal } = useModal();
+
   return (
     <div className="left-0 top-0 fixed overflow-y-hidden rounded-r-3xl index-30  bg-primary text-white">
       <Sidebar
@@ -26,25 +30,25 @@ const SidebarLayout = () => {
           </Link>
         </div>
         <Menu
-          className="overflow-y-auto scroll-pro h-[84vh]"
+          className="overflow-y-auto relative scroll-pro h-[84vh]"
           transitionDuration={600}
           menuItemStyles={{
             button: ({ level, active }) => {
               if (level === 0)
                 return {
-                  color: active ? 'black' : '#b5b3b3',
-                  marginTop: '4px',
-                  height: 'auto',
-                  padding: '3px 15px 3px 0px !important ',
-                  textAlign: 'left',
-                  fontWeight: active ? '600' : '500',
-                  borderLeft: active ? '5px solid #090979' : '',
-                  background: active ? '#e3f9ff' : '',
-                  '&:hover': {
-                    color: 'black',
-                    background: '#e3f9ff',
-                    borderLeft: '5px solid #090979',
-                    fontWeight: '500',
+                  color: active ? "black" : "#b5b3b3",
+                  marginTop: "4px",
+                  height: "auto",
+                  padding: "3px 15px 3px 0px !important ",
+                  textAlign: "left",
+                  fontWeight: active ? "600" : "500",
+                  borderLeft: active ? "5px solid #090979" : "",
+                  background: active ? "#e3f9ff" : "",
+                  "&:hover": {
+                    color: "black",
+                    background: "#e3f9ff",
+                    borderLeft: "5px solid #090979",
+                    fontWeight: "500",
                   },
                 };
             },
@@ -55,7 +59,7 @@ const SidebarLayout = () => {
               <>
                 {!!item.submenu.length ? (
                   <SubMenu label={item.name} icon={item.icon} key={item.name}>
-                    {item.submenu.map((item:RouteType, i) => (
+                    {item.submenu.map((item: RouteType, i) => (
                       <MenuItem
                         component={<Link to={item.route} />}
                         active={path.pathname === item.route && true}
@@ -78,11 +82,25 @@ const SidebarLayout = () => {
               </>
             );
           })}
+          <MenuItem
+            component={<Link to={"/admin/settings"} />}
+            icon={<BsGear className="text-xl" />}
+            className="mt-12"
+          >
+            <p className="fs-400">Settings</p>
+          </MenuItem>
+          <MenuItem
+            icon={<BiLogOutCircle className="text-xl" />}
+            onClick={() => setShowModal(true)}
+            className=""
+          >
+            <p className="fs-400">Logout</p>
+          </MenuItem>
         </Menu>
       </Sidebar>
-      {/* <Modal title="" noHead>
+      <Modal title="" size="xs">
         <LogoutModal CloseModal={() => setShowModal(false)} />
-      </Modal> */}
+      </Modal>
     </div>
   );
 };
