@@ -1,5 +1,4 @@
 import axios from "axios";
-import { ChangePassword, LoginTyping, UpdateProfile } from "../../types/auth";
 import * as ENDPOINT from "../constant";
 
 // const Base = ENDPOINT.BASE_URL
