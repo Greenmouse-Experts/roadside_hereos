@@ -34,7 +34,7 @@ const CategoryList = () => {
     }),
     columnHelper.accessor((row) => row.name, {
       id: "Category Name",
-      cell: (info) => <p className="fw-600 text-pri">{info.getValue()}</p>,
+      cell: (info) => <p className="fw-600 text-primary">{info.getValue()}</p>,
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.slug, {

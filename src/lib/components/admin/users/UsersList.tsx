@@ -32,7 +32,7 @@ const UsersList: FC<Props> = ({ users }) => {
             size={35}
             font={15}
           />
-          <p className="fw-600 text-pri">{info.getValue()}</p>
+          <p className="fw-600 text-primary">{info.getValue()}</p>
         </div>
       ),
       header: (info) => info.column.id,
