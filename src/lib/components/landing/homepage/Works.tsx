@@ -1,4 +1,3 @@
-import React from 'react'
 import arrow from '../../assets/arrow-down.svg'
 import arr from '../../assets/arrow-up.svg'
 

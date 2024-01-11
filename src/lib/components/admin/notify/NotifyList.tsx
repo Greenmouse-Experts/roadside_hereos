@@ -8,7 +8,7 @@ import {
   MenuHandler,
 } from "@material-tailwind/react";
 import { NotifyItem } from "../../../types/routine";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 // dayjs time format
 // const dayjs = require("dayjs");
@@ -22,7 +22,7 @@ interface Props {
   isError: boolean;
   refetch: () => void
 }
-const NotifyList: FC<Props> = ({ status, data, isLoading, refetch, isError }) => {
+const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
   const [notify, setNotify] = useState<NotifyItem[]>([]);
 
   useEffect(() => {

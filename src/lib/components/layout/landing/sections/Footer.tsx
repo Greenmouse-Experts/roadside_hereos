@@ -1,6 +1,5 @@
 import { SiFacebook, SiLinkedin, SiTwitter } from "react-icons/si";
 import { BiLogoInstagramAlt } from "react-icons/bi";
-import { FOOTER_LIST } from "./Routes";
 import { Link } from "react-router-dom";
 
 export const socials = [
