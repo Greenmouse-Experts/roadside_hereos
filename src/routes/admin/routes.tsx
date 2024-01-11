@@ -1,5 +1,6 @@
 import AdminCategory from "../../pages/admin/category";
 import AdminDashboardHome from "../../pages/admin/home";
+import AdminNotification from "../../pages/admin/notify";
 import AdminSettings from "../../pages/admin/settings";
 import AdminUsers from "../../pages/admin/users";
 
@@ -37,7 +38,7 @@ export const adminRoutes = [
     {
         id: 'admin2',
         path: 'notify',
-        component: <AdminUsers/>
+        component: <AdminNotification/>
     },
     {
         id: 'admin2',

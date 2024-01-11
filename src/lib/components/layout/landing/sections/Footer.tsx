@@ -7,61 +7,84 @@ export const socials = [
   {
     name: "twitter",
     to: "/",
-    icon: <SiTwitter className="lg:text-3xl text-xl" />,
+    icon: <SiTwitter className="lg:text-xl text-xl" />,
   },
   {
     name: "facebook",
     to: "/",
-    icon: <SiFacebook className="lg:text-3xl text-xl" />,
+    icon: <SiFacebook className="lg:text-xl text-xl" />,
   },
   {
     name: "instagram",
     to: "/",
-    icon: <BiLogoInstagramAlt className="lg:text-3xl text-xl" />,
+    icon: <BiLogoInstagramAlt className="lg:text-xl text-xl" />,
   },
   {
     name: "linkedin",
     to: "/",
-    icon: <SiLinkedin className="lg:text-3xl text-xl" />,
+    icon: <SiLinkedin className="lg:text-xl text-xl" />,
   },
 ];
 
 const Footer = () => {
   const date = new Date();
   return (
-    <div className="bg-black">
-      <div className="pt-12 pb-6">
-        <div className="border-y lg:pt-20 py-12 border-gray-600">
-          <div className="text-white box">
-            <ul className=" grid gap-y-4 lg:flex lg:justify-between text-center lg:w-10/12 mx-auto">
-              {FOOTER_LIST.map((item, i) => (
-                <li key={i}>
-                  <Link to={item.url} className="">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="mt-12 lg:mt-16">
-            <p className="lg:w-7/12 text-center text-white mx-auto">
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Rem sit
-              hic possimus delectus asperiores fugiat tempore adipisci voluptas
-              harum autem nemo.
-            </p>
-            <div className="mt-6 lg:mt-12">
-              <ul className="flex justify-between w-10/12 lg:w-4/12 2xl:w-48 mx-auto">
+    <div className="bg-review">
+      <div className="box text-white">
+        <div className="lg:pt-20 py-12 lg:grid lg:grid-cols-6">
+          <div className="col-span-2">
+            <img
+              src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969534/rsh/Logo_2_txz60y.png"
+              alt="logo"
+            />
+            <div className="mt-4 lg:pl-6">
+              <p className="fs-500">+0 123 456 7890</p>
+              <p className="mt-3 fs-500 ">N0 1 Company physical address, Country. Earth</p>
+              <ul className="flex gap-x-2 mt-4">
                 {socials.map((item, i) => (
-                  <li className="text-white text-xl cursor-pointer" key={i}>
+                  <li className="text-white text-sm cursor-pointer" key={i}>
                     {item.icon}
                   </li>
                 ))}
               </ul>
             </div>
           </div>
+          <div>
+            <p className="fw-600 mb-4 mt-10 lg:mt-0">Company</p>
+            <ul className="grid gap-6 fs-500">
+              <li><Link to={'/'}>Home</Link></li>
+              <li><Link to={'/'}>FAQs</Link></li>
+              <li><Link to={'/'}>Request a Service</Link></li>
+              <li><Link to={'/'}>Signup as a Provider</Link></li>
+            </ul>
+          </div>
+          <div>
+            <p className="fw-600 mb-4 mt-10 lg:mt-0">Legal</p>
+            <ul className="grid gap-6 fs-500">
+              <li><Link to={'/'}>Terms and Conditions</Link></li>
+              <li><Link to={'/'}>Privacy Policy</Link></li>
+              <li><Link to={'/'}>Cookies Policy</Link></li>
+            </ul>
+          </div>
+          <div>
+            <p className="fw-600 mb-4 mt-10 lg:mt-0">Support</p>
+            <ul className="grid gap-6 fs-500">
+              <li><Link to={'/'}>Help</Link></li>
+              <li><Link to={'/'}>Contact Us</Link></li>
+              <li><Link to={'/'}>Feedback</Link></li>
+            </ul>
+          </div>
+          <div>
+            <p className="fw-600 mt-10 lg:mt-0">Subscribe to Newsletter</p>
+            <p className="mt-3 fs-400">Subscribe to our newsletter to get updates from us</p>
+            <div className="mt-4 border rounded-[10px] flex bg-white">
+                <input type="text" name="email" placeholder="Your email" className="rounded-l-[10px] pl-2 border-none outline-none w-full" />
+                <button className="p-3 rounded-[10px] bg-[#FEB470] text-black fw-500">Join</button>
+            </div>
+          </div>
         </div>
-        <div className="pt-6">
-          <p className="text-center text-white">
+        <div className="pt-6 border-t border-gray-500">
+          <p className="text-center fs-500 text-white">
             Copyright © {date.getFullYear()} ROADSIDE HEROES. All Rights
             Reserved
           </p>

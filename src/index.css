@@ -13,7 +13,7 @@
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 6px;
 }
 .tab-bar::-webkit-scrollbar {
   width: 12px;
@@ -28,7 +28,7 @@
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #111827;
-  border-radius: 10px;
+  border-radius: 4px;
 }
 
 /* Handle on hover */
@@ -287,8 +287,11 @@ input[type="checkbox"]:checked {
   .circle {
     border-radius: 50%;
   }
-  .text-tertial {
-    color: #111827;
+  .text-ter {
+    color: #0D0D0D;
+  }
+  .text-pri {
+    color: #E4B080
   }
   .bg-secondary {
     background: #e3f9ff;
@@ -310,7 +313,7 @@ input[type="checkbox"]:checked {
     background: #421a00;
   }
   .bg-pri {
-    background: #fff5dd;
+    background: #E4B080;
   }
   .bg-review {
     background: rgb(17, 24, 39);
@@ -328,7 +331,7 @@ input[type="checkbox"]:checked {
     background: #111827;
   }
   .bg-pri {
-    background: #74e878;
+    background: #FEB470
   }
   .bg-service {
     background: linear-gradient(180deg, #b3751b 0%, #9b6415 100%);
@@ -366,18 +369,22 @@ input[type="checkbox"]:checked {
     box-shadow: rgba(0, 0, 0, 0.1) 1.95px 1.95px 2.6px;
   }
   .btn-primary:hover,
-  .btn-feel:hover,
   .btn-like:hover {
     background: #181f2cbe;
     transform: scaleX(1.02);
     transition: 0.6s;
   }
+  .btn-feel:hover{
+    background: #E4B080;
+    transform: scaleX(1.02);
+    transition: 0.6s;
+  }
   .btn-feel {
-    background: #111827;
+    border-radius: 1000px;
+    background: #173c88;
     color: white;
     font-weight: 500;
-    padding: 15px 30px;
-    border-radius: 6px 6px 6px 0px;
+    cursor: pointer;
   }
   .btn-like {
     background: #111827;

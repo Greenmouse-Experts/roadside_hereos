@@ -4,14 +4,23 @@ import TextInput, { InputType } from "../ui/TextInput";
 import { AiOutlineMail } from "react-icons/ai";
 import { VscLock } from "react-icons/vsc";
 import { LuUserCircle } from "react-icons/lu";
-import { GoCrossReference } from "react-icons/go";
+import { SlLocationPin } from "react-icons/sl";
+import { Country } from "country-state-city";
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import Button from "../ui/Button";
 import { ScaleSpinner } from "../ui/Loading";
+import { MdOutlineHomeRepairService } from "react-icons/md";
+import { useQuery } from "@tanstack/react-query";
+import { getCategories } from "../../services/api/serviceApi";
+import { ServiceCatItem } from "../../types/service";
 
 const ProviderRegisterForm = () => {
   const [isBusy, setIsBusy] = useState(false);
+  const { data: services } = useQuery({
+    queryKey: ["getCat"],
+    queryFn: getCategories,
+  });
   const {
     control,
     handleSubmit,
@@ -26,7 +35,7 @@ const ProviderRegisterForm = () => {
       password: "",
       confirm_password: "",
       service: "",
-      referral: ''
+      country: "",
     },
   });
   const onSubmit = () => {
@@ -106,7 +115,9 @@ const ProviderRegisterForm = () => {
             )}
           />
           <div>
-            <label className="mb-1 block mt-3">Phone Number</label>
+            <label className="mb-1 block mt-3 fw-500 text-[#000000B2]">
+              Phone Number
+            </label>
             <PhoneInputWithCountry
               international
               defaultCountry="NG"
@@ -129,7 +140,7 @@ const ProviderRegisterForm = () => {
         </div>
         <div className=" grid lg:grid-cols-2 gap-4">
           <div className="mt-4">
-            <label className="fw-500">Service Category</label>
+            <label className="fw-500 text-[#000000B2]">Service Category</label>
             <Controller
               name="service"
               control={control}
@@ -140,35 +151,48 @@ const ProviderRegisterForm = () => {
                 },
               }}
               render={({ field }) => (
-                <select
-                  className="border border-gray-400 w-full mt-[4px] p-2 rounded "
-                  {...field}
-                  ref={null}
-                >
-                  <option>Mechanic</option>
-                  <option>Baterry Charger</option>
-                </select>
+                <div className="border border-gray-400 w-full mt-[4px] p-[9px] rounded flex items-center gap-x-2">
+                  <MdOutlineHomeRepairService className="text-2xl text-gray-700" />
+                  <select
+                    className="border-none outline-none w-full"
+                    {...field}
+                    ref={null}
+                  >
+                    <option>Select an option</option>
+                    {services?.data &&
+                      services?.data.map((item: ServiceCatItem) => (
+                        <option value={item.id}>{item.name}</option>
+                      ))}
+                  </select>
+                </div>
               )}
             />
           </div>
+          <div className="mt-4">
+            <label className="fw-500 text-[#000000B2]">Country</label>
           <Controller
-            name="referral"
+            name="country"
             control={control}
             rules={{
-              required: false
+              required: false,
             }}
             render={({ field }) => (
-              <TextInput
-                label="Referral"
-                labelClassName="text-[#000000B2] fw-500"
-                icon={<GoCrossReference className="text-2xl mx-2 lg:mx-4" />}
-                error={errors.email?.message}
-                type={InputType.email}
-                {...field}
-                ref={null}
-              />
+              <div className="border border-gray-400 w-full mt-[4px] p-[9px] rounded flex items-center gap-x-2">
+                <SlLocationPin className="text-xl text-gray-700" />
+                <select
+                  className="border-none outline-none w-full"
+                  {...field}
+                  ref={null}
+                >
+                  <option value={""}>Country of residence</option>
+                  {Country.getAllCountries().map((item, index) => (
+                    <option value={item.isoCode} key={index}>{item.name}</option>
+                  ))}
+                </select>
+              </div>
             )}
           />
+          </div>
         </div>
         <div className=" grid lg:grid-cols-2 gap-4">
           <Controller

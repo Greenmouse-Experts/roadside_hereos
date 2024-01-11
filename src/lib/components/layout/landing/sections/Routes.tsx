@@ -1,23 +1,19 @@
 export const NAV_LIST = [
   {
-    url: "/",
-    name: "Home",
-  },
-  {
-    url: "/services",
-    name: "Services",
-  },
-  {
-    url: "/about",
-    name: "About Us",
-  },
-  {
     url: "/faqs",
     name: "FAQs",
   },
   {
+    url: "/support",
+    name: "Support",
+  },
+  {
     url: "/contact",
     name: "Contact Us",
+  },
+  {
+    url: "/request",
+    name: "Request a Service",
   },
 ];
 export const FOOTER_LIST = [

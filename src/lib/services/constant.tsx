@@ -12,6 +12,8 @@ export enum HTTP_METHODS {
 // Admin endpoints
 export const ADMIN_LOGIN = '/admin/login'
 export const GET_USERS = '/all/users'
+export const GET_PROVIDERS = '/all/users'
+export const GET_ADMIN_NOTIFY = '/notifications/admin'
 
 // Auth endpoints
 export const UPDATE_ACCOUNT = '/user/update-account'

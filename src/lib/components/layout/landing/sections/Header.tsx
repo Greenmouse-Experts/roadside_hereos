@@ -14,20 +14,20 @@ const Header: FC<Props> = ({ fixed }) => {
   return (
     <>
       <div
-        className={`w-full lg:p-5 py-5 ${
+        className={`w-full lg:p-8 py-5 ${
           fixed ? "absolute w-full top-0 left-0" : ""
         }`}
       >
         <div className="box">
           <div className="flex items-center justify-between">
             <img
-              src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1704791331/sm_5af3ff321c2f8_e8lure.jpg"
+              src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969536/rsh/Logo_1_opqhgq.png"
               alt="logo"
               width={100}
               height={60}
-              className="lg:w-[60px] w-20"
+              className="lg:w-[130px] w-36"
             />
-            <div className="lg:w-9/12 lg:flex hidden justify-between">
+            <div className="lg:w-8/12 xl:w-7/12 2xl:w-6/12 lg:flex hidden justify-between">
               <ul className="flex gap-x-12 items-center justify-between">
                 {NAV_LIST.map((item, i) => (
                   <li key={i}>
@@ -36,8 +36,8 @@ const Header: FC<Props> = ({ fixed }) => {
                       className={`${
                         pathname === item.url
                           ? "text-black fw-600"
-                          : "text-gray-600 fw-500"
-                      }`}
+                          : "text-ter fw-500"
+                      } whitespace-nowrap`}
                     >
                       {item.name}
                     </Link>
@@ -46,8 +46,8 @@ const Header: FC<Props> = ({ fixed }) => {
               </ul>
               <ul>
                 <li>
-                  <Link to="/auth/login" className="btn-like">
-                    Login
+                  <Link to="/auth/login" className="btn-feel px-5 py-2 whitespace-nowrap">
+                      Sign in
                   </Link>
                 </li>
               </ul>

@@ -13,11 +13,11 @@ const CallOutMenu:FC<Props> = ({show}) => {
         <div className="bg-primary relative menu-pop h-full text-white pl-5 pt-8 w-[75%]">
           <div className="mb-16">
             <img
-              src='https://res.cloudinary.com/greenmouse-tech/image/upload/v1704791331/sm_5af3ff321c2f8_e8lure.jpg'
+              src='https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969534/rsh/Logo_2_txz60y.png'
               alt="logo"
               width={100}
               height={80}
-              className="w-24"
+              className="w-36"
             />
           </div>
           <div>

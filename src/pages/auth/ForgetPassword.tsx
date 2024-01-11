@@ -8,14 +8,13 @@ const ForgetPassword = () => {
         <div className="w-full h-full bg-login">
           <div className="box h-full place-center">
             <Link to="/" className="lg:hidden absolute top-6 left-2 lg:left-6">
-              {/* <img
-            src={logo}
+            <img
+            src='https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969536/rsh/Logo_1_opqhgq.png'
             alt="logo"
-            className="w-48"
+            className="w-44 mx-auto my-6"
             width={400}
-            height={100}
-          /> */}
-              <p>Roadside Heroes</p>
+            height={80}
+          />
             </Link>
 
             <div className="lg:w-[550px] mx-auto bg-white lg:px-16 p-6">
