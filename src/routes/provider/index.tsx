@@ -1,8 +1,19 @@
-import { Route, Routes } from "react-router-dom";
+import { useEffect } from "react";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import { providerRoutes } from "./routes";
 import ProviderDashboardLayout from "../../lib/components/layout/provider";
 
 const ProviderDashboardWraper = () => {
+  const token = localStorage.getItem('rhs_token');
+  const navigate = useNavigate();
+  useEffect(() => {
+    if(!token){
+      navigate("/auth/admin");
+    }
+  }, [])
+  if (!token) {
+    return;
+  }
   return (
     <>
       <ProviderDashboardLayout>
