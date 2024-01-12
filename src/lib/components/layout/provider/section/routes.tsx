@@ -46,10 +46,4 @@ export const Routes = [
     route: '/provider/payments',
     submenu: [],
   },
-  {
-    name: 'Settings',
-    icon: <BsGear className="text-xl" />,
-    route: '/provider/settings',
-    submenu: [],
-  },
 ]

@@ -7,7 +7,7 @@ const HeroBanner = () => {
   const navigate = useNavigate()
   return (
     <>
-      <div className="h-[480px] relative bg-review z-0">
+      <div className="h-[480px] relative bg-hero z-0">
       <div className="h-[480px] w-full overflow-hidden absolute z-10 top-0 left-0">
             <HeroSlide/>
           </div>

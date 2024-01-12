@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import TextInput, { InputType } from "../ui/TextInput";
 import { AiOutlineMail } from "react-icons/ai";
@@ -11,12 +11,20 @@ import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import Button from "../ui/Button";
 import { ScaleSpinner } from "../ui/Loading";
 import { MdOutlineHomeRepairService } from "react-icons/md";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { getCategories } from "../../services/api/serviceApi";
 import { ServiceCatItem } from "../../types/service";
+import { registerUser } from "../../services/api/authApi";
+import { toast } from "react-toastify";
+import useModal from "../../hooks/useModal";
+import RegisterSuccess from "./RegisterSuccess";
 
 const ProviderRegisterForm = () => {
   const [isBusy, setIsBusy] = useState(false);
+  const {Modal, setShowModal} = useModal()
+  useEffect(() => {
+    setShowModal(true)
+  }, [])
   const { data: services } = useQuery({
     queryKey: ["getCat"],
     queryFn: getCategories,
@@ -24,6 +32,7 @@ const ProviderRegisterForm = () => {
   const {
     control,
     handleSubmit,
+    watch,
     formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
@@ -38,8 +47,29 @@ const ProviderRegisterForm = () => {
       country: "",
     },
   });
-  const onSubmit = () => {
+  const mutation = useMutation({
+    mutationFn: registerUser,
+  });
+  const onSubmit = (data: any) => {
     setIsBusy(true);
+    const payload = {
+      name: `${data.first_name} ${data.last_name}`,
+      email: data.email,
+      phone: data.phone,
+      password: data.password,
+      userType: 'professional',
+      country: data.country
+    }
+    mutation.mutate(payload, {
+      onSuccess: (data) => {
+        setIsBusy(false)
+        toast.success(data?.message)
+      },
+      onError: (error:any) => {
+        toast.error(error.response.data.message)
+        setIsBusy(false)
+      }
+    });
   };
   return (
     <div>
@@ -61,8 +91,8 @@ const ProviderRegisterForm = () => {
                 icon={
                   <LuUserCircle className="text-2xl mx-2 lg:mx-3 text-gray-800" />
                 }
-                error={errors.email?.message}
-                type={InputType.email}
+                error={errors.first_name?.message}
+                type={InputType.text}
                 {...field}
                 ref={null}
               />
@@ -84,8 +114,8 @@ const ProviderRegisterForm = () => {
                 icon={
                   <LuUserCircle className="text-2xl mx-2 lg:mx-3 text-gray-800" />
                 }
-                error={errors.email?.message}
-                type={InputType.email}
+                error={errors.last_name?.message}
+                type={InputType.text}
                 {...field}
                 ref={null}
               />
@@ -227,11 +257,12 @@ const ProviderRegisterForm = () => {
             rules={{
               required: {
                 value: true,
-                message: "Password is required",
+                message: "Please enter your password",
               },
-              minLength: {
-                value: 6,
-                message: "Password is too short",
+              validate: (val) => {
+                if (watch("password") != val) {
+                  return "Your passwords do no match";
+                }
               },
             }}
             render={({ field }) => (
@@ -240,7 +271,7 @@ const ProviderRegisterForm = () => {
                 labelClassName="text-[#000000B2] fw-500"
                 icon={<VscLock className="text-2xl mx-2 lg:mx-4" />}
                 placeholder="*********"
-                error={errors.password?.message}
+                error={errors.confirm_password?.message}
                 type={InputType.password}
                 {...field}
                 ref={null}
@@ -258,6 +289,11 @@ const ProviderRegisterForm = () => {
           />
         </div>
       </form>
+      <Modal title="" size="sm">
+        <div>
+            <RegisterSuccess/>
+        </div>
+      </Modal>
     </div>
   );
 };

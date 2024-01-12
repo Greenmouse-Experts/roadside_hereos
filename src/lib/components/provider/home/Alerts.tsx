@@ -51,9 +51,9 @@ const Alerts = () => {
               <div
                 className={`border-l-[5px] relative ${color} rounded-l-md p-3 mb-5`}
               >
-                <p className="fw-600">{item.title}</p>
+                <p className="fw-600 pt-5 lg:pt-0">{item.title}</p>
                 <p>{item.desc}</p>
-                <p className="absolute fs-300 top-2 fw-600 text-primary right-2">
+                <p className="absolute fs-300 top-2 fw-600 text-gray-600 lg:text-primary right-2">
                   {item.time}
                 </p>
               </div>

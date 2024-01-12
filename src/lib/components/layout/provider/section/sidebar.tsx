@@ -1,10 +1,14 @@
 import { Menu, MenuItem, Sidebar, SubMenu } from 'react-pro-sidebar';
 import { RouteType, Routes } from './routes';
 import { Link, useLocation } from 'react-router-dom';
+import { BsGear } from 'react-icons/bs';
+import { BiLogOutCircle } from 'react-icons/bi';
+import LogoutModal from '../../../auth/LogoutModal';
+import useModal from '../../../../hooks/useModal';
 
 const SidebarLayout = () => {
   const path = useLocation();
-  console.log(path.pathname);
+  const { Modal, setShowModal } = useModal();
   
   return (
     <div className="left-0 top-0 fixed overflow-y-hidden rounded-r-3xl index-30  bg-primary text-white">
@@ -78,11 +82,25 @@ const SidebarLayout = () => {
               </>
             );
           })}
+          <MenuItem
+            component={<Link to={"/provider/settings"} />}
+            icon={<BsGear className="text-xl" />}
+            className="mt-12"
+          >
+            <p className="fs-400">Settings</p>
+          </MenuItem>
+          <MenuItem
+            icon={<BiLogOutCircle className="text-xl" />}
+            onClick={() => setShowModal(true)}
+            className=""
+          >
+            <p className="fs-400">Logout</p>
+          </MenuItem>
         </Menu>
       </Sidebar>
-      {/* <Modal title="" noHead>
+      <Modal title="" size="xs">
         <LogoutModal CloseModal={() => setShowModal(false)} />
-      </Modal> */}
+      </Modal>
     </div>
   );
 };

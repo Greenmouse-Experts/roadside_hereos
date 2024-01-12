@@ -1,7 +1,7 @@
 import React from "react";
 import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
 
-const ProviderPayments = () => {
+const AdminRequests = () => {
   const [isLoading, setIsLoading] = React.useState(true);
   // const { isLoading, isError, data } = useQuery({
   //     queryKey: ["getProviders"],
@@ -13,7 +13,7 @@ const ProviderPayments = () => {
   return (
     <>
       <div className="bg-white p-6 rounded-lg shadow min-h-[80vh]">
-        <p className="fw-600 text-xl">Payments Recieved</p>
+        <p className="fw-600 text-xl">Service Requests</p>
         <div className="mt-5 lg:mt-10">
           {isLoading && (
             <div className="py-12 flex justify-center items-center text-black">
@@ -22,7 +22,7 @@ const ProviderPayments = () => {
                   <CurveLoader />
                 </div>
                 <p className="text-center mt-5 fw-500">
-                  Fetching Payments Received...
+                  Fetching Service Requests...
                 </p>
               </div>
             </div>
@@ -33,6 +33,6 @@ const ProviderPayments = () => {
       </div>
     </>
   );
-}
+};
 
-export default ProviderPayments
+export default AdminRequests;

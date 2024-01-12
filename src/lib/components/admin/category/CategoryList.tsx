@@ -74,12 +74,6 @@ const CategoryList = () => {
       {data && <DataTable
         columns={columns}
         data={data.data}
-        prev={() => false}
-        next={() => false}
-        gotoPage={() => false}
-        pageCount={0}
-        currentPage={0}
-        total={0}
       />}
     </div>
   );

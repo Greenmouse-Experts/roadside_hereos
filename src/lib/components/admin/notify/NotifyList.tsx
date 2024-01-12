@@ -50,7 +50,7 @@ const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
         {isLoading && (
           <div className="py-12 flex justify-center items-center text-black">
             <div>
-              <CurveLoader/>
+              <div className="flex place-center"><CurveLoader/></div>
               <p className="text-center mt-5 fw-500">Fetching Notifications...</p>
             </div>
           </div>

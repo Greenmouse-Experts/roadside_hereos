@@ -288,10 +288,10 @@ input[type="checkbox"]:checked {
     border-radius: 50%;
   }
   .text-ter {
-    color: #0D0D0D;
+    color: #0d0d0d;
   }
   .text-pri {
-    color: #E4B080
+    color: #e4b080;
   }
   .bg-secondary {
     background: #e3f9ff;
@@ -309,11 +309,17 @@ input[type="checkbox"]:checked {
   .bg-tertial-op {
     background: rgba(200, 100, 38, 0.1);
   }
-  .bg-video {
-    background: #421a00;
+  .bg-hero {
+    background: rgb(255, 255, 255);
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 1) 0%,
+      rgba(227, 227, 227, 1) 78%,
+      rgba(140, 140, 140, 1) 100%
+    );
   }
   .bg-pri {
-    background: #E4B080;
+    background: #e4b080;
   }
   .bg-review {
     background: rgb(17, 24, 39);
@@ -331,7 +337,7 @@ input[type="checkbox"]:checked {
     background: #111827;
   }
   .bg-pri {
-    background: #FEB470
+    background: #feb470;
   }
   .bg-service {
     background: linear-gradient(180deg, #b3751b 0%, #9b6415 100%);
@@ -374,8 +380,8 @@ input[type="checkbox"]:checked {
     transform: scaleX(1.02);
     transition: 0.6s;
   }
-  .btn-feel:hover{
-    background: #E4B080;
+  .btn-feel:hover {
+    background: #e4b080;
     transform: scaleX(1.02);
     transition: 0.6s;
   }

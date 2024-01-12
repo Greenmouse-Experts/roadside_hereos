@@ -21,3 +21,9 @@ export const getUsers = async () => {
     .get(`${ENDPOINT.GET_USERS}`)
     .then((response) => response.data);
 };
+
+export const getProviders = async () => {
+  return axios
+    .get(`${ENDPOINT.GET_PROVIDERS}`)
+    .then((response) => response.data);
+};

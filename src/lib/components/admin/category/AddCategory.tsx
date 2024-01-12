@@ -33,8 +33,8 @@ const AddCategory = () => {
       reset()
       setImageValue([])
     },
-    onError: () => {
-      toast.error("error dey");
+    onError: (error) => {
+      toast.error(error.message);
       setIsBusy(false);
     },
   });
@@ -56,8 +56,8 @@ const AddCategory = () => {
           }
           addCat.mutate(payload)
         },
-        onError: () => {
-          toast.error("error dey");
+        onError: (error) => {
+          toast.error(error.message);
           setIsBusy(false);
         },
       });

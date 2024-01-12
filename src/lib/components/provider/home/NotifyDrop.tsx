@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import { BiBell } from "react-icons/bi";
 
-const NotifyDrop = () => {
+const ProviderNotifyDrop = () => {
   return (
     <>
       <Menu placement="bottom-end">
@@ -49,4 +49,4 @@ const NotifyDrop = () => {
   );
 };
 
-export default NotifyDrop;
+export default ProviderNotifyDrop;

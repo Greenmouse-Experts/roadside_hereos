@@ -15,7 +15,7 @@ import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
 interface Props {
   users: any;
 }
-const UsersList: FC<Props> = ({ users }) => {
+const ProvidersList: FC<Props> = ({ users }) => {
     const gotoDetails = (id:string) => {
         console.log(id);
     }
@@ -88,4 +88,4 @@ const UsersList: FC<Props> = ({ users }) => {
   );
 };
 
-export default UsersList;
+export default ProvidersList;

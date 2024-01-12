@@ -16,8 +16,10 @@ export const GET_PROVIDERS = '/all/users'
 export const GET_ADMIN_NOTIFY = '/notifications/admin'
 
 // Auth endpoints
+export const USER_LOGIN = '/user/login'
 export const UPDATE_ACCOUNT = '/user/update-account'
 export const UPDATE_PASSWORD ='/user/change-password'
+export const USER_SIGNUP = '/user/signup'
 
 
 // service

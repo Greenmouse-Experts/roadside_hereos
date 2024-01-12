@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ChangePassword, LoginTyping, UpdateProfile } from "../../types/auth";
+import { ChangePassword, CreateUser, LoginTyping, UpdateProfile } from "../../types/auth";
 import * as ENDPOINT from "../constant";
 
 // const Base = ENDPOINT.BASE_URL
@@ -24,6 +24,10 @@ export const adminLogin = async(payload:LoginTyping) => {
    return  axios.post(`${ENDPOINT.ADMIN_LOGIN}`, payload).then((response) => response.data)
 } 
 
+export const userLogin = async(payload:LoginTyping) => {
+  return  axios.post(`${ENDPOINT.USER_LOGIN}`, payload).then((response) => response.data)
+} 
+
 export const adminUpdateAvatar = async(payload:FormData) => {
     return  axios.patch(`${ENDPOINT.UPDATE_ACCOUNT}`, payload).then((response) => response.data)
  } 
@@ -35,3 +39,7 @@ export const updateProfile = async(payload:UpdateProfile) => {
  export const adminUpdatePassword = async(payload:ChangePassword) => {
     return  axios.patch(`${ENDPOINT.UPDATE_ACCOUNT}`, payload).then((response) => response.data)
  } 
+
+ export const registerUser = async(payload:CreateUser) => {
+  return  axios.post(`${ENDPOINT.USER_SIGNUP}`, payload).then((response) => response.data)
+} 

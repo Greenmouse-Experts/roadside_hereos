@@ -45,8 +45,8 @@ const AdminLoginForm = () => {
       navigate('/admin')
       setIsBusy(false);
     },
-    onError: () => {
-      toast.error("error dey");
+    onError: (error) => {
+      toast.error(error.message);
       setIsBusy(false);
     },
   });

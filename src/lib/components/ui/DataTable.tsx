@@ -1,41 +1,35 @@
 import { FC } from "react";
 import {
-  flexRender,
-  getCoreRowModel,
   useReactTable,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getPaginationRowModel,
+  flexRender,
 } from "@tanstack/react-table";
-import { generatePaginationNumbers, isNumber } from "../../utils";
+import { TbArrowBackUp, TbArrowBackUpDouble, TbArrowForwardUp, TbArrowForwardUpDouble } from "react-icons/tb";
+// import { generatePaginationNumbers, isNumber } from "../../utils";
 // import { generatePaginationNumbers, isNumber } from "@/shared/utils/format";
 
 interface Props {
   data: any;
   columns: any;
-  prev: () => void;
-  next: () => void;
-  gotoPage: (value: number) => void;
-  currentPage: number | undefined;
-  pageCount: number | undefined;
-  total: number | undefined;
 }
-export const DataTable: FC<Props> = ({
-  data,
-  columns,
-  pageCount,
-  currentPage,
-  total,
-  next,
-  prev,
-}) => {
+export const DataTable: FC<Props> = ({ data, columns }) => {
   const table = useReactTable({
     data,
     columns,
+    // Pipeline
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    //
+    debugTable: true,
   });
   return (
     <>
-      <div className="flex flex-col min-h-[360px]">
+      <div className="flex flex-col border-t-2 border-l border-b border-gray-400">
         <div className=" overflow-x-auto">
-          <div className="py-2 align-middle inline-block min-w-full ">
+          <div className="align-middle inline-block min-w-full ">
             <table className="items-center w-full bg-transparent border-collapse">
               <thead className="thead-light bg-light">
                 {table.getHeaderGroups().map((headerGroup) => (
@@ -44,7 +38,7 @@ export const DataTable: FC<Props> = ({
                       <th
                         key={header.id}
                         scope="col"
-                        className="px-6 align-middle py-3 fs-500 whitespace-nowrap text-left"
+                        className="px-6 align-middle border-r-2 border-b-2 border-gray-400 py-3 fs-500 whitespace-nowrap text-left"
                       >
                         {header.isPlaceholder
                           ? null
@@ -63,7 +57,7 @@ export const DataTable: FC<Props> = ({
                     {row.getVisibleCells().map((cell) => (
                       <td
                         key={cell.id}
-                        className="align-middle fs-500 whitespace-nowrap px-6 py-4 text-left"
+                        className="align-middle fs-500 border-r-2 border-b-2 border-gray-400 whitespace-nowrap px-6 py-4 text-left"
                       >
                         {flexRender(
                           cell.column.columnDef.cell,
@@ -91,46 +85,78 @@ export const DataTable: FC<Props> = ({
                 ))}
               </tfoot>
             </table>
-            <div className="h-4" />
+            {/* <div className="h-4" /> */}
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between px-6">
-        <div>
-          <p>
-            Showing {currentPage}-{pageCount} of {total} entries
-          </p>
-        </div>
-        <div className="flex items-center gap-x-2">
-          <button
-            className={`border px-3 py-1 rounded-[3px] fs-500 ${currentPage || 1 > 1? 'boreder-[#C0C0C0] text-[#C0C0C0]' : 'border-[#888888] text-[#888888]'}`}
-            onClick={prev}
+      <div className="flex items-center justify-between px-6 border border-gray-400 py-2">
+        <div className="lg:flex w-full justify-between items-center gap-2">
+          <div className="flex gap-x-2">
+          <span className="flex items-center gap-1">
+            <div>Page</div>
+            <strong>
+              {table.getState().pagination.pageIndex + 1} of{" "}
+              {table.getPageCount()}
+            </strong>
+          </span>
+          <select
+            value={table.getState().pagination.pageSize}
+            onChange={(e) => {
+              table.setPageSize(Number(e.target.value));
+            }}
+            className="border rounded border-black"
           >
-            Previous
-          </button>
-          {generatePaginationNumbers(currentPage || 0, pageCount || 0).map(
-            (item, i) =>
-              isNumber(item) ? (
-                <button
-                  className={` border fs-500 px-2 py-1 rounded-[3px] ${
-                    currentPage === item
-                      ? "border-[#888888] text-[#888888]"
-                      : "boreder-[#C0C0C0] text-[#C0C0C0]"
-                  }`}
-                  key={i}
-                >
-                  {item}
-                </button>
-              ) : (
-                item
-              )
-          )}
+            {[10, 20, 30, 40, 50].map((pageSize) => (
+              <option key={pageSize} value={pageSize}>
+                Show {pageSize}
+              </option>
+            ))}
+          </select>
+          </div>
+          <div className="flex gap-x-3">
+          <span className="flex items-center gap-1 fw-500">
+            Go to page:
+            <input
+              type="number"
+              defaultValue={table.getState().pagination.pageIndex + 1}
+              onChange={(e) => {
+                const page = e.target.value ? Number(e.target.value) - 1 : 0;
+                table.setPageIndex(page);
+              }}
+              className="border border-black p-1 rounded w-12"
+            />
+          </span>
+          <div>
           <button
-            className={`border px-3 py-1 rounded-[3px] fs-500 ${currentPage === pageCount? 'border-[#888888] text-[#888888]' : 'boreder-[#C0C0C0] text-[#C0C0C0]'}`}
-            onClick={next}
+            className="border-none rounded p-1"
+            onClick={() => table.setPageIndex(0)}
+            disabled={!table.getCanPreviousPage()}
           >
-            Next
+            <span className="w-7 h-7 circle bg-primary text-white flex place-center hover:scale-105 duration-100"><TbArrowBackUpDouble className='text-2xl'/></span>
           </button>
+          <button
+            className="border-none rounded p-1"
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            <span className="w-7 h-7 circle bg-primary text-white flex place-center hover:scale-105 duration-100"><TbArrowBackUp className='text-2xl'/></span>
+          </button>
+          <button
+            className="border-none rounded p-1"
+            onClick={() => table.nextPage()}
+            disabled={!table.getCanNextPage()}
+          >
+             <span className="w-7 h-7 circle bg-primary text-white flex place-center hover:scale-105 duration-100"><TbArrowForwardUp className='text-2xl'/></span>
+          </button>
+          <button
+            className="border-none rounded p-1"
+            onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+            disabled={!table.getCanNextPage()}
+          >
+            <span className="w-7 h-7 circle bg-primary text-white flex place-center hover:scale-105 duration-100"><TbArrowForwardUpDouble className='text-2xl'/></span>
+          </button>
+          </div>
+          </div>
         </div>
       </div>
     </>

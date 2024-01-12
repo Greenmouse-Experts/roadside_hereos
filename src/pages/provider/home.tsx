@@ -1,11 +1,16 @@
-import Alerts from '../../lib/components/provider/home/Alerts'
-import { formatAsNgnMoney } from '../../lib/utils'
+import Alerts from "../../lib/components/provider/home/Alerts";
+// import useAuth from "../../lib/hooks/authUser";
+import { formatAsNgnMoney } from "../../lib/utils";
 
 const ProviderHomePage = () => {
+  // const {firstName} = useAuth()
   return (
     <>
-         <div>
-        <div className="w-full h-[140px] bg-review border"></div>
+      <div>
+        <div className="w-full h-[140px] bg-review border p-3 flex items-center">
+          <div>
+          </div>
+        </div>
         <div className="grid lg:grid-cols-3 gap-y-6 gap-x-6 dash-shade p-5 py-8 rounded-lg">
           <div className="flex items-center gap-x-3 border-r border-[#00000059]">
             <img
@@ -48,13 +53,13 @@ const ProviderHomePage = () => {
           </div>
         </div>
         <div>
-            <div>
-                <Alerts/>
-            </div>
+          <div>
+            <Alerts />
+          </div>
         </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default ProviderHomePage
+export default ProviderHomePage;

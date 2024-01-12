@@ -28,8 +28,8 @@ const SecuritySetting = () => {
       setIsBusy(false);
       reset()
     },
-    onError: () => {
-      toast.error("error dey");
+    onError: (error) => {
+      toast.error(error.message);
       setIsBusy(false);
     },
   });
@@ -44,7 +44,7 @@ const SecuritySetting = () => {
   };
   return (
     <>
-      <div className="bg-gray-100 rounded">
+      <div className="bg-gray-100 p-4 rounded">
         <p className="border-b  fw-600 text-lg border-gray-700 lg:p-6 lg:py-4">Passwords</p>
         <div className="mt-4  px-8 py-4 lg:py-6 w-full flex justify-between rounded-[15px]">
           <form onSubmit={handleSubmit(onSubmit)} className="w-full">
