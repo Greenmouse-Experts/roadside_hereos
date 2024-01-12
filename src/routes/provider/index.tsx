@@ -8,7 +8,7 @@ const ProviderDashboardWraper = () => {
   const navigate = useNavigate();
   useEffect(() => {
     if(!token){
-      navigate("/auth/admin");
+      navigate("/auth/login");
     }
   }, [])
   if (!token) {
