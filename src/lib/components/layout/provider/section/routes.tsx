@@ -4,7 +4,6 @@ import {
 import {  BiGitPullRequest } from 'react-icons/bi';
 import { LuServerCog } from 'react-icons/lu';
 import { IoNotificationsCircleOutline } from "react-icons/io5";
-import { BsGear } from 'react-icons/bs';
 export interface RouteType {
   name:string;
   icon: any;

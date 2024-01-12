@@ -63,12 +63,6 @@ const RequestList:FC<Props> = ({status}) => {
           <DataTable
             columns={columns}
             data={dets}
-            prev={() => false}
-            next={() => false}
-            gotoPage={() => false}
-            pageCount={0}
-            currentPage={0}
-            total={0}
           />
         </div>
       );
