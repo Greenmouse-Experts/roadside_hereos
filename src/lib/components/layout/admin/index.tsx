@@ -11,10 +11,10 @@ import {
 import { BsGear } from "react-icons/bs";
 import { IoLogOutOutline } from "react-icons/io5";
 import useModal from "../../../hooks/useModal";
-import LogoutModal from "../../auth/LogoutModal";
 import useAuth from "../../../hooks/authUser";
 import ProfileAvatar from "../../ui/ProfileAvatar";
 import NotifyDrop from "../../admin/home/NotifyDrop";
+import LogoutModal from "../../auth/AdminLogoutModal";
 
 interface Props {
   children: React.ReactNode;

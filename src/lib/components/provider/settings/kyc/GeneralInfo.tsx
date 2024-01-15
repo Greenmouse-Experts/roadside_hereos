@@ -20,7 +20,6 @@ const GeneralInfo = () => {
       ssn: ""
     },
   });
-  console.log(imageValue);
   
   return (
     <>

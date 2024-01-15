@@ -2,9 +2,9 @@ import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
 import { RouteType, Routes } from "./routes";
 import { Link, useLocation } from "react-router-dom";
 import useModal from "../../../../hooks/useModal";
-import LogoutModal from "../../../auth/LogoutModal";
 import { BiLogOutCircle } from "react-icons/bi";
 import { BsGear } from "react-icons/bs";
+import LogoutModal from "../../../auth/AdminLogoutModal";
 
 const SidebarLayout = () => {
   const path = useLocation();

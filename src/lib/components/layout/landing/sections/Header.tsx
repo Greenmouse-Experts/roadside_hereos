@@ -20,6 +20,7 @@ const Header: FC<Props> = ({ fixed }) => {
       >
         <div className="box">
           <div className="flex items-center justify-between">
+            <Link to='/'>
             <img
               src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969536/rsh/Logo_1_opqhgq.png"
               alt="logo"
@@ -27,6 +28,7 @@ const Header: FC<Props> = ({ fixed }) => {
               height={60}
               className="lg:w-[130px] w-36"
             />
+            </Link>
             <div className="lg:w-8/12 xl:w-7/12 2xl:w-6/12 lg:flex hidden justify-between">
               <ul className="flex gap-x-12 items-center justify-between">
                 {NAV_LIST.map((item, i) => (

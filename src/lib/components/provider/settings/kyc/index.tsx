@@ -4,6 +4,7 @@ import { FaCar, FaRegUser } from "react-icons/fa";
 import { BsBank2 } from "react-icons/bs";
 import GeneralInfo from "./GeneralInfo";
 import ServiceInfo from "./ServiceInfo";
+import BankInfo from "./BankInfo";
  
 const KycIndex = () => {
   const [activeStep, setActiveStep] = React.useState(0);
@@ -77,6 +78,7 @@ const KycIndex = () => {
       <div className="mt-24 px-4">
         {activeStep === 0 && <GeneralInfo/>}
         {activeStep === 1 && <ServiceInfo/>}
+        {activeStep === 2 && <BankInfo/>}
       </div>
       <div className="mt-16 px-4 flex justify-between">
         <Button onClick={handlePrev} disabled={isFirstStep}>

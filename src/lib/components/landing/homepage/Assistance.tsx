@@ -1,38 +1,45 @@
+import { useQuery } from "@tanstack/react-query";
 import Button from "../../ui/Button";
+import { getCategories } from "../../../services/api/serviceApi";
+import { ServiceCatItem } from "../../../types/service";
 
 const Assistance = () => {
-  const services = [
-    {
-      name: "Emergency towing service",
-      img: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969535/rsh/Rectangle_20_ewhcb9.png",
-      color: "bg-white",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor orci nibh, vitae laoreet mi hendrerit id. Proin viverra est ac orci lacinia egestas. ",
-    },
-    {
-      name: "Emergency Repairs",
-      img: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969535/rsh/Rectangle_21_bstran.png",
-      color: "bg-[#FEB470]",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor orci nibh, vitae laoreet mi hendrerit id. Proin viverra est ac orci lacinia egestas. ",
-    },
-    {
-      name: "Fuel Delivery",
-      img: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969535/rsh/Rectangle_22_ee9gws.png",
-      color: "bg-white",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor orci nibh, vitae laoreet mi hendrerit id. Proin viverra est ac orci lacinia egestas. ",
-    },
-    {
-      name: "Lockout Services",
-      img: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969536/rsh/Rectangle_23_hfxo8k.png",
-      color: "bg-white",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor orci nibh, vitae laoreet mi hendrerit id. Proin viverra est ac orci lacinia egestas. ",
-    },
-    {
-      name: "Battery Replacement",
-      img: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969534/rsh/Rectangle_24_iiikug.png",
-      color: "bg-white",
-      desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor orci nibh, vitae laoreet mi hendrerit id. Proin viverra est ac orci lacinia egestas. ",
-    },
-  ];
+  const { data: service } = useQuery({
+    queryKey: ["getCat"],
+    queryFn: getCategories,
+  });
+  // const services = [
+  //   {
+  //     name: "Emergency towing service",
+  //     img: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969535/rsh/Rectangle_20_ewhcb9.png",
+  //     color: "bg-white",
+  //     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor orci nibh, vitae laoreet mi hendrerit id. Proin viverra est ac orci lacinia egestas. ",
+  //   },
+  //   {
+  //     name: "Emergency Repairs",
+  //     img: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969535/rsh/Rectangle_21_bstran.png",
+  //     color: "bg-[#FEB470]",
+  //     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor orci nibh, vitae laoreet mi hendrerit id. Proin viverra est ac orci lacinia egestas. ",
+  //   },
+  //   {
+  //     name: "Fuel Delivery",
+  //     img: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969535/rsh/Rectangle_22_ee9gws.png",
+  //     color: "bg-white",
+  //     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor orci nibh, vitae laoreet mi hendrerit id. Proin viverra est ac orci lacinia egestas. ",
+  //   },
+  //   {
+  //     name: "Lockout Services",
+  //     img: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969536/rsh/Rectangle_23_hfxo8k.png",
+  //     color: "bg-white",
+  //     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor orci nibh, vitae laoreet mi hendrerit id. Proin viverra est ac orci lacinia egestas. ",
+  //   },
+  //   {
+  //     name: "Battery Replacement",
+  //     img: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969534/rsh/Rectangle_24_iiikug.png",
+  //     color: "bg-white",
+  //     desc: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor orci nibh, vitae laoreet mi hendrerit id. Proin viverra est ac orci lacinia egestas. ",
+  //   },
+  // ];
   return (
     <>
       <div className="section text-black bg-[#F8F8F8]">
@@ -55,8 +62,9 @@ const Assistance = () => {
               />
             </div>
             <div className="mt-6 lg:mt-12">
-              <div className="grid lg:grid-cols-6 lg:[&>*:first-child]:col-span-3 lg:[&>*:nth-child(2)]:col-span-3 make-2 gap-6 lg:gap-8">
-                {services.map((item) => (
+              <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
+              {/* <div className="grid lg:grid-cols-6 lg:[&>*:first-child]:col-span-3 lg:[&>*:nth-child(2)]:col-span-3 make-2 gap-6 lg:gap-8"> */}
+                {/* {services.map((item) => (
                   <div
                     className={`${item.color} col-span-2 rounded-[12px] p-5 lg:p-10 hover:shadow-lg hover:scale-105 duration-100 `}
                   >
@@ -68,7 +76,17 @@ const Assistance = () => {
                       <p className="fs-500">{item.desc}</p>
                     </div>
                   </div>
-                ))}
+                ))} */}
+                {
+                  service && !!service.data.length && service.data.map((item:ServiceCatItem) => (
+                    <div className="new-shade text-center h-[230px] w-full place-center">
+                        <div>
+                          <img src={item.icon} alt="icon" className="w-20 mx-auto" />
+                          <p className="mt-4 fw-600">{item.name}</p>
+                        </div>
+                    </div>
+                  ))
+                }
               </div>
             </div>
           </div>

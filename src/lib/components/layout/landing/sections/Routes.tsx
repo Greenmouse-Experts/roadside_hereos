@@ -4,8 +4,8 @@ export const NAV_LIST = [
     name: "FAQs",
   },
   {
-    url: "/support",
-    name: "Support",
+    url: "/career",
+    name: "Careers",
   },
   {
     url: "/contact",

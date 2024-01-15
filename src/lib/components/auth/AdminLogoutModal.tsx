@@ -16,7 +16,7 @@ const LogoutModal: FC<Props> = ({ CloseModal }) => {
     resetUser();
     localStorage.clear();
     toast.success("Logout Successful");
-    navigate("/auth/login");
+    navigate("/auth/admin");
   };
   return (
     <div>
