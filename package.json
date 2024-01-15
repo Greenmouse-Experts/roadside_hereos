@@ -17,6 +17,7 @@
     "axios": "^1.6.5",
     "country-state-city": "^3.2.1",
     "dayjs": "^1.11.10",
+    "list-of-cars": "^0.0.142",
     "react": "^18.2.0",
     "react-apexcharts": "^1.4.1",
     "react-dom": "^18.2.0",

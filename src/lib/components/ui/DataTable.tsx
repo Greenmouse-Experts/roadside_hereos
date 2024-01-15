@@ -7,8 +7,6 @@ import {
   flexRender,
 } from "@tanstack/react-table";
 import { TbArrowBackUp, TbArrowBackUpDouble, TbArrowForwardUp, TbArrowForwardUpDouble } from "react-icons/tb";
-// import { generatePaginationNumbers, isNumber } from "../../utils";
-// import { generatePaginationNumbers, isNumber } from "@/shared/utils/format";
 
 interface Props {
   data: any;

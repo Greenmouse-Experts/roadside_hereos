@@ -27,5 +27,5 @@ export interface CreateUser {
   reference?: string;
   aboutUs?: string;
   platform?: string;
-  serviceTypeId?: string;
+  serviceTypeId?: string[];
 }

@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import TextInput, { InputType } from "../ui/TextInput";
 import { AiOutlineMail } from "react-icons/ai";
@@ -18,17 +18,30 @@ import { registerUser } from "../../services/api/authApi";
 import { toast } from "react-toastify";
 import useModal from "../../hooks/useModal";
 import RegisterSuccess from "./RegisterSuccess";
+import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+
 
 const ProviderRegisterForm = () => {
   const [isBusy, setIsBusy] = useState(false);
-  const {Modal, setShowModal} = useModal()
-  useEffect(() => {
-    setShowModal(true)
-  }, [])
+  const { Modal, setShowModal } = useModal();
+  const [showDrop, setShowDrop] = useState(false);
+  // const [selectedCat, setSelectedCat] = useState([]);
+  const [values, setValues] = useState<string[]>([]);
   const { data: services } = useQuery({
     queryKey: ["getCat"],
     queryFn: getCategories,
   });
+  const handleCheckboxChange = (event: any) => {
+    if (event.target.checked) {
+      const newValue = event.target.value; // Replace this with the value you want to add
+      setValues((prevValues) => [...prevValues, newValue]);
+    } else {
+      values.splice(values.indexOf(event.target.value), 1);
+    }
+    // const selected = services?.data.filter((where:ServiceCatItem) => values.includes(where.id))
+    // setSelectedCat(selected)
+  };
+  
   const {
     control,
     handleSubmit,
@@ -43,7 +56,7 @@ const ProviderRegisterForm = () => {
       email: "",
       password: "",
       confirm_password: "",
-      service: "",
+      serviceTypeId: [],
       country: "",
     },
   });
@@ -57,20 +70,36 @@ const ProviderRegisterForm = () => {
       email: data.email,
       phone: data.phone,
       password: data.password,
-      userType: 'professional',
-      country: data.country
-    }
+      userType: "professional",
+      country: data.country,
+      serviceTypeId: values
+    };
     mutation.mutate(payload, {
       onSuccess: (data) => {
-        setIsBusy(false)
-        toast.success(data?.message)
+        setIsBusy(false);
+        toast.success(data?.message);
+        setShowModal(true)
       },
-      onError: (error:any) => {
-        toast.error(error.response.data.message)
-        setIsBusy(false)
-      }
+      onError: (error: any) => {
+        toast.error(error.response.data.message);
+        setIsBusy(false);
+      },
     });
   };
+  const ref = useRef<any>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e:any) => {
+      if (!ref?.current?.contains(e.target)) {
+        setShowDrop(false)
+      }
+    };
+
+    document.addEventListener("click", handleOutsideClick, false);
+    return () => {
+      document.removeEventListener("click", handleOutsideClick, false);
+    };
+  }, [close]);
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -169,59 +198,78 @@ const ProviderRegisterForm = () => {
           </div>
         </div>
         <div className=" grid lg:grid-cols-2 gap-4">
-          <div className="mt-4">
+          <div className="mt-4" ref={ref}>
             <label className="fw-500 text-[#000000B2]">Service Category</label>
+            <div className="border border-gray-400 w-full mt-[4px] px-[9px] py-[9px] rounded flex items-center gap-x-2">
+              <MdOutlineHomeRepairService className="text-2xl text-gray-700" />
+              <div className="w-full relative">
+                <div className="rounded flex items-center justify-between" onClick={() => setShowDrop(!showDrop)}>
+                  <div className="w-[90%] flex items-center gapx-2 overflow-x-auto scroll-pro whitespace-nowrap">
+                    {/* {selectedCat.map((item: selectedCatType) => (
+                      <span className="px-1 rounded">{item.name},</span>
+                    ))} */}
+                    <p>Select Services</p>
+                  </div>
+                  <div onClick={(e) => e.preventDefault()}>
+                    {showDrop ? (
+                      <FaChevronUp
+                        className="text-[13px]"
+                        onClick={() => setShowDrop(false)}
+                      />
+                    ) : (
+                      <FaChevronDown
+                        className="text-[13px]"
+                        onClick={() => setShowDrop(true)}
+                      />
+                    )}
+                  </div>
+                </div>
+                {showDrop && (
+                  <div className="absolute grid gap-2 z-10 top-8 left-0 bg-white w-full p-3 border shadow">
+                    {services?.data &&
+                      services?.data.map((item: ServiceCatItem) => (
+                        <div className="flex items-center gap-x-2">
+                          <input
+                            type="checkbox"
+                            value={item.id}
+                            checked={values.includes(String(item.id))}
+                            className=""
+                            onChange={handleCheckboxChange}
+                          />
+                          <p>{item.name}</p>
+                        </div>
+                      ))}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+          <div className="mt-4">
+            <label className="fw-500 text-[#000000B2]">Country</label>
             <Controller
-              name="service"
+              name="country"
               control={control}
               rules={{
-                required: {
-                  value: true,
-                  message: "Please select a service",
-                },
+                required: false,
               }}
               render={({ field }) => (
                 <div className="border border-gray-400 w-full mt-[4px] p-[9px] rounded flex items-center gap-x-2">
-                  <MdOutlineHomeRepairService className="text-2xl text-gray-700" />
+                  <SlLocationPin className="text-xl text-gray-700" />
                   <select
                     className="border-none outline-none w-full"
                     {...field}
                     ref={null}
                   >
-                    <option>Select an option</option>
-                    {services?.data &&
-                      services?.data.map((item: ServiceCatItem) => (
-                        <option value={item.id}>{item.name}</option>
-                      ))}
+                    <option value={""}>Country of residence</option>
+                    {Country.getAllCountries().map((item, index) => (
+                      <option value={item.isoCode} key={index}>
+                        {item.name}
+                      </option>
+                    ))}
                   </select>
                 </div>
               )}
             />
-          </div>
-          <div className="mt-4">
-            <label className="fw-500 text-[#000000B2]">Country</label>
-          <Controller
-            name="country"
-            control={control}
-            rules={{
-              required: false,
-            }}
-            render={({ field }) => (
-              <div className="border border-gray-400 w-full mt-[4px] p-[9px] rounded flex items-center gap-x-2">
-                <SlLocationPin className="text-xl text-gray-700" />
-                <select
-                  className="border-none outline-none w-full"
-                  {...field}
-                  ref={null}
-                >
-                  <option value={""}>Country of residence</option>
-                  {Country.getAllCountries().map((item, index) => (
-                    <option value={item.isoCode} key={index}>{item.name}</option>
-                  ))}
-                </select>
-              </div>
-            )}
-          />
           </div>
         </div>
         <div className=" grid lg:grid-cols-2 gap-4">
@@ -291,7 +339,7 @@ const ProviderRegisterForm = () => {
       </form>
       <Modal title="" size="sm">
         <div>
-            <RegisterSuccess/>
+          <RegisterSuccess />
         </div>
       </Modal>
     </div>
