@@ -21,6 +21,10 @@ export const createCategory = async(payload:CreateCatType) => {
    return  axios.post(`${ENDPOINT.CREATE_CATEGORY}`, payload).then((response) => response.data)
 } 
 
+export const editCategory = async(payload:CreateCatType) => {
+  return  axios.patch(`${ENDPOINT.EDIT_CATEGORY}/${payload.id}`, payload).then((response) => response.data)
+} 
+
 export const getCategories = async() => {
     return  axios.get(`${ENDPOINT.GET_CATEGORY}`).then((response) => response.data)
  } 

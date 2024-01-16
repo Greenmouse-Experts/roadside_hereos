@@ -25,6 +25,7 @@ export const USER_SIGNUP = '/user/signup'
 // service
 export const CREATE_CATEGORY = '/services/create'
 export const GET_CATEGORY = '/services/all'
+export const EDIT_CATEGORY = '/services/update'
 
 // routine endpoints
 export const UPLOAD_FILE = '/upload'

@@ -11,14 +11,19 @@ import CareersPage from "./pages/landing/Careers";
 import TermsPage from "./pages/landing/Terms";
 import CookiePage from "./pages/landing/Cookie";
 import PolicyPage from "./pages/landing/Policy";
+import RequestPage from "./pages/landing/Request";
+import ScrollToTop from "./lib/scrollTop";
+import CookieModal from "./lib/components/landing/homepage/Cookie";
 
 function App() {
   return (
     <>
+      <ScrollToTop/>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/faqs" element={<FaqPage />} />
         <Route path="/request" element={<ServicesPage />} />
+        <Route path="/request/:id" element={<RequestPage />} />
         <Route path="/contact" element={<ContactUsPage />} />
         <Route path="/career" element={<CareersPage />} />
         <Route path="/terms" element={<TermsPage />} />
@@ -29,6 +34,7 @@ function App() {
         <Route path="/provider/*" element={<ProviderDashboardWraper />} />
         <Route path="/admin/*" element={<AdminDashboard />} />
       </Routes>
+      <CookieModal/>
     </>
   );
 }

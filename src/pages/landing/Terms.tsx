@@ -6,7 +6,7 @@ const TermsPage = () => {
     <>
       <LandingLayout>
         <div>
-          <div className="h-44 bg-policy">
+          <div className="h-44 lg:h-[220px] pb-4 bg-policy">
             <div className="box h-full flex items-center">
               <div>
                 <div className="flex">

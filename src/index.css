@@ -180,6 +180,9 @@ input[type="checkbox"]:checked {
   grid-auto-rows: max-content; /* Ensure each row takes the height of its content */
   gap: 10px; /* Add gap between grid items if desired */
 }
+.input-gray input{
+  background: #F3F3F3;
+}
 
 @layer components {
   /* container settings */

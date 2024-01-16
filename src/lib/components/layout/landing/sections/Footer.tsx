@@ -83,7 +83,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="pt-6 border-t border-gray-500">
-          <p className="text-center fs-500 text-white">
+          <p className="text-center pb-4 fs-500 text-white">
             Copyright © {date.getFullYear()} ROADSIDE HEROES. All Rights
             Reserved
           </p>

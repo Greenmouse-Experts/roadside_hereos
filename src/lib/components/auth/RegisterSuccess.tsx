@@ -12,10 +12,16 @@ const RegisterSuccess = () => {
         <div className="mt-5">
           <p className="text-center">
             Thanks for signing up. Welcome to our community. We are happy to
-            have you on board.
+            have you on board. A verification mail has been sent to your inbox,
+            please click on the provided link to verify your account.
           </p>
           <div className="flex justify-center mt-8">
-            <Link to='/auth/login' className="fw-500 text-[#172748] mt-3 lg:mt-0 border-2 border-[#172748] rounded-[100px] px-4 py-2">Procced to Login</Link>
+            <Link
+              to="/auth/login"
+              className="fw-500 text-[#172748] mt-3 lg:mt-0 border-2 border-[#172748] rounded-[100px] px-4 py-2"
+            >
+              Procced to Login
+            </Link>
           </div>
         </div>
       </div>

@@ -8,6 +8,7 @@ import { SlLocationPin } from "react-icons/sl";
 import { Country } from "country-state-city";
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
+import ReCAPTCHA from "react-google-recaptcha";
 import Button from "../ui/Button";
 import { ScaleSpinner } from "../ui/Loading";
 import { MdOutlineHomeRepairService } from "react-icons/md";
@@ -19,6 +20,7 @@ import { toast } from "react-toastify";
 import useModal from "../../hooks/useModal";
 import RegisterSuccess from "./RegisterSuccess";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+
 
 
 const ProviderRegisterForm = () => {
@@ -72,7 +74,8 @@ const ProviderRegisterForm = () => {
       password: data.password,
       userType: "professional",
       country: data.country,
-      serviceTypeId: values
+      serviceTypeId: values,
+      captcha: captchaRef.current.getValue(),
     };
     mutation.mutate(payload, {
       onSuccess: (data) => {
@@ -86,6 +89,7 @@ const ProviderRegisterForm = () => {
       },
     });
   };
+  const captchaRef = useRef<any>(null);
   const ref = useRef<any>(null);
 
   useEffect(() => {
@@ -327,7 +331,12 @@ const ProviderRegisterForm = () => {
             )}
           />
         </div>
-
+        <div className="mt-8">
+            <ReCAPTCHA
+              sitekey={`${import.meta.env.REACT_APP_SITE_KEY}`}
+              ref={captchaRef}
+            />
+          </div>
         <div className="mt-12">
           <Button
             title={

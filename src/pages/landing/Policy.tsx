@@ -6,13 +6,13 @@ const PolicyPage = () => {
     <>
       <LandingLayout>
         <div>
-          <div className="h-44 bg-policy">
+          <div className="h-44 lg:h-[220px] pb-4  bg-policy">
             <div className="box h-full flex items-center">
               <div>
                 <div className="flex">
                   <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#FEB470]">
                     <BsClock className="text-[#FEB470] text-[14px]" />
-                    <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-white">
+                    <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-[#FEB470]">
                       Available 24/7 for emergency road service
                     </p>
                   </div>

@@ -162,3 +162,5 @@ export const capitalizeFirstLetter = (string: string) => {
     }
     return paginationNumbers;
   };
+
+  

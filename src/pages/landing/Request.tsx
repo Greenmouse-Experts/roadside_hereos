@@ -1,8 +1,8 @@
 import { BsClock } from "react-icons/bs";
+import RequestForm from "../../lib/components/landing/services/RequestForm";
 import LandingLayout from "../../lib/components/layout/landing";
-import FaqList from "../../lib/components/landing/faqs/FaqList";
 
-const FaqPage = () => {
+const RequestPage = () => {
   return (
     <>
       <LandingLayout>
@@ -19,15 +19,15 @@ const FaqPage = () => {
                   </div>
                 </div>
                 <p className="text-3xl fw-700 mt-4">
-                  Frequently Asked Questions
+                  Need Help Now? Request Our Expert Services.
                 </p>
               </div>
             </div>
           </div>
           <div className="section">
-            <div className="box py-10">
-              <div className="lg:w-11/12 mx-auto">
-                <FaqList />
+            <div className="box">
+              <div className="w-9/12 mx-auto">
+                <RequestForm />
               </div>
             </div>
           </div>
@@ -37,4 +37,4 @@ const FaqPage = () => {
   );
 };
 
-export default FaqPage;
+export default RequestPage;

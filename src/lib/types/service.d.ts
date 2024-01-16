@@ -1,7 +1,8 @@
 export interface CreateCatType {
     name: string;
     slug: string;
-    icon: string
+    icon?: string;
+    id?: string
 }
 interface ServiceCatItem {
     name: string;
@@ -9,5 +10,5 @@ interface ServiceCatItem {
     cretatedAt: string;
     slug: string;
     updatedAt: string;
-    icon:string
+    icon:string | undefined
   }
