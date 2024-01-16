@@ -11,7 +11,7 @@ const ContactUsPage = () => {
     <>
       <LandingLayout>
         <div>
-          <div className="h-[250px]  bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1705326924/rsh/Group_59_1_xmvdrf.png')] bg-cover bg-right lg:bg-fit">
+          <div className="h-[250px] lg:h-[300px] bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1705326924/rsh/Group_59_1_xmvdrf.png')] bg-cover bg-right lg:bg-fit">
             <div className="box h-full flex items-center">
               <div>
                 <div className="flex">

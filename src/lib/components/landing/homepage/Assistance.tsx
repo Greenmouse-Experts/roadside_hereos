@@ -43,7 +43,7 @@ const Assistance = () => {
   return (
     <>
       <div className="section text-black bg-[#F8F8F8]">
-        <div className="box">
+        <div className="box lg:pt-12">
           <div>
             <div className="lg:flex justify-between items-center">
               <div className="lg:w-[50%]">

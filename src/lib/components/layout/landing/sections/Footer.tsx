@@ -52,24 +52,24 @@ const Footer = () => {
             <p className="fw-600 mb-4 mt-10 lg:mt-0">Company</p>
             <ul className="grid gap-6 fs-500">
               <li><Link to={'/'}>Home</Link></li>
-              <li><Link to={'/'}>FAQs</Link></li>
-              <li><Link to={'/'}>Request a Service</Link></li>
-              <li><Link to={'/'}>Signup as a Provider</Link></li>
+              <li><Link to={'/faqs'}>FAQs</Link></li>
+              <li><Link to={'/request'}>Request a Service</Link></li>
+              <li><Link to={'/auth/register'}>Signup as a Provider</Link></li>
             </ul>
           </div>
           <div>
             <p className="fw-600 mb-4 mt-10 lg:mt-0">Legal</p>
             <ul className="grid gap-6 fs-500">
-              <li><Link to={'/'}>Terms and Conditions</Link></li>
-              <li><Link to={'/'}>Privacy Policy</Link></li>
-              <li><Link to={'/'}>Cookies Policy</Link></li>
+              <li><Link to={'/terms'}>Terms and Conditions</Link></li>
+              <li><Link to={'/privacy'}>Privacy Policy</Link></li>
+              {/* <li><Link to={'/cookie'}>Cookies Policy</Link></li> */}
             </ul>
           </div>
           <div>
             <p className="fw-600 mb-4 mt-10 lg:mt-0">Support</p>
             <ul className="grid gap-6 fs-500">
-              <li><Link to={'/'}>Help</Link></li>
-              <li><Link to={'/'}>Contact Us</Link></li>
+              <li><Link to={'/contact'}>Help</Link></li>
+              <li><Link to={'/contact'}>Contact Us</Link></li>
               <li><Link to={'/'}>Feedback</Link></li>
             </ul>
           </div>

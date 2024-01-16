@@ -8,6 +8,9 @@ import FaqPage from "./pages/landing/Faqs";
 import ServicesPage from "./pages/landing/Services";
 import ContactUsPage from "./pages/landing/Contact";
 import CareersPage from "./pages/landing/Careers";
+import TermsPage from "./pages/landing/Terms";
+import CookiePage from "./pages/landing/Cookie";
+import PolicyPage from "./pages/landing/Policy";
 
 function App() {
   return (
@@ -18,6 +21,9 @@ function App() {
         <Route path="/request" element={<ServicesPage />} />
         <Route path="/contact" element={<ContactUsPage />} />
         <Route path="/career" element={<CareersPage />} />
+        <Route path="/terms" element={<TermsPage />} />
+        <Route path="/cookie" element={<CookiePage />} />
+        <Route path="/privacy" element={<PolicyPage />} />
         <Route path="/auth/*" element={<AuthRouting />} />
         <Route path="/user/*" element={<UsersDashboardWraper />} />
         <Route path="/provider/*" element={<ProviderDashboardWraper />} />
