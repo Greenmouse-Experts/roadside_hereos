@@ -155,7 +155,7 @@ const ProviderRegisterForm = () => {
             )}
           />
         </div>
-        <div className="grid lg:grid-cols-2 gap-4">
+        <div className="grid lg:grid-cols-2 lg:gap-4">
           <Controller
             name="email"
             control={control}
@@ -248,7 +248,7 @@ const ProviderRegisterForm = () => {
               </div>
             </div>
           </div>
-          <div className="mt-4">
+          <div className="lg:mt-4">
             <label className="fw-500 text-[#000000B2]">Country</label>
             <Controller
               name="country"
@@ -333,7 +333,7 @@ const ProviderRegisterForm = () => {
         </div>
         <div className="mt-8">
             <ReCAPTCHA
-              sitekey={`${import.meta.env.REACT_APP_SITE_KEY}`}
+              sitekey={`6Leno1MpAAAAAO0BmPjneoVUVd5FKfw0ED40qvpc`}
               ref={captchaRef}
             />
           </div>

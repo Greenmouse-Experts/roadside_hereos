@@ -10,5 +10,11 @@ interface ServiceCatItem {
     cretatedAt: string;
     slug: string;
     updatedAt: string;
-    icon:string | undefined
+    icon:string | undefined;
+    isPublished: boolean
+  }
+
+  interface PublishCatType {
+    published: boolean
+    id?: string
   }

@@ -120,7 +120,7 @@ const AddCategory = () => {
             />
           </div>
           <div className="mt-12 flex justify-center">
-            <div className="lg:w-5/12">
+            <div className="lg:w-5/12 w-full">
               <Button
                 title={
                   isBusy ? <ScaleSpinner size={14} color="white" /> : "Continue"

@@ -1,6 +1,6 @@
 import axios from "axios";
 import * as ENDPOINT from "../constant";
-import { CreateCatType } from "../../types/service";
+import { CreateCatType, PublishCatType } from "../../types/service";
 
 axios.defaults.baseURL = ENDPOINT.BASE_URL;
 axios.defaults.headers.common["Authorization"] = `${localStorage.getItem(
@@ -23,6 +23,14 @@ export const createCategory = async(payload:CreateCatType) => {
 
 export const editCategory = async(payload:CreateCatType) => {
   return  axios.patch(`${ENDPOINT.EDIT_CATEGORY}/${payload.id}`, payload).then((response) => response.data)
+} 
+
+export const publishCategory = async(payload:PublishCatType) => {
+  return  axios.patch(`${ENDPOINT.PUBLISH_CATEGORY}/${payload.id}`, payload).then((response) => response.data)
+} 
+
+export const deleteCategory = async(payload:string) => {
+  return  axios.delete(`${ENDPOINT.DELETE_CATEGORY}/${payload}`).then((response) => response.data)
 } 
 
 export const getCategories = async() => {
