@@ -29,6 +29,7 @@ const Assistance = () => {
               </div>
               <Button
                 title={"View all"}
+                onClick={() => navigate('/request')}
                 altClassName="btn-feel mt-5 lg:mt-0 fs-500 fw-500 bg-[#FEB470] text-black px-6 py-2"
               />
             </div>
@@ -36,7 +37,7 @@ const Assistance = () => {
               <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
                 {service &&
                   !!service.data.length &&
-                  service.data.filter((where:ServiceCatItem) => where.isPublished ).map((item: ServiceCatItem) => (
+                  service.data.slice(0,7).map((item: ServiceCatItem) => (
                     <div onClick={() => navigate(`/request/${item.id}`)} className="new-shade text-center h-[250px] rounded-[13px] bg-white w-full place-center hover:scale-105 duration-100 cursor-pointer">
                       <div>
                         <img

@@ -8,6 +8,8 @@ const ServiceProviders = () => {
     queryKey: ["getProviders"],
     queryFn: getProviders,
   });
+  console.log(data?.data);
+  
   return (
     <>
       <div className="bg-white p-6 rounded-lg shadow min-h-[80vh]">
@@ -24,7 +26,7 @@ const ServiceProviders = () => {
             </div>
           )}
           {isError && <p>Error Occured</p>}
-          {data && !!data.users.length && <ProvidersList users={data?.users} />}
+          {data && !!data?.data.length && <ProvidersList users={data?.data} />}
         </div>
       </div>
     </>

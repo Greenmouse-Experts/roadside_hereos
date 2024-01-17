@@ -17,7 +17,7 @@ import {
 } from "@material-tailwind/react";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
-import { formatAsNgnMoney } from "../../../utils";
+import { FormatStatus, formatAsNgnMoney } from "../../../utils";
 import useModal from "../../../hooks/useModal";
 import { useState } from "react";
 import EditCategory from "./EditCategory";
@@ -113,6 +113,11 @@ const CategoryList = () => {
     columnHelper.accessor((row) => row.slug, {
       id: "Default Price",
       cell: (info) => <>{formatAsNgnMoney(info.getValue())}</>,
+      header: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.isPublished, {
+      id: "Published Status",
+      cell: (info) => <>{info.getValue()? FormatStatus['Active'] : FormatStatus['Deactivate']}</>,
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.cretatedAt, {

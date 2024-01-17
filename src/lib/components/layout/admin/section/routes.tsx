@@ -36,19 +36,19 @@ export const Routes = [
     submenu: [],
   },
   {
-    name: 'Service Category',
+    name: 'Service List',
     icon: <BiCategoryAlt className="text-xl" />,
     route: '/admin/category',
     submenu: [],
   },
   {
-    name: 'Service Requests',
+    name: 'Pending Requests',
     icon: <BiGitPullRequest className="text-xl" />,
     route: '/admin/requests',
     submenu: [],
   },
   {
-    name: 'Services',
+    name: 'Completed Services',
     icon: <LuServerCog className="text-xl" />,
     route: '/admin/services',
     submenu: [],

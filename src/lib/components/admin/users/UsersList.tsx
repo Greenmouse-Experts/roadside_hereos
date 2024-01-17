@@ -22,13 +22,13 @@ const UsersList: FC<Props> = ({ users }) => {
   // Table components
   const columnHelper = createColumnHelper<any>();
   const columns = [
-    columnHelper.accessor((row) => row.user.name, {
+    columnHelper.accessor((row) => row.name, {
       id: "Name",
       cell: (info) => (
         <div className="flex gap-x-2 items-center">
           <ProfileAvatar
             name={info.getValue()}
-            url={info.row.original.user.photo}
+            url={info.row.original.photo}
             size={35}
             font={15}
           />
@@ -37,22 +37,22 @@ const UsersList: FC<Props> = ({ users }) => {
       ),
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.user.email, {
+    columnHelper.accessor((row) => row.email, {
       id: "Email",
       cell: (info) => <>{info.getValue()}</>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.user.phone, {
+    columnHelper.accessor((row) => row.phone, {
       id: "Phone",
       cell: (info) => <>{info.getValue()}</>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.user.createdAt, {
+    columnHelper.accessor((row) => row.createdAt, {
       id: "Joined at",
       cell: (info) => <>{dayjs(info.getValue()).format("DD  MMMM YYYY")}</>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.user.createdAt, {
+    columnHelper.accessor((row) => row.createdAt, {
       id: "Action",
       header: (info) => info.column.id,
       cell: (info) => (

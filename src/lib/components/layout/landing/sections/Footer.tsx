@@ -28,7 +28,7 @@ export const socials = [
 const Footer = () => {
   const date = new Date();
   return (
-    <div className="bg-review">
+    <div className="bg-[#172748] ">
       <div className="box text-white">
         <div className="lg:pt-20 py-12 lg:grid lg:grid-cols-6">
           <div className="col-span-2">

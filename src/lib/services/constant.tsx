@@ -12,7 +12,7 @@ export enum HTTP_METHODS {
 // Admin endpoints
 export const ADMIN_LOGIN = '/admin/login'
 export const GET_USERS = '/all/users'
-export const GET_PROVIDERS = '/all/users'
+export const GET_PROVIDERS = '/all/providers'
 export const GET_ADMIN_NOTIFY = '/notifications/admin'
 
 // Auth endpoints
@@ -24,7 +24,7 @@ export const USER_SIGNUP = '/user/signup'
 
 // service
 export const CREATE_CATEGORY = '/services/create'
-export const GET_CATEGORY = '/services/all'
+export const GET_CATEGORY = '/services/view'
 export const EDIT_CATEGORY = '/services/update'
 export const PUBLISH_CATEGORY = '/services/publish-unpublish'
 export const DELETE_CATEGORY = 'services/action'

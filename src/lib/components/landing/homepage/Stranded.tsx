@@ -51,13 +51,13 @@ const Stranded = () => {
               </div>
               <div className="md:flex mt-8 lg:mt-10 gap-x-5">
                 <Link
-                  to={""}
+                  to={"/request"}
                   className="btn-feel flex w-6/12 md:w-auto items-center gap-x-4 fs-500 !fw-600 bg-[#FEB470] text-black px-4 py-2"
                 >
-                  Get Started <HiOutlineArrowNarrowRight />
+                  Get Help <HiOutlineArrowNarrowRight />
                 </Link>
                 <Link
-                  to={""}
+                  to={"/auth/register"}
                   className="btn-feel flex mt-6 lg:mt-0 w-11/12 md:w-auto  items-center gap-x-4 fs-500 !fw-600 bg-[#FEB470] text-black px-4 py-2"
                 >
                   Sign Up as a Service Provider <HiOutlineArrowNarrowRight />

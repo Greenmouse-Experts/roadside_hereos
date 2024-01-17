@@ -22,7 +22,7 @@ const AdminUsers = () => {
             </div>
           )}
           {isError && <p>Error Occured</p>}
-          {data && !!data.users.length && <UsersList users={data?.users} />}
+          {data && !!data?.data.length && <UsersList users={data?.data} />}
         </div>
       </div>
     </>
