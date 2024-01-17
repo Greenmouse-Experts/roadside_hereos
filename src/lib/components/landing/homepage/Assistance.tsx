@@ -37,7 +37,7 @@ const Assistance = () => {
                 {service &&
                   !!service.data.length &&
                   service.data.map((item: ServiceCatItem) => (
-                    <div className="new-shade text-center h-[250px] rounded-[13px] bg-white w-full place-center hover:scale-105 duration-100 cursor-pointer">
+                    <div onClick={() => navigate(`/request/${item.id}`)} className="new-shade text-center h-[250px] rounded-[13px] bg-white w-full place-center hover:scale-105 duration-100 cursor-pointer">
                       <div>
                         <img
                           src={item.icon}
