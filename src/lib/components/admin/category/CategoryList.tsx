@@ -193,7 +193,7 @@ const CategoryList = () => {
       <Unpublish title="" size="xs">
         <ReusableModal
           title="Are you sure you want to unpublish this service Category"
-          actionTitle="Publish"
+          actionTitle="Unpublish"
           action={() => handlePublish('inctive')}
           cancelTitle="Close"
           closeModal={() => setPublish(false)}

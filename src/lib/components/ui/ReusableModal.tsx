@@ -21,7 +21,7 @@ const ReusableModal: FC<Props> = ({
   return (
     <div className="px-4">
       <img
-        src=""
+        src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1705594002/rsh/transparent-warning-sign-triangle-sign-with-yellow-background-and-exclamati6571913b7d52b6.0212584217019415635133-removebg-preview_vedpnz.png"
         alt="warning"
         width={120}
         height={120}
