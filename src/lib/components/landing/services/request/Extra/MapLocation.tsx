@@ -15,7 +15,8 @@ const MapLocation:FC<Props> = () => {
 
   return (
     <>
-        <div style={{ height: '100%', width: '100%' }}>
+       <div className='h-[400px]'>
+       <div style={{ height: '100%', width: '100%' }}>
       <GoogleMapReact
         bootstrapURLKeys={{ key: "AIzaSyAObMzoszg93PuKpMW5JpUjbN4H9JC0isY"}}
         defaultCenter={defaultProps.center}
@@ -27,6 +28,7 @@ const MapLocation:FC<Props> = () => {
         /> */}
       </GoogleMapReact>
     </div>
+       </div>
     </>
   )
 }

@@ -5,11 +5,11 @@ import AddCategory from '../../lib/components/admin/category/AddCategory'
 const AdminCategory = () => {
     const tabs = [
         {
-            title: <p>Category List</p>,
+            title: <p>Service List</p>,
             content: <CategoryList/>
         },
         {
-            title: <p>Add Category</p>,
+            title: <p>Add Service</p>,
             content: <AddCategory/>
         },
     ]

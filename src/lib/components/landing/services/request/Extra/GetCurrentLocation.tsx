@@ -12,7 +12,6 @@ interface Props {
 }
 const GetCurrentLocation:FC<Props> = ({setValue}) => {
   const [isBusy, setIsBusy] = useState(false);
-  const [location, setLocation] = useState<GeolocationCoordinates>();
   const {Modal, setShowModal} = useModal()
   const geolocationAPI = navigator.geolocation;
   const getUserCoordinates = () => {
@@ -23,7 +22,6 @@ const GetCurrentLocation:FC<Props> = ({setValue}) => {
       geolocationAPI.getCurrentPosition(
         (position) => {
           const { coords } = position;
-          setLocation(coords);
           fetchCoordinateDetails(coords);
         },
         (error) => {
@@ -33,7 +31,6 @@ const GetCurrentLocation:FC<Props> = ({setValue}) => {
       );
     }
   };
-  console.log(location);
   const fetchCoordinateDetails = async (data: GeolocationCoordinates) => {
     await axios
       .get(
@@ -47,7 +44,6 @@ const GetCurrentLocation:FC<Props> = ({setValue}) => {
       .then((response) => {
         response.data;
         if (response.data) {
-            console.log(response.data);
             const data = response.data; 
           setIsBusy(false);
           setValue(data.display_name)
@@ -57,7 +53,7 @@ const GetCurrentLocation:FC<Props> = ({setValue}) => {
 
   return (
     <>
-      <div className="flex items-center gap-x-6">
+      <div className="grid gap-y-2 lg:flex items-center gap-x-6">
         <p
           className="flex gap-x-1 items-center fw-600"
           onClick={getUserCoordinates}
@@ -73,7 +69,6 @@ const GetCurrentLocation:FC<Props> = ({setValue}) => {
           <BeatLoader size={34} />
         </div>
       )}
-      
       <Modal title="" size="lg">
         <MapLocation setValue={setValue}/>
       </Modal>

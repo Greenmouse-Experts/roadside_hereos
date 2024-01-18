@@ -3,14 +3,14 @@ import TextInput, { InputType } from "../../../ui/TextInput";
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import { Button } from "@material-tailwind/react";
-import { FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { FC } from "react";
 
 interface Props {
     next: () => void
     prev: () => void
 }
-const PersonalSec:FC<Props> = ({next}) => {
+const PersonalSec:FC<Props> = ({next, prev}) => {
   const {
     control,
     handleSubmit,
@@ -134,7 +134,7 @@ const PersonalSec:FC<Props> = ({next}) => {
                 }}
                 render={({ field }) => (
                   <TextInput
-                    label="Address"
+                    label="Residence Address"
                     labelClassName="text-[#000000B2] fw-500"
                     error={errors.address?.message}
                     type={InputType.textarea}
@@ -145,7 +145,13 @@ const PersonalSec:FC<Props> = ({next}) => {
               />
             </div>
           </div>
-          <div className="mt-16 flex justify-end">
+          <div className="mt-16 flex justify-between">
+           <Button
+              onClick={prev}
+              className="btn-feel flex gap-x-2 items-center"
+            >
+              <FaArrowLeftLong /> Prev
+            </Button>
             <Button type={'submit'} className="btn-feel flex gap-x-2 items-center">
                 Next <FaArrowRightLong/>
             </Button>

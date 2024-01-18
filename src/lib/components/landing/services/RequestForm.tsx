@@ -5,6 +5,8 @@ import { BsBank2 } from "react-icons/bs";
 import PersonalSec from './request/PersonalSec';
 import ServiceSec from './request/ServiceSec';
 import PaymentSec from './request/PaymentSec';
+import { MdMiscellaneousServices } from 'react-icons/md';
+import ProviderList from './request/ProviderList';
 
 const RequestForm = () => {
     const [activeStep, setActiveStep] = React.useState(0);
@@ -15,7 +17,7 @@ const RequestForm = () => {
     const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
    
     return (
-      <div className="w-full p-10 rounded-lg new-shade">
+      <div className="w-full p-2 py-6 lg:p-10 rounded-lg new-shade">
         <div className="px-2 lg:px-16">
         <Stepper
           activeStep={activeStep}
@@ -57,7 +59,7 @@ const RequestForm = () => {
             </div>
           </Step>
           <Step onClick={() => setActiveStep(2)}>
-            <FaCar className="h-5 w-5" />
+            <MdMiscellaneousServices className="h-5 w-5" />
             <div className="absolute -bottom-8 lg:-bottom-[4.5rem] w-max text-center">
               <Typography
                 variant="h6"
@@ -80,7 +82,7 @@ const RequestForm = () => {
                 variant="h6"
                 color={activeStep === 3 ? "blue-gray" : "gray"}
               >
-                Step 3
+                Step 4
               </Typography>
               <Typography
                 color={activeStep === 3 ? "blue-gray" : "gray"}
@@ -92,9 +94,10 @@ const RequestForm = () => {
           </Step>
         </Stepper>
         </div>
-        <div className="mt-24 px-4">
+        <div className="mt-24 lg:px-4">
           {activeStep === 0 && <ServiceSec next={() => handleNext()}/>}
           {activeStep === 1 && <PersonalSec prev={() => handlePrev()} next={() => handleNext()}/>}
+          {activeStep === 2 && <ProviderList prev={() => handlePrev()} next={() => handleNext()}/>}
           {activeStep === 3 && <PaymentSec prev={() => handlePrev()}/>}
         </div>
       </div>

@@ -10,7 +10,7 @@ interface Props {
   next: () => void;
   prev?: () => void;
 }
-const ServiceSec: FC<Props> = ({ next, prev }) => {
+const ServiceSec: FC<Props> = ({ next }) => {
   const [location, setLocation] = useState('')
   useEffect(() => {
     reset({
@@ -204,13 +204,7 @@ const ServiceSec: FC<Props> = ({ next, prev }) => {
               />
             </div>
           </div>
-          <div className="mt-16 flex justify-between">
-            <Button
-              onClick={prev}
-              className="btn-feel flex gap-x-2 items-center"
-            >
-              <FaArrowLeftLong /> Prev
-            </Button>
+          <div className="mt-16 flex justify-end">
             <Button
               type={"submit"}
               className="btn-feel flex gap-x-2 items-center"
