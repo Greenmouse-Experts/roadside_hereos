@@ -64,7 +64,7 @@ const GetCurrentLocation:FC<Props> = ({setValue}) => {
         >
           <FaMapMarkerAlt /> Get Coordinates
         </p>
-        <p className="flex gap-x-1 items-center fw-600">
+        <p className="flex gap-x-1 items-center fw-600" onClick={() => setShowModal(true)}>
           <FaMapLocationDot /> Open Map
         </p>
       </div>
