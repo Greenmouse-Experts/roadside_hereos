@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import {  FaArrowRightLong } from "react-icons/fa6";
 import { Controller, useForm } from "react-hook-form";
 import TextInput, { InputType } from "../../../ui/TextInput";
 import { Button } from "@material-tailwind/react";
