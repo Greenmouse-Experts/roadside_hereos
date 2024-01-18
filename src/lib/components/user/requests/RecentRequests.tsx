@@ -59,7 +59,7 @@ const RecentRequests = () => {
               <div className={`border-l-[5px] ${color} cursor-pointer pl-2 py-2 mb-7 hover:scale-105 duration-100`}>
                 <div className="flex items-center gap-x-2">
                   <FaRegUser className='text-gray-500'/>
-                  <p className="fs-300">{item.name}</p>
+                  <p className="fs-300 fw-500">{item.name}</p>
                 </div>
                 <div className="flex items-center gap-x-2">
                   <GrTransaction className='text-gray-500'/>

@@ -22,14 +22,14 @@ const HeroSlide = () => {
       >
         <SwiperSlide>
           <div
-            className={`bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1704984002/rsh/Property_1_Group_60_tapq5c.png')] bg-cover lg:bg-fit w-full h-full`}
+            className={`bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1705590870/rsh/Property_1_Group_60_1_k8lvd5.png')] bg-cover lg:bg-fit w-full h-full`}
           >
-            <div className="box relative z-10 h-full text-black flex items-center">
+            <div className="box relative z-10 h-full text-white flex items-center">
               <div className="">
                 <div className="flex">
-                  <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#172748]">
-                    <BsClock className="text-[#4C8700] text-[14px]" />
-                    <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-[#172748]">
+                  <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#FEB470]">
+                    <BsClock className="text-[#FEB470] text-[14px]" />
+                    <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-[#FEB470]">
                       Available 24/7 for emergency road service
                     </p>
                   </div>
@@ -43,12 +43,13 @@ const HeroSlide = () => {
                 </div>
                 <div className="lg:flex gap-x-6 itms-center mt-10">
                   <Button
-                    title={"Call us now"}
+                  onClick={() => navigate("/request")}
+                    title={"Get Help"}
                     altClassName="btn-feel fs-500 bg-[#FEB470] border-2 border-[#FEB470] text-black px-6 py-2"
                   />
                   <Button
                     title={"Sign up as a Service Provider"}
-                    altClassName="fw-500 text-[#172748] mt-3 lg:mt-0 border-2 border-[#172748] rounded-[100px] px-4 py-2"
+                    altClassName="fw-500 text-white mt-3 lg:mt-0 border-2 border-white rounded-[100px] px-4 py-2"
                     onClick={() => navigate("/auth/register")}
                   />
                 </div>
@@ -58,14 +59,14 @@ const HeroSlide = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className={`bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1704984001/rsh/Property_1_Group_61_dri7o0.png')] bg-cover lg:bg-fit w-full h-full`}
+            className={`bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1705590870/rsh/Property_1_Group_61_1_j5kusu.png')] bg-cover lg:bg-fit w-full h-full`}
           >
-            <div className="box relative z-10 h-full text-black flex items-center">
+            <div className="box relative z-10 h-full text-white flex items-center">
               <div className="">
                 <div className="flex">
-                  <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#172748]">
-                    <BsClock className="text-[#4C8700] text-[14px]" />
-                    <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-[#172748]">
+                  <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#FEB470]">
+                    <BsClock className="text-[#FEB470] text-[14px]" />
+                    <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-[#FEB470]">
                       Available 24/7 for emergency road service
                     </p>
                   </div>
@@ -78,12 +79,13 @@ const HeroSlide = () => {
                 </div>
                 <div className="lg:flex gap-x-6 itms-center mt-10">
                   <Button
-                    title={"Call us now"}
+                    onClick={() => navigate("/request")}
+                    title={"Get Help"}
                     altClassName="btn-feel fs-500 bg-[#FEB470] border-2 border-[#FEB470] text-black px-6 py-2"
                   />
                   <Button
                     title={"Sign up as a Service Provider"}
-                    altClassName="fw-500 text-[#172748] mt-3 lg:mt-0 border-2 border-[#172748] rounded-[100px] px-4 py-2"
+                    altClassName="fw-500 text-white mt-3 lg:mt-0 border-2 border-white rounded-[100px] px-4 py-2"
                     onClick={() => navigate("/auth/register")}
                   />
                 </div>
@@ -93,14 +95,14 @@ const HeroSlide = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className={`bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1704984001/rsh/Property_1_Group_62_j1esm6.png')] bg-cover lg:bg-fit w-full h-full`}
+            className={`bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1705590870/rsh/Property_1_Group_62_1_abdsgx.png')] bg-cover lg:bg-fit w-full h-full`}
           >
-            <div className="box relative z-10 h-full text-black flex items-center">
+            <div className="box relative z-10 h-full text-white flex items-center">
               <div className="">
                 <div className="flex">
-                  <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#172748]">
-                    <BsClock className="text-[#4C8700] text-[14px]" />
-                    <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-[#172748]">
+                  <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#FEB470]">
+                    <BsClock className="text-[#FEB470] text-[14px]" />
+                    <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-[#FEB470]">
                       Available 24/7 for emergency road service
                     </p>
                   </div>
@@ -113,12 +115,13 @@ const HeroSlide = () => {
                 </div>
                 <div className="lg:flex gap-x-6 itms-center mt-10">
                   <Button
-                    title={"Call us now"}
+                    onClick={() => navigate("/request")}
+                    title={"Get Help"}
                     altClassName="btn-feel fs-500 bg-[#FEB470] border-2 border-[#FEB470] text-black px-6 py-2"
                   />
                   <Button
                     title={"Sign up as a Service Provider"}
-                    altClassName="fw-500 text-[#172748] mt-3 lg:mt-0 border-2 border-[#172748] rounded-[100px] px-4 py-2"
+                    altClassName="fw-500 text-white mt-3 lg:mt-0 border-2 border-white rounded-[100px] px-4 py-2"
                     onClick={() => navigate("/auth/register")}
                   />
                 </div>
@@ -128,14 +131,14 @@ const HeroSlide = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className={`bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1704984001/rsh/Property_1_Group_63_cvitzu.png')] bg-cover lg:bg-fit w-full h-full`}
+            className={`bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1705590870/rsh/Property_1_Group_63_1_ne1lwh.png')] bg-cover lg:bg-fit w-full h-full`}
           >
-            <div className="box relative z-10 h-full text-black flex items-center">
+            <div className="box relative z-10 h-full text-white flex items-center">
               <div className="">
                 <div className="flex">
-                  <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#172748]">
-                    <BsClock className="text-[#4C8700] text-[14px]" />
-                    <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-[#172748]">
+                  <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#FEB470]">
+                    <BsClock className="text-[#FEB470] text-[14px]" />
+                    <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-[#FEB470]">
                       Available 24/7 for emergency road service
                     </p>
                   </div>
@@ -149,12 +152,13 @@ const HeroSlide = () => {
                 </div>
                 <div className="lg:flex gap-x-6 itms-center mt-10">
                   <Button
-                    title={"Call us now"}
+                    onClick={() => navigate("/request")}
+                    title={"Get Help"}
                     altClassName="btn-feel fs-500 bg-[#FEB470] border-2 border-[#FEB470] text-black px-6 py-2"
                   />
                   <Button
                     title={"Sign up as a Service Provider"}
-                    altClassName="fw-500 text-[#172748] mt-3 lg:mt-0 border-2 border-[#172748] rounded-[100px] px-4 py-2"
+                    altClassName="fw-500 text-white mt-3 lg:mt-0 border-2 border-white rounded-[100px] px-4 py-2"
                     onClick={() => navigate("/auth/register")}
                   />
                 </div>
@@ -164,14 +168,14 @@ const HeroSlide = () => {
         </SwiperSlide>
         <SwiperSlide>
           <div
-            className={`bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1704984002/rsh/Property_1_Group_64_guu2nz.png')] bg-cover lg:bg-fit w-full h-full`}
+            className={`bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1705590870/rsh/Property_1_Group_64_2_njx6mz.png')] bg-cover lg:bg-fit w-full h-full`}
           >
-            <div className="box relative z-10 h-full text-black flex items-center">
+            <div className="box relative z-10 h-full text-white flex items-center">
               <div className="">
                 <div className="flex">
-                  <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#172748]">
-                    <BsClock className="text-[#4C8700] text-[14px]" />
-                    <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-[#172748]">
+                  <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#FEB470]">
+                    <BsClock className="text-[#FEB470] text-[14px]" />
+                    <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-[#FEB470]">
                       Available 24/7 for emergency road service
                     </p>
                   </div>
@@ -190,7 +194,7 @@ const HeroSlide = () => {
                   />
                   <Button
                     title={"Sign up as a Service Provider"}
-                    altClassName="fw-500 text-[#172748] mt-3 lg:mt-0 border-2 border-[#172748] rounded-[100px] px-4 py-2"
+                    altClassName="fw-500 text-white mt-3 lg:mt-0 border-2 border-white rounded-[100px] px-4 py-2"
                     onClick={() => navigate("/auth/register")}
                   />
                 </div>
