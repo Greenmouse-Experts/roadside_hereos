@@ -36,3 +36,7 @@ export const deleteCategory = async(payload:string) => {
 export const getCategories = async() => {
     return  axios.get(`${ENDPOINT.GET_CATEGORY}`).then((response) => response.data)
  } 
+
+ export const getAdminCategories = async() => {
+  return  axios.get(`${ENDPOINT.ADMIN_CATEGORY}`).then((response) => response.data)
+} 

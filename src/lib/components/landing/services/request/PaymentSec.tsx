@@ -20,7 +20,7 @@ const PaymentSec: FC<Props> = ({ prev }) => {
       } as StripeElementsOptions;
   return (
     <>
-      <div className="bg-gray-100 min-h-[450px] lg:p-16 lg:pb-20 p-4 pb-8 rounded-md">
+      <div className="bg-gray-100 min-h-[450px] lg:p-10 lg:pb-20 p-4 pb-8 rounded-md">
         <Elements stripe={stripePromise} options={options}>
           <CheckoutForm prev={prev}/>
         </Elements>

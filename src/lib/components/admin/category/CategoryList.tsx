@@ -3,7 +3,7 @@ import { DataTable } from "../../ui/DataTable";
 import { createColumnHelper } from "@tanstack/react-table";
 import {
   deleteCategory,
-  getCategories,
+  getAdminCategories,
   publishCategory,
 } from "../../../services/api/serviceApi";
 import { ServiceCatItem } from "../../../types/service";
@@ -29,7 +29,7 @@ import { RiDeleteBin5Line } from "react-icons/ri";
 const CategoryList = () => {
   const { isLoading, isError, data, refetch } = useQuery({
     queryKey: ["getCat"],
-    queryFn: getCategories,
+    queryFn: getAdminCategories,
   });
   const publishCat = useMutation({
     mutationFn: publishCategory,

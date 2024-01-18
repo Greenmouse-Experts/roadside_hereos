@@ -1,18 +1,28 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { Controller, useForm } from "react-hook-form";
 import TextInput, { InputType } from "../../../ui/TextInput";
 import { Button } from "@material-tailwind/react";
 import { carsList } from "../../../../services/hardData/cars";
+import GetCurrentLocation from "./Extra/GetCurrentLocation";
 
 interface Props {
   next: () => void;
-  prev: () => void;
+  prev?: () => void;
 }
 const ServiceSec: FC<Props> = ({ next, prev }) => {
+  const [location, setLocation] = useState('')
+  useEffect(() => {
+    reset({
+      ...getValues,
+      location: location
+    })
+  },[location])
   const {
     control,
     handleSubmit,
+    getValues,
+    reset,
     formState: { errors },
   } = useForm({
     mode: "onChange",
@@ -21,26 +31,22 @@ const ServiceSec: FC<Props> = ({ next, prev }) => {
       car_model: "",
       car_year: "",
       car_color: "",
+      location: "",
       other: "",
     },
   });
-  const getYears = () => {
-    const now = new Date().getUTCFullYear();
-    return Array(now - (now - 20))
-      .fill("")
-      .map((idx) => now - idx) as Array<number>;
-  };
+  const getYears = Array.from({ length: 20 }, (_, i) => new Date().getFullYear() - i);
   const handleForm = () => {
     next();
   };
   return (
     <>
-      <div className="bg-gray-100 lg:p-16 lg:pb-20 p-4 pb-8 rounded-md">
+      <div className="bg-gray-100 lg:p-10 lg:pb-20 p-4 pb-8 rounded-md">
         <form onSubmit={handleSubmit(handleForm)}>
           <div className="grid gap-3">
             <div className="grid lg:grid-cols-2 gap-x-4 gap-y-3">
               <div>
-                <label className="mb-1 block mt-2 fw-500 text-[#000000B2]">
+                <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
                   Car Make
                 </label>
                 <Controller
@@ -85,7 +91,7 @@ const ServiceSec: FC<Props> = ({ next, prev }) => {
                 render={({ field }) => (
                   <TextInput
                     label="Model"
-                    labelClassName="text-[#000000B2] fw-500"
+                    labelClassName="text-[#000000B2] fw-600"
                     error={errors.car_model?.message}
                     type={InputType.text}
                     {...field}
@@ -96,8 +102,8 @@ const ServiceSec: FC<Props> = ({ next, prev }) => {
             </div>
             <div className="grid lg:grid-cols-2 gap-x-4 gap-y-3">
               <div>
-                <label className="mb-1 block mt-2 fw-500 text-[#000000B2]">
-                  Car Make
+                <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+                Year
                 </label>
                 <Controller
                   name="car_year"
@@ -115,7 +121,7 @@ const ServiceSec: FC<Props> = ({ next, prev }) => {
                       ref={null}
                     >
                       <option value="">Select an option</option>
-                      {getYears().map((item) => (
+                      {getYears.map((item) => (
                         <option value={item} key={item}>
                           {item}
                         </option>
@@ -140,8 +146,8 @@ const ServiceSec: FC<Props> = ({ next, prev }) => {
                 }}
                 render={({ field }) => (
                   <TextInput
-                    label="Address"
-                    labelClassName="text-[#000000B2] fw-500"
+                    label="Color"
+                    labelClassName="text-[#000000B2] fw-600"
                     error={errors.car_color?.message}
                     type={InputType.text}
                     {...field}
@@ -149,6 +155,31 @@ const ServiceSec: FC<Props> = ({ next, prev }) => {
                   />
                 )}
               />
+            </div>
+            <div>
+            <Controller
+                name="location"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Please enter a value",
+                  },
+                }}
+                render={({ field }) => (
+                  <TextInput
+                    label="Current Location"
+                    labelClassName="text-[#000000B2] fw-600"
+                    error={errors.other?.message}
+                    type={InputType.textarea}
+                    {...field}
+                    ref={null}
+                  />
+                )}
+              />
+              <div className="mt-3">
+                <GetCurrentLocation setValue={setLocation}/>
+              </div>
             </div>
             <div>
               <Controller
@@ -163,7 +194,7 @@ const ServiceSec: FC<Props> = ({ next, prev }) => {
                 render={({ field }) => (
                   <TextInput
                     label="Service Details"
-                    labelClassName="text-[#000000B2] fw-500"
+                    labelClassName="text-[#000000B2] fw-600"
                     error={errors.other?.message}
                     type={InputType.textarea}
                     {...field}

@@ -35,7 +35,7 @@ const RequestForm = () => {
                 color={activeStep === 0 ? "blue-gray" : "gray"}
                 className="font-normal hidden lg:block"
               >
-                Profile Information
+                Service Information
               </Typography>
             </div>
           </Step>
@@ -52,12 +52,12 @@ const RequestForm = () => {
                 color={activeStep === 1 ? "blue-gray" : "gray"}
                 className="font-normal hidden lg:block"
               >
-                  Service Information
+                  Profile Information
               </Typography>
             </div>
           </Step>
           <Step onClick={() => setActiveStep(2)}>
-            <BsBank2 className="h-5 w-5" />
+            <FaCar className="h-5 w-5" />
             <div className="absolute -bottom-8 lg:-bottom-[4.5rem] w-max text-center">
               <Typography
                 variant="h6"
@@ -69,6 +69,23 @@ const RequestForm = () => {
                 color={activeStep === 2 ? "blue-gray" : "gray"}
                 className="font-normal hidden lg:block"
               >
+                  Providers Available
+              </Typography>
+            </div>
+          </Step>
+          <Step onClick={() => setActiveStep(3)}>
+            <BsBank2 className="h-5 w-5" />
+            <div className="absolute -bottom-8 lg:-bottom-[4.5rem] w-max text-center">
+              <Typography
+                variant="h6"
+                color={activeStep === 3 ? "blue-gray" : "gray"}
+              >
+                Step 3
+              </Typography>
+              <Typography
+                color={activeStep === 3 ? "blue-gray" : "gray"}
+                className="font-normal hidden lg:block"
+              >
                Payment Confirmation
               </Typography>
             </div>
@@ -76,9 +93,9 @@ const RequestForm = () => {
         </Stepper>
         </div>
         <div className="mt-24 px-4">
-          {activeStep === 0 && <PersonalSec next={() => handleNext()}/>}
-          {activeStep === 1 && <ServiceSec prev={() => handlePrev()} next={() => handleNext()}/>}
-          {activeStep === 2 && <PaymentSec prev={() => handlePrev()}/>}
+          {activeStep === 0 && <ServiceSec next={() => handleNext()}/>}
+          {activeStep === 1 && <PersonalSec prev={() => handlePrev()} next={() => handleNext()}/>}
+          {activeStep === 3 && <PaymentSec prev={() => handlePrev()}/>}
         </div>
       </div>
     );

@@ -8,6 +8,7 @@ import { FC } from "react";
 
 interface Props {
     next: () => void
+    prev: () => void
 }
 const PersonalSec:FC<Props> = ({next}) => {
   const {
@@ -29,7 +30,7 @@ const PersonalSec:FC<Props> = ({next}) => {
   }
   return (
     <>
-      <div className="bg-gray-100 lg:p-16 lg:pb-20 p-4 pb-8 rounded-md">
+      <div className="bg-gray-100 lg:p-10 lg:pb-20 p-4 pb-8 rounded-md">
         <form onSubmit={handleSubmit(handleForm)}>
           <div className="grid gap-3">
             <div className="grid lg:grid-cols-2 gap-x-4 gap-y-3">
