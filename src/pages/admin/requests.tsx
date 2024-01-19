@@ -1,4 +1,3 @@
-import React from "react";
 import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
 import { getAllServices } from "../../lib/services/api/serviceApi";
 import { useQuery } from "@tanstack/react-query";

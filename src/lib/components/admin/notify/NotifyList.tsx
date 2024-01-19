@@ -8,7 +8,6 @@ import {
   MenuHandler,
 } from "@material-tailwind/react";
 import { NotifyItem } from "../../../types/routine";
-// import { toast } from "react-toastify";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import { useMutation } from "@tanstack/react-query";
 import { markAsRead } from "../../../services/api/notifyApi";
@@ -27,8 +26,6 @@ interface Props {
 }
 const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
   const [notify, setNotify] = useState<NotifyItem[]>([]);
-  console.log(data);
-  
   useEffect(() => {
     if (status === "unread") {
       const filtered = data?.filter((where) => !where.isRead);
