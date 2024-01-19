@@ -23,6 +23,7 @@ export const USER_SIGNUP = '/user/signup'
 export const USER_PROVIDER_SIGNUP = '/user/provider/signup'
 export const VERIFY_EMAIL = '/user/verifyemail'
 export const RESEND_TOKEN = '/user/resend-token'
+export const FORGOT_PASSWORD = '/user/forgot-password'
 
 
 // service

@@ -51,3 +51,7 @@ export const verifyProvider = async(payload:string) => {
 export const resendCode = async(payload:ResendTokenType) => {
   return  axios.post(`${ENDPOINT.RESEND_TOKEN}`, payload).then((response) => response.data)
 } 
+
+export const forgetPassword = async(payload:string) => {
+  return  axios.get(`${ENDPOINT.FORGOT_PASSWORD}?email=${payload}`).then((response) => response.data)
+} 
