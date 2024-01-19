@@ -11,7 +11,8 @@ interface ServiceCatItem {
     slug: string;
     updatedAt: string;
     icon:string | undefined;
-    isPublished: boolean
+    isPublished: boolean;
+    questionNote: string
   }
 
   interface PublishCatType {

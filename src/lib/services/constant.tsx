@@ -20,6 +20,9 @@ export const USER_LOGIN = '/user/login'
 export const UPDATE_ACCOUNT = '/user/update-account'
 export const UPDATE_PASSWORD ='/user/change-password'
 export const USER_SIGNUP = '/user/signup'
+export const USER_PROVIDER_SIGNUP = '/user/provider/signup'
+export const VERIFY_EMAIL = '/user/verifyemail'
+export const RESEND_TOKEN = '/user/resend-token'
 
 
 // service

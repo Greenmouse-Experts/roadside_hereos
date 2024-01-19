@@ -8,15 +8,15 @@ const UserLogin = () => {
         <div className="w-full h-full bg-login">
           <div className="box h-full place-center">
             <div className="lg:w-[550px] mx-auto bg-white lg:px-16 p-6">
-            <Link to='/'>
-            <img
-            src='https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969536/rsh/Logo_1_opqhgq.png'
-            alt="logo"
-            className="w-44 mx-auto my-6"
-            width={400}
-            height={80}
-          />
-            </Link>
+              <Link to="/">
+                <img
+                  src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969536/rsh/Logo_1_opqhgq.png"
+                  alt="logo"
+                  className="w-44 mx-auto my-6"
+                  width={400}
+                  height={80}
+                />
+              </Link>
               <div className="mt-6 lg:mt-6">
                 <p className="text-xl fw-600">Account Login</p>
                 <p className="mt-3 fs-500">
@@ -26,9 +26,17 @@ const UserLogin = () => {
               <div className="my-8 lg:mt-8 mb-5 mx-auto">
                 <LoginForm />
               </div>
-            <div>
-                <p className="fs-500">Not yet registered? <Link to={'/auth/register'} className="underline fw-500 text-primary">Register now</Link></p>
-            </div>
+              <div>
+                <p className="fs-500">
+                  Not yet registered?{" "}
+                  <Link
+                    to={"/auth/register"}
+                    className="underline fw-500 text-primary"
+                  >
+                    Register now
+                  </Link>
+                </p>
+              </div>
             </div>
           </div>
         </div>

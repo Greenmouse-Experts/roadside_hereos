@@ -29,3 +29,8 @@ export interface CreateUser {
   platform?: string;
   serviceTypeId?: string[];
 }
+
+export interface ResendTokenType {
+  email: string
+  platform: string
+}

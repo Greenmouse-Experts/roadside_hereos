@@ -10,6 +10,8 @@ import { toast } from "react-toastify";
 import { userLogin } from "../../services/api/authApi";
 import { useMutation } from "@tanstack/react-query";
 import useAuthStore from "../../store/userStore";
+import useModal from "../../hooks/useModal";
+import AccontNotVerified from "./AccontNotVerified";
 
 const LoginForm = () => {
   const [isBusy, setIsBusy] = useState(false);
@@ -18,6 +20,7 @@ const LoginForm = () => {
   const {
     control,
     handleSubmit,
+    getValues,
     formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
@@ -51,6 +54,9 @@ const LoginForm = () => {
     },
     onError: (error: any) => {
       toast.error(error.response.data.message);
+      if(error.response.data.message === 'Please Verify account'){
+        setShowModal(true)
+      }
       setIsBusy(false);
     },
   });
@@ -58,8 +64,11 @@ const LoginForm = () => {
     setIsBusy(true);
     mutation.mutate(data);
   };
+  // Account not verified modal
+  const {Modal, setShowModal} = useModal()
   return (
-    <div>
+    <>
+      <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <Controller
@@ -127,6 +136,10 @@ const LoginForm = () => {
         </div>
       </form>
     </div>
+    <Modal size="sm" title="">
+      <AccontNotVerified email={getValues('email')}/>
+    </Modal>
+    </>
   );
 };
 

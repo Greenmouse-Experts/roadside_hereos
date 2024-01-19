@@ -4,8 +4,6 @@ import TextInput, { InputType } from "../ui/TextInput";
 import { AiOutlineMail } from "react-icons/ai";
 import { VscLock } from "react-icons/vsc";
 import { LuUserCircle } from "react-icons/lu";
-import { SlLocationPin } from "react-icons/sl";
-import { Country } from "country-state-city";
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import ReCAPTCHA from "react-google-recaptcha";
@@ -15,7 +13,7 @@ import { MdOutlineHomeRepairService } from "react-icons/md";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { getCategories } from "../../services/api/serviceApi";
 import { ServiceCatItem } from "../../types/service";
-import { registerUser } from "../../services/api/authApi";
+import { registerProvider } from "../../services/api/authApi";
 import { toast } from "react-toastify";
 import useModal from "../../hooks/useModal";
 import RegisterSuccess from "./RegisterSuccess";
@@ -53,27 +51,24 @@ const ProviderRegisterForm = () => {
     mode: "onChange",
     defaultValues: {
       first_name: "",
-      last_name: "",
       phone: "",
       email: "",
       password: "",
       confirm_password: "",
       serviceTypeId: [],
-      country: "",
     },
   });
   const mutation = useMutation({
-    mutationFn: registerUser,
+    mutationFn: registerProvider,
   });
   const onSubmit = (data: any) => {
     setIsBusy(true);
     const payload = {
-      name: `${data.first_name} ${data.last_name}`,
+      name: `${data.first_name}`,
       email: data.email,
       phone: data.phone,
       password: data.password,
       userType: "professional",
-      country: data.country,
       serviceTypeId: values,
       captcha: captchaRef.current.getValue(),
     };
@@ -119,7 +114,7 @@ const ProviderRegisterForm = () => {
             }}
             render={({ field }) => (
               <TextInput
-                label="First Name"
+                label="Company Name"
                 labelClassName="text-[#000000B2] fw-500"
                 icon={
                   <LuUserCircle className="text-2xl mx-2 lg:mx-3 text-gray-800" />
@@ -131,31 +126,6 @@ const ProviderRegisterForm = () => {
               />
             )}
           />
-          <Controller
-            name="last_name"
-            control={control}
-            rules={{
-              required: {
-                value: true,
-                message: "Please enter your last_name",
-              },
-            }}
-            render={({ field }) => (
-              <TextInput
-                label="Last Name"
-                labelClassName="text-[#000000B2] fw-500"
-                icon={
-                  <LuUserCircle className="text-2xl mx-2 lg:mx-3 text-gray-800" />
-                }
-                error={errors.last_name?.message}
-                type={InputType.text}
-                {...field}
-                ref={null}
-              />
-            )}
-          />
-        </div>
-        <div className="grid lg:grid-cols-2 lg:gap-4">
           <Controller
             name="email"
             control={control}
@@ -177,7 +147,9 @@ const ProviderRegisterForm = () => {
               />
             )}
           />
-          <div>
+        </div>
+        <div className="grid lg:grid-cols-2 lg:gap-4">
+          <div className="mt-[4px]">
             <label className="mb-1 block mt-3 fw-500 text-[#000000B2]">
               Phone Number
             </label>
@@ -200,8 +172,6 @@ const ProviderRegisterForm = () => {
               <p className="error text-red-400 text-sm">Invalid Phone Number</p>
             )}
           </div>
-        </div>
-        <div className=" grid lg:grid-cols-2 gap-4">
           <div className="mt-4" ref={ref}>
             <label className="fw-500 text-[#000000B2]">Service Category</label>
             <div className="border border-gray-400 w-full mt-[4px] px-[9px] py-[9px] rounded flex items-center gap-x-2">
@@ -247,33 +217,6 @@ const ProviderRegisterForm = () => {
                 )}
               </div>
             </div>
-          </div>
-          <div className="lg:mt-4">
-            <label className="fw-500 text-[#000000B2]">Country</label>
-            <Controller
-              name="country"
-              control={control}
-              rules={{
-                required: false,
-              }}
-              render={({ field }) => (
-                <div className="border border-gray-400 w-full mt-[4px] p-[9px] rounded flex items-center gap-x-2">
-                  <SlLocationPin className="text-xl text-gray-700" />
-                  <select
-                    className="border-none outline-none w-full"
-                    {...field}
-                    ref={null}
-                  >
-                    <option value={""}>Country of residence</option>
-                    {Country.getAllCountries().map((item, index) => (
-                      <option value={item.isoCode} key={index}>
-                        {item.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              )}
-            />
           </div>
         </div>
         <div className=" grid lg:grid-cols-2 gap-4">

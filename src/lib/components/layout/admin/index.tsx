@@ -31,13 +31,13 @@ const AdminDashboardLayout: React.FC<Props> = ({ children }) => {
         <div className="w-full lg:w-[calc(100%_-_256px)] min-h-screen bg-light py-4 lg:py-9">
           <div className="">
             <div className="h-[60px] relative index-30">
-              <div className="fixed top-0 lg:w-[calc(100%_-_250px)] pl-9 pr-5 py-[26px] bg-light flex items-center justify-between">
+              <div className="fixed top-0 w-full lg:w-[calc(100%_-_250px)] pl-9 pr-5 py-4 lg:py-[26px] bg-light flex items-center justify-between">
                 <p className="fw-600 lg:text-lg">Admin Dashboard</p>
                 <div className="flex gap-x-5 items-center">
                   <NotifyDrop/>
                   <div className="flex gap-x-4 items-center">
                     <ProfileAvatar url={user.image} name={user.name} size={44} font={17}/>
-                    <div className="flex gap-x-4 items-center cursor-pointer">
+                    <div className="hidden lg:flex gap-x-4 items-center cursor-pointer">
                       <p className="fw-500">{user.name}</p>
                       <Menu placement="bottom-start">
                         <MenuHandler>

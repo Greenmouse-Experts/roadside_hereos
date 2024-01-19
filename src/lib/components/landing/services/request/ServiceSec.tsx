@@ -5,12 +5,28 @@ import TextInput, { InputType } from "../../../ui/TextInput";
 import { Button } from "@material-tailwind/react";
 import { carsList } from "../../../../services/hardData/cars";
 import GetCurrentLocation from "./Extra/GetCurrentLocation";
+import { getCategories } from "../../../../services/api/serviceApi";
+import { useQuery } from "@tanstack/react-query";
+import { ServiceCatItem } from "../../../../types/service";
 
 interface Props {
   next: () => void;
   prev?: () => void;
+  activeId: string
 }
-const ServiceSec: FC<Props> = ({ next }) => {
+const ServiceSec: FC<Props> = ({ next, activeId }) => {
+  const { data: service } = useQuery({
+    queryKey: ["getCat"],
+    queryFn: getCategories,
+  });
+  const [activeQuestion, setActiveQuestion] = useState('')
+  const getActiveService = () => {
+    const active = service.data.filter((where:ServiceCatItem) => where.id === activeId)
+    setActiveQuestion(active[0].questionNote)
+  }
+  useEffect(() => {
+    getActiveService()
+  }, [])
   const [location, setLocation] = useState('')
   useEffect(() => {
     reset({
@@ -193,7 +209,7 @@ const ServiceSec: FC<Props> = ({ next }) => {
                 }}
                 render={({ field }) => (
                   <TextInput
-                    label="Service Details"
+                    label={activeQuestion? activeQuestion : "Service Details"}
                     labelClassName="text-[#000000B2] fw-600"
                     error={errors.other?.message}
                     type={InputType.textarea}

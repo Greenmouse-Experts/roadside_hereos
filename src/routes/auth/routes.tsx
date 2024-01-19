@@ -2,6 +2,7 @@ import AdminLogin from "../../pages/auth/AdminLogin";
 import ForgetPassword from "../../pages/auth/ForgetPassword";
 import ProviderRegister from "../../pages/auth/ProviderRegister";
 import UserLogin from "../../pages/auth/UserLogin";
+import VerifyEmail from "../../pages/auth/VerifyEmail";
 
 export const authRoutes = [
     {
@@ -20,13 +21,13 @@ export const authRoutes = [
         component: <ForgetPassword/>
     },
     {
-        id: 'auth-4',
-        path: 'verify/:id',
-        component: <ForgetPassword/>
-    },
-    {
         id: 'auth-5',
         path: 'admin',
         component: <AdminLogin/>
+    },
+    {
+        id: 'auth-6',
+        path: 'verify/:code',
+        component: <VerifyEmail/>
     },
 ]

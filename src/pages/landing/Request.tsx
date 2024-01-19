@@ -1,8 +1,10 @@
 import { BsClock } from "react-icons/bs";
 import RequestForm from "../../lib/components/landing/services/RequestForm";
 import LandingLayout from "../../lib/components/layout/landing";
+import { useParams } from "react-router-dom";
 
 const RequestPage = () => {
+  const {id} = useParams()
   return (
     <>
       <LandingLayout>
@@ -27,7 +29,7 @@ const RequestPage = () => {
           <div className="section">
             <div className="box">
               <div className="lg:w-11/12 mx-auto">
-                <RequestForm />
+                <RequestForm activeId={`${id}`}/>
               </div>
             </div>
           </div>

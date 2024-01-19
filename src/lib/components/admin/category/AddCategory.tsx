@@ -23,6 +23,7 @@ const AddCategory = () => {
       name: "",
       image: "",
       pricing: "",
+      questionNote: "",
     },
   });
   const addCat = useMutation({
@@ -52,7 +53,8 @@ const AddCategory = () => {
           const payload = {
             name: datas.name,
             icon: data[0],
-            slug: datas.pricing
+            slug: datas.pricing,
+            questionNote: data.questionNote
           }
           addCat.mutate(payload)
         },
@@ -82,7 +84,7 @@ const AddCategory = () => {
               }}
               render={({ field }) => (
                 <TextInput
-                  label="Category Name"
+                  label="Service Name"
                   labelClassName="text-[#000000B2] fw-500"
                   error={errors.name?.message}
                   type={InputType.text}
@@ -113,8 +115,30 @@ const AddCategory = () => {
             />
           </div>
           <div>
+          <Controller
+              name="questionNote"
+              control={control}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Please enter category pricing",
+                },
+              }}
+              render={({ field }) => (
+                <TextInput
+                  label="Service Question"
+                  labelClassName="text-[#000000B2] fw-500"
+                  error={errors.questionNote?.message}
+                  type={InputType.textarea}
+                  {...field}
+                  ref={null}
+                />
+              )}
+            />
+          </div>
+          <div>
             <ImageInput
-              label="Service Category Image"
+              label="Service Image"
               setImage={setImageValue}
               containerClass="mt-5"
             />

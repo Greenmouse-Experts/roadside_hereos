@@ -28,6 +28,7 @@ const EditCategory: FC<Props> = ({ close, item, refetch }) => {
       name: item?.name || "",
       image: item?.icon || "",
       pricing: item?.slug || "",
+      questionNote: item?.questionNote || ""
     },
   });
   const addCat = useMutation({
@@ -58,6 +59,7 @@ const EditCategory: FC<Props> = ({ close, item, refetch }) => {
             icon: data[0],
             slug: datas.pricing,
             id: item?.id,
+            questionNote: datas.questionNote
           };
           addCat.mutate(payload);
         },
@@ -72,14 +74,16 @@ const EditCategory: FC<Props> = ({ close, item, refetch }) => {
         icon: item?.icon,
         slug: datas.pricing,
         id: item?.id,
+        questionNote: datas?.questionNote
       };
       addCat.mutate(payload);
     }
   };
   return (
     <>
-      <div className="mt-6">
+      <div className="mt-6 px-2">
         <form onSubmit={handleSubmit(onSubmit)}>
+          <div className="max-h-[350px] overflow-auto pr-2">
           <div className="grid lg:grid-cols-2 gap-5">
             <Controller
               name="name"
@@ -123,12 +127,36 @@ const EditCategory: FC<Props> = ({ close, item, refetch }) => {
             />
           </div>
           <div>
+          <Controller
+              name="questionNote"
+              control={control}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Please enter a service question",
+                },
+              }}
+              render={({ field }) => (
+                <TextInput
+                  label="Service Question"
+                  labelClassName="text-[#000000B2] fw-500"
+                  error={errors.questionNote?.message}
+                  altClassName="h-16 rounded p-2 w-full outline-none text-black"
+                  type={InputType.textarea}
+                  {...field}
+                  ref={null}
+                />
+              )}
+            />
+          </div>
+          <div>
             <ImageInput
               label="Service Category Image"
               setImage={setImageValue}
               containerClass="mt-5"
               prevValue={item?.icon}
             />
+          </div>
           </div>
           <div className="mt-12 flex justify-center">
             <div className="w-full">
