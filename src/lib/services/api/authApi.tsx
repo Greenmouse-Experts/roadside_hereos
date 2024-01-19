@@ -1,5 +1,5 @@
 import axios from "axios";
-import { ChangePassword, CreateUser, LoginTyping, ResendTokenType, UpdateProfile } from "../../types/auth";
+import { ChangePassword, CreateUser, LoginTyping, ResendTokenType, ResetPasswordType, UpdateProfile } from "../../types/auth";
 import * as ENDPOINT from "../constant";
 
 // const Base = ENDPOINT.BASE_URL
@@ -54,4 +54,8 @@ export const resendCode = async(payload:ResendTokenType) => {
 
 export const forgetPassword = async(payload:string) => {
   return  axios.get(`${ENDPOINT.FORGOT_PASSWORD}?email=${payload}`).then((response) => response.data)
+} 
+
+export const resetPassword = async(payload:ResetPasswordType) => {
+  return  axios.post(`${ENDPOINT.RESET_PASSWORD}`, payload).then((response) => response.data)
 } 

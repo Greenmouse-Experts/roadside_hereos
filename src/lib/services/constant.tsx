@@ -14,6 +14,7 @@ export const ADMIN_LOGIN = '/admin/login'
 export const GET_USERS = '/all/users'
 export const GET_PROVIDERS = '/all/providers'
 export const GET_ADMIN_NOTIFY = '/notifications/admin'
+export const MARK_NOTIFY_READ = '/notifications/mark-read'
 
 // Auth endpoints
 export const USER_LOGIN = '/user/login'
@@ -24,7 +25,7 @@ export const USER_PROVIDER_SIGNUP = '/user/provider/signup'
 export const VERIFY_EMAIL = '/user/verifyemail'
 export const RESEND_TOKEN = '/user/resend-token'
 export const FORGOT_PASSWORD = '/user/forgot-password'
-
+export const RESET_PASSWORD = '/user/reset-password'
 
 // service
 export const CREATE_CATEGORY = '/services/create'
@@ -32,7 +33,9 @@ export const GET_CATEGORY = '/services/all'
 export const ADMIN_CATEGORY = '/services/view'
 export const EDIT_CATEGORY = '/services/update'
 export const PUBLISH_CATEGORY = '/services/publish-unpublish'
-export const DELETE_CATEGORY = 'services/action'
+export const DELETE_CATEGORY = '/services/action'
+export const SERVICE_REQUEST = '/service-request/service-information/create'
+export const GET_SERVICES = '/service-request/service-information/view'
 
 // routine endpoints
 export const UPLOAD_FILE = '/upload'

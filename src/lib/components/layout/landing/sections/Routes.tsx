@@ -22,19 +22,19 @@ export const FOOTER_LIST = [
     name: "Home",
   },
   {
-    url: "/about",
-    name: "About Us",
+    url: "/request",
+    name: "Get Help",
   },
   {
-    url: "/faq",
+    url: "/faqs",
     name: "FAQS",
   },
   {
-    url: "/reviews",
-    name: "Reviews",
+    url: "/career",
+    name: "Careers",
   },
   {
-    url: "/policy",
+    url: "/privacy",
     name: "Policy",
   },
   {

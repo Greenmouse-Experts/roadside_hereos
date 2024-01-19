@@ -14,7 +14,7 @@ const ContactForm = () => {
             </label>
             <input
               type="text"
-              placeholder="Your Full Name"
+              placeholder="Enter First Name"
               className="mt-3 p-3 w-full border-0 outline-none bg-[#F3F3F3] rounded-[16px]"
             />
           </div>
@@ -24,7 +24,7 @@ const ContactForm = () => {
             </label>
             <input
               type="text"
-              placeholder="Your Full Name"
+              placeholder="Enter Last Name"
               className="mt-3 p-3 w-full border-0 outline-none bg-[#F3F3F3] rounded-[16px]"
             />
           </div>

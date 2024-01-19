@@ -5,9 +5,11 @@ import TextInput, { InputType } from "../../../ui/TextInput";
 import { Button } from "@material-tailwind/react";
 import { carsList } from "../../../../services/hardData/cars";
 import GetCurrentLocation from "./Extra/GetCurrentLocation";
-import { getCategories } from "../../../../services/api/serviceApi";
-import { useQuery } from "@tanstack/react-query";
+import { getCategories, requestService } from "../../../../services/api/serviceApi";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { ServiceCatItem } from "../../../../types/service";
+import { toast } from "react-toastify";
+import { BeatLoader } from "react-spinners";
 
 interface Props {
   next: () => void;
@@ -28,6 +30,8 @@ const ServiceSec: FC<Props> = ({ next, activeId }) => {
     getActiveService()
   }, [])
   const [location, setLocation] = useState('')
+  const [postal, setPostal] = useState('')
+  const [isBusy, setIsBusy] = useState(false)
   useEffect(() => {
     reset({
       ...getValues,
@@ -39,7 +43,7 @@ const ServiceSec: FC<Props> = ({ next, activeId }) => {
     handleSubmit,
     getValues,
     reset,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
     defaultValues: {
@@ -52,8 +56,32 @@ const ServiceSec: FC<Props> = ({ next, activeId }) => {
     },
   });
   const getYears = Array.from({ length: 20 }, (_, i) => new Date().getFullYear() - i);
-  const handleForm = () => {
-    next();
+  const request = useMutation({
+    mutationFn: requestService,
+    mutationKey: ['request']
+  })
+  const handleForm = (data:any) => {
+    setIsBusy(true)
+    const payload = {
+      vehicleMake: data.car_make,
+      model: data.car_model,
+      vehicleYear: data.car_year,
+      color: data.car_color,
+      location: data.location,
+      zipcode: postal,
+      requestNote: data.other,
+      serviceId: activeId
+    }
+    request.mutate(payload, {
+      onSuccess: () => {
+        setIsBusy(false)
+        next();
+      },
+      onError: () => {
+        setIsBusy(false)
+        toast.error('Something went wrong')
+      }
+    })
   };
   return (
     <>
@@ -194,7 +222,7 @@ const ServiceSec: FC<Props> = ({ next, activeId }) => {
                 )}
               />
               <div className="mt-3">
-                <GetCurrentLocation setValue={setLocation}/>
+                <GetCurrentLocation setPostal={setPostal} setValue={setLocation}/>
               </div>
             </div>
             <div>
@@ -224,8 +252,9 @@ const ServiceSec: FC<Props> = ({ next, activeId }) => {
             <Button
               type={"submit"}
               className="btn-feel flex gap-x-2 items-center"
+              disabled={!isValid}
             >
-              Next <FaArrowRightLong />
+              {isBusy? <BeatLoader size={13}/> : <>Next <FaArrowRightLong /></>}
             </Button>
           </div>
         </form>

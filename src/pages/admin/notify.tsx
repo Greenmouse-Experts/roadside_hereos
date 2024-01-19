@@ -11,11 +11,11 @@ const AdminNotification = () => {
   const tab = [
     {
       title: <>All</>,
-      content: <NotifyList status='all' refetch={refetch} data={data} isLoading={isLoading} isError={isError}/>
+      content: <NotifyList status='all' refetch={refetch} data={data?.data} isLoading={isLoading} isError={isError}/>
     },
     {
       title: <>Unread</>,
-      content: <NotifyList status='unread'  refetch={refetch} data={data} isLoading={isLoading} isError={isError}/>
+      content: <NotifyList status='unread'  refetch={refetch} data={data?.data} isLoading={isLoading} isError={isError}/>
     },
   ]
   return (

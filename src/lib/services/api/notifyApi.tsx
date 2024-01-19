@@ -24,3 +24,9 @@ export const getAdminNotify = async () => {
       .get(`${ENDPOINT.GET_ADMIN_NOTIFY}`)
       .then((response) => response.data);
   };
+
+  export const markAsRead = async (payload:string) => {
+    return axios
+      .patch(`${ENDPOINT.MARK_NOTIFY_READ}/${payload}`,)
+      .then((response) => response.data);
+  };

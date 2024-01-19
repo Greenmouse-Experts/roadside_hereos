@@ -9,8 +9,9 @@ import MapLocation from "./MapLocation";
 
 interface Props {
     setValue: React.Dispatch<React.SetStateAction<string>>
+    setPostal: React.Dispatch<React.SetStateAction<string>>
 }
-const GetCurrentLocation:FC<Props> = ({setValue}) => {
+const GetCurrentLocation:FC<Props> = ({setValue, setPostal}) => {
   const [isBusy, setIsBusy] = useState(false);
   const {Modal, setShowModal} = useModal()
   const geolocationAPI = navigator.geolocation;
@@ -47,6 +48,7 @@ const GetCurrentLocation:FC<Props> = ({setValue}) => {
             const data = response.data; 
           setIsBusy(false);
           setValue(data.display_name)
+          setPostal(data.address.postcode)
         }
       });
   };

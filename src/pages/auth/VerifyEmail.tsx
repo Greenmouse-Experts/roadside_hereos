@@ -11,7 +11,7 @@ const VerifyEmail = () => {
   const { code } = useParams();
   const navigate = useNavigate()
   const email = code?.split("&");
-
+  
   const { isLoading, isError, isSuccess } = useQuery({
     queryKey: ["getCat"],
     queryFn: () => verifyProvider(code || ""),

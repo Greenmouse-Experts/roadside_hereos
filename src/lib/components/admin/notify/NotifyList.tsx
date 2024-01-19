@@ -10,10 +10,13 @@ import {
 import { NotifyItem } from "../../../types/routine";
 // import { toast } from "react-toastify";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
+import { useMutation } from "@tanstack/react-query";
+import { markAsRead } from "../../../services/api/notifyApi";
+import { toast } from "react-toastify";
 // dayjs time format
-// const dayjs = require("dayjs");
-// const relativeTime = require("dayjs/plugin/relativeTime");
-// dayjs.extend(relativeTime);
+const dayjs = require("dayjs");
+const relativeTime = require("dayjs/plugin/relativeTime");
+dayjs.extend(relativeTime);
 
 interface Props {
   status: string;
@@ -24,26 +27,29 @@ interface Props {
 }
 const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
   const [notify, setNotify] = useState<NotifyItem[]>([]);
-
+  console.log(data);
+  
   useEffect(() => {
     if (status === "unread") {
       const filtered = data?.filter((where) => !where.isRead);
       setNotify(filtered);
     } else setNotify(data);
-  }, [status]);
+  }, [status, data]);
 
-  //   const { data, isLoading, refetch } = useGetAdminNotifyQuery(status);
-  //   const [mark] = useLazyAdminMarkNotifyQuery()
-  //   const MarkAsRead = async(item:string) => {
-  //     await mark(item)
-  //     .then((res) => {
-  //         if(res.isSuccess){
-  //             toast.success('Marked as read')
-  //             refetch()
-  //         }
-  //     })
-  //     .catch(() => {})
-  //   }
+  const markRead = useMutation({
+    mutationFn: markAsRead,
+    mutationKey: ['markRead']
+  })
+    const MarkNotify = async(item:string) => {
+      markRead.mutateAsync(item, {
+        onSuccess: (data) => {
+          toast.success(data.message)
+        },
+        onError: () => {
+          toast.error('Something went wrong')
+        }
+      })
+    }
   return (
     <>
       <div>
@@ -57,7 +63,7 @@ const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
         )}
         <div className="grid gap-4">
           {notify &&
-            notify.length &&
+            !!notify.length &&
             notify.map((item, i: number) => (
               <div
                 key={i}
@@ -66,17 +72,16 @@ const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
                 }`}
               >
                 <div className="flex items-center gap-x-2">
-                  <img
-                    src={`https://i.pravatar.cc/280${i}`}
-                    alt="profile"
-                    width={100}
-                    height={100}
-                    className="w-10 circle"
-                  />
+                  {
+                    item.message.includes('signed')? 
+                    <img src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1705678152/rsh/gnup_eusaot.jpg" alt="alt" className="w-12 h-12 circle"/>
+                    :
+                    <img src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1705678152/rsh/gnup_eusaot.jpg" alt="alt" className="w-12 h-12 circle"/>
+                  }
                   <div>
                     <p className="">{item.message}</p>
                     <p className="text-[14px] text-[#808080]">
-                      {/* {dayjs(item.createdAt).fromNow()} */}
+                      {dayjs(item.createdAt).fromNow()}
                     </p>
                   </div>
                 </div>
@@ -88,7 +93,7 @@ const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
                       </Button>
                     </MenuHandler>
                     <MenuList className="bg-[#0D0D0D]">
-                      <MenuItem className="my-1 fw-500 text-white bg-primary pt-1">
+                      <MenuItem className="my-1 fw-500 text-white bg-primary pt-1" onClick={() => MarkNotify(item.id)}>
                         Mark as read
                       </MenuItem>
                     </MenuList>

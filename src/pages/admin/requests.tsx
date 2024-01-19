@@ -1,15 +1,13 @@
 import React from "react";
 import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
+import { getAllServices } from "../../lib/services/api/serviceApi";
+import { useQuery } from "@tanstack/react-query";
 
 const AdminRequests = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
-  // const { isLoading, isError, data } = useQuery({
-  //     queryKey: ["getProviders"],
-  //     queryFn: getProviders,
-  //   });
-  setTimeout(() => {
-    setIsLoading(false)
-  }, 4000);
+  const { isLoading } = useQuery({
+      queryKey: ["getServices"],
+      queryFn: getAllServices,
+    });
   return (
     <>
       <div className="bg-white p-6 rounded-lg shadow min-h-[80vh]">

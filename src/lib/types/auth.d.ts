@@ -34,3 +34,9 @@ export interface ResendTokenType {
   email: string
   platform: string
 }
+
+export interface ResetPasswordType {
+  token: string
+  email: string
+  password: string
+}
