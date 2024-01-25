@@ -12,9 +12,9 @@ const ForgetPassword = () => {
             <div className="lg:w-[550px] mx-auto bg-white lg:px-16 p-6">
             <Link to="/">
                 <img
-                  src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969536/rsh/Logo_1_opqhgq.png"
+                  src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1706192916/rsh/Group_48097863_txmkbr.png"
                   alt="logo"
-                  className="w-44 mx-auto my-6"
+                  className="w-60 mx-auto my-6"
                   width={400}
                   height={80}
                 />

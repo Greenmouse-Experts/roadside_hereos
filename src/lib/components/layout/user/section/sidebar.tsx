@@ -13,15 +13,12 @@ const SidebarLayout = () => {
         backgroundColor=""
       >
         <div className="py-6 text-center lg:pb-8">
-          <Link to="/" className="block flex gap-x-1">
-            {/* <Image
-              src={logo}
+          <Link to="/" className="block flex justify-center gap-x-1">
+            <img
+              src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1706192917/rsh/Group_48097864_1_mopmlj.png"
               alt="logo"
-              width={170}
-              height={60}
-              className="w-8 h-8"
-            /> */}
-            <p className="fw-700 text-[19px] uppercase">Roadside Heroes</p>
+              className="w-10/12"
+            />
           </Link>
           <div className="mt-10">
             <img

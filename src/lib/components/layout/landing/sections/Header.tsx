@@ -14,7 +14,7 @@ const Header: FC<Props> = ({ fixed }) => {
   return (
     <>
       <div
-        className={`w-full lg:p-8 py-5 ${
+        className={`w-full lg:p-4 py-3 ${
           fixed ? "absolute w-full top-0 left-0" : ""
         }`}
       >
@@ -22,11 +22,11 @@ const Header: FC<Props> = ({ fixed }) => {
           <div className="flex items-center justify-between">
             <Link to='/'>
             <img
-              src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1704969536/rsh/Logo_1_opqhgq.png"
+              src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1706192916/rsh/Group_48097863_txmkbr.png"
               alt="logo"
               width={100}
               height={60}
-              className="lg:w-[130px] w-36"
+              className="lg:w-[190px] w-36"
             />
             </Link>
             <div className="lg:w-8/12 xl:w-7/12 2xl:w-6/12 lg:flex hidden justify-between">
