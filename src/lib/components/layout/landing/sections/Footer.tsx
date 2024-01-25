@@ -6,22 +6,22 @@ export const socials = [
   {
     name: "twitter",
     to: "/",
-    icon: <SiTwitter className="lg:text-xl text-xl" />,
+    icon: <SiTwitter className="lg:text-3xl text-xl" />,
   },
   {
     name: "facebook",
     to: "/",
-    icon: <SiFacebook className="lg:text-xl text-xl" />,
+    icon: <SiFacebook className="lg:text-3xl text-xl" />,
   },
   {
     name: "instagram",
     to: "/",
-    icon: <BiLogoInstagramAlt className="lg:text-xl text-xl" />,
+    icon: <BiLogoInstagramAlt className="lg:text-4xl text-xl" />,
   },
   {
     name: "linkedin",
     to: "/",
-    icon: <SiLinkedin className="lg:text-xl text-xl" />,
+    icon: <SiLinkedin className="lg:text-3xl text-xl" />,
   },
 ];
 
@@ -35,14 +35,14 @@ const Footer = () => {
             <img
               src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1706192917/rsh/Group_48097864_1_mopmlj.png"
               alt="logo"
-              className="w-full lg:w-10/12"
+              className="w-full lg:w-6/12"
             />
             <div className="mt-4 lg:pl-6">
-              <p className="fs-500">+0 123 456 7890</p>
-              <p className="mt-3 fs-500 ">N0 1 Company physical address, Country. Earth</p>
-              <ul className="flex gap-x-2 mt-4">
+              {/* <p className="fs-500">+0 123 456 7890</p>
+              <p className="mt-3 fs-500 ">N0 1 Company physical address, Country. Earth</p> */}
+              <ul className="flex gap-x-2 lg:gap-x-4 mt-12">
                 {socials.map((item, i) => (
-                  <li className="text-white text-sm cursor-pointer" key={i}>
+                  <li className="text-white cursor-pointer" key={i}>
                     {item.icon}
                   </li>
                 ))}
