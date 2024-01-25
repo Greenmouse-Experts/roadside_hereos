@@ -35,7 +35,7 @@ const Footer = () => {
             <img
               src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1706192917/rsh/Group_48097864_1_mopmlj.png"
               alt="logo"
-              className="w-full lg:w-6/12"
+              className="w-8/12 lg:w-6/12"
             />
             <div className="mt-4 lg:pl-6">
               {/* <p className="fs-500">+0 123 456 7890</p>
