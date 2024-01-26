@@ -86,7 +86,7 @@ const CareersPage = () => {
               </div>
             </div>
           </div>
-          <div className="section bg-[#EBEDEF]">
+          {/* <div className="section bg-[#EBEDEF]">
             <div className="box">
               <div className="text-center">
                 <p className="fw-600 text-3xl">Our Client and Partners</p>
@@ -105,7 +105,7 @@ const CareersPage = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </div>
       </LandingLayout>
     </>
