@@ -42,6 +42,7 @@ const BankInfo:FC<Props> = ({prev}) => {
     },
   });
   const onSubmit = (data:any) => {
+    setIsBusy(true)
     const payload = {
       ...kyc,
       bank_name: data.bank_name,

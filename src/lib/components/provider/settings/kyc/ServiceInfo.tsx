@@ -108,7 +108,7 @@ const ServiceInfo: FC<Props> = ({ prev, next }) => {
               <PhoneInputWithCountry
                 international
                 defaultCountry="NG"
-                name="business_phone"
+                name="phone"
                 control={control}
                 rules={{
                   required: true,

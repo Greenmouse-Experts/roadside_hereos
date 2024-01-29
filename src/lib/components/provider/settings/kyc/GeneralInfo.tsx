@@ -162,9 +162,8 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                       <option value="Corporation (federal or provincial/territorial)">
                         Corporation (federal or provincial/territorial)
                       </option>
-                      <option value="Partnership">Partnership</option>
                       <option value="Sole proprietorship or partnership">
-                        Sole proprietorship
+                        Sole proprietorship or partnership
                       </option>
                       <option value="Cooperative">Cooperative</option>
                     </select>
