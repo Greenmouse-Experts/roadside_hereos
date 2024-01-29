@@ -1,5 +1,4 @@
 import { Button, Tooltip } from "@material-tailwind/react";
-import { IoCheckbox } from "react-icons/io5";
 import { TbListDetails } from "react-icons/tb";
 
 const RenderedServices = () => {

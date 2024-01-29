@@ -1,7 +1,6 @@
 import ProviderHomePage from "../../pages/provider/home";
 import ProviderNotification from "../../pages/provider/notify";
 import ProviderPayments from "../../pages/provider/payments";
-import ProviderRequests from "../../pages/provider/staff";
 import ProviderServices from "../../pages/provider/services";
 import ProviderSetting from "../../pages/provider/settings";
 import CompanyStaffs from "../../pages/provider/staff";

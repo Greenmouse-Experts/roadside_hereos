@@ -1,5 +1,5 @@
 import React from "react";
-import { Stepper, Step, Button, Typography } from "@material-tailwind/react";
+import { Stepper, Step, Typography } from "@material-tailwind/react";
 import { FaCar, FaRegUser } from "react-icons/fa";
 import { BsBank2 } from "react-icons/bs";
 import GeneralInfo from "./GeneralInfo";

@@ -12,8 +12,13 @@ import {
 import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
 import { staffList } from "../../../dummy";
 import { FormatStatus } from "../../../utils";
+import { useNavigate } from "react-router-dom";
 
 const StaffList = () => {
+    const navigate = useNavigate()
+    const gotoDetails = (item:string) => {
+        navigate(`/provider/staff/${item}`)
+    }
     // Table components
   const columnHelper = createColumnHelper<any>();
   const columns = [
@@ -66,7 +71,7 @@ const StaffList = () => {
             <MenuList className="">
               <MenuItem
                 className="my-1 fw-500 flex items-center gap-x-2 pt-1"
-                // onClick={() => gotoDetails(info.getValue())}
+                onClick={() => gotoDetails(info.getValue())}
               >
                 <BsArrowsExpand/> View Details
               </MenuItem>
