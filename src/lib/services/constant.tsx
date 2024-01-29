@@ -39,3 +39,5 @@ export const GET_SERVICES = '/service-request/service-information/view'
 
 // routine endpoints
 export const UPLOAD_FILE = '/upload'
+export const SUBMIT_KYC = '/kyc/service-company/save'
+export const GET_KYC = '/kyc/service-company/view'

@@ -1,9 +1,11 @@
 import ProviderHomePage from "../../pages/provider/home";
 import ProviderNotification from "../../pages/provider/notify";
 import ProviderPayments from "../../pages/provider/payments";
-import ProviderRequests from "../../pages/provider/requests";
+import ProviderRequests from "../../pages/provider/staff";
 import ProviderServices from "../../pages/provider/services";
 import ProviderSetting from "../../pages/provider/settings";
+import CompanyStaffs from "../../pages/provider/staff";
+import StaffDetail from "../../pages/provider/staffDetail";
 
 export const providerRoutes = [
     {
@@ -33,7 +35,12 @@ export const providerRoutes = [
     },
     {
         id: 'user6',
-        path: 'request',
-        component: <ProviderRequests/>
+        path: 'staff',
+        component: <CompanyStaffs/>
     },
+    {
+        id: 'users-7',
+        path: 'staff/:id',
+        component: <StaffDetail/>
+    }
 ]

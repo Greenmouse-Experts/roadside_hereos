@@ -1,7 +1,7 @@
 import { useState } from "react";
-import MyProfileSettings from "../../lib/components/admin/settings/MyProfile";
 import SecuritySetting from "../../lib/components/admin/settings/Security";
 import KycIndex from "../../lib/components/provider/settings/kyc";
+import MyProfileSettings from "../../lib/components/provider/settings/MyProfile";
 
 const ProviderSettings = () => {
   const [active, setActive] = useState(1);

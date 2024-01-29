@@ -1,5 +1,6 @@
 import React from "react";
 import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
+import RenderedServices from "../../lib/components/provider/requests/RequestList";
 
 const ProviderServices = () => {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -13,7 +14,7 @@ const ProviderServices = () => {
   return (
     <>
       <div className="bg-white p-6 rounded-lg shadow min-h-[80vh]">
-        <p className="fw-600 text-xl">My Services</p>
+        <p className="fw-600 text-xl">Rendered Services</p>
         <div className="mt-5 lg:mt-10">
           {isLoading && (
             <div className="py-12 flex justify-center items-center text-black">
@@ -27,8 +28,7 @@ const ProviderServices = () => {
               </div>
             </div>
           )}
-          {/* {isError && <p>Error Occured</p>}
-              {data && !!data.users.length && <ProvidersList users={data?.users} />} */}
+          {!isLoading &&  <RenderedServices/>}
         </div>
       </div>
     </>

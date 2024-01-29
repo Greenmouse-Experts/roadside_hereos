@@ -18,7 +18,7 @@ const ProviderRegister = () => {
                 />
               </Link>
               <div className="mt-6 lg:mt-6">
-                <p className="text-xl fw-600">Create a Provider Account</p>
+                <p className="text-xl fw-600">Create a Company Account</p>
                 <p className="mt-3 fs-500">
                   Fill in your credentials to create an account on this platform
                 </p>

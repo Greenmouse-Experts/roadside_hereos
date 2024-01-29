@@ -35,7 +35,7 @@ const KycIndex = () => {
               color={activeStep === 0 ? "blue-gray" : "gray"}
               className="font-normal hidden lg:block"
             >
-              Profile Information
+              Organisation Information
             </Typography>
           </div>
         </Step>
@@ -52,7 +52,7 @@ const KycIndex = () => {
               color={activeStep === 1 ? "blue-gray" : "gray"}
               className="font-normal hidden lg:block"
             >
-                Service Information
+                Director's Information
             </Typography>
           </div>
         </Step>
@@ -76,17 +76,9 @@ const KycIndex = () => {
       </Stepper>
       </div>
       <div className="mt-24 px-4">
-        {activeStep === 0 && <GeneralInfo/>}
-        {activeStep === 1 && <ServiceInfo/>}
-        {activeStep === 2 && <BankInfo/>}
-      </div>
-      <div className="mt-16 px-4 flex justify-between">
-        <Button onClick={handlePrev} disabled={isFirstStep}>
-          Prev
-        </Button>
-        <Button onClick={handleNext} disabled={isLastStep}>
-          Next
-        </Button>
+        {activeStep === 0 && <GeneralInfo next={handleNext}/>}
+        {activeStep === 1 && <ServiceInfo prev={handlePrev} next={handleNext}/>}
+        {activeStep === 2 && <BankInfo prev={handlePrev}/>}
       </div>
     </div>
   );

@@ -4,17 +4,17 @@ import { MdCrisisAlert } from "react-icons/md";
 const Alerts = () => {
   const alerts = [
     {
-      title: "Service Request",
+      title: "Service Rendered",
       desc: "Battery Charger request at oshodi underbrige fo a corolla 2015 model",
       time: "10:23pm August 24, 2024",
     },
     {
-      title: "Service Request",
+      title: "Service",
       desc: "Battery Charger request at oshodi underbrige fo a corolla 2015 model",
       time: "10:23pm August 24, 2024",
     },
     {
-      title: "Service Request",
+      title: "Service",
       desc: "Battery Charger request at oshodi underbrige fo a corolla 2015 model",
       time: "10:23pm August 24, 2024",
     },

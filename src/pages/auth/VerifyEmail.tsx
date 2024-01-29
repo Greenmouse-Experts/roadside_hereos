@@ -84,7 +84,7 @@ const VerifyEmail = () => {
                     </p>
                     <p
                       onClick={handleResend}
-                      className="mt-4 fw-600 text-gray-500 text-center italics fs-300"
+                      className="mt-4 fw-600 cursor-pointer text-gray-500 text-center italics fs-300"
                     >
                       Click to resend mail
                     </p>

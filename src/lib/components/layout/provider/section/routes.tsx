@@ -22,13 +22,13 @@ export const Routes = [
     submenu: [],
   },
   {
-    name: 'Service Requests',
+    name: 'Staffs',
     icon: <MdOutlineHomeRepairService className="text-xl" />,
-    route: '/provider/request',
+    route: '/provider/staff',
     submenu: [],
   },
   {
-    name: 'My Services',
+    name: 'Services',
     icon: <BiGitPullRequest className="text-xl" />,
     route: '/provider/services',
     submenu: [],

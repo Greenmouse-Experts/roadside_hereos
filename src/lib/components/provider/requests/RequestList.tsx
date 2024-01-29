@@ -2,7 +2,7 @@ import { Button, Tooltip } from "@material-tailwind/react";
 import { IoCheckbox } from "react-icons/io5";
 import { TbListDetails } from "react-icons/tb";
 
-const RequestList = () => {
+const RenderedServices = () => {
   const alerts = [
     {
       title: "Service Request",
@@ -50,14 +50,9 @@ const RequestList = () => {
                 </p>
               </div>
               <div className="flex gap-x-3 ">
-                <Tooltip content="View Request Details">
+                <Tooltip content="View Service Details">
                   <Button className="m-0 p-0 shadow-none hover:shadow-none bg-transparent text-black">
                     <TbListDetails className="text-3xl" />
-                  </Button>
-                </Tooltip>
-                <Tooltip content="Accept Request">
-                  <Button className="m-0 p-0 shadow-none hover:shadow-none bg-transparent text-black">
-                    <IoCheckbox className="text-3xl text-green-600" />
                   </Button>
                 </Tooltip>
               </div>
@@ -69,4 +64,4 @@ const RequestList = () => {
   );
 };
 
-export default RequestList;
+export default RenderedServices;

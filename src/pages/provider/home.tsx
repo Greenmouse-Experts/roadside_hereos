@@ -1,14 +1,17 @@
 import Alerts from "../../lib/components/provider/home/Alerts";
-// import useAuth from "../../lib/hooks/authUser";
+import useAuth from "../../lib/hooks/authUser";
 import { formatAsNgnMoney } from "../../lib/utils";
 
 const ProviderHomePage = () => {
-  // const {firstName} = useAuth()
+  const { user} = useAuth()
   return (
     <>
       <div>
-        <div className="w-full h-[140px] bg-review border p-3 flex items-center">
-          <div>
+        <div className="w-full h-[140px] bg-review border p-3 lg:px-5 flex items-center">
+          <div className="w-full">
+            <p className="fw-600 text-white text-lg uppercase">WELCOME BACK! {user.name}</p>
+            <p className="lg:w-8/12 mt-3 text-gray-400 fw-500 fs-400 ">Your company have rendered a total of 6 services to ALLDRIVE SOS users this month.</p>
+            <p className="lg:w-8/12 text-gray-400 fw-500 fs-400 ">We appreciate your contribution.</p>
           </div>
         </div>
         <div className="grid lg:grid-cols-3 gap-y-6 gap-x-6 dash-shade p-5 py-8 rounded-lg">
@@ -22,7 +25,7 @@ const ProviderHomePage = () => {
             />
             <div>
               <p className="fs-700 fw-600">{formatAsNgnMoney(3400)}</p>
-              <p className="fs-400 fw-500 text-primary">Total Amount Spent</p>
+              <p className="fs-400 fw-500 text-primary">Total Amount Made</p>
             </div>
           </div>
           <div className="flex items-center gap-x-3 border-r border-[#00000059]">
@@ -48,7 +51,7 @@ const ProviderHomePage = () => {
             />
             <div>
               <p className="text-lg fw-600">10</p>
-              <p className="fs-400 fw-500 text-primary">RH Services</p>
+              <p className="fs-400 fw-500 text-primary">Service Staff</p>
             </div>
           </div>
         </div>
