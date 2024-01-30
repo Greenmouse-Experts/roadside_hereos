@@ -15,3 +15,9 @@ export interface GetInvitedItem {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface AcceptInviteInput {
+    phone_number: string;
+    address: string;
+    password: string;
+  }

@@ -10,18 +10,16 @@ import {
   MenuList,
 } from "@material-tailwind/react";
 import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
-import { staffList } from "../../../dummy";
 import { FormatStatus } from "../../../utils";
 import { useNavigate } from "react-router-dom";
-import { useQuery } from "@tanstack/react-query";
-import { getInvite } from "../../../services/api/companyApi";
 import { GetInvitedItem } from "../../../types/company";
+import { FC } from "react";
 
-const StaffList = () => {
-    const {data} = useQuery({
-      queryFn: getInvite,
-      queryKey: ['invites']
-    })
+interface Props {
+  data: GetInvitedItem[]
+}
+const StaffList:FC<Props> = (data) => {
+   
     const navigate = useNavigate()
     const gotoDetails = (item:string) => {
         navigate(`/provider/staff/${item}`)
@@ -90,9 +88,9 @@ const StaffList = () => {
   return (
     <>
         <div>
-        {data && data?.data.length && <DataTable
+        {!!data.data.length && <DataTable
           columns={columns}
-          data={data?.data}
+          data={data.data}
         />}
       </div>
     </>

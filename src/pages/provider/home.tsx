@@ -10,7 +10,7 @@ const ProviderHomePage = () => {
         <div className="w-full h-[140px] bg-review border p-3 lg:px-5 flex items-center">
           <div className="w-full">
             <p className="fw-600 text-white text-lg uppercase">WELCOME BACK! {user.name}</p>
-            <p className="lg:w-8/12 mt-3 text-gray-400 fw-500 fs-400 ">Your company have rendered a total of 6 services to ALLDRIVE SOS users this month.</p>
+            <p className="lg:w-8/12 mt-3 text-gray-400 fw-500 fs-400 ">Your company have rendered a total of <span className="fw-500">0</span> services to ALLDRIVE SOS users this month.</p>
             <p className="lg:w-8/12 text-gray-400 fw-500 fs-400 ">We appreciate your contribution.</p>
           </div>
         </div>

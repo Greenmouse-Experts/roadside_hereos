@@ -10,8 +10,9 @@ import { ScaleSpinner } from "../../ui/Loading";
 
 interface Props{
     close: () => void
+    refetch: () => void
 }
-const InviteStaff:FC<Props> = ({close}) => {
+const InviteStaff:FC<Props> = ({close, refetch}) => {
   const [isBusy, setIsBusy] = useState(false)
   const {userId} = useAuth()
   const {
@@ -31,6 +32,7 @@ const InviteStaff:FC<Props> = ({close}) => {
     onSuccess: (data:any) => {
       toast.success(data.message)
       setIsBusy(false);
+      refetch()
       close()
     },
     onError: () => {
