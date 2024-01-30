@@ -39,5 +39,9 @@ export const GET_SERVICES = '/service-request/service-information/view'
 
 // routine endpoints
 export const UPLOAD_FILE = '/upload'
+
+// company Kyc
 export const SUBMIT_KYC = '/kyc/service-company/save'
 export const GET_KYC = '/kyc/service-company/view'
+export const EXTEND_INVITE = '/invitation-request/create'
+export const GET_COMP_INVITE = '/invitation-request'

@@ -38,8 +38,6 @@ const ProviderRegisterForm = () => {
     } else {
       values.splice(values.indexOf(event.target.value), 1);
     }
-    // const selected = services?.data.filter((where:ServiceCatItem) => values.includes(where.id))
-    // setSelectedCat(selected)
   };
   
   const {
@@ -62,6 +60,9 @@ const ProviderRegisterForm = () => {
     mutationFn: registerProvider,
   });
   const onSubmit = (data: any) => {
+    if(data.email.includes('+')){
+
+    }
     setIsBusy(true);
     const payload = {
       name: `${data.first_name}`,
@@ -133,6 +134,11 @@ const ProviderRegisterForm = () => {
               required: {
                 value: true,
                 message: "Please enter your email",
+              },
+              validate:(val) => {
+                if (val.includes('+')) {
+                  return "  Invalid Email";
+                }
               },
             }}
             render={({ field }) => (

@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
@@ -6,6 +6,11 @@ import TextInput, { InputType } from "../../../ui/TextInput";
 import useAuth from "../../../../hooks/authUser";
 import Button from "../../../ui/Button";
 import useKycStore from "../../../../store/kycStore";
+import ImageInput from "../../../ui/ImageInput";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { uploadFile } from "../../../../services/api/routineApi";
+import { toast } from "react-toastify";
+import { getKyc } from "../../../../services/api/kycApi";
 
 interface Props {
   next: () => void;
@@ -14,9 +19,22 @@ const GeneralInfo: FC<Props> = ({ next }) => {
   const { user } = useAuth();
   const kyc = useKycStore((state) => state.kyc);
   const saveKyc =  useKycStore((state) => state.saveKyc);
+  const [imageVal, setImageVal] = useState<Array<File>>()
+  const [uploading, setUploading] = useState(0)
+  const {  data:prevKyc } = useQuery({
+    queryKey: ["getKyc"],
+    queryFn: getKyc,
+  });
+  useEffect(() => {
+    if(prevKyc) {
+      saveKyc(prevKyc.data)
+      reset()
+    }
+  }, [prevKyc])
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
@@ -31,6 +49,29 @@ const GeneralInfo: FC<Props> = ({ next }) => {
       business_phone: kyc.business_phone || user?.phone || "",
     },
   });
+  const upload = useMutation({
+    mutationFn: uploadFile,
+  });
+  const handleUpload = () => {
+    if (imageVal) {
+      setUploading(1)
+      const fd = new FormData();
+      fd.append("image", imageVal[0]);
+      upload.mutateAsync(fd, {
+        onSuccess: (data) => {
+          saveKyc({...kyc, insurance_doc: data[0]})
+          setUploading(2)
+        },
+        onError: (error) => {
+          toast.error(error.message);
+          setUploading(3);
+        },
+      });
+    }
+  }
+  useEffect(() => {
+    handleUpload()
+  }, [imageVal])
   const submitAction = async(data: any) => {
     const payload = {
       business_name: user.name,
@@ -190,6 +231,11 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                   />
                 )}
               />
+            </div>
+            <div className="mt-3">
+              <ImageInput label="Upload Insurance Requirement" setImage={setImageVal} prevValue={kyc.insurance_doc}/>
+                  {uploading === 1 && <p className="fs-400 italics text-gray-500 fw-500">Document is uploading...</p>}
+                  {uploading === 2 && <p className="fs-400 italics text-green-600 fw-500">Document is uploaded</p>}
             </div>
             <div>
               <p className="fw-500 mt-3">Comapany Contact Information</p>

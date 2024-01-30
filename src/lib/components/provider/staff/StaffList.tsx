@@ -13,26 +13,32 @@ import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
 import { staffList } from "../../../dummy";
 import { FormatStatus } from "../../../utils";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getInvite } from "../../../services/api/companyApi";
+import { GetInvitedItem } from "../../../types/company";
 
 const StaffList = () => {
+    const {data} = useQuery({
+      queryFn: getInvite,
+      queryKey: ['invites']
+    })
     const navigate = useNavigate()
     const gotoDetails = (item:string) => {
         navigate(`/provider/staff/${item}`)
     }
     // Table components
-  const columnHelper = createColumnHelper<any>();
+  const columnHelper = createColumnHelper<GetInvitedItem>();
   const columns = [
-    columnHelper.accessor((row) => row.firstName, {
+    columnHelper.accessor((row) => row.first_name, {
       id: "Name",
       cell: (info) => (
         <div className="flex gap-x-2 items-center">
           <ProfileAvatar
-            name={`${info.getValue()} ${info.row.original.lastName}`}
-            url={info.row.original.photo}
+            name={`${info.getValue()} ${info.row.original.last_name}`}
             size={35}
             font={15}
           />
-          <p className="fw-600 text-primary">{`${info.getValue()} ${info.row.original.lastName}`}</p>
+          <p className="fw-600 text-primary">{`${info.getValue()} ${info.row.original.last_name}`}</p>
         </div>
       ),
       header: (info) => info.column.id,
@@ -42,11 +48,11 @@ const StaffList = () => {
       cell: (info) => <>{info.getValue()}</>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.skill, {
-      id: "Service Category",
-      cell: (info) => <>{info.getValue().map((item:string) => <p className="flex gap-x-1 items-center fs-500 fw-500"><span className="w-2 h-2 circle bg-orange-500"></span>{item}</p>)}</>,
-      header: (info) => info.column.id,
-    }),
+    // columnHelper.accessor((row) => row.skill, {
+    //   id: "Service Category",
+    //   cell: (info) => <>{info.getValue().map((item:string) => <p className="flex gap-x-1 items-center fs-500 fw-500"><span className="w-2 h-2 circle bg-orange-500"></span>{item}</p>)}</>,
+    //   header: (info) => info.column.id,
+    // }),
     columnHelper.accessor((row) => row.createdAt, {
       id: "Joined at",
       cell: (info) => <>{dayjs(info.getValue()).format("DD  MMMM YYYY")}</>,
@@ -84,10 +90,10 @@ const StaffList = () => {
   return (
     <>
         <div>
-        <DataTable
+        {data && data?.data.length && <DataTable
           columns={columns}
-          data={staffList}
-        />
+          data={data?.data}
+        />}
       </div>
     </>
   )

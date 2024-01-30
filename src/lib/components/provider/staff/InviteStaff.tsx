@@ -1,34 +1,58 @@
 import { Controller, useForm } from "react-hook-form";
 import TextInput, { InputType } from "../../ui/TextInput";
 import Button from "../../ui/Button";
-import { FC } from "react";
+import { FC, useState } from "react";
+import { useMutation } from "@tanstack/react-query";
+import { sendInvite } from "../../../services/api/companyApi";
+import { toast } from "react-toastify";
+import useAuth from "../../../hooks/authUser";
+import { ScaleSpinner } from "../../ui/Loading";
 
 interface Props{
     close: () => void
 }
 const InviteStaff:FC<Props> = ({close}) => {
+  const [isBusy, setIsBusy] = useState(false)
+  const {userId} = useAuth()
   const {
     control,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      firstName: "",
-      lastName: "",
+      first_name: "",
+      last_name: "",
       email: "",
     },
   });
-  const submitAction = () => {
-    close()
+  const mutation = useMutation({
+    mutationFn: sendInvite,
+    onSuccess: (data:any) => {
+      toast.success(data.message)
+      setIsBusy(false);
+      close()
+    },
+    onError: () => {
+      toast.error("Something went wrong");
+      setIsBusy(false);
+    },
+  });
+  const submitAction = (data:any) => {
+    setIsBusy(true)
+    const payload = {
+     ...data,
+     company_id: userId
+    }
+    mutation.mutate(payload)
   };
   return (
     <>
       <div>
         <form onSubmit={handleSubmit(submitAction)}>
-          <div className="grid gap-4">
+          <div className="grid gap-2">
             <Controller
-              name="firstName"
+              name="first_name"
               control={control}
               rules={{
                 required: {
@@ -40,7 +64,7 @@ const InviteStaff:FC<Props> = ({close}) => {
                 <TextInput
                   label="Full Name"
                   labelClassName="text-[#000000B2] fw-500"
-                  error={errors.firstName?.message}
+                  error={errors.first_name?.message}
                   type={InputType.text}
                   {...field}
                   ref={null}
@@ -48,7 +72,7 @@ const InviteStaff:FC<Props> = ({close}) => {
               )}
             />
             <Controller
-              name="lastName"
+              name="last_name"
               control={control}
               rules={{
                 required: {
@@ -60,7 +84,7 @@ const InviteStaff:FC<Props> = ({close}) => {
                 <TextInput
                   label="Last Name"
                   labelClassName="text-[#000000B2] fw-500"
-                  error={errors.lastName?.message}
+                  error={errors.last_name?.message}
                   type={InputType.text}
                   {...field}
                   ref={null}
@@ -91,7 +115,7 @@ const InviteStaff:FC<Props> = ({close}) => {
           <div className="mt-6">
             <div className="flex justify-between">
               <div className="w-full">
-                <Button title={"Invite"} />
+                <Button  title={isBusy ? <ScaleSpinner size={14} color="white" /> : "Send Invite"} disabled={!isValid} />
               </div>
             </div>
           </div>

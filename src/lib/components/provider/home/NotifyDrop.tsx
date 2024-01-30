@@ -39,7 +39,7 @@ const ProviderNotifyDrop = () => {
                             </p>
                           </div>
                         ))} */}
-            <Link to="/admin/notify">
+            <Link to="/provider/notify">
               <p className="text-center hover:text-orange-500">View All</p>
             </Link>
           </MenuItem>

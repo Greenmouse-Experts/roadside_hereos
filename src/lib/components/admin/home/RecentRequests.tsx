@@ -52,7 +52,7 @@ const RecentRequests = () => {
     <>
       <div className="w-full rounded-xl">
         <div className="bg-primary text-white rounded-t-xl px-4 py-4">
-          <p className="text-lg fw-600">Recent Requests</p>
+          <p className="text-lg fw-600">Pending Requests</p>
         </div>
         <div className="p-4 bg-white rounded-b-xl">
           {requests.map((item, index) => {

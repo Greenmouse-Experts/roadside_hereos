@@ -6,16 +6,18 @@ import {
   ServiceRequestType,
 } from "../../types/service";
 
-axios.defaults.baseURL = ENDPOINT.BASE_URL;
-axios.defaults.headers.common["Authorization"] = `${localStorage.getItem(
+// const Base = ENDPOINT.BASE_URL
+const getToken = () => {return `${localStorage.getItem(
   "rhs_token"
-)}`;
+)}`}
+axios.defaults.baseURL = ENDPOINT.BASE_URL;
+axios.defaults.headers.common["Authorization"] = getToken();
 axios.interceptors.response.use(
   (response) => {
     return response;
   },
   (error) => {
-    if (error.response.status === 401) {
+    if (error.response.status === 402) {
       return (window.location.href = "/auth/login");
     }
     return Promise.reject(error);

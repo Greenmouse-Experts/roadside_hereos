@@ -34,7 +34,7 @@ const ImageInput: FC<Props> = ({
         <p className="text-[#767676] fw-500 mb-2">{label}</p>
         <div
           {...getRootProps()}
-          className="w-full border border-gray-400 rounded-lg min-h-[120px] p-4 flex justify-between items-center"
+          className="w-full border bg-white border-gray-400 rounded-lg min-h-[120px] p-4 flex justify-between items-center"
         >
           <input {...getInputProps()} />
           {preview ? (

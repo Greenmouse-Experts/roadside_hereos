@@ -14,6 +14,7 @@ const KycIndex = () => {
   const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
   const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
  
+ 
   return (
     <div className="w-full  py-4">
       <div className="px-2 lg:px-16">

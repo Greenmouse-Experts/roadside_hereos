@@ -2,7 +2,12 @@ import axios from "axios";
 import * as ENDPOINT from "../constant";
 
 // const Base = ENDPOINT.BASE_URL
+// const Base = ENDPOINT.BASE_URL
+const getToken = () => {return `${localStorage.getItem(
+  "rhs_token"
+)}`}
 axios.defaults.baseURL = ENDPOINT.BASE_URL;
+axios.defaults.headers.common["Authorization"] = getToken();
 axios.defaults.headers.common["Authorization"] = `${localStorage.getItem(
   "rhs_token"
 )}`;
@@ -11,7 +16,7 @@ axios.interceptors.response.use(
     return response;
   },
   (error) => {
-    if (error.response.status === 401) {
+    if (error.response.status === 402) {
         localStorage.clear()
       return (window.location.href = "/auth/login");
     }
