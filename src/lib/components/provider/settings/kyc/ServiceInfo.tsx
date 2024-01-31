@@ -20,10 +20,10 @@ const ServiceInfo: FC<Props> = ({ prev, next }) => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      fullname: kyc.director_fullname || "",
-      designation: kyc.director_designation || "",
-      email: kyc.director_email || "",
-      phone: kyc.director_phone || "",
+      fullname: kyc?.director_fullname || "",
+      designation: kyc?.director_designation || "",
+      email: kyc?.director_email || "",
+      phone: kyc?.director_phone || "",
     },
   });
   const submitAction = async(data:any) => {

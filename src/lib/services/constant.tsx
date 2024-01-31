@@ -43,6 +43,12 @@ export const UPLOAD_FILE = '/upload'
 // company Kyc
 export const SUBMIT_KYC = '/kyc/service-company/save'
 export const GET_KYC = '/kyc/service-company/view'
+
+// company api
 export const EXTEND_INVITE = '/invitation-request/create'
 export const GET_COMP_INVITE = '/invitation-request'
 export const ACCEPT_INVITE = '/invitation-request/join'
+export const GET_DRIVERS = '/users/get-drivers'
+export const GET_DRIVER_DETAILS = '/users/get-drivers'
+export const GET_ME = '/invitation-request/account'
+export const GET_USER_NOTIFY = '/notifications/user'

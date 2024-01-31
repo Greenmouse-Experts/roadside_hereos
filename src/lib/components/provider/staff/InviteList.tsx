@@ -12,31 +12,31 @@ import {
 import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
 import { FormatStatus } from "../../../utils";
 import { useNavigate } from "react-router-dom";
-import { GetInvitedItem, StaffItem } from "../../../types/company";
+import { GetInvitedItem } from "../../../types/company";
 import { FC } from "react";
 
 interface Props {
   data: GetInvitedItem[]
 }
-const StaffList:FC<Props> = (data) => {
+const InviteList:FC<Props> = (data) => {
    
     const navigate = useNavigate()
     const gotoDetails = (item:string) => {
         navigate(`/provider/staff/${item}`)
     }
     // Table components
-  const columnHelper = createColumnHelper<StaffItem>();
+  const columnHelper = createColumnHelper<GetInvitedItem>();
   const columns = [
-    columnHelper.accessor((row) => row.fname, {
+    columnHelper.accessor((row) => row.first_name, {
       id: "Name",
       cell: (info) => (
         <div className="flex gap-x-2 items-center">
           <ProfileAvatar
-            name={`${info.getValue()} ${info.row.original.lname}`}
+            name={`${info.getValue()} ${info.row.original.last_name}`}
             size={35}
             font={15}
           />
-          <p className="fw-600 text-primary">{`${info.getValue()} ${info.row.original.lname}`}</p>
+          <p className="fw-600 text-primary">{`${info.getValue()} ${info.row.original.last_name}`}</p>
         </div>
       ),
       header: (info) => info.column.id,
@@ -56,9 +56,9 @@ const StaffList:FC<Props> = (data) => {
       cell: (info) => <>{dayjs(info.getValue()).format("DD  MMMM YYYY")}</>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.isActive, {
+    columnHelper.accessor((row) => row.status, {
         id: "Status",
-        cell: (info) => <>{info.getValue() ? FormatStatus['active']: FormatStatus['inactive']}</>,
+        cell: (info) => <>{FormatStatus[info.getValue() as keyof typeof FormatStatus]}</>,
         header: (info) => info.column.id,
       }),
     columnHelper.accessor((row) => row.id, {
@@ -97,4 +97,4 @@ const StaffList:FC<Props> = (data) => {
   )
 }
 
-export default StaffList
+export default InviteList

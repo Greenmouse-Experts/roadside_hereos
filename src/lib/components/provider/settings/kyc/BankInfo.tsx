@@ -22,11 +22,11 @@ const BankInfo:FC<Props> = ({prev}) => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      bank_name: kyc.bank_name || "",
-      routing_num: kyc.routing_number || "",
-      account_name: kyc.bank_account_name || "",
-      account_number: kyc.bank_account_number || "",
-      account_type: kyc.account_type || "",
+      bank_name: kyc?.bank_name || "",
+      routing_num: kyc?.routing_number || "",
+      account_name: kyc?.bank_account_name || "",
+      account_number: kyc?.bank_account_number || "",
+      account_type: kyc?.account_type || "",
     },
   });
   const mutation = useMutation({
@@ -36,8 +36,8 @@ const BankInfo:FC<Props> = ({prev}) => {
       saveKyc(data.data)
       setIsBusy(false);
     },
-    onError: () => {
-      toast.error("Something went wrong");
+    onError: (err:any) => {
+      toast.error(err.response.data.message);
       setIsBusy(false);
     },
   });
@@ -50,6 +50,7 @@ const BankInfo:FC<Props> = ({prev}) => {
       bank_account_name: data.account_name,
       account_type: data.account_type,
       routing_number:  data.routing_num,
+      insurance_doc: kyc?.insurance_doc
     }
     mutation.mutate(payload)
   };

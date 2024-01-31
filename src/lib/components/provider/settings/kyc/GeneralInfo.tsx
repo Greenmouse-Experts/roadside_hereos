@@ -39,14 +39,14 @@ const GeneralInfo: FC<Props> = ({ next }) => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      address: kyc.address || "",
-      company: user.name,
-      business_registration_number: kyc.registration_number || "",
-      tin: kyc.tax_id || "",
-      date: kyc.incorporation_date || "",
-      business_type: kyc.business_nature || "",
-      business_email: kyc.business_email || user?.email || "",
-      business_phone: kyc.business_phone || user?.phone || "",
+      address: kyc?.address || "",
+      company: user?.name,
+      business_registration_number: kyc?.registration_number || "",
+      tin: kyc?.tax_id || "",
+      date: kyc?.incorporation_date || "",
+      business_type: kyc?.business_nature || "",
+      business_email: kyc?.business_email || user?.email || "",
+      business_phone: kyc?.business_phone || user?.phone || "",
     },
   });
   const upload = useMutation({
@@ -88,7 +88,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
     await saveKyc({...kyc, ...payload})
     next()
   };
-
+  
   return (
     <>
       <div className="bg-gray-100 p-4 pb-8 rounded-md">
@@ -233,7 +233,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
               />
             </div>
             <div className="mt-3">
-              <ImageInput label="Upload Insurance Requirement" setImage={setImageVal} prevValue={kyc.insurance_doc}/>
+              <ImageInput label="Upload Insurance Requirement" setImage={setImageVal} prevValue={kyc?.insurance_doc}/>
                   {uploading === 1 && <p className="fs-400 italics text-gray-500 fw-500">Document is uploading...</p>}
                   {uploading === 2 && <p className="fs-400 italics text-green-600 fw-500">Document is uploaded</p>}
             </div>

@@ -1,4 +1,5 @@
 import ProviderHomePage from "../../pages/provider/home";
+import CompanyInvites from "../../pages/provider/invite";
 import ProviderNotification from "../../pages/provider/notify";
 import ProviderPayments from "../../pages/provider/payments";
 import ProviderServices from "../../pages/provider/services";
@@ -41,5 +42,10 @@ export const providerRoutes = [
         id: 'users-7',
         path: 'staff/:id',
         component: <StaffDetail/>
+    },
+    {
+        id: 'users-8',
+        path: 'invite',
+        component: <CompanyInvites/>
     }
 ]

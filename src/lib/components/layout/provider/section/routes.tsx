@@ -1,4 +1,5 @@
 import {
+  MdInsertInvitation,
   MdOutlineDashboard, MdOutlineHomeRepairService,
 } from 'react-icons/md';
 import {  BiGitPullRequest } from 'react-icons/bi';
@@ -19,6 +20,12 @@ export const Routes = [
     name: 'Dashboard',
     icon: <MdOutlineDashboard className="text-xl" />,
     route: '/provider',
+    submenu: [],
+  },
+  {
+    name: 'Invites',
+    icon: <MdInsertInvitation className="text-xl" />,
+    route: '/provider/invite',
     submenu: [],
   },
   {

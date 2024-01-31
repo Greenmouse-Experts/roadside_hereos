@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
@@ -16,7 +16,22 @@ import { toast } from "react-toastify";
 const OnboardStaff = () => {
     const { code } = useParams();
     const token =   code?.replace("token=", "")
+    const [user, setUser] = useState<string>()
   const [isBusy, setIsBusy] = useState(false);
+ const getMe = () => {
+  axios.get('/invitation-request/account', {
+    headers: {
+      Authorization: token
+    }
+  })
+  .then((res) => {
+    setUser(res?.data?.data?.first_name)
+  })
+  .catch(() => {})
+ }
+ useEffect(() => {
+  getMe()
+ },[])
   const {
     control,
     handleSubmit,
@@ -50,8 +65,8 @@ const OnboardStaff = () => {
         setShowModal(true)
     })
     .then((err:any) => {
+      setIsBusy(false)
         toast.error(err.response.data.message)
-        setIsBusy(false)
     })
   }
   return (
@@ -70,7 +85,7 @@ const OnboardStaff = () => {
                 />
               </Link>
               <div className="mt-6 lg:mt-6">
-                <p className="text-xl fw-600">Hello Marline</p>
+                <p className="text-xl fw-600">Hello {user? user : '...'}</p>
                 <p className="mt-3 fs-500">
                   Please complete your registration to gain access
                 </p>

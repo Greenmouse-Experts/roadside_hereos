@@ -64,7 +64,7 @@ const InviteStaff:FC<Props> = ({close, refetch}) => {
               }}
               render={({ field }) => (
                 <TextInput
-                  label="Full Name"
+                  label="First Name"
                   labelClassName="text-[#000000B2] fw-500"
                   error={errors.first_name?.message}
                   type={InputType.text}

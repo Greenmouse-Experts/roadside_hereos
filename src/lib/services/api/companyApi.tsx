@@ -28,3 +28,15 @@ export const sendInvite = async(payload:SendInviteInput) => {
 export const getInvite = async() => {
     return  axios.get(`${ENDPOINT.GET_COMP_INVITE}`).then((response) => response.data)
  } 
+
+ export const getMe = async() => {
+  return  axios.get(`${ENDPOINT.GET_ME}`).then((response) => response.data)
+} 
+
+ export const getDrivers = async() => {
+  return  axios.get(`${ENDPOINT.GET_DRIVERS}`).then((response) => response.data)
+} 
+
+export const getDriversDetail = async(payload:string) => {
+  return  axios.get(`${ENDPOINT.GET_DRIVER_DETAILS}/${payload}`).then((response) => response.data)
+} 
