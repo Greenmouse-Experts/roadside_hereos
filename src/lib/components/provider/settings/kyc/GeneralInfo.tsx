@@ -32,7 +32,9 @@ const GeneralInfo: FC<Props> = ({ next }) => {
   useEffect(() => {
     if (prevKyc) {
       saveKyc(prevKyc.data);
-      reset();
+      setTimeout(() => {
+        reset();
+      }, 500);
     }
   }, [prevKyc]);
   const {

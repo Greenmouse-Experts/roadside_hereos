@@ -14,7 +14,7 @@ const CompanyProviders:FC<Props> = ({id}) => {
   return (
     <>
         <div className="bg-white p-6 shadow rounded min-h-[350px]">
-          <StaffList data={data?.data}/>
+          {data && <StaffList data={data?.data}/>}
         </div>
     </>
   )
