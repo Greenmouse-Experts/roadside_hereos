@@ -11,13 +11,15 @@ import {
   MenuList,
 } from "@material-tailwind/react";
 import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   users: any;
 }
 const ProvidersList: FC<Props> = ({ users }) => {
+  const navigate = useNavigate()
     const gotoDetails = (id:string) => {
-        console.log(id);
+        navigate(`/admin/providers/${id}`)
     }
   // Table components
   const columnHelper = createColumnHelper<any>();
@@ -52,7 +54,7 @@ const ProvidersList: FC<Props> = ({ users }) => {
       cell: (info) => <>{dayjs(info.getValue()).format("DD  MMMM YYYY")}</>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.createdAt, {
+    columnHelper.accessor((row) => row.id, {
       id: "Action",
       header: (info) => info.column.id,
       cell: (info) => (

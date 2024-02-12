@@ -8,8 +8,6 @@ const ServiceProviders = () => {
     queryKey: ["getProviders"],
     queryFn: getProviders,
   });
-  console.log(data?.data);
-  
   return (
     <>
       <div className="bg-white p-6 rounded-lg shadow min-h-[80vh]">

@@ -28,7 +28,7 @@ const Tabs: FC<Props> = ({ tabs, broadcastCurrentIndex, type }) => {
   };
   const navActiveClass = {
     charts: 'bg-review text-white fw-600 rounded-[10px] duration-100',
-    norm: 'border-b-[4px] text-[#B3561B] border-[#B3561B]',
+    norm: 'border-b-[4px] text-[#111827] fw-600 border-[#111827]',
     '': 'border-b-[4px] text-[#B3561B] border-[#B3561B]',
     price: 'bg-[#B3561B] text-white rounded-[10px] duration-100',
   };

@@ -41,3 +41,9 @@ export const getProviders = async () => {
     .get(`${ENDPOINT.GET_PROVIDERS}`)
     .then((response) => response.data);
 };
+
+export const getProvidersDetails = async (payload:string) => {
+  return axios
+    .get(`${ENDPOINT.GET_PROVIDER_DETAILS}/${payload}`)
+    .then((response) => response.data);
+};

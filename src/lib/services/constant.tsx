@@ -15,6 +15,7 @@ export const GET_USERS = '/all/users'
 export const GET_PROVIDERS = '/all/providers'
 export const GET_ADMIN_NOTIFY = '/notifications/admin'
 export const MARK_NOTIFY_READ = '/notifications/mark-read'
+export const GET_PROVIDER_DETAILS = '/users/get-user'
 
 // Auth endpoints
 export const USER_LOGIN = '/user/login'

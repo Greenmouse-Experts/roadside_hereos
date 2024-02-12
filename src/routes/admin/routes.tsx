@@ -1,6 +1,7 @@
 import AdminCategory from "../../pages/admin/category";
 import AdminDashboardHome from "../../pages/admin/home";
 import AdminNotification from "../../pages/admin/notify";
+import ProviderDetails from "../../pages/admin/providerDetails";
 import ServiceProviders from "../../pages/admin/providers";
 import AdminRequests from "../../pages/admin/requests";
 import AdminRenderedServices from "../../pages/admin/services";
@@ -19,33 +20,38 @@ export const adminRoutes = [
         component: <AdminUsers/>
     },
     {
-        id: 'admin2',
+        id: 'admin3',
         path: 'providers',
         component: <ServiceProviders/>
     },
     {
-        id: 'admin2',
+        id: 'admin4',
         path: 'category',
         component: <AdminCategory/>
     },
     {
-        id: 'admin2',
+        id: 'admin5',
         path: 'requests',
         component: <AdminRequests/>
     },
     {
-        id: 'admin2',
+        id: 'admin6',
         path: 'services',
         component: <AdminRenderedServices/>
     },
     {
-        id: 'admin2',
+        id: 'admin7',
         path: 'notify',
         component: <AdminNotification/>
     },
     {
-        id: 'admin2',
+        id: 'admin8',
         path: 'settings',
         component: <AdminSettings/>
+    },
+    {
+        id: 'admin9',
+        path: 'providers/:id',
+        component: <ProviderDetails/>
     },
 ]

@@ -56,6 +56,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
   const upload = useMutation({
     mutationFn: uploadFile,
   });
+  // for insurance
   const handleUpload = () => {
     if (imageVal) {
       setUploading(1);
@@ -78,6 +79,27 @@ const GeneralInfo: FC<Props> = ({ next }) => {
   useEffect(() => {
     handleUpload();
   }, [imageVal]);
+  // for business certificate
+  const handleCertUpload = () => {
+    if (bizCert) {
+      setSending(1);
+      const fd = new FormData();
+        fd.append("image", bizCert[0])
+      upload.mutateAsync(fd, {
+        onSuccess: (data) => {
+          saveKyc({ ...kyc, business_reg_certificate: data[0] });
+          setSending(2);
+        },
+        onError: (error) => {
+          toast.error(error.message);
+          setSending(3);
+        },
+      });
+    }
+  };
+  useEffect(() => {
+    handleCertUpload();
+  }, [bizCert]);
   const submitAction = async (data: any) => {
     const payload = {
       business_name: user.name,

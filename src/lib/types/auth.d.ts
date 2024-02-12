@@ -31,12 +31,40 @@ export interface CreateUser {
 }
 
 export interface ResendTokenType {
-  email: string
-  platform: string
+  email: string;
+  platform: string;
 }
 
 export interface ResetPasswordType {
-  token: string
-  email: string
-  password: string
+  token: string;
+  email: string;
+  password: string;
+}
+
+export interface UserItemType {
+  city: string | null;
+  companyId: string | null;
+  createdAt: string;
+  email: string;
+  expiredAt: string | null;
+  fname: string | null;
+  hasActiveSubscription: string | null;
+  id: string;
+  invitationId: string | null;
+  isActive: boolean;
+  isAvailableForService: string | null;
+  isSuspended: boolean | null;
+  level: string | number | null;
+  lname: string | null;
+  name: string;
+  password: string;
+  phone: string;
+  photo: string | null;
+  planId: string | null;
+  referralId: string;
+  state: string | null;
+  street: string | null;
+  token: string | null;
+  updatedAt: string;
+  userType: string;
 }
