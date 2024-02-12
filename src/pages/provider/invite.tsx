@@ -31,7 +31,7 @@ const CompanyInvites = () => {
               </div>
             </div>
           )}
-            {data && !!data?.data.length && <InviteList data={data.data}/>}
+            {data && !!data?.data?.length && <InviteList data={data.data}/>}
            </div>
         </div>
       <Modal title="Invite New Staff" size="md" type="withCancel">

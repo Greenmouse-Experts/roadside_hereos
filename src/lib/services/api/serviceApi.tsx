@@ -5,6 +5,34 @@ import {
   PublishCatType,
   ServiceRequestType,
 } from "../../types/service";
+import { getToken } from "../helpers";
+
+axios.defaults.baseURL = ENDPOINT.BASE_URL;
+axios.defaults.headers.common["Authorization"] = getToken();
+axios.interceptors.request.use(
+  function (config) {
+    const token = getToken();
+    if (token) {
+      config.headers["Authorization"] = getToken();
+    }
+    return config;
+  },
+  function (error) {
+    return Promise.reject(error);
+  }
+);
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response.status === 401) {
+      localStorage.clear();
+      return (window.location.href = "/auth/login");
+    }
+    return Promise.reject(error);
+  }
+);
 
 
 export const createCategory = async (payload: CreateCatType) => {

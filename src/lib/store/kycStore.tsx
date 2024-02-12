@@ -11,7 +11,8 @@ export interface kycProps{
     registration_number: string;
     incorporation_date:string;
     address: string;
-    insurance_doc: string,
+    insurance_doc: string[],
+    business_reg_certificate: string,
     business_email:string;
     business_phone:string;
     business_nature: string;
@@ -34,7 +35,8 @@ const kycInitState = {
     incorporation_date: "",
     address:  "",
     business_email: "",
-    insurance_doc: "",
+    insurance_doc: [],
+    business_reg_certificate: "",
     business_phone: "",
     business_nature:  "",
     staff_number: 0,

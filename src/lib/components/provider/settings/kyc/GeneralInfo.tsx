@@ -11,6 +11,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { uploadFile } from "../../../../services/api/routineApi";
 import { toast } from "react-toastify";
 import { getKyc } from "../../../../services/api/kycApi";
+import { FaCircleInfo } from "react-icons/fa6";
 
 interface Props {
   next: () => void;
@@ -18,19 +19,22 @@ interface Props {
 const GeneralInfo: FC<Props> = ({ next }) => {
   const { user } = useAuth();
   const kyc = useKycStore((state) => state.kyc);
-  const saveKyc =  useKycStore((state) => state.saveKyc);
-  const [imageVal, setImageVal] = useState<Array<File>>()
-  const [uploading, setUploading] = useState(0)
-  const {  data:prevKyc } = useQuery({
+  const saveKyc = useKycStore((state) => state.saveKyc);
+  const [imageVal, setImageVal] = useState<Array<File>>();
+  const [uploading, setUploading] = useState(0);
+  const [bizCert, setbizCert] = useState<Array<File>>();
+  const [sending, setSending] = useState(0);
+  const [showTip, setShowTip] = useState(false)
+  const { data: prevKyc } = useQuery({
     queryKey: ["getKyc"],
     queryFn: getKyc,
   });
   useEffect(() => {
-    if(prevKyc) {
-      saveKyc(prevKyc.data)
-      reset()
+    if (prevKyc) {
+      saveKyc(prevKyc.data);
+      reset();
     }
-  }, [prevKyc])
+  }, [prevKyc]);
   const {
     control,
     handleSubmit,
@@ -54,13 +58,15 @@ const GeneralInfo: FC<Props> = ({ next }) => {
   });
   const handleUpload = () => {
     if (imageVal) {
-      setUploading(1)
+      setUploading(1);
       const fd = new FormData();
-      fd.append("image", imageVal[0]);
+      for (let i = 0; i < imageVal.length; i++) {
+        fd.append("image", imageVal[i])
+      }
       upload.mutateAsync(fd, {
         onSuccess: (data) => {
-          saveKyc({...kyc, insurance_doc: data[0]})
-          setUploading(2)
+          saveKyc({ ...kyc, insurance_doc: data });
+          setUploading(2);
         },
         onError: (error) => {
           toast.error(error.message);
@@ -68,11 +74,11 @@ const GeneralInfo: FC<Props> = ({ next }) => {
         },
       });
     }
-  }
+  };
   useEffect(() => {
-    handleUpload()
-  }, [imageVal])
-  const submitAction = async(data: any) => {
+    handleUpload();
+  }, [imageVal]);
+  const submitAction = async (data: any) => {
     const payload = {
       business_name: user.name,
       registration_number: data.business_registration_number,
@@ -83,12 +89,12 @@ const GeneralInfo: FC<Props> = ({ next }) => {
       business_nature: data.business_type,
       staff_number: 2,
       vat_registration_number: data.business_registration_number,
-      tax_id: data.tin ,
+      tax_id: data.tin,
     };
-    await saveKyc({...kyc, ...payload})
-    next()
+    await saveKyc({ ...kyc, ...payload });
+    next();
   };
-  
+
   return (
     <>
       <div className="bg-gray-100 p-4 pb-8 rounded-md">
@@ -232,10 +238,45 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                 )}
               />
             </div>
-            <div className="mt-3">
-              <ImageInput label="Upload Insurance Requirement" setImage={setImageVal} prevValue={kyc?.insurance_doc}/>
-                  {uploading === 1 && <p className="fs-400 italics text-gray-500 fw-500">Document is uploading...</p>}
-                  {uploading === 2 && <p className="fs-400 italics text-green-600 fw-500">Document is uploaded</p>}
+            <div className="mt-3 relative">
+              <ImageInput
+                label="Upload Business Registration Certificate"
+                setImage={setbizCert}
+                prevValue={kyc?.business_reg_certificate}
+              />
+              {sending === 1 && (
+                <p className="fs-400 italics text-gray-500 fw-500">
+                  Document is uploading...
+                </p>
+              )}
+              {sending === 2 && (
+                <p className="fs-400 italics text-green-600 fw-500">
+                  Document is uploaded
+                </p>
+              )}
+              </div>
+            <div className="mt-3 relative">
+              <ImageInput
+                label="Upload Insurance Requirement"
+                setImage={setImageVal}
+                prevValue={kyc?.insurance_doc}
+              />
+              {uploading === 1 && (
+                <p className="fs-400 italics text-gray-500 fw-500">
+                  Document is uploading...
+                </p>
+              )}
+              {uploading === 2 && (
+                <p className="fs-400 italics text-green-600 fw-500">
+                  Document is uploaded
+                </p>
+              )}
+              <div className="absolute top-1 left-[260px]" onMouseEnter={() => setShowTip(true)} onMouseLeave={() => setShowTip(false)}>
+                <FaCircleInfo className="cursor-pointer"/>
+                {
+                  showTip && <p className="w-60 lg:w-[350px] fw-500 shadow bg-white rounded-lg p-3 fs-400 relative top-1">Upload General Liability Insurance and Commercial Vehicle Insurance (if rendering towing service).</p>
+                }
+              </div>
             </div>
             <div>
               <p className="fw-500 mt-3">Comapany Contact Information</p>
@@ -291,7 +332,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
           <div className="mt-12">
             <div className="flex justify-end">
               <div className="w-3/12">
-                <Button title={"Next"} disabled={!isValid}/>
+                <Button title={"Next"} disabled={!isValid} />
               </div>
             </div>
           </div>

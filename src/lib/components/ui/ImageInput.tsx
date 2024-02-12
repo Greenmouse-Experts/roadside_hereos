@@ -6,7 +6,7 @@ interface Props {
   label: string;
   setImage: React.Dispatch<React.SetStateAction<Array<File> | undefined>>;
   containerClass?: string;
-  prevValue?: string;
+  prevValue?: string | string[];
 }
 const ImageInput: FC<Props> = ({
   label,
@@ -51,15 +51,28 @@ const ImageInput: FC<Props> = ({
               </p>
             </div>
           )}
-          {preview && (
-            <img
-              src={preview as string}
-              alt="Upload preview"
-              className="w-24 mx-auto"
-              width={200}
-              height={200}
-            />
-          )}
+          {preview &&
+            (Array.isArray(prevValue) ? (
+              <div className="flex gap-x-1">
+                {prevValue.map((item) => (
+                  <img
+                    src={item}
+                    alt="Upload preview"
+                    className="w-24 mx-auto"
+                    width={200}
+                    height={200}
+                  />
+                ))}
+              </div>
+            ) : (
+              <img
+                src={preview as string}
+                alt="Upload preview"
+                className="w-24 mx-auto"
+                width={200}
+                height={200}
+              />
+            ))}
           <div>
             <div className="border border-[#D2D2D2] rounded-[4px] px-7 py-2 lg:px-12 cursor-pointer">
               <p>Browse</p>
