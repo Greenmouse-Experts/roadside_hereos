@@ -1,6 +1,7 @@
 import axios from "axios";
 import * as ENDPOINT from "../constant";
 import { getToken } from "../helpers";
+import { SuspendUserInputType } from "../../types/auth";
 
 axios.defaults.baseURL = ENDPOINT.BASE_URL;
 axios.defaults.headers.common["Authorization"] = getToken();
@@ -45,5 +46,23 @@ export const getProviders = async () => {
 export const getProvidersDetails = async (payload:string) => {
   return axios
     .get(`${ENDPOINT.GET_PROVIDER_DETAILS}/${payload}`)
+    .then((response) => response.data);
+};
+
+export const suspendUser = async (payload:SuspendUserInputType) => {
+  return axios
+    .post(`${ENDPOINT.SUSPEND_USER}`, payload)
+    .then((response) => response.data);
+};
+
+export const unsuspendUser = async (payload:SuspendUserInputType) => {
+  return axios
+    .post(`${ENDPOINT.UNSUSPEND_USER}`, payload)
+    .then((response) => response.data);
+};
+
+export const getCompanyProviders = async (payload:string) => {
+  return axios
+    .get(`${ENDPOINT.GET_COMPANY_PROVIDERS}/${payload}`)
     .then((response) => response.data);
 };

@@ -49,7 +49,6 @@ const AddCategory = () => {
       fd.append("image", imageValue[0]);
       upload.mutateAsync(fd, {
         onSuccess: (data) => {
-          console.log(data);
           const payload = {
             name: datas.name,
             icon: data[0],

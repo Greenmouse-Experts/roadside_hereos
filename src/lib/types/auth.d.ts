@@ -68,3 +68,8 @@ export interface UserItemType {
   updatedAt: string;
   userType: string;
 }
+
+export interface SuspendUserInputType {
+  userId: string;
+  reason?: string
+}

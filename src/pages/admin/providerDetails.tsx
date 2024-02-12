@@ -9,7 +9,7 @@ import { getProvidersDetails } from "../../lib/services/api/usersApi";
 
 const ProviderDetails = () => {
   const { id } = useParams();
-  const { isLoading, isError, data } = useQuery({
+  const { isLoading, isError, data, refetch } = useQuery({
     queryKey: ["getProviders"],
     queryFn: () => getProvidersDetails(`${id}`),
   });
@@ -20,7 +20,7 @@ const ProviderDetails = () => {
     },
     {
       title: <p>Company Providers</p>,
-      content: <CompanyProviders />,
+      content: <CompanyProviders id={`${id}`}/>,
     },
     {
       title: <p>Company Kyc</p>,
@@ -37,9 +37,10 @@ const ProviderDetails = () => {
             <ProviderDetailsHeader
               picture={data?.data?.photo}
               name={data?.data?.name}
-              status={data?.data?.isActive}
+              status={data?.data?.isSuspended}
               id={`${id}`}
               email={data?.data?.email}
+              refetch={refetch}
             />
           </div>
           <Tabs tabs={tabs} type="norm" />

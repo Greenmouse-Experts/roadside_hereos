@@ -16,6 +16,9 @@ export const GET_PROVIDERS = '/all/providers'
 export const GET_ADMIN_NOTIFY = '/notifications/admin'
 export const MARK_NOTIFY_READ = '/notifications/mark-read'
 export const GET_PROVIDER_DETAILS = '/users/get-user'
+export const SUSPEND_USER = `/admin/suspend-user`
+export const UNSUSPEND_USER =`/admin/unsuspend-user`
+export const GET_COMPANY_PROVIDERS = `/admin/get-provider-drivers`
 
 // Auth endpoints
 export const USER_LOGIN = '/user/login'

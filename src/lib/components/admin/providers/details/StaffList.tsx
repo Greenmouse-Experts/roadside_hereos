@@ -1,6 +1,6 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { DataTable } from "../../ui/DataTable";
-import ProfileAvatar from "../../ui/ProfileAvatar";
+// import { DataTable } from "../../ui/DataTable";
+// import ProfileAvatar from "../../ui/ProfileAvatar";
 import dayjs from "dayjs";
 import {
   Button,
@@ -10,10 +10,14 @@ import {
   MenuList,
 } from "@material-tailwind/react";
 import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
-import { FormatStatus } from "../../../utils";
+// import { FormatStatus } from "../../../utils";
 import { useNavigate } from "react-router-dom";
-import { GetInvitedItem, StaffItem } from "../../../types/company";
+// import { GetInvitedItem, StaffItem } from "../../../types/company";
 import { FC } from "react";
+import { GetInvitedItem, StaffItem } from "../../../../types/company";
+import ProfileAvatar from "../../../ui/ProfileAvatar";
+import { FormatStatus } from "../../../../utils";
+import { DataTable } from "../../../ui/DataTable";
 
 interface Props {
   data: GetInvitedItem[];
