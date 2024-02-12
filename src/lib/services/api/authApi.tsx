@@ -2,23 +2,6 @@ import axios from "axios";
 import { ChangePassword, CreateUser, LoginTyping, ResendTokenType, ResetPasswordType, UpdateProfile } from "../../types/auth";
 import * as ENDPOINT from "../constant";
 
-// const Base = ENDPOINT.BASE_URL
-axios.defaults.baseURL = ENDPOINT.BASE_URL;
-axios.defaults.headers.common["Authorization"] = `${localStorage.getItem(
-  "rhs_token"
-)}`;
-axios.interceptors.response.use(
-  (response) => {
-    return response;
-  },
-  (error) => {
-    if (error.response.status === 402) {
-        localStorage.clear()
-      return (window.location.href = "/auth/login");
-    }
-    return Promise.reject(error);
-  }
-);
 
 export const adminLogin = async(payload:LoginTyping) => {
    return  axios.post(`${ENDPOINT.ADMIN_LOGIN}`, payload).then((response) => response.data)
