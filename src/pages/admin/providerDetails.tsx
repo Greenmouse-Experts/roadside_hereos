@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import { toast } from "react-toastify";
 import { useQuery } from "@tanstack/react-query";
 import ProviderDetailsHeader from "../../lib/components/admin/providers/details/Header";
 import CompanyDetails from "../../lib/components/admin/providers/details/CompanyDetails";
@@ -32,15 +30,16 @@ const ProviderDetails = () => {
   return (
     <>
       {isLoading && <p>Loading</p>}
+      {isError && <p>There was an issue fetching provider details</p>}
       {!isLoading && data && (
         <div>
           <div className="mb-16">
             <ProviderDetailsHeader
-              picture=""
-              name="Mi"
-              status="active"
+              picture={data?.data?.photo}
+              name={data?.data?.name}
+              status={data?.data?.isActive}
               id={`${id}`}
-              email={""}
+              email={data?.data?.email}
             />
           </div>
           <Tabs tabs={tabs} type="norm" />
