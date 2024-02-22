@@ -2,16 +2,7 @@ import { createColumnHelper } from "@tanstack/react-table";
 import { DataTable } from "../../ui/DataTable";
 import ProfileAvatar from "../../ui/ProfileAvatar";
 import dayjs from "dayjs";
-import {
-  Button,
-  Menu,
-  MenuHandler,
-  MenuItem,
-  MenuList,
-} from "@material-tailwind/react";
-import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
 import { FormatStatus } from "../../../utils";
-import { useNavigate } from "react-router-dom";
 import { GetInvitedItem } from "../../../types/company";
 import { FC } from "react";
 
@@ -19,11 +10,6 @@ interface Props {
   data: GetInvitedItem[]
 }
 const InviteList:FC<Props> = (data) => {
-   
-    const navigate = useNavigate()
-    const gotoDetails = (item:string) => {
-        navigate(`/provider/staff/${item}`)
-    }
     // Table components
   const columnHelper = createColumnHelper<GetInvitedItem>();
   const columns = [
