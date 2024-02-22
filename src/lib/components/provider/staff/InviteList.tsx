@@ -46,11 +46,6 @@ const InviteList:FC<Props> = (data) => {
       cell: (info) => <>{info.getValue()}</>,
       header: (info) => info.column.id,
     }),
-    // columnHelper.accessor((row) => row.skill, {
-    //   id: "Service Category",
-    //   cell: (info) => <>{info.getValue().map((item:string) => <p className="flex gap-x-1 items-center fs-500 fw-500"><span className="w-2 h-2 circle bg-orange-500"></span>{item}</p>)}</>,
-    //   header: (info) => info.column.id,
-    // }),
     columnHelper.accessor((row) => row.createdAt, {
       id: "Joined at",
       cell: (info) => <>{dayjs(info.getValue()).format("DD  MMMM YYYY")}</>,
@@ -61,29 +56,6 @@ const InviteList:FC<Props> = (data) => {
         cell: (info) => <>{FormatStatus[info.getValue() as keyof typeof FormatStatus]}</>,
         header: (info) => info.column.id,
       }),
-    columnHelper.accessor((row) => row.id, {
-      id: "Action",
-      header: (info) => info.column.id,
-      cell: (info) => (
-        <>
-          <Menu placement="bottom-end">
-            <MenuHandler>
-              <Button className="bg-transparent px-0 mx-0 hover:shadow-none text-md flex items-center font-normal shadow-none capitalize">
-                <BsThreeDotsVertical className="text-xl text-black" />
-              </Button>
-            </MenuHandler>
-            <MenuList className="">
-              <MenuItem
-                className="my-1 fw-500 flex items-center gap-x-2 pt-1"
-                onClick={() => gotoDetails(info.getValue())}
-              >
-                <BsArrowsExpand/> View Details
-              </MenuItem>
-            </MenuList>
-          </Menu>
-        </>
-      ),
-    }),
   ];
   return (
     <>

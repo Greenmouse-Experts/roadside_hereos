@@ -1,34 +1,23 @@
-import React from "react";
-import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
-import RenderedServices from "../../lib/components/provider/requests/RequestList";
+import Tabs from "../../lib/components/ui/Tabs";
+import RenderedServices from "../../lib/components/provider/requests/RenderedList";
+import PendingService from "../../lib/components/provider/requests/RequestList";
 
 const ProviderServices = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
-  // const { isLoading, isError, data } = useQuery({
-  //     queryKey: ["getProviders"],
-  //     queryFn: getProviders,
-  //   });
-  setTimeout(() => {
-    setIsLoading(false)
-  }, 4000);
+  const tabs = [
+    {
+        title: <p>Rendered Service</p>,
+        content: <RenderedServices/>
+    },
+    {
+        title: <p>Pending Service</p>,
+        content: <PendingService/>
+    },
+]
   return (
     <>
       <div className="bg-white p-6 rounded-lg shadow min-h-[80vh]">
-        <p className="fw-600 text-xl">Rendered Services</p>
-        <div className="mt-5 lg:mt-10">
-          {isLoading && (
-            <div className="py-12 flex justify-center items-center text-black">
-              <div>
-                <div className="place-center">
-                  <CurveLoader />
-                </div>
-                <p className="text-center mt-5 fw-500">
-                  Fetching Rendered Services...
-                </p>
-              </div>
-            </div>
-          )}
-          {!isLoading &&  <RenderedServices/>}
+        <div className="mt-5">
+            <Tabs tabs={tabs} type='charts'/>
         </div>
       </div>
     </>

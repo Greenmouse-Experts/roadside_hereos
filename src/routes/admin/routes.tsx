@@ -6,6 +6,7 @@ import ServiceProviders from "../../pages/admin/providers";
 import AdminRequests from "../../pages/admin/requests";
 import AdminRenderedServices from "../../pages/admin/services";
 import AdminSettings from "../../pages/admin/settings";
+import StaffDetail from "../../pages/admin/staffDetail";
 import AdminUsers from "../../pages/admin/users";
 
 export const adminRoutes = [
@@ -53,5 +54,10 @@ export const adminRoutes = [
         id: 'admin9',
         path: 'providers/:id',
         component: <ProviderDetails/>
+    },
+    {
+        id: 'admin10',
+        path: 'providers/staff/:id',
+        component: <StaffDetail/>
     },
 ]

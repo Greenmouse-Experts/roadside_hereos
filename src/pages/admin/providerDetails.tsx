@@ -6,6 +6,7 @@ import ViewKyc from "../../lib/components/admin/providers/details/ViewKyc";
 import CompanyProviders from "../../lib/components/admin/providers/details/CompanyProviders";
 import Tabs from "../../lib/components/ui/Tabs";
 import { getProvidersDetails } from "../../lib/services/api/usersApi";
+import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
 
 const ProviderDetails = () => {
   const { id } = useParams();
@@ -16,11 +17,11 @@ const ProviderDetails = () => {
   const tabs = [
     {
       title: <p>Company Details</p>,
-      content: <CompanyDetails data={data?.data}/>,
+      content: <CompanyDetails data={data?.data} />,
     },
     {
       title: <p>Company Providers</p>,
-      content: <CompanyProviders id={`${id}`}/>,
+      content: <CompanyProviders id={`${id}`} />,
     },
     {
       title: <p>Company Kyc</p>,
@@ -29,7 +30,16 @@ const ProviderDetails = () => {
   ];
   return (
     <>
-      {isLoading && <p>Loading</p>}
+      {isLoading && (
+        <div className="py-12 flex justify-center items-center text-black">
+          <div>
+            <CurveLoader />
+            <p className="text-center mt-5 fw-500">
+              Fetching Provider Details...
+            </p>
+          </div>
+        </div>
+      )}
       {isError && <p>There was an issue fetching provider details</p>}
       {!isLoading && data && (
         <div>

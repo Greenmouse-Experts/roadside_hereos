@@ -1,11 +1,11 @@
 import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
-import { getAllServices } from "../../lib/services/api/serviceApi";
 import { useQuery } from "@tanstack/react-query";
+import { getPendingServices } from "../../lib/services/api/serviceApi";
 
 const AdminRequests = () => {
   const { isLoading } = useQuery({
       queryKey: ["getServices"],
-      queryFn: getAllServices,
+      queryFn: getPendingServices,
     });
   return (
     <>

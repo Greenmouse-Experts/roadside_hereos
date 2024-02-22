@@ -30,3 +30,34 @@ interface ServiceRequestType {
   requestNote: string;
   serviceId: string;
 }
+
+interface ServiceRequestItem {
+  id: string;
+  ref: string | null;
+  userId: string | null;
+  userType: string;
+  providerId: string | null;
+  status: string | null;
+  processStatus: string | null;
+  serviceId: string;
+  amount: string | null;
+  vehicleMake: string;
+  model: string;
+  vehicleYear: string;
+  color: string;
+  location: string;
+  zipcode: string;
+  requestNote: string;
+  createdAt: string;
+  updatedAt: string;
+  service: {
+    id: string;
+    name: string;
+    slug: string;
+    icon: string;
+    isPublished: boolean;
+    questionNote: string;
+    createdAt: string;
+    updatedAt: string;
+  };
+}

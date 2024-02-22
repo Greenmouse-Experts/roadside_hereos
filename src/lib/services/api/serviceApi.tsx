@@ -77,7 +77,7 @@ export const requestService = async (payload: ServiceRequestType) => {
     .then((response) => response.data);
 };
 
-export const getAllServices = async () => {
+export const getPendingServices = async () => {
   return axios
     .get(`${ENDPOINT.GET_SERVICES}`)
     .then((response) => response.data);

@@ -25,7 +25,7 @@ interface Props {
 const StaffList: FC<Props> = (data) => {
   const navigate = useNavigate();
   const gotoDetails = (item: string) => {
-    navigate(`/provider/staff/${item}`);
+    navigate(`/admin/providers/staff/${item}`);
   };
   // Table components
   const columnHelper = createColumnHelper<StaffItem>();

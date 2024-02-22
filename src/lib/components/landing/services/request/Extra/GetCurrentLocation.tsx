@@ -8,12 +8,12 @@ import useModal from "../../../../../hooks/useModal";
 import MapLocation from "./MapLocation";
 
 interface Props {
-    setValue: React.Dispatch<React.SetStateAction<string>>
-    setPostal: React.Dispatch<React.SetStateAction<string>>
+  setValue: React.Dispatch<React.SetStateAction<string>>;
+  setPostal: React.Dispatch<React.SetStateAction<string>>;
 }
-const GetCurrentLocation:FC<Props> = ({setValue, setPostal}) => {
+const GetCurrentLocation: FC<Props> = ({ setValue, setPostal }) => {
   const [isBusy, setIsBusy] = useState(false);
-  const {Modal, setShowModal} = useModal()
+  const { Modal, setShowModal } = useModal();
   const geolocationAPI = navigator.geolocation;
   const getUserCoordinates = () => {
     setIsBusy(true);
@@ -27,6 +27,7 @@ const GetCurrentLocation:FC<Props> = ({setValue, setPostal}) => {
         },
         (error) => {
           console.log(error);
+          setIsBusy(false);
           toast.error("Something went wrong getting your position!");
         }
       );
@@ -45,10 +46,10 @@ const GetCurrentLocation:FC<Props> = ({setValue, setPostal}) => {
       .then((response) => {
         response.data;
         if (response.data) {
-            const data = response.data; 
+          const data = response.data;
           setIsBusy(false);
-          setValue(data.display_name)
-          setPostal(data.address.postcode)
+          setValue(data.display_name);
+          setPostal(data.address.postcode);
         }
       });
   };
@@ -57,12 +58,15 @@ const GetCurrentLocation:FC<Props> = ({setValue, setPostal}) => {
     <>
       <div className="grid gap-y-2 lg:flex items-center gap-x-6">
         <p
-          className="flex gap-x-1 items-center fw-600"
+          className="flex gap-x-1 items-center fw-600 cursor-pointer"
           onClick={getUserCoordinates}
         >
           <FaMapMarkerAlt /> Get Coordinates
         </p>
-        <p className="flex gap-x-1 items-center fw-600" onClick={() => setShowModal(true)}>
+        <p
+          className="flex gap-x-1 items-center fw-600 cursor-pointer"
+          onClick={() => setShowModal(true)}
+        >
           <FaMapLocationDot /> Open Map
         </p>
       </div>
@@ -72,7 +76,7 @@ const GetCurrentLocation:FC<Props> = ({setValue, setPostal}) => {
         </div>
       )}
       <Modal title="" size="lg">
-        <MapLocation setValue={setValue}/>
+        <MapLocation setValue={setValue} />
       </Modal>
     </>
   );

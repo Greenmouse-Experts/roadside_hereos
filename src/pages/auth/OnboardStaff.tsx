@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
-// import TextInput, { InputType } from "../ui/TextInput";
 import { Link, useParams } from "react-router-dom";
 import { VscLock } from "react-icons/vsc";
 import TextInput, { InputType } from "../../lib/components/ui/TextInput";
@@ -10,28 +9,35 @@ import Button from "../../lib/components/ui/Button";
 import { ScaleSpinner } from "../../lib/components/ui/Loading";
 import OnboardSuccess from "../../lib/components/auth/OnboardSuccess";
 import useModal from "../../lib/hooks/useModal";
-import axios from "axios";
 import { toast } from "react-toastify";
+import { BASE_URL } from "../../lib/services/constant";
 
 const OnboardStaff = () => {
-    const { code } = useParams();
-    const token =   code?.replace("token=", "")
-    const [user, setUser] = useState<string>()
+  const { code } = useParams();
+  const token = code?.replace("token=", "");
+  const [user, setUser] = useState<string>();
   const [isBusy, setIsBusy] = useState(false);
- const getMe = () => {
-  axios.get('/invitation-request/account', {
-    headers: {
-      Authorization: token
+  const getMe = async () => {
+    try {
+      const response = await fetch(`${BASE_URL}/invitation-request/account`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+      });
+
+      const result = await response.json();
+      if (result) {
+        setUser(result?.data?.first_name);
+      }
+    } catch (error: any) {
+      toast.error(error.message);
     }
-  })
-  .then((res) => {
-    setUser(res?.data?.data?.first_name)
-  })
-  .catch(() => {})
- }
- useEffect(() => {
-  getMe()
- },[])
+  };
+  useEffect(() => {
+    getMe();
+  }, []);
   const {
     control,
     handleSubmit,
@@ -46,29 +52,35 @@ const OnboardStaff = () => {
       confirm_password: "",
     },
   });
-  const {Modal, setShowModal} = useModal()
-  const submitAction = async(data:any) => {
-    setIsBusy(true)
+  const { Modal, setShowModal } = useModal();
+  const submitAction = async (data: any) => {
+    setIsBusy(true);
     const payload = {
-        address: data.address,
-        password: data.password,
-        phone_number: data.phone
-    }
-    await axios.post('/invitation-request/join', payload, {
+      address: data.address,
+      password: data.password,
+      phone_number: data.phone,
+    };
+    try {
+      const response = await fetch(`${BASE_URL}/invitation-request/join`, {
+        method: "POST",
         headers: {
-            Authorization: token
-        }
-    })
-    .then((data:any) => {
-        toast.success(data.message)
-        setIsBusy(false)
-        setShowModal(true)
-    })
-    .then((err:any) => {
+          "Content-Type": "application/json",
+          Authorization: `${token}`,
+        },
+        body: JSON.stringify(payload)
+      });
+
+      const result = await response.json();
+      if (result) {
+        toast.success(result?.message);
+        setIsBusy(false);
+        setShowModal(true);
+      }
+    } catch (error: any) {
       setIsBusy(false)
-        toast.error(err.response.data.message)
-    })
-  }
+      toast.error(error.message);
+    }
+  };
   return (
     <>
       <div className="bg-primary h-screen">
@@ -85,7 +97,7 @@ const OnboardStaff = () => {
                 />
               </Link>
               <div className="mt-6 lg:mt-6">
-                <p className="text-xl fw-600">Hello {user? user : '...'}</p>
+                <p className="text-xl fw-600">Hello {user ? user : "..."}</p>
                 <p className="mt-3 fs-500">
                   Please complete your registration to gain access
                 </p>

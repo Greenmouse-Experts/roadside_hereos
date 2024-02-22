@@ -18,7 +18,7 @@ import { FC } from "react";
 interface Props {
   data: GetInvitedItem[];
 }
-const StaffList: FC<Props> = (data) => {
+const StaffList: FC<Props> = ({data}) => {
   const navigate = useNavigate();
   const gotoDetails = (item: string) => {
     navigate(`/provider/staff/${item}`);
@@ -93,7 +93,8 @@ const StaffList: FC<Props> = (data) => {
   return (
     <>
       <div>
-        {!!data.data.length && <DataTable columns={columns} data={data.data} />}
+      
+        {!!data.length && <DataTable columns={columns} data={data} />}
       </div>
     </>
   );
