@@ -5,8 +5,13 @@ import { BsGear } from 'react-icons/bs';
 import { BiLogOutCircle } from 'react-icons/bi';
 import LogoutModal from '../../../auth/LogoutModal';
 import useModal from '../../../../hooks/useModal';
+import { FC } from 'react';
 
-const SidebarLayout = () => {
+interface Props{
+  toggled: boolean
+  setToggled: React.Dispatch<React.SetStateAction<boolean>>
+}
+const SidebarLayout:FC<Props> = ({toggled, setToggled}) => {
   const path = useLocation();
   const { Modal, setShowModal } = useModal();
   
@@ -14,8 +19,10 @@ const SidebarLayout = () => {
     <div className="left-0 top-0 fixed overflow-y-hidden rounded-r-3xl index-30  bg-primary text-white">
       <Sidebar
         customBreakPoint="1024px"
-        className="h-screen overflow-y-hidden scroll-pro pb-4 fs-700 fw-500 px-4"
-        backgroundColor=""
+        className="h-screen overflow-y-hidden scroll-pro lg:pb-4 fs-700 fw-500 lg:px-4"
+        backgroundColor="#111827"
+        onBackdropClick={() => setToggled(false)} 
+        toggled={toggled}
       >
         <div className="flex justify-center py-6 lg:py-9 lg:pb-8 items-center">
           <Link to="/" className="block flex justify-center gap-x-1">

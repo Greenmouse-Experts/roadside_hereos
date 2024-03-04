@@ -5,12 +5,15 @@ import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import { Button } from "@material-tailwind/react";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { FC } from "react";
+import useRequestStore from "../../../../store/serviceStore";
 
 interface Props {
     next: () => void
     prev: () => void
 }
 const PersonalSec:FC<Props> = ({next, prev}) => {
+  const requestInfo = useRequestStore((store) => store.request)
+  const saveRequest = useRequestStore((state) => state.saveRequest)
   const {
     control,
     handleSubmit,
@@ -25,7 +28,15 @@ const PersonalSec:FC<Props> = ({next, prev}) => {
       address: "",
     },
   });
-  const handleForm = () => {
+  const handleForm = (data:any) => {
+    saveRequest({
+      ...requestInfo,
+      firstName: data.first_name,
+      lastName: data.last_name,
+      email: data.email,
+      homeAddress: data.address,
+      phone: data.phone
+    })
     next()
   }
   return (
@@ -134,7 +145,7 @@ const PersonalSec:FC<Props> = ({next, prev}) => {
                 }}
                 render={({ field }) => (
                   <TextInput
-                    label="Residence Address"
+                    label="Home Address"
                     labelClassName="text-[#000000B2] fw-500"
                     error={errors.address?.message}
                     type={InputType.textarea}

@@ -33,7 +33,7 @@ const CareersPage = () => {
                 <p>
                   At Roadside Heroes, we firmly believe that talented
                   professionals are our key resources that sustain our
-                  businesses and propel the organisation forward. Exciting
+                  businesses and propel the organization forward. Exciting
                   career opportunities and enriching jobs in a range of business
                   areas await experienced professionals as well as newcomers.
                 </p>

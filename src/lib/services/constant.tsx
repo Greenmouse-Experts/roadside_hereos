@@ -40,6 +40,8 @@ export const PUBLISH_CATEGORY = '/services/publish-unpublish'
 export const DELETE_CATEGORY = '/services/action'
 export const SERVICE_REQUEST = '/service-request/service-information/create'
 export const GET_SERVICES = '/service-request/service-information/view'
+export const GET_AVAILABLE_SERVICE = `/service-quote/fetch-quotes`
+export const SELECT_SERVICE_PROVIDER = `/service-quote/select-driver-quote`
 
 // routine endpoints
 export const UPLOAD_FILE = '/upload'
@@ -47,6 +49,9 @@ export const UPLOAD_FILE = '/upload'
 // company Kyc
 export const SUBMIT_KYC = '/kyc/service-company/save'
 export const GET_KYC = '/kyc/service-company/view'
+export const GET_COMPANY_KYC = '/kyc/service-company/fetch'
+export const GET_DRIVER_KYC = '/kyc/driver/fetch'
+export const APPROVE_COMPANY_KYC = '/kyc/document/approval'
 
 // company api
 export const EXTEND_INVITE = '/invitation-request/create'

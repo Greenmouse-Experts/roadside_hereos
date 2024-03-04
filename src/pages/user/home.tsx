@@ -16,7 +16,7 @@ const UsersHome = () => {
               className="circle w-[56px]"
             />
             <div>
-              <p className="fs-700 fw-600">{formatAsNgnMoney(3400)}</p>
+              <p className="fs-700 fw-600">{formatAsNgnMoney(0)}</p>
               <p className="fs-400 fw-500 text-primary">Total Amount Spent</p>
             </div>
           </div>
@@ -29,8 +29,8 @@ const UsersHome = () => {
               className="circle w-[56px]"
             />
             <div>
-              <p className="text-lg fw-600">56</p>
-              <p className="fs-400 fw-500 text-primary">Total Services</p>
+              <p className="text-lg fw-600">0</p>
+              <p className="fs-400 fw-500 text-primary">Total Service Request</p>
             </div>
           </div>
           <div className="flex items-center gap-x-3 border-r border-[#00000059] lg:border-none">
@@ -42,8 +42,8 @@ const UsersHome = () => {
               className="circle w-[56px]"
             />
             <div>
-              <p className="text-lg fw-600">10</p>
-              <p className="fs-400 fw-500 text-primary">RH Services</p>
+              <p className="text-lg fw-600">0</p>
+              <p className="fs-400 fw-500 text-primary">Completed Services</p>
             </div>
           </div>
         </div>

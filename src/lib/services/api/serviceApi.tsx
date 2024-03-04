@@ -77,6 +77,18 @@ export const requestService = async (payload: ServiceRequestType) => {
     .then((response) => response.data);
 };
 
+export const getAvailableService = async (payload: string) => {
+  return axios
+    .get(`${ENDPOINT.GET_AVAILABLE_SERVICE}/${payload}`)
+    .then((response) => response.data);
+};
+
+export const selectServiceProvider = async (payload: string) => {
+  return axios
+    .post(`${ENDPOINT.SELECT_SERVICE_PROVIDER}/${payload}`)
+    .then((response) => response.data);
+};
+
 export const getPendingServices = async () => {
   return axios
     .get(`${ENDPOINT.GET_SERVICES}`)

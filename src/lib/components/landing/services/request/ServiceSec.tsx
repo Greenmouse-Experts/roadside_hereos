@@ -69,6 +69,7 @@ const ServiceSec: FC<Props> = ({ next, activeId }) => {
       color: data.car_color,
       location: data.location,
       zipcode: postal,
+      // zipcode: `100581`,
       requestNote: data.other,
       serviceId: activeId
     }

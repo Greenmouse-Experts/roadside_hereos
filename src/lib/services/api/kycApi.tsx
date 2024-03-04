@@ -30,6 +30,18 @@ axios.interceptors.response.use(
   }
 );
 
+export const getCompanyKyc = async(payload:string) => {
+  return axios
+    .get(`${ENDPOINT.GET_COMPANY_KYC}/${payload}`)
+    .then((response) => response.data);
+}
+
+export const getDriverKyc = async(payload:string) => {
+  return axios
+    .get(`${ENDPOINT.GET_DRIVER_KYC}/${payload}`)
+    .then((response) => response.data);
+}
+
 
 export const submitKyc = async (payload: kycProps) => {
   return axios
@@ -39,4 +51,10 @@ export const submitKyc = async (payload: kycProps) => {
 
 export const getKyc = async () => {
   return axios.get(`${ENDPOINT.GET_KYC}`).then((response) => response.data);
+};
+
+export const approveCompanyKyc = async (data:any, payload:any ) => {
+  return axios
+    .patch(`${ENDPOINT.APPROVE_COMPANY_KYC}/${data.id}/${data.userId}`, payload)
+    .then((response) => response.data);
 };

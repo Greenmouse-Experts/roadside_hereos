@@ -48,7 +48,7 @@ const UsersList: FC<Props> = ({ users }) => {
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.createdAt, {
-      id: "Joined at",
+      id: "Joined On",
       cell: (info) => <>{dayjs(info.getValue()).format("DD  MMMM YYYY")}</>,
       header: (info) => info.column.id,
     }),

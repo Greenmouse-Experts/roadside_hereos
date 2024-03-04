@@ -22,17 +22,19 @@ interface Props {
 const ProviderDashboardLayout: React.FC<Props> = ({ children }) => {
   const { user } = useAuth();
   const { Modal, setShowModal } = useModal();
+  const [toggled, setToggled] = React.useState(false);
+
   return (
     <>
       <div className="flex bg-light">
         <div className="lg:w-[250px]">
-          <SidebarLayout />
+          <SidebarLayout toggled={toggled} setToggled={setToggled}/>
         </div>
         <div className="w-full lg:w-[calc(100%_-_256px)] min-h-screen bg-light py-4 lg:py-9">
           <div className="">
-            <div className="h-[60px] relative index-30">
+            <div className="h-[60px] relative z-10">
               <div className="fixed top-0 w-full lg:w-[calc(100%_-_250px)] pl-3 lg:pl-9 pr-5 py-4 lg:py-[26px] bg-light flex items-center justify-between">
-              <RiMenu4Fill className='lg:hidden text-4xl' />
+              <RiMenu4Fill className='lg:hidden text-4xl' onClick={() => setToggled(true)}/>
                 <p className="fw-600 hidden lg:block">Company Dashboard</p>
                 <div className="flex gap-x-5 items-center">
                   <ProviderNotifyDrop/>

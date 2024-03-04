@@ -49,3 +49,7 @@ export const getInvite = async() => {
 export const getDriversDetail = async(payload:string) => {
   return  axios.get(`${ENDPOINT.GET_DRIVER_DETAILS}/${payload}`).then((response) => response.data)
 } 
+
+export const getStaffDetail = async(payload:any) => {
+  return  axios.get(`${ENDPOINT.GET_COMPANY_PROVIDERS}/${payload.proId}/${payload.stfId}`).then((response) => response.data)
+} 

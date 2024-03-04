@@ -36,7 +36,7 @@ const KycIndex = () => {
               color={activeStep === 0 ? "blue-gray" : "gray"}
               className="font-normal hidden lg:block"
             >
-              Organisation Information
+              Organization Information
             </Typography>
           </div>
         </Step>

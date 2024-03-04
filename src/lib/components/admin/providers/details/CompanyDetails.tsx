@@ -66,7 +66,7 @@ const CompanyDetails: FC<Props> = ({ data }) => {
           <div className="flex items-center gap-x-4 lg:gap-x-12">
             <div className="lg:w-2/12 border-l-2 border-orange-400 flex bg-primary text-white p-3 items-center gap-x-2">
               <BsCalendar4Week className="text-xl" />
-              <p>Joined At</p>
+              <p>Joined On</p>
             </div>
             <div>
               <p className="fw-600">

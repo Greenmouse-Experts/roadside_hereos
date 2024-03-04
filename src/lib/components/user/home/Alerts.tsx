@@ -42,10 +42,10 @@ const Alerts = () => {
                const colorIndex = index % colors.length;
                const color = colors[colorIndex];
             return (
-              <div className={`border-l-[5px] relative ${color} rounded-l-md p-3 mb-5`}>
+              <div className={`border-l-[5px] relative ${color} rounded-l-md p-2 pb-6 lg:p-3 mb-5`}>
                 <p className="fw-600">{item.title}</p>
                 <p>{item.desc}</p>
-                <p className="absolute fs-300 top-2 fw-600 text-primary right-2">{item.time}</p>
+                <p className="absolute fs-300  lg:top-2 fw-600 text-primary right-2">{item.time}</p>
               </div>
             );
           })}

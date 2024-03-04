@@ -20,12 +20,12 @@ const ProviderDetails = () => {
       content: <CompanyDetails data={data?.data} />,
     },
     {
-      title: <p>Company Providers</p>,
+      title: <p>Company Drivers</p>,
       content: <CompanyProviders id={`${id}`} />,
     },
     {
       title: <p>Company Kyc</p>,
-      content: <ViewKyc />,
+      content: <ViewKyc id={`${id}`} kyc={data?.data?.verified} refetch={refetch}/>,
     },
   ];
   return (
@@ -33,7 +33,9 @@ const ProviderDetails = () => {
       {isLoading && (
         <div className="py-12 flex justify-center items-center text-black">
           <div>
-            <CurveLoader />
+           <div className="flex justify-center">
+           <CurveLoader />
+           </div>
             <p className="text-center mt-5 fw-500">
               Fetching Provider Details...
             </p>

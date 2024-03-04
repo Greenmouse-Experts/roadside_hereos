@@ -15,7 +15,7 @@ const SidebarLayout = () => {
         <div className="py-6 text-center lg:pb-8">
           <Link to="/" className="block flex justify-center gap-x-1">
             <img
-              src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1706192917/rsh/Group_48097864_1_mopmlj.png"
+              src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1706192916/rsh/Group_48097863_txmkbr.png"
               alt="logo"
               className="w-10/12"
             />
@@ -26,7 +26,7 @@ const SidebarLayout = () => {
                 "https://res.cloudinary.com/greenmouse-tech/image/upload/v1701941410/Gleemora/Rectangle_20040_f4krjt.png"
               }
               alt="profile"
-              className="w-[70%] aspect-square border border-gray-400 mx-auto circle"
+              className="w-[70%] aspect-square object-cover border border-gray-400 mx-auto circle"
             />
           </div>
         </div>

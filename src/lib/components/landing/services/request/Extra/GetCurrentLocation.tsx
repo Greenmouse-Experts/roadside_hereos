@@ -1,4 +1,3 @@
-import axios from "axios";
 import { FC, useState } from "react";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import { FaMapLocationDot } from "react-icons/fa6";
@@ -34,24 +33,22 @@ const GetCurrentLocation: FC<Props> = ({ setValue, setPostal }) => {
     }
   };
   const fetchCoordinateDetails = async (data: GeolocationCoordinates) => {
-    await axios
-      .get(
-        `https://geocode.maps.co/reverse?lat=${data.latitude}&lon=${data.longitude}&api_key=65a902d846b9f544820502crw54f601`,
-        {
-          headers: {
-            Authorization: null,
-          },
-        }
-      )
-      .then((response) => {
-        response.data;
-        if (response.data) {
-          const data = response.data;
-          setIsBusy(false);
-          setValue(data.display_name);
-          setPostal(data.address.postcode);
-        }
+    try {
+      const response = await fetch(`https://geocode.maps.co/reverse?lat=${data.latitude}&lon=${data.longitude}&api_key=65a902d846b9f544820502crw54f601`, {
+        method: "GET",
       });
+
+      const result = await response.json();
+      if (result) {
+        toast.success(result?.message);
+        setIsBusy(false);
+          setValue(result?.display_name);
+          setPostal(result?.address.postcode);
+      }
+    } catch (error: any) {
+      setIsBusy(false)
+      toast.error(error.message);
+    }
   };
 
   return (
