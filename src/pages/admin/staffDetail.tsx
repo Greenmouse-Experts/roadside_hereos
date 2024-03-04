@@ -23,6 +23,8 @@ const StaffDetail = () => {
     queryKey: ["getStaffKyc"],
     queryFn: () => getDriverKyc(`${id}`),
   });
+  console.log(kyc);
+  
   return (
     <>
       <div>
