@@ -1,30 +1,25 @@
 import { FC, useState } from "react";
-import TextInput, { InputType } from "../../../ui/TextInput";
-import { ScaleSpinner } from "../../../ui/Loading";
-import Button from "../../../ui/Button";
-import { approveCompanyKyc } from "../../../../services/api/kycApi";
 import { toast } from "react-toastify";
+import { approveDriverKyc } from "../../../services/api/kycApi";
+import TextInput, { InputType } from "../../ui/TextInput";
+import Button from "../../ui/Button";
+import { ScaleSpinner } from "../../ui/Loading";
 
 interface Props {
   id: string;
-  userId: string;
   close: () => void;
   refetch: () => void;
 }
-const DisapproveKyc: FC<Props> = ({ id, userId, close, refetch }) => {
+const DisapproveDriverKyc: FC<Props> = ({ id, close, refetch }) => {
   const [reason, setReason] = useState("");
   const [isBusy, setIsBusy] = useState(false);
   const Suspend = async () => {
     setIsBusy(true);
-    const datas = {
-      id: id,
-      userId: userId,
-    };
     const payload = {
       approved: false,
       reason: reason,
     };
-    await approveCompanyKyc(datas, payload)
+    await approveDriverKyc(id, payload)
       .then((res) => {
         toast.success(res.message);
         close();
@@ -57,4 +52,4 @@ const DisapproveKyc: FC<Props> = ({ id, userId, close, refetch }) => {
   );
 };
 
-export default DisapproveKyc;
+export default DisapproveDriverKyc;

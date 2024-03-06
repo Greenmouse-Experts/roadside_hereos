@@ -34,7 +34,6 @@ axios.interceptors.response.use(
   }
 );
 
-
 export const createCategory = async (payload: CreateCatType) => {
   return axios
     .post(`${ENDPOINT.CREATE_CATEGORY}`, payload)
@@ -92,5 +91,11 @@ export const selectServiceProvider = async (payload: string) => {
 export const getPendingServices = async () => {
   return axios
     .get(`${ENDPOINT.GET_SERVICES}`)
+    .then((response) => response.data);
+};
+
+export const fetchAdminRequests = async (payload: string) => {
+  return axios
+    .get(`${ENDPOINT.ADMIN_GET_REQUESTS}?status=${payload}`)
     .then((response) => response.data);
 };

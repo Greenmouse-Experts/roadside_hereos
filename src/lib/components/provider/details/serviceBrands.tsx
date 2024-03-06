@@ -1,9 +1,12 @@
+import { FC } from "react";
 
-const ServiceBrands = () => {
-    const skill = ["Audi", "Toyota", "Lexus", "Hyundia", "Innoson"];
+interface Props{
+  brands: string[]
+}
+const ServiceBrands:FC<Props> = ({brands}) => {
     return (
       <>
-        {skill.map((item) => (
+        {!!brands?.length && brands?.map((item) => (
           <div className="flex gap-x-3 items-center mb-3" key={item}>
             <div className="relative">
               <div className="absolute w-4 h-4 circle bg-review -top-1 -left-1"></div>

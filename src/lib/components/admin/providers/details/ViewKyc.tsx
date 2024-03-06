@@ -18,7 +18,7 @@ interface Props {
   refetch: () => void;
 }
 const ViewKyc: FC<Props> = ({ id, kyc, refetch }) => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch:refetchKyc } = useQuery({
     queryKey: ["getCompanyKyc"],
     queryFn: () => getCompanyKyc(id),
   });
@@ -38,6 +38,7 @@ const ViewKyc: FC<Props> = ({ id, kyc, refetch }) => {
         toast.success(res.message);
         setShowModal(false);
         refetch();
+        refetchKyc()
       })
       .catch((err: any) => {
         toast.error(err.response.data.message);
@@ -59,6 +60,10 @@ const ViewKyc: FC<Props> = ({ id, kyc, refetch }) => {
         {!isLoading && data && (
           <div>
             <div className="flex gap-x-3 justify-end">
+              {data?.data?.isVerified === "0" && <div className="text-red-600 text-lg fw-600 flex items-center gap-x-2">
+                  <span className="w-3 h-3 circle bg-red-600 block"></span>{" "}
+                  Declined
+                </div>}
               {kyc === "1" ? (
                 <div className="text-green-600 text-lg fw-600 flex items-center gap-x-2">
                   <span className="w-3 h-3 circle bg-green-600 block"></span>{" "}
@@ -240,9 +245,9 @@ const ViewKyc: FC<Props> = ({ id, kyc, refetch }) => {
       <DisApproval title="Disapprove Comapny Kyc" size="sm">
         <DisapproveKyc
           id={data?.data?.id}
-          userId={data?.data?.userid}
+          userId={data?.data?.userId}
           close={() => SetDisApproval(false)}
-          refetch={refetch}
+          refetch={refetchKyc}
         />
       </DisApproval>
     </>

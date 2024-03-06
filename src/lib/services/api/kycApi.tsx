@@ -58,3 +58,9 @@ export const approveCompanyKyc = async (data:any, payload:any ) => {
     .patch(`${ENDPOINT.APPROVE_COMPANY_KYC}/${data.id}/${data.userId}`, payload)
     .then((response) => response.data);
 };
+
+export const approveDriverKyc = async (id:string, payload:any ) => {
+  return axios
+    .patch(`${ENDPOINT.APPROVE_DRIVER_KYC}/${id}`, payload)
+    .then((response) => response.data);
+};

@@ -1,8 +1,9 @@
+import SmallEmptyState from "../../ui/emptyState/smallEmptyState";
+
 const ServiceRendered = () => {
-    const skill = ["E-Fuel", "Battery Replacement", "Tire Change"];
     return (
       <>
-        {skill.map((item) => (
+        {/* {skill.map((item) => (
           <div className="flex gap-x-3 items-center mb-3" key={item}>
             <div className="relative">
               <div className="absolute w-4 h-4 circle bg-review -top-1 -left-1"></div>
@@ -10,7 +11,8 @@ const ServiceRendered = () => {
             </div>
             <p className="">Successfully rendered {item} to a user at All Drive Condo.</p>
           </div>
-        ))}
+        ))} */}
+        <SmallEmptyState msg="No Rendered Service Yet"/>
       </>
     );
   };

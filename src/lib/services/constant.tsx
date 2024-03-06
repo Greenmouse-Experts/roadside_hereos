@@ -42,6 +42,7 @@ export const SERVICE_REQUEST = '/service-request/service-information/create'
 export const GET_SERVICES = '/service-request/service-information/view'
 export const GET_AVAILABLE_SERVICE = `/service-quote/fetch-quotes`
 export const SELECT_SERVICE_PROVIDER = `/service-quote/select-driver-quote`
+export const ADMIN_GET_REQUESTS = `/service-request/admin-fetch-details`
 
 // routine endpoints
 export const UPLOAD_FILE = '/upload'
@@ -50,8 +51,9 @@ export const UPLOAD_FILE = '/upload'
 export const SUBMIT_KYC = '/kyc/service-company/save'
 export const GET_KYC = '/kyc/service-company/view'
 export const GET_COMPANY_KYC = '/kyc/service-company/fetch'
-export const GET_DRIVER_KYC = '/kyc/driver/fetch'
+export const GET_DRIVER_KYC = '/kyc/driver/fetch-details'
 export const APPROVE_COMPANY_KYC = '/kyc/document/approval'
+export const APPROVE_DRIVER_KYC = '/kyc/document/driver-approval'
 
 // company api
 export const EXTEND_INVITE = '/invitation-request/create'
@@ -61,3 +63,5 @@ export const GET_DRIVERS = '/users/get-drivers'
 export const GET_DRIVER_DETAILS = '/users/get-drivers'
 export const GET_ME = '/invitation-request/account'
 export const GET_USER_NOTIFY = '/notifications/user'
+export const SUSPEND_DRIVER = '/users/suspend-driver'
+export const UNSUSPEND_DRIVER = '/users/unsuspend-driver'

@@ -61,3 +61,7 @@ interface ServiceRequestItem {
     updatedAt: string;
   };
 }
+
+export interface ServiceRequestFull {
+  
+}

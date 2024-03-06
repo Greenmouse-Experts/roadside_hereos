@@ -111,7 +111,7 @@ const StaffDetail = () => {
                         Service Brands
                       </p>
                       <div className="px-4 py-3">
-                        <ServiceBrands />
+                        <ServiceBrands brands={data?.data?.brands}/>
                       </div>
                     </div>
                     <div className="border-r-2 h-full">
@@ -132,33 +132,33 @@ const StaffDetail = () => {
                         <p className="w-3/12 text-gray-600 shrink-0">
                           Service Area:
                         </p>
-                        <p className="fw-500">4012333</p>
+                        <p className="fw-500">{data?.data?.service_area}</p>
                       </div>
                       <div className="flex items-center">
                         <p className="w-3/12 shrink-0 text-gray-600 ">
                           Account Name:
                         </p>
-                        <p className="fw-500">Poile Unbartu</p>
+                        <p className="fw-500">{data?.data?.account_name}</p>
                       </div>
                       <div className="flex items-center">
                         <p className="w-3/12 shrink-0 text-gray-600 ">
                           Account Number:
                         </p>
-                        <p className="fw-500">3933330333</p>
+                        <p className="fw-500">{data?.data?.account_number}</p>
                       </div>
                       <div className="flex items-center">
                         <p className="w-3/12 shrink-0 text-gray-600 ">
                           Bank Name:
                         </p>
-                        <p className="fw-500">Internatinale</p>
+                        <p className="fw-500">{data?.data?.bank_name}</p>
                       </div>
                       <div className="flex items-center">
                         <p className="w-3/12 shrink-0 text-gray-600 ">
                           Routing Number:
                         </p>
-                        <p className="fw-500">4343242222</p>
+                        <p className="fw-500">{data?.data?.routing_number}</p>
                       </div>
-                      <div className="flex">
+                      {/* <div className="flex">
                         <p className="w-3/12 shrink-0 text-gray-600 ">
                           Service Fees:
                         </p>
@@ -166,7 +166,7 @@ const StaffDetail = () => {
                           <p>E-Fuel - $45</p>
                           <p>Towing - $55</p>
                         </div>
-                      </div>
+                      </div> */}
                     </div>
                   </div>
                 </div>

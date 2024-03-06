@@ -53,3 +53,19 @@ export const getDriversDetail = async(payload:string) => {
 export const getStaffDetail = async(payload:any) => {
   return  axios.get(`${ENDPOINT.GET_COMPANY_PROVIDERS}/${payload.proId}/${payload.stfId}`).then((response) => response.data)
 } 
+
+export const getDriversKyc = async(payload:string) => {
+  return  axios.get(`${ENDPOINT.GET_DRIVER_KYC}/${payload}`).then((response) => response.data)
+} 
+
+export const suspendDriver = async (id:string) => {
+  return axios
+    .post(`${ENDPOINT.SUSPEND_USER}/${id}`)
+    .then((response) => response.data);
+};
+
+export const unsuspendDriver = async (payload:string) => {
+  return axios
+    .post(`${ENDPOINT.UNSUSPEND_DRIVER}/${payload}`)
+    .then((response) => response.data);
+}
