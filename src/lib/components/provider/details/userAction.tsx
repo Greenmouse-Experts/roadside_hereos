@@ -13,12 +13,14 @@ import useModal from "../../../hooks/useModal";
 import { useMutation } from "@tanstack/react-query";
 import ReusableModal from "../../ui/ReusableModal";
 import { suspendDriver, unsuspendDriver } from "../../../services/api/companyApi";
+import { FormatStatus } from "../../../utils";
 
   interface Props {
     id: string
     refetch: () => void
+    suspended: boolean
   }
-const UserAction:FC<Props> = ({id, refetch}) => {
+const UserAction:FC<Props> = ({id, refetch, suspended}) => {
    const { Modal: Suspend, setShowModal: ShowSuspend } = useModal();
   const { Modal: Unsuspend, setShowModal: ShowUnsuspend } = useModal();
   const [isBusy, setIsBusy] = useState(false);
@@ -60,7 +62,8 @@ const UserAction:FC<Props> = ({id, refetch}) => {
   };
   return (
     <>
-        <div>
+        <div className="flex items-center gap-x-2">
+        {suspended ? FormatStatus["inactive"] : FormatStatus["active"]}
         <Menu placement="bottom-end">
             <MenuHandler>
               <Button className="bg-transparent px-0 mx-0 hover:shadow-none text-md flex items-center font-normal shadow-none capitalize">
@@ -68,12 +71,18 @@ const UserAction:FC<Props> = ({id, refetch}) => {
               </Button>
             </MenuHandler>
             <MenuList className="">
-              <MenuItem
+              {!suspended && <MenuItem
                 className="my-1 fw-500 flex items-center gap-x-2 pt-1"
                 onClick={() => suspendAction()}
               >
                 <BsArrowsExpand/> Suspend User
-              </MenuItem>
+              </MenuItem>}
+              {suspended && <MenuItem
+                className="my-1 fw-500 flex items-center gap-x-2 pt-1"
+                onClick={() => UnsuspendAction()}
+              >
+                <BsArrowsExpand/> Unuspend User
+              </MenuItem>}
             </MenuList>
           </Menu>
         </div>

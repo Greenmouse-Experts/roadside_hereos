@@ -47,21 +47,17 @@ const StaffList: FC<Props> = ({data}) => {
       cell: (info) => <>{info.getValue()}</>,
       header: (info) => info.column.id,
     }),
-    // columnHelper.accessor((row) => row.skill, {
-    //   id: "Service Category",
-    //   cell: (info) => <>{info.getValue().map((item:string) => <p className="flex gap-x-1 items-center fs-500 fw-500"><span className="w-2 h-2 circle bg-orange-500"></span>{item}</p>)}</>,
-    //   header: (info) => info.column.id,
-    // }),
+    // colu
     columnHelper.accessor((row) => row.createdAt, {
       id: "Joined On",
       cell: (info) => <>{dayjs(info.getValue()).format("DD  MMMM YYYY")}</>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.isActive, {
+    columnHelper.accessor((row) => row.isSuspended, {
       id: "Status",
       cell: (info) => (
         <>
-          {info.getValue() ? FormatStatus["active"] : FormatStatus["inactive"]}
+          {info.getValue() ? FormatStatus["inactive"] : FormatStatus["active"]}
         </>
       ),
       header: (info) => info.column.id,

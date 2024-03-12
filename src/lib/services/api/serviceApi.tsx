@@ -76,6 +76,24 @@ export const requestService = async (payload: ServiceRequestType) => {
     .then((response) => response.data);
 };
 
+export const sendProfileInfo = async (payload: any) => {
+  return axios
+    .post(`${ENDPOINT.SEND_PROFILE_INFO}`, payload)
+    .then((response) => response.data);
+};
+
+export const getServiceQoutes = async (payload:string) => {
+  return axios
+    .get(`${ENDPOINT.GET_SERVICE_QOUTES}/${payload}`)
+    .then((response) => response.data);
+};
+
+export const selectThisQoute = async (id:string) => {
+  return axios
+    .get(`${ENDPOINT.SELECT_QOUTE}/${id}`)
+    .then((response) => response.data);
+};
+
 export const getAvailableService = async (payload: string) => {
   return axios
     .get(`${ENDPOINT.GET_AVAILABLE_SERVICE}/${payload}`)

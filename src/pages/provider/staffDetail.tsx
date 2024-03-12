@@ -33,7 +33,7 @@ const StaffDetail = () => {
       approved: true,
       reason: "",
     };
-    await approveDriverKyc(data?.data?.id, payload)
+    await approveDriverKyc(kyc?.data?.id, payload)
       .then((res) => {
         toast.success(res.message);
         setShowModal(false);
@@ -67,7 +67,7 @@ const StaffDetail = () => {
                 <ProfileAvatar name={`${data?.data.fname} ${data?.data.lname}`} url={data?.data.photo} size={140} font={27}/>
               </div>
               <div>
-                <UserAction refetch={refetch} id={data?.data.id}/>
+                <UserAction refetch={refetch} id={data?.data.id} suspended={data?.data.isSuspended}/>
               </div>
             </div>
             <div className="px-6 realive mt-10 grid lg:grid-cols-3">

@@ -59,8 +59,11 @@ export const getDriversKyc = async(payload:string) => {
 } 
 
 export const suspendDriver = async (id:string) => {
+  const payload = {
+    reason: ''
+  }
   return axios
-    .post(`${ENDPOINT.SUSPEND_USER}/${id}`)
+    .post(`${ENDPOINT.SUSPEND_DRIVER}/${id}`, payload )
     .then((response) => response.data);
 };
 

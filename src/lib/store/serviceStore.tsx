@@ -1,36 +1,36 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-interface Props{
-    request: requestProps;
-    saveRequest: (data: requestProps) => void;
-    clearRequest: () => void;
+interface Props {
+  request: requestProps;
+  saveRequest: (data: requestProps) => void;
+  clearRequest: () => void;
 }
-interface requestProps{
-    firstName: string;
-    lastName: string;
-    email: string;
-    phone: string;
-    serviceId: string;
-    location: string;
-    price: string;
-    homeAddress: string;
+interface requestProps {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  location: string;
+  price: string;
+  homeAddress: string;
 }
 const requestInitState = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    phone: '',
-    serviceId: '',
-    location: '',
-    price: '',
-    homeAddress: '',
-}
+  id: "",
+  firstName: "",
+  lastName: "",
+  email: "",
+  phone: "",
+  location: "",
+  price: "",
+  homeAddress: "",
+};
 const useRequestStore = create<Props>()(
   persist(
     (set) => ({
       request: requestInitState,
-      saveRequest: (data:requestProps) =>
+      saveRequest: (data: requestProps) =>
         set(() => ({
           request: data,
         })),
@@ -40,9 +40,9 @@ const useRequestStore = create<Props>()(
         })),
     }),
     {
-        name: "rsh_service",
-        storage: createJSONStorage(() => localStorage),
-      }
+      name: "rsh_service",
+      storage: createJSONStorage(() => sessionStorage),
+    }
   )
 );
 

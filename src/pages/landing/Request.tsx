@@ -2,9 +2,27 @@ import { BsClock } from "react-icons/bs";
 import RequestForm from "../../lib/components/landing/services/RequestForm";
 import LandingLayout from "../../lib/components/layout/landing";
 import { useParams } from "react-router-dom";
+import { getCategories } from "../../lib/services/api/serviceApi";
+import { ServiceCatItem } from "../../lib/types/service";
+import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const RequestPage = () => {
   const {id} = useParams()
+  const { data: service } = useQuery({
+    queryKey: ["getCat"],
+    queryFn: getCategories,
+  });
+  const [active, setActive] = useState<ServiceCatItem>()
+  const getActiveService = () => {
+    const activeService = service?.data?.filter((where:ServiceCatItem) => where.id === id)
+    setActive(activeService[0])
+  }
+  useEffect(() => {
+    if(service){
+      getActiveService()
+    }
+  }, [service])
   return (
     <>
       <LandingLayout>
@@ -29,7 +47,8 @@ const RequestPage = () => {
           <div className="section">
             <div className="box">
               <div className="lg:w-11/12 mx-auto">
-                <RequestForm activeId={`${id}`}/>
+                <p className="mb-4 text-lg lg:text-3xl fw-600">Service: {active?.name}</p>
+                {active && <RequestForm activeId={`${id}`} activeQuestion={active?.questionNote}/>}
               </div>
             </div>
           </div>

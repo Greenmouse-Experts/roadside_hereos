@@ -9,9 +9,10 @@ import { MdMiscellaneousServices } from 'react-icons/md';
 import ProviderList from './request/ProviderList';
 
 interface Props{
-  activeId: string
+  activeId: string,
+  activeQuestion: string,
 }
-const RequestForm:FC<Props> = ({activeId}) => {
+const RequestForm:FC<Props> = ({activeId, activeQuestion}) => {
     const [activeStep, setActiveStep] = React.useState(0);
     const [isLastStep, setIsLastStep] = React.useState(false);
     const [isFirstStep, setIsFirstStep] = React.useState(false);
@@ -98,7 +99,7 @@ const RequestForm:FC<Props> = ({activeId}) => {
         </Stepper>
         </div>
         <div className="mt-24 lg:px-4">
-          {activeStep === 0 && <ServiceSec next={() => handleNext()} activeId={activeId}/>}
+          {activeStep === 0 && <ServiceSec next={() => handleNext()} activeId={activeId} activeQuestion={activeQuestion}/>}
           {activeStep === 1 && <PersonalSec prev={() => handlePrev()} next={() => handleNext()}/>}
           {activeStep === 2 && <ProviderList prev={() => handlePrev()} next={() => handleNext()}/>}
           {activeStep === 3 && <PaymentSec prev={() => handlePrev()}/>}

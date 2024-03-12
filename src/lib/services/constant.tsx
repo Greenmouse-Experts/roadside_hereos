@@ -38,11 +38,16 @@ export const ADMIN_CATEGORY = '/services/view'
 export const EDIT_CATEGORY = '/services/update'
 export const PUBLISH_CATEGORY = '/services/publish-unpublish'
 export const DELETE_CATEGORY = '/services/action'
-export const SERVICE_REQUEST = '/service-request/service-information/create'
 export const GET_SERVICES = '/service-request/service-information/view'
 export const GET_AVAILABLE_SERVICE = `/service-quote/fetch-quotes`
 export const SELECT_SERVICE_PROVIDER = `/service-quote/select-driver-quote`
 export const ADMIN_GET_REQUESTS = `/service-request/admin-fetch-details`
+
+// service request
+export const SERVICE_REQUEST = '/service-request/service-information/create'
+export const SEND_PROFILE_INFO = `/service-request/profile-information/create`
+export const GET_SERVICE_QOUTES = `/service-quote/fetch-quotes`
+export const SELECT_QOUTE = `/service-quote/select-driver-quote`
 
 // routine endpoints
 export const UPLOAD_FILE = '/upload'

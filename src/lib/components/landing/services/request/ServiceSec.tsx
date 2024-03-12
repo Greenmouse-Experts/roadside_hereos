@@ -5,36 +5,26 @@ import TextInput, { InputType } from "../../../ui/TextInput";
 import { Button } from "@material-tailwind/react";
 import { carsList } from "../../../../services/hardData/cars";
 import GetCurrentLocation from "./Extra/GetCurrentLocation";
-import { getCategories, requestService } from "../../../../services/api/serviceApi";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { ServiceCatItem } from "../../../../types/service";
+import { requestService } from "../../../../services/api/serviceApi";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
+import useRequestStore from "../../../../store/serviceStore";
 
 interface Props {
   next: () => void;
   prev?: () => void;
-  activeId: string
+  activeId: string;
+  activeQuestion: string;
 }
-const ServiceSec: FC<Props> = ({ next, activeId }) => {
-  const { data: service } = useQuery({
-    queryKey: ["getCat"],
-    queryFn: getCategories,
-  });
-  const [activeQuestion, setActiveQuestion] = useState('')
-  const getActiveService = () => {
-    const active = service.data.filter((where:ServiceCatItem) => where.id === activeId)
-    setActiveQuestion(active[0].questionNote)
-  }
-  useEffect(() => {
-    getActiveService()
-  }, [])
+const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
+  const saveServiceId = useRequestStore((state) => state.saveRequest)
   const [location, setLocation] = useState('')
   const [postal, setPostal] = useState('')
   const [isBusy, setIsBusy] = useState(false)
   useEffect(() => {
     reset({
-      ...getValues,
+      ...getValues(),
       location: location
     })
   },[location])
@@ -74,8 +64,18 @@ const ServiceSec: FC<Props> = ({ next, activeId }) => {
       serviceId: activeId
     }
     request.mutate(payload, {
-      onSuccess: () => {
+      onSuccess: (data) => {
         setIsBusy(false)
+        saveServiceId({
+          id: data.data.id,
+          firstName: "",
+          lastName: "",
+          email: "",
+          phone: "",
+          location: data?.data?.zipcode,
+          price: "",
+          homeAddress: "",
+        })
         next();
       },
       onError: () => {

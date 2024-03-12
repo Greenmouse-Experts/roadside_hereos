@@ -4,16 +4,20 @@ import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import { Button } from "@material-tailwind/react";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
-import { FC } from "react";
+import { FC, useState } from "react";
 import useRequestStore from "../../../../store/serviceStore";
+import { useMutation } from "@tanstack/react-query";
+import { sendProfileInfo } from "../../../../services/api/serviceApi";
+import { toast } from "react-toastify";
+import { BeatLoader } from "react-spinners";
 
 interface Props {
-    next: () => void
-    prev: () => void
+  next: () => void;
+  prev: () => void;
 }
-const PersonalSec:FC<Props> = ({next, prev}) => {
-  const requestInfo = useRequestStore((store) => store.request)
-  const saveRequest = useRequestStore((state) => state.saveRequest)
+const PersonalSec: FC<Props> = ({ next, prev }) => {
+  const requestInfo = useRequestStore((store) => store.request);
+  const saveRequest = useRequestStore((state) => state.saveRequest);
   const {
     control,
     handleSubmit,
@@ -28,63 +32,86 @@ const PersonalSec:FC<Props> = ({next, prev}) => {
       address: "",
     },
   });
-  const handleForm = (data:any) => {
-    saveRequest({
-      ...requestInfo,
-      firstName: data.first_name,
-      lastName: data.last_name,
+  const [isBusy, setIsBusy] = useState(false);
+  const request = useMutation({
+    mutationFn: sendProfileInfo,
+    mutationKey: ["send-profile"],
+  });
+  const handleForm = (data: any) => {
+    setIsBusy(true);
+    const payload = {
+      request_id: requestInfo.id,
+      first_name: data.first_name,
+      last_name: data.last_name,
       email: data.email,
-      homeAddress: data.address,
-      phone: data.phone
+      phone: data.phone,
+      address: data.address,
+    };
+    request.mutate(payload, {
+      onSuccess: () => {
+        setIsBusy(false)
+        saveRequest({
+          ...requestInfo,
+          firstName: data.first_name,
+          lastName: data.last_name,
+          email: data.email,
+          homeAddress: data.address,
+          phone: data.phone,
+        });
+        next();
+      },
+      onError: (err:any) => {
+        setIsBusy(false)
+        toast.error(err?.response?.data?.message)
+      }
     })
-    next()
-  }
+  };
   return (
     <>
       <div className="bg-gray-100 lg:p-10 lg:pb-20 p-4 pb-8 rounded-md">
         <form onSubmit={handleSubmit(handleForm)}>
           <div className="grid gap-3">
             <div className="grid lg:grid-cols-2 gap-x-4 gap-y-3">
-            <Controller
-              name="first_name"
-              control={control}
-              rules={{
-                required: {
-                  value: true,
-                  message: "Please enter a value",
-                },
-              }}
-              render={({ field }) => (
-                <TextInput
-                  label="First Name"
-                  labelClassName="text-[#000000B2] fw-500"
-                  error={errors.first_name?.message}
-                  type={InputType.text}
-                  {...field}
-                  ref={null}
-                />
-              )}
-            />
-            <Controller
-              name="last_name"
-              control={control}
-              rules={{
-                required: {
-                  value: true,
-                  message: "Please enter a value",
-                },
-              }}
-              render={({ field }) => (
-                <TextInput
-                  label="Last Name"
-                  labelClassName="text-[#000000B2] fw-500"
-                  error={errors.last_name?.message}
-                  type={InputType.text}
-                  {...field}
-                  ref={null}
-                />
-              )}
-            />
+              <Controller
+                name="first_name"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Please enter a value",
+                  },
+                }}
+                render={({ field }) => (
+                  <TextInput
+                    label="First Name"
+                    labelClassName="text-[#000000B2] fw-500"
+                    error={errors.first_name?.message}
+                    type={InputType.text}
+                    {...field}
+                    ref={null}
+                  />
+                )}
+              />
+              <Controller
+                name="last_name"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Please enter a value",
+                  },
+                }}
+                render={({ field }) => (
+                  <TextInput
+                    label="Last Name"
+                    labelClassName="text-[#000000B2] fw-500"
+                    error={errors.last_name?.message}
+                    type={InputType.text}
+                    {...field}
+                    ref={null}
+                  />
+                )}
+              />
             </div>
             <div className="grid lg:grid-cols-2 gap-x-4 gap-y-3">
               <Controller
@@ -157,14 +184,17 @@ const PersonalSec:FC<Props> = ({next, prev}) => {
             </div>
           </div>
           <div className="mt-16 flex justify-between">
-           <Button
+            <Button
               onClick={prev}
               className="btn-feel flex gap-x-2 items-center"
             >
               <FaArrowLeftLong /> Prev
             </Button>
-            <Button type={'submit'} className="btn-feel flex gap-x-2 items-center">
-                Next <FaArrowRightLong/>
+            <Button
+              type={"submit"}
+              className="btn-feel flex gap-x-2 items-center"
+            >
+              {isBusy? <BeatLoader size={13}/> : <>Next <FaArrowRightLong /></>}
             </Button>
           </div>
         </form>
