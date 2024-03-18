@@ -4,6 +4,7 @@ import CallOutMenu from "./CallOut";
 import { AiOutlineClose } from "react-icons/ai";
 import { NAV_LIST } from "./Routes";
 import { Link, useLocation } from "react-router-dom";
+import useAuth from "../../../../hooks/authUser";
 
 interface Props {
   fixed?: boolean;
@@ -11,6 +12,12 @@ interface Props {
 const Header: FC<Props> = ({ fixed }) => {
   const [showMenu, setShowMenu] = useState(false);
   const { pathname } = useLocation();
+  const { isLoggedIn, userType } = useAuth();
+  const formatUserRoute = {
+    professional: "/provider",
+    private_client: "/user",
+    admin: "/admin",
+  };
   return (
     <>
       <div
@@ -20,14 +27,14 @@ const Header: FC<Props> = ({ fixed }) => {
       >
         <div className="box">
           <div className="flex items-center justify-between">
-            <Link to='/'>
-            <img
-              src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1706192916/rsh/Group_48097863_txmkbr.png"
-              alt="logo"
-              width={100}
-              height={60}
-              className="lg:w-[190px] w-36"
-            />
+            <Link to="/">
+              <img
+                src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1706192916/rsh/Group_48097863_txmkbr.png"
+                alt="logo"
+                width={100}
+                height={60}
+                className="lg:w-[190px] w-36"
+              />
             </Link>
             <div className="lg:w-8/12 xl:w-7/12 2xl:w-6/12 lg:flex hidden justify-between">
               <ul className="flex gap-x-12 items-center justify-between">
@@ -47,11 +54,29 @@ const Header: FC<Props> = ({ fixed }) => {
                 ))}
               </ul>
               <ul>
-                <li>
-                  <Link to="/auth/login" className="btn-feel px-5 py-2 whitespace-nowrap">
+                {isLoggedIn ? (
+                  <li>
+                    <Link
+                      to={
+                        formatUserRoute[
+                          userType as keyof typeof formatUserRoute
+                        ]
+                      }
+                      className="btn-feel px-5 py-2 whitespace-nowrap"
+                    >
+                      Dashboard
+                    </Link>
+                  </li>
+                ) : (
+                  <li>
+                    <Link
+                      to="/auth/login"
+                      className="btn-feel px-5 py-2 whitespace-nowrap"
+                    >
                       Sign in
-                  </Link>
-                </li>
+                    </Link>
+                  </li>
+                )}
               </ul>
             </div>
             <div className="lg:hidden mb-2">

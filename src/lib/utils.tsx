@@ -21,7 +21,7 @@ export const capitalizeFirstLetter = (string: string) => {
   
   export const formatAsNgnMoney = (value: number | string) => {
     if (!value) return '';
-    return `₦${value
+    return `$${value
       .toLocaleString('en-US')
       .replace(/\B(?=(\d{3})+(?!\d))/g, ',')}`;
   };

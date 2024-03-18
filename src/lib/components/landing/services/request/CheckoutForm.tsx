@@ -1,16 +1,20 @@
-import { Button } from '@material-tailwind/react';
-import {useStripe, useElements, PaymentElement} from '@stripe/react-stripe-js';
-import { FC } from 'react';
-import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6';
+import { Button } from "@material-tailwind/react";
+import {
+  useStripe,
+  useElements,
+  PaymentElement,
+} from "@stripe/react-stripe-js";
+import { FC } from "react";
+import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 
 interface Props {
-    prev: () => void
+  prev: () => void;
 }
-const CheckoutForm:FC<Props> = ({prev}) => {
+const CheckoutForm: FC<Props> = ({ prev }) => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const handleSubmit = async (event:any) => {
+  const handleSubmit = async (event: any) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
@@ -41,23 +45,17 @@ const CheckoutForm:FC<Props> = ({prev}) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <PaymentElement/>
+      <PaymentElement />
       <div className="mt-16 flex justify-between">
-            <Button
-              onClick={prev}
-              className="btn-feel flex gap-x-2 items-center"
-            >
-              <FaArrowLeftLong /> Prev
-            </Button>
-            <Button
-              type={"submit"}
-              className="btn-feel flex gap-x-2 items-center"
-            >
-              Next <FaArrowRightLong />
-            </Button>
-          </div>
+        <Button onClick={prev} className="btn-feel flex gap-x-2 items-center">
+          <FaArrowLeftLong /> Prev
+        </Button>
+        <Button type={"submit"} className="btn-feel flex gap-x-2 items-center">
+          Next <FaArrowRightLong />
+        </Button>
+      </div>
     </form>
-  )
+  );
 };
 
 export default CheckoutForm;

@@ -64,6 +64,12 @@ export const getCategories = async () => {
     .then((response) => response.data);
 };
 
+export const getCompanyCategories = async () => {
+  return axios
+    .get(`${ENDPOINT.GET_COMPANY_SERVICES}`)
+    .then((response) => response.data);
+};
+
 export const getAdminCategories = async () => {
   return axios
     .get(`${ENDPOINT.ADMIN_CATEGORY}`)
@@ -90,7 +96,19 @@ export const getServiceQoutes = async (payload:string) => {
 
 export const selectThisQoute = async (id:string) => {
   return axios
-    .get(`${ENDPOINT.SELECT_QOUTE}/${id}`)
+    .post(`${ENDPOINT.SELECT_QOUTE}/${id}`)
+    .then((response) => response.data);
+};
+
+export const initiatePay = async (id: string) => {
+  return axios
+    .post(`${ENDPOINT.INITIATE_PAYMENT}/${id}`)
+    .then((response) => response.data);
+};
+
+export const confirmPay = async (payload:any) => {
+  return axios
+    .post(`${ENDPOINT.CONFIRM_PAYMENT}`, payload)
     .then((response) => response.data);
 };
 
@@ -117,3 +135,5 @@ export const fetchAdminRequests = async (payload: string) => {
     .get(`${ENDPOINT.ADMIN_GET_REQUESTS}?status=${payload}`)
     .then((response) => response.data);
 };
+
+

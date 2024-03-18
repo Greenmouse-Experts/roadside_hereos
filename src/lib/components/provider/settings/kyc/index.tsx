@@ -76,7 +76,7 @@ const KycIndex = () => {
         </Step>
       </Stepper>
       </div>
-      <div className="mt-24 px-4">
+      <div className="mt-24 lg:px-4">
         {activeStep === 0 && <GeneralInfo next={handleNext}/>}
         {activeStep === 1 && <ServiceInfo prev={handlePrev} next={handleNext}/>}
         {activeStep === 2 && <BankInfo prev={handlePrev}/>}

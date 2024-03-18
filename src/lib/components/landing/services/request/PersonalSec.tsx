@@ -140,7 +140,7 @@ const PersonalSec: FC<Props> = ({ next, prev }) => {
                 </label>
                 <PhoneInputWithCountry
                   international
-                  defaultCountry="NG"
+                  defaultCountry="US"
                   name="phone"
                   control={control}
                   rules={{

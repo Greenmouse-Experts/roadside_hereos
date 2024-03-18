@@ -28,6 +28,7 @@ export interface kycProps{
     bank_account_name:string;
     account_type:string;
     routing_number: string;
+    isVerified: string;
 }
 const kycInitState = {
     business_name:  "",
@@ -51,6 +52,7 @@ const kycInitState = {
     bank_account_name: "",
     account_type: "",
     routing_number:  "",
+    isVerified: ""
 }
 const useKycStore = create<Props>()(
   persist(

@@ -2,6 +2,7 @@ import { useState } from "react";
 import SecuritySetting from "../../lib/components/admin/settings/Security";
 import KycIndex from "../../lib/components/provider/settings/kyc";
 import MyProfileSettings from "../../lib/components/provider/settings/MyProfile";
+import ServicesAdded from "../../lib/components/provider/settings/Services";
 
 const ProviderSettings = () => {
   const [active, setActive] = useState(1);
@@ -33,10 +34,18 @@ const ProviderSettings = () => {
                   KYC
                 </li>
                 <li
-                  className={`cursor-pointer px-4 py-2  whitespace-nowrap rounded-lg hover:scale-105 duration-100 hover:bg-white ${
+                  className={`cursor-pointer px-4 py-2  whitespace-nowrap rounded-lg hover:scale-105 duration-100 ${
                     active === 3 && "bg-white fw-600"
                   }`}
                   onClick={() => handleActive(3)}
+                >
+                  Services
+                </li>
+                <li
+                  className={`cursor-pointer px-4 py-2  whitespace-nowrap rounded-lg hover:scale-105 duration-100 hover:bg-white ${
+                    active === 4 && "bg-white fw-600"
+                  }`}
+                  onClick={() => handleActive(4)}
                 >
                   Security
                 </li>
@@ -45,7 +54,8 @@ const ProviderSettings = () => {
             <div className="lg:w-[83%] pt-6 lg:pt-0">
               {active === 1 && <MyProfileSettings />}
               {active ===2 && <KycIndex/>}
-              {active === 3 && <SecuritySetting />}
+              {active ===3 && <ServicesAdded/>}
+              {active === 4 && <SecuritySetting />}
             </div>
           </div>
         </div>

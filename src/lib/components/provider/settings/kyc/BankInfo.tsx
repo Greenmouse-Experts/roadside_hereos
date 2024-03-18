@@ -15,6 +15,7 @@ const BankInfo:FC<Props> = ({prev}) => {
   const [isBusy, setIsBusy] = useState(false)
   const kyc = useKycStore((state) => state.kyc);
   const saveKyc =  useKycStore((state) => state.saveKyc);
+  const isDisabled = kyc.isVerified === "1"? true : false
   const {
     control,
     handleSubmit,
@@ -58,7 +59,7 @@ const BankInfo:FC<Props> = ({prev}) => {
     <>
       <div className="bg-gray-100 p-4 pb-8 rounded-md">
         <form onSubmit={handleSubmit(onSubmit)}>
-          <div className="grid grid-cols-2 gap-x-4">
+          <div className="grid lg:grid-cols-2 gap-x-4">
             <Controller
               name="bank_name"
               control={control}
@@ -68,6 +69,7 @@ const BankInfo:FC<Props> = ({prev}) => {
                   message: "Please enter an input",
                 },
               }}
+              disabled={isDisabled}
               render={({ field }) => (
                 <TextInput
                   label="Bank Name"
@@ -88,6 +90,7 @@ const BankInfo:FC<Props> = ({prev}) => {
                   message: "Please enter an input",
                 },
               }}
+              disabled={isDisabled}
               render={({ field }) => (
                 <TextInput
                   label="Routing Number"
@@ -108,6 +111,7 @@ const BankInfo:FC<Props> = ({prev}) => {
                   message: "Please enter an input",
                 },
               }}
+              disabled={isDisabled}
               render={({ field }) => (
                 <TextInput
                   label="Account Name"
@@ -128,6 +132,7 @@ const BankInfo:FC<Props> = ({prev}) => {
                   message: "Please enter an input",
                 },
               }}
+              disabled={isDisabled}
               render={({ field }) => (
                 <TextInput
                   label="Account Number"
@@ -147,7 +152,8 @@ const BankInfo:FC<Props> = ({prev}) => {
                   value: true,
                   message: "Please enter an input",
                 },
-              }}
+              }} 
+              disabled={isDisabled}
               render={({ field }) => (
                 <TextInput
                   label="Account Type"

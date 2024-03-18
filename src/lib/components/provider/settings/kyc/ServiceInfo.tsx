@@ -13,6 +13,7 @@ interface Props {
 const ServiceInfo: FC<Props> = ({ prev, next }) => {
   const kyc = useKycStore((state) => state.kyc);
   const saveKyc =  useKycStore((state) => state.saveKyc);
+  const isDisabled = kyc.isVerified === "1"? true : false
   const {
     control,
     handleSubmit,
@@ -50,6 +51,7 @@ const ServiceInfo: FC<Props> = ({ prev, next }) => {
                   message: "Please enter a value",
                 },
               }}
+              disabled={isDisabled}
               render={({ field }) => (
                 <TextInput
                   label="Full Name"
@@ -70,6 +72,7 @@ const ServiceInfo: FC<Props> = ({ prev, next }) => {
                   message: "Please enter a value",
                 },
               }}
+              disabled={isDisabled}
               render={({ field }) => (
                 <TextInput
                   label="Designation"
@@ -90,6 +93,7 @@ const ServiceInfo: FC<Props> = ({ prev, next }) => {
                   message: "Please enter a value",
                 },
               }}
+              disabled={isDisabled}
               render={({ field }) => (
                 <TextInput
                   label="Email"
@@ -110,6 +114,7 @@ const ServiceInfo: FC<Props> = ({ prev, next }) => {
                 defaultCountry="NG"
                 name="phone"
                 control={control}
+                disabled={isDisabled}
                 rules={{
                   required: true,
                   pattern: {

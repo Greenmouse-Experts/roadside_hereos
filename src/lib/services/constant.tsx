@@ -42,12 +42,15 @@ export const GET_SERVICES = '/service-request/service-information/view'
 export const GET_AVAILABLE_SERVICE = `/service-quote/fetch-quotes`
 export const SELECT_SERVICE_PROVIDER = `/service-quote/select-driver-quote`
 export const ADMIN_GET_REQUESTS = `/service-request/admin-fetch-details`
+export const GET_COMPANY_SERVICES = `/company/services`
 
 // service request
 export const SERVICE_REQUEST = '/service-request/service-information/create'
 export const SEND_PROFILE_INFO = `/service-request/profile-information/create`
 export const GET_SERVICE_QOUTES = `/service-quote/fetch-quotes`
 export const SELECT_QOUTE = `/service-quote/select-driver-quote`
+export const INITIATE_PAYMENT = `/service-quote/pay-selected-quote`
+export const CONFIRM_PAYMENT = `/service-quote/pay-selected-quote/verify-selected-quote`
 
 // routine endpoints
 export const UPLOAD_FILE = '/upload'

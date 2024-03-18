@@ -12,6 +12,7 @@ import { uploadFile } from "../../../../services/api/routineApi";
 import { toast } from "react-toastify";
 import { getKyc } from "../../../../services/api/kycApi";
 import { FaCircleInfo } from "react-icons/fa6";
+import dayjs from "dayjs";
 
 interface Props {
   next: () => void;
@@ -24,7 +25,8 @@ const GeneralInfo: FC<Props> = ({ next }) => {
   const [uploading, setUploading] = useState(0);
   const [bizCert, setbizCert] = useState<Array<File>>();
   const [sending, setSending] = useState(0);
-  const [showTip, setShowTip] = useState(false)
+  const [showTip, setShowTip] = useState(false);
+  const [disabledField, setDisabledField] = useState(false);
   const { data: prevKyc } = useQuery({
     queryKey: ["getKyc"],
     queryFn: getKyc,
@@ -32,8 +34,20 @@ const GeneralInfo: FC<Props> = ({ next }) => {
   useEffect(() => {
     if (prevKyc) {
       saveKyc(prevKyc.data);
+      if (prevKyc.data.isVerified === "1") {
+        setDisabledField(true);
+      }
       setTimeout(() => {
-        reset();
+        reset({
+          address: prevKyc.data?.address || "",
+          company: user?.name,
+          business_registration_number: prevKyc.data?.registration_number || "",
+          tin: prevKyc.data?.tax_id || "",
+          date: prevKyc.data?.incorporation_date || "",
+          business_type: prevKyc.data?.business_nature || "",
+          business_email: prevKyc.data?.business_email || user?.email || "",
+          business_phone: prevKyc.data?.business_phone || user?.phone || "",
+        });
       }, 500);
     }
   }, [prevKyc]);
@@ -64,7 +78,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
       setUploading(1);
       const fd = new FormData();
       for (let i = 0; i < imageVal.length; i++) {
-        fd.append("image", imageVal[i])
+        fd.append("image", imageVal[i]);
       }
       upload.mutateAsync(fd, {
         onSuccess: (data) => {
@@ -86,7 +100,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
     if (bizCert) {
       setSending(1);
       const fd = new FormData();
-        fd.append("image", bizCert[0])
+      fd.append("image", bizCert[0]);
       upload.mutateAsync(fd, {
         onSuccess: (data) => {
           saveKyc({ ...kyc, business_reg_certificate: data[0] });
@@ -121,6 +135,14 @@ const GeneralInfo: FC<Props> = ({ next }) => {
 
   return (
     <>
+      <div className="flex justify-end mb-2">
+        {kyc.isVerified === "1" && (
+          <div className="flex gap-x-1 items-center">
+            <span className="w-4 h-4 circle bg-green-600 block"></span>
+            <p className="text-green-700 fw-600">Verified</p>
+          </div>
+        )}
+      </div>
       <div className="bg-gray-100 p-4 pb-8 rounded-md">
         <form onSubmit={handleSubmit(submitAction)}>
           <div className="grid gap-3">
@@ -155,6 +177,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                     message: "Please enter category tin",
                   },
                 }}
+                disabled={disabledField}
                 render={({ field }) => (
                   <TextInput
                     label="Business Reg No"
@@ -170,6 +193,8 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                 <label className="block mt-3 text-[#000000B2] fw-500">
                   Date of Incorporation/Registration
                 </label>
+                {kyc?.incorporation_date &&
+                  dayjs(kyc?.incorporation_date).format("MMMM-YYYY")}
                 <Controller
                   name="date"
                   control={control}
@@ -179,6 +204,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                       message: "Please enter a value",
                     },
                   }}
+                  disabled={disabledField}
                   render={({ field }) => (
                     <input
                       type="month"
@@ -199,6 +225,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                   message: "Please enter category address",
                 },
               }}
+              disabled={disabledField}
               render={({ field }) => (
                 <TextInput
                   label="Operational Address"
@@ -224,6 +251,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                       message: "Please enter a value",
                     },
                   }}
+                  disabled={disabledField}
                   render={({ field }) => (
                     <select
                       className="border w-full border-gray-400 rounded-[4px] py-2 px-3 mt-2"
@@ -250,6 +278,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                     message: "Please enter category tin",
                   },
                 }}
+                disabled={disabledField}
                 render={({ field }) => (
                   <TextInput
                     label="Tax Identification Number"
@@ -267,6 +296,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                 label="Upload Business Registration Certificate"
                 setImage={setbizCert}
                 prevValue={kyc?.business_reg_certificate}
+                disabled={disabledField}
               />
               {sending === 1 && (
                 <p className="fs-400 italics text-gray-500 fw-500">
@@ -278,12 +308,13 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                   Document is uploaded
                 </p>
               )}
-              </div>
+            </div>
             <div className="mt-3 relative">
               <ImageInput
                 label="Upload Insurance Requirement"
                 setImage={setImageVal}
-                prevValue={kyc?.insurance_doc}
+                prevValue={kyc?.insurance_doc[0]}
+                disabled={disabledField}
               />
               {uploading === 1 && (
                 <p className="fs-400 italics text-gray-500 fw-500">
@@ -295,11 +326,18 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                   Document is uploaded
                 </p>
               )}
-              <div className="absolute top-1 left-[260px]" onMouseEnter={() => setShowTip(true)} onMouseLeave={() => setShowTip(false)}>
-                <FaCircleInfo className="cursor-pointer"/>
-                {
-                  showTip && <p className="w-60 lg:w-[350px] fw-500 shadow bg-white rounded-lg p-3 fs-400 relative top-1">Upload General Liability Insurance and Commercial Vehicle Insurance (if rendering towing service).</p>
-                }
+              <div
+                className="absolute top-1 left-[260px]"
+                onMouseEnter={() => setShowTip(true)}
+                onMouseLeave={() => setShowTip(false)}
+              >
+                <FaCircleInfo className="cursor-pointer" />
+                {showTip && (
+                  <p className="w-60 lg:w-[350px] fw-500 shadow bg-white rounded-lg p-3 fs-400 relative top-1">
+                    Upload General Liability Insurance and Commercial Vehicle
+                    Insurance (if rendering towing service).
+                  </p>
+                )}
               </div>
             </div>
             <div>
@@ -314,6 +352,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                       message: "Please enter a value",
                     },
                   }}
+                  disabled={disabledField}
                   render={({ field }) => (
                     <TextInput
                       label="Email"
@@ -334,6 +373,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                     defaultCountry="NG"
                     name="business_phone"
                     control={control}
+                    disabled={disabledField}
                     rules={{
                       required: true,
                       pattern: {

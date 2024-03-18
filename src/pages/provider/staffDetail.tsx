@@ -58,7 +58,7 @@ const StaffDetail = () => {
             </div>
           </div>
         )}
-        {isError && <p>There was an issue fetching this provider details</p>}
+        {isError && <p className="py-24 text-center">There was an issue fetching this provider details</p>}
         {(!isLoading && !loading && data) && (
           <div>
             <div className="w-full h-[140px] bg-review border p-3 rounded-t-lg lg:px-5 flex items-center"></div>
@@ -79,7 +79,7 @@ const StaffDetail = () => {
                 { kyc?.data.verified === "0" &&
                   <div className="text-red-600 text-lg fw-600 flex items-center gap-x-2">
                   <span className="w-3 h-3 circle bg-red-600 block"></span>{" "}
-                  Verified
+                  Not Verified
                 </div>
                 }
                 { kyc?.data.verified === "1" &&
@@ -88,7 +88,7 @@ const StaffDetail = () => {
                   Verified
                 </div>
                 }
-               {kyc?.data.verified === null && <div className="flex gap-x-2">
+               {kyc?.data.verified === null || kyc?.data.verified === "0" && <div className="flex gap-x-2">
                   <button className="btn-like px-3 py-1 fs-400" onClick={() => setShowModal(true)}>Approve</button>
                   <button className="border border-gray-600 px-2 py-1 rounded-[4px] fs-400" onClick={() => SetDisApproval(true)}>Disapprove</button>
                 </div>}
@@ -118,7 +118,7 @@ const StaffDetail = () => {
                   Service Category
                 </p>
                 <div className="px-4 py-3">
-                  <ServiceCategory />
+                  <ServiceCategory cat={kyc?.data?.service_rendered}/>
                 </div>
               </div>
               <div className="border-r-2 h-full">

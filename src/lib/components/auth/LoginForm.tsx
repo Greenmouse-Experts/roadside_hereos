@@ -47,8 +47,10 @@ const LoginForm = () => {
       toast.success("Login Success");
       if (data.user.userType === "private_client") {
         navigate("/user");
-      } else {
+      } else if(data?.user?.userType === "professional") {
         navigate("/provider");
+      }else{
+        toast.info('User not available on web platform')
       }
       setIsBusy(false);
     },
