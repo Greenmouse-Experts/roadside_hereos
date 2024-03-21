@@ -103,7 +103,7 @@ const StaffDetail = () => {
                         Service Category
                       </p>
                       <div className="px-4 py-3">
-                        <ServiceCategory />
+                        <ServiceCategory cat={[]} />
                       </div>
                     </div>
                     <div className="border-r-2 h-full">
