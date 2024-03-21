@@ -39,7 +39,7 @@ const UserServices = () => {
             <div className="text-white lg:text-xl mb-3">
               <p className="fw-600 fs-400">Sign Up as Service Personnel</p>
               <p className="mt-4 fs-300">
-                Earn on Roadside Heroes by joining our team of experienced
+                Earn on  AllDrive SOS by joining our team of experienced
                 Service Personnels
               </p>
             </div>

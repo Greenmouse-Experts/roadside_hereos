@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { CountdownCircleTimer } from "react-countdown-circle-timer";
 
-const minuteSeconds = 110;
+const minuteSeconds = 10;
 
 const timerProps = {
   size: 190,

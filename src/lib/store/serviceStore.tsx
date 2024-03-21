@@ -13,8 +13,10 @@ interface requestProps {
   email: string;
   phone: string;
   location: string;
-  price: string;
+  price: number;
   homeAddress: string;
+  level: number;
+  qouteId: string;
 }
 const requestInitState = {
   id: "",
@@ -23,8 +25,10 @@ const requestInitState = {
   email: "",
   phone: "",
   location: "",
-  price: "",
+  price: 0,
   homeAddress: "",
+  level: 0,
+  qouteId: '',
 };
 const useRequestStore = create<Props>()(
   persist(

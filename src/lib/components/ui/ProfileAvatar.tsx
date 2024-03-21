@@ -1,12 +1,13 @@
 import React from "react";
 
 interface Props {
-  url?: string;
+  url?: string | null;
   name?: string;
   size?: number;
   font?: number;
+  square?: boolean
 }
-const ProfileAvatar: React.FC<Props> = ({ url, name, size, font }) => {
+const ProfileAvatar: React.FC<Props> = ({ url, name, size, font, square }) => {
   const nameRow = name?.split(" ");
   const firstLetter = nameRow && nameRow[0]?.charAt(0);
   const lastLetter = nameRow && nameRow?.length > 1 && nameRow[1]?.charAt(0);
@@ -17,13 +18,13 @@ const ProfileAvatar: React.FC<Props> = ({ url, name, size, font }) => {
         alt="profile"
         width={size}
         height={size}
-        className="circle"
+        className={square? '' : 'circle'}
       />
     );
   } else
     return (
       <div
-        className="circle relative border-2 flex gap-x-[1px] justify-center items-center fw-600 bg-primary text-white"
+        className={`${square? '' : 'circle'} relative border-2 flex gap-x-[1px] justify-center items-center fw-600 bg-primary text-white`}
         style={{ width: size, height: size }}
       >
         <p style={{ fontSize: font }} className="uppercase">

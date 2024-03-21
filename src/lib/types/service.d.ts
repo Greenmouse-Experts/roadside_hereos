@@ -1,3 +1,5 @@
+import { UserItemType } from "./auth";
+
 export interface CreateCatType {
   name: string;
   slug: string;
@@ -62,6 +64,14 @@ interface ServiceRequestItem {
   };
 }
 
-export interface ServiceRequestFull {
-  
+export interface ServiceQouteItem {
+  createdAt: string;
+  driver: UserItemType | null;
+  id: string;
+  quote: number;
+  selected: string | null;
+  serviceRequestId: string;
+  updatedAt: string;
+  userId: string | null;
 }
+

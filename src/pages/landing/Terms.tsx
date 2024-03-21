@@ -28,7 +28,7 @@ const TermsPage = () => {
               <div>
                 <p className="fw-600 text-lg">CONTRACTUAL RELATIONSHIP</p>
                 <p className="mt-5">
-                  Roadside Heroes, incorporated under the Companies Act, 2013,
+                  AllDrive SOS, incorporated under the Companies Act, 2013,
                   having its registered office at F-212, DLF NEW TOWN HEIGHTS,
                   SECTOR 91, Garhi Harsaru, Gurugram, Haryana – 122505,
                   operating under the trademarked name “GoMechanic”, provides

@@ -57,6 +57,7 @@ const PersonalSec: FC<Props> = ({ next, prev }) => {
           email: data.email,
           homeAddress: data.address,
           phone: data.phone,
+          level: 1
         });
         next();
       },

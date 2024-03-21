@@ -85,7 +85,7 @@ const Footer = () => {
         </div>
         <div className="pt-6 border-t border-gray-500">
           <p className="text-center pb-4 fs-500 text-white">
-            Copyright © {date.getFullYear()} ROADSIDE HEROES. All Rights
+            Copyright © {date.getFullYear()}  ALLDRIVE SOS. All Rights
             Reserved
           </p>
         </div>

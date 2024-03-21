@@ -36,7 +36,7 @@ const Header: FC<Props> = ({ fixed }) => {
                 className="lg:w-[190px] w-36"
               />
             </Link>
-            <div className="lg:w-8/12 xl:w-7/12 2xl:w-6/12 lg:flex hidden justify-between">
+            <div className="lg:w-9/12 xl:w-8/12 2xl:w-7/12 lg:flex hidden justify-between">
               <ul className="flex gap-x-12 items-center justify-between">
                 {NAV_LIST.map((item, i) => (
                   <li key={i}>

@@ -6,13 +6,24 @@ import {
 } from "@stripe/react-stripe-js";
 import { FC } from "react";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import { confirmPay } from "../../../../services/api/serviceApi";
+import { toast } from "react-toastify";
 
 interface Props {
   prev: () => void;
+  secret_key: string;
 }
-const CheckoutForm: FC<Props> = ({ prev }) => {
+const CheckoutForm: FC<Props> = ({ prev, secret_key }) => {
   const stripe = useStripe();
   const elements = useElements();
+
+  const confirmPayment = async () => {
+    await confirmPay(secret_key)
+    .then((res) => {
+      toast.success(res.message)
+    })
+    .catch(() => {})
+  }
 
   const handleSubmit = async (event: any) => {
     // We don't want to let default form submission happen here,
@@ -29,7 +40,7 @@ const CheckoutForm: FC<Props> = ({ prev }) => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: "https://example.com/order/123/complete",
+        return_url: "https://roadside-heroes.netlify.app/",
       },
     });
 
@@ -37,6 +48,7 @@ const CheckoutForm: FC<Props> = ({ prev }) => {
       // Show error to your customer (for example, payment details incomplete)
       console.log(result.error.message);
     } else {
+      confirmPayment()
       // Your customer will be redirected to your `return_url`. For some payment
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.

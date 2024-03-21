@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import { Stepper, Step, Typography } from "@material-tailwind/react";
 import { FaCar, FaRegUser } from "react-icons/fa";
 import { BsBank2 } from "react-icons/bs";
@@ -7,15 +7,23 @@ import ServiceSec from './request/ServiceSec';
 import PaymentSec from './request/PaymentSec';
 import { MdMiscellaneousServices } from 'react-icons/md';
 import ProviderList from './request/ProviderList';
+import useRequestStore from '../../../store/serviceStore';
 
 interface Props{
   activeId: string,
   activeQuestion: string,
 }
 const RequestForm:FC<Props> = ({activeId, activeQuestion}) => {
+    
     const [activeStep, setActiveStep] = React.useState(0);
     const [isLastStep, setIsLastStep] = React.useState(false);
     const [isFirstStep, setIsFirstStep] = React.useState(false);
+    const request = useRequestStore((state) => state.request)
+    useEffect(() => {
+      if(request.level){
+        setActiveStep(request.level + 1)
+      }
+    },[request])
    
     const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
     const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);

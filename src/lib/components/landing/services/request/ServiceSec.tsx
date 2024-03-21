@@ -73,8 +73,10 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
           email: "",
           phone: "",
           location: data?.data?.zipcode,
-          price: "",
+          price: 0,
           homeAddress: "",
+          level: 0,
+          qouteId: ""
         })
         next();
       },

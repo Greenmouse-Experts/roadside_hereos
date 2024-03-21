@@ -27,12 +27,12 @@ const PolicyPage = () => {
             <div className="box">
               <div>
                 <p>
-                  Welcome to Roadside Heroes, your trusted ally in times of
+                  Welcome to AllDrive SOS, your trusted ally in times of
                   travel uncertainty. As guardians of your roadside safety, we
                   hold your privacy in the highest regard. This Privacy Policy
                   is designed to transparently outline how we collect, use, and
                   protect your personal information, ensuring your confidence in
-                  every interaction with Roadside Heroes. Your security on the
+                  every interaction with AllDrive SOS. Your security on the
                   road is our priority, and so is safeguarding the privacy of
                   the heroes we assist.
                 </p>
@@ -53,7 +53,7 @@ const PolicyPage = () => {
                     geographical location collectively, &apos;Information&apos;.
                   </p>
                   <p className="mt-3">
-                    Roadside Heroes collects information about you and your use
+                    AllDrive SOS collects information about you and your use
                     of the Platform, and the devices used by you to access the
                     Platform including; your activity on the platform, which
                     would include your search history, your search inputs, pages
@@ -69,7 +69,7 @@ const PolicyPage = () => {
                     utilizing the Platform, such usage will be undertaken only
                     with the strict supervision and approval of a parent or a
                     legal guardian or any other person having parental
-                    responsibility for the child, and Roadside Heroes will not
+                    responsibility for the child, and AllDrive SOS will not
                     be responsible for the same at any time and in any manner
                     whatsoever
                   </p>
@@ -110,7 +110,7 @@ const PolicyPage = () => {
                     analyse Information to personalise, drive insights and help
                     us better your experience or reach out to you with more
                     value-added applications, products, information and
-                    Services. Roadside Heroes will not be liable for the privacy
+                    Services. AllDrive SOS will not be liable for the privacy
                     practices of such third-party entities and encourages you to
                     carefully read the privacy policies and procedures of such
                     third parties.
@@ -124,7 +124,7 @@ const PolicyPage = () => {
                     traffic patterns, and related site information to reputable
                     third parties. However, this information, when disclosed,
                     will be in an aggregate form and does not contain any of
-                    your personally identifiable information. Roadside Heroes
+                    your personally identifiable information. AllDrive SOS
                     will occasionally send email notices or contact you to
                     communicate about our Services, products and benefits, as
                     they are considered an essential part of the
@@ -143,14 +143,14 @@ const PolicyPage = () => {
                     Information we disclose to them and have agreed to adhere to
                     the terms set forth in this Policy; to protect against
                     imminent harm to the rights, property or safety of the
-                    Platform/ Roadside Heroes or its users or the public as
+                    Platform/ AllDrive SOS or its users or the public as
                     required or permitted by law; with third-party service
                     providers in order to personalise the
                     Platform/Services/products for a better user experience and
                     to perform behavioural analysis. We may share Information
-                    upon the merger or acquisition of Roadside Heroes with
+                    upon the merger or acquisition of AllDrive SOS with
                     another company. We shall transmit and transfer the
-                    Information upon acquisition or merger of Roadside Heroes
+                    Information upon acquisition or merger of AllDrive SOS
                     with another company.
                   </p>
                   <p className="mt-3">
