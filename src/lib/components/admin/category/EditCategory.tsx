@@ -155,6 +155,7 @@ const EditCategory: FC<Props> = ({ close, item, refetch }) => {
               setImage={setImageValue}
               containerClass="mt-5"
               prevValue={item?.icon}
+              disabled={false}
             />
           </div>
           </div>

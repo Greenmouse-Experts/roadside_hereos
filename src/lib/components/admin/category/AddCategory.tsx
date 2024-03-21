@@ -140,6 +140,7 @@ const AddCategory = () => {
               label="Service Image"
               setImage={setImageValue}
               containerClass="mt-5"
+              disabled={false}
             />
           </div>
           <div className="mt-12 flex justify-center">
