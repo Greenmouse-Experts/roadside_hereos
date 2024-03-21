@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { BASE_URL } from '../../lib/services/constant';
 import { useNavigate, useParams } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -10,6 +10,8 @@ const PasswordSet = () => {
   const hash = code?.split("&");
   const token = !!hash?.length ? hash[1]?.replace("token=", "") : ""
     const email = !!hash?.length ? hash[0]?.replace("email=", "") : ""
+    console.log(isBusy, email);
+    
     const submitAction = async (data: any) => {
         setIsBusy(true);
         const payload = {
@@ -38,7 +40,7 @@ const PasswordSet = () => {
         }
       };
   return (
-    <div>PasswordSet</div>
+    <div onClick={() => submitAction('')} onMouseDown={() => navigate('/')}>PasswordSet</div>
   )
 }
 
