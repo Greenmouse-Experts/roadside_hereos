@@ -70,6 +70,18 @@ export const getCompanyCategories = async () => {
     .then((response) => response.data);
 };
 
+export const removeCompanyCategories = async (id:string) => {
+  return axios
+    .patch(`${ENDPOINT.REMOVE_COMPANY_SERVICE}/${id}`)
+    .then((response) => response.data);
+};
+
+export const addCompanyCategories = async (payload: any) => {
+  return axios
+    .post(`${ENDPOINT.ADD_COMPANY_SERVICE}`, payload)
+    .then((response) => response.data);
+};
+
 export const getAdminCategories = async () => {
   return axios
     .get(`${ENDPOINT.ADMIN_CATEGORY}`)

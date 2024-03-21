@@ -10,7 +10,7 @@ const CompanyStaffs = () => {
   const { Modal, setShowModal } = useModal();
   const { data, refetch, isLoading } = useQuery({
     queryFn: getDrivers,
-    queryKey: ["invites"],
+    queryKey: ["Drivers"],
   });
   return (
     <>

@@ -43,6 +43,8 @@ export const GET_AVAILABLE_SERVICE = `/service-quote/fetch-quotes`
 export const SELECT_SERVICE_PROVIDER = `/service-quote/select-driver-quote`
 export const ADMIN_GET_REQUESTS = `/service-request/admin-fetch-details`
 export const GET_COMPANY_SERVICES = `/company/services`
+export const REMOVE_COMPANY_SERVICE = `company/remove-service`
+export const ADD_COMPANY_SERVICE = `company/add-service`
 
 // service request
 export const SERVICE_REQUEST = '/service-request/service-information/create'
