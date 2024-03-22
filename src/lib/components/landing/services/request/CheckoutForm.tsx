@@ -8,19 +8,26 @@ import { FC } from "react";
 import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { confirmPay } from "../../../../services/api/serviceApi";
 import { toast } from "react-toastify";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface Props {
   prev: () => void;
   secret_key: string;
 }
-const CheckoutForm: FC<Props> = ({ prev, secret_key }) => {
+const CheckoutForm: FC<Props> = ({ prev }) => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const confirmPayment = async () => {
-    await confirmPay(secret_key)
+  const confirmPayment = async (secret:string | null) => {
+    const navigate = useNavigate()
+    const {id} = useParams()
+    const payload = {
+      clientSecret: secret
+    }
+    await confirmPay(payload)
     .then((res) => {
       toast.success(res.message)
+      navigate(`/success/${id}`)
     })
     .catch(() => {})
   }
@@ -42,13 +49,14 @@ const CheckoutForm: FC<Props> = ({ prev, secret_key }) => {
       confirmParams: {
         return_url: "https://roadside-heroes.netlify.app/",
       },
+      redirect: "if_required",
     });
 
     if (result.error) {
       // Show error to your customer (for example, payment details incomplete)
       console.log(result.error.message);
     } else {
-      confirmPayment()
+      confirmPayment(result.paymentIntent.client_secret)
       // Your customer will be redirected to your `return_url`. For some payment
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.

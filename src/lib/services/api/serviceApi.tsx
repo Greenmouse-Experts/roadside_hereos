@@ -148,4 +148,10 @@ export const fetchAdminRequests = async (payload: string) => {
     .then((response) => response.data);
 };
 
+export const getMyServices = async () => {
+  return axios
+    .get(`${ENDPOINT.GET_MY_SERVICES}`)
+    .then((response) => response.data);
+};
+
 

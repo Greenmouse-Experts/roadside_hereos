@@ -75,3 +75,24 @@ export interface ServiceQouteItem {
   userId: string | null;
 }
 
+export interface ServiceItemUser {
+  amount: number | null;
+  color: string;
+  createdAt: string;
+  id: string;
+  location: string;
+  model: string;
+  processStatus: string | null;
+  providerId: string | null;
+  ref: string | null;
+  requestNote: string;
+  service: ServiceCatItem;
+  serviceId: string;
+  status: string;
+  updatedAt: string;
+  userId: string;
+  userType: string;
+  vehicleMake: string;
+  vehicleYear: string;
+  zipcode: string;
+}

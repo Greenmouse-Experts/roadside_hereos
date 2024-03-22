@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { markAsRead } from "../../../services/api/notifyApi";
 import { useMutation } from "@tanstack/react-query";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
+import EmptyState from "../../ui/EmptyState";
 // import { toast } from "react-toastify";
 // dayjs time format
 const dayjs = require("dayjs");
@@ -61,6 +62,12 @@ const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
                 Fetching Notifications...
               </p>
             </div>
+          </div>
+        )}
+        {notify &&
+            !notify.length && (
+          <div>
+            <EmptyState msg="You have not received any notification." />
           </div>
         )}
         <div className="grid gap-4">

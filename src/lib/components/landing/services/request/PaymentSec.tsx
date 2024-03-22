@@ -26,7 +26,7 @@ const PaymentSec: FC<Props> = ({ prev }) => {
       }
     },[request])
     const options = {
-        clientSecret: `${payDetails?.id}_secret_${payDetails?.client_secret}`,
+        clientSecret: `${payDetails?.client_secret}`,
         // Fully customizable with appearance API.
         // appearance: {
         //   /*...*/

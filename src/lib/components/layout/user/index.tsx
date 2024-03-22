@@ -5,12 +5,14 @@ import { MdHomeRepairService } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
+import useAuth from "../../../hooks/authUser";
 
 interface Props {
   children: React.ReactNode;
 }
 const UserDashboardLayout: React.FC<Props> = ({ children }) => {
   const navigate = useNavigate()
+  const {user} = useAuth()
   return (
     <>
       <div className="flex bg-gray-100">
@@ -27,7 +29,7 @@ const UserDashboardLayout: React.FC<Props> = ({ children }) => {
                   <AiOutlineMenuUnfold className='text-3xl'/>
                 </div>
                 <div>
-                  <p className="fw-600">Hello Benjamin</p>
+                  <p className="fw-600">Hello {user.name}</p>
                   <p className="fs-300 text-grya-400">
                     Today is {dayjs().format('dddd DD, MMMM YYYY')}
                   </p>

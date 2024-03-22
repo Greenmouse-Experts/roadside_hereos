@@ -1,6 +1,7 @@
 import AdminLogin from "../../pages/auth/AdminLogin";
 import ForgetPassword from "../../pages/auth/ForgetPassword";
 import OnboardStaff from "../../pages/auth/OnboardStaff";
+import PasswordSet from "../../pages/auth/Password";
 import ProviderRegister from "../../pages/auth/ProviderRegister";
 import ResetPassword from "../../pages/auth/ResetPassword";
 import UserLogin from "../../pages/auth/UserLogin";
@@ -41,5 +42,10 @@ export const authRoutes = [
         id: 'auth-8',
         path: 'onboard/:code',
         component: <OnboardStaff/>
+    },
+    {
+        id: 'auth-8',
+        path: 'password/:code',
+        component: <PasswordSet/>
     }
 ]

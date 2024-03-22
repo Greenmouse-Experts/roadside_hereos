@@ -46,6 +46,16 @@ const LoginForm = () => {
       localStorage.setItem("rhs_token", data.token);
       toast.success("Login Success");
       if (data.user.userType === "private_client") {
+        saveUser({
+          token: data.token,
+          email: data.user.email,
+          phone: data.user.phone,
+          image: data.user.photo,
+          state: data.user.state,
+          account: data.user.userType,
+          id: data.user.id,
+          name: `${data?.user?.fname} ${data?.user?.lname}`
+        })
         navigate("/user");
       } else if(data?.user?.userType === "professional") {
         navigate("/provider");

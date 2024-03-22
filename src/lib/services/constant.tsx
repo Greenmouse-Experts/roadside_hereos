@@ -75,3 +75,6 @@ export const GET_ME = '/invitation-request/account'
 export const GET_USER_NOTIFY = '/notifications/user'
 export const SUSPEND_DRIVER = '/users/suspend-driver'
 export const UNSUSPEND_DRIVER = '/users/unsuspend-driver'
+
+// user endpoints
+export const GET_MY_SERVICES = '/service-request/user-fetch-details'

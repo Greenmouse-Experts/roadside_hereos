@@ -1,9 +1,12 @@
 import { Menu, MenuItem, Sidebar, SubMenu } from "react-pro-sidebar";
 import { RouteType, Routes } from "./routes";
 import { Link, useLocation } from "react-router-dom";
+import useAuth from "../../../../hooks/authUser";
+import ProfileAvatar from "../../../ui/ProfileAvatar";
 
 const SidebarLayout = () => {
   const path = useLocation();
+  const {user} = useAuth()
 
   return (
     <div className="left-0 top-0 fixed overflow-y-hidden rounded-r-3xl index-30">
@@ -20,13 +23,12 @@ const SidebarLayout = () => {
               className="w-10/12"
             />
           </Link>
-          <div className="mt-10">
-            <img
-              src={
-                "https://res.cloudinary.com/greenmouse-tech/image/upload/v1701941410/Gleemora/Rectangle_20040_f4krjt.png"
-              }
-              alt="profile"
-              className="w-[70%] aspect-square object-cover border border-gray-400 mx-auto circle"
+          <div className="mt-10 flex justify-center">
+            <ProfileAvatar
+              url={user.image}
+              name={user.name}
+              size={150}
+              font={30}
             />
           </div>
         </div>

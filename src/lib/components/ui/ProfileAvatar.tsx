@@ -18,7 +18,7 @@ const ProfileAvatar: React.FC<Props> = ({ url, name, size, font, square }) => {
         alt="profile"
         width={size}
         height={size}
-        className={square? '' : 'circle'}
+        className={square? 'aspect-square' : 'circle aspect-square'}
       />
     );
   } else

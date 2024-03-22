@@ -14,6 +14,7 @@ import PolicyPage from "./pages/landing/Policy";
 import RequestPage from "./pages/landing/Request";
 import ScrollToTop from "./lib/scrollTop";
 import CookieModal from "./lib/components/landing/homepage/Cookie";
+import RequestSuccess from "./pages/landing/RequestSuccess";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/cookie" element={<CookiePage />} />
         <Route path="/privacy" element={<PolicyPage />} />
+        <Route path="/success/:id" element={<RequestSuccess />} />
         <Route path="/auth/*" element={<AuthRouting />} />
         <Route path="/user/*" element={<UsersDashboardWraper />} />
         <Route path="/provider/*" element={<ProviderDashboardWraper />} />

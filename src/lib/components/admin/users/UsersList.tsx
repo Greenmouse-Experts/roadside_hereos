@@ -11,6 +11,7 @@ import {
   MenuList,
 } from "@material-tailwind/react";
 import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
+import { UserItemType } from "../../../types/auth";
 
 interface Props {
   users: any;
@@ -20,19 +21,19 @@ const UsersList: FC<Props> = ({ users }) => {
         console.log(id);
     }
   // Table components
-  const columnHelper = createColumnHelper<any>();
+  const columnHelper = createColumnHelper<UserItemType>();
   const columns = [
-    columnHelper.accessor((row) => row.name, {
+    columnHelper.accessor((row) => row.fname, {
       id: "Name",
       cell: (info) => (
         <div className="flex gap-x-2 items-center">
           <ProfileAvatar
-            name={info.getValue()}
+            name={`${info.getValue()} ${info.row.original.lname}`}
             url={info.row.original.photo}
-            size={35}
-            font={15}
+            size={50}
+            font={17}
           />
-          <p className="fw-600 text-primary">{info.getValue()}</p>
+          <p className="fw-600 text-primary">{`${info.getValue()} ${info.row.original.lname}`}</p>
         </div>
       ),
       header: (info) => info.column.id,
@@ -52,7 +53,7 @@ const UsersList: FC<Props> = ({ users }) => {
       cell: (info) => <>{dayjs(info.getValue()).format("DD  MMMM YYYY")}</>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.createdAt, {
+    columnHelper.accessor((row) => row.id, {
       id: "Action",
       header: (info) => info.column.id,
       cell: (info) => (

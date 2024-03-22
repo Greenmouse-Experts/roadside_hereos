@@ -5,7 +5,7 @@ import useAuth from '../../lib/hooks/authUser'
 import { getUserNotify } from '../../lib/services/api/notifyApi'
 
 const UserNotification = () => {
-  const { userId} = useAuth()
+  const { userId } = useAuth()
   const { isLoading, isError, data, refetch } = useQuery({
     queryKey: ['getUserNotify'],
     queryFn: () => getUserNotify(userId),
