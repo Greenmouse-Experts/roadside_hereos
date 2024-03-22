@@ -52,7 +52,7 @@ export const SEND_PROFILE_INFO = `/service-request/profile-information/create`
 export const GET_SERVICE_QOUTES = `/service-quote/fetch-quotes`
 export const SELECT_QOUTE = `/service-quote/select-driver-quote`
 export const INITIATE_PAYMENT = `/service-quote/pay-selected-quote`
-export const CONFIRM_PAYMENT = `/service-quote/pay-selected-quote/verify-selected-quote`
+export const CONFIRM_PAYMENT = `/service-quote/verify-selected-quote`
 
 // routine endpoints
 export const UPLOAD_FILE = '/upload'

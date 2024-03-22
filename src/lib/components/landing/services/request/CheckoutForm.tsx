@@ -9,6 +9,7 @@ import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
 import { confirmPay } from "../../../../services/api/serviceApi";
 import { toast } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
+import useRequestStore from "../../../../store/serviceStore";
 
 interface Props {
   prev: () => void;
@@ -17,10 +18,11 @@ interface Props {
 const CheckoutForm: FC<Props> = ({ prev }) => {
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate()
+    const {id} = useParams()
+    const clear = useRequestStore((state) => state.clearRequest)
 
   const confirmPayment = async (secret:string | null) => {
-    const navigate = useNavigate()
-    const {id} = useParams()
     const payload = {
       clientSecret: secret
     }
@@ -28,8 +30,11 @@ const CheckoutForm: FC<Props> = ({ prev }) => {
     .then((res) => {
       toast.success(res.message)
       navigate(`/success/${id}`)
+      clear()
     })
-    .catch(() => {})
+    .catch((err) => {
+      console.log(err.message);
+    })
   }
 
   const handleSubmit = async (event: any) => {

@@ -46,7 +46,7 @@ const RequestList: FC<Props> = ({ status, data, isLoading }) => {
     }),
     columnHelper.accessor((row) => row.id, {
       id: "Action",
-      cell: (info) => <p className="fw-600 underline text-primary" onClick={() => navigate(`/user/requests/${info.getValue()}`)}>View Details</p>,
+      cell: (info) => <p className="fw-600 cursor-pointer underline text-primary" onClick={() => navigate(`/user/requests/${info.getValue()}`)}>View Details</p>,
     }),
   ];
   const dets = data && data?.filter((where) => where.status === status);

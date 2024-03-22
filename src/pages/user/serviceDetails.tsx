@@ -21,7 +21,7 @@ const ServiceDetails = () => {
           <p className="fs-600 fw-600">Track Location</p>
         </div>
       </div>
-      <div className="bg-gray-100 mt-6 rounded-lg p-4">
+      <div className="bg-white shadow mt-6 rounded-lg p-4">
         <div className="flex justify-between">
           <p className="fw-500 flex items-center gap-x-1 text-lg">
             <span className="block w-4 h-4 circle bg-primary"></span> Provider
@@ -74,7 +74,7 @@ const ServiceDetails = () => {
           </div>
         </div>
       </div>
-      <div className="bg-gray-100 mt-6 rounded-lg p-4">
+      <div className="bg-white shadow mt-6 rounded-lg p-4">
         <div className="flex justify-between">
           <p className="fw-500 flex items-center gap-x-1 text-lg">
             <span className="block w-4 h-4 circle bg-primary"></span> Service

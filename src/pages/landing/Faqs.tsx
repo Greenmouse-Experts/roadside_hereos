@@ -27,7 +27,12 @@ const FaqPage = () => {
           <div className="section">
             <div className="box py-10">
               <div className="lg:w-11/12 mx-auto">
+              <p className="text-lg lg:w-9/12 fw-500 mb-7">
+                We've got you covered, mile after mile! Here are some frequently
+                asked questions to help you get the most out of AllDrive SOS:
+              </p>
                 <FaqList />
+                <p className="mt-10">We hope this helps! If you have any other questions, feel free to contact our friendly customer support team. We're always happy to assist you!</p>
               </div>
             </div>
           </div>

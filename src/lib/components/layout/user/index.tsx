@@ -16,7 +16,7 @@ const UserDashboardLayout: React.FC<Props> = ({ children }) => {
   return (
     <>
       <div className="flex bg-gray-100">
-        <div className="lg:w-[250px] border-r-2 bg-gray-50">
+        <div className="lg:w-[250px] border-r-2 bg-white">
           <SidebarLayout />
         </div>
         <div className="w-full lg:w-[calc(100%_-_256px)] min-h-screen flex">
