@@ -6,13 +6,13 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import useAuth from "../../../hooks/authUser";
-
 interface Props {
   children: React.ReactNode;
 }
 const UserDashboardLayout: React.FC<Props> = ({ children }) => {
   const navigate = useNavigate()
   const {user} = useAuth()
+  
   return (
     <>
       <div className="flex bg-gray-100">
@@ -21,7 +21,7 @@ const UserDashboardLayout: React.FC<Props> = ({ children }) => {
         </div>
         <div className="w-full lg:w-[calc(100%_-_256px)] min-h-screen flex">
           <div className="w-full  bg-gray-50 h-screen overflow-y-auto scroll-pro">
-            <div className="h-[60px] relative index-30">
+            <div className="h-[60px] relative z-10">
               <div className="fixed w-full lg:w-[calc(100%_-_256px)] top-0 right-0">
                 
               <div className="bg-gray-50 px-3  lg:pl-9 lg:pr-9 py-[26px] flex items-center lg:justify-between">
@@ -50,6 +50,7 @@ const UserDashboardLayout: React.FC<Props> = ({ children }) => {
             <div className="px-3 lg:px-9 mt-8 lg:mt-12">{children}</div>
           </div>
         </div>
+        
       </div>
     </>
   );

@@ -1,3 +1,5 @@
+import { UserItemType } from "./auth";
+
 export interface NotifyItem {
   id: string;
   userId: string;
@@ -8,4 +10,16 @@ export interface NotifyItem {
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;
+}
+
+export interface ReviewItem {
+  comment: string;
+  createdAt: string;
+  id: string;
+  rating: string;
+  updatedAt: string;
+  user: UserItemType;
+  userId: string;
+  vendor: UserItemType;
+  vendorId: string;
 }

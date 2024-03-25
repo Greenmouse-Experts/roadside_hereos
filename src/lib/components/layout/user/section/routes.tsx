@@ -5,6 +5,7 @@ import { BiGitPullRequest } from 'react-icons/bi';
 import { LuServerCog } from 'react-icons/lu';
 import { IoNotificationsCircleOutline } from "react-icons/io5";
 import { BsGear } from 'react-icons/bs';
+import { LiaFileInvoiceDollarSolid } from 'react-icons/lia';
 export interface RouteType {
   name:string;
   icon: any;
@@ -40,7 +41,12 @@ export const Routes = [
     route: '/user/notify',
     submenu: [],
   },
-  
+  {
+    name: 'Payments',
+    icon: <LiaFileInvoiceDollarSolid className="text-xl" />,
+    route: '/user/payments',
+    submenu: [],
+  },
   {
     name: 'Settings',
     icon: <BsGear className="text-xl" />,

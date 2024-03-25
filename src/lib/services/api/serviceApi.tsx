@@ -154,4 +154,18 @@ export const getMyServices = async () => {
     .then((response) => response.data);
 };
 
+export const submitReview = async (payload:any) => {
+  return axios
+    .post(`${ENDPOINT.SUBMIT_REVIEW}`, payload)
+    .then((response) => response.data);
+};
+
+export const getAllReviews = async () => {
+  return axios
+    .get(`${ENDPOINT.GET_ALL_REVIEWS}`)
+    .then((response) => response.data);
+};
+
+
+
 

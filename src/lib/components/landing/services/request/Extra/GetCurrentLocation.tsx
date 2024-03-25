@@ -58,7 +58,7 @@ const GetCurrentLocation: FC<Props> = ({ setValue, setPostal }) => {
           className="flex gap-x-1 items-center fw-600 cursor-pointer"
           onClick={getUserCoordinates}
         >
-          <FaMapMarkerAlt /> Get Coordinates
+          <FaMapMarkerAlt /> Get Current Location
         </p>
         <p
           className="flex gap-x-1 items-center fw-600 cursor-pointer"

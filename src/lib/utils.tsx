@@ -37,6 +37,12 @@ export const capitalizeFirstLetter = (string: string) => {
         <span className="fw-500 text-green-600">Active</span>
       </div>
     ),
+    successful: (
+      <div className="flex items-center gap-x-2">
+        <span className="bg-green-600 w-4 h-4 circle"></span>{" "}
+        <span className="fw-500 text-green-600">Successful</span>
+      </div>
+    ),
     inactive: (
       <div className="flex items-center gap-x-2">
         <span className="bg-orange-600 w-4 h-4 circle"></span>{" "}
@@ -162,5 +168,15 @@ export const capitalizeFirstLetter = (string: string) => {
     }
     return paginationNumbers;
   };
+
+  export const formatPhoneNumber = (phoneNumberString:string) => {
+    var cleaned = ('' + phoneNumberString).replace(/\D/g, '');
+    var match = cleaned.match(/^(\d{1,3}|)?(\d{3})(\d{3})(\d{4})$/);
+     if (match) {
+      var intlCode = (match[1] ? `+${match[1]} ` : '');
+      return [intlCode, '(', match[2], ') ', match[3], '-', match[4]].join('');
+    }
+    return null;
+  }
 
   

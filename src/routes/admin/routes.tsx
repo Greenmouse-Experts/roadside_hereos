@@ -1,9 +1,11 @@
 import AdminCategory from "../../pages/admin/category";
 import AdminDashboardHome from "../../pages/admin/home";
 import AdminNotification from "../../pages/admin/notify";
+import AdminPayments from "../../pages/admin/payment";
 import ProviderDetails from "../../pages/admin/providerDetails";
 import ServiceProviders from "../../pages/admin/providers";
 import AdminRequests from "../../pages/admin/requests";
+import AllReviews from "../../pages/admin/reviews";
 import AdminRenderedServices from "../../pages/admin/services";
 import AdminSettings from "../../pages/admin/settings";
 import StaffDetail from "../../pages/admin/staffDetail";
@@ -59,5 +61,15 @@ export const adminRoutes = [
         id: 'admin10',
         path: 'providers/staff/:id',
         component: <StaffDetail/>
+    },
+    {
+        id: 'admin11',
+        path: 'reviews',
+        component: <AllReviews/>
+    },
+    {
+        id: 'admin12',
+        path: 'payments',
+        component: <AdminPayments/>
     },
 ]

@@ -17,7 +17,6 @@ const PasswordSet = () => {
   const hash = code?.split("&");
   const token = !!hash?.length ? hash[1]?.replace("token=", "") : "";
   const email = !!hash?.length ? hash[0]?.replace("email=", "") : "";
-  console.log(isBusy, email);
   const {
     control,
     handleSubmit,
@@ -88,7 +87,7 @@ const PasswordSet = () => {
               <div className="mt-6 lg:mt-6">
                 <p className="text-xl fw-600">Hello {email ? email : "..."}</p>
                 <p className="mt-3 fs-500">
-                  Please attach a password to your account
+                  Please cretae a password for your account
                 </p>
               </div>
               <div className="my-8 lg:mt-8 mb-5 mx-auto">

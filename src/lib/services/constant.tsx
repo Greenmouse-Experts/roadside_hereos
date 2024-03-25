@@ -30,6 +30,7 @@ export const VERIFY_EMAIL = '/user/verifyemail'
 export const RESEND_TOKEN = '/user/resend-token'
 export const FORGOT_PASSWORD = '/user/forgot-password'
 export const RESET_PASSWORD = '/user/reset-password'
+export const GET_ALL_REVIEWS = '/review/fetch-driver-reviews'
 
 // service
 export const CREATE_CATEGORY = '/services/create'
@@ -78,3 +79,4 @@ export const UNSUSPEND_DRIVER = '/users/unsuspend-driver'
 
 // user endpoints
 export const GET_MY_SERVICES = '/service-request/user-fetch-details'
+export const SUBMIT_REVIEW = '/review/driver/create-review'

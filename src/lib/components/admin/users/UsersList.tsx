@@ -12,6 +12,7 @@ import {
 } from "@material-tailwind/react";
 import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
 import { UserItemType } from "../../../types/auth";
+import { formatPhoneNumber } from "../../../utils";
 
 interface Props {
   users: any;
@@ -45,7 +46,7 @@ const UsersList: FC<Props> = ({ users }) => {
     }),
     columnHelper.accessor((row) => row.phone, {
       id: "Phone",
-      cell: (info) => <>{info.getValue()}</>,
+      cell: (info) => <>{formatPhoneNumber(info.getValue())}</>,
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.createdAt, {

@@ -1,11 +1,12 @@
 import {
-  MdOutlineDashboard,
+  MdOutlineDashboard, MdOutlineRateReview,
 } from 'react-icons/md';
 import { HiOutlineUsers } from "react-icons/hi2";
 import { RiUserSettingsLine } from 'react-icons/ri';
 import { BiCategoryAlt, BiGitPullRequest } from 'react-icons/bi';
 import { LuServerCog } from 'react-icons/lu';
 import { IoNotificationsCircleOutline } from "react-icons/io5";
+import { BsCashCoin } from 'react-icons/bs';
 export interface RouteType {
   name:string;
   icon: any;
@@ -54,9 +55,21 @@ export const Routes = [
     submenu: [],
   },
   {
+    name: 'Service Reviews',
+    icon: <MdOutlineRateReview className="text-xl" />,
+    route: '/admin/reviews',
+    submenu: [],
+  },
+  {
     name: 'Notifications',
     icon: <IoNotificationsCircleOutline className="text-xl" />,
     route: '/admin/notify',
+    submenu: [],
+  },
+  {
+    name: 'Payments',
+    icon: <BsCashCoin className="text-xl" />,
+    route: '/admin/payments',
     submenu: [],
   },
 ]

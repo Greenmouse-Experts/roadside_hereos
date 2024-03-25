@@ -1,5 +1,6 @@
 import UsersHome from "../../pages/user/home";
 import UserNotification from "../../pages/user/notify";
+import UserPayments from "../../pages/user/payment";
 import UserRequests from "../../pages/user/requests";
 import ServiceDetails from "../../pages/user/serviceDetails";
 import UserServices from "../../pages/user/services";
@@ -30,6 +31,11 @@ export const userRoutes = [
         id: 'user4',
         path: 'notify',
         component: <UserNotification/>
+    },
+    {
+        id: 'user8',
+        path: 'Payments',
+        component: <UserPayments/>
     },
     {
         id: 'user5',

@@ -1,10 +1,13 @@
 import { useParams } from "react-router-dom";
 import ProfileAvatar from "../../lib/components/ui/ProfileAvatar";
-import { Rating } from "@material-tailwind/react";
+import { Rating, Typography } from "@material-tailwind/react";
 import { MdLocationPin } from "react-icons/md";
+import useDialog from "../../lib/hooks/useDialog";
+import ReviewModal from "../../lib/components/user/requestDetails/ReviewModal";
 
 const ServiceDetails = () => {
   const { id } = useParams();
+  const { Dialog, setShowModal } = useDialog();
   return (
     <div className="pb-24">
       <div className="flex justify-between items-start">
@@ -18,7 +21,7 @@ const ServiceDetails = () => {
         </div>
         <div className="flex items-center gap-x-1 underline">
           <MdLocationPin className="text-xl" />
-          <p className="fs-600 fw-600">Track Location</p>
+          <p className="fs-600 fw-600">Track Driver Location</p>
         </div>
       </div>
       <div className="bg-white shadow mt-6 rounded-lg p-4">
@@ -27,7 +30,7 @@ const ServiceDetails = () => {
             <span className="block w-4 h-4 circle bg-primary"></span> Provider
             Details
           </p>
-          <p className="fw-500 underline">Submit a Query</p>
+          <p className="fw-500 underline" onClick={() => setShowModal(true)}>Leave a rating</p>
         </div>
         <div className="mt-6">
           <div className="flex items-center gap-x-3">
@@ -39,7 +42,16 @@ const ServiceDetails = () => {
             />
             <div>
               <p className="fw-500 mb-2 text-lg">Enzo Fernandez</p>
-              <Rating value={4} />
+              <div className="flex items-center gap-2 font-bold text-blue-gray-500">
+                {4}.7
+                <Rating value={4} readonly />
+                <Typography
+                  color="blue-gray"
+                  className="font-medium text-blue-gray-500"
+                >
+                  Based on 134 Reviews
+                </Typography>
+              </div>
             </div>
           </div>
         </div>
@@ -122,6 +134,9 @@ const ServiceDetails = () => {
           </div>
         </div>
       </div>
+      <Dialog title="Submit a Review" size="lg">
+        <ReviewModal id={`${id}`} close={() => setShowModal(false)}/>
+      </Dialog>
     </div>
   );
 };

@@ -3,10 +3,14 @@ import { RouteType, Routes } from "./routes";
 import { Link, useLocation } from "react-router-dom";
 import useAuth from "../../../../hooks/authUser";
 import ProfileAvatar from "../../../ui/ProfileAvatar";
+import useDialog from "../../../../hooks/useDialog";
+import LogoutModal from "../../../auth/LogoutModal";
+import { BiLogOutCircle } from "react-icons/bi";
 
 const SidebarLayout = () => {
   const path = useLocation();
   const {user} = useAuth()
+  const {Dialog, setShowModal} = useDialog()
 
   return (
     <div className="left-0 top-0 fixed overflow-y-hidden rounded-r-3xl index-30">
@@ -85,11 +89,18 @@ const SidebarLayout = () => {
               </>
             );
           })}
+          <MenuItem
+            icon={<BiLogOutCircle className="text-xl" />}
+            onClick={() => setShowModal(true)}
+            className=""
+          >
+            <p className="fs-400">Logout</p>
+          </MenuItem>
         </Menu>
       </Sidebar>
-      {/* <Modal title="" noHead>
+      <Dialog title="" size="sm">
         <LogoutModal CloseModal={() => setShowModal(false)} />
-      </Modal> */}
+        </Dialog>
     </div>
   );
 };
