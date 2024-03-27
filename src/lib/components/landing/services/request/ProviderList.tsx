@@ -86,7 +86,7 @@ const ProviderList: FC<Props> = ({ next, prev }) => {
                    <div className="flex mt-2 gap-x-2">
                      {star.map((items, i) => (
                        <p key={i} className="text-gray-500">
-                         <FaStar className={`${items} text-xl ${i < 0 && 'text-orange-400'}`} />
+                         <FaStar className={`${items} text-xl ${i + 1 <= (item?.driver?.reviewsAvg || 0) && 'text-orange-400'}`} />
                        </p>
                      ))}
                    </div>

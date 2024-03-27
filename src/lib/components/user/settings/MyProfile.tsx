@@ -42,10 +42,10 @@ const MyProfileSettings = () => {
   };
   return (
     <>
-      <div className="bg-gray-100 rounded p-4 lg:p-5">
+      <div className="bg-gray-100 rounded p-2 lg:p-5">
         <p className="text-lg fw-600">My Profile</p>
         <div className="mt-4 border-2 border-[#808080] px-8 py-4 lg:py-6 flex justify-between rounded-[15px]">
-          <div className="flex items-center">
+          <div className="lg:flex items-center">
             <div className="flex">
               <ProfileAvatar size={102} url={user.image} name={user.name} font={28}/>
               <div className="relative overflow-hidden bg-gray-600 h-9 w-9 flex items-center justify-center circle top-[73px] -left-7 ">
@@ -60,13 +60,13 @@ const MyProfileSettings = () => {
                 />
               </div>
             </div>
-            <div>
+            <div className="mt-6 lg:mt-0">
               <p className="fw-500">{`${user.name}`}</p>
               <p className="text-gray-500">{user.account}</p>
             </div>
           </div>
         </div>
-        <div className="mt-4 lg:my-8 border-2 border-[#808080] overflow-hidden px-8 py-4 lg:pt-6 lg:pb-10 rounded-[15px]">
+        <div className="mt-4 lg:my-8 border-2 border-[#808080] overflow-hidden px-2 lg:px-8 py-4 lg:pt-6 lg:pb-10 rounded-[15px]">
           <div className="w-full flex justify-between items-center">
             <p className="fw-500 ">Personal Information</p>
             <button

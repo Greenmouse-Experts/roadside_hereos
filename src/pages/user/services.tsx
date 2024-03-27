@@ -12,7 +12,7 @@ const UserServices = () => {
   const navigate = useNavigate();
   return (
     <div>
-      <div className="bg-white p-5 ">
+      <div className="bg-white p-2 lg:p-5 ">
         <div className="mb-6">
           <p className="text-2xl fw-600">AllDrive Services</p>
           <p className="fs-400 mt-1 lg:w-8/12">Choose from the variety of services we render on this platform. Request a service and get a service professional in minutes.</p>

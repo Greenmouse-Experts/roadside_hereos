@@ -21,7 +21,7 @@ const Tabs: FC<Props> = ({ tabs, broadcastCurrentIndex, type }) => {
   };
   const navClass = {
     charts:
-      'whitespace-nowrap grow text-center cursor-pointer py-[10px] fs-500',
+      'whitespace-nowrap grow px-5 text-center cursor-pointer py-[10px] fs-500',
     norm: 'whitespace-nowrap text-center cursor-pointer py-[5px] px-6 fs-500',
     price:
       'whitespace-nowrap text-center cursor-pointer py-[10px] px-6 lg:px-12 fs-500',

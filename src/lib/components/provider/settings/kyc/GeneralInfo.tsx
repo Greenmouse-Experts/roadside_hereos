@@ -370,7 +370,8 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                   </label>
                   <PhoneInputWithCountry
                     international
-                    defaultCountry="NG"
+                    defaultCountry="US"
+                    countries={['US']}
                     name="business_phone"
                     control={control}
                     disabled={disabledField}

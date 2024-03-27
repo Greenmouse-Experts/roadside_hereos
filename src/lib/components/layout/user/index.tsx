@@ -12,12 +12,13 @@ interface Props {
 const UserDashboardLayout: React.FC<Props> = ({ children }) => {
   const navigate = useNavigate()
   const {user} = useAuth()
+  const [toggled, setToggled] = React.useState(false);
   
   return (
     <>
       <div className="flex bg-gray-100">
         <div className="lg:w-[250px] border-r-2 bg-white">
-          <SidebarLayout />
+          <SidebarLayout toggled={toggled} setToggled={setToggled}/>
         </div>
         <div className="w-full lg:w-[calc(100%_-_256px)] min-h-screen flex">
           <div className="w-full  bg-gray-50 h-screen overflow-y-auto scroll-pro">
@@ -26,7 +27,7 @@ const UserDashboardLayout: React.FC<Props> = ({ children }) => {
                 
               <div className="bg-gray-50 px-3  lg:pl-9 lg:pr-9 py-[26px] flex items-center lg:justify-between">
                 <div className="pr-6 lg:hidden">
-                  <AiOutlineMenuUnfold className='text-3xl'/>
+                  <AiOutlineMenuUnfold className='text-3xl' onClick={() => setToggled(true)}/>
                 </div>
                 <div>
                   <p className="fw-600">Hello {user.name}</p>

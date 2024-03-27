@@ -166,6 +166,12 @@ export const getAllReviews = async () => {
     .then((response) => response.data);
 };
 
+export const getAllPayments = async () => {
+  return axios
+    .get(`${ENDPOINT.GET_ALL_PAYMENTS}`)
+    .then((response) => response.data);
+};
+
 
 
 

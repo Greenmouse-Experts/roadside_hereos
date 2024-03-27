@@ -72,3 +72,9 @@ export const unsuspendDriver = async (payload:string) => {
     .post(`${ENDPOINT.UNSUSPEND_DRIVER}/${payload}`)
     .then((response) => response.data);
 }
+
+export const getDriverReviews = async (id:string) => {
+  return axios
+    .get(`${ENDPOINT.GET_DRIVER_REVIEWS}/${id}`)
+    .then((response) => response.data);
+}

@@ -24,7 +24,7 @@ const UserRequests = () => {
     ]
   return (
     <>
-        <div className='bg-white p-6 rounded-lg shadow min-h-[80vh]'>
+        <div className='bg-white p-2 lg:p-6 rounded-lg shadow min-h-[80vh]'>
             <Tabs tabs={tabs} type='charts'/>
         </div>
     </>

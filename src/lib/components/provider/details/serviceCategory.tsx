@@ -11,7 +11,7 @@ interface Props{
 const ServiceCategory:FC<Props> = ({cat}) => {
   return (
     <>
-      {!!cat.length && cat.map((item) => (
+      {!!cat?.length && cat.map((item) => (
         <div className="flex gap-x-3 mb-3" key={item.id}>
           <div className="relative -bottom-2">
             <div className="absolute w-4 h-4 circle bg-review -top-1 -left-1"></div>

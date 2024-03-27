@@ -18,7 +18,7 @@ const ReviewModal: FC<Props> = ({ id, close }) => {
   const handleSubmit = async () => {
     setIsBusy(true);
     const payload = {
-      vendorId: id,
+      serviceRequestId: id,
       rating: ratings,
       comment: review,
     };

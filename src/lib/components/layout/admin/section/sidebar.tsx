@@ -25,7 +25,7 @@ const SidebarLayout:FC<Props> = ({toggled, setToggled}) => {
         toggled={toggled}
       >
         <div className="flex justify-center py-6 lg:py-9 lg:pb-8 items-center">
-          <Link to="/" className="block flex justify-center gap-x-1">
+          <Link to="/" className="flex justify-center gap-x-1">
             <img src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1706192917/rsh/Group_48097864_1_mopmlj.png" alt="logo" className="w-10/12" />
             {/* <p className="fw-700 text-[19px] uppercase">Roadside Heroes</p> */}
           </Link>

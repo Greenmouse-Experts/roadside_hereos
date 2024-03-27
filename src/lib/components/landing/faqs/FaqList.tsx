@@ -19,7 +19,7 @@ const FaqList = () => {
           className="bg-[#EBEDEF] fw-500 rounded-xl pr-5"
         >
           <div className="px-5 py-1 rounded-xl">
-            1. What roadside assistance services do you provide?
+            What roadside assistance services do you provide?
           </div>
         </AccordionHeader>
         <AccordionBody>
@@ -132,7 +132,7 @@ const FaqList = () => {
           className="bg-[#EBEDEF] fw-500 rounded-xl pr-5 mt-3"
         >
           <div className="px-5 py-1 rounded-xl">
-            7. Can I cancel a pending roadside assistance request and get a
+            Can I cancel a pending roadside assistance request and get a
             refund?
           </div>
         </AccordionHeader>

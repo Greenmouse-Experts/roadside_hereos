@@ -1,12 +1,20 @@
 import { useParams } from "react-router-dom";
 import ProfileAvatar from "../../lib/components/ui/ProfileAvatar";
-import { Rating, Typography } from "@material-tailwind/react";
+import { Rating } from "@material-tailwind/react";
 import { MdLocationPin } from "react-icons/md";
 import useDialog from "../../lib/hooks/useDialog";
 import ReviewModal from "../../lib/components/user/requestDetails/ReviewModal";
+import { useQuery } from "@tanstack/react-query";
+import { getOneService } from "../../lib/services/api/clientApi";
+import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
+import dayjs from "dayjs";
 
 const ServiceDetails = () => {
   const { id } = useParams();
+  const {data, isLoading} = useQuery({
+    queryKey: ['userServiceData'],
+    queryFn: () => getOneService(`${id}`)
+  })
   const { Dialog, setShowModal } = useDialog();
   return (
     <div className="pb-24">
@@ -16,7 +24,7 @@ const ServiceDetails = () => {
             Service Id: <span className="uppercase fw-600">{id}</span>
           </p>
           <p className="fw-500 mt-2 text-lg lg:text-2xl">
-            Emergency Towing Service
+            {data?.data?.service?.name}
           </p>
         </div>
         <div className="flex items-center gap-x-1 underline">
@@ -24,13 +32,27 @@ const ServiceDetails = () => {
           <p className="fs-600 fw-600">Track Driver Location</p>
         </div>
       </div>
-      <div className="bg-white shadow mt-6 rounded-lg p-4">
+      {isLoading && (
+          <div className="py-12 flex justify-center items-center text-black">
+            <div>
+              <div className="flex place-center">
+                <CurveLoader />
+              </div>
+              <p className="text-center mt-5 fw-500">
+                Fetching Service Details...
+              </p>
+            </div>
+          </div>
+        )}
+      {
+        data && !isLoading && <div>
+          <div className="bg-white shadow mt-6 rounded-lg p-4">
         <div className="flex justify-between">
           <p className="fw-500 flex items-center gap-x-1 text-lg">
             <span className="block w-4 h-4 circle bg-primary"></span> Provider
             Details
           </p>
-          <p className="fw-500 underline" onClick={() => setShowModal(true)}>Leave a rating</p>
+          <p className="fw-500 underline cursor-pointer" onClick={() => setShowModal(true)}>Leave a rating</p>
         </div>
         <div className="mt-6">
           <div className="flex items-center gap-x-3">
@@ -45,12 +67,6 @@ const ServiceDetails = () => {
               <div className="flex items-center gap-2 font-bold text-blue-gray-500">
                 {4}.7
                 <Rating value={4} readonly />
-                <Typography
-                  color="blue-gray"
-                  className="font-medium text-blue-gray-500"
-                >
-                  Based on 134 Reviews
-                </Typography>
               </div>
             </div>
           </div>
@@ -97,43 +113,45 @@ const ServiceDetails = () => {
           <div className="grid gap-5">
             <div className="flex gap-x-2">
               <p>Car Make:</p>
-              <p className="fw-500">Toyotal</p>
+              <p className="fw-500">{data?.data?.vehicleMake}</p>
             </div>
             <div className="flex gap-x-2">
               <p>Car Model:</p>
-              <p className="fw-500">Camry</p>
+              <p className="fw-500">{data?.data?.model}</p>
             </div>
             <div className="flex gap-x-2">
               <p>Car Year:</p>
-              <p className="fw-500">2899</p>
+              <p className="fw-500">{data?.data?.vehicleYear}</p>
             </div>
             <div className="flex gap-x-2">
               <p>Car Color:</p>
-              <p className="fw-500">Black Matte</p>
+              <p className="fw-500">{data?.data?.color}</p>
             </div>
           </div>
           <div className="grid gap-5 lg:col-span-2">
             <div className="flex gap-x-2">
               <p>Service Location:</p>
               <p className="fw-500">
-                Aguda, Ikeja, Lagos State, 100282, Nigeria.
+                {data?.data?.location}
               </p>
             </div>
             <div className="flex gap-x-2">
               <p>Servie Info:</p>
-              <p className="fw-500">Tow to Lekki Phase 1</p>
+              <p className="fw-500">{data?.data?.requestNote}</p>
             </div>
             <div className="flex gap-x-2">
               <p>Request Time:</p>
-              <p className="fw-500">15:05, Wednesday 23, March 2024.</p>
+              <p className="fw-500">{dayjs(data?.data?.createdAt).format('hh:mmA, ddd DD, MMMM YYYY')}</p>
             </div>
             <div className="flex gap-x-2">
               <p>Response Time:</p>
-              <p className="fw-500">15:05, Wednesday 23, March 2024.</p>
+              <p className="fw-500">{dayjs(data?.data?.updatedAt).format('hh:mmA, ddd DD, MMMM YYYY')}.</p>
             </div>
           </div>
         </div>
       </div>
+        </div>
+      }
       <Dialog title="Submit a Review" size="lg">
         <ReviewModal id={`${id}`} close={() => setShowModal(false)}/>
       </Dialog>

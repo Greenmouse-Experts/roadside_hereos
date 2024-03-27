@@ -6,8 +6,13 @@ import ProfileAvatar from "../../../ui/ProfileAvatar";
 import useDialog from "../../../../hooks/useDialog";
 import LogoutModal from "../../../auth/LogoutModal";
 import { BiLogOutCircle } from "react-icons/bi";
+import { FC } from "react";
 
-const SidebarLayout = () => {
+interface Props{
+  toggled: boolean
+  setToggled: React.Dispatch<React.SetStateAction<boolean>>
+}
+const SidebarLayout:FC<Props> = ({toggled, setToggled}) => {
   const path = useLocation();
   const {user} = useAuth()
   const {Dialog, setShowModal} = useDialog()
@@ -16,11 +21,13 @@ const SidebarLayout = () => {
     <div className="left-0 top-0 fixed overflow-y-hidden rounded-r-3xl index-30">
       <Sidebar
         customBreakPoint="1024px"
-        className="h-screen overflow-y-hidden scroll-pro pb-4 fs-700 fw-500 px-4"
-        backgroundColor=""
+        className="h-screen overflow-y-hidden scroll-pro lg:pb-4 fs-700 fw-500 lg:px-4"
+        backgroundColor="white"
+        onBackdropClick={() => setToggled(false)} 
+        toggled={toggled}
       >
         <div className="py-6 text-center lg:pb-8">
-          <Link to="/" className="block flex justify-center gap-x-1">
+          <Link to="/" className="flex justify-center gap-x-1">
             <img
               src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1706192916/rsh/Group_48097863_txmkbr.png"
               alt="logo"

@@ -19,6 +19,7 @@ export const GET_PROVIDER_DETAILS = '/users/get-user'
 export const SUSPEND_USER = `/admin/suspend-user`
 export const UNSUSPEND_USER =`/admin/unsuspend-user`
 export const GET_COMPANY_PROVIDERS = `/admin/get-provider-drivers`
+export const GET_ALL_PAYMENTS = `services-quote/get-all-paid-quote`
 
 // Auth endpoints
 export const USER_LOGIN = '/user/login'
@@ -30,7 +31,8 @@ export const VERIFY_EMAIL = '/user/verifyemail'
 export const RESEND_TOKEN = '/user/resend-token'
 export const FORGOT_PASSWORD = '/user/forgot-password'
 export const RESET_PASSWORD = '/user/reset-password'
-export const GET_ALL_REVIEWS = '/review/fetch-driver-reviews'
+export const GET_ALL_REVIEWS = 'review/fetch-service-reviews'
+export const GET_DRIVER_REVIEWS = 'review/fetch-service-reviews'
 
 // service
 export const CREATE_CATEGORY = '/services/create'
@@ -79,4 +81,6 @@ export const UNSUSPEND_DRIVER = '/users/unsuspend-driver'
 
 // user endpoints
 export const GET_MY_SERVICES = '/service-request/user-fetch-details'
-export const SUBMIT_REVIEW = '/review/driver/create-review'
+export const SUBMIT_REVIEW = '/review/create-service-review'
+export const GET_ONE_SERVICE = 'service-request/user-fetch-details'
+export const GET_MY_PAYMENTS = 'service-quote/get-user-paid-quotes'

@@ -70,8 +70,8 @@ const StaffDetail = () => {
                       <div className="py-6"></div>
                     </div>
                     <div className="flex items-center gap-2 font-bold text-blue-gray-500 pt-10 lg:pt-0 px-2 lg:pr-4 cursor-pointer" onClick={() => setShowModal(true)}>
-                      {4}.7
-                      <Rating value={4} className="scale-120" readonly/>
+                      {data?.data?.reviewsAvg === null? "No Ratings Yet" : data?.data?.reviewsAvg}
+                      <Rating value={Number(data?.data?.reviewsAvg) || 0} className="scale-120" readonly/>
                       <span className="underline">View</span>
                     </div>
                   </div>
@@ -100,8 +100,8 @@ const StaffDetail = () => {
                     </div>
                     <div className="mt-3 lg:mt-0">
                       <p className="fw-500 text-gray-500 mb-4">Email</p>
-                      <div className="flex gap-x-2 items-center">
-                        <div className="bg-review w-10 h-10 circle place-center text-white">
+                      <div className="flex overflow-hidden gap-x-2 items-center">
+                        <div className="bg-review shrink-0 w-10 h-10 circle place-center text-white">
                           <AiOutlineMail />
                         </div>
                         <p className="fw-500">{data?.data?.email}</p>
@@ -185,7 +185,7 @@ const StaffDetail = () => {
             </div>
           </div>
         )}
-        <Dialog title="View Driver's Reviews" size="xl">
+        <Dialog title="View Driver's Reviews" size="lg">
           <ViewReviewsModal id={`${id}`}/>
         </Dialog>
       </div>

@@ -67,6 +67,7 @@ export interface UserItemType {
   token: string | null;
   updatedAt: string;
   userType: string;
+  reviewsAvg: number;
 }
 
 export interface SuspendUserInputType {
