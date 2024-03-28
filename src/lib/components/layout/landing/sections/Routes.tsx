@@ -31,7 +31,7 @@ export const FOOTER_LIST = [
   },
   {
     url: "/faqs",
-    name: "FAQS",
+    name: "FAQs",
   },
   {
     url: "/career",
