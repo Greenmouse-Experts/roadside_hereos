@@ -7,15 +7,15 @@ import useModal from "../../../hooks/useModal";
 import RequestDetailsModal from "./RequestDetailsModal";
 import { useState } from "react";
 import { toast } from "react-toastify";
-import { useQuery } from "@tanstack/react-query";
-import { fetchAdminRequests } from "../../../services/api/serviceApi";
 import EmptyState from "../../ui/EmptyState";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
+import { fetchAdminRequests } from "../../../services/api/serviceApi";
+import { useQuery } from "@tanstack/react-query";
 
-const AdminPendingService = () => {
+const AdminProcessingService = () => {
   const { data, isLoading } = useQuery({
-    queryKey: ["getServices", 'pending'],
-    queryFn: () => fetchAdminRequests("pending"),
+    queryKey: ["getServices", 'processing'],
+    queryFn: () => fetchAdminRequests("processing"),
   });
   const colors: string[] = [
     "border-purple-500",
@@ -60,9 +60,9 @@ const AdminPendingService = () => {
   return (
     <>
       <div>
-        {data && !data?.data?.length && (
+        {(data && !data?.data?.length) && (
           <div>
-            <EmptyState msg="There's no pending request currently on the system." />
+            <EmptyState msg="There's no processed request currently on the system." />
           </div>
         )}
         {isLoading && (
@@ -72,13 +72,13 @@ const AdminPendingService = () => {
                 <CurveLoader />
               </div>
               <p className="text-center mt-5 fw-500">
-                Fetching Pending Service Requests...
+                Fetching Processed Service Requests...
               </p>
             </div>
           </div>
         )}
         {data &&
-          !!data?.data?.length &&
+          !!data?.data.length &&
           data?.data
             ?.slice(start, stop)
             .map((item: ServiceRequestItem, index: number) => {
@@ -150,4 +150,4 @@ const AdminPendingService = () => {
   );
 };
 
-export default AdminPendingService;
+export default AdminProcessingService;

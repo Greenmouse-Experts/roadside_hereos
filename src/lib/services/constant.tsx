@@ -20,6 +20,8 @@ export const SUSPEND_USER = `/admin/suspend-user`
 export const UNSUSPEND_USER =`/admin/unsuspend-user`
 export const GET_COMPANY_PROVIDERS = `/admin/get-provider-drivers`
 export const GET_ALL_PAYMENTS = `services-quote/get-all-paid-quote`
+export const ADMIN_ADD_RATES = `charge/save-charges`
+export const ADMIN_GET_RATES = `charge/fetch-charges`
 
 // Auth endpoints
 export const USER_LOGIN = '/user/login'

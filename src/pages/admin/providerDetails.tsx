@@ -45,7 +45,7 @@ const ProviderDetails = () => {
       {isError && <p>There was an issue fetching provider details</p>}
       {!isLoading && data && (
         <div>
-          <div className="mb-16">
+          <div className="mb-24 lg:mb-16">
             <ProviderDetailsHeader
               picture={data?.data?.photo}
               name={data?.data?.name}

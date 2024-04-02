@@ -5,17 +5,17 @@ import dayjs from "dayjs";
 import { MdLocationPin } from "react-icons/md";
 import useModal from "../../../hooks/useModal";
 import RequestDetailsModal from "./RequestDetailsModal";
-import { useState } from "react";
+import {  useState } from "react";
 import { toast } from "react-toastify";
-import { useQuery } from "@tanstack/react-query";
 import { fetchAdminRequests } from "../../../services/api/serviceApi";
+import { useQuery } from "@tanstack/react-query";
 import EmptyState from "../../ui/EmptyState";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 
-const AdminPendingService = () => {
+const AdminOngoingService = () => {
   const { data, isLoading } = useQuery({
-    queryKey: ["getServices", 'pending'],
-    queryFn: () => fetchAdminRequests("pending"),
+    queryKey: ["getServices", 'ongoing'],
+    queryFn: () => fetchAdminRequests("ongoing"),
   });
   const colors: string[] = [
     "border-purple-500",
@@ -62,7 +62,7 @@ const AdminPendingService = () => {
       <div>
         {data && !data?.data?.length && (
           <div>
-            <EmptyState msg="There's no pending request currently on the system." />
+            <EmptyState msg="There's no ongoing request currently on the system." />
           </div>
         )}
         {isLoading && (
@@ -72,13 +72,13 @@ const AdminPendingService = () => {
                 <CurveLoader />
               </div>
               <p className="text-center mt-5 fw-500">
-                Fetching Pending Service Requests...
+                Fetching Ongoing Service Requests...
               </p>
             </div>
           </div>
         )}
         {data &&
-          !!data?.data?.length &&
+          !!data?.data.length &&
           data?.data
             ?.slice(start, stop)
             .map((item: ServiceRequestItem, index: number) => {
@@ -150,4 +150,4 @@ const AdminPendingService = () => {
   );
 };
 
-export default AdminPendingService;
+export default AdminOngoingService;

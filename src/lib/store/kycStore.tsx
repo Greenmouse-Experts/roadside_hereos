@@ -29,6 +29,7 @@ export interface kycProps{
     account_type:string;
     routing_number: string;
     isVerified: string;
+    serviceCharge: number
 }
 const kycInitState = {
     business_name:  "",
@@ -36,6 +37,7 @@ const kycInitState = {
     incorporation_date: "",
     address:  "",
     business_email: "",
+    serviceCharge: 0,
     insurance_doc: [],
     business_reg_certificate: "",
     business_phone: "",

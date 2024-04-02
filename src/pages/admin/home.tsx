@@ -70,7 +70,7 @@ const AdminDashboardHome = () => {
             <ColumnChart/>
           </div>
         </div>
-        <div className="w-[30%]">
+        <div className="lg:w-[30%] mt-6 lg:mt-0">
             <RecentRequests/>
         </div>
       </div>

@@ -40,6 +40,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
       setTimeout(() => {
         reset({
           address: prevKyc.data?.address || "",
+          serviceCharge: prevKyc.data?.serviceCharge || 0,
           company: user?.name,
           business_registration_number: prevKyc.data?.registration_number || "",
           tin: prevKyc.data?.tax_id || "",
@@ -60,6 +61,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
     mode: "onChange",
     defaultValues: {
       address: kyc?.address || "",
+      serviceCharge: kyc?.serviceCharge || 0,
       company: user?.name,
       business_registration_number: kyc?.registration_number || "",
       tin: kyc?.tax_id || "",
@@ -116,7 +118,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
   useEffect(() => {
     handleCertUpload();
   }, [bizCert]);
-  const submitAction = async (data: any) => {
+  const submitAction = (data: any) => {
     const payload = {
       business_name: user.name,
       registration_number: data.business_registration_number,
@@ -128,8 +130,9 @@ const GeneralInfo: FC<Props> = ({ next }) => {
       staff_number: 2,
       vat_registration_number: data.business_registration_number,
       tax_id: data.tin,
+      serviceCharge: data.serviceCharge,
     };
-    await saveKyc({ ...kyc, ...payload });
+    saveKyc({ ...prevKyc.data, ...payload });
     next();
   };
 
@@ -189,12 +192,46 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                   />
                 )}
               />
-              <div>
-                <label className="block mt-3 text-[#000000B2] fw-500">
-                  Date of Incorporation/Registration
-                </label>
-                {kyc?.incorporation_date &&
-                  dayjs(kyc?.incorporation_date).format("MMMM-YYYY")}
+              <Controller
+                name="serviceCharge"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Please enter service charge",
+                  },
+                  min: {
+                    value: 1,
+                    message: "Value must be between 1 and 100.",
+                  },
+                  max: {
+                    value: 100,
+                    message: "Value must be between 1 and 100.",
+                  },
+                }}
+                // disabled={disabledField}
+                render={({ field }) => (
+                  <TextInput
+                    label="Service Charge (%)"
+                    labelClassName="text-[#000000B2] fw-500"
+                    error={errors.serviceCharge?.message}
+                    type={InputType.text}
+                    {...field}
+                    ref={null}
+                  />
+                )}
+              />
+              <div className="lg:col-span-2">
+                <div className="flex gap-x-3 items-center mt-3">
+                  <label className="block text-[#000000B2] fw-500">
+                    Date of Incorporation/Registration
+                  </label>
+                  {kyc?.incorporation_date && (
+                    <p className="bg-gray-200 fw-600 px-2">
+                      {dayjs(kyc?.incorporation_date).format("MMMM-YYYY")}
+                    </p>
+                  )}
+                </div>
                 <Controller
                   name="date"
                   control={control}
@@ -371,7 +408,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                   <PhoneInputWithCountry
                     international
                     defaultCountry="US"
-                    countries={['US']}
+                    countries={["US"]}
                     name="business_phone"
                     control={control}
                     disabled={disabledField}

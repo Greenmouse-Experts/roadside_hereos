@@ -59,7 +59,7 @@ const ViewKyc: FC<Props> = ({ id, kyc, refetch }) => {
         )}
         {!isLoading && data && (
           <div>
-            <div className="flex gap-x-3 justify-end">
+            <div className="flex flex-col lg:flex-row gap-3 mb-8 lg:mb-0 justify-end">
               {data?.data?.isVerified === "0" && <div className="text-red-600 text-lg fw-600 flex items-center gap-x-2">
                   <span className="w-3 h-3 circle bg-red-600 block"></span>{" "}
                   Declined

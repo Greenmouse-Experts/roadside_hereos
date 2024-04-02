@@ -58,7 +58,7 @@ const ProviderDetailsHeader: FC<Props> = ({
   return (
     <>
       <div className="relative">
-        <div className="bg-primary flex justify-end gap-x-3 p-8 w-full rounded-lg">
+        <div className="bg-primary flex justify-end gap-x-3 pb-16 lg:pb-8 p-8 w-full rounded-lg">
           <div className="text-end">
             <div className="flex items-center gap-x-5">
               <p className="text-white fw-600 lg:text-lg">{name}</p>
@@ -96,7 +96,7 @@ const ProviderDetailsHeader: FC<Props> = ({
             </div>
           </div>
         </div>
-        <div className="absolute top-16 left-6">
+        <div className="absolute top-28 lg:top-16 left-2 lg:left-6">
           <ProfileAvatar url={picture} name={name} size={130} font={35} />
         </div>
       </div>

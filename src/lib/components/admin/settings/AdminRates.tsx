@@ -1,0 +1,135 @@
+import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
+import TextInput, { InputType } from "../../ui/TextInput";
+import { ScaleSpinner } from "../../ui/Loading";
+import Button from "../../ui/Button";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { adminAddRates, adminGetRates } from "../../../services/api/adminApi";
+import { toast } from "react-toastify";
+
+const AdminRates = () => {
+  const [isBusy, setIsBusy] = useState(false);
+  const { isLoading, data, refetch } = useQuery({
+    queryKey: ["getAdminRates"],
+    queryFn: adminGetRates,
+  });
+  useEffect(() => {
+    if (data) {
+      reset({
+        service_percent: data?.data?.service_percent,
+        tax_percent:  data?.data?.tax_percent,
+      });
+    }
+  }, [data]);
+  const {
+    control,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      tax_percent: "",
+      service_percent: "",
+    },
+  });
+  const mutate = useMutation({
+    mutationFn: adminAddRates,
+    mutationKey: ["admin-add-rates"],
+  });
+  const onSubmit = (data: any) => {
+    if(data?.service_percent > 100 || data?.tax_percent > 100){
+        toast.info('Invalid Percentage')
+        return;
+    }
+    setIsBusy(true);
+    mutate.mutate(data, {
+      onSuccess: (data) => {
+        setIsBusy(false);
+        toast.success(data.message);
+        refetch()
+      },
+      onError: () => {
+        toast.error("Something went wrong");
+        setIsBusy(false);
+      },
+    });
+  };
+  return (
+    <>
+      <div className="bg-gray-100 rounded p-4 lg:p-5">
+        <p className="text-lg fw-600">Rates Setting</p>
+        <div className="mt-8">
+          <form onSubmit={handleSubmit(onSubmit)}>
+            <div>
+              <Controller
+                name="service_percent"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Please enter your service rate",
+                  },
+                  maxLength: 3,
+                  value: "number",
+                }}
+                disabled={isLoading}
+                render={({ field }) => (
+                  <TextInput
+                    label="Service Rate (%)"
+                    labelClassName="text-gray-500 fw-500"
+                    error={errors.service_percent?.message}
+                    type={InputType.number}
+                    min={0}
+                    max={100}
+                    maxLength={3}
+                    {...field}
+                  />
+                )}
+              />
+            </div>
+            <div className="mt-4">
+              <Controller
+                name="tax_percent"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Please enter your service rate",
+                  },
+                  maxLength: 3,
+                  value: "number",
+                }}
+                disabled={isLoading}
+                render={({ field }) => (
+                  <TextInput
+                    label="VAT (%)"
+                    labelClassName="text-gray-500 fw-500"
+                    error={errors.tax_percent?.message}
+                    type={InputType.number}
+                    min={0}
+                    max={100}
+                    maxLength={3}
+                    {...field}
+                  />
+                )}
+              />
+            </div>
+            <div className="mt-8 flex justify-end">
+              <div className="lg:w-5/12">
+                <Button
+                  title={
+                    isBusy ? <ScaleSpinner size={10} color="white" /> : "Update"
+                  }
+                  altClassName="btn-primary py-2 w-full text-lg fw-500"
+                />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default AdminRates;
