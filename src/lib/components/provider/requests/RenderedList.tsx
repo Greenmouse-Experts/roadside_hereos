@@ -7,11 +7,16 @@ import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import { ServiceRequestItem } from "../../../types/service";
 import { MdLocationPin } from "react-icons/md";
 import dayjs from "dayjs";
+import { FC, useState } from "react";
+import { toast } from "react-toastify";
 
-const RenderedServices = () => {
+interface Props{
+  status: string
+}
+const RenderedServices:FC<Props> = ({status}) => {
     const { isLoading, data } = useQuery({
-        queryKey: ["getServices"],
-        queryFn: getPendingServices,
+        queryKey: ["getServices", status],
+        queryFn: () => getPendingServices(status),
       });
   const colors: string[] = [
     "border-purple-500",
@@ -20,6 +25,33 @@ const RenderedServices = () => {
     "border-pink-500",
     "border-orange-500",
   ];
+  const [{ start, stop, page }, setPage] = useState({
+    start: 0,
+    stop: 6,
+    page: 1,
+  });
+  const handleNext = () => {
+    if (stop >= data?.data?.length) {
+      toast.info("This is the last page");
+    } else {
+      setPage({
+        start: start + 6,
+        stop: stop + 6,
+        page: page + 1,
+      });
+    }
+  };
+  const handlePrev = () => {
+    if (page === 1) {
+      toast.info("This is the first page");
+    } else {
+      setPage({
+        start: start - 6,
+        stop: stop - 6,
+        page: page - 1,
+      });
+    }
+  };
   return (
     <>
       <div>
@@ -71,6 +103,33 @@ const RenderedServices = () => {
           </div>
           );
         })}
+        <div className="mt-6 flex justify-end">
+          <div className="flex gap-x-4 items-center">
+            <p className="fw-600">Page {page}</p>
+            <div className="flex gap-x-2 items-center">
+              <div
+                onClick={handlePrev}
+                className={`px-2 py-1 rounded ${
+                  page === 1
+                    ? "bg-gray-300 cursor-not-allowed"
+                    : "bg-primary text-white cursor-pointer"
+                }`}
+              >
+                Prev
+              </div>
+              <div
+                onClick={handleNext}
+                className={`px-2 py-1 rounded ${
+                  stop >= data?.data?.length
+                    ? "bg-gray-300 cursor-not-allowed"
+                    : "bg-primary text-white cursor-pointer"
+                }`}
+              >
+                Next
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -10,11 +10,12 @@ import EmptyState from "../../ui/EmptyState";
 import useModal from "../../../hooks/useModal";
 import RequestDetailsModal from "./RequestDetailsModal";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const PendingService = () => {
   const { isLoading, data } = useQuery({
-    queryKey: ["getServices"],
-    queryFn: getPendingServices,
+    queryKey: ["getServices", "pending"],
+    queryFn: () => getPendingServices('pending'),
   });
   const colors: string[] = [
     "border-purple-500",
@@ -29,6 +30,33 @@ const PendingService = () => {
     setSelected(item)
     setShowModal(true)
   }
+  const [{ start, stop, page }, setPage] = useState({
+    start: 0,
+    stop: 10,
+    page: 1,
+  });
+  const handleNext = () => {
+    if (stop >= data?.data?.length) {
+      toast.info("This is the last page");
+    } else {
+      setPage({
+        start: start + 10,
+        stop: stop + 10,
+        page: page + 1,
+      });
+    }
+  };
+  const handlePrev = () => {
+    if (page === 1) {
+      toast.info("This is the first page");
+    } else {
+      setPage({
+        start: start - 10,
+        stop: stop - 10,
+        page: page - 1,
+      });
+    }
+  };
   return (
     <>
       <div className="p-3 lg:p-6">
@@ -51,7 +79,7 @@ const PendingService = () => {
         )}
         {!isLoading &&
           data &&
-          data?.data?.map((item: ServiceRequestItem, index: number) => {
+          data?.data?.slice(start, stop)?.map((item: ServiceRequestItem, index: number) => {
             const colorIndex = index % colors.length;
             const color = colors[colorIndex];
             return (
@@ -80,6 +108,33 @@ const PendingService = () => {
               </div>
             );
           })}
+          <div className="mt-6 flex justify-end">
+          <div className="flex gap-x-4 items-center">
+            <p className="fw-600">Page {page}</p>
+            <div className="flex gap-x-2 items-center">
+              <div
+                onClick={handlePrev}
+                className={`px-2 py-1 rounded ${
+                  page === 1
+                    ? "bg-gray-300 cursor-not-allowed"
+                    : "bg-primary text-white cursor-pointer"
+                }`}
+              >
+                Prev
+              </div>
+              <div
+                onClick={handleNext}
+                className={`px-2 py-1 rounded ${
+                  stop >= data?.data?.length
+                    ? "bg-gray-300 cursor-not-allowed"
+                    : "bg-primary text-white cursor-pointer"
+                }`}
+              >
+                Next
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
       <Modal title="Service Details" size="md" type="withCancel">
         <RequestDetailsModal item={selected}/>

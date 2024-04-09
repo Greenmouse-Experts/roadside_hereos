@@ -10,6 +10,7 @@ import { useMutation } from "@tanstack/react-query";
 import { sendProfileInfo } from "../../../../services/api/serviceApi";
 import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
+import useAuth from "../../../../hooks/authUser";
 
 interface Props {
   next: () => void;
@@ -18,6 +19,7 @@ interface Props {
 const PersonalSec: FC<Props> = ({ next, prev }) => {
   const requestInfo = useRequestStore((store) => store.request);
   const saveRequest = useRequestStore((state) => state.saveRequest);
+  const {user, firstName, lastName} = useAuth()
   const {
     control,
     handleSubmit,
@@ -25,10 +27,10 @@ const PersonalSec: FC<Props> = ({ next, prev }) => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
-      first_name: "",
-      last_name: "",
-      email: "",
-      phone: "",
+      first_name: firstName || "",
+      last_name: lastName || "",
+      email: user.email || "",
+      phone: user.phone || "",
       address: "",
     },
   });
@@ -167,7 +169,7 @@ const PersonalSec: FC<Props> = ({ next, prev }) => {
                 control={control}
                 rules={{
                   required: {
-                    value: true,
+                    value: false,
                     message: "Please enter a value",
                   },
                 }}

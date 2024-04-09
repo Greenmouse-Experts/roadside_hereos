@@ -64,15 +64,15 @@ const ServiceDetails = () => {
                 <div className="flex items-center gap-x-3">
                   <ProfileAvatar
                     url={""}
-                    name="Enzo Fernandez"
+                    name={`${data?.data?.driver?.fname} ${data?.data?.driver?.lname}`}
                     size={100}
                     font={30}
                   />
                   <div>
-                    <p className="fw-500 mb-2 text-lg">Enzo Fernandez</p>
+                    <p className="fw-500 mb-2 text-lg">{`${data?.data?.driver?.fname} ${data?.data?.driver?.lname}`}</p>
                     <div className="flex items-center gap-2 font-bold text-blue-gray-500">
-                      {4}.7
-                      <Rating value={4} readonly />
+                      {data?.data?.driver?.reviewsAvg}.0
+                      <Rating value={Number(data?.data?.driver?.reviewsAvg)} readonly />
                     </div>
                   </div>
                 </div>
@@ -81,25 +81,25 @@ const ServiceDetails = () => {
                 <div className="grid gap-5">
                   <div className="flex gap-x-2">
                     <p>Company:</p>
-                    <p className="fw-500">Greenmouse Technology</p>
+                    <p className="fw-500">{data?.data?.driverCompany?.name}</p>
                   </div>
                   <div className="flex gap-x-2">
                     <p>Car Description:</p>
-                    <p className="fw-500">Black toyata camry 2015</p>
+                    <p className="fw-500">{data?.data?.driverMoreInfo?.car_description}</p>
                   </div>
                   <div className="flex gap-x-2">
                     <p>Plate Number:</p>
-                    <p className="fw-500">CA-32899</p>
+                    <p className="fw-500">{data?.data?.driverMoreInfo?.plate_number}</p>
                   </div>
                 </div>
                 <div className="grid gap-5">
                   <div className="flex gap-x-2">
                     <p>Service Cost:</p>
-                    <p className="fw-500">$480</p>
+                    <p className="fw-500">{data?.data?.serviceRequest?.amount}</p>
                   </div>
                   <div className="flex gap-x-2">
                     <p>Contact Info:</p>
-                    <p className="fw-500">+1 (419) 456 5566</p>
+                    <p className="fw-500">{data?.data?.driverCompany?.phone}</p>
                   </div>
                   <div className="flex gap-x-2">
                     <p>Addition Info:</p>

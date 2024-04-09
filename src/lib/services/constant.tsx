@@ -1,5 +1,5 @@
-export const BASE_URL = 'https://roadside-heroes-bea8766012cb.herokuapp.com/api'
-export const BASE_UPLOAD = 'https://roadside-heroes-bea8766012cb.herokuapp.com'
+export const BASE_URL = 'https://api.alldrivesos.com/api'
+export const BASE_UPLOAD = 'https://api.alldrivesos.com'
 
 export enum HTTP_METHODS {
     GET = "GET",

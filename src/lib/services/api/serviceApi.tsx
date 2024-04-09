@@ -136,9 +136,9 @@ export const selectServiceProvider = async (payload: string) => {
     .then((response) => response.data);
 };
 
-export const getPendingServices = async () => {
+export const getPendingServices = async (status:string) => {
   return axios
-    .get(`${ENDPOINT.GET_SERVICES}`)
+    .get(`${ENDPOINT.GET_SERVICES}?status=${status}`)
     .then((response) => response.data);
 };
 
