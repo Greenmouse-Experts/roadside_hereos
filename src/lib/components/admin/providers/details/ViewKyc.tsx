@@ -17,7 +17,7 @@ interface Props {
   kyc: any;
   refetch: () => void;
 }
-const ViewKyc: FC<Props> = ({ id, kyc, refetch }) => {
+const ViewKyc: FC<Props> = ({ id, refetch }) => {
   const {
     data,
     isLoading,
