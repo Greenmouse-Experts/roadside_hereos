@@ -18,7 +18,11 @@ interface Props {
   refetch: () => void;
 }
 const ViewKyc: FC<Props> = ({ id, kyc, refetch }) => {
-  const { data, isLoading, refetch:refetchKyc } = useQuery({
+  const {
+    data,
+    isLoading,
+    refetch: refetchKyc,
+  } = useQuery({
     queryKey: ["getCompanyKyc"],
     queryFn: () => getCompanyKyc(id),
   });
@@ -38,7 +42,7 @@ const ViewKyc: FC<Props> = ({ id, kyc, refetch }) => {
         toast.success(res.message);
         setShowModal(false);
         refetch();
-        refetchKyc()
+        refetchKyc();
       })
       .catch((err: any) => {
         toast.error(err.response.data.message);
@@ -60,11 +64,13 @@ const ViewKyc: FC<Props> = ({ id, kyc, refetch }) => {
         {!isLoading && data && (
           <div>
             <div className="flex flex-col lg:flex-row gap-3 mb-8 lg:mb-0 justify-end">
-              {data?.data?.isVerified === "0" && <div className="text-red-600 text-lg fw-600 flex items-center gap-x-2">
+              {/* {data?.data?.isVerified && (
+                <div className="text-red-600 text-lg fw-600 flex items-center gap-x-2">
                   <span className="w-3 h-3 circle bg-red-600 block"></span>{" "}
                   Declined
-                </div>}
-              {kyc === "1" ? (
+                </div>
+              )} */}
+              {data?.data?.isVerified ? (
                 <div className="text-green-600 text-lg fw-600 flex items-center gap-x-2">
                   <span className="w-3 h-3 circle bg-green-600 block"></span>{" "}
                   Verified
@@ -77,7 +83,7 @@ const ViewKyc: FC<Props> = ({ id, kyc, refetch }) => {
                   onClick={() => setShowModal(true)}
                 />
               )}
-              {kyc !== "1" && (
+              {!data?.data?.isVerified && (
                 <Button
                   title={"Disapprove KYC"}
                   disabled={data?.data ? false : true}

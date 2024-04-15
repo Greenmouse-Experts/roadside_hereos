@@ -192,14 +192,10 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                   />
                 )}
               />
-              <Controller
+              {/* <Controller
                 name="serviceCharge"
                 control={control}
                 rules={{
-                  required: {
-                    value: true,
-                    message: "Please enter service charge",
-                  },
                   min: {
                     value: 1,
                     message: "Value must be between 1 and 100.",
@@ -209,7 +205,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                     message: "Value must be between 1 and 100.",
                   },
                 }}
-                // disabled={disabledField}
+                disabled={disabledField}
                 render={({ field }) => (
                   <TextInput
                     label="Service Charge (%)"
@@ -220,8 +216,8 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                     ref={null}
                   />
                 )}
-              />
-              <div className="lg:col-span-2">
+              /> */}
+              <div className="">
                 <div className="flex gap-x-3 items-center mt-3">
                   <label className="block text-[#000000B2] fw-500">
                     Date of Incorporation/Registration
@@ -332,7 +328,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
               <ImageInput
                 label="Upload Business Registration Certificate"
                 setImage={setbizCert}
-                prevValue={kyc?.business_reg_certificate}
+                prevValue={prevKyc?.data?.business_reg_certificate}
                 disabled={disabledField}
               />
               {sending === 1 && (
@@ -350,7 +346,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
               <ImageInput
                 label="Upload Insurance Requirement"
                 setImage={setImageVal}
-                prevValue={kyc?.insurance_doc[0]}
+                prevValue={prevKyc && prevKyc?.data?.insurance_doc?.length && prevKyc?.data?.insurance_doc[0]}
                 disabled={disabledField}
               />
               {uploading === 1 && (

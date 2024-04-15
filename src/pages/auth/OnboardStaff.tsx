@@ -110,7 +110,7 @@ const OnboardStaff = () => {
                     </label>
                     <PhoneInputWithCountry
                       international
-                      defaultCountry="NG"
+                      defaultCountry="US"
                       name="phone"
                       control={control}
                       rules={{

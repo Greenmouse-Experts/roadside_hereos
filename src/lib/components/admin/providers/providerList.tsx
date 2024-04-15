@@ -13,6 +13,7 @@ import {
 import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { formatPhoneNumber } from "react-phone-number-input";
+import { FormatStatus } from "../../../utils";
 
 interface Props {
   users: any;
@@ -53,6 +54,11 @@ const ProvidersList: FC<Props> = ({ users }) => {
     columnHelper.accessor((row) => row.createdAt, {
       id: "Joined On",
       cell: (info) => <>{dayjs(info.getValue()).format("DD  MMMM YYYY")}</>,
+      header: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.isActive, {
+      id: "Status",
+      cell: (info) => <>{info.getValue()? FormatStatus['active'] : FormatStatus['inactive']}</>,
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.id, {

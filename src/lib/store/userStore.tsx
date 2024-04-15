@@ -15,6 +15,7 @@ interface userProps{
     phone: string;
     id: string;
     account: string
+    charge?: number
 }
 const userInitState = {
     name: '',
@@ -24,7 +25,8 @@ const userInitState = {
     state: '',
     account: '',
     phone: '',
-    id: ''
+    id: '',
+    charge: 0
 }
 const useAuthStore = create<Props>()(
   persist(

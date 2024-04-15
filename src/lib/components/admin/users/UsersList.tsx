@@ -12,7 +12,7 @@ import {
 } from "@material-tailwind/react";
 import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
 import { UserItemType } from "../../../types/auth";
-import { formatPhoneNumber } from "../../../utils";
+import { FormatStatus, formatPhoneNumber } from "../../../utils";
 
 interface Props {
   users: any;
@@ -54,6 +54,11 @@ const UsersList: FC<Props> = ({ users }) => {
       cell: (info) => <>{dayjs(info.getValue()).format("DD  MMMM YYYY")}</>,
       header: (info) => info.column.id,
     }),
+    columnHelper.accessor((row) => row.isActive, {
+      id: "Status",
+      cell: (info) => <>{info.getValue()? FormatStatus['active'] : FormatStatus['inactive']}</>,
+      header: (info) => info.column.id,
+    }),
     columnHelper.accessor((row) => row.id, {
       id: "Action",
       header: (info) => info.column.id,
@@ -70,7 +75,7 @@ const UsersList: FC<Props> = ({ users }) => {
                 className="my-1 fw-500 flex items-center gap-x-2 pt-1"
                 onClick={() => gotoDetails(info.getValue())}
               >
-                <BsArrowsExpand/> View Details
+                <BsArrowsExpand/> View User Requests
               </MenuItem>
             </MenuList>
           </Menu>

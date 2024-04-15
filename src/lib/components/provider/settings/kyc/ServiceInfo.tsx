@@ -111,7 +111,7 @@ const ServiceInfo: FC<Props> = ({ prev, next }) => {
               </label>
               <PhoneInputWithCountry
                 international
-                defaultCountry="NG"
+                defaultCountry="US"
                 name="phone"
                 control={control}
                 disabled={isDisabled}

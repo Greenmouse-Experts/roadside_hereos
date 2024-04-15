@@ -1,16 +1,19 @@
 "use client";
 import React, { useState } from "react";
 import { FaCamera } from "react-icons/fa";
-import { BiEditAlt } from "react-icons/bi";
+import { BiEdit, BiEditAlt } from "react-icons/bi";
 import { toast } from "react-toastify";
 import useAuth from "../../../hooks/authUser";
 import ProfileAvatar from "../../ui/ProfileAvatar";
 import { useMutation } from "@tanstack/react-query";
 import { adminUpdateAvatar } from "../../../services/api/authApi";
+import useDialog from "../../../hooks/useDialog";
+import SetChargeModal from "./charge/setChargeModal";
 
 const MyProfileSettings = () => {
   const {user, saveUser} = useAuth();
   const [isBusy, setIsBusy] = useState(false);
+  const {Dialog, setShowModal} = useDialog()
   const mutation = useMutation({
     mutationFn: adminUpdateAvatar,
     onSuccess: (data) => {
@@ -63,7 +66,18 @@ const MyProfileSettings = () => {
             </div>
           </div>
         </div>
-        <div className="mt-4 lg:my-8 border-2 border-[#808080] overflow-hidden px-8 py-4 lg:pt-6 lg:pb-10 rounded-[15px]">
+        <div className="mt-4 border-2 border-[#808080] px-8 py-4 lg:py-6 flex justify-between rounded-[15px]">
+          <div className="">
+            <div className="flex gap-x-3 items-center">
+            <p className="text-[#808080]">Service Charge (%)</p>
+            <BiEdit className="cursor-pointer" onClick={() => setShowModal(true)}/>
+            </div>
+            <div className="mt-1 pl-2">
+              <p className="fw-500">{user.charge? `${user.charge} %` : '0 %'}</p>
+            </div>
+          </div>
+        </div>
+        <div className="mt-4 lg:my-6 border-2 border-[#808080] overflow-hidden px-8 py-4 lg:pt-6 lg:pb-10 rounded-[15px]">
           <div className="w-full flex justify-between items-center">
             <p className="fw-500 ">Company Information</p>
             <button
@@ -93,6 +107,9 @@ const MyProfileSettings = () => {
           </div>
         </div>
       </div>
+      <Dialog title="Update Service Charge" size="md">
+        <SetChargeModal close={() => setShowModal(false)}/>
+      </Dialog>
     </>
   );
 };
