@@ -36,7 +36,7 @@ const RequestForm:FC<Props> = ({activeId, activeQuestion}) => {
           isLastStep={(value) => setIsLastStep(value)}
           isFirstStep={(value) => setIsFirstStep(value)}
         >
-          <Step onClick={() => setActiveStep(0)}>
+          <Step >
             <FaRegUser className="h-5 w-5" />
             <div className="absolute -bottom-8 lg:-bottom-[4.5rem] w-max text-center">
               <Typography
@@ -53,7 +53,7 @@ const RequestForm:FC<Props> = ({activeId, activeQuestion}) => {
               </Typography>
             </div>
           </Step>
-          <Step onClick={() => setActiveStep(1)}>
+          <Step >
             <FaCar className="h-5 w-5" />
             <div className="absolute -bottom-8 lg:-bottom-[4.5rem] w-max text-center">
               <Typography
@@ -70,7 +70,7 @@ const RequestForm:FC<Props> = ({activeId, activeQuestion}) => {
               </Typography>
             </div>
           </Step>
-          <Step onClick={() => setActiveStep(2)}>
+          <Step>
             <MdMiscellaneousServices className="h-5 w-5" />
             <div className="absolute -bottom-8 lg:-bottom-[4.5rem] w-max text-center">
               <Typography
@@ -87,7 +87,7 @@ const RequestForm:FC<Props> = ({activeId, activeQuestion}) => {
               </Typography>
             </div>
           </Step>
-          <Step onClick={() => setActiveStep(3)}>
+          <Step >
             <BsBank2 className="h-5 w-5" />
             <div className="absolute -bottom-8 lg:-bottom-[4.5rem] w-max text-center">
               <Typography

@@ -32,7 +32,6 @@ const ProviderList: FC<Props> = ({ next, prev }) => {
     setLoading(true)
     await getServiceQoutes(request.id)
     .then((res) => {
-      toast.success('Providers fetched')
       setProviders(res?.data)
       setLoading(false)
     })
@@ -97,7 +96,7 @@ const ProviderList: FC<Props> = ({ next, prev }) => {
             </div>
             ))
           )}
-          {(!play && !loading && !providers.length) && (
+          {(!play && !loading) && (
             <div className="flex justify-end mt-12"><button className="underline px-4 py-2 flex items-center gap-x-1" onClick={() => fetchProviders()}><MdRefresh/> Retry Again</button></div>
           )}
           {loading && (

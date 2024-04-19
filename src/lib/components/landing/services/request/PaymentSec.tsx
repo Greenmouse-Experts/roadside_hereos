@@ -4,6 +4,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { initiatePay } from "../../../../services/api/serviceApi";
 import useRequestStore from "../../../../store/serviceStore";
+import { formatNumber } from "../../../../utils";
 
 interface Props {
   prev: () => void;
@@ -48,7 +49,7 @@ const PaymentSec: FC<Props> = ({ prev }) => {
             </div>
             <div className="flex justify-between border-t-2 border-gray-300 pt-2">
               <p className="fw-500">Total:</p>
-              <p className="fw-600 fs-700">$5,050</p>
+              <p className="fw-600 fs-700">${formatNumber(payDetails?.amount)}</p>
             </div>
           </div>
         )}

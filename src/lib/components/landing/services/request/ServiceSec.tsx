@@ -220,6 +220,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                     error={errors.other?.message}
                     type={InputType.textarea}
                     {...field}
+                    disabled
                     ref={null}
                   />
                 )}
