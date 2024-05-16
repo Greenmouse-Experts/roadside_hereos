@@ -47,7 +47,7 @@ export const updateProfile = async(payload:UpdateProfile) => {
  } 
 
  export const adminUpdatePassword = async(payload:ChangePassword) => {
-    return  axios.patch(`${ENDPOINT.UPDATE_ACCOUNT}`, payload).then((response) => response.data)
+    return  axios.patch(`${ENDPOINT.UPDATE_PASSWORD}`, payload).then((response) => response.data)
  } 
 
  export const registerProvider = async(payload:CreateUser) => {

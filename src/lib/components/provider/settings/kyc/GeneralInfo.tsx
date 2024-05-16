@@ -27,14 +27,14 @@ const GeneralInfo: FC<Props> = ({ next }) => {
   const [sending, setSending] = useState(0);
   const [showTip, setShowTip] = useState(false);
   const [disabledField, setDisabledField] = useState(false);
-  const { data: prevKyc } = useQuery({
+  const { data: prevKyc, isLoading } = useQuery({
     queryKey: ["getKyc"],
     queryFn: getKyc,
   });
   useEffect(() => {
     if (prevKyc) {
       saveKyc(prevKyc.data);
-      if (prevKyc.data.isVerified === "1") {
+      if (prevKyc?.data?.isVerified === "1") {
         setDisabledField(true);
       }
       setTimeout(() => {
@@ -139,7 +139,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
   return (
     <>
       <div className="flex justify-end mb-2">
-        {kyc.isVerified === "1" && (
+        {kyc?.isVerified === "1" && (
           <div className="flex gap-x-1 items-center">
             <span className="w-4 h-4 circle bg-green-600 block"></span>
             <p className="text-green-700 fw-600">Verified</p>
@@ -192,31 +192,6 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                   />
                 )}
               />
-              {/* <Controller
-                name="serviceCharge"
-                control={control}
-                rules={{
-                  min: {
-                    value: 1,
-                    message: "Value must be between 1 and 100.",
-                  },
-                  max: {
-                    value: 100,
-                    message: "Value must be between 1 and 100.",
-                  },
-                }}
-                disabled={disabledField}
-                render={({ field }) => (
-                  <TextInput
-                    label="Service Charge (%)"
-                    labelClassName="text-[#000000B2] fw-500"
-                    error={errors.serviceCharge?.message}
-                    type={InputType.text}
-                    {...field}
-                    ref={null}
-                  />
-                )}
-              /> */}
               <div className="">
                 <div className="flex gap-x-3 items-center mt-3">
                   <label className="block text-[#000000B2] fw-500">
@@ -325,12 +300,12 @@ const GeneralInfo: FC<Props> = ({ next }) => {
               />
             </div>
             <div className="mt-3 relative">
-              <ImageInput
+             {(prevKyc && !isLoading) && <ImageInput
                 label="Upload Business Registration Certificate"
                 setImage={setbizCert}
                 prevValue={prevKyc?.data?.business_reg_certificate}
                 disabled={disabledField}
-              />
+              />}
               {sending === 1 && (
                 <p className="fs-400 italics text-gray-500 fw-500">
                   Document is uploading...
@@ -343,12 +318,12 @@ const GeneralInfo: FC<Props> = ({ next }) => {
               )}
             </div>
             <div className="mt-3 relative">
-              <ImageInput
+             {(prevKyc && !isLoading) && <ImageInput
                 label="Upload Insurance Requirement"
                 setImage={setImageVal}
                 prevValue={prevKyc && prevKyc?.data?.insurance_doc?.length && prevKyc?.data?.insurance_doc[0]}
                 disabled={disabledField}
-              />
+              />}
               {uploading === 1 && (
                 <p className="fs-400 italics text-gray-500 fw-500">
                   Document is uploading...
