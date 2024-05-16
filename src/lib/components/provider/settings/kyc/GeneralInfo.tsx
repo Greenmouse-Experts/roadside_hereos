@@ -34,7 +34,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
   useEffect(() => {
     if (prevKyc) {
       saveKyc(prevKyc.data);
-      if (prevKyc?.data?.isVerified === "1") {
+      if (prevKyc?.data?.isVerified) {
         setDisabledField(true);
       }
       setTimeout(() => {
@@ -139,7 +139,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
   return (
     <>
       <div className="flex justify-end mb-2">
-        {kyc?.isVerified === "1" && (
+        {kyc?.isVerified  && (
           <div className="flex gap-x-1 items-center">
             <span className="w-4 h-4 circle bg-green-600 block"></span>
             <p className="text-green-700 fw-600">Verified</p>
