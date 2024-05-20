@@ -16,6 +16,7 @@ export interface UpdateProfile {
   state?: string;
   city?: string;
   street?: string;
+  fcm_token?: string
 }
 
 export interface CreateUser {

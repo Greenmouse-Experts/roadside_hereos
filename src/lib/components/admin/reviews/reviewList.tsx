@@ -39,7 +39,7 @@ const ReviewList: FC<Props> = ({ data }) => {
                 <div className="hidden lg:block border-l pl-4 w-4/12 p-2">
                   <p className="fw-600">{`${item.vendor.fname} ${item.vendor.lname}`}</p>
                   <div className="mt-2">
-                    <Rating value={item.vendor.reviewsAvg} readonly/>
+                    <Rating count={5} value={Number(item.vendor.reviewsAvg)} readonly/>
                   </div>
                 </div>
               </div>

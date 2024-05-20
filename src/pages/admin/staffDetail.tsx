@@ -70,8 +70,8 @@ const StaffDetail = () => {
                       <div className="py-6"></div>
                     </div>
                     <div className="flex items-center gap-2 font-bold text-blue-gray-500 pt-10 lg:pt-0 px-2 lg:pr-4 cursor-pointer" onClick={() => setShowModal(true)}>
-                      {data?.data?.reviewsAvg === null? "No Ratings Yet" : data?.data?.reviewsAvg}
-                      <Rating value={Number(data?.data?.reviewsAvg) || 0} className="scale-120" readonly/>
+                      {data?.data?.reviewsAvg === null? "No Ratings Yet" : `${data?.data?.reviewsAvg}/5`}
+                      {data?.data?.reviewsAvg && <Rating value={Number(data?.data?.reviewsAvg) || 0} ratedColor={'amber'}  className="scale-120" readonly/>}
                       <span className="underline">View</span>
                     </div>
                   </div>

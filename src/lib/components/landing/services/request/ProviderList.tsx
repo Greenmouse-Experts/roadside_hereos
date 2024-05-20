@@ -1,5 +1,5 @@
 import { Button } from "@material-tailwind/react";
-import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowRightLong } from "react-icons/fa6";
 import { FC, useEffect, useState } from "react";
 import { FaStar } from "react-icons/fa";
 import { formatAsNgnMoney } from "../../../../utils";
@@ -17,7 +17,7 @@ interface Props {
   prev: () => void;
 }
 
-const ProviderList: FC<Props> = ({ next, prev }) => {
+const ProviderList: FC<Props> = ({ next }) => {
   const request = useRequestStore((state) => state.request)
   const saveRequest = useRequestStore((state) => state.saveRequest)
   const [loading, setLoading] = useState(false)
@@ -112,10 +112,7 @@ const ProviderList: FC<Props> = ({ next, prev }) => {
             </div>
           )}
         </div>
-        <div className="mt-16 flex justify-between">
-          <Button onClick={prev} className="btn-feel flex gap-x-2 items-center">
-            <FaArrowLeftLong /> Prev
-          </Button>
+        <div className="mt-16 flex justify-end">
           <Button
             onClick={handleNext}
             type={"submit"}

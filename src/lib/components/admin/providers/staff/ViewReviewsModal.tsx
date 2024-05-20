@@ -25,7 +25,7 @@ const ViewReviewsModal: FC<Props> = ({ id }) => {
   return (
     <div>
       <div className="max-h-[400px] overflow-y-auto">
-      {data?.data?.length &&
+      {!!data?.data?.length &&
         data?.data?.map((item: ReviewItem, index:number) => {
           const colorIndex = index % colors.length;
           const color = colors[colorIndex];

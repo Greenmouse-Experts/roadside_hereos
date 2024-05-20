@@ -8,10 +8,6 @@ export const NAV_LIST = [
     name: "FAQs",
   },
   {
-    url: "/career",
-    name: "Careers",
-  },
-  {
     url: "/contact",
     name: "Contact Us",
   },

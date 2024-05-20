@@ -6,23 +6,29 @@ import { getCategories } from "../../lib/services/api/serviceApi";
 import { ServiceCatItem } from "../../lib/types/service";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
+import useRequestStore from "../../lib/store/serviceStore";
+import { RiDeleteBin5Fill } from "react-icons/ri";
 
 const RequestPage = () => {
-  const {id} = useParams()
+  const { id } = useParams();
+  const requestInfo = useRequestStore((store) => store.request);
+  const clearRequest = useRequestStore((store) => store.clearRequest);
   const { data: service } = useQuery({
     queryKey: ["getCat"],
     queryFn: getCategories,
   });
-  const [active, setActive] = useState<ServiceCatItem>()
+  const [active, setActive] = useState<ServiceCatItem>();
   const getActiveService = () => {
-    const activeService = service?.data?.filter((where:ServiceCatItem) => where.id === id)
-    setActive(activeService[0])
-  }
+    const activeService = service?.data?.filter(
+      (where: ServiceCatItem) => where.id === id
+    );
+    setActive(activeService[0]);
+  };
   useEffect(() => {
-    if(service){
-      getActiveService()
+    if (service) {
+      getActiveService();
     }
-  }, [service])
+  }, [service]);
   return (
     <>
       <LandingLayout>
@@ -47,8 +53,25 @@ const RequestPage = () => {
           <div className="section">
             <div className="box">
               <div className="lg:w-11/12 mx-auto">
-                <p className="mb-4 text-lg lg:text-3xl fw-600">Service: {active?.name}</p>
-                {active && <RequestForm activeId={`${id}`} activeQuestion={active?.questionNote}/>}
+                <div className="flex justify-between items-center">
+                  <p className="mb-4 text-lg lg:text-3xl fw-600">
+                    Service: {active?.name}
+                  </p>
+                  {requestInfo.level > 0 && (
+                    <p
+                      onClick={clearRequest}
+                      className="flex items-center gap-x-2 cursor-pointer text-red-600 fw-600 fs-500"
+                    >
+                      <RiDeleteBin5Fill /> Clear Request
+                    </p>
+                  )}
+                </div>
+                {active && (
+                  <RequestForm
+                    activeId={`${id}`}
+                    activeQuestion={active?.questionNote}
+                  />
+                )}
               </div>
             </div>
           </div>

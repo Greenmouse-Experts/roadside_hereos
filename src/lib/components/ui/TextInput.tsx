@@ -184,7 +184,7 @@ const TextInput: React.FC<Props> = ({
         <>
           {label && (
             <label className={labelClassName ? labelClassName : ''}>
-              {label}
+              {label} {required && <span className='fw-600 text-red-600'> *</span>}
             </label>
           )}
         </>

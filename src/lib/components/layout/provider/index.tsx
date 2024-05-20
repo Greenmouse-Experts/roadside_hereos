@@ -15,6 +15,7 @@ import useAuth from "../../../hooks/authUser";
 import LogoutModal from "../../auth/LogoutModal";
 import ProfileAvatar from "../../ui/ProfileAvatar";
 import ProviderNotifyDrop from "../../provider/home/NotifyDrop";
+import Notification from "../../../services/pushNotify";
 
 interface Props {
   children: React.ReactNode;
@@ -26,6 +27,7 @@ const ProviderDashboardLayout: React.FC<Props> = ({ children }) => {
 
   return (
     <>
+    <Notification/>
       <div className="flex bg-light">
         <div className="lg:w-[250px]">
           <SidebarLayout toggled={toggled} setToggled={setToggled}/>

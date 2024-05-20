@@ -54,6 +54,7 @@ const Footer = () => {
             <ul className="grid gap-6 fs-500">
               <li><Link to={'/'}>Home</Link></li>
               <li><Link to={'/faqs'}>FAQs</Link></li>
+              <li><Link to={'/career'}>Careers</Link></li>
               <li><Link to={'/request'}>Request a Service</Link></li>
               <li><Link to={'/auth/register'}>Signup as a Provider</Link></li>
             </ul>

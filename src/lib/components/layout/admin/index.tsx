@@ -15,6 +15,7 @@ import useAuth from "../../../hooks/authUser";
 import ProfileAvatar from "../../ui/ProfileAvatar";
 import NotifyDrop from "../../admin/home/NotifyDrop";
 import LogoutModal from "../../auth/AdminLogoutModal";
+import Notification from "../../../services/pushNotify";
 
 interface Props {
   children: React.ReactNode;
@@ -25,6 +26,7 @@ const AdminDashboardLayout: React.FC<Props> = ({ children }) => {
   const [toggled, setToggled] = React.useState(false);
   return (
     <>
+    <Notification/>
       <div className="flex bg-light">
         <div className="lg:w-[250px]">
           <SidebarLayout  toggled={toggled} setToggled={setToggled}/>

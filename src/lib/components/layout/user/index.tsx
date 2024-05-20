@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import { AiOutlineMenuUnfold } from "react-icons/ai";
 import useAuth from "../../../hooks/authUser";
+import Notification from "../../../services/pushNotify";
 interface Props {
   children: React.ReactNode;
 }
@@ -16,6 +17,7 @@ const UserDashboardLayout: React.FC<Props> = ({ children }) => {
   
   return (
     <>
+      <Notification/>
       <div className="flex bg-gray-100">
         <div className="lg:w-[250px] border-r-2 bg-white">
           <SidebarLayout toggled={toggled} setToggled={setToggled}/>

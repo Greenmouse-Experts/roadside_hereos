@@ -3,7 +3,7 @@ import TextInput, { InputType } from "../../../ui/TextInput";
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import { Button } from "@material-tailwind/react";
-import { FaArrowLeftLong, FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowRightLong } from "react-icons/fa6";
 import { FC, useState } from "react";
 import useRequestStore from "../../../../store/serviceStore";
 import { useMutation } from "@tanstack/react-query";
@@ -16,7 +16,7 @@ interface Props {
   next: () => void;
   prev: () => void;
 }
-const PersonalSec: FC<Props> = ({ next, prev }) => {
+const PersonalSec: FC<Props> = ({ next }) => {
   const requestInfo = useRequestStore((store) => store.request);
   const saveRequest = useRequestStore((state) => state.saveRequest);
   const {user, firstName, lastName} = useAuth()
@@ -90,6 +90,7 @@ const PersonalSec: FC<Props> = ({ next, prev }) => {
                     labelClassName="text-[#000000B2] fw-500"
                     error={errors.first_name?.message}
                     type={InputType.text}
+                    required
                     {...field}
                     ref={null}
                   />
@@ -110,6 +111,7 @@ const PersonalSec: FC<Props> = ({ next, prev }) => {
                     labelClassName="text-[#000000B2] fw-500"
                     error={errors.last_name?.message}
                     type={InputType.text}
+                    required
                     {...field}
                     ref={null}
                   />
@@ -132,6 +134,7 @@ const PersonalSec: FC<Props> = ({ next, prev }) => {
                     labelClassName="text-[#000000B2] fw-500"
                     error={errors.email?.message}
                     type={InputType.email}
+                    required
                     {...field}
                     ref={null}
                   />
@@ -139,7 +142,7 @@ const PersonalSec: FC<Props> = ({ next, prev }) => {
               />
               <div>
                 <label className="mb-1 block mt-3 fw-500 text-[#000000B2]">
-                  Phone Number
+                  Phone Number <span className="fw-600 text-red-600"> *</span>
                 </label>
                 <PhoneInputWithCountry
                   defaultCountry="US"
@@ -179,6 +182,7 @@ const PersonalSec: FC<Props> = ({ next, prev }) => {
                     labelClassName="text-[#000000B2] fw-500"
                     error={errors.address?.message}
                     type={InputType.textarea}
+                    required
                     {...field}
                     ref={null}
                   />
@@ -186,13 +190,7 @@ const PersonalSec: FC<Props> = ({ next, prev }) => {
               />
             </div>
           </div>
-          <div className="mt-16 flex justify-between">
-            <Button
-              onClick={prev}
-              className="btn-feel flex gap-x-2 items-center"
-            >
-              <FaArrowLeftLong /> Prev
-            </Button>
+          <div className="mt-16 flex justify-end">
             <Button
               type={"submit"}
               className="btn-feel flex gap-x-2 items-center"

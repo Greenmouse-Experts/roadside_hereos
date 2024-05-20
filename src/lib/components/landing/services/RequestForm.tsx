@@ -20,7 +20,7 @@ const RequestForm:FC<Props> = ({activeId, activeQuestion}) => {
     const [isFirstStep, setIsFirstStep] = React.useState(false);
     const request = useRequestStore((state) => state.request)
     useEffect(() => {
-      if(request.level){
+      if(request.id){
         setActiveStep(request.level + 1)
       }
     },[request])
