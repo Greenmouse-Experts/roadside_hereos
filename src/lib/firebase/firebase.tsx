@@ -2,7 +2,6 @@
 import { initializeApp } from "firebase/app";
 import { getMessaging, getToken, onMessage } from "firebase/messaging";
 import { updateProfile } from "../services/api/authApi";
-import { toast } from "react-toastify";
 import { useMutation } from "@tanstack/react-query";
 
 const VAPID_KEY = import.meta.env.VITE_VAPID_KEY
@@ -56,7 +55,6 @@ export const onMessageListener = () =>
 new Promise((resolve) => {
     const messaging = getMessaging(app);
   onMessage(messaging, (payload) => {
-    console.log("payload", payload)
     resolve(payload);
   });
 });
