@@ -2,7 +2,8 @@ import { BiFilter } from "react-icons/bi";
 import { BsBarChartLine } from "react-icons/bs";
 import { formatNumber } from "../../lib/utils";
 import RecentRequests from "../../lib/components/admin/home/RecentRequests";
-import ColumnChart from "../../lib/components/admin/home/ActivityChart";
+import ActivityChart from "../../lib/components/admin/home/ActivityChart";
+// import ColumnChart from "../../lib/components/admin/home/ActivityChart";
 
 const AdminDashboardHome = () => {
   const serviceData = [
@@ -67,7 +68,7 @@ const AdminDashboardHome = () => {
             </div>
           </div>
           <div className="mt-6">
-            <ColumnChart/>
+            <ActivityChart/>
           </div>
         </div>
         <div className="lg:w-[30%] mt-6 lg:mt-0">

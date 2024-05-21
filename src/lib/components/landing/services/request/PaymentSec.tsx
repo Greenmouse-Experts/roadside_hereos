@@ -41,11 +41,15 @@ const PaymentSec: FC<Props> = ({ prev }) => {
           <div className="grid gap-2 bg-primary text-white p-4 rounded mb-5">
             <div className="flex justify-between">
               <p className="fw-500">Service Fee:</p>
-              <p className="fw-600 fs-700">$5,000</p>
+              <p className="fw-600 fs-700">${formatNumber(payDetails.amount_breakdown.subtotal)}</p>
+            </div>
+            <div className="flex justify-between">
+              <p className="fw-500">AllDriveSOS Fee:</p>
+              <p className="fw-600 fs-700">${formatNumber(payDetails.amount_breakdown.service_amount)}</p>
             </div>
             <div className="flex justify-between">
               <p className="fw-500">VAT:</p>
-              <p className="fw-600 fs-700">$50</p>
+              <p className="fw-600 fs-700">${formatNumber(payDetails.amount_breakdown.tax_amount)}</p>
             </div>
             <div className="flex justify-between border-t-2 border-gray-300 pt-2">
               <p className="fw-500">Total:</p>
