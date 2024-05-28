@@ -16,7 +16,7 @@ const SidebarLayout:FC<Props> = ({toggled, setToggled}) => {
   const { Modal, setShowModal } = useModal();
   
   return (
-    <div className="left-0 top-0 fixed overflow-y-hidden rounded-r-3xl index-30  bg-primary text-white">
+    <div className="left-0 top-0 fixed overflow-y-hidden rounded-r-3xl z-10 bg-primary text-white">
       <Sidebar
         customBreakPoint="1024px"
         className="h-screen overflow-y-hidden scroll-pro lg:pb-4 fs-700 fw-500 lg:px-4"
@@ -25,7 +25,7 @@ const SidebarLayout:FC<Props> = ({toggled, setToggled}) => {
         toggled={toggled}
       >
         <div className="flex justify-center py-6 lg:py-9 lg:pb-8 items-center">
-          <Link to="/" className="block flex justify-center gap-x-1">
+          <Link to="/" className=" flex justify-center gap-x-1">
           <img src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1706192917/rsh/Group_48097864_1_mopmlj.png" alt="logo" className="w-10/12" />
           </Link>
         </div>

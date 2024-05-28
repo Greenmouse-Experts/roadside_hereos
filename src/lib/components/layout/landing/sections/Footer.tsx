@@ -72,7 +72,7 @@ const Footer = () => {
             <ul className="grid gap-6 fs-500">
               <li><Link to={'/contact'}>Help</Link></li>
               <li><Link to={'/contact'}>Contact Us</Link></li>
-              <li><Link to={'/'}>Feedback</Link></li>
+              {/* <li><Link to={'/'}>Feedback</Link></li> */}
             </ul>
           </div>
           <div>

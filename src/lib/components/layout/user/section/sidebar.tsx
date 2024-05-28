@@ -18,7 +18,7 @@ const SidebarLayout:FC<Props> = ({toggled, setToggled}) => {
   const {Dialog, setShowModal} = useDialog()
 
   return (
-    <div className="left-0 top-0 fixed overflow-y-hidden rounded-r-3xl index-30">
+    <div className="left-0 top-0 fixed overflow-y-hidden rounded-r-3xl index-10">
       <Sidebar
         customBreakPoint="1024px"
         className="h-screen overflow-y-hidden scroll-pro lg:pb-4 fs-700 fw-500 lg:px-4"

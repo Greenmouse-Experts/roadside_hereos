@@ -1,5 +1,6 @@
 export const BASE_URL = 'https://api.alldrivesos.com/api'
 export const BASE_UPLOAD = 'https://api.alldrivesos.com'
+export const GOOGLE_API_KEY = `${import.meta.env.VITE_GOOGLE_KEY}`
 
 export enum HTTP_METHODS {
     GET = "GET",
