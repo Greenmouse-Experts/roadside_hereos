@@ -2,17 +2,18 @@ import GoogleMapReact from "google-map-react";
 import { FC, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { GOOGLE_API_KEY } from "../../../../../services/constant";
-import { getPostalCodeFromGoogle } from "../../../../../utils";
+import { getCityFromGoogle, getPostalCodeFromGoogle } from "../../../../../utils";
+import { LocationProps } from "../ServiceSec";
 
 interface Props {
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-  setPostal: React.Dispatch<React.SetStateAction<string>>;
+  setValue: React.Dispatch<React.SetStateAction<LocationProps>>;
   close: () => void
 }
-const MapLocation: FC<Props> = ({ setValue, setPostal, close }) => {
+const MapLocation: FC<Props> = ({ setValue, close }) => {
   const [isBusy, setIsBusy] = useState(false);
   const [selectedAddress, setSelectedAddress] = useState<string>("");
   const [selectedPostal, setSelectedPostal] = useState<string>("");
+  const [selectedCity, setSelectedCity] = useState<string>("");
   const [{ lat, lon }, setCordss] = useState({
     lat: 0,
     lon: 0,
@@ -85,7 +86,7 @@ const MapLocation: FC<Props> = ({ setValue, setPostal, close }) => {
       const result = await response.json();
       if (result) {
         setSelectedAddress(result?.results[0].formatted_address);
-        // setValue(result?.results[0].formatted_address);
+        setSelectedCity(getCityFromGoogle(result?.results[0].address_components))
         setSelectedPostal(
           getPostalCodeFromGoogle(result?.results[0].address_components)
         );
@@ -96,8 +97,13 @@ const MapLocation: FC<Props> = ({ setValue, setPostal, close }) => {
   };
 
   const selectAddress = () => {
-    setValue(selectedAddress);
-    setPostal(selectedPostal);
+    setValue({
+      location: selectedAddress,
+      latitude: String(lat),
+      longitude: String(lon),
+      postal: selectedPostal,
+      city: selectedCity,
+    });
     close()
   }
 

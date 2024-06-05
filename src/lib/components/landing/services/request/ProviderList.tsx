@@ -81,7 +81,7 @@ const ProviderList: FC<Props> = ({ next }) => {
                  <ProfileAvatar url={item?.driver?.photo} name={`${item?.driver?.fname} ${item?.driver?.lname}`} size={70} font={22} square={true}/>
                  <div>
                    <p>{`${item?.driver?.fname} ${item?.driver?.lname}`}</p>
-                   <p>Distance: 35km</p>
+                   <p>Distance: {`${item.distance}`}</p>
                    <div className="flex mt-2 gap-x-2">
                      {star.map((items, i) => (
                        <p key={i} className="text-gray-500">

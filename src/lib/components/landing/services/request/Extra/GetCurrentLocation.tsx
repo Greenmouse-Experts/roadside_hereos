@@ -5,14 +5,14 @@ import { BeatLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import MapLocation from "./MapLocation";
 import { GOOGLE_API_KEY } from "../../../../../services/constant";
-import { getPostalCodeFromGoogle } from "../../../../../utils";
+import { getCityFromGoogle, getPostalCodeFromGoogle } from "../../../../../utils";
 import useCustomModal from "../../../../../hooks/useCustomModal";
+import { LocationProps } from "../ServiceSec";
 
 interface Props {
-  setValue: React.Dispatch<React.SetStateAction<string>>;
-  setPostal: React.Dispatch<React.SetStateAction<string>>;
+  setValue: React.Dispatch<React.SetStateAction<LocationProps>>;
 }
-const GetCurrentLocation: FC<Props> = ({ setValue, setPostal }) => {
+const GetCurrentLocation: FC<Props> = ({ setValue }) => {
   const [isBusy, setIsBusy] = useState(false);
   const { Dialog, setShowModal } = useCustomModal();
   const geolocationAPI = navigator.geolocation;
@@ -57,10 +57,14 @@ const GetCurrentLocation: FC<Props> = ({ setValue, setPostal }) => {
       if (result) {
         toast.success("Nearest Location Fetched");
         setIsBusy(false);
-        setValue(result?.results[0].formatted_address);
-        setPostal(
-          getPostalCodeFromGoogle(result?.results[0].address_components)
-        );
+        console.log(result);
+        setValue({
+          location: result?.results[0].formatted_address,
+          postal:  getPostalCodeFromGoogle(result?.results[0].address_components),
+          latitude: String(data.latitude),
+          longitude: String(data.longitude),
+          city: getCityFromGoogle(result?.results[0].address_components)
+        });
       }
     } catch (error: any) {
       setIsBusy(false);
@@ -90,7 +94,7 @@ const GetCurrentLocation: FC<Props> = ({ setValue, setPostal }) => {
         </div>
       )}
       <Dialog title="" size="lg">
-        <MapLocation setPostal={setPostal} setValue={setValue} close={() => setShowModal(false)} />
+        <MapLocation setValue={setValue} close={() => setShowModal(false)} />
       </Dialog>
     </>
   );

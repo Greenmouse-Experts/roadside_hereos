@@ -11,6 +11,13 @@ import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
 import useRequestStore from "../../../../store/serviceStore";
 
+export interface LocationProps{
+  city: string;
+  location: string;
+  latitude: string;
+  longitude: string;
+  postal: string;
+}
 interface Props {
   next: () => void;
   prev?: () => void;
@@ -19,15 +26,20 @@ interface Props {
 }
 const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
   const saveServiceId = useRequestStore((state) => state.saveRequest)
-  const [location, setLocation] = useState('')
-  const [postal, setPostal] = useState('')
+  const [locationDetail, setLocationDetail] = useState<LocationProps>({
+    city: '',
+    location: '',
+    latitude: '',
+    longitude: '',
+    postal: ''
+  })
   const [isBusy, setIsBusy] = useState(false)
   useEffect(() => {
     reset({
       ...getValues(),
-      location: location
+      location: locationDetail.location
     })
-  },[location])
+  },[locationDetail])
   const {
     control,
     handleSubmit,
@@ -57,9 +69,11 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
       model: data.car_model,
       vehicleYear: data.car_year,
       color: data.car_color,
-      location: data.location,
-      zipcode: postal,
-      // zipcode: `100581`,
+      location: locationDetail.location,
+      zipcode: locationDetail.postal,
+      city: locationDetail.city,
+      longitude: locationDetail.longitude,
+      latitude: locationDetail.latitude,
       requestNote: data.other,
       serviceId: activeId
     }
@@ -226,7 +240,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                 )}
               />
               <div className="mt-3">
-                <GetCurrentLocation setPostal={setPostal} setValue={setLocation}/>
+                <GetCurrentLocation  setValue={setLocationDetail}/>
               </div>
             </div>
             <div>

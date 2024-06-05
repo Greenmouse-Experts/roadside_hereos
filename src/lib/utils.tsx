@@ -185,8 +185,22 @@ interface AddressType {
   types: string[];
 }
 export const getPostalCodeFromGoogle = (address: AddressType[]) => {
+  if(!address.length){
+    return ''
+  }
   const selectedAdd = address.filter((where) =>
     where.types.includes("postal_code")
+  );
+  const postal = selectedAdd[0].long_name;
+  return postal;
+};
+
+export const getCityFromGoogle = (address: AddressType[]) => {
+  if(!address.length){
+    return ''
+  }
+  const selectedAdd = address.filter((where) =>
+    where.types.includes("administrative_area_level_2")
   );
   const postal = selectedAdd[0].long_name;
   return postal;

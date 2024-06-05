@@ -66,6 +66,10 @@ interface ServiceRequestItem {
 
 export interface ServiceQouteItem {
   createdAt: string;
+  paid: string;
+  longitude: string;
+  latitude: string;
+  distance: string;
   driver: UserItemType | null;
   id: string;
   quote: number;
