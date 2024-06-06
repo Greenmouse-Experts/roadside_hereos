@@ -55,7 +55,7 @@ const RenderedServices:FC<Props> = ({status}) => {
   return (
     <>
       <div>
-      {data && !!data?.data.length && (
+      {data && !data?.data?.length && (
           <div>
             <EmptyState msg="There's no completed service request" />
           </div>
@@ -73,7 +73,7 @@ const RenderedServices:FC<Props> = ({status}) => {
           </div>
         )}
         {!isLoading &&
-          !data.data.length &&
+          !!data?.data?.length &&
           data?.data?.map((item: ServiceRequestItem, index: number)  => {
           const colorIndex = index % colors.length;
           const color = colors[colorIndex];

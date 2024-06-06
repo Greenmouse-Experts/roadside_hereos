@@ -20,6 +20,8 @@ import DisapproveDriverKyc from "../../lib/components/provider/details/disapprov
 import { Rating } from "@material-tailwind/react";
 import useDialog from "../../lib/hooks/useDialog";
 import ViewReviewsModal from "../../lib/components/admin/providers/staff/ViewReviewsModal";
+import { MdLocationCity, MdSignpost } from "react-icons/md";
+import { formatAsNgnMoney, formatPhoneNumber } from "../../lib/utils";
 
 const StaffDetail = () => {
   const { id } = useParams();
@@ -77,7 +79,12 @@ const StaffDetail = () => {
         )}
         {!isLoading && !loading && data && (
           <div>
-            <div className="w-full h-[140px] bg-review border p-3 rounded-t-lg lg:px-5 flex items-center"></div>
+            <div className="w-full h-[140px] flex justify-end bg-review border p-3 rounded-t-lg lg:px-5 items-center">
+              <div className="text-white">
+               <p> Pending Balance: <span className="text-lg fw-600">{formatAsNgnMoney(data.data.pendingBal) || '$0'}</span></p>
+               <p> Available Balance: <span className="text-lg fw-600">{formatAsNgnMoney(data.data.walletBal) || '$0'}</span></p>
+              </div>
+            </div>
             <div className="flex relative justify-end px-8">
               <div className="absolute left-10 -top-16">
                 <ProfileAvatar
@@ -111,27 +118,26 @@ const StaffDetail = () => {
                 />
               </div>
             </div>
-            <div className="px-6 realive mt-10 grid lg:grid-cols-3">
-              <div>
+            <div className="px-6 realive mt-10 grid lg:grid-cols-3 gap-y-3">
+              <div className="lg:row-span-2">
                 <p className="fw-600 text-lg lg:text-xl">{`${data?.data.fname} ${data?.data.lname}`}</p>
                 <p className="fs-500 text-gray-500 fw-500 pl-3 mb-3">
                   Service Provider
                 </p>
-                {kyc?.data.verified === "0" && (
-                  <div className="text-red-600 text-lg fw-600 flex items-center gap-x-2">
+                {!data?.data.verified  && (
+                  <div className="text-red-600 fw-600 flex items-center gap-x-2">
                     <span className="w-3 h-3 circle bg-red-600 block"></span>{" "}
                     Not Verified
                   </div>
                 )}
-                {kyc?.data.verified === "1" && (
-                  <div className="text-green-600 text-lg fw-600 flex items-center gap-x-2">
+                {data?.data.verified && (
+                  <div className="text-green-600 fw-600 flex items-center gap-x-2">
                     <span className="w-3 h-3 circle bg-green-600 block"></span>{" "}
                     Verified
                   </div>
                 )}
-                {kyc?.data.verified === null ||
-                  (kyc?.data.verified === "0" && (
-                    <div className="flex gap-x-2">
+                {!data?.data.verified  && (
+                    <div className="flex gap-x-2 mt-2">
                       <button
                         className="btn-like px-3 py-1 fs-400"
                         onClick={() => setShowModal(true)}
@@ -145,7 +151,7 @@ const StaffDetail = () => {
                         Disapprove
                       </button>
                     </div>
-                  ))}
+                  )}
               </div>
               <div>
                 <p className="fw-500 text-gray-500 mb-4">Phone</p>
@@ -153,7 +159,7 @@ const StaffDetail = () => {
                   <div className="bg-review w-10 h-10 circle place-center text-white">
                     <BsTelephone />
                   </div>
-                  <p className="fw-500">{data?.data.phone}</p>
+                  <p className="fw-500">{formatPhoneNumber(data?.data.phone)}</p>
                 </div>
               </div>
               <div>
@@ -163,6 +169,24 @@ const StaffDetail = () => {
                     <AiOutlineMail />
                   </div>
                   <p className="fw-500">{data?.data.email}</p>
+                </div>
+              </div>
+              <div>
+                <p className="fw-500 text-gray-500 mb-4">City</p>
+                <div className="flex gap-x-2 items-center w-full overflow-x-auto scroll-pro">
+                  <div className="bg-review shrink-0 w-10 h-10 circle place-center text-white">
+                    <MdLocationCity />
+                  </div>
+                  <p className="fw-500 text-black">{kyc?.data?.city}</p>
+                </div>
+              </div>
+              <div>
+                <p className="fw-500 text-gray-500 mb-4">Postal Code</p>
+                <div className="flex gap-x-2 items-center w-full overflow-x-auto scroll-pro">
+                  <div className="bg-review shrink-0 w-10 h-10 circle place-center text-white">
+                    <MdSignpost />
+                  </div>
+                  <p className="fw-500 text-black">{kyc?.data?.zipcode}</p>
                 </div>
               </div>
             </div>
@@ -221,15 +245,18 @@ const StaffDetail = () => {
                   </p>
                   <p className="fw-500">{kyc?.data?.routing_number}</p>
                 </div>
-                {/* <div className="flex">
-                        <p className="w-3/12 shrink-0 text-gray-600 ">
-                          Service Fees:
-                        </p>
-                        <div className="fw-500 grid gap-2">
-                          <p>E-Fuel - $45</p>
-                          <p>Towing - $55</p>
-                        </div>
-                      </div> */}
+                <div className="flex items-center">
+                  <p className="w-3/12 shrink-0 text-gray-600 ">
+                    Car Description:
+                  </p>
+                  <p className="fw-500">{kyc?.data?.car_description}</p>
+                </div>
+                <div className="flex items-center">
+                  <p className="w-3/12 shrink-0 text-gray-600 ">
+                    Plate Number:
+                  </p>
+                  <p className="fw-500">{kyc?.data?.plate_number}</p>
+                </div>
               </div>
             </div>
           </div>

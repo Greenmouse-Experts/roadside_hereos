@@ -2,31 +2,59 @@ import { BiMoneyWithdraw } from "react-icons/bi";
 import Alerts from "../../lib/components/provider/home/Alerts";
 import useAuth from "../../lib/hooks/authUser";
 import { formatAsNgnMoney } from "../../lib/utils";
+import { getMe } from "../../lib/services/api/usersApi";
+import { useEffect, useState } from "react";
 
 const ProviderHomePage = () => {
-  const { user} = useAuth()
+  const { user } = useAuth();
+  const [userData, setUserData] = useState<any>()
+  useEffect(() => {
+    const handleFetch = async () => {
+      await getMe('professional')
+      .then((res) => {
+        setUserData(res.user)
+      })
+    }
+    handleFetch()
+  },[])
   return (
     <>
       <div>
-       <div className="lg:flex gap-6 flex-row-reverse">
-        <div className="bg-review w-[500px] rounded-lg text-white p-4 lg:p-8">
-          <div className="flex items-center justify-between">
-          <p className="fw-500">Current Balance</p>
-          <div className="flex gap-x-1 items-center cursor-pointer">
-            <BiMoneyWithdraw/>
-            <p className="fs-500 fw-600">Withdraw</p>
+        <div className="lg:flex items-stretch gap-6 flex-row-reverse">
+          <div className="bg-review w-[500px] rounded-lg text-white p-4 lg:p-8">
+            <div className="mb-2">
+              <p>Pending Balance</p>
+              <p className="fw-600 text-xl mt-1">
+              {formatAsNgnMoney(userData?.pendingBal) || '$0'}.00
+            </p>
+            </div>
+            <div className="flex items-center justify-between">
+              <p className="fw-500">Current Balance</p>
+              <div className="flex gap-x-1 items-center cursor-pointer">
+                <BiMoneyWithdraw />
+                <p className="fs-500 fw-600">Withdraw</p>
+              </div>
+            </div>
+            <p className="fw-600 text-3xl mt-3">
+              {formatAsNgnMoney(userData?.walletBal)}.00
+            </p>
           </div>
+          <div className="w-full h-[140px] lg:h-auto bg-review rounded-lg border p-3 lg:px-5 flex items-center">
+            <div className="w-full">
+              <p className="fw-600 text-white text-lg uppercase">
+                WELCOME BACK! {user.name}
+              </p>
+              <p className="lg:w-8/12 mt-3 text-gray-400 fw-500 fs-400 ">
+                Your company have rendered a total of{" "}
+                <span className="fw-500">0</span> services to ALLDRIVE SOS users
+                this month.
+              </p>
+              <p className="lg:w-8/12 text-gray-400 fw-500 fs-400 ">
+                We appreciate your contribution.
+              </p>
+            </div>
           </div>
-          <p className="fw-600 text-3xl mt-3">{formatAsNgnMoney(350000)}.00</p>
         </div>
-       <div className="w-full h-[140px] bg-review rounded-lg border p-3 lg:px-5 flex items-center">
-          <div className="w-full">
-            <p className="fw-600 text-white text-lg uppercase">WELCOME BACK! {user.name}</p>
-            <p className="lg:w-8/12 mt-3 text-gray-400 fw-500 fs-400 ">Your company have rendered a total of <span className="fw-500">0</span> services to ALLDRIVE SOS users this month.</p>
-            <p className="lg:w-8/12 text-gray-400 fw-500 fs-400 ">We appreciate your contribution.</p>
-          </div>
-        </div>
-       </div>
         <div className="grid lg:grid-cols-3 gap-y-6 gap-x-6 dash-shade p-5 py-8 rounded-lg">
           <div className="flex items-center gap-x-3 border-r border-[#00000059]">
             <img

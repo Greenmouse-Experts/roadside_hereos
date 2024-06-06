@@ -94,9 +94,9 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
         })
         next();
       },
-      onError: () => {
+      onError: (err:any) => {
         setIsBusy(false)
-        toast.error('Something went wrong')
+        toast.error(err.response.data.message)
       }
     })
   };

@@ -83,6 +83,7 @@ export const SUSPEND_DRIVER = '/users/suspend-driver'
 export const UNSUSPEND_DRIVER = '/users/unsuspend-driver'
 
 // user endpoints
+export const GET_MY_ACCOUNT = `/user/me`
 export const GET_MY_SERVICES = '/service-request/user-fetch-details'
 export const SUBMIT_REVIEW = '/review/create-service-review'
 export const GET_ONE_SERVICE = 'service-request/user-fetch-details'
