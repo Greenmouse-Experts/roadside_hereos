@@ -19,7 +19,7 @@ const RequestSuccess = () => {
                 <p className="lg:w-10/12 mx-auto text-center">
                   You have successfully requested a service. If you are a new
                   user, please check your mailbox to verify your details.
-                  Otherwise, click the service button to redirect to your
+                  Otherwise, click the on the right button to redirect to your
                   dashboard and monitor service details.
                 </p>
               </div>
