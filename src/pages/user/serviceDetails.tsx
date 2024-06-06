@@ -8,6 +8,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getOneService } from "../../lib/services/api/clientApi";
 import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
 import dayjs from "dayjs";
+import useCustomModal from "../../lib/hooks/useCustomModal";
+import DriverMapTracking from "../../lib/components/user/requestDetails/map-tracking";
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -16,6 +18,7 @@ const ServiceDetails = () => {
     queryFn: () => getOneService(`${id}`),
   });
   const { Dialog, setShowModal } = useDialog();
+  const { Dialog: TrackModal, setShowModal: ShowTrackModal } = useCustomModal();
   return (
     <div className="pb-24">
       <div className="flex justify-between items-start">
@@ -27,10 +30,15 @@ const ServiceDetails = () => {
             {data?.data?.serviceRequest?.service?.name}
           </p>
         </div>
-        {data?.data?.serviceRequest?.status !== "pending" && <div className="flex items-center gap-x-1 underline">
-          <MdLocationPin className="text-xl" />
-          <p className="fs-600 fw-600">Track Driver Location</p>
-        </div>}
+        {data?.data?.serviceRequest?.status !== "ending" && (
+          <div
+            className="flex items-center gap-x-1 underline"
+            onClick={() => ShowTrackModal(true)}
+          >
+            <MdLocationPin className="text-xl" />
+            <p className="fs-600 fw-600">Track Driver Location</p>
+          </div>
+        )}
       </div>
       {isLoading && (
         <div className="py-12 flex justify-center items-center text-black">
@@ -72,7 +80,10 @@ const ServiceDetails = () => {
                     <p className="fw-500 mb-2 text-lg">{`${data?.data?.driver?.fname} ${data?.data?.driver?.lname}`}</p>
                     <div className="flex items-center gap-2 font-bold text-blue-gray-500">
                       {data?.data?.driver?.reviewsAvg}.0
-                      <Rating value={Number(data?.data?.driver?.reviewsAvg)} readonly />
+                      <Rating
+                        value={Number(data?.data?.driver?.reviewsAvg)}
+                        readonly
+                      />
                     </div>
                   </div>
                 </div>
@@ -85,17 +96,23 @@ const ServiceDetails = () => {
                   </div>
                   <div className="flex gap-x-2">
                     <p>Car Description:</p>
-                    <p className="fw-500">{data?.data?.driverMoreInfo?.car_description}</p>
+                    <p className="fw-500">
+                      {data?.data?.driverMoreInfo?.car_description}
+                    </p>
                   </div>
                   <div className="flex gap-x-2">
                     <p>Plate Number:</p>
-                    <p className="fw-500">{data?.data?.driverMoreInfo?.plate_number}</p>
+                    <p className="fw-500">
+                      {data?.data?.driverMoreInfo?.plate_number}
+                    </p>
                   </div>
                 </div>
                 <div className="grid gap-5">
                   <div className="flex gap-x-2">
                     <p>Service Cost:</p>
-                    <p className="fw-500">{data?.data?.serviceRequest?.amount}</p>
+                    <p className="fw-500">
+                      {data?.data?.serviceRequest?.amount}
+                    </p>
                   </div>
                   <div className="flex gap-x-2">
                     <p>Contact Info:</p>
@@ -120,7 +137,9 @@ const ServiceDetails = () => {
               <div className="grid gap-5">
                 <div className="flex gap-x-2">
                   <p>Car Make:</p>
-                  <p className="fw-500">{data?.data?.serviceRequest?.vehicleMake}</p>
+                  <p className="fw-500">
+                    {data?.data?.serviceRequest?.vehicleMake}
+                  </p>
                 </div>
                 <div className="flex gap-x-2">
                   <p>Car Model:</p>
@@ -128,7 +147,9 @@ const ServiceDetails = () => {
                 </div>
                 <div className="flex gap-x-2">
                   <p>Car Year:</p>
-                  <p className="fw-500">{data?.data?.serviceRequest?.vehicleYear}</p>
+                  <p className="fw-500">
+                    {data?.data?.serviceRequest?.vehicleYear}
+                  </p>
                 </div>
                 <div className="flex gap-x-2">
                   <p>Car Color:</p>
@@ -138,11 +159,15 @@ const ServiceDetails = () => {
               <div className="grid mt-5 lg:mt-0 gap-5 lg:col-span-2">
                 <div className="flex gap-x-2">
                   <p>Service Location:</p>
-                  <p className="fw-500">{data?.data?.serviceRequest?.location}</p>
+                  <p className="fw-500">
+                    {data?.data?.serviceRequest?.location}
+                  </p>
                 </div>
                 <div className="flex gap-x-2">
                   <p>Servie Info:</p>
-                  <p className="fw-500">{data?.data?.serviceRequest?.requestNote}</p>
+                  <p className="fw-500">
+                    {data?.data?.serviceRequest?.requestNote}
+                  </p>
                 </div>
                 <div className="flex gap-x-2">
                   <p>Request Time:</p>
@@ -169,6 +194,9 @@ const ServiceDetails = () => {
       <Dialog title="Submit a Review" size="lg">
         <ReviewModal id={`${id}`} close={() => setShowModal(false)} />
       </Dialog>
+      <TrackModal title="" size="lg">
+        <DriverMapTracking close={() => ShowTrackModal(false)} />
+      </TrackModal>
     </div>
   );
 };
