@@ -9,7 +9,7 @@ import { getProvidersDetails } from "../../lib/services/api/usersApi";
 import ServiceRendered from "../../lib/components/provider/details/serviceRendered";
 import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
 import ProfileAvatar from "../../lib/components/ui/ProfileAvatar";
-import { FormatStatus } from "../../lib/utils";
+import { FormatStatus, formatAsNgnMoney } from "../../lib/utils";
 import { formatPhoneNumber } from "react-phone-number-input";
 import { Rating } from "@material-tailwind/react";
 import useDialog from "../../lib/hooks/useDialog";
@@ -26,7 +26,7 @@ const StaffDetail = () => {
   //   queryKey: ["getStaffKyc"],
   //   queryFn: () => getDriverKyc(`${id}`),
   // });
-  const {Dialog, setShowModal} = useDialog()
+  const { Dialog, setShowModal } = useDialog();
   return (
     <>
       <div>
@@ -56,7 +56,24 @@ const StaffDetail = () => {
             <div className="bg-white rounded-lg shadow min-h-[80vh]">
               {!isLoading && data && (
                 <div>
-                  <div className="w-full h-[140px] bg-review border p-3 rounded-t-lg lg:px-5 flex items-center"></div>
+                  <div className="w-full h-[140px] bg-review border p-3 rounded-t-lg lg:px-5 flex justify-end items-center">
+                    <div className="text-white">
+                      <p>
+                        {" "}
+                        Pending Balance:{" "}
+                        <span className="text-lg fw-600">
+                          {formatAsNgnMoney(data.data.pendingBal) || "$0"}
+                        </span>
+                      </p>
+                      <p>
+                        {" "}
+                        Available Balance:{" "}
+                        <span className="text-lg fw-600">
+                          {formatAsNgnMoney(data.data.walletBal) || "$0"}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
                   <div className="lg:flex justify-between">
                     <div className="flex relative justify-end px-8">
                       <div className="absolute left-4 lg:left-10 border-[5px] w-[140px] h-[140px] circle -top-16">
@@ -69,9 +86,21 @@ const StaffDetail = () => {
                       </div>
                       <div className="py-6"></div>
                     </div>
-                    <div className="flex items-center gap-2 font-bold text-blue-gray-500 pt-10 lg:pt-0 px-2 lg:pr-4 cursor-pointer" onClick={() => setShowModal(true)}>
-                      {data?.data?.reviewsAvg === null? "No Ratings Yet" : `${data?.data?.reviewsAvg}/5`}
-                      {data?.data?.reviewsAvg && <Rating value={Number(data?.data?.reviewsAvg) || 0} ratedColor={'amber'}  className="scale-120" readonly/>}
+                    <div
+                      className="flex items-center gap-2 font-bold text-blue-gray-500 pt-10 lg:pt-0 px-2 lg:pr-4 cursor-pointer"
+                      onClick={() => setShowModal(true)}
+                    >
+                      {data?.data?.reviewsAvg === null
+                        ? "No Ratings Yet"
+                        : `${data?.data?.reviewsAvg}/5`}
+                      {data?.data?.reviewsAvg && (
+                        <Rating
+                          value={Number(data?.data?.reviewsAvg) || 0}
+                          ratedColor={"amber"}
+                          className="scale-120"
+                          readonly
+                        />
+                      )}
                       <span className="underline">View</span>
                     </div>
                   </div>
@@ -186,7 +215,7 @@ const StaffDetail = () => {
           </div>
         )}
         <Dialog title="View Driver's Reviews" size="lg">
-          <ViewReviewsModal id={`${id}`}/>
+          <ViewReviewsModal id={`${id}`} />
         </Dialog>
       </div>
     </>

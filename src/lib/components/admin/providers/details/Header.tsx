@@ -7,7 +7,7 @@ import {
   MenuList,
 } from "@material-tailwind/react";
 import ProfileAvatar from "../../../ui/ProfileAvatar";
-import { FormatStatus } from "../../../../utils";
+import { FormatStatus, formatAsNgnMoney } from "../../../../utils";
 import useModal from "../../../../hooks/useModal";
 import SuspendModal from "./SuspendModal";
 import { useMutation } from "@tanstack/react-query";
@@ -21,14 +21,17 @@ interface Props {
   picture: string;
   status: string;
   email: string;
+  walletBal: string;
+  pendingBal: string;
   refetch: () => void;
 }
 const ProviderDetailsHeader: FC<Props> = ({
   id,
   picture,
   status,
-  email,
   name,
+  walletBal,
+  pendingBal,
   refetch,
 }) => {
   const { Modal: Suspend, setShowModal: ShowSuspend } = useModal();
@@ -60,8 +63,11 @@ const ProviderDetailsHeader: FC<Props> = ({
       <div className="relative">
         <div className="bg-primary flex justify-end gap-x-3 pb-16 lg:pb-8 p-8 w-full rounded-lg">
           <div className="text-end">
-            <div className="flex items-center gap-x-5">
-              <p className="text-white fw-600 lg:text-lg">{name}</p>
+            <div className="flex flex-row-reverse lg:gap-x-12 items-center gap-x-5">
+            <div className="text-white">
+               <p> Pending Balance: <span className="text-lg fw-600">{formatAsNgnMoney(pendingBal) || '$0'}</span></p>
+               <p> Available Balance: <span className="text-lg fw-600">{formatAsNgnMoney(walletBal) || '$0'}</span></p>
+              </div>
               <Menu placement="bottom-end">
                 <MenuHandler>
                   <Button className="bg-transparent px-0 mx-0 hover:shadow-none text-md flex items-center font-normal shadow-none capitalize">
@@ -90,9 +96,6 @@ const ProviderDetailsHeader: FC<Props> = ({
                   )}
                 </MenuList>
               </Menu>
-            </div>
-            <div>
-              <p className="text-gray-300 italic">{email}</p>
             </div>
           </div>
         </div>
