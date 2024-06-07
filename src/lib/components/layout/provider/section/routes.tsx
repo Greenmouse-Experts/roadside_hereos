@@ -30,7 +30,7 @@ export const Routes = [
     submenu: [],
   },
   {
-    name: 'Staffs',
+    name: 'Staff',
     icon: <MdOutlineHomeRepairService className="text-xl" />,
     route: '/provider/staff',
     submenu: [],
