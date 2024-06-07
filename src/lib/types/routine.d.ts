@@ -23,3 +23,45 @@ export interface ReviewItem {
   vendor: UserItemType;
   vendorId: string;
 }
+
+export interface PaymentItem {
+  amount: number | null;
+  charge: number;
+  city: string;
+  clientSecret: string;
+  color: string;
+  companyCharge: number;
+  createdAt: string;
+  driverQuoteId: string;
+  icon: string;
+  id: string;
+  isPublished: number;
+  latitude: string;
+  location: string;
+  longitude: string;
+  minimumQuote: number | null;
+  model: string;
+  name: string;
+  paymentId: string;
+  paymentRef: string;
+  paymentStatus: string;
+  paymentTotal: number;
+  processStatus: string | null;
+  providerId: string | null;
+  questionNote: string;
+  ref: string | null;
+  requestNote: string;
+  serviceId: string;
+  serviceRequestId: string;
+  slug: string;
+  status: string;
+  tax: number;
+  updatedAt: string;
+  userId: string;
+  userType: string;
+  vehicleMake: string;
+  vehicleYear: string;
+  zipcode: string;
+  fname?: string;
+  lname?: string
+}

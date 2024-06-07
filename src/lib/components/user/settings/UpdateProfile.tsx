@@ -156,11 +156,10 @@ const UpdateProfile: FC<Props> = ({ close }) => {
                 }}
                 render={({ field }) => (
                   <TextInput
-                    label="State"
+                    label="Home Address"
                     labelClassName="text-gray-500 fw-500"
                     error={errors.state?.message}
-                    type={InputType.text}
-                    disabled
+                    type={InputType.textarea}
                     {...field}
                     ref={null}
                   />

@@ -14,6 +14,16 @@ const DriverMapTracking: FC<Props> = ({}) => {
   const isBusy = false
   const lat =  6.6246889;
   const lon = 3.342436;
+  const marks = [
+    {
+      lat: 6.6246889,
+    lng: 3.342436,
+    },
+    {
+      lat: 6.627546,
+    lng: 3.3389291,
+    },
+  ]
 
   const defaultProps = {
     center: {
@@ -23,12 +33,10 @@ const DriverMapTracking: FC<Props> = ({}) => {
     zoom: 16,
   };
   const renderMarkers = (map: any, maps: any) => {
-    let marker = new maps.Marker({
-      position: { lat: lat, lng: lon },
-      map,
-      title: "Hello World!",
+    const markers = marks.map(data => {
+      return new maps.Marker({ position: data, map, title: "Drivers" });
     });
-    return marker;
+    return markers
   };
   return (
     <div>

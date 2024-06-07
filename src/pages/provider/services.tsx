@@ -1,20 +1,19 @@
 import Tabs from "../../lib/components/ui/Tabs";
 import RenderedServices from "../../lib/components/provider/requests/RenderedList";
-import PendingService from "../../lib/components/provider/requests/RequestList";
 
 const ProviderServices = () => {
   const tabs = [
     {
+      title: <p>Processing Service</p>,
+      content: <RenderedServices status={'pending'}/>,
+    },
+    {
+      title: <p>Ongoing Service</p>,
+      content: <RenderedServices status="ongoing" />,
+    },
+    {
       title: <p>Rendered Service</p>,
       content: <RenderedServices status="completed" />,
-    },
-    {
-      title: <p>Processed Service</p>,
-      content: <RenderedServices status="processed" />,
-    },
-    {
-      title: <p>Pending Service</p>,
-      content: <PendingService />,
     },
   ];
   return (

@@ -52,6 +52,7 @@ interface ServiceRequestItem {
   requestNote: string;
   createdAt: string;
   updatedAt: string;
+  name: string;
   service: {
     id: string;
     name: string;
@@ -98,5 +99,79 @@ export interface ServiceItemUser {
   userType: string;
   vehicleMake: string;
   vehicleYear: string;
+  zipcode: string;
+  payment: {
+    amount: number;
+    charge: number;
+    clientSecret: string;
+    companyCharge: number;
+    createdAt: string;
+    driverQuoteId: string;
+    id: string;
+    paymentRef: string;
+    serviceRequestId: string;
+    status: string;
+    tax: number;
+    updatedAt: string;
+    userId: string;
+  };
+}
+
+export interface ServiceRequestItem2 {
+  amount: number;
+  charge: number;
+  city: string;
+  clientSecret: string;
+  color: string;
+  companyCharge: number;
+  companyId: string;
+  createdAt: string;
+  driverQuoteId: string;
+  email: string;
+  expiredAt: string | null;
+  fcmToken: string;
+  fname: string;
+  hasActiveSubscription: boolean | null;
+  id: string;
+  invitationId: string;
+  isActive: number;
+  isAvailableForService: boolean | null;
+  isSuspended: number;
+  last_login: string;
+  latitude: string;
+  level: number;
+  lname: string;
+  location: string;
+  longitude: string;
+  model: string;
+  name: string | null;
+  password: string;
+  paymentRef: string;
+  pendingBal: number | null;
+  phone: string;
+  photo: string | null;
+  planId: string | null;
+  processStatus: string | null;
+  providerId: string | null;
+  ref: string | null;
+  referralId: string | null;
+  requestNote: string;
+  reviewsAvg: string;
+  serviceCharge: number | null;
+  serviceId: string;
+  serviceRequestId: string;
+  serviceRequestStatus: string;
+  state: string | null;
+  status: string;
+  street: string | null;
+  tax: number;
+  token: string | null;
+  updatedAt: string;
+  userId: string;
+  userType: string;
+  vehicleMake: string;
+  vehicleYear: string;
+  verified: number;
+  walletBal: string | null;
   zipcode: string;
 }

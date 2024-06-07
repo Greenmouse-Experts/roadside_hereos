@@ -1,3 +1,4 @@
+import ServiceAlerts from "../../pages/provider/alerts";
 import ProviderHomePage from "../../pages/provider/home";
 import CompanyInvites from "../../pages/provider/invite";
 import ProviderNotification from "../../pages/provider/notify";
@@ -17,6 +18,11 @@ export const providerRoutes = [
         id: 'user2',
         path: 'services',
         component: <ProviderServices/>
+    },
+    {
+        id: 'user2',
+        path: 'services-alerts',
+        component: <ServiceAlerts/>
     },
     {
         id: 'user3',

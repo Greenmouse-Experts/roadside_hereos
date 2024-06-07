@@ -1,6 +1,5 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import { FormatStatus, formatAsNgnMoney } from "../../../utils";
-import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import dayjs from "dayjs";
 import { FC } from "react";
 import { PaymentItem } from "../../../types/routine";
@@ -14,8 +13,7 @@ interface Props {
   next: () => void;
   prev: () => void;
 }
-const PaymentList: FC<Props> = ({
-  isLoading,
+const PaymentTable: FC<Props> = ({
   data,
   count,
   page,
@@ -54,6 +52,15 @@ const PaymentList: FC<Props> = ({
         </p>
       ),
     }),
+    columnHelper.accessor((row) => row.fname, {
+        id: "Service Provider",
+        header: (info) => info.column.id,
+        cell: (info) => (
+          <p className="fw-600">
+            {info.getValue()} {info.row.original.lname}
+          </p>
+        ),
+      }),
     columnHelper.accessor((row) => row.paymentStatus, {
       id: "Status",
       header: (info) => info.column.id,
@@ -70,17 +77,6 @@ const PaymentList: FC<Props> = ({
   ];
   return (
     <div className="lg:p-4 w-full">
-      {isLoading && (
-        <div className="py-12 flex justify-center items-center text-black">
-          <div>
-            <div className="place-center">
-              <CurveLoader />
-            </div>
-            <p className="text-center mt-5 fw-500">Fetching payments...</p>
-          </div>
-        </div>
-      )}
-      {!isLoading && data && (
         <DynamicTable
           columns={columns}
           data={data}
@@ -89,9 +85,8 @@ const PaymentList: FC<Props> = ({
           next={next}
           page={page}
         />
-      )}
     </div>
   );
 };
 
-export default PaymentList;
+export default PaymentTable;

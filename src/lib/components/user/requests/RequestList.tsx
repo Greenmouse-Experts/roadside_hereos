@@ -11,20 +11,21 @@ interface Props {
   status: string;
   data: ServiceItemUser[];
   isLoading: boolean;
+  checkPay: string;
 }
-const RequestList: FC<Props> = ({ status, data, isLoading }) => {
-  const navigate = useNavigate()
+const RequestList: FC<Props> = ({ status, checkPay, data, isLoading }) => {
+  const navigate = useNavigate();
   // Table components
   const columnHelper = createColumnHelper<ServiceItemUser>();
   const columns = [
     columnHelper.accessor((row) => row.service.name, {
       id: "Service Category",
-      cell: (info) => <p className="fw-500 text-pri">{info.getValue()}</p>,
+      cell: (info) => <p className="fw-600">{info.getValue()}</p>,
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.location, {
       id: "Service Location",
-      cell: (info) => <p className="fw-600">{info.getValue()}</p>,
+      cell: (info) => <p className="fw-500">{info.getValue()}</p>,
     }),
     columnHelper.accessor((row) => row.createdAt, {
       id: "Date Requested",
@@ -32,6 +33,19 @@ const RequestList: FC<Props> = ({ status, data, isLoading }) => {
       cell: (info) => (
         <p className="fw-600">
           {dayjs(info.getValue()).format("ddd DD, MMM YYYY")}
+        </p>
+      ),
+    }),
+    columnHelper.accessor((row) => row.payment.status, {
+      id: "Payment Status",
+      header: (info) => info.column.id,
+      cell: (info) => (
+        <p className="fw-600">
+          {
+            FormatStatus[
+              info.getValue().toLowerCase() as keyof typeof FormatStatus
+            ]
+          }
         </p>
       ),
     }),
@@ -46,10 +60,23 @@ const RequestList: FC<Props> = ({ status, data, isLoading }) => {
     }),
     columnHelper.accessor((row) => row.id, {
       id: "Action",
-      cell: (info) => <p className="fw-600 cursor-pointer underline text-primary" onClick={() => navigate(`/user/requests/${info.getValue()}`)}>View Details</p>,
+      cell: (info) => (
+        <p
+          className="fw-600 cursor-pointer underline text-primary"
+          onClick={() => navigate(`/user/requests/${info.getValue()}`)}
+        >
+          View Details
+        </p>
+      ),
     }),
   ];
-  const dets = data && data?.filter((where) => where.status === status);
+  const dets =
+    data &&
+    data?.filter(
+      (where) =>
+        where.status.toLowerCase() === status &&
+        where.payment.status.toLowerCase() === checkPay
+    );
   return (
     <div className="lg:p-4 w-full">
       {isLoading && (

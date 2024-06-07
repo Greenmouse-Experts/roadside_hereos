@@ -9,6 +9,7 @@ import ProfileAvatar from "../../ui/ProfileAvatar";
 import UpdateProfile from "./UpdateProfile";
 import { useMutation } from "@tanstack/react-query";
 import { adminUpdateAvatar } from "../../../services/api/authApi";
+import { formatPhoneNumber } from "react-phone-number-input";
 
 const MyProfileSettings = () => {
   const {user, firstName, lastName, saveUser} = useAuth();
@@ -91,14 +92,14 @@ const MyProfileSettings = () => {
             </div>
             <div>
               <p className="text-[#808080]">Phone</p>
-              <p className="mt-3 fw-500">{user.phone}</p>
+              <p className="mt-3 fw-500">{formatPhoneNumber(user.phone)}</p>
             </div>
             <div>
               <p className="text-[#808080]">Gender</p>
               <p className="mt-3 fw-500">Null</p>
             </div>
             <div>
-              <p className="text-[#808080]">State</p>
+              <p className="text-[#808080]">Home Address</p>
               <p className="mt-3 fw-500">{user.state && user.state}</p>
             </div>
           </div>

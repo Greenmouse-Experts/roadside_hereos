@@ -31,7 +31,7 @@ const PersonalSec: FC<Props> = ({ next }) => {
       last_name: lastName || "",
       email: user.email || "",
       phone: user.phone || "",
-      address: "",
+      address: user.state || "",
     },
   });
   const [isBusy, setIsBusy] = useState(false);

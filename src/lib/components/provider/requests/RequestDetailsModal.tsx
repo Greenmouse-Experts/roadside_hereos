@@ -1,17 +1,17 @@
 import { FC } from "react";
-import { ServiceRequestItem } from "../../../types/service";
+import { ServiceRequestItem2 } from "../../../types/service";
 import dayjs from "dayjs";
 import { MdLocationPin, MdOutlineStickyNote2 } from "react-icons/md";
 import { FaCar } from "react-icons/fa6";
 
 interface Props {
-  item: ServiceRequestItem | undefined;
+  item: ServiceRequestItem2 | undefined;
 }
 const RequestDetailsModal: FC<Props> = ({ item }) => {
   return (
     <div className="text-black">
       <div>
-        <p className="fw-600 lg:text-lg">{item?.service.name}</p>
+        <p className="fw-600 lg:text-lg">{item?.name}</p>
         <p>
           Requested at{" "}
           {dayjs(item?.createdAt).format("hh:mma dddd DD, MMMM YYYY")}

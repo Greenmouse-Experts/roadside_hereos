@@ -35,8 +35,14 @@ export const getOneService = async (id:string) => {
       .then((response) => response.data);
   }
 
-  export const getMyPayment = async () => {
+  export const getMyPayment = async (page:number) => {
     return axios
-      .get(`${ENDPOINT.GET_MY_PAYMENTS}`)
+      .get(`${ENDPOINT.GET_MY_PAYMENTS}?page=${page}`)
+      .then((response) => response.data);
+  }
+
+  export const getProviderPayment = async (page:number) => {
+    return axios
+      .get(`${ENDPOINT.GET_PROVIDER_PAYMENTS}?status=Paid&page=${page}`)
       .then((response) => response.data);
   }

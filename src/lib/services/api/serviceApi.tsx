@@ -70,7 +70,7 @@ export const getCompanyCategories = async () => {
     .then((response) => response.data);
 };
 
-export const removeCompanyCategories = async (id:string) => {
+export const removeCompanyCategories = async (id: string) => {
   return axios
     .patch(`${ENDPOINT.REMOVE_COMPANY_SERVICE}/${id}`)
     .then((response) => response.data);
@@ -100,13 +100,13 @@ export const sendProfileInfo = async (payload: any) => {
     .then((response) => response.data);
 };
 
-export const getServiceQoutes = async (payload:string) => {
+export const getServiceQoutes = async (payload: string) => {
   return axios
     .get(`${ENDPOINT.GET_SERVICE_QOUTES}/${payload}`)
     .then((response) => response.data);
 };
 
-export const selectThisQoute = async (id:string) => {
+export const selectThisQoute = async (id: string) => {
   return axios
     .post(`${ENDPOINT.SELECT_QOUTE}/${id}`)
     .then((response) => response.data);
@@ -118,7 +118,7 @@ export const initiatePay = async (id: string) => {
     .then((response) => response.data);
 };
 
-export const confirmPay = async (payload:any) => {
+export const confirmPay = async (payload: any) => {
   return axios
     .post(`${ENDPOINT.CONFIRM_PAYMENT}`, payload)
     .then((response) => response.data);
@@ -136,9 +136,12 @@ export const selectServiceProvider = async (payload: string) => {
     .then((response) => response.data);
 };
 
-export const getPendingServices = async (status:string) => {
+export const getPendingServices = async (param: {
+  status: string;
+  page: number;
+}) => {
   return axios
-    .get(`${ENDPOINT.GET_SERVICES}?status=${status}`)
+    .get(`${ENDPOINT.GET_SERVICES}?status=${param.status}&page=${param.page}`)
     .then((response) => response.data);
 };
 
@@ -154,7 +157,7 @@ export const getMyServices = async () => {
     .then((response) => response.data);
 };
 
-export const submitReview = async (payload:any) => {
+export const submitReview = async (payload: any) => {
   return axios
     .post(`${ENDPOINT.SUBMIT_REVIEW}`, payload)
     .then((response) => response.data);
@@ -171,7 +174,3 @@ export const getAllPayments = async () => {
     .get(`${ENDPOINT.GET_ALL_PAYMENTS}`)
     .then((response) => response.data);
 };
-
-
-
-

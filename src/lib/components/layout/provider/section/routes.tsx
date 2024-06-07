@@ -1,5 +1,6 @@
 import {
   MdInsertInvitation,
+  MdOutlineCrisisAlert,
   MdOutlineDashboard, MdOutlineHomeRepairService,
 } from 'react-icons/md';
 import {  BiGitPullRequest } from 'react-icons/bi';
@@ -38,6 +39,12 @@ export const Routes = [
     name: 'Services',
     icon: <BiGitPullRequest className="text-xl" />,
     route: '/provider/services',
+    submenu: [],
+  },
+  {
+    name: 'Services Alerts',
+    icon: <MdOutlineCrisisAlert className="text-xl" />,
+    route: '/provider/services-alerts',
     submenu: [],
   },
   {

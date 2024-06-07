@@ -2,7 +2,7 @@ import { Button, Tooltip } from "@material-tailwind/react";
 import { TbListDetails } from "react-icons/tb";
 import { useQuery } from "@tanstack/react-query";
 import { getPendingServices } from "../../../services/api/serviceApi";
-import { ServiceRequestItem } from "../../../types/service";
+import { ServiceRequestItem2 } from "../../../types/service";
 import dayjs from "dayjs";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import { MdLocationPin } from "react-icons/md";
@@ -13,9 +13,10 @@ import { useState } from "react";
 import { toast } from "react-toastify";
 
 const PendingService = () => {
+  const [page, setPage] = useState(1);
   const { isLoading, data } = useQuery({
-    queryKey: ["getServices", "pending"],
-    queryFn: () => getPendingServices('pending'),
+    queryKey: ["getServices", page],
+    queryFn: () => getPendingServices({ page: page, status: "pending" }),
   });
   const colors: string[] = [
     "border-purple-500",
@@ -24,43 +25,35 @@ const PendingService = () => {
     "border-pink-500",
     "border-orange-500",
   ];
-  const {Modal, setShowModal} = useModal()
-  const [selected, setSelected] = useState<ServiceRequestItem>()
-  const openDetails = (item:ServiceRequestItem) => {
-    setSelected(item)
-    setShowModal(true)
-  }
-  const [{ start, stop, page }, setPage] = useState({
-    start: 0,
-    stop: 10,
-    page: 1,
-  });
+  const count = data?.data?.total;
+  const service = data?.data?.serviceRequests;
+
   const handleNext = () => {
-    if (stop >= data?.data?.length) {
+    if (count > page * 10) {
+      setPage(page + 1);
+    } else {
       toast.info("This is the last page");
-    } else {
-      setPage({
-        start: start + 10,
-        stop: stop + 10,
-        page: page + 1,
-      });
     }
   };
+
   const handlePrev = () => {
-    if (page === 1) {
-      toast.info("This is the first page");
+    if (page > 1) {
+      setPage(page - 1);
     } else {
-      setPage({
-        start: start - 10,
-        stop: stop - 10,
-        page: page - 1,
-      });
+      toast.info("This is the first page");
     }
   };
+  const { Modal, setShowModal } = useModal();
+  const [selected, setSelected] = useState<ServiceRequestItem2>();
+  const openDetails = (item: ServiceRequestItem2) => {
+    setSelected(item);
+    setShowModal(true);
+  };
+
   return (
     <>
-      <div className="p-3 lg:p-6">
-        {data && !data?.data.length && (
+      <div className="">
+        {data && !service.length && (
           <div>
             <EmptyState msg="There's no pending request currently on the system." />
           </div>
@@ -78,8 +71,8 @@ const PendingService = () => {
           </div>
         )}
         {!isLoading &&
-          data &&
-          data?.data?.slice(start, stop)?.map((item: ServiceRequestItem, index: number) => {
+          !!service.length &&
+          service.map((item: ServiceRequestItem2, index: number) => {
             const colorIndex = index % colors.length;
             const color = colors[colorIndex];
             return (
@@ -88,7 +81,7 @@ const PendingService = () => {
                 className={`border-l-[8px] relative flex items-center justify-between ${color}  p-3 mb-5`}
               >
                 <div>
-                  <p className="fw-600">{item.service.name}</p>
+                  <p className="fw-600">{item?.name}</p>
                   <p>{item.requestNote}</p>
                   <p className="my-1 fs-500 flex gap-x-2 items-center">
                     <MdLocationPin className="text-sm text-gray-500" />
@@ -100,7 +93,10 @@ const PendingService = () => {
                 </div>
                 <div className="flex gap-x-3 ">
                   <Tooltip content="View Service Details">
-                    <Button className="m-0 p-0 shadow-none hover:shadow-none bg-transparent text-black" onClick={() => openDetails(item)}>
+                    <Button
+                      className="m-0 p-0 shadow-none hover:shadow-none bg-transparent text-black"
+                      onClick={() => openDetails(item)}
+                    >
                       <TbListDetails className="text-3xl" />
                     </Button>
                   </Tooltip>
@@ -108,7 +104,7 @@ const PendingService = () => {
               </div>
             );
           })}
-          <div className="mt-6 flex justify-end">
+        <div className="mt-6 flex justify-end">
           <div className="flex gap-x-4 items-center">
             <p className="fw-600">Page {page}</p>
             <div className="flex gap-x-2 items-center">
@@ -125,7 +121,7 @@ const PendingService = () => {
               <div
                 onClick={handleNext}
                 className={`px-2 py-1 rounded ${
-                  stop >= data?.data?.length
+                  page * 10 >= count
                     ? "bg-gray-300 cursor-not-allowed"
                     : "bg-primary text-white cursor-pointer"
                 }`}
@@ -137,7 +133,7 @@ const PendingService = () => {
         </div>
       </div>
       <Modal title="Service Details" size="md" type="withCancel">
-        <RequestDetailsModal item={selected}/>
+        <RequestDetailsModal item={selected} />
       </Modal>
     </>
   );

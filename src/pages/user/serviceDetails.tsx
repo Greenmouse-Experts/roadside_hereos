@@ -10,6 +10,7 @@ import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader"
 import dayjs from "dayjs";
 import useCustomModal from "../../lib/hooks/useCustomModal";
 import DriverMapTracking from "../../lib/components/user/requestDetails/map-tracking";
+import { formatAsNgnMoney } from "../../lib/utils";
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -17,11 +18,17 @@ const ServiceDetails = () => {
     queryKey: ["userServiceData", `${id}`],
     queryFn: () => getOneService(`${id}`),
   });
+  const payment = data?.data?.serviceRequest?.payment
+  const isPaid = payment && (payment?.status).toLowerCase() === 'paid';
+  const getTotal = () => {
+    const totalPay = Number(payment?.amount) + Number(payment?.charge) + Number(payment?.tax)
+    return totalPay
+  }
   const { Dialog, setShowModal } = useDialog();
   const { Dialog: TrackModal, setShowModal: ShowTrackModal } = useCustomModal();
   return (
     <div className="pb-24">
-      <div className="flex justify-between items-start">
+      <div className="lg:flex justify-between items-start">
         <div>
           <p>
             Service Id: <span className="uppercase fw-600">{id}</span>
@@ -30,9 +37,9 @@ const ServiceDetails = () => {
             {data?.data?.serviceRequest?.service?.name}
           </p>
         </div>
-        {data?.data?.serviceRequest?.status !== "ending" && (
+        {isPaid && (
           <div
-            className="flex items-center gap-x-1 underline"
+            className="flex items-center gap-x-1 mt-2 lg:mt-0 underline"
             onClick={() => ShowTrackModal(true)}
           >
             <MdLocationPin className="text-xl" />
@@ -54,7 +61,7 @@ const ServiceDetails = () => {
       )}
       {data && !isLoading && (
         <div>
-          {data?.data?.serviceRequest?.status !== "pending" && (
+          {isPaid && (
             <div className="bg-white shadow mt-6 rounded-lg p-4">
               <div className="flex justify-between">
                 <p className="fw-500 flex items-center gap-x-1 text-lg">
@@ -88,7 +95,7 @@ const ServiceDetails = () => {
                   </div>
                 </div>
               </div>
-              <div className="grid lg:grid-cols-2 mt-6">
+              <div className="grid lg:grid-cols-2 gap-5 lg:gap-0 mt-6">
                 <div className="grid gap-5">
                   <div className="flex gap-x-2">
                     <p>Company:</p>
@@ -111,7 +118,7 @@ const ServiceDetails = () => {
                   <div className="flex gap-x-2">
                     <p>Service Cost:</p>
                     <p className="fw-500">
-                      {data?.data?.serviceRequest?.amount}
+                      {formatAsNgnMoney(getTotal())}
                     </p>
                   </div>
                   <div className="flex gap-x-2">
