@@ -25,7 +25,9 @@ const ProviderDetails = () => {
     },
     {
       title: <p>Company Kyc</p>,
-      content: <ViewKyc id={`${id}`} kyc={data?.data?.verified} refetch={refetch}/>,
+      content: (
+        <ViewKyc id={`${id}`} kyc={data?.data?.verified} refetch={refetch} />
+      ),
     },
   ];
   return (
@@ -33,9 +35,9 @@ const ProviderDetails = () => {
       {isLoading && (
         <div className="py-12 flex justify-center items-center text-black">
           <div>
-           <div className="flex justify-center">
-           <CurveLoader />
-           </div>
+            <div className="flex justify-center">
+              <CurveLoader />
+            </div>
             <p className="text-center mt-5 fw-500">
               Fetching Provider Details...
             </p>
@@ -53,6 +55,8 @@ const ProviderDetails = () => {
               id={`${id}`}
               email={data?.data?.email}
               refetch={refetch}
+              pendingBal={data?.data?.pendingBal}
+              walletBal={data?.data?.walletBal}
             />
           </div>
           <Tabs tabs={tabs} type="norm" />
