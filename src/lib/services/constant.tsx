@@ -89,3 +89,6 @@ export const SUBMIT_REVIEW = '/review/create-service-review'
 export const GET_ONE_SERVICE = '/service-request/user-fetch-details'
 export const GET_MY_PAYMENTS = '/service-request/payments'
 export const GET_PROVIDER_PAYMENTS = `service-request/fetch-driver-payments`
+
+// payments
+export const ADMIN_GET_PAYMENTS = `service-request/fetch-payments`

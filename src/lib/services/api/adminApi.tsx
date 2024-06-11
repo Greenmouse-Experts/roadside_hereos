@@ -31,14 +31,22 @@ axios.interceptors.response.use(
   }
 );
 
-export const adminAddRates = async (payload:any) => {
+export const adminAddRates = async (payload: any) => {
   return axios
     .post(`${ENDPOINT.ADMIN_ADD_RATES}`, payload)
     .then((response) => response.data);
-}
+};
 
 export const adminGetRates = async () => {
   return axios
     .get(`${ENDPOINT.ADMIN_GET_RATES}`)
     .then((response) => response.data);
-}
+};
+
+export const getAdminPayments = async (params: any) => {
+  return axios
+    .get(
+      `${ENDPOINT.ADMIN_GET_PAYMENTS}?page=${params.page}&status=${params.status}`
+    )
+    .then((response) => response.data);
+};

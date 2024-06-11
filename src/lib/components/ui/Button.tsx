@@ -15,7 +15,6 @@ interface Props {
 const Button: React.FC<Props> = ({
   title,
   onClick,
-  capitalizeTitle,
   disabled,
   altClassName,
   isBusy,
@@ -25,14 +24,14 @@ const Button: React.FC<Props> = ({
       <button
         className={
           altClassName ||
-          `py-3 lg:text-lg w-full btn-primary uppercase fw-500 ${
+          `py-3 lg:text-lg w-full btn-primary fw-500 ${
             disabled ? 'cursor-not-allowed btn-disabled' : ''
           }`
         }
         onClick={onClick ? onClick : undefined}
         disabled={disabled}
       >
-        {isBusy ? 'loading' : capitalizeTitle ? title : title}
+        {isBusy ? 'loading' : title}
       </button>
     </div>
   );

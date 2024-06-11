@@ -55,11 +55,13 @@ const GetCurrentLocation: FC<Props> = ({ setValue }) => {
 
       const result = await response.json();
       if (result) {
-        toast.success("Nearest Location Fetched");
+        if(result?.results[0]?.formatted_address){
+          toast.success("Nearest Location Fetched");
+        }
         setIsBusy(false);
         console.log(result);
         setValue({
-          location: result?.results[0].formatted_address,
+          location: result?.results[0]?.formatted_address,
           postal:  getPostalCodeFromGoogle(result?.results[0].address_components),
           latitude: String(data.latitude),
           longitude: String(data.longitude),
@@ -68,7 +70,7 @@ const GetCurrentLocation: FC<Props> = ({ setValue }) => {
       }
     } catch (error: any) {
       setIsBusy(false);
-      toast.error(error.message);
+      toast.error("Cannot get current location, use the map");
     }
   };
 
