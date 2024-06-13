@@ -1,16 +1,14 @@
 import { useParams } from "react-router-dom";
 import ProfileAvatar from "../../lib/components/ui/ProfileAvatar";
 import { Rating } from "@material-tailwind/react";
-import { MdLocationPin } from "react-icons/md";
 import useDialog from "../../lib/hooks/useDialog";
 import ReviewModal from "../../lib/components/user/requestDetails/ReviewModal";
 import { useQuery } from "@tanstack/react-query";
 import { getOneService } from "../../lib/services/api/clientApi";
 import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
 import dayjs from "dayjs";
-import useCustomModal from "../../lib/hooks/useCustomModal";
-import DriverMapTracking from "../../lib/components/user/requestDetails/map-tracking";
 import { formatAsNgnMoney } from "../../lib/utils";
+import TrackingBtn from "../../lib/components/user/requestDetails/TrackingBtn";
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -18,14 +16,15 @@ const ServiceDetails = () => {
     queryKey: ["userServiceData", `${id}`],
     queryFn: () => getOneService(`${id}`),
   });
-  const payment = data?.data?.serviceRequest?.payment
-  const isPaid = payment && (payment?.status).toLowerCase() === 'paid';
+  const payment = data?.data?.serviceRequest?.payment;
+  const isPaid = payment && (payment?.status).toLowerCase() === "paid";
   const getTotal = () => {
-    const totalPay = Number(payment?.amount) + Number(payment?.charge) + Number(payment?.tax)
-    return totalPay
-  }
+    const totalPay =
+      Number(payment?.amount) + Number(payment?.charge) + Number(payment?.tax);
+    return totalPay;
+  };
   const { Dialog, setShowModal } = useDialog();
-  const { Dialog: TrackModal, setShowModal: ShowTrackModal } = useCustomModal();
+
   return (
     <div className="pb-24">
       <div className="lg:flex justify-between items-start">
@@ -38,13 +37,11 @@ const ServiceDetails = () => {
           </p>
         </div>
         {isPaid && (
-          <div
-            className="flex items-center gap-x-1 mt-2 lg:mt-0 underline"
-            onClick={() => ShowTrackModal(true)}
-          >
-            <MdLocationPin className="text-xl" />
-            <p className="fs-600 fw-600">Track Driver Location</p>
-          </div>
+          <TrackingBtn
+            id={`${id}`}
+            lat={data?.data?.serviceRequest?.latitude}
+            lng={data?.data?.serviceRequest?.longitude}
+          />
         )}
       </div>
       {isLoading && (
@@ -117,9 +114,7 @@ const ServiceDetails = () => {
                 <div className="grid gap-5">
                   <div className="flex gap-x-2">
                     <p>Service Cost:</p>
-                    <p className="fw-500">
-                      {formatAsNgnMoney(getTotal())}
-                    </p>
+                    <p className="fw-500">{formatAsNgnMoney(getTotal())}</p>
                   </div>
                   <div className="flex gap-x-2">
                     <p>Contact Info:</p>
@@ -201,9 +196,6 @@ const ServiceDetails = () => {
       <Dialog title="Submit a Review" size="lg">
         <ReviewModal id={`${id}`} close={() => setShowModal(false)} />
       </Dialog>
-      <TrackModal title="" size="lg">
-        <DriverMapTracking close={() => ShowTrackModal(false)} />
-      </TrackModal>
     </div>
   );
 };

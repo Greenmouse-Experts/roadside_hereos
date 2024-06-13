@@ -7,6 +7,7 @@ import { ScaleSpinner } from "../../ui/Loading";
 import Button from "../../ui/Button";
 import { FaRegStar, FaStar } from "react-icons/fa";
 
+
 interface Props {
   id: string;
   close: () => void;

@@ -8,3 +8,4 @@ export const getLoggedUserToken = () => {
 export const getToken = () => {
   return `${localStorage.getItem("rhs_token")}`;
 };
+
