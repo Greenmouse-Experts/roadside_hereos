@@ -41,7 +41,7 @@ const LoginForm = () => {
         state: data.user.state,
         account: data.user.userType,
         id: data.user.id,
-        charge: data.serviceCharge
+        charge: data.user.serviceCharge
       };
       saveUser(payload);
       localStorage.setItem("rhs_token", data.token);

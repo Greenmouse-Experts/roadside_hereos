@@ -13,7 +13,7 @@ interface Props {
 const ServiceInfo: FC<Props> = ({ prev, next }) => {
   const kyc = useKycStore((state) => state.kyc);
   const saveKyc =  useKycStore((state) => state.saveKyc);
-  const isDisabled = kyc.isVerified === "1"? true : false
+  const isDisabled = kyc.isVerified
   const {
     control,
     handleSubmit,

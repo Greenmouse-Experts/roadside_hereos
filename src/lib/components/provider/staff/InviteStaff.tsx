@@ -35,8 +35,8 @@ const InviteStaff:FC<Props> = ({close, refetch}) => {
       refetch()
       close()
     },
-    onError: () => {
-      toast.error("Something went wrong");
+    onError: (err:any) => {
+      toast.error(err.response.data.message);
       setIsBusy(false);
     },
   });

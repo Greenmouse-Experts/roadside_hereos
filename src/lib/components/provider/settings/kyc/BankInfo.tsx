@@ -15,7 +15,7 @@ const BankInfo:FC<Props> = ({prev}) => {
   const [isBusy, setIsBusy] = useState(false)
   const kyc = useKycStore((state) => state.kyc);
   const saveKyc =  useKycStore((state) => state.saveKyc);
-  const isDisabled = kyc.isVerified === "1"? true : false
+  const isDisabled = kyc.isVerified
   const {
     control,
     handleSubmit,
@@ -172,7 +172,7 @@ const BankInfo:FC<Props> = ({prev}) => {
                 <Button title={"Prev"} onClick={prev}/>
               </div>
               <div className="w-3/12">
-                <Button title={isBusy ? <ScaleSpinner size={14} color="white" /> : "Submit"} disabled={!isValid} />
+                <Button title={isBusy ? <ScaleSpinner size={14} color="white" /> : "Submit"} disabled={!isValid || isDisabled} />
               </div>
             </div>
           </div>
