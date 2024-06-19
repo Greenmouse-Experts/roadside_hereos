@@ -160,7 +160,6 @@ const UpdateProfile: FC<Props> = ({ close }) => {
                     labelClassName="text-gray-500 fw-500"
                     error={errors.state?.message}
                     type={InputType.textarea}
-                    disabled
                     {...field}
                     ref={null}
                   />

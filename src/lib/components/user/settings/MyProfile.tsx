@@ -63,7 +63,7 @@ const MyProfileSettings = () => {
             </div>
             <div className="mt-6 lg:mt-0">
               <p className="fw-500">{`${user.name}`}</p>
-              <p className="text-gray-500">{user.account}</p>
+              <p className="text-gray-500">Guest</p>
             </div>
           </div>
         </div>
