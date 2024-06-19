@@ -11,7 +11,7 @@ interface Props {
   status: string;
   data: ServiceItemUser[];
   isLoading: boolean;
-  checkPay: string;
+  checkPay?: string;
 }
 const RequestList: FC<Props> = ({ status, checkPay, data, isLoading }) => {
   const navigate = useNavigate();
@@ -36,14 +36,14 @@ const RequestList: FC<Props> = ({ status, checkPay, data, isLoading }) => {
         </p>
       ),
     }),
-    columnHelper.accessor((row) => row.payment.status, {
+    columnHelper.accessor((row) => row.payment, {
       id: "Payment Status",
       header: (info) => info.column.id,
       cell: (info) => (
         <p className="fw-600">
           {
             FormatStatus[
-              info.getValue().toLowerCase() as keyof typeof FormatStatus
+              info.getValue()?.status?.toLowerCase() as keyof typeof FormatStatus
             ]
           }
         </p>
@@ -74,9 +74,10 @@ const RequestList: FC<Props> = ({ status, checkPay, data, isLoading }) => {
     data &&
     data?.filter(
       (where) =>
-        where.status.toLowerCase() === status &&
-        where.payment.status.toLowerCase() === checkPay
+        where.status.toLowerCase() === status
     );
+
+    const dets2 = checkPay? dets.filter((where) => where?.payment?.status?.toLowerCase() === checkPay) : dets
   return (
     <div className="lg:p-4 w-full">
       {isLoading && (
@@ -91,7 +92,7 @@ const RequestList: FC<Props> = ({ status, checkPay, data, isLoading }) => {
           </div>
         </div>
       )}
-      {!isLoading && data && <DataTable columns={columns} data={dets} />}
+      {!isLoading && data && <DataTable columns={columns} data={dets2} />}
     </div>
   );
 };

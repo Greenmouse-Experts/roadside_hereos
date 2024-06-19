@@ -11,7 +11,7 @@ const UserRequests = () => {
     const tabs = [
         {
             title: <p>Pending</p>,
-            content: <RequestList status="pending" checkPay={'pending'} data={data?.data} isLoading={isLoading}/>
+            content: <RequestList status="pending" data={data?.data} isLoading={isLoading}/>
         },
         {
             title: <p>Processing</p>,
@@ -19,11 +19,11 @@ const UserRequests = () => {
         },
         {
             title: <p>Ongoing</p>,
-            content: <RequestList status="ongoing" checkPay={'paid'} data={data?.data} isLoading={isLoading}/>
+            content: <RequestList status="ongoing" data={data?.data} isLoading={isLoading}/>
         },
         {
             title: <p>Completed</p>,
-            content: <RequestList status="completed" checkPay={'paid'} data={data?.data} isLoading={isLoading}/>
+            content: <RequestList status="completed" data={data?.data} isLoading={isLoading}/>
         },
     ]
   return (
