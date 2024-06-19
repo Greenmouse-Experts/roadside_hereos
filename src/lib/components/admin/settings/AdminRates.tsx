@@ -31,6 +31,7 @@ const AdminRates = () => {
     defaultValues: {
       tax_percent: "",
       service_percent: "",
+      company_percent: ""
     },
   });
   const mutate = useMutation({
@@ -38,7 +39,7 @@ const AdminRates = () => {
     mutationKey: ["admin-add-rates"],
   });
   const onSubmit = (data: any) => {
-    if(data?.service_percent > 100 || data?.tax_percent > 100){
+    if(data?.service_percent > 100 || data?.tax_percent > 100 || data?.company_percent > 100){
         toast.info('Invalid Percentage')
         return;
     }
@@ -79,6 +80,33 @@ const AdminRates = () => {
                     label="Service Rate (%)"
                     labelClassName="text-gray-500 fw-500"
                     error={errors.service_percent?.message}
+                    type={InputType.number}
+                    min={0}
+                    max={100}
+                    maxLength={3}
+                    {...field}
+                  />
+                )}
+              />
+            </div>
+            <div className="mt-4">
+              <Controller
+                name="company_percent"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Please enter your service rate",
+                  },
+                  maxLength: 3,
+                  value: "number",
+                }}
+                disabled={isLoading}
+                render={({ field }) => (
+                  <TextInput
+                    label="Provider's Charge (%)"
+                    labelClassName="text-gray-500 fw-500"
+                    error={errors.company_percent?.message}
                     type={InputType.number}
                     min={0}
                     max={100}

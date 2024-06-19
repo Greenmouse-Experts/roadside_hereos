@@ -133,10 +133,10 @@ const HeroSlide = () => {
           <div
             className={`bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1705590870/rsh/Property_1_Group_63_1_ne1lwh.png')] bg-cover lg:bg-fit w-full h-full`}
           >
-            <div className="box relative z-10 h-full text-white flex items-center">
+            <div className="box relative z-10 h-full text-white items-center">
               <div className="">
                 <div className="flex">
-                  <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#FEB470]">
+                  <div className="border-2 flex items-center gap-2  px-3 py-2 rounded-[100px] border-[#FEB470]">
                     <BsClock className="text-[#FEB470] text-[14px]" />
                     <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-[#FEB470]">
                       Available 24/7 for emergency road service
@@ -170,7 +170,7 @@ const HeroSlide = () => {
           <div
             className={`bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1705590870/rsh/Property_1_Group_64_2_njx6mz.png')] bg-cover lg:bg-fit w-full h-full`}
           >
-            <div className="box relative z-10 h-full text-white flex items-center">
+            <div className="box relative z-10 h-full flex items-center">
               <div className="">
                 <div className="flex">
                   <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#FEB470]">

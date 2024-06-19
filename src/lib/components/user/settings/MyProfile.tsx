@@ -95,10 +95,6 @@ const MyProfileSettings = () => {
               <p className="mt-3 fw-500">{formatPhoneNumber(user.phone)}</p>
             </div>
             <div>
-              <p className="text-[#808080]">Gender</p>
-              <p className="mt-3 fw-500">Null</p>
-            </div>
-            <div>
               <p className="text-[#808080]">Home Address</p>
               <p className="mt-3 fw-500">{user.state && user.state}</p>
             </div>
