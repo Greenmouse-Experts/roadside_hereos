@@ -15,7 +15,7 @@ import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 const AdminPendingService = () => {
   const { data, isLoading } = useQuery({
     queryKey: ["getServices", 'pending'],
-    queryFn: () => fetchAdminRequests("pending"),
+    queryFn: () => fetchAdminRequests("Pending"),
   });
   const colors: string[] = [
     "border-purple-500",
