@@ -35,37 +35,33 @@ const AdminCompletedService = () => {
     setSelected(item);
     setShowModal(true);
   };
-  const [{ start, stop, page }, setPage] = useState({
-    start: 0,
-    stop: 6,
-    page: 1,
-  });
+  const count = data?.data?.total || 0;
+
   const handleNext = () => {
-    if (stop >= data?.data?.length) {
+    if (params.page * 10 > count) {
       toast.info("This is the last page");
     } else {
-      setPage({
-        start: start + 6,
-        stop: stop + 6,
-        page: page + 1,
+      setParams({
+        ...params,
+        page: params.page + 1,
       });
     }
   };
   const handlePrev = () => {
-    if (page === 1) {
+    if (params.page === 1) {
       toast.info("This is the first page");
     } else {
-      setPage({
-        start: start - 6,
-        stop: stop - 6,
-        page: page - 1,
+      setParams({
+        ...params,
+        page: params.page - 1,
       });
     }
   };
+
   return (
     <>
       <div>
-        {data && !data?.data?.length && (
+        {data && !data?.data?.serviceRequests.length && (
           <div>
             <EmptyState msg="There's no completed request currently on the system." />
           </div>
@@ -85,7 +81,6 @@ const AdminCompletedService = () => {
         {data &&
           !!data?.data.length &&
           data?.data?.serviceRequests
-            ?.slice(start, stop)
             .map((item: ServiceRequestItem2, index: number) => {
               const colorIndex = index % colors.length;
               const color = colors[colorIndex];
@@ -122,12 +117,12 @@ const AdminCompletedService = () => {
             })}
         <div className="mt-6 flex justify-end">
           <div className="flex gap-x-4 items-center">
-            <p className="fw-600">Page {page}</p>
+            <p className="fw-600">Page {params.page}</p>
             <div className="flex gap-x-2 items-center">
               <div
                 onClick={handlePrev}
                 className={`px-2 py-1 rounded ${
-                  page === 1
+                  params.page === 1
                     ? "bg-gray-300 cursor-not-allowed"
                     : "bg-primary text-white cursor-pointer"
                 }`}
@@ -137,7 +132,7 @@ const AdminCompletedService = () => {
               <div
                 onClick={handleNext}
                 className={`px-2 py-1 rounded ${
-                  stop >= data?.data?.length
+                  params.page * 10 >= count
                     ? "bg-gray-300 cursor-not-allowed"
                     : "bg-primary text-white cursor-pointer"
                 }`}
