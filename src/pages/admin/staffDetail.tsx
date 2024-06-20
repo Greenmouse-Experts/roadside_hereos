@@ -27,6 +27,7 @@ const StaffDetail = () => {
   //   queryFn: () => getDriverKyc(`${id}`),
   // });
   const { Dialog, setShowModal } = useDialog();
+
   return (
     <>
       <div>

@@ -10,8 +10,12 @@ interface Props {
   id: string;
   lat: string;
   lng: string;
+  driverLat: string;
+  driverLng: string;
+  time: string;
+  miles: string;
 }
-const TrackingBtn: FC<Props> = ({ id, lat, lng }) => {
+const TrackingBtn: FC<Props> = ({ id, lat, lng, driverLat, driverLng, time, miles }) => {
   
   const { Dialog: TrackModal, setShowModal: ShowTrackModal } = useCustomModal();
   return (
@@ -30,6 +34,10 @@ const TrackingBtn: FC<Props> = ({ id, lat, lng }) => {
           socket={socket}
           lat={lat}
           lng={lng}
+          driverLat={driverLat}
+          driverLng={driverLng}
+          miles={miles}
+          time={time}
         />
       </TrackModal>
     </div>

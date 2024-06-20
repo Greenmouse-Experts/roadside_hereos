@@ -1,5 +1,5 @@
 import { FC, useEffect, useState } from "react";
-import {  FaArrowRightLong } from "react-icons/fa6";
+import { FaArrowRightLong } from "react-icons/fa6";
 import { Controller, useForm } from "react-hook-form";
 import TextInput, { InputType } from "../../../ui/TextInput";
 import { Button } from "@material-tailwind/react";
@@ -10,8 +10,9 @@ import { useMutation } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
 import useRequestStore from "../../../../store/serviceStore";
+import { requestForTokenForService } from "../../../../firebase/firebase";
 
-export interface LocationProps{
+export interface LocationProps {
   city: string;
   location: string;
   latitude: string;
@@ -25,21 +26,32 @@ interface Props {
   activeQuestion: string;
 }
 const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
-  const saveServiceId = useRequestStore((state) => state.saveRequest)
+  const saveServiceId = useRequestStore((state) => state.saveRequest);
+  const [fcmToken, setFcmToken] = useState("");
   const [locationDetail, setLocationDetail] = useState<LocationProps>({
-    city: '',
-    location: '',
-    latitude: '',
-    longitude: '',
-    postal: ''
-  })
-  const [isBusy, setIsBusy] = useState(false)
+    city: "",
+    location: "",
+    latitude: "",
+    longitude: "",
+    postal: "",
+  });
+
+  const [isBusy, setIsBusy] = useState(false);
+
+  const getToken = () => {
+    requestForTokenForService().then((res) => setFcmToken(res as string));
+  };
+
+  useEffect(() => {
+    getToken();
+  }, []);
+
   useEffect(() => {
     reset({
       ...getValues(),
-      location: locationDetail.location
-    })
-  },[locationDetail])
+      location: locationDetail.location,
+    });
+  }, [locationDetail]);
   const {
     control,
     handleSubmit,
@@ -57,13 +69,16 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
       other: "",
     },
   });
-  const getYears = Array.from({ length: 20 }, (_, i) => new Date().getFullYear() - i);
+  const getYears = Array.from(
+    { length: 20 },
+    (_, i) => new Date().getFullYear() - i
+  );
   const request = useMutation({
     mutationFn: requestService,
-    mutationKey: ['request']
-  })
-  const handleForm = (data:any) => {
-    setIsBusy(true)
+    mutationKey: ["request"],
+  });
+  const handleForm = (data: any) => {
+    setIsBusy(true);
     const payload = {
       vehicleMake: data.car_make,
       model: data.car_model,
@@ -75,11 +90,12 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
       longitude: locationDetail.longitude,
       latitude: locationDetail.latitude,
       requestNote: data.other,
-      serviceId: activeId
-    }
+      serviceId: activeId,
+      userFcmToken: fcmToken,
+    };
     request.mutate(payload, {
       onSuccess: (data) => {
-        setIsBusy(false)
+        setIsBusy(false);
         saveServiceId({
           id: data.data.id,
           firstName: "",
@@ -90,15 +106,15 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
           price: 0,
           homeAddress: "",
           level: 0,
-          qouteId: ""
-        })
+          qouteId: "",
+        });
         next();
       },
-      onError: (err:any) => {
-        setIsBusy(false)
-        toast.error(err.response.data.message)
-      }
-    })
+      onError: (err: any) => {
+        setIsBusy(false);
+        toast.error(err.response.data.message);
+      },
+    });
   };
   return (
     <>
@@ -164,7 +180,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
             <div className="grid lg:grid-cols-2 gap-x-4 gap-y-3">
               <div>
                 <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
-                Year
+                  Year
                 </label>
                 <Controller
                   name="car_year"
@@ -218,7 +234,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
               />
             </div>
             <div>
-            <Controller
+              <Controller
                 name="location"
                 control={control}
                 rules={{
@@ -240,7 +256,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                 )}
               />
               <div className="mt-3">
-                <GetCurrentLocation  setValue={setLocationDetail}/>
+                <GetCurrentLocation setValue={setLocationDetail} />
               </div>
             </div>
             <div>
@@ -255,7 +271,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                 }}
                 render={({ field }) => (
                   <TextInput
-                    label={activeQuestion? activeQuestion : "Service Details"}
+                    label={activeQuestion ? activeQuestion : "Service Details"}
                     labelClassName="text-[#000000B2] fw-600"
                     error={errors.other?.message}
                     type={InputType.textarea}
@@ -272,7 +288,13 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
               className="btn-feel flex gap-x-2 items-center"
               disabled={!isValid}
             >
-              {isBusy? <BeatLoader size={13}/> : <>Next <FaArrowRightLong /></>}
+              {isBusy ? (
+                <BeatLoader size={13} />
+              ) : (
+                <>
+                  Next <FaArrowRightLong />
+                </>
+              )}
             </Button>
           </div>
         </form>

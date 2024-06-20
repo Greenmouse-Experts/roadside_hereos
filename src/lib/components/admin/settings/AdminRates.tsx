@@ -18,6 +18,7 @@ const AdminRates = () => {
       reset({
         service_percent: data?.data?.service_percent,
         tax_percent:  data?.data?.tax_percent,
+        company_percent: data?.data?.company_percent
       });
     }
   }, [data]);
@@ -77,7 +78,7 @@ const AdminRates = () => {
                 disabled={isLoading}
                 render={({ field }) => (
                   <TextInput
-                    label="Service Rate (%)"
+                    label="Customer Service Charge (%)"
                     labelClassName="text-gray-500 fw-500"
                     error={errors.service_percent?.message}
                     type={InputType.number}

@@ -1,6 +1,6 @@
 import { Button, Tooltip } from "@material-tailwind/react";
 import { TbListDetails } from "react-icons/tb";
-import { ServiceRequestItem } from "../../../types/service";
+import { ServiceRequestItem2 } from "../../../types/service";
 import dayjs from "dayjs";
 import { MdLocationPin } from "react-icons/md";
 import useModal from "../../../hooks/useModal";
@@ -13,9 +13,14 @@ import EmptyState from "../../ui/EmptyState";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 
 const AdminCompletedService = () => {
+  const [params, setParams] = useState({
+    status: "Completed",
+    page: 1,
+    payment: ""
+  })
   const { data, isLoading } = useQuery({
-    queryKey: ["getServices", 'completed'],
-    queryFn: () => fetchAdminRequests("completed"),
+    queryKey: ["getServices", params],
+    queryFn: () => fetchAdminRequests(params),
   });
   const colors: string[] = [
     "border-purple-500",
@@ -25,8 +30,8 @@ const AdminCompletedService = () => {
     "border-orange-500",
   ];
   const { Modal, setShowModal } = useModal();
-  const [selected, setSelected] = useState<ServiceRequestItem>();
-  const openDetails = (item: ServiceRequestItem) => {
+  const [selected, setSelected] = useState<ServiceRequestItem2>();
+  const openDetails = (item: ServiceRequestItem2) => {
     setSelected(item);
     setShowModal(true);
   };
@@ -79,9 +84,9 @@ const AdminCompletedService = () => {
         )}
         {data &&
           !!data?.data.length &&
-          data?.data
+          data?.data?.serviceRequests
             ?.slice(start, stop)
-            .map((item: ServiceRequestItem, index: number) => {
+            .map((item: ServiceRequestItem2, index: number) => {
               const colorIndex = index % colors.length;
               const color = colors[colorIndex];
               return (
@@ -90,7 +95,7 @@ const AdminCompletedService = () => {
                   className={`border-l-[8px] relative flex items-center justify-between ${color}  p-3 mb-5`}
                 >
                   <div>
-                    <p className="fw-600">{item.service.name}</p>
+                    <p className="fw-600">{item.name}</p>
                     <p>{item.requestNote}</p>
                     <p className="my-1 fs-500 flex gap-x-2 items-center">
                       <MdLocationPin className="text-sm text-gray-500" />

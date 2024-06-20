@@ -41,8 +41,10 @@ const ServiceDetails = () => {
             id={`${id}`}
             lat={data?.data?.serviceRequest?.latitude}
             lng={data?.data?.serviceRequest?.longitude}
-            // driverInitLat={data?.data?.serviceRequest?.longitude}
-            // driverInitLng={data?.data?.serviceRequest?.longitude}
+            driverLat={data?.data?.driverQuote?.latitude}
+            driverLng={data?.data?.driverQuote?.longitude}
+            miles={data?.data?.driverQuote?.distance}
+            time={data?.data?.driverQuote?.timeTaken}
           />
         )}
       </div>

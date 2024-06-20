@@ -37,6 +37,26 @@ export const requestForToken = async () => {
     });
 };
 
+export const requestForTokenForService = async () => {
+  const messaging = getMessaging(app);
+
+  return await getToken(messaging, { vapidKey: `${VAPID_KEY}` })
+    .then((currentToken) => {
+      if (currentToken) {
+        return currentToken
+        // Perform any other neccessary action with the token
+      } else {
+        // Show permission request UI
+        console.log(
+          "No registration token available. Request permission to generate one."
+        );
+      }
+    })
+    .catch((err) => {
+      console.log("An error occurred while retrieving token. ", err);
+    });
+};
+
 const sendToken = async (payload: string) => {
   const mutate = useMutation({
     mutationFn: updateProfile,

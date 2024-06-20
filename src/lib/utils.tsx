@@ -216,3 +216,8 @@ export const getStateFromGoogle = (address: AddressType[]) => {
   const postal = selectedAdd[0].long_name;
   return postal;
 };
+
+export const getJustNumbers = (val:string) => {
+  var numsStr = val.replace(/[^0-9\.]/g, '');
+  return parseInt(numsStr);
+}

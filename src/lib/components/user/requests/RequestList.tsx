@@ -1,24 +1,44 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { DataTable } from "../../ui/DataTable";
 import { createColumnHelper } from "@tanstack/react-table";
 import { FormatStatus } from "../../../utils";
-import { ServiceItemUser } from "../../../types/service";
+import { ServiceRequestItem2 } from "../../../types/service";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
+import { useQuery } from "@tanstack/react-query";
+import { getMyServices } from "../../../services/api/serviceApi";
 
 interface Props {
   status: string;
-  data: ServiceItemUser[];
-  isLoading: boolean;
-  checkPay?: string;
+  paymentStatus: string;
 }
-const RequestList: FC<Props> = ({ status, checkPay, data, isLoading }) => {
+const RequestList: FC<Props> = ({ status, paymentStatus }) => {
+  
+  const [params, setParams] = useState({
+    page: 1,
+    status: status,
+    paymentStatus: paymentStatus
+  })
+
+  useEffect(() => {
+    setParams({
+      ...params,
+      status: status,
+      paymentStatus: paymentStatus
+    })
+  }, [status, paymentStatus])
+
+  const {data, isLoading} = useQuery({
+    queryKey: ['getMyService', params],
+    queryFn: () => getMyServices(params)
+})
+
   const navigate = useNavigate();
   // Table components
-  const columnHelper = createColumnHelper<ServiceItemUser>();
+  const columnHelper = createColumnHelper<ServiceRequestItem2>();
   const columns = [
-    columnHelper.accessor((row) => row.service.name, {
+    columnHelper.accessor((row) => row.name, {
       id: "Service Category",
       cell: (info) => <p className="fw-600">{info.getValue()}</p>,
       header: (info) => info.column.id,
@@ -36,20 +56,20 @@ const RequestList: FC<Props> = ({ status, checkPay, data, isLoading }) => {
         </p>
       ),
     }),
-    columnHelper.accessor((row) => row.payment, {
+    columnHelper.accessor((row) => row.status, {
       id: "Payment Status",
       header: (info) => info.column.id,
       cell: (info) => (
         <p className="fw-600">
           {
             FormatStatus[
-              info.getValue()?.status?.toLowerCase() as keyof typeof FormatStatus
+              info.getValue()?.toLowerCase() as keyof typeof FormatStatus
             ]
           }
         </p>
       ),
     }),
-    columnHelper.accessor((row) => row.status, {
+    columnHelper.accessor((row) => row.serviceRequestStatus, {
       id: "Status",
       header: (info) => info.column.id,
       cell: (info) => (
@@ -58,7 +78,7 @@ const RequestList: FC<Props> = ({ status, checkPay, data, isLoading }) => {
         </p>
       ),
     }),
-    columnHelper.accessor((row) => row.id, {
+    columnHelper.accessor((row) => row.serviceRequestId, {
       id: "Action",
       cell: (info) => (
         <p
@@ -70,14 +90,7 @@ const RequestList: FC<Props> = ({ status, checkPay, data, isLoading }) => {
       ),
     }),
   ];
-  const dets =
-    data &&
-    data?.filter(
-      (where) =>
-        where.status.toLowerCase() === status
-    );
-
-    const dets2 = checkPay? dets.filter((where) => where?.payment?.status?.toLowerCase() === checkPay) : dets
+  
   return (
     <div className="lg:p-4 w-full">
       {isLoading && (
@@ -92,7 +105,7 @@ const RequestList: FC<Props> = ({ status, checkPay, data, isLoading }) => {
           </div>
         </div>
       )}
-      {!isLoading && data && <DataTable columns={columns} data={dets2} />}
+      {!isLoading && data && <DataTable columns={columns} data={data?.data?.serviceRequests} />}
     </div>
   );
 };

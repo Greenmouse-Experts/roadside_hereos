@@ -145,15 +145,15 @@ export const getPendingServices = async (param: {
     .then((response) => response.data);
 };
 
-export const fetchAdminRequests = async (payload: string) => {
+export const fetchAdminRequests = async (payload: {status: string; page: number; payment: string}) => {
   return axios
-    .get(`${ENDPOINT.ADMIN_GET_REQUESTS}?status=${payload}`)
+    .get(`${ENDPOINT.ADMIN_GET_REQUESTS}?page=${payload.page}&status=${payload.status}`)
     .then((response) => response.data);
 };
 
-export const getMyServices = async () => {
+export const getMyServices = async (payload: {status: string; page: number; paymentStatus: string}) => {
   return axios
-    .get(`${ENDPOINT.GET_MY_SERVICES}`)
+    .get(`${ENDPOINT.GET_MY_SERVICES}?page=${payload.page}&status=${payload.status}&paymentStatus=${payload.paymentStatus}`)
     .then((response) => response.data);
 };
 

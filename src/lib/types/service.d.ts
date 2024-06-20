@@ -78,6 +78,7 @@ export interface ServiceQouteItem {
   serviceRequestId: string;
   updatedAt: string;
   userId: string | null;
+  timeTaken: string
 }
 
 export interface ServiceItemUser {
