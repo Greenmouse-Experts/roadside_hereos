@@ -217,7 +217,21 @@ export const getStateFromGoogle = (address: AddressType[]) => {
   return postal;
 };
 
-export const getJustNumbers = (val:string) => {
-  var numsStr = val.replace(/[^0-9\.]/g, '');
+export const getJustNumbers = (val: string) => {
+  var numsStr = val.replace(/[^0-9\.]/g, "");
   return parseInt(numsStr);
+};
+
+export const getJustNumbers2 = (val:string | undefined) => {
+  if(!val) return;
+  const numsStr = val.replace(/[^0-9\.]/g, '');
+  const km = parseInt(numsStr);
+  const conversionFactor: number = 0.621371;
+  const miles: number = km * conversionFactor;
+
+  if (miles % 1 !== 0) {
+    return parseFloat(miles.toFixed(2));
+  } else {
+    return miles;
+  }
 }

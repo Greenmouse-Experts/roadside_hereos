@@ -1,18 +1,17 @@
 import { useParams } from "react-router-dom";
 import ProfileAvatar from "../../lib/components/ui/ProfileAvatar";
 import { Rating } from "@material-tailwind/react";
-import useDialog from "../../lib/hooks/useDialog";
-import ReviewModal from "../../lib/components/user/requestDetails/ReviewModal";
 import { useQuery } from "@tanstack/react-query";
 import { getOneService } from "../../lib/services/api/clientApi";
 import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
 import dayjs from "dayjs";
 import { formatAsNgnMoney } from "../../lib/utils";
 import TrackingBtn from "../../lib/components/user/requestDetails/TrackingBtn";
+import ServiceProgress from "../../lib/components/user/requestDetails/ServiceProgress";
 
 const ServiceDetails = () => {
   const { id } = useParams();
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryKey: ["userServiceData", `${id}`],
     queryFn: () => getOneService(`${id}`),
   });
@@ -23,7 +22,6 @@ const ServiceDetails = () => {
       Number(payment?.amount) + Number(payment?.charge) + Number(payment?.tax);
     return totalPay;
   };
-  const { Dialog, setShowModal } = useDialog();
 
   return (
     <div className="pb-24">
@@ -63,70 +61,78 @@ const ServiceDetails = () => {
       {data && !isLoading && (
         <div>
           {isPaid && (
-            <div className="bg-white shadow mt-6 rounded-lg p-4">
-              <div className="flex justify-between">
-                <p className="fw-500 flex items-center gap-x-1 text-lg">
-                  <span className="block w-4 h-4 circle bg-primary"></span>{" "}
-                  Provider Details
-                </p>
-                <p
-                  className="fw-500 underline cursor-pointer"
-                  onClick={() => setShowModal(true)}
-                >
-                  Leave a rating
-                </p>
+            <div>
+              <div>
+                <ServiceProgress
+                  id={`${id}`}
+                  status={data?.data?.serviceRequest?.status}
+                  query={data?.data?.serviceRequest?.queryNote}
+                  refetch={refetch}
+                />
               </div>
-              <div className="mt-6">
-                <div className="flex items-center gap-x-3">
-                  <ProfileAvatar
-                    url={""}
-                    name={`${data?.data?.driver?.fname} ${data?.data?.driver?.lname}`}
-                    size={100}
-                    font={30}
-                  />
-                  <div>
-                    <p className="fw-500 mb-2 text-lg">{`${data?.data?.driver?.fname} ${data?.data?.driver?.lname}`}</p>
-                    <div className="flex items-center gap-2 font-bold text-blue-gray-500">
-                      {data?.data?.driver?.reviewsAvg}.0
-                      <Rating
-                        value={Number(data?.data?.driver?.reviewsAvg)}
-                        readonly
-                      />
+              <div className="bg-white shadow mt-6 rounded-lg p-4">
+                <div className="flex justify-between">
+                  <p className="fw-500 flex items-center gap-x-1 text-lg">
+                    <span className="block w-4 h-4 circle bg-primary"></span>{" "}
+                    Provider Details
+                  </p>
+                </div>
+                <div className="mt-6">
+                  <div className="flex items-center gap-x-3">
+                    <ProfileAvatar
+                      url={""}
+                      name={`${data?.data?.driver?.fname} ${data?.data?.driver?.lname}`}
+                      size={100}
+                      font={30}
+                    />
+                    <div>
+                      <p className="fw-500 mb-2 text-lg">{`${data?.data?.driver?.fname} ${data?.data?.driver?.lname}`}</p>
+                      <div className="flex items-center gap-2 font-bold text-blue-gray-500">
+                        {data?.data?.driver?.reviewsAvg}.0
+                        <Rating
+                          value={Number(data?.data?.driver?.reviewsAvg)}
+                          readonly
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-              <div className="grid lg:grid-cols-2 gap-5 lg:gap-0 mt-6">
-                <div className="grid gap-5">
-                  <div className="flex gap-x-2">
-                    <p>Company:</p>
-                    <p className="fw-500">{data?.data?.driverCompany?.name}</p>
+                <div className="grid lg:grid-cols-2 gap-5 lg:gap-0 mt-6">
+                  <div className="grid gap-5">
+                    <div className="flex gap-x-2">
+                      <p>Company:</p>
+                      <p className="fw-500">
+                        {data?.data?.driverCompany?.name}
+                      </p>
+                    </div>
+                    <div className="flex gap-x-2">
+                      <p>Car Description:</p>
+                      <p className="fw-500">
+                        {data?.data?.driverMoreInfo?.car_description}
+                      </p>
+                    </div>
+                    <div className="flex gap-x-2">
+                      <p>Plate Number:</p>
+                      <p className="fw-500">
+                        {data?.data?.driverMoreInfo?.plate_number}
+                      </p>
+                    </div>
                   </div>
-                  <div className="flex gap-x-2">
-                    <p>Car Description:</p>
-                    <p className="fw-500">
-                      {data?.data?.driverMoreInfo?.car_description}
-                    </p>
-                  </div>
-                  <div className="flex gap-x-2">
-                    <p>Plate Number:</p>
-                    <p className="fw-500">
-                      {data?.data?.driverMoreInfo?.plate_number}
-                    </p>
-                  </div>
-                </div>
-                <div className="grid gap-5">
-                  <div className="flex gap-x-2">
-                    <p>Service Cost:</p>
-                    <p className="fw-500">{formatAsNgnMoney(getTotal())}</p>
-                  </div>
-                  <div className="flex gap-x-2">
-                    <p>Contact Info:</p>
-                    <p className="fw-500">{data?.data?.driverCompany?.phone}</p>
-                  </div>
-                  <div className="flex gap-x-2">
-                    <p>Addition Info:</p>
-                    <p className="fw-500"></p>
+                  <div className="grid gap-5">
+                    <div className="flex gap-x-2">
+                      <p>Service Cost:</p>
+                      <p className="fw-500">{formatAsNgnMoney(getTotal())}</p>
+                    </div>
+                    <div className="flex gap-x-2">
+                      <p>Contact Info:</p>
+                      <p className="fw-500">
+                        {data?.data?.driverCompany?.phone}
+                      </p>
+                    </div>
+                    <div className="flex gap-x-2">
+                      <p>Addition Info:</p>
+                      <p className="fw-500"></p>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -197,9 +203,6 @@ const ServiceDetails = () => {
           </div>
         </div>
       )}
-      <Dialog title="Submit a Review" size="lg">
-        <ReviewModal id={`${id}`} close={() => setShowModal(false)} />
-      </Dialog>
     </div>
   );
 };

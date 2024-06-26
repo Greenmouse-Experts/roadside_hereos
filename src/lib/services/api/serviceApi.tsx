@@ -163,6 +163,18 @@ export const submitReview = async (payload: any) => {
     .then((response) => response.data);
 };
 
+export const submitQuery = async (id:string, payload: any) => {
+  return axios
+    .post(`${ENDPOINT.SUBMIT_QUERY}/${id}`, payload)
+    .then((response) => response.data);
+};
+
+export const clientUpdateService = async (id:string, payload: any) => {
+  return axios
+    .patch(`${ENDPOINT.COMPLETE_SERVICE}/${id}`, payload)
+    .then((response) => response.data);
+};
+
 export const getAllReviews = async () => {
   return axios
     .get(`${ENDPOINT.GET_ALL_REVIEWS}`)

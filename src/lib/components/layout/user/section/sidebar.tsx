@@ -14,7 +14,7 @@ interface Props{
 }
 const SidebarLayout:FC<Props> = ({toggled, setToggled}) => {
   const path = useLocation();
-  const {user} = useAuth()
+  const {user, firstName, lastName} = useAuth()
   const {Dialog, setShowModal} = useDialog()
 
   return (
@@ -37,7 +37,7 @@ const SidebarLayout:FC<Props> = ({toggled, setToggled}) => {
           <div className="mt-10 flex justify-center">
             <ProfileAvatar
               url={user.image}
-              name={user.name}
+              name={`${firstName} ${lastName}`}
               size={150}
               font={30}
             />
