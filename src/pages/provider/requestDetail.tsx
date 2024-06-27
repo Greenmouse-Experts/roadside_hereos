@@ -1,11 +1,11 @@
-import { useQuery } from "@tanstack/react-query";
-import { useParams } from "react-router-dom"
-import { getSingleService } from "../../lib/services/api/serviceApi";
+// import { useQuery } from "@tanstack/react-query";
+// import { useParams } from "react-router-dom"
+// import { getSingleService } from "../../lib/services/api/serviceApi";
 import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
 import RequestDetailsIndex from "../../lib/components/provider/requests/details";
 
 const RequestDetail = () => {
-    const {id} = useParams()
+    // const {id} = useParams()
     // const { isLoading, isError, data, refetch } = useQuery({
     //     queryKey: ["get-service-detail", `${id}`],
     //     queryFn: () => getSingleService(`${id}`),
