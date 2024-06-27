@@ -3,6 +3,7 @@ import ProviderHomePage from "../../pages/provider/home";
 import CompanyInvites from "../../pages/provider/invite";
 import ProviderNotification from "../../pages/provider/notify";
 import ProviderPayments from "../../pages/provider/payments";
+import RequestDetail from "../../pages/provider/requestDetail";
 import ProviderServices from "../../pages/provider/services";
 import ProviderSetting from "../../pages/provider/settings";
 import CompanyStaffs from "../../pages/provider/staff";
@@ -18,6 +19,11 @@ export const providerRoutes = [
         id: 'user2',
         path: 'services',
         component: <ProviderServices/>
+    },
+    {
+        id: 'user0',
+        path: 'services/:id',
+        component: <RequestDetail/>
     },
     {
         id: 'user2',

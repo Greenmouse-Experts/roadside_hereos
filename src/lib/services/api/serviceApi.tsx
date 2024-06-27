@@ -145,6 +145,12 @@ export const getPendingServices = async (param: {
     .then((response) => response.data);
 };
 
+export const getSingleService = async (id:string) => {
+  return axios
+    .get(`${ENDPOINT.GET_SINGLE_SERVICE}/${id}`)
+    .then((response) => response.data);
+};
+
 export const fetchAdminRequests = async (payload: {status: string; page: number; payment: string}) => {
   return axios
     .get(`${ENDPOINT.ADMIN_GET_REQUESTS}?page=${payload.page}&status=${payload.status}`)

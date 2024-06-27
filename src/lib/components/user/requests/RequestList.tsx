@@ -60,13 +60,13 @@ const RequestList: FC<Props> = ({ status, paymentStatus }) => {
       id: "Payment Status",
       header: (info) => info.column.id,
       cell: (info) => (
-        <p className="fw-600">
+        <div className="fw-600">
           {
             FormatStatus[
               info.getValue()?.toLowerCase() as keyof typeof FormatStatus
             ]
           }
-        </p>
+        </div>
       ),
     }),
     columnHelper.accessor((row) => row.serviceRequestStatus, {

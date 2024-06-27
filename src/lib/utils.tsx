@@ -72,8 +72,8 @@ export const FormatStatus = {
   ),
   ongoing: (
     <div className="flex items-center gap-x-2">
-      <span className="bg-purple-600 w-4 h-4 circle"></span>{" "}
-      <span className="fw-500 text-purple-600">Ongoing</span>
+      <span className="bg-blue-600 w-4 h-4 circle"></span>{" "}
+      <span className="fw-500 text-blue-600">Ongoing</span>
     </div>
   ),
   accepted: (
@@ -234,4 +234,9 @@ export const getJustNumbers2 = (val:string | undefined) => {
   } else {
     return miles;
   }
+}
+
+export const removeSpace = (str: string) => {
+  const result = str.replace(/\s/g, '');
+  return result
 }

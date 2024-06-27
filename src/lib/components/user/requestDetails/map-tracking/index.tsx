@@ -41,8 +41,8 @@ const DriverMapTracking: FC<Props> = ({
 
   const calculateDistance = async () => {
     const directionService = new google.maps.DirectionsService();
-    var start = new google.maps.LatLng(markes[0].lat, markes[0].lng);
-    var end = new google.maps.LatLng(markes[1].lat, markes[1].lng);
+    const start = new google.maps.LatLng(markes[0].lat, markes[0].lng);
+    const end = new google.maps.LatLng(markes[1].lat, markes[1].lng);
     const results = await directionService.route({
       origin: start,
       destination: end,
@@ -97,8 +97,8 @@ const DriverMapTracking: FC<Props> = ({
   }, [myLocation]);
 
   useEffect(() => {
-    calculateDistance();
-  }, [myLocation]);
+      calculateDistance();
+  }, [markes]);
 
   const defaultProps = {
     center: {
@@ -124,11 +124,8 @@ const DriverMapTracking: FC<Props> = ({
                 icon={{
                   url: "https://res.cloudinary.com/greenmouse-tech/image/upload/v1718965767/rsh/top_view-removebg-preview_1_xj6b9a.png",
                   scaledSize: { equals: () => true, height: 60, width: 35 },
-                  anchor: {
-                    equals: () => true,
-                    x: markes[0]?.lat,
-                    y: markes[0]?.lng,
-                  },
+                  anchor: new window.google.maps.Point(markes[0]?.lat, markes[0]?.lat),
+                  rotation: 40
                 }}
               />
               {directionResponse && (
@@ -151,13 +148,15 @@ const DriverMapTracking: FC<Props> = ({
       <div className="p-4">
         <div className="flex gap-x-2 items-center">
           <GiPathDistance className="text-xl lg:text-3xl" />
-          <p className="fw-600 text-xl">{getJustNumbers2(distance)} Miles</p>
+          <p className="fw-600 lg:text-xl">{getJustNumbers2(distance)} Miles</p>
           <p>from your location.</p>
         </div>
         <div className="mt-1 lg:mt-2 flex gap-x-2 items-center">
           <BiTimer className="text-xl lg:text-3xl" />
-          <p>Service provider will get to you in</p>
-          <p className="fw-600 text-xl">{duration}.</p>
+          <div>
+          <p className="inline-block">Service provider will get to you in</p>
+          <p className="inline-block fw-600 lg:text-xl">{" "}{duration}.</p>
+          </div>
         </div>
       </div>
     </div>

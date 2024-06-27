@@ -89,10 +89,10 @@ const ServiceDetails = () => {
                       <p className="fw-500 mb-2 text-lg">{`${data?.data?.driver?.fname} ${data?.data?.driver?.lname}`}</p>
                       <div className="flex items-center gap-2 font-bold text-blue-gray-500">
                         {data?.data?.driver?.reviewsAvg}.0
-                        <Rating
+                        {data?.data?.driver?.reviewsAvg && <Rating
                           value={Number(data?.data?.driver?.reviewsAvg)}
                           readonly
-                        />
+                        />}
                       </div>
                     </div>
                   </div>

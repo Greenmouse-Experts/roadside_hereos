@@ -26,7 +26,7 @@ import { formatAsNgnMoney, formatPhoneNumber } from "../../lib/utils";
 const StaffDetail = () => {
   const { id } = useParams();
   const { isLoading, isError, data, refetch } = useQuery({
-    queryKey: ["getProviders"],
+    queryKey: ["getProviders", `${id}`],
     queryFn: () => getDriversDetail(`${id}`),
   });
   const {

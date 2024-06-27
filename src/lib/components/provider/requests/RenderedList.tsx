@@ -9,12 +9,14 @@ import { MdLocationPin } from "react-icons/md";
 import dayjs from "dayjs";
 import { FC, useState } from "react";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   status: string;
 }
 const RenderedServices: FC<Props> = ({ status }) => {
   const [page, setPage] = useState(1);
+  const navigate = useNavigate();
   const { isLoading, data } = useQuery({
     queryKey: ["getServices", status],
     queryFn: () => getPendingServices({ status: status, page: page }),
@@ -87,7 +89,10 @@ const RenderedServices: FC<Props> = ({ status }) => {
                 </div>
                 <div className="flex gap-x-3 ">
                   <Tooltip content="View Service Details">
-                    <Button className="m-0 p-0 shadow-none hover:shadow-none bg-transparent text-black">
+                    <Button
+                      className="m-0 p-0 shadow-none hover:shadow-none bg-transparent text-black"
+                      onClick={() => navigate(`/provider/services/${item.id}`)}
+                    >
                       <TbListDetails className="text-3xl" />
                     </Button>
                   </Tooltip>

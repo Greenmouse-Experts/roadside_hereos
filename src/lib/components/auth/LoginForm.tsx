@@ -12,6 +12,7 @@ import { useMutation } from "@tanstack/react-query";
 import useAuthStore from "../../store/userStore";
 import useModal from "../../hooks/useModal";
 import AccontNotVerified from "./AccontNotVerified";
+import { removeSpace } from "../../utils";
 
 const LoginForm = () => {
   const [isBusy, setIsBusy] = useState(false);
@@ -41,7 +42,7 @@ const LoginForm = () => {
         state: data.user.state,
         account: data.user.userType,
         id: data.user.id,
-        charge: data.user.serviceCharge
+        charge: data.user.serviceCharge,
       };
       saveUser(payload);
       localStorage.setItem("rhs_token", data.token);
@@ -55,20 +56,22 @@ const LoginForm = () => {
           state: data.user.state,
           account: data.user.userType,
           id: data.user.id,
-          name: `${data?.user?.fname} ${data?.user?.lname}`
-        })
+          name: `${removeSpace(data?.user?.fname)} ${removeSpace(
+            data?.user?.lname
+          )}`,
+        });
         navigate("/user");
-      } else if(data?.user?.userType === "professional") {
+      } else if (data?.user?.userType === "professional") {
         navigate("/provider");
-      }else{
-        toast.info('User not available on web platform')
+      } else {
+        toast.info("User not available on web platform");
       }
       setIsBusy(false);
     },
     onError: (error: any) => {
       toast.error(error.response.data.message);
-      if(error.response.data.message === 'Please Verify account'){
-        setShowModal(true)
+      if (error.response.data.message === "Please Verify account") {
+        setShowModal(true);
       }
       setIsBusy(false);
     },
@@ -78,80 +81,82 @@ const LoginForm = () => {
     mutation.mutate(data);
   };
   // Account not verified modal
-  const {Modal, setShowModal} = useModal()
+  const { Modal, setShowModal } = useModal();
   return (
     <>
       <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div>
-          <Controller
-            name="email"
-            control={control}
-            rules={{
-              required: {
-                value: true,
-                message: "Please enter your email",
-              },
-            }}
-            render={({ field }) => (
-              <TextInput
-                label="Email"
-                labelClassName="text-[#000000B2] fw-500"
-                icon={<AiOutlineMail className="text-2xl mx-2 lg:mx-4" />}
-                placeholder="victorchigozie@gmail.com"
-                error={errors.email?.message}
-                type={InputType.email}
-                {...field}
-                ref={null}
-              />
-            )}
-          />
-        </div>
-        <div className="mt-6 relative">
-          <Link
-            to="/auth/forget"
-            className="absolute top-0 right-0 fw-500 fs-400"
-          >
-            Forgot Password?
-          </Link>
-          <Controller
-            name="password"
-            control={control}
-            rules={{
-              required: {
-                value: true,
-                message: "Password is required",
-              },
-              minLength: {
-                value: 6,
-                message: "Password is too short",
-              },
-            }}
-            render={({ field }) => (
-              <TextInput
-                label="Password"
-                labelClassName="text-[#000000B2] fw-500"
-                icon={<VscLock className="text-2xl mx-2 lg:mx-4" />}
-                placeholder="*********"
-                error={errors.password?.message}
-                type={InputType.password}
-                {...field}
-                ref={null}
-              />
-            )}
-          />
-        </div>
-        <div className="mt-12">
-          <Button
-            title={isBusy ? <ScaleSpinner size={14} color="white" /> : "Login"}
-            disabled={!isValid}
-          />
-        </div>
-      </form>
-    </div>
-    <Modal size="sm" title="">
-      <AccontNotVerified email={getValues('email')}/>
-    </Modal>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <div>
+            <Controller
+              name="email"
+              control={control}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Please enter your email",
+                },
+              }}
+              render={({ field }) => (
+                <TextInput
+                  label="Email"
+                  labelClassName="text-[#000000B2] fw-500"
+                  icon={<AiOutlineMail className="text-2xl mx-2 lg:mx-4" />}
+                  placeholder="victorchigozie@gmail.com"
+                  error={errors.email?.message}
+                  type={InputType.email}
+                  {...field}
+                  ref={null}
+                />
+              )}
+            />
+          </div>
+          <div className="mt-6 relative">
+            <Link
+              to="/auth/forget"
+              className="absolute top-0 right-0 fw-500 fs-400"
+            >
+              Forgot Password?
+            </Link>
+            <Controller
+              name="password"
+              control={control}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Password is required",
+                },
+                minLength: {
+                  value: 6,
+                  message: "Password is too short",
+                },
+              }}
+              render={({ field }) => (
+                <TextInput
+                  label="Password"
+                  labelClassName="text-[#000000B2] fw-500"
+                  icon={<VscLock className="text-2xl mx-2 lg:mx-4" />}
+                  placeholder="*********"
+                  error={errors.password?.message}
+                  type={InputType.password}
+                  {...field}
+                  ref={null}
+                />
+              )}
+            />
+          </div>
+          <div className="mt-12">
+            <Button
+              title={
+                isBusy ? <ScaleSpinner size={14} color="white" /> : "Login"
+              }
+              disabled={!isValid}
+            />
+          </div>
+        </form>
+      </div>
+      <Modal size="sm" title="">
+        <AccontNotVerified email={getValues("email")} />
+      </Modal>
     </>
   );
 };
