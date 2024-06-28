@@ -116,6 +116,10 @@ const DriverMapTracking: FC<Props> = ({
             <GoogleMap
               center={defaultProps.center}
               zoom={defaultProps.zoom}
+              options={{
+                gestureHandling:'greedy',
+                streetViewControl:false,
+              }}
               mapContainerStyle={{ width: "100%", height: "100%" }}
             >
               <Marker position={{ lat: markes[0]?.lat, lng: markes[0]?.lng }} />
@@ -155,7 +159,7 @@ const DriverMapTracking: FC<Props> = ({
           <BiTimer className="text-xl lg:text-3xl" />
           <div>
             <p className="inline-block">Service provider will get to you in</p>
-            <p className="inline-block fw-600 lg:text-xl"> {duration}.</p>
+            <p className="inline-block fw-600 lg:text-xl pl-1 lg:pl-2">{" "}{duration}.</p>
           </div>
         </div>
       </div>
