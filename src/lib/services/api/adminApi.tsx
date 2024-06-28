@@ -50,3 +50,11 @@ export const getAdminPayments = async (params: any) => {
     )
     .then((response) => response.data);
 };
+
+export const adminGetUserDetails = async (id: string) => {
+  return axios
+    .get(
+      `${ENDPOINT.GET_PROVIDER_DETAILS}/${id}`
+    )
+    .then((response) => response.data);
+};

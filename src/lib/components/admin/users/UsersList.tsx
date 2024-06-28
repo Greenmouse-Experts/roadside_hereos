@@ -13,13 +13,15 @@ import {
 import { BsArrowsExpand, BsThreeDotsVertical } from "react-icons/bs";
 import { UserItemType } from "../../../types/auth";
 import { FormatStatus, formatPhoneNumber } from "../../../utils";
+import { useNavigate } from "react-router-dom";
 
 interface Props {
   users: any;
 }
 const UsersList: FC<Props> = ({ users }) => {
+  const navigate = useNavigate()
     const gotoDetails = (id:string) => {
-        console.log(id);
+        navigate(`/admin/users/${id}`)
     }
   // Table components
   const columnHelper = createColumnHelper<UserItemType>();
@@ -75,7 +77,7 @@ const UsersList: FC<Props> = ({ users }) => {
                 className="my-1 fw-500 flex items-center gap-x-2 pt-1"
                 onClick={() => gotoDetails(info.getValue())}
               >
-                <BsArrowsExpand/> View User Requests
+                <BsArrowsExpand/> View User Detail
               </MenuItem>
             </MenuList>
           </Menu>

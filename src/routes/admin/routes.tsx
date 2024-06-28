@@ -6,9 +6,11 @@ import ProviderDetails from "../../pages/admin/providerDetails";
 import ServiceProviders from "../../pages/admin/providers";
 import AdminRequests from "../../pages/admin/requests";
 import AllReviews from "../../pages/admin/reviews";
+import AdminServiceDetails from "../../pages/admin/serviceDetails";
 import AdminRenderedServices from "../../pages/admin/services";
 import AdminSettings from "../../pages/admin/settings";
 import StaffDetail from "../../pages/admin/staffDetail";
+import AdminUserDetails from "../../pages/admin/userDetails";
 import AdminUsers from "../../pages/admin/users";
 
 export const adminRoutes = [
@@ -21,6 +23,11 @@ export const adminRoutes = [
         id: 'admin2',
         path: 'users',
         component: <AdminUsers/>
+    },
+    {
+        id: 'admin2',
+        path: 'users/:id',
+        component: <AdminUserDetails/>
     },
     {
         id: 'admin3',
@@ -41,6 +48,11 @@ export const adminRoutes = [
         id: 'admin6',
         path: 'services',
         component: <AdminRenderedServices/>
+    },
+    {
+        id: 'admin13',
+        path: 'services/:id',
+        component: <AdminServiceDetails/>
     },
     {
         id: 'admin7',

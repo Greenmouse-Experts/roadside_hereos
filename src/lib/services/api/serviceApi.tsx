@@ -145,21 +145,33 @@ export const getPendingServices = async (param: {
     .then((response) => response.data);
 };
 
-export const getSingleService = async (id:string) => {
+export const getSingleService = async (id: string) => {
   return axios
     .get(`${ENDPOINT.GET_SINGLE_SERVICE}/${id}`)
     .then((response) => response.data);
 };
 
-export const fetchAdminRequests = async (payload: {status: string; page: number; payment: string}) => {
+export const fetchAdminRequests = async (payload: {
+  status: string;
+  page: number;
+  payment: string;
+}) => {
   return axios
-    .get(`${ENDPOINT.ADMIN_GET_REQUESTS}?page=${payload.page}&status=${payload.status}`)
+    .get(
+      `${ENDPOINT.ADMIN_GET_REQUESTS}?page=${payload.page}&status=${payload.status}&paymentStatus=${payload.payment}`
+    )
     .then((response) => response.data);
 };
 
-export const getMyServices = async (payload: {status: string; page: number; paymentStatus: string}) => {
+export const getMyServices = async (payload: {
+  status: string;
+  page: number;
+  paymentStatus: string;
+}) => {
   return axios
-    .get(`${ENDPOINT.GET_MY_SERVICES}?page=${payload.page}&status=${payload.status}&paymentStatus=${payload.paymentStatus}`)
+    .get(
+      `${ENDPOINT.GET_MY_SERVICES}?page=${payload.page}&status=${payload.status}&paymentStatus=${payload.paymentStatus}`
+    )
     .then((response) => response.data);
 };
 
@@ -169,13 +181,13 @@ export const submitReview = async (payload: any) => {
     .then((response) => response.data);
 };
 
-export const submitQuery = async (id:string, payload: any) => {
+export const submitQuery = async (id: string, payload: any) => {
   return axios
     .post(`${ENDPOINT.SUBMIT_QUERY}/${id}`, payload)
     .then((response) => response.data);
 };
 
-export const clientUpdateService = async (id:string, payload: any) => {
+export const clientUpdateService = async (id: string, payload: any) => {
   return axios
     .patch(`${ENDPOINT.COMPLETE_SERVICE}/${id}`, payload)
     .then((response) => response.data);

@@ -61,7 +61,7 @@ const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
         <div className="grid gap-4">
           {notify &&
             !!notify.length &&
-            notify.map((item, i: number) => (
+            notify.slice(0,20).map((item, i: number) => (
               <div
                 key={i}
                 className={`bg-primary p-3 rounded-[15px] text-white flex items-center justify-between hover:scale-105 duration-100 ${

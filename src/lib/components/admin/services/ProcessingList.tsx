@@ -3,25 +3,27 @@ import { TbListDetails } from "react-icons/tb";
 import { ServiceRequestItem2 } from "../../../types/service";
 import dayjs from "dayjs";
 import { MdLocationPin } from "react-icons/md";
-import useModal from "../../../hooks/useModal";
-import RequestDetailsModal from "./RequestDetailsModal";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import EmptyState from "../../ui/EmptyState";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import { fetchAdminRequests } from "../../../services/api/serviceApi";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const AdminProcessingService = () => {
+  const navigate = useNavigate()
   const [params, setParams] = useState({
     status: "Pending",
     page: 1,
-    payment: ""
+    payment: "Paid"
   })
+
   const { data, isLoading } = useQuery({
     queryKey: ["getServices", params],
     queryFn: () => fetchAdminRequests(params),
   });
+
   const colors: string[] = [
     "border-purple-500",
     "border-blue-500",
@@ -29,12 +31,7 @@ const AdminProcessingService = () => {
     "border-pink-500",
     "border-orange-500",
   ];
-  const { Modal, setShowModal } = useModal();
-  const [selected, setSelected] = useState<ServiceRequestItem2>();
-  const openDetails = (item: ServiceRequestItem2) => {
-    setSelected(item);
-    setShowModal(true);
-  };
+
   const count = data?.data?.total || 0;
 
   const handleNext = () => {
@@ -47,6 +44,7 @@ const AdminProcessingService = () => {
       });
     }
   };
+  
   const handlePrev = () => {
     if (params.page === 1) {
       toast.info("This is the first page");
@@ -107,7 +105,9 @@ const AdminProcessingService = () => {
                     <Tooltip content="View Service Details">
                       <Button
                         className="m-0 p-0 shadow-none hover:shadow-none bg-transparent text-black"
-                        onClick={() => openDetails(item)}
+                        onClick={() =>
+                          navigate(`/admin/services/${item.serviceRequestId}`)
+                        }
                       >
                         <TbListDetails className="text-3xl" />
                       </Button>
@@ -144,9 +144,6 @@ const AdminProcessingService = () => {
           </div>
         </div>
       </div>
-      <Modal title="Service Details" size="md" type="withCancel">
-        <RequestDetailsModal item={selected} />
-      </Modal>
     </>
   );
 };
