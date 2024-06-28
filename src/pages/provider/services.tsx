@@ -13,7 +13,7 @@ const ProviderServices = () => {
     },
     {
       title: <p>Rendered Service</p>,
-      content: <RenderedServices status="completed" />,
+      content: <RenderedServices status="fulfilled" />,
     },
   ];
   return (

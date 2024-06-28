@@ -97,8 +97,8 @@ const DriverMapTracking: FC<Props> = ({
   }, [myLocation]);
 
   useEffect(() => {
-      calculateDistance();
-  }, [markes]);
+    calculateDistance();
+  }, [myLocation, markes]);
 
   const defaultProps = {
     center: {
@@ -154,8 +154,8 @@ const DriverMapTracking: FC<Props> = ({
         <div className="mt-1 lg:mt-2 flex gap-x-2 items-center">
           <BiTimer className="text-xl lg:text-3xl" />
           <div>
-          <p className="inline-block">Service provider will get to you in</p>
-          <p className="inline-block fw-600 lg:text-xl">{" "}{duration}.</p>
+            <p className="inline-block">Service provider will get to you in</p>
+            <p className="inline-block fw-600 lg:text-xl"> {duration}.</p>
           </div>
         </div>
       </div>

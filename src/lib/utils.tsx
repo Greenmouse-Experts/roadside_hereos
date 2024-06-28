@@ -104,6 +104,12 @@ export const FormatStatus = {
       <span className="fw-500 text-green-600">Completed</span>
     </div>
   ),
+  fulfilled: (
+    <div className="flex items-center gap-x-2">
+      <span className="bg-green-600 w-4 h-4 circle"></span>{" "}
+      <span className="fw-500 text-green-600">Completed</span>
+    </div>
+  ),
   declined: (
     <div className="flex items-center gap-x-2">
       <span className="bg-red-600 w-4 h-4 circle"></span>{" "}
@@ -185,8 +191,8 @@ interface AddressType {
   types: string[];
 }
 export const getPostalCodeFromGoogle = (address: AddressType[]) => {
-  if(!address.length){
-    return ''
+  if (!address.length) {
+    return "";
   }
   const selectedAdd = address.filter((where) =>
     where.types.includes("postal_code")
@@ -196,8 +202,8 @@ export const getPostalCodeFromGoogle = (address: AddressType[]) => {
 };
 
 export const getCityFromGoogle = (address: AddressType[]) => {
-  if(!address.length){
-    return ''
+  if (!address.length) {
+    return "";
   }
   const selectedAdd = address.filter((where) =>
     where.types.includes("administrative_area_level_2")
@@ -207,8 +213,8 @@ export const getCityFromGoogle = (address: AddressType[]) => {
 };
 
 export const getStateFromGoogle = (address: AddressType[]) => {
-  if(!address.length){
-    return ''
+  if (!address.length) {
+    return "";
   }
   const selectedAdd = address.filter((where) =>
     where.types.includes("administrative_area_level_1")
@@ -222,9 +228,9 @@ export const getJustNumbers = (val: string) => {
   return parseInt(numsStr);
 };
 
-export const getJustNumbers2 = (val:string | undefined) => {
-  if(!val) return;
-  const numsStr = val.replace(/[^0-9\.]/g, '');
+export const getJustNumbers2 = (val: string | undefined) => {
+  if (!val) return;
+  const numsStr = val.replace(/[^0-9\.]/g, "");
   const km = parseInt(numsStr);
   const conversionFactor: number = 0.621371;
   const miles: number = km * conversionFactor;
@@ -234,9 +240,28 @@ export const getJustNumbers2 = (val:string | undefined) => {
   } else {
     return miles;
   }
-}
+};
 
 export const removeSpace = (str: string) => {
-  const result = str.replace(/\s/g, '');
-  return result
-}
+  const result = str.replace(/\s/g, "");
+  return result;
+};
+
+export const getBearing = (
+  lat1: number,
+  lon1: number,
+  lat2: number,
+  lon2: number
+) => {
+  const dLon = lon2 - lon1;
+  const y = Math.sin(dLon) * Math.cos(lat2);
+  const x =
+    Math.cos(lat1) * Math.sin(lat2) -
+    Math.sin(lat1) * Math.cos(lat2) * Math.cos(dLon);
+  let brng = Math.atan2(y, x);
+  brng = (brng * 180) / Math.PI;
+  brng = (brng + 360) % 360;
+  brng = 360 - brng; // count degrees counter-clockwise - remove to make clockwise
+
+  return brng;
+};

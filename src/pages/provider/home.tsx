@@ -4,6 +4,8 @@ import useAuth from "../../lib/hooks/authUser";
 import { formatAsNgnMoney } from "../../lib/utils";
 import { getMe } from "../../lib/services/api/usersApi";
 import { useEffect, useState } from "react";
+import useDialog from "../../lib/hooks/useDialog";
+import WithdrawModal from "../../lib/components/provider/home/WithdrawModal";
 
 const ProviderHomePage = () => {
   const { user } = useAuth();
@@ -17,6 +19,7 @@ const ProviderHomePage = () => {
     }
     handleFetch()
   },[])
+  const {Dialog, setShowModal} = useDialog()
   return (
     <>
       <div>
@@ -30,7 +33,7 @@ const ProviderHomePage = () => {
             </div>
             <div className="flex items-center justify-between">
               <p className="fw-500">Current Balance</p>
-              <div className="flex gap-x-1 items-center cursor-pointer">
+              <div className="flex gap-x-1 items-center cursor-pointer" onClick={() => setShowModal(true)}>
                 <BiMoneyWithdraw />
                 <p className="fs-500 fw-600">Withdraw</p>
               </div>
@@ -102,6 +105,9 @@ const ProviderHomePage = () => {
           </div>
         </div>
       </div>
+      <Dialog title="Request Withdrawal" size="lg">
+        <WithdrawModal close={() => setShowModal(false)} avail_bal={userData?.walletBal}/>
+      </Dialog>
     </>
   );
 };

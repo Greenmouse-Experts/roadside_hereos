@@ -175,4 +175,6 @@ export interface ServiceRequestItem2 {
   verified: number;
   walletBal: string | null;
   zipcode: string;
+  quote: number;
+  queryNote: string
 }

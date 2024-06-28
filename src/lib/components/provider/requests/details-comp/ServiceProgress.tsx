@@ -9,7 +9,7 @@ interface Props {
   status: string;
   query: string;
 }
-const ServiceProgress: FC<Props> = ({status, query }) => {
+const ServiceProgress: FC<Props> = ({ status, query }) => {
   const formatStatusWidth = {
     pending: "w-[35%]",
     ongoing: "w-[75%]",
@@ -52,7 +52,9 @@ const ServiceProgress: FC<Props> = ({status, query }) => {
             </div>
             <div
               className={`w-12 h-12 lg:w-16 lg:h-16 circle place-center ${
-                status === "ongoing" ? "bg-orange-500" : "bg-gray-400"
+                status === "ongoing" || status === "fulfilled"
+                  ? "bg-orange-500"
+                  : "bg-gray-400"
               }`}
             >
               <p className="fw-700 text-lg">
@@ -61,7 +63,7 @@ const ServiceProgress: FC<Props> = ({status, query }) => {
             </div>
             <div
               className={`w-12 h-12 lg:w-16 lg:h-16 circle place-center ${
-                status === "completed" ? "bg-orange-500" : "bg-gray-400"
+                status === "fulfilled" ? "bg-orange-500" : "bg-gray-400"
               }`}
             >
               <p className="fw-700 text-lg">
@@ -80,7 +82,12 @@ const ServiceProgress: FC<Props> = ({status, query }) => {
           </div>
         </div>
         <div className="">
-              {query && <div className="bg-red-100 p-4 rounded"><p className="fw-600 mb-1">Query:</p><p className="fw-500">{query}</p></div>}
+          {query && (
+            <div className="bg-red-100 p-4 rounded">
+              <p className="fw-600 mb-1">Query:</p>
+              <p className="fw-500">{query}</p>
+            </div>
+          )}
         </div>
       </div>
     </div>

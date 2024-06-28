@@ -18,7 +18,7 @@ const UserRequests = () => {
         },
         {
             title: <p>Completed</p>,
-            content: <RequestList status="completed" paymentStatus="Paid"/>
+            content: <RequestList status="fulfilled" paymentStatus="Paid"/>
         },
     ]
   return (

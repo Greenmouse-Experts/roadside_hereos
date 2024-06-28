@@ -91,7 +91,7 @@ const RenderedServices: FC<Props> = ({ status }) => {
                   <Tooltip content="View Service Details">
                     <Button
                       className="m-0 p-0 shadow-none hover:shadow-none bg-transparent text-black"
-                      onClick={() => navigate(`/provider/services/${item.id}`)}
+                      onClick={() => navigate(`/provider/services/${item.serviceRequestId}`)}
                     >
                       <TbListDetails className="text-3xl" />
                     </Button>
