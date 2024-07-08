@@ -69,6 +69,7 @@ export interface UserItemType {
   updatedAt: string;
   userType: string;
   reviewsAvg: number;
+  serviceRequests?: any[]
 }
 
 export interface SuspendUserInputType {

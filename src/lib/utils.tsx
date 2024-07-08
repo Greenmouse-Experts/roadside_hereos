@@ -116,6 +116,12 @@ export const FormatStatus = {
       <span className="fw-500 text-red-600">Declined</span>
     </div>
   ),
+  disapproved: (
+    <div className="flex items-center gap-x-2">
+      <span className="bg-red-600 w-4 h-4 circle"></span>{" "}
+      <span className="fw-500 text-red-600">Declined</span>
+    </div>
+  ),
   confirmed: (
     <div className="flex items-center gap-x-2">
       <span className="bg-green-600 w-4 h-4 circle"></span>{" "}

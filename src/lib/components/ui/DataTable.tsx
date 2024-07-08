@@ -87,9 +87,9 @@ export const DataTable: FC<Props> = ({ data, columns }) => {
           </div>
         </div>
       </div>
-      <div className="lg:flex items-center justify-between px-6 border border-gray-400 py-2">
-        <div className="lg:flex w-full justify-between items-center gap-2">
-          <div className="flex gap-x-2">
+      <div className="lg:flex items-center justify-center lg:justify-between px-6 border border-gray-400 py-2">
+        <div className="lg:flex w-full justify-center lg:justify-between items-center gap-2">
+          <div className="flex justify-center gap-x-2">
           <span className="flex items-center gap-1">
             <div>Page</div>
             <strong>
@@ -112,7 +112,7 @@ export const DataTable: FC<Props> = ({ data, columns }) => {
           </select>
           </div>
           <div className="lg:flex gap-x-1 lg:gap-x-3">
-          <span className="flex justify-center lg:justify-normal mt-3 lg:mt-0 items-center gap-1 fw-500">
+          <span className="hidden lg:flex justify-center lg:justify-normal mt-3 lg:mt-0 items-center gap-1 fw-500">
             Go to page:
             <input
               type="number"

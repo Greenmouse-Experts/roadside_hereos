@@ -16,7 +16,7 @@ const CompanyInvites = () => {
     <>
       <div className="bg-white p-6 rounded-lg shadow min-h-[80vh]">
         <div className="flex justify-between">
-          <p className="fw-500 lg:text-xl">Invited Staff</p>
+          <p className="fw-600 text-lg lg:text-2xl">Invited Staff</p>
           <p
             className="btn-primary px-5 py-1 cursor-pointer"
             onClick={() => setShowModal(true)}

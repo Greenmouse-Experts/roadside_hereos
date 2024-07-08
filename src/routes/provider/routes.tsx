@@ -3,6 +3,7 @@ import ProviderHomePage from "../../pages/provider/home";
 import CompanyInvites from "../../pages/provider/invite";
 import ProviderNotification from "../../pages/provider/notify";
 import ProviderPayments from "../../pages/provider/payments";
+import StaffPayouts from "../../pages/provider/payouts";
 import RequestDetail from "../../pages/provider/requestDetail";
 import ProviderServices from "../../pages/provider/services";
 import ProviderSetting from "../../pages/provider/settings";
@@ -59,5 +60,10 @@ export const providerRoutes = [
         id: 'users-8',
         path: 'invite',
         component: <CompanyInvites/>
+    },
+    {
+        id: 'users-9',
+        path: 'payouts',
+        component: <StaffPayouts/>
     }
 ]

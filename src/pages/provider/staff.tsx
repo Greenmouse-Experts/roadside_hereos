@@ -16,7 +16,7 @@ const CompanyStaffs = () => {
     <>
       <div className="bg-white p-6 rounded-lg shadow min-h-[80vh]">
         <div className="flex justify-between">
-          <p className="fw-500 lg:text-xl">Registered Staff</p>
+          <p className="fw-600 text-lg lg:text-2xl">Registered Staff</p>
         </div>
         <div className="mt-12">
           {isLoading && (

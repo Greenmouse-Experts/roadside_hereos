@@ -2,6 +2,7 @@ import AdminCategory from "../../pages/admin/category";
 import AdminDashboardHome from "../../pages/admin/home";
 import AdminNotification from "../../pages/admin/notify";
 import AdminPayments from "../../pages/admin/payment";
+import CompanyPayouts from "../../pages/admin/payouts";
 import ProviderDetails from "../../pages/admin/providerDetails";
 import ServiceProviders from "../../pages/admin/providers";
 import AdminRequests from "../../pages/admin/requests";
@@ -83,5 +84,10 @@ export const adminRoutes = [
         id: 'admin12',
         path: 'payments',
         component: <AdminPayments/>
+    },
+    {
+        id: 'admin15',
+        path: 'payouts',
+        component: <CompanyPayouts/>
     },
 ]

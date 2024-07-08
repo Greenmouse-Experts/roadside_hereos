@@ -2,7 +2,7 @@ import {
   MdOutlineDashboard, MdOutlineRateReview,
 } from 'react-icons/md';
 import { HiOutlineUsers } from "react-icons/hi2";
-import { RiUserSettingsLine } from 'react-icons/ri';
+import { RiSecurePaymentFill, RiUserSettingsLine } from 'react-icons/ri';
 import { BiCategoryAlt, BiGitPullRequest } from 'react-icons/bi';
 import { LuServerCog } from 'react-icons/lu';
 import { IoNotificationsCircleOutline } from "react-icons/io5";
@@ -64,6 +64,12 @@ export const Routes = [
     name: 'Notifications',
     icon: <IoNotificationsCircleOutline className="text-xl" />,
     route: '/admin/notify',
+    submenu: [],
+  },
+  {
+    name: 'Payouts',
+    icon: <RiSecurePaymentFill className="text-xl" />,
+    route: '/admin/payouts',
     submenu: [],
   },
   {

@@ -23,6 +23,10 @@ export const GET_COMPANY_PROVIDERS = `/admin/get-provider-drivers`
 export const GET_ALL_PAYMENTS = `services-quote/get-all-paid-quote`
 export const ADMIN_ADD_RATES = `charge/save-charges`
 export const ADMIN_GET_RATES = `charge/fetch-charges`
+export const ADMIN_GET_PAYOUT_CAP = `payout/fetch`
+export const ADMIN_SET_PAYOUT_CAP = `payout/save`
+export const ADMIN_GET_PAYOUT_REQUESTS = `service-request/fetch-withdrawals`
+export const ADMIN_DECLINE_PAYOUT_REQUESTS = `service-request/disapprove-withdrawal`
 
 // Auth endpoints
 export const USER_LOGIN = '/user/login'
@@ -82,6 +86,10 @@ export const GET_ME = '/invitation-request/account'
 export const GET_USER_NOTIFY = '/notifications/user'
 export const SUSPEND_DRIVER = '/users/suspend-driver'
 export const UNSUSPEND_DRIVER = '/users/unsuspend-driver'
+export const REQUEST_PAYOUT = '/service-request/request-withdrawal'
+export const GET_STAFF_REQUEST = `/service-request/fetch-withdrawals`
+export const DECLINE_STAFF_REQUEST = `/service-request/disapprove-withdrawal`
+
 
 // user endpoints
 export const GET_MY_ACCOUNT = `/user/me`

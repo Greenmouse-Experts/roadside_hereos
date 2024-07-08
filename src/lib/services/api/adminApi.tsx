@@ -43,6 +43,32 @@ export const adminGetRates = async () => {
     .then((response) => response.data);
 };
 
+export const adminGetPayoutCap = async () => {
+  return axios
+    .get(`${ENDPOINT.ADMIN_GET_PAYOUT_CAP}`)
+    .then((response) => response.data);
+};
+
+export const adminSetPayoutCap = async (payload: { amount: number }) => {
+  return axios
+    .post(`${ENDPOINT.ADMIN_SET_PAYOUT_CAP}`, payload)
+    .then((response) => response.data);
+};
+
+export const admingetPayoutRequest = async (params: any) => {
+  return axios
+    .get(
+      `${ENDPOINT.ADMIN_GET_PAYOUT_REQUESTS}?page=${params.page}&status=${params.status}`
+    )
+    .then((response) => response.data);
+};
+
+export const adminDeclinePayoutRequests = async (id: string) => {
+  return axios
+    .post(`${ENDPOINT.ADMIN_DECLINE_PAYOUT_REQUESTS}/${id}`)
+    .then((response) => response.data);
+};
+
 export const getAdminPayments = async (params: any) => {
   return axios
     .get(
@@ -53,8 +79,6 @@ export const getAdminPayments = async (params: any) => {
 
 export const adminGetUserDetails = async (id: string) => {
   return axios
-    .get(
-      `${ENDPOINT.GET_PROVIDER_DETAILS}/${id}`
-    )
+    .get(`${ENDPOINT.GET_PROVIDER_DETAILS}/${id}`)
     .then((response) => response.data);
 };

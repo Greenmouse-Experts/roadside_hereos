@@ -4,6 +4,9 @@ import { Controller, useForm } from "react-hook-form";
 import Button from "../../ui/Button";
 import { ScaleSpinner } from "../../ui/Loading";
 import { BsCurrencyDollar } from "react-icons/bs";
+import { useMutation } from "@tanstack/react-query";
+import { requestPayout } from "../../../services/api/companyApi";
+import { toast } from "react-toastify";
 
 interface Props {
   close: () => void;
@@ -11,6 +14,9 @@ interface Props {
 }
 const WithdrawModal: FC<Props> = ({ close, avail_bal }) => {
   const [isBusy, setIsBusy] = useState(false);
+  const mutate = useMutation({
+    mutationFn: requestPayout
+  })
   const {
     control,
     handleSubmit,
@@ -22,8 +28,20 @@ const WithdrawModal: FC<Props> = ({ close, avail_bal }) => {
   });
   const handleRequest = (data: any) => {
     setIsBusy(true);
-    console.log(data);
-    close()
+    const payload = {
+      amount: Number(data.amount)
+    }
+    mutate.mutate(payload, {
+      onSuccess: (data) => {
+        toast.success(data.message)
+        setIsBusy(false);
+        close()
+      },
+      onError: (err:any) => {
+        setIsBusy(false);
+        toast.error(err.response.data.message)
+      }
+    })
   };
   return (
     <div>
