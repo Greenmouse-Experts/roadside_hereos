@@ -3,7 +3,7 @@ import { TbListDetails } from "react-icons/tb";
 import { ServiceRequestItem2 } from "../../../types/service";
 import dayjs from "dayjs";
 import { MdLocationPin } from "react-icons/md";
-import { useState } from "react";
+import { FC, useState } from "react";
 import { toast } from "react-toastify";
 import { fetchAdminRequests } from "../../../services/api/serviceApi";
 import { useQuery } from "@tanstack/react-query";
@@ -11,10 +11,13 @@ import EmptyState from "../../ui/EmptyState";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import { useNavigate } from "react-router-dom";
 
-const AdminCompletedService = () => {
+interface Props{
+  status: string
+}
+const AdminCompletedService:FC<Props> = ({status}) => {
   const navigate = useNavigate();
   const [params, setParams] = useState({
-    status: "fulfilled",
+    status: status,
     page: 1,
     payment: "",
   });
@@ -58,7 +61,7 @@ const AdminCompletedService = () => {
       <div>
         {data && !data?.data?.serviceRequests.length && (
           <div>
-            <EmptyState msg="There's no completed request currently on the system." />
+            <EmptyState msg={`There's no ${status} request currently on the system.`} />
           </div>
         )}
         {isLoading && (
@@ -68,7 +71,7 @@ const AdminCompletedService = () => {
                 <CurveLoader />
               </div>
               <p className="text-center mt-5 fw-500">
-                Fetching Completed Service Requests...
+                Fetching {status} service requests...
               </p>
             </div>
           </div>

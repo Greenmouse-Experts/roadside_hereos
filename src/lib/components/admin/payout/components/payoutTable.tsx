@@ -60,7 +60,7 @@ const PayoutTable: FC<Props> = ({ data, count, page, next, prev, refetch }) => {
       cell: (info) => <p className="">{info.getValue()}</p>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.createdAt, {
+    columnHelper.accessor((row) => row.payoutCreatedAt, {
       id: "Date Requested",
       header: (info) => info.column.id,
       cell: (info) => (

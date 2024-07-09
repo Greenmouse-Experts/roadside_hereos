@@ -12,7 +12,7 @@ const ProviderServices = () => {
       content: <RenderedServices status="ongoing" />,
     },
     {
-      title: <p>Rendered Service</p>,
+      title: <p>Fulfilled Service</p>,
       content: <RenderedServices status="fulfilled" />,
     },
   ];

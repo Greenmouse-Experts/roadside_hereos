@@ -52,9 +52,9 @@ const PayoutTable: FC<Props> = ({
  // Table components
  const columnHelper = createColumnHelper<PayoutItem>();
  const columns = [
-   columnHelper.accessor((row) => row.name, {
+   columnHelper.accessor((row) => row.fname, {
      id: "Staff Name",
-     cell: (info) => <p className="fw-600">{info.getValue()}</p>,
+     cell: (info) => <p className="fw-600">{`${info.getValue()} ${info.row.original.lname}`}</p>,
    }),
    columnHelper.accessor((row) => row.amount, {
      id: "Requested Amount",
@@ -67,7 +67,7 @@ const PayoutTable: FC<Props> = ({
      cell: (info) => <p className="">{info.getValue()}</p>,
      header: (info) => info.column.id,
    }),
-   columnHelper.accessor((row) => row.createdAt, {
+   columnHelper.accessor((row) => row.payoutCreatedAt, {
      id: "Date Requested",
      header: (info) => info.column.id,
      cell: (info) => (

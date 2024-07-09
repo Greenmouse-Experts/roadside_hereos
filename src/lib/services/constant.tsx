@@ -99,7 +99,8 @@ export const SUBMIT_QUERY = "/service-request/submit-query";
 export const COMPLETE_SERVICE = "/service-request/client-update";
 export const GET_ONE_SERVICE = '/service-request/user-fetch-details'
 export const GET_MY_PAYMENTS = '/service-request/payments'
-export const GET_PROVIDER_PAYMENTS = `service-request/fetch-driver-payments`
+export const GET_PROVIDER_PAYMENTS = `/service-request/fetch-driver-payments`
+export const GET_CLIENT_DASHBOARD_STATS = `/service-request/client-stat`
 
 // payments
 export const ADMIN_GET_PAYMENTS = `service-request/fetch-payments`

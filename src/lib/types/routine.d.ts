@@ -63,5 +63,16 @@ export interface PaymentItem {
   vehicleYear: string;
   zipcode: string;
   fname?: string;
-  lname?: string
+  lname?: string;
+}
+
+export interface NotifyItem {
+  id: string;
+  userId: string;
+  type: string;
+  message: string;
+  isRead: string | null;
+  status: string | null;
+  createdAt: string;
+  updatedAt: string;
 }

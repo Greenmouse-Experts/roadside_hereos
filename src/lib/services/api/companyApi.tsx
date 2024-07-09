@@ -103,8 +103,8 @@ export const getStaffRequest = async (params: any) => {
     .then((response) => response.data);
 };
 
-export const declineStaffRequest = async (payload: any) => {
+export const declineStaffRequest = async (payload: string) => {
   return axios
-    .post(`${ENDPOINT.DECLINE_STAFF_REQUEST}`, payload)
+    .post(`${ENDPOINT.DECLINE_STAFF_REQUEST}/${payload}`)
     .then((response) => response.data);
 };

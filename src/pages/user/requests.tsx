@@ -5,10 +5,6 @@ const UserRequests = () => {
    
     const tabs = [
         {
-            title: <p>Pending</p>,
-            content: <RequestList status="Pending" paymentStatus="Pending"/>
-        },
-        {
             title: <p>Processing</p>,
             content: <RequestList status="Pending" paymentStatus="Paid"/>
         },
@@ -17,8 +13,12 @@ const UserRequests = () => {
             content: <RequestList status="Ongoing" paymentStatus="Paid"/>
         },
         {
+            title: <p>Fulfilled</p>,
+            content: <RequestList status="fulfilled" paymentStatus="Pending"/>
+        },
+        {
             title: <p>Completed</p>,
-            content: <RequestList status="fulfilled" paymentStatus="Paid"/>
+            content: <RequestList status="completed" paymentStatus="Paid"/>
         },
     ]
   return (

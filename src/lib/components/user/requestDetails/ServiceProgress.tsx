@@ -17,8 +17,9 @@ const ServiceProgress: FC<Props> = ({ id, status, query, refetch }) => {
   const { Dialog, setShowModal } = useDialog();
   const formatStatusWidth = {
     pending: "w-[35%]",
-    ongoing: "w-[75%]",
-    fulfilled: "w-[100%]",
+    ongoing: "w-[70%]",
+    fulfilled: "w-[85%]",
+    completed: "w-[100%]",
   };
   return (
     <div>
@@ -64,7 +65,7 @@ const ServiceProgress: FC<Props> = ({ id, status, query, refetch }) => {
             </div>
             <div
               className={`w-12 h-12 lg:w-16 lg:h-16 circle place-center ${
-                status === "ongoing" || status === "fulfilled" ? "bg-orange-500" : "bg-gray-400"
+                status === "ongoing" || status === "completed" || status === "fulfilled" ? "bg-orange-500" : "bg-gray-400"
               }`}
             >
               <p className="fw-700 text-lg">
@@ -73,7 +74,7 @@ const ServiceProgress: FC<Props> = ({ id, status, query, refetch }) => {
             </div>
             <div
               className={`w-12 h-12 lg:w-16 lg:h-16 circle place-center ${
-                status === "fulfilled" ? "bg-orange-500" : "bg-gray-400"
+                status === "completed" ? "bg-orange-500" : "bg-gray-400"
               }`}
             >
               <p className="fw-700 text-lg">

@@ -14,9 +14,11 @@ import { useMutation } from "@tanstack/react-query";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import EmptyState from "../../ui/EmptyState";
 // import { toast } from "react-toastify";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime"
 // dayjs time format
-const dayjs = require("dayjs");
-const relativeTime = require("dayjs/plugin/relativeTime");
+// const dayjs = require("dayjs");
+// const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 interface Props {

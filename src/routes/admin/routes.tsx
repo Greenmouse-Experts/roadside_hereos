@@ -1,4 +1,5 @@
 import AdminCategory from "../../pages/admin/category";
+import AdminFulfilledServices from "../../pages/admin/fulfilledService";
 import AdminDashboardHome from "../../pages/admin/home";
 import AdminNotification from "../../pages/admin/notify";
 import AdminPayments from "../../pages/admin/payment";
@@ -44,6 +45,11 @@ export const adminRoutes = [
         id: 'admin5',
         path: 'requests',
         component: <AdminRequests/>
+    },
+    {
+        id: 'admin14',
+        path: 'fulfilled-services',
+        component: <AdminFulfilledServices/>
     },
     {
         id: 'admin6',

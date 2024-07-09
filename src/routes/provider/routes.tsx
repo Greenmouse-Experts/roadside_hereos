@@ -1,4 +1,5 @@
 import ServiceAlerts from "../../pages/provider/alerts";
+import CompletedServices from "../../pages/provider/completed-services";
 import ProviderHomePage from "../../pages/provider/home";
 import CompanyInvites from "../../pages/provider/invite";
 import ProviderNotification from "../../pages/provider/notify";
@@ -65,5 +66,10 @@ export const providerRoutes = [
         id: 'users-9',
         path: 'payouts',
         component: <StaffPayouts/>
-    }
+    },
+    {
+        id: 'users-10',
+        path: 'completed-services',
+        component: <CompletedServices/>
+    },
 ]

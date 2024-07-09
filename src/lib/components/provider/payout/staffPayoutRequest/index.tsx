@@ -15,7 +15,7 @@ const StaffPayoutRequest = () => {
     queryFn: () => getStaffRequest(params),
   });
 
-  const datas = data?.data?.payments;
+  const datas = data?.data?.withdrawalRequests;
   const count = data?.data?.total;
 
   const handleNext = () => {

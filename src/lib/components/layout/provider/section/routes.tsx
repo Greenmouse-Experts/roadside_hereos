@@ -7,6 +7,7 @@ import {  BiGitPullRequest } from 'react-icons/bi';
 import { LuServerCog } from 'react-icons/lu';
 import { IoNotificationsCircleOutline } from "react-icons/io5";
 import { RiSecurePaymentFill } from 'react-icons/ri';
+import { PiListChecksFill } from 'react-icons/pi';
 export interface RouteType {
   name:string;
   icon: any;
@@ -40,6 +41,12 @@ export const Routes = [
     name: 'Services',
     icon: <BiGitPullRequest className="text-xl" />,
     route: '/provider/services',
+    submenu: [],
+  },
+  {
+    name: 'Completed Services',
+    icon: <PiListChecksFill className="text-xl" />,
+    route: '/provider/completed-services',
     submenu: [],
   },
   {

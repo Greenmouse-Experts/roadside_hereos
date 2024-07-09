@@ -29,20 +29,26 @@ axios.interceptors.response.use(
   }
 );
 
-export const getOneService = async (id:string) => {
-    return axios
-      .get(`${ENDPOINT.GET_ONE_SERVICE}/${id}`)
-      .then((response) => response.data);
-  }
+export const getOneService = async (id: string) => {
+  return axios
+    .get(`${ENDPOINT.GET_ONE_SERVICE}/${id}`)
+    .then((response) => response.data);
+};
 
-  export const getMyPayment = async (page:number) => {
-    return axios
-      .get(`${ENDPOINT.GET_MY_PAYMENTS}?page=${page}`)
-      .then((response) => response.data);
-  }
+export const getMyPayment = async (page: number) => {
+  return axios
+    .get(`${ENDPOINT.GET_MY_PAYMENTS}?page=${page}`)
+    .then((response) => response.data);
+};
 
-  export const getProviderPayment = async (page:number) => {
-    return axios
-      .get(`${ENDPOINT.GET_PROVIDER_PAYMENTS}?status=Paid&page=${page}`)
-      .then((response) => response.data);
-  }
+export const getProviderPayment = async (page: number) => {
+  return axios
+    .get(`${ENDPOINT.GET_PROVIDER_PAYMENTS}?status=Paid&page=${page}`)
+    .then((response) => response.data);
+};
+
+export const getClientStats = async () => {
+  return axios
+    .get(`${ENDPOINT.GET_CLIENT_DASHBOARD_STATS}`)
+    .then((response) => response.data);
+};
