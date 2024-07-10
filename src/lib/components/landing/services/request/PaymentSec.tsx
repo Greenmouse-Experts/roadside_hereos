@@ -10,7 +10,7 @@ interface Props {
   prev: () => void;
 }
 const stripePromise = loadStripe(
-  "pk_test_51HoQfvKiOZXcwcTbQS0xwfzkxRYCPWQ7VT4Xl6sObmhguPXhX5agZY88UrCsPcAQLKa071M8lQh3kA6DMe42L7IB00ibW8gtHu"
+  "pk_test_51PBIJjK3lZO8TZuy3bR0MmkShGXzWXAUsjsS0XABpN4ZsAedFg3P6MsDDCD1sevLrX9hAsUxUO8gQwB8jADXQNlX00wgRZxFWb"
 );
 
 const PaymentSec: FC<Props> = ({ prev }) => {
