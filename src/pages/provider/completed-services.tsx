@@ -1,4 +1,4 @@
-import CompanyCompletedService from "../../lib/components/provider/requests/CompletedList";
+import CompanyCompletedService from "../../lib/components/provider/requests/completedList";
 
 const CompletedServices = () => {
   return (
