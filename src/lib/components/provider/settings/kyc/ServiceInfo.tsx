@@ -4,11 +4,12 @@ import TextInput, { InputType } from "../../../ui/TextInput";
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import Button from "../../../ui/Button";
-import useKycStore from "../../../../store/kycStore";
+import useKycStore, { kycProps } from "../../../../store/kycStore";
 
 interface Props {
   prev: () => void;
   next: () => void;
+  prevKyc: kycProps;
 }
 const ServiceInfo: FC<Props> = ({ prev, next }) => {
   const kyc = useKycStore((state) => state.kyc);

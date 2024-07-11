@@ -161,7 +161,8 @@ const ProviderRegisterForm = () => {
             </label>
             <PhoneInputWithCountry
               international
-              defaultCountry="NG"
+              defaultCountry="US"
+              countries={["US"]}
               name="phone"
               control={control}
               rules={{
@@ -183,7 +184,7 @@ const ProviderRegisterForm = () => {
             <div className="border border-gray-400 w-full mt-[4px] px-[9px] py-[9px] rounded flex items-center gap-x-2">
               <MdOutlineHomeRepairService className="text-2xl text-gray-700" />
               <div className="w-full relative">
-                <div className="rounded flex items-center justify-between" onClick={() => setShowDrop(!showDrop)}>
+                <div className="rounded cursor-pointer flex items-center justify-between" onClick={() => setShowDrop(!showDrop)}>
                   <div className="w-[90%] flex items-center gapx-2 overflow-x-auto scroll-pro whitespace-nowrap">
                     {/* {selectedCat.map((item: selectedCatType) => (
                       <span className="px-1 rounded">{item.name},</span>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SidebarLayout from "./section/sidebar";
 import { RiArrowDropDownLine, RiMenu4Fill } from "react-icons/ri";
 import {
@@ -16,6 +16,7 @@ import LogoutModal from "../../auth/LogoutModal";
 import ProfileAvatar from "../../ui/ProfileAvatar";
 import ProviderNotifyDrop from "../../provider/home/NotifyDrop";
 import Notification from "../../../services/pushNotify";
+import useKycStore from "../../../store/kycStore";
 
 interface Props {
   children: React.ReactNode;
@@ -24,6 +25,16 @@ const ProviderDashboardLayout: React.FC<Props> = ({ children }) => {
   const { user } = useAuth();
   const { Modal, setShowModal } = useModal();
   const [toggled, setToggled] = React.useState(false);
+  const kyc = useKycStore((state) => state.kyc)
+  const saveKyc = useKycStore((state) => state.saveKyc)
+
+  useEffect(() => {
+    fetch('https://api.ipify.org?format=json')
+      .then(response => response.json())
+      .then(data => {console.log(data);
+       saveKyc({...kyc, device_ip:data.ip})})
+      .catch(error => console.log(error))
+  }, []);
 
   return (
     <>

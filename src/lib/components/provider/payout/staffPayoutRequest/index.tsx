@@ -49,7 +49,7 @@ const StaffPayoutRequest = () => {
             </div>
           </div>
         )}
-        {datas && (
+        {datas && !!datas?.length && (
           <PayoutTable
             isLoading={isLoading}
             data={datas || []}

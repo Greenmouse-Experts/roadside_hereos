@@ -8,14 +8,14 @@ import { toast } from "react-toastify";
 import { submitKyc } from "../../../../services/api/kycApi";
 import { ScaleSpinner } from "../../../ui/Loading";
 
-interface Props{
-  prev: () => void
+interface Props {
+  prev: () => void;
 }
-const BankInfo:FC<Props> = ({prev}) => {
-  const [isBusy, setIsBusy] = useState(false)
+const BankInfo: FC<Props> = ({ prev }) => {
+  const [isBusy, setIsBusy] = useState(false);
   const kyc = useKycStore((state) => state.kyc);
-  const saveKyc =  useKycStore((state) => state.saveKyc);
-  const isDisabled = kyc.isVerified
+  const saveKyc = useKycStore((state) => state.saveKyc);
+  const isDisabled = kyc.isVerified;
   const {
     control,
     handleSubmit,
@@ -32,28 +32,35 @@ const BankInfo:FC<Props> = ({prev}) => {
   });
   const mutation = useMutation({
     mutationFn: submitKyc,
-    onSuccess: (data:any) => {
-      toast.success(data.message)
-      saveKyc(data.data)
+    onSuccess: (data: any) => {
+      toast.success(data.message);
+      saveKyc(data.data);
       setIsBusy(false);
     },
-    onError: (err:any) => {
-      toast.error(err.response.data.message);
-      setIsBusy(false);
+    onError: (err: any) => {
+      if(err.response.data.message){
+        toast.error(err.response.data.message);
+        setIsBusy(false);
+      } else{
+      Object.entries<any>(err?.response.data?.errors).forEach(([_, value]) => {
+        toast.error(value.message);
+      });
+      setIsBusy(false);}
     },
   });
-  const onSubmit = (data:any) => {
-    setIsBusy(true)
+  const onSubmit = (data: any) => {
+    setIsBusy(true);
     const payload = {
       ...kyc,
       bank_name: data.bank_name,
       bank_account_number: data.account_number,
       bank_account_name: data.account_name,
       account_type: data.account_type,
-      routing_number:  data.routing_num,
-      insurance_doc: kyc?.insurance_doc
-    }
-    mutation.mutate(payload)
+      routing_number: data.routing_num,
+      insurance_doc: kyc?.insurance_doc,
+    };
+    saveKyc(payload);
+    mutation.mutate(payload);
   };
   return (
     <>
@@ -152,7 +159,7 @@ const BankInfo:FC<Props> = ({prev}) => {
                   value: true,
                   message: "Please enter an input",
                 },
-              }} 
+              }}
               disabled={isDisabled}
               render={({ field }) => (
                 <TextInput
@@ -168,11 +175,16 @@ const BankInfo:FC<Props> = ({prev}) => {
           </div>
           <div className="mt-12">
             <div className="flex justify-between">
-            <div className="w-3/12">
-                <Button title={"Prev"} onClick={prev}/>
+              <div className="w-3/12">
+                <Button title={"Prev"} onClick={prev} />
               </div>
               <div className="w-3/12">
-                <Button title={isBusy ? <ScaleSpinner size={14} color="white" /> : "Submit"} disabled={!isValid || isDisabled} />
+                <Button
+                  title={
+                    isBusy ? <ScaleSpinner size={14} color="white" /> : "Submit"
+                  }
+                  disabled={!isValid || isDisabled}
+                />
               </div>
             </div>
           </div>

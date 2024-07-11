@@ -14,7 +14,7 @@ export interface kycProps{
     insurance_doc: string[],
     business_reg_certificate: string,
     business_email:string;
-    business_phone:string;
+    business_phone_number:string;
     business_nature: string;
     staff_number: number,
     vat_registration_number:string;
@@ -29,7 +29,12 @@ export interface kycProps{
     account_type:string;
     routing_number: string;
     isVerified: boolean;
-    serviceCharge: number
+    serviceCharge: number;
+    business_desc: string;
+    business_city: string;
+    business_state: string;
+    business_postal_code: string;
+    device_ip: string;
 }
 const kycInitState = {
     business_name:  "",
@@ -40,7 +45,7 @@ const kycInitState = {
     serviceCharge: 0,
     insurance_doc: [],
     business_reg_certificate: "",
-    business_phone: "",
+    business_phone_number: "",
     business_nature:  "",
     staff_number: 0,
     vat_registration_number: "",
@@ -54,7 +59,12 @@ const kycInitState = {
     bank_account_name: "",
     account_type: "",
     routing_number:  "",
-    isVerified: false
+    isVerified: false,
+    business_desc: "",
+    business_city: "",
+    business_state: "",
+    business_postal_code: "",
+    device_ip: "",
 }
 const useKycStore = create<Props>()(
   persist(

@@ -31,7 +31,7 @@ const UserPayments = () => {
         <div className="bg-white p-6 rounded-lg shadow min-h-[80vh]">
           <p className="text-lg lg:p-2 lg:text-2xl fw-600">Service Payments</p>
           <div>
-            {datas && (
+            {datas && !!datas.length && (
               <PaymentList
                 isLoading={isLoading}
                 data={datas || []}

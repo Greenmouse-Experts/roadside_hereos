@@ -5,19 +5,27 @@ import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import TextInput, { InputType } from "../../../ui/TextInput";
 import useAuth from "../../../../hooks/authUser";
 import Button from "../../../ui/Button";
-import useKycStore from "../../../../store/kycStore";
+import useKycStore, { kycProps } from "../../../../store/kycStore";
 import ImageInput from "../../../ui/ImageInput";
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import { uploadFile } from "../../../../services/api/routineApi";
 import { toast } from "react-toastify";
-import { getKyc } from "../../../../services/api/kycApi";
 import { FaCircleInfo } from "react-icons/fa6";
 import dayjs from "dayjs";
+import { usePlacesWidget } from "react-google-autocomplete";
+import { GOOGLE_API_KEY } from "../../../../services/constant";
+import {
+  getCityFromGoogle,
+  getPostalCodeFromGoogle,
+  getStateFromGoogle,
+} from "../../../../utils";
 
 interface Props {
   next: () => void;
+  prevKyc: kycProps;
+  isLoading: boolean;
 }
-const GeneralInfo: FC<Props> = ({ next }) => {
+const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
   const { user } = useAuth();
   const kyc = useKycStore((state) => state.kyc);
   const saveKyc = useKycStore((state) => state.saveKyc);
@@ -27,34 +35,73 @@ const GeneralInfo: FC<Props> = ({ next }) => {
   const [sending, setSending] = useState(0);
   const [showTip, setShowTip] = useState(false);
   const [disabledField, setDisabledField] = useState(false);
-  const { data: prevKyc, isLoading } = useQuery({
-    queryKey: ["getKyc"],
-    queryFn: getKyc,
+
+  const { ref } = usePlacesWidget({
+    apiKey: GOOGLE_API_KEY,
+    options: {
+      types: ["address"],
+    },
+    onPlaceSelected: (place) => {
+      setValue("address", place.formatted_address || "");
+      setValue(
+        "business_state",
+        getStateFromGoogle(place.address_components || [])
+      );
+      setValue(
+        "business_city",
+        getCityFromGoogle(place.address_components || [])
+      );
+      setValue(
+        "business_postal_code",
+        getPostalCodeFromGoogle(place.address_components || [])
+      );
+    },
   });
+
   useEffect(() => {
     if (prevKyc) {
-      saveKyc(prevKyc.data);
-      if (prevKyc?.data?.isVerified) {
+      if (prevKyc?.isVerified) {
         setDisabledField(true);
       }
       setTimeout(() => {
         reset({
-          address: prevKyc.data?.address || "",
-          serviceCharge: prevKyc.data?.serviceCharge || 0,
+          address: kyc.address ? kyc.address : prevKyc.address || "",
+          serviceCharge: prevKyc.serviceCharge || 0,
           company: user?.name,
-          business_registration_number: prevKyc.data?.registration_number || "",
-          tin: prevKyc.data?.tax_id || "",
-          date: prevKyc.data?.incorporation_date || "",
-          business_type: prevKyc.data?.business_nature || "",
-          business_email: prevKyc.data?.business_email || user?.email || "",
-          business_phone: prevKyc.data?.business_phone || user?.phone || "",
+          business_registration_number: kyc.registration_number
+            ? kyc.registration_number
+            : prevKyc.registration_number || "",
+          tin: prevKyc.tax_id || "",
+          date: kyc?.incorporation_date
+            ? kyc?.incorporation_date
+            : prevKyc.incorporation_date || "",
+          business_type: kyc?.business_nature
+            ? kyc.business_nature
+            : prevKyc.business_nature || "",
+          business_email: prevKyc.business_email || user?.email || "",
+          business_phone_number:
+            prevKyc.business_phone_number || user?.phone || "",
+          business_desc: kyc?.business_desc
+            ? kyc.business_desc
+            : prevKyc?.business_desc || "",
+          business_city: kyc?.business_city
+            ? kyc.business_city
+            : prevKyc?.business_city || "",
+          business_postal_code: kyc?.business_postal_code
+            ? kyc?.business_postal_code
+            : prevKyc?.business_postal_code || "",
+          business_state: kyc?.business_state
+            ? kyc?.business_state
+            : prevKyc?.business_state || "",
         });
       }, 500);
     }
   }, [prevKyc]);
+
   const {
     control,
     handleSubmit,
+    setValue,
     reset,
     formState: { errors, isValid },
   } = useForm({
@@ -68,9 +115,14 @@ const GeneralInfo: FC<Props> = ({ next }) => {
       date: kyc?.incorporation_date || "",
       business_type: kyc?.business_nature || "",
       business_email: kyc?.business_email || user?.email || "",
-      business_phone: kyc?.business_phone || user?.phone || "",
+      business_phone_number: kyc?.business_phone_number || user?.phone || "",
+      business_desc: kyc?.business_desc || "",
+      business_city: kyc?.business_city || "",
+      business_postal_code: kyc?.business_postal_code || "",
+      business_state: kyc?.business_state || "",
     },
   });
+
   const upload = useMutation({
     mutationFn: uploadFile,
   });
@@ -115,9 +167,11 @@ const GeneralInfo: FC<Props> = ({ next }) => {
       });
     }
   };
+
   useEffect(() => {
     handleCertUpload();
   }, [bizCert]);
+
   const submitAction = (data: any) => {
     const payload = {
       business_name: user.name,
@@ -125,21 +179,25 @@ const GeneralInfo: FC<Props> = ({ next }) => {
       incorporation_date: data?.date,
       address: data.address,
       business_email: data.business_email,
-      business_phone: data.business_phone,
+      business_phone_number: data.business_phone_number,
       business_nature: data.business_type,
       staff_number: 2,
       vat_registration_number: data.business_registration_number,
       tax_id: data.tin,
       serviceCharge: data.serviceCharge,
+      business_desc: data?.business_desc,
+      business_city: data?.business_city,
+      business_postal_code: data?.business_postal_code,
+      business_state: data?.business_state,
     };
-    saveKyc({ ...prevKyc.data, ...payload });
+    saveKyc({ ...kyc, ...payload });
     next();
   };
 
   return (
     <>
       <div className="flex justify-end mb-2">
-        {kyc?.isVerified  && (
+        {kyc?.isVerified && (
           <div className="flex gap-x-1 items-center">
             <span className="w-4 h-4 circle bg-green-600 block"></span>
             <p className="text-green-700 fw-600">Verified</p>
@@ -225,6 +283,27 @@ const GeneralInfo: FC<Props> = ({ next }) => {
               </div>
             </div>
             <Controller
+              name="business_desc"
+              control={control}
+              rules={{
+                required: {
+                  value: true,
+                  message: "Please enter business description",
+                },
+              }}
+              disabled={disabledField}
+              render={({ field }) => (
+                <TextInput
+                  label="Business Description"
+                  labelClassName="text-[#000000B2] fw-500"
+                  error={errors.business_desc?.message}
+                  type={InputType.textarea}
+                  {...field}
+                  ref={null}
+                />
+              )}
+            />
+            <Controller
               name="address"
               control={control}
               rules={{
@@ -235,14 +314,16 @@ const GeneralInfo: FC<Props> = ({ next }) => {
               }}
               disabled={disabledField}
               render={({ field }) => (
-                <TextInput
-                  label="Operational Address"
-                  labelClassName="text-[#000000B2] fw-500"
-                  error={errors.address?.message}
-                  type={InputType.textarea}
-                  {...field}
-                  ref={null}
-                />
+                <div className="w-full">
+                  <p className="text-[#000000B2] fw-500">Operational Address</p>
+                  <input
+                    type="text"
+                    {...field}
+                    ref={ref as any}
+                    className="w-full bg-white outline-none p-2 lg:p-3 mt-2 rounded-lg border border-gray-400 placeholder:text-black"
+                    placeholder="Enter city or region"
+                  />
+                </div>
               )}
             />
             <div className="grid lg:grid-cols-2 gap-x-4 gap-y-3">
@@ -300,12 +381,14 @@ const GeneralInfo: FC<Props> = ({ next }) => {
               />
             </div>
             <div className="mt-3 relative">
-             {(prevKyc && !isLoading) && <ImageInput
-                label="Upload Business Registration Certificate"
-                setImage={setbizCert}
-                prevValue={prevKyc?.data?.business_reg_certificate}
-                disabled={disabledField}
-              />}
+              {!isLoading && (
+                <ImageInput
+                  label="Upload Business Registration Certificate"
+                  setImage={setbizCert}
+                  prevValue={prevKyc?.business_reg_certificate}
+                  disabled={disabledField}
+                />
+              )}
               {sending === 1 && (
                 <p className="fs-400 italics text-gray-500 fw-500">
                   Document is uploading...
@@ -318,12 +401,19 @@ const GeneralInfo: FC<Props> = ({ next }) => {
               )}
             </div>
             <div className="mt-3 relative">
-             {(prevKyc && !isLoading) && <ImageInput
-                label="Upload Insurance Requirement"
-                setImage={setImageVal}
-                prevValue={prevKyc && prevKyc?.data?.insurance_doc?.length && prevKyc?.data?.insurance_doc[0]}
-                disabled={disabledField}
-              />}
+              {!isLoading && (
+                <ImageInput
+                  label="Upload Insurance Requirement"
+                  setImage={setImageVal}
+                  prevValue={
+                    (prevKyc &&
+                      prevKyc?.insurance_doc?.length &&
+                      prevKyc?.insurance_doc[0]) ||
+                    []
+                  }
+                  disabled={disabledField}
+                />
+              )}
               {uploading === 1 && (
                 <p className="fs-400 italics text-gray-500 fw-500">
                   Document is uploading...
@@ -380,7 +470,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                     international
                     defaultCountry="US"
                     countries={["US"]}
-                    name="business_phone"
+                    name="business_phone_number"
                     control={control}
                     disabled={disabledField}
                     rules={{
@@ -393,7 +483,7 @@ const GeneralInfo: FC<Props> = ({ next }) => {
                     }}
                     className="border p-2 bg-white border-gray-400 rounded outline-none"
                   />
-                  {errors.business_phone && (
+                  {errors.business_phone_number && (
                     <p className="error text-red-400 text-sm">
                       Invalid Phone Number
                     </p>

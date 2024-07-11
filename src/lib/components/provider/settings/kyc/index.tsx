@@ -1,19 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Stepper, Step, Typography } from "@material-tailwind/react";
 import { FaCar, FaRegUser } from "react-icons/fa";
 import { BsBank2 } from "react-icons/bs";
 import GeneralInfo from "./GeneralInfo";
 import ServiceInfo from "./ServiceInfo";
 import BankInfo from "./BankInfo";
+import { useQuery } from "@tanstack/react-query";
+import { getKyc } from "../../../../services/api/kycApi";
+import useKycStore from "../../../../store/kycStore";
  
 const KycIndex = () => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [isLastStep, setIsLastStep] = React.useState(false);
   const [isFirstStep, setIsFirstStep] = React.useState(false);
+  const kyc = useKycStore((state) => state.kyc);
+  const saveKyc = useKycStore((state) => state.saveKyc);
  
   const handleNext = () => !isLastStep && setActiveStep((cur) => cur + 1);
   const handlePrev = () => !isFirstStep && setActiveStep((cur) => cur - 1);
- 
+  const { data, isLoading } = useQuery({
+    queryKey: ["getKyc"],
+    queryFn: getKyc,
+  });
+
+  useEffect(() => {
+    saveKyc({ ...data.data, device_ip: kyc.device_ip });
+  },[data])
  
   return (
     <div className="w-full  py-4">
@@ -76,11 +88,11 @@ const KycIndex = () => {
         </Step>
       </Stepper>
       </div>
-      <div className="mt-24 lg:px-4">
-        {activeStep === 0 && <GeneralInfo next={handleNext}/>}
-        {activeStep === 1 && <ServiceInfo prev={handlePrev} next={handleNext}/>}
+      {!isLoading && <div className="mt-24 lg:px-4">
+        {activeStep === 0 && <GeneralInfo next={handleNext} prevKyc={data?.data} isLoading={isLoading}/> }
+        {activeStep === 1 && <ServiceInfo prev={handlePrev} prevKyc={data?.data} next={handleNext}/>}
         {activeStep === 2 && <BankInfo prev={handlePrev}/>}
-      </div>
+      </div>}
     </div>
   );
 }

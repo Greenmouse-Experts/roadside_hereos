@@ -46,7 +46,7 @@ const PaymentList = () => {
             </div>
           </div>
         )}
-        {datas && (
+        {datas && !!datas.length && (
           <PaymentTable
             isLoading={isLoading}
             data={datas || []}

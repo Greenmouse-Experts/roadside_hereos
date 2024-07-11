@@ -203,6 +203,7 @@ export const getPostalCodeFromGoogle = (address: AddressType[]) => {
   const selectedAdd = address.filter((where) =>
     where.types.includes("postal_code")
   );
+  if(!selectedAdd.length) return "";
   const postal = selectedAdd[0].long_name;
   return postal;
 };
@@ -212,8 +213,9 @@ export const getCityFromGoogle = (address: AddressType[]) => {
     return "";
   }
   const selectedAdd = address.filter((where) =>
-    where.types.includes("administrative_area_level_2")
+    where.types.includes("political")
   );
+  if(!selectedAdd.length) return "";
   const postal = selectedAdd[0].long_name;
   return postal;
 };
@@ -225,6 +227,7 @@ export const getStateFromGoogle = (address: AddressType[]) => {
   const selectedAdd = address.filter((where) =>
     where.types.includes("administrative_area_level_1")
   );
+  if(!selectedAdd.length) return "";
   const postal = selectedAdd[0].long_name;
   return postal;
 };

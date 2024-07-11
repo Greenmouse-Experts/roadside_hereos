@@ -11,6 +11,7 @@ import useModal from "../../../../hooks/useModal";
 import ReusableModal from "../../../ui/ReusableModal";
 import { toast } from "react-toastify";
 import DisapproveKyc from "./DisapproveKyc";
+import { formatPhoneNumber } from "../../../../utils";
 
 interface Props {
   id: string;
@@ -119,6 +120,22 @@ const ViewKyc: FC<Props> = ({ id, refetch }) => {
                   <p className="fw-600 mt-2">{data?.data?.address}</p>
                 </div>
                 <div>
+                  <p className="fw-500 text-gray-500">
+                    Business Description:
+                  </p>
+                  <p className="fw-600 mt-2">
+                    {data?.data?.business_desc}
+                  </p>
+                </div>
+                <div>
+                  <p className="fw-500 text-gray-500">
+                    Device Ip:
+                  </p>
+                  <p className="fw-600 mt-2">
+                    {data?.data?.device_ip}
+                  </p>
+                </div>
+                <div>
                   <p className="fw-500 text-gray-500">Nature of Company</p>
                   <p className="fw-600 mt-2">{data?.data?.business_nature}</p>
                 </div>
@@ -133,7 +150,7 @@ const ViewKyc: FC<Props> = ({ id, refetch }) => {
                     Comapany Contact Information
                   </p>
                   <p className="fw-600 mt-2">{data?.data?.business_email}</p>
-                  <p className="fw-600 mt-1">{data?.data?.business_phone}</p>
+                  <p className="fw-600 mt-1">{formatPhoneNumber(data?.data?.business_phone)}</p>
                 </div>
                 <div>
                   <p className="fw-500 text-gray-500">
@@ -201,7 +218,7 @@ const ViewKyc: FC<Props> = ({ id, refetch }) => {
                 </div>
                 <div>
                   <p className="fw-500 text-gray-500">Contact Phone:</p>
-                  <p className="fw-600 mt-2">{data?.data?.director_phone}</p>
+                  <p className="fw-600 mt-2">{formatPhoneNumber(data?.data?.director_phone)}</p>
                 </div>
               </div>
             </div>
