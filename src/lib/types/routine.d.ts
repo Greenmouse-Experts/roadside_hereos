@@ -52,6 +52,7 @@ export interface PaymentItem {
   ref: string | null;
   requestNote: string;
   serviceId: string;
+  serviceName: string;
   serviceRequestId: string;
   slug: string;
   status: string;

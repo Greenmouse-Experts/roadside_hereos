@@ -1,8 +1,8 @@
 import { createColumnHelper } from "@tanstack/react-table";
-import { FormatStatus, formatAsNgnMoney } from "../../../utils";
+import { FormatStatus, formatAsNgnMoney } from "../../../../utils";
 import dayjs from "dayjs";
 import { FC } from "react";
-import { DynamicTable } from "../../ui/DynamicTable";
+import { DynamicTable } from "../../../ui/DynamicTable";
 
 interface Props {
   isLoading: boolean;
@@ -28,17 +28,17 @@ const PaymentListing: FC<Props> = ({ data, count, page, prev, next }) => {
       id: "Customer",
       cell: (info) => <p className="">{info.getValue()} {info.row.original.lname}</p>,
     }),
-    columnHelper.accessor((row) => row.service_name, {
+    columnHelper.accessor((row) => row.serviceName, {
       id: "Service Category",
       cell: (info) => <p className="">{info.getValue()}</p>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.city, {
+    columnHelper.accessor((row) => row.location, {
       id: "Service Location",
       cell: (info) => <p className="capitalize">{info.getValue()}</p>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.createdAt, {
+    columnHelper.accessor((row) => row.paymentCreatedAt, {
       id: "Date Requested",
       header: (info) => info.column.id,
       cell: (info) => (

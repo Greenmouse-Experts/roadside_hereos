@@ -82,3 +82,23 @@ export const adminGetUserDetails = async (id: string) => {
     .get(`${ENDPOINT.GET_PROVIDER_DETAILS}/${id}`)
     .then((response) => response.data);
 };
+
+export const adminApprovePayout = async (id: string) => {
+  return axios
+    .post(`${ENDPOINT.ADMIN_APPROVE_PAYOUT}/${id}`)
+    .then((response) => response.data);
+};
+
+export const adminIniatePayout = async (id: string) => {
+  return axios
+    .post(`${ENDPOINT.ADMIN_INITIATE_PAYOUT}/${id}`)
+    .then((response) => response.data);
+};
+
+export const getAdminTransactions = async (params: any) => {
+  return axios
+    .get(
+      `${ENDPOINT.FETCH_PAYOUT_TRANSACTIONS}?page=${params.page}`
+    )
+    .then((response) => response.data);
+};

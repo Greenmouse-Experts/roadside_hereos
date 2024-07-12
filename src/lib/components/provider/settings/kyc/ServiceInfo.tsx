@@ -13,8 +13,9 @@ interface Props {
 }
 const ServiceInfo: FC<Props> = ({ prev, next }) => {
   const kyc = useKycStore((state) => state.kyc);
-  const saveKyc =  useKycStore((state) => state.saveKyc);
-  const isDisabled = kyc.isVerified
+  const saveKyc = useKycStore((state) => state.saveKyc);
+  const isDisabled = kyc.isVerified;
+  
   const {
     control,
     handleSubmit,
@@ -28,15 +29,15 @@ const ServiceInfo: FC<Props> = ({ prev, next }) => {
       phone: kyc?.director_phone || "",
     },
   });
-  const submitAction = async(data:any) => {
+  const submitAction = async (data: any) => {
     const payload = {
       director_fullname: data.fullname,
-    director_designation: data.designation,
-    director_phone: data.phone,
-    director_email: data.email,
-    }
-    await saveKyc({...kyc, ...payload})
-    next()
+      director_designation: data.designation,
+      director_phone: data.phone,
+      director_email: data.email,
+    };
+    await saveKyc({ ...kyc, ...payload });
+    next();
   };
   return (
     <>
@@ -139,7 +140,7 @@ const ServiceInfo: FC<Props> = ({ prev, next }) => {
                 <Button title={"Prev"} onClick={prev} />
               </div>
               <div className="w-3/12">
-                <Button title={"Next"} disabled={!isValid}/>
+                <Button title={"Next"} disabled={!isValid} />
               </div>
             </div>
           </div>

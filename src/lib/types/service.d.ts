@@ -78,7 +78,7 @@ export interface ServiceQouteItem {
   serviceRequestId: string;
   updatedAt: string;
   userId: string | null;
-  timeTaken: string
+  timeTaken: string;
 }
 
 export interface ServiceItemUser {
@@ -161,6 +161,7 @@ export interface ServiceRequestItem2 {
   serviceCharge: number | null;
   serviceId: string;
   serviceRequestId: string;
+  serviceRequestCreatedAt: string;
   serviceRequestStatus: string;
   state: string | null;
   status: string;
@@ -176,5 +177,5 @@ export interface ServiceRequestItem2 {
   walletBal: string | null;
   zipcode: string;
   quote: number;
-  queryNote: string
+  queryNote: string;
 }

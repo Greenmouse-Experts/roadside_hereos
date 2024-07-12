@@ -24,7 +24,9 @@ const KycIndex = () => {
   });
 
   useEffect(() => {
-    saveKyc({ ...data.data, device_ip: kyc.device_ip });
+    if(data?.data){
+      saveKyc({ ...data.data, device_ip: kyc.device_ip });
+    }
   },[data])
  
   return (
@@ -88,7 +90,7 @@ const KycIndex = () => {
         </Step>
       </Stepper>
       </div>
-      {!isLoading && <div className="mt-24 lg:px-4">
+      {!isLoading && data && <div className="mt-24 lg:px-4">
         {activeStep === 0 && <GeneralInfo next={handleNext} prevKyc={data?.data} isLoading={isLoading}/> }
         {activeStep === 1 && <ServiceInfo prev={handlePrev} prevKyc={data?.data} next={handleNext}/>}
         {activeStep === 2 && <BankInfo prev={handlePrev}/>}

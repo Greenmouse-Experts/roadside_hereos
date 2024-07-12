@@ -21,7 +21,7 @@ const UserInfo: FC<Props> = ({ data }) => {
     color,
     name,
     model,
-    createdAt,
+    serviceRequestCreatedAt,
     requestNote,
     vehicleMake,
     vehicleYear,
@@ -59,7 +59,7 @@ const UserInfo: FC<Props> = ({ data }) => {
               <p className="my-1 fw-500 flex gap-x-2 items-center">
                 <IoMdTime className="text-lg lg:text-2xl text-gray-500" />
                 Requested <span className="fw-600">{name}</span> at{" "}
-                {dayjs(createdAt).format("hh:mma dddd DD, MMMM YYYY")}
+                {dayjs(serviceRequestCreatedAt).format("hh:mma dddd DD, MMMM YYYY")}
               </p>
               <p className="my-1 fw-500 flex gap-x-2 items-center">
                 <MdLocationPin className="text-lg lg:text-2xl text-gray-500" />

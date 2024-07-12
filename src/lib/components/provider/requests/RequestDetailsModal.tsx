@@ -14,7 +14,7 @@ const RequestDetailsModal: FC<Props> = ({ item }) => {
         <p className="fw-600 lg:text-lg">{item?.name}</p>
         <p>
           Requested at{" "}
-          {dayjs(item?.createdAt).format("hh:mma dddd DD, MMMM YYYY")}
+          {dayjs(item?.serviceRequestCreatedAt).format("hh:mma dddd DD, MMMM YYYY")}
         </p>
       </div>
       <div>

@@ -1,5 +1,5 @@
+import ApprovedRequests from "../../lib/components/admin/payout/approvedRequest";
 import CompanyPayoutRequest from "../../lib/components/admin/payout/companyPayoutRequest";
-import ApprovedRequests from "../../lib/components/admin/payout/companyPayoutRequest";
 import DisapprovedRequests from "../../lib/components/admin/payout/disapprovedRequest";
 import Tabs from "../../lib/components/ui/Tabs";
 

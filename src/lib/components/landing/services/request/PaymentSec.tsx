@@ -5,13 +5,12 @@ import { Elements } from "@stripe/react-stripe-js";
 import { initiatePay } from "../../../../services/api/serviceApi";
 import useRequestStore from "../../../../store/serviceStore";
 import { formatNumber } from "../../../../utils";
+import { PAYMENT_KEY } from "../../../../services/constant";
 
 interface Props {
   prev: () => void;
 }
-const stripePromise = loadStripe(
-  "pk_test_51PBIJjK3lZO8TZuy3bR0MmkShGXzWXAUsjsS0XABpN4ZsAedFg3P6MsDDCD1sevLrX9hAsUxUO8gQwB8jADXQNlX00wgRZxFWb"
-);
+const stripePromise = loadStripe(PAYMENT_KEY);
 
 const PaymentSec: FC<Props> = ({ prev }) => {
   const [payDetails, setPayDetails] = useState<any>();

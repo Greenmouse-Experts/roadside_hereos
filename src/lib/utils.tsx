@@ -25,6 +25,7 @@ export const formatAsNgnMoney = (value: number | string) => {
     .toLocaleString("en-US")
     .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
 };
+
 export const FormatStatus = {
   Active: (
     <p className="w-28 text-center py-1 text-green-800 bg-green-100 border border-green-800 rounded">
@@ -110,6 +111,12 @@ export const FormatStatus = {
       <span className="fw-500 text-green-600">Completed</span>
     </div>
   ),
+  succeeded: (
+    <div className="flex items-center gap-x-2">
+      <span className="bg-green-600 w-4 h-4 circle"></span>{" "}
+      <span className="fw-500 text-green-600">Completed</span>
+    </div>
+  ),
   declined: (
     <div className="flex items-center gap-x-2">
       <span className="bg-red-600 w-4 h-4 circle"></span>{" "}
@@ -138,6 +145,18 @@ export const FormatStatus = {
     <div className="flex items-center gap-x-2">
       <span className="bg-red-600 w-4 h-4 circle"></span>{" "}
       <span className="fw-500 text-red-600">Failed</span>
+    </div>
+  ),
+  payout_initiated: (
+    <div className="flex items-center gap-x-2">
+      <span className="bg-green-600 w-4 h-4 circle"></span>{" "}
+      <span className="fw-500 text-green-600">Approved</span>
+    </div>
+  ),
+  initiated: (
+    <div className="flex items-center gap-x-2">
+      <span className="bg-green-600 w-4 h-4 circle"></span>{" "}
+      <span className="fw-500 text-green-600">Initiated</span>
     </div>
   ),
 };

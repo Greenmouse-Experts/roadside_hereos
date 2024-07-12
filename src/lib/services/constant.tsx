@@ -1,6 +1,7 @@
 export const BASE_URL = 'https://api.alldrivesos.com/api'
 export const BASE_UPLOAD = 'https://api.alldrivesos.com'
 export const GOOGLE_API_KEY = `${import.meta.env.VITE_GOOGLE_KEY}`
+export const PAYMENT_KEY = `${import.meta.env.VITE_PAYMENT_KEY}`
 
 export enum HTTP_METHODS {
     GET = "GET",
@@ -20,13 +21,16 @@ export const GET_PROVIDER_DETAILS = '/users/get-user'
 export const SUSPEND_USER = `/admin/suspend-user`
 export const UNSUSPEND_USER =`/admin/unsuspend-user`
 export const GET_COMPANY_PROVIDERS = `/admin/get-provider-drivers`
-export const GET_ALL_PAYMENTS = `services-quote/get-all-paid-quote`
-export const ADMIN_ADD_RATES = `charge/save-charges`
-export const ADMIN_GET_RATES = `charge/fetch-charges`
-export const ADMIN_GET_PAYOUT_CAP = `payout/fetch`
-export const ADMIN_SET_PAYOUT_CAP = `payout/save`
-export const ADMIN_GET_PAYOUT_REQUESTS = `service-request/fetch-withdrawals`
-export const ADMIN_DECLINE_PAYOUT_REQUESTS = `service-request/disapprove-withdrawal`
+export const GET_ALL_PAYMENTS = `/services-quote/get-all-paid-quote`
+export const ADMIN_ADD_RATES = `/charge/save-charges`
+export const ADMIN_GET_RATES = `/charge/fetch-charges`
+export const ADMIN_GET_PAYOUT_CAP = `/payout/fetch`
+export const ADMIN_SET_PAYOUT_CAP = `/payout/save`
+export const ADMIN_GET_PAYOUT_REQUESTS = `/service-request/fetch-withdrawals`
+export const ADMIN_APPROVE_PAYOUT = `/service-request/approve-withdrawal`
+export const ADMIN_INITIATE_PAYOUT = `/service-request/initiate-company-payout`
+export const ADMIN_DECLINE_PAYOUT_REQUESTS = `/service-request/disapprove-withdrawal`
+export const FETCH_PAYOUT_TRANSACTIONS = `/transactions`
 
 // Auth endpoints
 export const USER_LOGIN = '/user/login'

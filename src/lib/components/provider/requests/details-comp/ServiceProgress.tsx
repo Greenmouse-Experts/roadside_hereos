@@ -52,7 +52,7 @@ const ServiceProgress: FC<Props> = ({ status, query }) => {
             </div>
             <div
               className={`w-12 h-12 lg:w-16 lg:h-16 circle place-center ${
-                status === "ongoing" || status === "fulfilled"
+                status === "ongoing" || status === "fulfilled" || status === "completed"
                   ? "bg-orange-500"
                   : "bg-gray-400"
               }`}
@@ -63,7 +63,7 @@ const ServiceProgress: FC<Props> = ({ status, query }) => {
             </div>
             <div
               className={`w-12 h-12 lg:w-16 lg:h-16 circle place-center ${
-                status === "fulfilled" ? "bg-orange-500" : "bg-gray-400"
+                status === "fulfilled" || status === "completed"? "bg-orange-500" : "bg-gray-400"
               }`}
             >
               <p className="fw-700 text-lg">
