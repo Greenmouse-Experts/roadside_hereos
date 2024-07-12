@@ -40,6 +40,7 @@ const MapLocation: FC<Props> = ({ setValue, close }) => {
         },
         (error) => {
           setIsBusy(false);
+          console.log(error);
           toast.error("Something went wrong getting your position!");
         },
         options

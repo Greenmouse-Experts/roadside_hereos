@@ -33,6 +33,7 @@ const GetCurrentLocation: FC<Props> = ({ setValue }) => {
         },
         (error) => {
           setIsBusy(false);
+          console.log(error);
           toast.error("Something went wrong getting your position!");
         },
         options
