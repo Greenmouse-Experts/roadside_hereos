@@ -10,7 +10,7 @@ const AdminPayments = () => {
       content: <AdminServicePayment />,
     },
     {
-      title: <p>Service Payout</p>,
+      title: <p>Contractor Payout</p>,
       content: <AdminServicePayout />,
     },
   ];

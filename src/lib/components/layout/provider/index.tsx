@@ -31,7 +31,7 @@ const ProviderDashboardLayout: React.FC<Props> = ({ children }) => {
   useEffect(() => {
     fetch('https://api.ipify.org?format=json')
       .then(response => response.json())
-      .then(data => {console.log(data);
+      .then(data => {
        saveKyc({...kyc, device_ip:data.ip})})
       .catch(error => console.log(error))
   }, []);

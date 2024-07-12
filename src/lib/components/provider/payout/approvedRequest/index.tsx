@@ -58,6 +58,7 @@ const ApprovedRequests = () => {
             prev={handlePrev}
             count={count || 0}
             refetch={refetch}
+            status={params.status}
           />
         )}
       </div>

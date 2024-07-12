@@ -1,14 +1,10 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import dayjs from "dayjs";
-import { FC, useState } from "react";
-import ReusableModal from "../../../ui/ReusableModal";
+import { FC } from "react";
 import { DynamicTable } from "../../../ui/DynamicTable";
-import Button from "../../../ui/Button";
 import { FormatStatus, formatAsNgnMoney } from "../../../../utils";
 import { PayoutItem } from "../../../../types/payment";
-import { toast } from "react-toastify";
-import useDialog from "../../../../hooks/useDialog";
-import { declineStaffRequest } from "../../../../services/api/companyApi";
+import PayoutActions from "./payoutActions";
 
 interface Props {
   isLoading: boolean;
@@ -17,7 +13,8 @@ interface Props {
   page: number;
   next: () => void;
   prev: () => void;
-  refetch: () => void
+  refetch: () => void;
+  status: string;
 }
 const PayoutTable: FC<Props> = ({
   data,
@@ -25,30 +22,9 @@ const PayoutTable: FC<Props> = ({
   page,
   next,
   prev,
-  refetch
+  refetch,
+  status
 }) => {
- // modals
- const [isBusy, setIsBusy] = useState(false);
- // const { Dialog, setShowModal } = useDialog();
- const { Dialog: Decline, setShowModal: ShowDecline } = useDialog();
- const [selectedId, setSelectedId] = useState("");
- const openDecline = (item: string) => {
-   setSelectedId(item);
-   ShowDecline(true);
- };
- const handleDecline = async () => {
-   setIsBusy(true);
-   await declineStaffRequest(selectedId)
-     .then((res) => {
-       toast.success(res.message);
-       ShowDecline(false);
-       refetch();
-     })
-     .catch((err: any) => {
-       toast.error(err.response.data.message);
-       setIsBusy(false);
-     });
- };
  // Table components
  const columnHelper = createColumnHelper<PayoutItem>();
  const columns = [
@@ -87,14 +63,15 @@ const PayoutTable: FC<Props> = ({
      id: "Action",
      header: (info) => info.column.id,
      cell: (info) => (
-       <div className="fw-600 flex gap-x-3">
-         <Button title={"Approve"} altClassName="py-2 px-5 btn-primary" />
-         <Button
-           title={"Decline"}
-           onClick={() => openDecline(info.getValue())}
-           altClassName="py-2 px-5 btn-primary bg-red-600"
-         />
-       </div>
+      <>
+      {status === "pending" && (
+        <PayoutActions
+          id={info.getValue()}
+          status={info.row.original.status}
+          refetch={refetch}
+        />
+      )}
+      </>
      ),
    }),
  ];
@@ -110,16 +87,6 @@ const PayoutTable: FC<Props> = ({
          page={page}
        />
      </div>
-     <Decline title="" size="md">
-       <ReusableModal
-         title="Are you sure want to decline this withdrawal request?"
-         action={handleDecline}
-         actionTitle="Decline"
-         cancelTitle="No, Close"
-         closeModal={() => ShowDecline(false)}
-         isBusy={isBusy}
-       />
-     </Decline>
    </>
  );
 };

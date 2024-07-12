@@ -33,7 +33,6 @@ const ReviewModal: FC<Props> = ({ id, close }) => {
       })
       .catch((err: any) => {
         toast.error(err.response.data.message);
-        console.log(err);
         setIsBusy(false);
       });
   };

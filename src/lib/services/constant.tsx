@@ -105,6 +105,7 @@ export const GET_ONE_SERVICE = '/service-request/user-fetch-details'
 export const GET_MY_PAYMENTS = '/service-request/payments'
 export const GET_PROVIDER_PAYMENTS = `/service-request/fetch-driver-payments`
 export const GET_CLIENT_DASHBOARD_STATS = `/service-request/client-stat`
+export const GET_PAYOUT_RECORDS = `/service-request/fetch-user-withdrawals`
 
 // payments
 export const ADMIN_GET_PAYMENTS = `service-request/fetch-payments`

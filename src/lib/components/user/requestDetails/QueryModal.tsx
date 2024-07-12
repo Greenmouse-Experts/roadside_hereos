@@ -27,7 +27,6 @@ const QueryModal: FC<Props> = ({ id, close, refetch }) => {
       })
       .catch((err: any) => {
         toast.error(err.response.data.message);
-        console.log(err);
         setIsBusy(false);
       });
   };

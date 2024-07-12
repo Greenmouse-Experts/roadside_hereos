@@ -52,3 +52,9 @@ export const getClientStats = async () => {
     .get(`${ENDPOINT.GET_CLIENT_DASHBOARD_STATS}`)
     .then((response) => response.data);
 };
+
+export const getProviderPayouts = async (page: number) => {
+  return axios
+    .get(`${ENDPOINT.GET_PAYOUT_RECORDS}?page=${page}`)
+    .then((response) => response.data);
+};

@@ -75,7 +75,7 @@ const PayoutSettings = () => {
                 disabled={isLoading}
                 render={({ field }) => (
                   <TextInput
-                    label="Maximum Payout Amount"
+                    label="Minimum Payout Amount"
                     labelClassName="text-gray-500 fw-500"
                     error={errors.amount?.message}
                     type={InputType.number}

@@ -32,7 +32,6 @@ const GetCurrentLocation: FC<Props> = ({ setValue }) => {
           fetchCoordinateDetailsWithGoogle(coords);
         },
         (error) => {
-          console.log(error);
           setIsBusy(false);
           toast.error("Something went wrong getting your position!");
         },

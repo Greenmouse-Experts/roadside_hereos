@@ -98,7 +98,7 @@ export const requestPayout = async (payload: any) => {
 export const getStaffRequest = async (params: any) => {
   return axios
     .get(
-      `${ENDPOINT.GET_STAFF_REQUEST}?page=${params.page}&status${params.status}`
+      `${ENDPOINT.GET_STAFF_REQUEST}?page=${params.page}&status=${params.status}`
     )
     .then((response) => response.data);
 };

@@ -15,7 +15,7 @@ const DisapprovedRequests = () => {
     queryFn: () => getStaffRequest(params),
   });
 
-  const datas = data?.data?.payments;
+  const datas = data?.data?.withdrawalRequests;
   const count = data?.data?.total;
 
   const handleNext = () => {
@@ -44,7 +44,7 @@ const DisapprovedRequests = () => {
                 <CurveLoader />
               </div>
               <p className="text-center mt-5 fw-500">
-                Fetching Approved Payouts...
+                Fetching Declined Payouts...
               </p>
             </div>
           </div>
@@ -58,6 +58,7 @@ const DisapprovedRequests = () => {
             prev={handlePrev}
             count={count || 0}
             refetch={refetch}
+            status={params.status}
           />
         )}
       </div>

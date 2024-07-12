@@ -33,7 +33,6 @@ const CheckoutForm: FC<Props> = ({ prev }) => {
       clear()
     })
     .catch((err) => {
-      console.log(err.message);
       toast.error(err.response.data.message)
     })
   }
