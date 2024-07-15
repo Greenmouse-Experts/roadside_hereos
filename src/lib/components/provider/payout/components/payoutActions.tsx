@@ -61,22 +61,33 @@ const PayoutActions: FC<Props> = ({ id, status, refetch }) => {
         });
     }
   };
-  
+
   return (
     <>
       <div>
-        <div className="fw-600 flex gap-x-3">
-          <Button
-            title={"Approve"}
-            onClick={() => ShowApprove(true)}
-            altClassName="py-2 px-5 btn-primary"
-          />
-          <Button
-            title={"Decline"}
-            onClick={() => ShowDecline(true)}
-            altClassName="py-2 px-5 btn-primary bg-red-600"
-          />
-        </div>
+        {status === "pending" && (
+          <div className="fw-600 flex gap-x-3">
+            <Button
+              title={"Approve"}
+              onClick={() => ShowApprove(true)}
+              altClassName="py-2 px-5 btn-primary"
+            />
+            <Button
+              title={"Decline"}
+              onClick={() => ShowDecline(true)}
+              altClassName="py-2 px-5 btn-primary bg-red-600"
+            />
+          </div>
+        )}
+        {status === "approved" && (
+          <div className="fw-600 flex gap-x-3">
+            <Button
+              title={"Initiate Transfer"}
+              onClick={() => ShowApprove(true)}
+              altClassName="py-2 px-5 btn-primary"
+            />
+          </div>
+        )}
       </div>
       <Approve title="" size="md">
         <ReusableModal
