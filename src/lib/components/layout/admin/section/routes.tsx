@@ -2,11 +2,12 @@ import {
   MdOutlineDashboard, MdOutlineRateReview,
 } from 'react-icons/md';
 import { HiOutlineUsers } from "react-icons/hi2";
-import { RiCarWashingFill, RiSecurePaymentFill, RiUserSettingsLine } from 'react-icons/ri';
+import { RiCarWashingFill, RiRefund2Line, RiSecurePaymentFill, RiUserSettingsLine } from 'react-icons/ri';
 import { BiCategoryAlt, BiGitPullRequest } from 'react-icons/bi';
 import { LuServerCog } from 'react-icons/lu';
 import { IoNotificationsCircleOutline } from "react-icons/io5";
 import { BsCashCoin } from 'react-icons/bs';
+
 export interface RouteType {
   name:string;
   icon: any;
@@ -58,6 +59,12 @@ export const Routes = [
     name: 'Completed Services',
     icon: <LuServerCog className="text-xl" />,
     route: '/admin/services',
+    submenu: [],
+  },
+  {
+    name: 'Refund Request',
+    icon: <RiRefund2Line className="text-xl" />,
+    route: '/admin/refund-request',
     submenu: [],
   },
   {

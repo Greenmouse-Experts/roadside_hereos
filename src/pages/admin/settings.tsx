@@ -43,7 +43,7 @@ const AdminSettings = () => {
                 </li>
                 <li
                   className={`cursor-pointer px-4 py-2  whitespace-nowrap rounded-lg hover:scale-105 duration-100 hover:bg-white ${
-                    active === 3 && "bg-white fw-600"
+                    active === 4 && "bg-white fw-600"
                   }`}
                   onClick={() => handleActive(4)}
                 >

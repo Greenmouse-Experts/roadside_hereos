@@ -17,8 +17,9 @@ const AdminRates = () => {
     if (data) {
       reset({
         service_percent: data?.data?.service_percent,
-        tax_percent:  data?.data?.tax_percent,
-        company_percent: data?.data?.company_percent
+        tax_percent: data?.data?.tax_percent,
+        company_percent: data?.data?.company_percent,
+        driver_refund_charge: data?.data?.driver_refund_charge,
       });
     }
   }, [data]);
@@ -32,7 +33,8 @@ const AdminRates = () => {
     defaultValues: {
       tax_percent: "",
       service_percent: "",
-      company_percent: ""
+      company_percent: "",
+      driver_refund_charge: "",
     },
   });
   const mutate = useMutation({
@@ -40,16 +42,27 @@ const AdminRates = () => {
     mutationKey: ["admin-add-rates"],
   });
   const onSubmit = (data: any) => {
-    if(data?.service_percent > 100 || data?.tax_percent > 100 || data?.company_percent > 100){
-        toast.info('Invalid Percentage')
-        return;
+    if (
+      data?.service_percent > 100 ||
+      data?.tax_percent > 100 ||
+      data?.company_percent > 100 ||
+      data?.driver_refund_charge > 100
+    ) {
+      toast.info("Invalid Percentage");
+      return;
     }
     setIsBusy(true);
-    mutate.mutate(data, {
+    const payload = {
+      tax_percent: Number(data.tax_percent),
+      service_percent: Number(data.service_percent),
+      company_percent: Number(data.company_percent),
+      driver_refund_charge: Number(data.driver_refund_charge),
+    };
+    mutate.mutate(payload, {
       onSuccess: (data) => {
         setIsBusy(false);
         toast.success(data.message);
-        refetch()
+        refetch();
       },
       onError: () => {
         toast.error("Something went wrong");
@@ -133,6 +146,33 @@ const AdminRates = () => {
                 render={({ field }) => (
                   <TextInput
                     label="VAT (%)"
+                    labelClassName="text-gray-500 fw-500"
+                    error={errors.tax_percent?.message}
+                    type={InputType.number}
+                    min={0}
+                    max={100}
+                    maxLength={3}
+                    {...field}
+                  />
+                )}
+              />
+            </div>
+            <div className="mt-4">
+              <Controller
+                name="driver_refund_charge"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Please enter your service rate",
+                  },
+                  maxLength: 3,
+                  value: "number",
+                }}
+                disabled={isLoading}
+                render={({ field }) => (
+                  <TextInput
+                    label="Driver Refund (%)"
                     labelClassName="text-gray-500 fw-500"
                     error={errors.tax_percent?.message}
                     type={InputType.number}

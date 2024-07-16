@@ -102,3 +102,15 @@ export const getAdminTransactions = async (params: any) => {
     )
     .then((response) => response.data);
 };
+
+export const approveRefund = async (id: string) => {
+  return axios
+    .post(`${ENDPOINT.APPROVE_REFUND}/${id}`)
+    .then((response) => response.data);
+};
+
+export const disapproveRefund = async (id: string, payload: {reason: string}) => {
+  return axios
+    .post(`${ENDPOINT.ADMIN_INITIATE_PAYOUT}/${id}`, payload)
+    .then((response) => response.data);
+};

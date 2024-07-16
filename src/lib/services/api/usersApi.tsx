@@ -69,3 +69,9 @@ export const getMe = async (type: string) => {
     .get(`${ENDPOINT.GET_MY_ACCOUNT}?userType=${type}`)
     .then((response) => response.data);
 };
+
+export const requestRefund = async (payload: {serviceRequestId: string}) => {
+  return axios
+    .post(`${ENDPOINT.USER_REQUEST_REFUND}`, payload)
+    .then((response) => response.data);
+};

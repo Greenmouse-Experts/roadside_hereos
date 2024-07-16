@@ -6,6 +6,7 @@ import AdminPayments from "../../pages/admin/payment";
 import CompanyPayouts from "../../pages/admin/payouts";
 import ProviderDetails from "../../pages/admin/providerDetails";
 import ServiceProviders from "../../pages/admin/providers";
+import RefundRequests from "../../pages/admin/refund";
 import AdminRequests from "../../pages/admin/requests";
 import AllReviews from "../../pages/admin/reviews";
 import AdminServiceDetails from "../../pages/admin/serviceDetails";
@@ -96,4 +97,9 @@ export const adminRoutes = [
         path: 'payouts',
         component: <CompanyPayouts/>
     },
+    {
+        id: 'refund-request',
+        path: 'refund-request',
+        component: <RefundRequests/>
+    }
 ]
