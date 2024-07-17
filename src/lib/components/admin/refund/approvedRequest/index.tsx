@@ -5,10 +5,10 @@ import CurveLoader from "../../../ui/loader/curveLoader/CurveLoader";
 import {  getAdminRefunds } from "../../../../services/api/adminApi";
 import RefundTable from "../components/refundTable";
 
-const RefundPendingRequest = () => {
+const RefundApprovedRequest = () => {
   const [params, setParams] = useState({
     page: 1,
-    status: "pending",
+    status: "approved",
   });
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["admin-refund-request", params],
@@ -66,4 +66,4 @@ const RefundPendingRequest = () => {
   );
 };
 
-export default RefundPendingRequest;
+export default RefundApprovedRequest;

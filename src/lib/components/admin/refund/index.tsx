@@ -1,4 +1,6 @@
 import Tabs from "../../ui/Tabs";
+import RefundApprovedRequest from "./approvedRequest";
+import RefundDisapprovedRequest from "./disapprovedRequest";
 import RefundPendingRequest from "./pendingRequest";
 
 const RefundIndex = () => {
@@ -9,11 +11,11 @@ const RefundIndex = () => {
     },
     {
       title: <>Approved</>,
-      content: <></>,
+      content: <RefundApprovedRequest/>,
     },
     {
       title: <>Declined</>,
-      content: <></>,
+      content: <RefundDisapprovedRequest/>,
     },
   ];
   return (

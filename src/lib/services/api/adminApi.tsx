@@ -103,6 +103,12 @@ export const getAdminTransactions = async (params: any) => {
     .then((response) => response.data);
 };
 
+export const getAdminRefunds = async (params: any) => {
+  return axios
+    .get(`${ENDPOINT.GET_REFUND_REQUESTS}?page=${params.page}`)
+    .then((response) => response.data);
+};
+
 export const approveRefund = async (id: string) => {
   return axios
     .post(`${ENDPOINT.APPROVE_REFUND}/${id}`)
@@ -111,6 +117,15 @@ export const approveRefund = async (id: string) => {
 
 export const disapproveRefund = async (id: string, payload: {reason: string}) => {
   return axios
-    .post(`${ENDPOINT.ADMIN_INITIATE_PAYOUT}/${id}`, payload)
+    .post(`${ENDPOINT.DISAPPROVE_REFUND}/${id}`, payload)
+    .then((response) => response.data);
+};
+
+export const initiateRefund = async (payload: {
+  refundReqId: string;
+  amountToClient: number;
+}) => {
+  return axios
+    .post(`${ENDPOINT.INITIATE_REFUND}`, payload)
     .then((response) => response.data);
 };

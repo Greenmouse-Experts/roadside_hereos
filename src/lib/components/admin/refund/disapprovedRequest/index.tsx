@@ -5,10 +5,10 @@ import CurveLoader from "../../../ui/loader/curveLoader/CurveLoader";
 import {  getAdminRefunds } from "../../../../services/api/adminApi";
 import RefundTable from "../components/refundTable";
 
-const RefundPendingRequest = () => {
+const RefundDisapprovedRequest = () => {
   const [params, setParams] = useState({
     page: 1,
-    status: "pending",
+    status: "disapproved",
   });
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["admin-refund-request", params],
@@ -16,7 +16,7 @@ const RefundPendingRequest = () => {
   });
 
   const datas = data?.data;
-  const count = data?.data?.length;
+  const count = data?.data?.total;
 
   const handleNext = () => {
     if (count > params.page * 10) {
@@ -66,4 +66,4 @@ const RefundPendingRequest = () => {
   );
 };
 
-export default RefundPendingRequest;
+export default RefundDisapprovedRequest;

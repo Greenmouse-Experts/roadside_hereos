@@ -1,11 +1,20 @@
 import { createColumnHelper } from "@tanstack/react-table";
 import dayjs from "dayjs";
 import { FC } from "react";
-import { PayoutItem } from "../../../../types/payment";
-import { FormatStatus, formatAsNgnMoney } from "../../../../utils";
+import { FormatStatus } from "../../../../utils";
 import { DynamicTable } from "../../../ui/DynamicTable";
 import PayoutActions from "./refundActions";
+import { Link } from "react-router-dom";
 
+interface RefundItem {
+  createdAt: string;
+  disapprovalReason: null;
+  id: string;
+  serviceRequestId: string;
+  status: string;
+  updatedAt: string;
+  userId: string;
+}
 interface Props {
   isLoading: boolean;
   data: PaymentItem[];
@@ -26,24 +35,25 @@ const RefundTable: FC<Props> = ({
   status,
 }) => {
   // Table components
-  const columnHelper = createColumnHelper<PayoutItem>();
+  const columnHelper = createColumnHelper<RefundItem>();
   const columns = [
-    columnHelper.accessor((row) => row.name, {
-      id: "Provider Name",
-      cell: (info) => <p className="fw-600">{info.getValue()}</p>,
-    }),
-    columnHelper.accessor((row) => row.amount, {
-      id: "Requested Amount",
+    columnHelper.accessor((row) => row.userId, {
+      id: "Provider Id",
       cell: (info) => (
-        <p className="fw-600">{formatAsNgnMoney(info.getValue())}</p>
+        <Link to={`/admin/users/${info.getValue()}`} className="fw-600">
+          {info.getValue()}
+        </Link>
       ),
     }),
-    columnHelper.accessor((row) => row.walletBal, {
-      id: "Wallet Balance",
-      cell: (info) => <p className="fw-500">{formatAsNgnMoney(info.getValue())}</p>,
-      header: (info) => info.column.id,
+    columnHelper.accessor((row) => row.serviceRequestId, {
+      id: "Service Id",
+      cell: (info) => (
+        <Link to={`/admin/services/${info.getValue()}`} className="fw-600">
+          {info.getValue()}
+        </Link>
+      ),
     }),
-    columnHelper.accessor((row) => row.payoutCreatedAt, {
+    columnHelper.accessor((row) => row.createdAt, {
       id: "Date Requested",
       header: (info) => info.column.id,
       cell: (info) => (
@@ -59,12 +69,12 @@ const RefundTable: FC<Props> = ({
         <>{FormatStatus[info.getValue() as keyof typeof FormatStatus]}</>
       ),
     }),
-    columnHelper.accessor((row) => row.PayoutRequestId, {
+    columnHelper.accessor((row) => row.serviceRequestId, {
       id: "Action",
       header: (info) => info.column.id,
       cell: (info) => (
         <>
-          {status === "pending" && (
+          {(status === "pending" || status === "approved") && (
             <PayoutActions
               id={info.getValue()}
               status={info.row.original.status}

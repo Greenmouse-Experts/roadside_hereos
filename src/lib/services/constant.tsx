@@ -31,9 +31,10 @@ export const ADMIN_APPROVE_PAYOUT = `/service-request/approve-withdrawal`
 export const ADMIN_INITIATE_PAYOUT = `/service-request/initiate-company-payout`
 export const ADMIN_DECLINE_PAYOUT_REQUESTS = `/service-request/disapprove-withdrawal`
 export const FETCH_PAYOUT_TRANSACTIONS = `/transactions`
+export const GET_REFUND_REQUESTS = `/services-quote/fetch-refund-requests`;
 export const DISAPPROVE_REFUND = `/services-quote/disapprove-refund`
 export const APPROVE_REFUND = `/services-quote/approve-refund`
-export const INITIATE_REFUND = `/`
+export const INITIATE_REFUND = `/service-quote/initiate-refund`;
 
 // Auth endpoints
 export const USER_LOGIN = '/user/login'
