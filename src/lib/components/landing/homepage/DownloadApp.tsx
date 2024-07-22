@@ -6,7 +6,7 @@ const DownloadApp = () => {
   return (
     <div className="section pt-0">
       <div className="box">
-        <div className="lg:h-[400px] rounded-[50px] overflow-hidden lg:flex bg-[#172748]">
+        <div className="lg:h-[400px] rounded-[20px] lg:rounded-[50px] overflow-hidden lg:flex bg-[#172748]">
           <div className="lg:w-6/12 pt-6 lg:pt-0 flex h-full items-center">
             <div className="text-white p-6 lg:pl-12">
               <p className="fw-600 text-2xl">
