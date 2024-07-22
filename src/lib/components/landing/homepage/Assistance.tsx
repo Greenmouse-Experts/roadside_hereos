@@ -22,9 +22,7 @@ const Assistance = () => {
                   Get Instant Assistance
                 </p>
                 <p className="mt-3 fs-400 fw-500">
-                  Request instant roadside assistance now! Choose through the
-                  provided options, the problem you&apos;re having and
-                  we&apos;ll be there in minutes.
+                Quick roadside rescue! Choose your issue, we&apos;re minutes away.
                 </p>
               </div>
               <Button

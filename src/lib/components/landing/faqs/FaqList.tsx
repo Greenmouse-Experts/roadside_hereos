@@ -5,6 +5,7 @@ import {
   AccordionBody,
 } from "@material-tailwind/react";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const FaqList = () => {
   const [open, setOpen] = React.useState(0);
@@ -27,8 +28,7 @@ const FaqList = () => {
             At AllDrive SOS, we offer comprehensive maintenance and emergency
             roadside assistance services for all motor vehicles. Our service
             list is continually expanding to meet your needs. For the most
-            up-to-date list of services, please visit our services page
-            [here](link to services page).
+            up-to-date list of services, please visit our <Link to={'/request'} className="fw-500 text-primary underline">services page</Link>.
           </div>
         </AccordionBody>
       </Accordion>

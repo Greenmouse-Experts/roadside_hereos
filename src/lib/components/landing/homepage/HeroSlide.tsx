@@ -39,7 +39,7 @@ const HeroSlide = () => {
                     Your Safety, Our Priority - Trust Us to Get You Back on the
                     Road.
                   </p>
-                  <p className="fw-600 mt-4">A leading towing company and emergency road service provider. We operate new, clean and professional towing vehicles and equipment.</p>
+                  <p className="fw-600 mt-4">Vehicle breakdown? Get ALLDRIVE SOS, the #1 roadside assistance app to connect with nearby providers instantly. 24/7 nationwide coverage. Get rescued now!</p>
                 </div>
                 <div className="lg:flex gap-x-6 itms-center mt-10">
                   <Button
@@ -75,7 +75,7 @@ const HeroSlide = () => {
                   <p className="text-2xl md:text-3xl lg:text-[45px] fw-600 leading-[40px] lg:leading-normal">
                     Quick Fix for On-the-Go Emergencies. Fast and Reliable.
                   </p>
-                  <p className="fw-600 mt-4">A leading towing company and emergency road service provider. We operate new, clean and professional towing vehicles and equipment.</p>
+                  <p className="fw-600 mt-4">Vehicle breakdown? Get ALLDRIVE SOS, the #1 roadside assistance app to connect with nearby providers instantly. 24/7 nationwide coverage. Get rescued now!</p>
                 </div>
                 <div className="lg:flex gap-x-6 itms-center mt-10">
                   <Button
@@ -111,7 +111,7 @@ const HeroSlide = () => {
                   <p className="text-2xl md:text-3xl lg:text-[45px] fw-600 leading-[40px] lg:leading-normal">
                     Never Run out of Fuel Again as We've got You Covered.
                   </p>
-                  <p className="fw-600 mt-4">A leading towing company and emergency road service provider. We operate new, clean and professional towing vehicles and equipment.</p>
+                  <p className="fw-600 mt-4">Vehicle breakdown? Get ALLDRIVE SOS, the #1 roadside assistance app to connect with nearby providers instantly. 24/7 nationwide coverage. Get rescued now!</p>
                 </div>
                 <div className="lg:flex gap-x-6 itms-center mt-10">
                   <Button
@@ -148,7 +148,7 @@ const HeroSlide = () => {
                     Locked Out? We're Here 24/7 to Get You Back Behind the
                     Wheel!
                   </p>
-                  <p className="fw-600 mt-4">A leading towing company and emergency road service provider. We operate new, clean and professional towing vehicles and equipment.</p>
+                  <p className="fw-600 mt-4">Vehicle breakdown? Get ALLDRIVE SOS, the #1 roadside assistance app to connect with nearby providers instantly. 24/7 nationwide coverage. Get rescued now!</p>
                 </div>
                 <div className="lg:flex gap-x-6 itms-center mt-10">
                   <Button
@@ -185,11 +185,12 @@ const HeroSlide = () => {
                     On-the-Spot Battery Replacement. Ready to Power Your
                     Journey.
                   </p>
-                  <p className="fw-600 mt-4">A leading towing company and emergency road service provider. We operate new, clean and professional towing vehicles and equipment.</p>
+                  <p className="fw-600 mt-4">Vehicle breakdown? Get ALLDRIVE SOS, the #1 roadside assistance app to connect with nearby providers instantly. 24/7 nationwide coverage. Get rescued now!</p>
                 </div>
                 <div className="lg:flex gap-x-6 itms-center mt-10">
                   <Button
-                    title={"Call us now"}
+                    title={"Get Help"}
+                    onClick={() => navigate("/request")}
                     altClassName="btn-feel fs-500 bg-[#FEB470] border-2 border-[#FEB470] text-black px-6 py-2"
                   />
                   <Button

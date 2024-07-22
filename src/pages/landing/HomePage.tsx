@@ -1,4 +1,5 @@
 import Assistance from '../../lib/components/landing/homepage/Assistance'
+import DownloadApp from '../../lib/components/landing/homepage/DownloadApp'
 import HeroBanner from '../../lib/components/landing/homepage/HeroBanner'
 import Stranded from '../../lib/components/landing/homepage/Stranded'
 import Works from '../../lib/components/landing/homepage/Works'
@@ -13,6 +14,7 @@ const HomePage = () => {
               <Assistance/>
               <Stranded/>
               <Works/>
+              <DownloadApp/>
             </div>
         </LandingLayout>
     </>

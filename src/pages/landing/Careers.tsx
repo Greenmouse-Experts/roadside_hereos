@@ -1,9 +1,39 @@
 import { BsClock } from "react-icons/bs";
 import LandingLayout from "../../lib/components/layout/landing";
-import { FaCircleCheck } from "react-icons/fa6";
+import { FaCheck, FaCircleCheck } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const CareersPage = () => {
+  const data = [
+    {
+      name: "Set Your Own Rates",
+      desc: "Control your earnings by setting competitive service rates that reflect your expertise.",
+    },
+    {
+      name: "Steady Work Opportunities",
+      desc: "Receive consistent job alerts straight to your phone, ensuring a constant flow of work from a thriving network.",
+    },
+    {
+      name: "Real-Time Tracking",
+      desc: "Our user-friendly app allows you to track job locations and customer information in real-time, ensuring efficient service and clear communication.",
+    },
+    {
+      name: "Less Downtime",
+      desc: "Never waste time searching for your next job. The ALLDRIVE SOS app seamlessly connects you with new requests while you're finishing current ones, maximizing your earning potential.",
+    },
+    {
+      name: "Easy-to-Use App",
+      desc: "Manage jobs, navigate to customer locations, and access all necessary information through our streamlined and intuitive app, making your workday effortless",
+    },
+    {
+      name: "Flexible Schedule",
+      desc: "Be your own boss and work on your terms. Our platform allows you to choose the jobs that fit your availability, giving you the freedom to manage your time effectively.",
+    },
+    {
+      name: "Fair Compensation",
+      desc: "Enjoy competitive rates with prompt payments to ensure you're rewarded for your skills and hustle.",
+    },
+  ];
   return (
     <>
       <LandingLayout>
@@ -26,24 +56,31 @@ const CareersPage = () => {
           <div className="section">
             <div className="box">
               <div className="border-b border-[#172748]">
-                <p className="fw-600 text-3xl">Diverse Opportunities</p>
-                <div className="mt-6 w-1/12 border-2 border-[#172748]"></div>
+                <p className="fw-600 text-xl lg:text-3xl">
+                  Be a Roadside Hero: Save Motorists & Earn with ALLDRIVE SOS
+                </p>
+                <div className="mt-2 lg:mt-6 w-6/12 lg:w-1/12 border-2 border-[#172748]"></div>
               </div>
               <div className="mt-5">
                 <p>
-                  At AllDrive SOS, we firmly believe that talented
-                  professionals are our key resources that sustain our
-                  businesses and propel the organization forward. Exciting
-                  career opportunities and enriching jobs in a range of business
-                  areas await experienced professionals as well as newcomers.
+                  Join the ALLDRIVE SOS team and become part of a growing
+                  network of nationwide roadside assistance providers. As a
+                  technician on our platform, you'll have the opportunity to
+                  help motorists in need while enjoying numerous benefits:
                 </p>
-                <p className="mt-3">
-                  With our diverse and global business lines, one gets an
-                  invaluable opportunity to work with people of different
-                  nationalities and cultures. By joining us, you become a member
-                  of one of the most respected and reputed global business
-                  conglomerates
-                </p>
+                <div className="mt-4 lg:mt-10 grid lg:grid-cols-2 gap-5 lg:gap-7">
+                  {data.map((item) => (
+                    <div className="flex gap-x-3">
+                      <div className="w-5 lg:w-6 h-5 lg:h-6 mt-2 lg:mt-[4px] circle place-center bg-pri">
+                        <FaCheck className="text-ter fs-300 lg:fs-500" />
+                      </div>
+                      <div className="w-[90%]">
+                        <p className="fw-600 lg:text-lg">{item.name}</p>
+                        <p className="fs-400 lg:fs-500">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
               <div className="mt-6 lg:flex items-center lg:mt-16">
                 <div className="lg:w-5/12">
@@ -53,11 +90,14 @@ const CareersPage = () => {
                     className="w-full lg:w-10/12"
                   />
                 </div>
-                <div className="lg:w-5/12">
-                  <p className="text-3xl fw-600">Join as a Service Personnel</p>
-                  <p className="mt-6">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Quisque varius erat in sem accumsan vestibulum vel in leo.
+                <div className="mt-5 lg:mt-0 lg:w-5/12">
+                  <p className="text-xl lg:text-3xl fw-600">Join as a Service Personnel</p>
+                  <p className="mt-3 lg:mt-6">
+                    ALLDRIVE SOS values quality and only partners with trusted
+                    service providers. To ensure customer safety and
+                    satisfaction, we require all service providers to have a
+                    registered business in good standing and comply with their
+                    state's insurance requirements.
                   </p>
                   <div className="my-8 lg:my-8 flex gap-x-4">
                     <div>
@@ -68,9 +108,11 @@ const CareersPage = () => {
                         Your Career Path
                       </p>
                       <p className="fs-400 mt-3">
-                        Our commitment to straightforward pricing ensures you
-                        only pay for the services you need, with clarity and
-                        honesty every step of the way.
+                        Ready to make a difference on the road while earning top
+                        dollar? Click on the button below to signup today and
+                        start making a difference on the road while earning on
+                        your terms. Join now, start accepting jobs, and begin
+                        your journey as a roadside hero with ALLDRIVE SOS.
                       </p>
                     </div>
                   </div>
