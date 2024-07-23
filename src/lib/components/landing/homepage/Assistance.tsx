@@ -22,12 +22,13 @@ const Assistance = () => {
                   Get Instant Assistance
                 </p>
                 <p className="mt-3 fs-400 fw-500">
-                Quick roadside rescue! Choose your issue, we&apos;re minutes away.
+                  Quick roadside rescue! Choose your issue, we&apos;re minutes
+                  away.
                 </p>
               </div>
               <Button
                 title={"View all"}
-                onClick={() => navigate('/request')}
+                onClick={() => navigate("/request")}
                 altClassName="btn-feel mt-5 lg:mt-0 fs-500 fw-500 bg-[#FEB470] text-black px-6 py-2"
               />
             </div>
@@ -35,8 +36,11 @@ const Assistance = () => {
               <div className="grid lg:grid-cols-4 md:grid-cols-2 gap-8">
                 {service &&
                   !!service.data.length &&
-                  service.data.slice(0,7).map((item: ServiceCatItem) => (
-                    <div onClick={() => navigate(`/request/${item.id}`)} className="new-shade text-center h-[250px] rounded-[13px] bg-white w-full place-center hover:scale-105 duration-100 cursor-pointer">
+                  service.data.slice(0, 7).map((item: ServiceCatItem) => (
+                    <div
+                      onClick={() => navigate(`/request/${item.id}`)}
+                      className="new-shade text-center h-[250px] rounded-[13px] bg-white w-full place-center hover:scale-105 duration-100 cursor-pointer"
+                    >
                       <div>
                         <img
                           src={item.icon}
@@ -47,12 +51,15 @@ const Assistance = () => {
                       </div>
                     </div>
                   ))}
-                <div onClick={() => navigate('/request')} className="bg-[#172748] relative new-shade p-6 h-[250px] rounded-[13px] w-full place-center hover:scale-105 duration-100 cursor-pointer">
+                <div
+                  onClick={() => navigate("/request")}
+                  className="bg-[#172748] relative new-shade p-6 h-[250px] rounded-[13px] w-full place-center hover:scale-105 duration-100 cursor-pointer"
+                >
                   <div className="text-white lg:text-xl mb-3">
-                    <p className="fw-600">Sign Up as Service Personnel</p>
+                    <p className="fw-600">Become a Service Provider</p>
                     <p className="mt-4 fs-400">
-                      Earn on AllDrive SOS by joining our team of experienced
-                      Service Personnels
+                      Join our nationwide network of service providers and start
+                      earning with ALLDRIVE SOS!
                     </p>
                   </div>
                   <FaArrowRightLong className="absolute top-[190px] right-10 cursor-pointer text-white text-xl" />
