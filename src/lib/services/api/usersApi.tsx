@@ -70,6 +70,12 @@ export const getMe = async (type: string) => {
     .then((response) => response.data);
 };
 
+export const deleteMe = async () => {
+  return axios
+    .delete(`${ENDPOINT.DELETE_MY_ACCOUNT}`)
+    .then((response) => response.data);
+};
+
 export const requestRefund = async (payload: {serviceRequestId: string}) => {
   return axios
     .post(`${ENDPOINT.USER_REQUEST_REFUND}`, payload)

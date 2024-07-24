@@ -101,6 +101,7 @@ export const DECLINE_STAFF_REQUEST = `/service-request/disapprove-withdrawal`
 
 // user endpoints
 export const GET_MY_ACCOUNT = `/user/me`
+export const DELETE_MY_ACCOUNT = `/user/delete`;
 export const GET_MY_SERVICES = '/service-request/user-fetch-details'
 export const SUBMIT_REVIEW = '/review/create-service-review'
 export const SUBMIT_QUERY = "/service-request/submit-query";

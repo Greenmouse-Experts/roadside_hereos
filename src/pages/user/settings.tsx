@@ -1,6 +1,7 @@
 import { useState } from "react";
 import MyProfileSettings from "../../lib/components/user/settings/MyProfile";
 import SecuritySetting from "../../lib/components/user/settings/Security";
+import DeleteProfile from "../../lib/components/user/settings/DeleteProfile";
 
 const UserSettings = () => {
   const [active, setActive] = useState(1);
@@ -44,7 +45,7 @@ const UserSettings = () => {
             <div className="lg:w-[83%]">
               {active === 1 && <MyProfileSettings />}
               {active === 2 && <SecuritySetting />}
-              {active === 3 && <></>}
+              {active === 3 && <DeleteProfile/>}
             </div>
           </div>
         </div>
