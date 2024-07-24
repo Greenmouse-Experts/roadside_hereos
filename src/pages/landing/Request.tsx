@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import useRequestStore from "../../lib/store/serviceStore";
 import { RiDeleteBin5Fill } from "react-icons/ri";
+import DownloadApp from "../../lib/components/landing/homepage/DownloadApp";
 
 const RequestPage = () => {
   const { id } = useParams();
@@ -76,6 +77,7 @@ const RequestPage = () => {
             </div>
           </div>
         </div>
+        <DownloadApp />
       </LandingLayout>
     </>
   );

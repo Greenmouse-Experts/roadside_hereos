@@ -2,6 +2,7 @@ import { BsClock } from "react-icons/bs";
 import LandingLayout from "../../lib/components/layout/landing";
 import { FaCheck, FaCircleCheck } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import DownloadApp from "../../lib/components/landing/homepage/DownloadApp";
 
 const CareersPage = () => {
   const data = [
@@ -91,7 +92,9 @@ const CareersPage = () => {
                   />
                 </div>
                 <div className="mt-5 lg:mt-0 lg:w-5/12">
-                  <p className="text-xl lg:text-3xl fw-600">Join as a Service Personnel</p>
+                  <p className="text-xl lg:text-3xl fw-600">
+                    Join as a Service Personnel
+                  </p>
                   <p className="mt-3 lg:mt-6">
                     ALLDRIVE SOS values quality and only partners with trusted
                     service providers. To ensure customer safety and
@@ -128,26 +131,7 @@ const CareersPage = () => {
               </div>
             </div>
           </div>
-          {/* <div className="section bg-[#EBEDEF]">
-            <div className="box">
-              <div className="text-center">
-                <p className="fw-600 text-3xl">Our Client and Partners</p>
-                <p className="w-6/12 mx-auto mt-4">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.Ut
-                  elit tellus, luctus nec ullamcorper mattis.
-                </p>
-              </div>
-              <div className="mt-12">
-                <div className="grid grid-cols-5 gap-x-24">
-                    <img src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1705333714/rsh/image_7_pzdd3k.png" alt="img" className="w-full" />
-                    <img src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1705333714/rsh/image_5_ysidiu.png" alt="img" className="w-full" />
-                    <img src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1705333714/rsh/image_7_pzdd3k.png" alt="img" className="w-full" />
-                    <img src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1705333714/rsh/image_5_ysidiu.png" alt="img" className="w-full" />
-                    <img src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1705333714/rsh/image_7_pzdd3k.png" alt="img" className="w-full" />
-                </div>
-              </div>
-            </div>
-          </div> */}
+          <DownloadApp />
         </div>
       </LandingLayout>
     </>

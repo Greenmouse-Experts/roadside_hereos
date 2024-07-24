@@ -5,6 +5,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getCategories } from "../../lib/services/api/serviceApi";
 import { ServiceCatItem } from "../../lib/types/service";
 import { FaArrowRightLong } from "react-icons/fa6";
+import DownloadApp from "../../lib/components/landing/homepage/DownloadApp";
 
 const ServicesPage = () => {
   const { data: service } = useQuery({
@@ -73,11 +74,7 @@ const ServicesPage = () => {
               </div>
             </div>
           </div>
-          {/* <div className="section">
-            <div className="box">
-              <div></div>
-            </div>
-          </div> */}
+          <DownloadApp />
         </div>
       </LandingLayout>
     </>

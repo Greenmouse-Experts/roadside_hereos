@@ -5,6 +5,7 @@ import { MdEmail } from "react-icons/md";
 import { GiRotaryPhone } from "react-icons/gi";
 import ContactForm from "../../lib/components/landing/contact/ContactForm";
 import MapComponent from "../../lib/components/landing/contact/Maps";
+import DownloadApp from "../../lib/components/landing/homepage/DownloadApp";
 
 const ContactUsPage = () => {
   return (
@@ -65,20 +66,26 @@ const ContactUsPage = () => {
           </div>
           <div className="section bg-[#EBEDEF]">
             <div className="box">
-                <div className="lg:flex lg:gap-16 flex-row-reverse">
-                    <div className="lg:w-6/12 bg-white p-6 rounded-[16px]">
-                        <ContactForm/>
-                    </div>
-                    <div className="lg:w-6/12 mt-12 lg:mt-0">
-                        <p className="text-xl lg:text-4xl fw-600">Reach Out to Us Directly</p>
-                        <p className="mt-2 lg:w-10/12">Fill in the form with the appropriate fields to send us a message directly and we will get back to immediately.</p>
-                        <div className="w-full h-[340px] mt-5">
-                        <MapComponent/>
-                        </div>
-                    </div>
+              <div className="lg:flex lg:gap-16 flex-row-reverse">
+                <div className="lg:w-6/12 bg-white p-6 rounded-[16px]">
+                  <ContactForm />
                 </div>
+                <div className="lg:w-6/12 mt-12 lg:mt-0">
+                  <p className="text-xl lg:text-4xl fw-600">
+                    Reach Out to Us Directly
+                  </p>
+                  <p className="mt-2 lg:w-10/12">
+                    Fill in the form with the appropriate fields to send us a
+                    message directly and we will get back to immediately.
+                  </p>
+                  <div className="w-full h-[340px] mt-5">
+                    <MapComponent />
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
+          <DownloadApp />
         </div>
       </LandingLayout>
     </>
