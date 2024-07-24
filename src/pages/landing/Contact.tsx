@@ -85,7 +85,9 @@ const ContactUsPage = () => {
               </div>
             </div>
           </div>
-          <DownloadApp />
+          <div className="pt-8 lg:pt-16">
+            <DownloadApp />
+          </div>
         </div>
       </LandingLayout>
     </>
