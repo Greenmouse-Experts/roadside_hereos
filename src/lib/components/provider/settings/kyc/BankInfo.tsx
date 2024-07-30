@@ -58,6 +58,7 @@ const BankInfo: FC<Props> = ({ prev }) => {
       account_type: data.account_type,
       routing_number: data.routing_num,
       insurance_doc: kyc?.insurance_doc,
+      business_phone: kyc.business_phone_number
     };
     saveKyc(payload);
     mutation.mutate(payload);
