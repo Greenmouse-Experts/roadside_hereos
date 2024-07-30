@@ -29,11 +29,12 @@ const ContactUsPage = () => {
           </div>
           <div className="section">
             <div className="box lg:pb-6">
-              <div className="grid lg:grid-cols-3 gap-24 lg:gap-6 lg:gap-24 pt-24">
+              <div className="grid lg:grid-cols-3 gap-24  lg:gap-24 pt-24">
                 <div className="relative text-center box-shade p-5 pt-12">
-                  <p className="fw-600">Office Location</p>
-                  <p className="mt-4 fs-500">
-                    No 1 Company Avenue, Address. Toronto, Canada.
+                  <p className="fw-600">Our Coverage</p>
+                  <p className="mt-4 fs-400">
+                    ALLDRIVE SOS offers nationwide roadside assistance,
+                    providing help in all 50 US states and territories.
                   </p>
                   <div className="absolute -top-12 left-0 w-full flex justify-center">
                     <div className="w-[76px] h-[76px] place-center bg-[#172748]">
@@ -43,8 +44,7 @@ const ContactUsPage = () => {
                 </div>
                 <div className="relative text-center box-shade p-5 pt-12">
                   <p className="fw-600">Email Address</p>
-                  <p className="mt-4 fs-500">alldrivesos@gmail.com</p>
-                  <p>info@alldrivesos.com</p>
+                  <p className="mt-4 fs-500">support@alldrivesos.com</p>
                   <div className="absolute -top-12 left-0 w-full flex justify-center">
                     <div className="w-[76px] h-[76px] place-center bg-[#172748]">
                       <MdEmail className="text-[#FEB470] text-4xl" />
@@ -53,8 +53,7 @@ const ContactUsPage = () => {
                 </div>
                 <div className="relative text-center box-shade p-5 pt-12">
                   <p className="fw-600">Hotlines</p>
-                  <p className="mt-4 fs-500">+1 (80) 123 456 7890</p>
-                  <p>+1 (80) 123 456 7890</p>
+                  <p className="mt-4 fs-500">+1 915 400 1465</p>
                   <div className="absolute -top-12 left-0 w-full flex justify-center">
                     <div className="w-[76px] h-[76px] place-center bg-[#172748]">
                       <GiRotaryPhone className="text-[#FEB470] text-4xl" />
@@ -78,7 +77,7 @@ const ContactUsPage = () => {
                     Fill in the form with the appropriate fields to send us a
                     message directly and we will get back to immediately.
                   </p>
-                  <div className="w-full h-[340px] mt-5">
+                  <div className="w-full h-[350px] mt-5 shadow-lg">
                     <MapComponent />
                   </div>
                 </div>

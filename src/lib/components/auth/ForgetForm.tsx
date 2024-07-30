@@ -55,7 +55,7 @@ const ForgetForm = () => {
                 label="Email"
                 labelClassName="text-[#000000B2] fw-500"
                 icon={<AiOutlineMail className="text-2xl mx-2 lg:mx-4" />}
-                placeholder="victorchigozie@gmail.com"
+                placeholder="name@domain.com"
                 error={errors.email?.message}
                 type={InputType.email}
                 {...field}

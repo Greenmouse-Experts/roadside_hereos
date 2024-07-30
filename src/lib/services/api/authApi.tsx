@@ -38,7 +38,7 @@ export const userLogin = async(payload:LoginTyping) => {
   return  axios.post(`${ENDPOINT.USER_LOGIN}`, payload).then((response) => response.data)
 } 
 
-export const adminUpdateAvatar = async(payload:FormData) => {
+export const adminUpdateAvatar = async(payload:any) => {
     return  axios.patch(`${ENDPOINT.UPDATE_ACCOUNT}`, payload).then((response) => response.data)
  } 
 

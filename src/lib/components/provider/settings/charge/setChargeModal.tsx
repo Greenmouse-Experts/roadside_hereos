@@ -28,7 +28,8 @@ const SetChargeModal: FC<Props> = ({ close }) => {
     mutationKey: ["admin-add-rates"],
   });
   const onSubmit = (data: any) => {
-    if (data?.serviceCharge > 100) {
+    const charge = data?.serviceCharge
+    if (charge > 100) {
       toast.info("Invalid Percentage");
       return;
     }
@@ -39,7 +40,7 @@ const SetChargeModal: FC<Props> = ({ close }) => {
         toast.success(data.message);
         saveUser({
             ...user,
-            charge: data?.user?.serviceCharge
+            charge: charge
         })
         close();
       },

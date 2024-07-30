@@ -1,4 +1,4 @@
-import React, { useState, useCallback, FC } from "react";
+import React, { useState, useCallback, FC, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { AiFillPicture } from "react-icons/ai";
 
@@ -16,7 +16,11 @@ const ImageInput: FC<Props> = ({
   prevValue,
   disabled,
 }) => {
+ 
   const [preview, setPreview] = useState<any>(prevValue);
+  useEffect(() => {
+    setPreview(prevValue)
+  },[prevValue])
   //   handle drag and drop
   const onDrop = useCallback((acceptedFiles: Array<File>) => {
     setImage(acceptedFiles);

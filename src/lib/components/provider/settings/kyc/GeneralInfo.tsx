@@ -14,6 +14,8 @@ import { FaCircleInfo } from "react-icons/fa6";
 import dayjs from "dayjs";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { GOOGLE_API_KEY } from "../../../../services/constant";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 import {
   getCityFromGoogle,
   getPostalCodeFromGoogle,
@@ -42,6 +44,8 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
       types: ["address"],
     },
     onPlaceSelected: (place) => {
+      console.log(place);
+
       setValue("address", place.formatted_address || "");
       setValue(
         "business_state",
@@ -79,8 +83,6 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
             ? kyc.business_nature
             : prevKyc.business_nature || "",
           business_email: prevKyc.business_email || user?.email || "",
-          business_phone_number:
-            prevKyc.business_phone_number || user?.phone || "",
           business_desc: kyc?.business_desc
             ? kyc.business_desc
             : prevKyc?.business_desc || "",
@@ -93,6 +95,9 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
           business_state: kyc?.business_state
             ? kyc?.business_state
             : prevKyc?.business_state || "",
+          business_phone_number: kyc?.business_phone_number
+            ? kyc?.business_phone_number
+            : prevKyc?.business_phone_number || "",
         });
       }, 500);
     }
@@ -102,6 +107,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
     control,
     handleSubmit,
     setValue,
+    watch,
     reset,
     formState: { errors, isValid },
   } = useForm({
@@ -261,25 +267,23 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
                     </p>
                   )}
                 </div>
-                <Controller
-                  name="date"
-                  control={control}
-                  rules={{
-                    required: {
-                      value: true,
-                      message: "Please enter a value",
-                    },
-                  }}
-                  disabled={disabledField}
-                  render={({ field }) => (
-                    <input
-                      type="month"
-                      min="2000-03"
-                      className="border border-gray-400 rounded-[4px] py-2 px-3 mt-[2px] w-full"
-                      {...field}
-                    />
-                  )}
-                />
+                <div className="mt-1 bg-white rounded-lg border border-gray-400">
+                  <DatePicker
+                    selected={
+                      watch("date")
+                        ? dayjs(watch("date")).toDate()
+                        : new Date(2010, 0)
+                    }
+                    startDate={new Date(2010, 0)}
+                    onChange={(date) =>
+                      setValue("date", dayjs(date).format("YYYY-MM") || "")
+                    }
+                    showIcon
+                    maxDate={new Date()}
+                    dateFormat={"dd - MM - yyyy"}
+                    className="block !w-full"
+                  />
+                </div>
               </div>
             </div>
             <Controller
@@ -303,29 +307,54 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
                 />
               )}
             />
-            <Controller
-              name="address"
-              control={control}
-              rules={{
-                required: {
-                  value: true,
-                  message: "Please enter category address",
-                },
-              }}
-              disabled={disabledField}
-              render={({ field }) => (
-                <div className="w-full">
-                  <p className="text-[#000000B2] fw-500">Operational Address</p>
-                  <input
-                    type="text"
+            <div className="grid lg:grid-cols-2 gap-4">
+              <Controller
+                name="address"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Please enter category address",
+                  },
+                }}
+                disabled={disabledField}
+                render={({ field }) => (
+                  <div className="w-full mt-[6px]">
+                    <p className="text-[#000000B2] fw-500">
+                      Operational Address
+                    </p>
+                    <input
+                      type="text"
+                      {...field}
+                      ref={ref as any}
+                      className="w-full bg-white outline-none p-2 lg:p-[10px] mt-[5px] rounded-lg border border-gray-400 placeholder:text-black"
+                      placeholder="Enter city or region"
+                    />
+                  </div>
+                )}
+              />
+              <Controller
+                name="business_postal_code"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Please enter a value",
+                  },
+                }}
+                disabled={disabledField}
+                render={({ field }) => (
+                  <TextInput
+                    label="Postal Code"
+                    labelClassName="text-[#000000B2] fw-500"
+                    error={errors.business_postal_code?.message}
+                    type={InputType.text}
                     {...field}
-                    ref={ref as any}
-                    className="w-full bg-white outline-none p-2 lg:p-3 mt-2 rounded-lg border border-gray-400 placeholder:text-black"
-                    placeholder="Enter city or region"
+                    ref={null}
                   />
-                </div>
-              )}
-            />
+                )}
+              />
+            </div>
             <div className="grid lg:grid-cols-2 gap-x-4 gap-y-3">
               <div>
                 <label className="block mt-3 text-[#000000B2] fw-500">

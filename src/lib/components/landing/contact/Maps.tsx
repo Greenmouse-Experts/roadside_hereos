@@ -1,13 +1,12 @@
 import GoogleMapReact from 'google-map-react';
-
-// const AnyReactComponent = ({ text }) => <div>{text}</div>;
+import { GOOGLE_API_KEY } from '../../../services/constant';
 
 const MapComponent = () => {
 
     const defaultProps = {
         center: {
-          lat: 6.3350,
-          lng: 5.6037
+          lat: 43.6532,
+          lng: -79.3832
         },
         zoom: 14
       };
@@ -16,14 +15,10 @@ const MapComponent = () => {
     <>
         <div style={{ height: '100%', width: '100%' }}>
       <GoogleMapReact
-        bootstrapURLKeys={{ key: "AIzaSyAObMzoszg93PuKpMW5JpUjbN4H9JC0isY"}}
+        bootstrapURLKeys={{ key: GOOGLE_API_KEY}}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >
-        {/* <AnyReactComponent
-          lat={6.458985}
-          lng={3.601521}
-        /> */}
       </GoogleMapReact>
     </div>
     </>

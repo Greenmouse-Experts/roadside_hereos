@@ -9,20 +9,36 @@ import { useMutation } from "@tanstack/react-query";
 import { adminUpdateAvatar } from "../../../services/api/authApi";
 import useDialog from "../../../hooks/useDialog";
 import SetChargeModal from "./charge/setChargeModal";
+import { uploadFile } from "../../../services/api/routineApi";
 
 const MyProfileSettings = () => {
-  const {user, saveUser} = useAuth();
+  const { user, saveUser } = useAuth();
   const [isBusy, setIsBusy] = useState(false);
-  const {Dialog, setShowModal} = useDialog()
+  const [profilePic, setProfilePic] = useState("");
+  const { Dialog, setShowModal } = useDialog();
+  const upload = useMutation({
+    mutationFn: uploadFile,
+    onSuccess: (data) => {
+      setProfilePic(data[0]);
+      const payload = {
+        photo: data[0],
+      };
+      mutation.mutate(payload);
+    },
+    onError: () => {
+      toast.error("Something went wrong");
+      setIsBusy(false);
+    },
+  });
   const mutation = useMutation({
     mutationFn: adminUpdateAvatar,
     onSuccess: (data) => {
       const payload = {
         ...user,
-        image: data.user.photo
+        image: profilePic,
       };
-      toast.success(data.message)
-      saveUser(payload)
+      toast.success(data.message);
+      saveUser(payload);
       setIsBusy(false);
     },
     onError: () => {
@@ -33,12 +49,12 @@ const MyProfileSettings = () => {
   const handleChangePicture = async (
     e: React.ChangeEvent<HTMLInputElement | null>
   ) => {
-    setIsBusy(true)
+    setIsBusy(true);
     if (!e.target.files) return;
     const files = e.target.files[0];
     const fd = new FormData();
-    fd.append("photo", files);
-    mutation.mutate(fd)
+    fd.append("image", files);
+    upload.mutate(fd);
   };
   return (
     <>
@@ -47,7 +63,12 @@ const MyProfileSettings = () => {
         <div className="mt-4 border-2 border-[#808080] px-8 py-4 lg:py-6 flex justify-between rounded-[15px]">
           <div className="flex items-center">
             <div className="flex">
-              <ProfileAvatar size={102} url={user.image} name={user.name} font={28}/>
+              <ProfileAvatar
+                size={102}
+                url={user.image}
+                name={user.name}
+                font={28}
+              />
               <div className="relative overflow-hidden bg-gray-600 h-9 w-9 flex items-center justify-center circle top-[73px] -left-7 ">
                 {!isBusy && <FaCamera className="text-lg text-white mb-1" />}
                 <input
@@ -61,19 +82,26 @@ const MyProfileSettings = () => {
               </div>
             </div>
             <div>
-              <p className="fw-500">{`${user.name}`}</p>
-              <p className="text-gray-500">{user.account}</p>
+              <p className="fw-600 lg:text-lg">{`${user.name}`}</p>
+              <p className="text-gray-500 fw-500">
+                {user.account === "professional" ? "Company" : user.account}
+              </p>
             </div>
           </div>
         </div>
         <div className="mt-4 border-2 border-[#808080] px-8 py-4 lg:py-6 flex justify-between rounded-[15px]">
           <div className="">
             <div className="flex gap-x-3 items-center">
-            <p className="text-[#808080]">Service Charge (%)</p>
-            <BiEdit className="cursor-pointer" onClick={() => setShowModal(true)}/>
+              <p className="text-[#808080]">Service Charge (%)</p>
+              <BiEdit
+                className="cursor-pointer"
+                onClick={() => setShowModal(true)}
+              />
             </div>
             <div className="mt-1 pl-2">
-              <p className="fw-500">{user.charge? `${user.charge} %` : '0 %'}</p>
+              <p className="fw-500">
+                {user.charge ? `${user.charge} %` : "0 %"}
+              </p>
             </div>
           </div>
         </div>
@@ -82,7 +110,7 @@ const MyProfileSettings = () => {
             <p className="fw-500 ">Company Information</p>
             <button
               className="font-light flex gap-x-1 items-center px-3 py-1 text-gray-400 border border-gray-400 rounded-[15px]"
-              onClick={() => toast.info('Cannot edit comapny information')}
+              onClick={() => toast.info("Cannot edit comapny information")}
             >
               Edit <BiEditAlt />
             </button>
@@ -93,11 +121,11 @@ const MyProfileSettings = () => {
               <p className="mt-3 fw-500">{user.name}</p>
             </div>
             <div>
-            <p className="text-[#808080]">Email Address</p>
+              <p className="text-[#808080]">Email Address</p>
               <p className="mt-3 fw-500">{user.email}</p>
             </div>
             <div>
-            <p className="text-[#808080]">Phone</p>
+              <p className="text-[#808080]">Phone</p>
               <p className="mt-3 fw-500">{user.phone}</p>
             </div>
             <div>
@@ -108,7 +136,7 @@ const MyProfileSettings = () => {
         </div>
       </div>
       <Dialog title="Update Service Charge" size="md">
-        <SetChargeModal close={() => setShowModal(false)}/>
+        <SetChargeModal close={() => setShowModal(false)} />
       </Dialog>
     </>
   );

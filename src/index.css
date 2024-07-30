@@ -183,6 +183,15 @@ input[type="checkbox"]:checked {
 .input-gray input{
   background: #F3F3F3;
 }
+.react-datepicker-wrapper{
+  width: 100%;
+  padding: 4px;
+  outline: none;
+  border: none;
+}
+.react-datepicker__view-calendar-icon input{
+  margin-left: 10px;
+}
 
 @layer components {
   /* container settings */

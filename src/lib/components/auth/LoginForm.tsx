@@ -46,7 +46,6 @@ const LoginForm = () => {
       };
       saveUser(payload);
       localStorage.setItem("rhs_token", data.token);
-      toast.success("Login Success");
       if (data.user.userType === "private_client") {
         saveUser({
           token: data.token,
@@ -61,8 +60,10 @@ const LoginForm = () => {
           )}`,
         });
         navigate("/user");
+        toast.success("Login Success");
       } else if (data?.user?.userType === "professional") {
         navigate("/provider");
+        toast.success("Login Success");
       } else {
         toast.info("User not available on web platform");
       }
@@ -101,7 +102,7 @@ const LoginForm = () => {
                   label="Email"
                   labelClassName="text-[#000000B2] fw-500"
                   icon={<AiOutlineMail className="text-2xl mx-2 lg:mx-4" />}
-                  placeholder="victorchigozie@gmail.com"
+                  placeholder="name@domain.com"
                   error={errors.email?.message}
                   type={InputType.email}
                   {...field}
