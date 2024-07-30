@@ -24,7 +24,7 @@ const ProviderDetails = () => {
       content: <CompanyProviders id={`${id}`} />,
     },
     {
-      title: <p>Company Kyc</p>,
+      title: <p>Company KYC</p>,
       content: (
         <ViewKyc id={`${id}`} kyc={data?.data?.verified} refetch={refetch} />
       ),
