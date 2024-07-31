@@ -104,9 +104,9 @@ const Stranded = () => {
           <div className="lg:flex items-center mt-8 lg:mt-16">
             <div className="lg:w-6/12">
               <img
-                src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1721661058/rsh/Rectangle_27_2_bthmla.png"
+                src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1722434847/rsh/Gemini_Generated_Image_kana84kana84kana_rpcmr8.jpg"
                 alt="stranded-img"
-                className="lg:w-10/12"
+                className="lg:w-10/12 rounded-2xl"
               />
             </div>
             <div className="lg:w-6/12 mt-8 lg:mt-0">

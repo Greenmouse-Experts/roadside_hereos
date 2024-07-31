@@ -83,12 +83,12 @@ const CareersPage = () => {
                   ))}
                 </div>
               </div>
-              <div className="mt-6 lg:flex items-center lg:mt-16">
+              <div className="mt-6 lg:flex gap-8 items-center lg:mt-16">
                 <div className="lg:w-5/12">
                   <img
-                    src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1705332400/rsh/Group_48097335_1_hg4gsv.png"
+                    src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1722434847/rsh/Gemini_Generated_Image_a5w19ea5w19ea5w1_pu9ydi.jpg"
                     alt="image"
-                    className="w-full lg:w-10/12"
+                    className="w-full max-h-[470px] object-cover rounded-2xl"
                   />
                 </div>
                 <div className="mt-5 lg:mt-0 lg:w-5/12">
