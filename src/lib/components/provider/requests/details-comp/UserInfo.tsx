@@ -26,6 +26,7 @@ const UserInfo: FC<Props> = ({ data }) => {
     vehicleMake,
     vehicleYear,
     quote,
+    customer,
   } = data;
 
   return (
@@ -44,14 +45,14 @@ const UserInfo: FC<Props> = ({ data }) => {
             <div className="flex items-center gap-x-2">
               <div>
                 <ProfileAvatar
-                  name={`${fname} ${lname}`}
+                  name={`${customer.fname} ${customer.lname}`}
                   url={""}
                   size={80}
                   font={20}
                 />
               </div>
               <div>
-                <p className="fw-600 lg:text-lg">{`${fname} ${lname}`}</p>
+                <p className="fw-600 lg:text-lg">{`${customer.fname} ${customer.lname}`}</p>
                 <p className="fw-500 opacity-80">Customer</p>
               </div>
             </div>

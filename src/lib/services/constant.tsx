@@ -115,3 +115,9 @@ export const USER_REQUEST_REFUND = `/services-quote/request-refund`
 
 // payments
 export const ADMIN_GET_PAYMENTS = `/service-request/fetch-payments`
+
+// routine 
+export const SUBSCRIBE_NEWSLETTER = `/newsletter/subscribe`
+export const CONTACT_US = `/user/contact-admin`
+export const PROVIDER_STATS = `/user/fetch-provider-stats`
+export const ADMIN_STATS = `/user/fetch-stats`

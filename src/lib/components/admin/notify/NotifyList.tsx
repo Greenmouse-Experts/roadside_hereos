@@ -22,9 +22,9 @@ interface Props {
   data: NotifyItem[];
   isLoading: boolean;
   isError: boolean;
-  refetch: () => void
+  refetch: () => void;
 }
-const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
+const NotifyList: FC<Props> = ({ status, data, isLoading, refetch }) => {
   const [notify, setNotify] = useState<NotifyItem[]>([]);
   useEffect(() => {
     if (status === "unread") {
@@ -35,33 +35,38 @@ const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
 
   const markRead = useMutation({
     mutationFn: markAsRead,
-    mutationKey: ['markRead']
-  })
-    const MarkNotify = async(item:string) => {
-      markRead.mutateAsync(item, {
-        onSuccess: (data) => {
-          toast.success(data.message)
-        },
-        onError: () => {
-          toast.error('Something went wrong')
-        }
-      })
-    }
+    mutationKey: ["markRead"],
+  });
+  const MarkNotify = async (item: string) => {
+    markRead.mutateAsync(item, {
+      onSuccess: (data) => {
+        toast.success(data.message);
+        refetch()
+      },
+      onError: () => {
+        toast.error("Something went wrong");
+      },
+    });
+  };
   return (
     <>
       <div>
         {isLoading && (
           <div className="py-12 flex justify-center items-center text-black">
             <div>
-              <div className="flex place-center"><CurveLoader/></div>
-              <p className="text-center mt-5 fw-500">Fetching Notifications...</p>
+              <div className="flex place-center">
+                <CurveLoader />
+              </div>
+              <p className="text-center mt-5 fw-500">
+                Fetching Notifications...
+              </p>
             </div>
           </div>
         )}
         <div className="grid gap-4">
           {notify &&
             !!notify.length &&
-            notify.slice(0,20).map((item, i: number) => (
+            notify.slice(0, 20).map((item, i: number) => (
               <div
                 key={i}
                 className={`bg-primary p-3 rounded-[15px] text-white flex items-center justify-between hover:scale-105 duration-100 ${
@@ -69,12 +74,19 @@ const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
                 }`}
               >
                 <div className="flex items-center gap-x-2">
-                  {
-                    item.message.includes('signed')? 
-                    <img src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1705678152/rsh/gnup_eusaot.jpg" alt="alt" className="w-12 h-12 circle"/>
-                    :
-                    <img src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1705678152/rsh/gnup_eusaot.jpg" alt="alt" className="w-12 h-12 circle"/>
-                  }
+                  {item.message.includes("signed") ? (
+                    <img
+                      src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1705678152/rsh/gnup_eusaot.jpg"
+                      alt="alt"
+                      className="w-12 h-12 circle"
+                    />
+                  ) : (
+                    <img
+                      src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1705678152/rsh/gnup_eusaot.jpg"
+                      alt="alt"
+                      className="w-12 h-12 circle"
+                    />
+                  )}
                   <div>
                     <p className="">{item.message}</p>
                     <p className="text-[14px] text-[#808080]">
@@ -90,7 +102,10 @@ const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
                       </Button>
                     </MenuHandler>
                     <MenuList className="bg-[#0D0D0D]">
-                      <MenuItem className="my-1 fw-500 text-white bg-primary pt-1" onClick={() => MarkNotify(item.id)}>
+                      <MenuItem
+                        className="my-1 fw-500 text-white bg-primary pt-1"
+                        onClick={() => MarkNotify(item.id)}
+                      >
                         Mark as read
                       </MenuItem>
                     </MenuList>

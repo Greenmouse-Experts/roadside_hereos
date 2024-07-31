@@ -178,4 +178,5 @@ export interface ServiceRequestItem2 {
   zipcode: string;
   quote: number;
   queryNote: string;
+  customer: UserItemType
 }

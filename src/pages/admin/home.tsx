@@ -3,29 +3,36 @@ import { BsBarChartLine } from "react-icons/bs";
 import { formatNumber } from "../../lib/utils";
 import RecentRequests from "../../lib/components/admin/home/RecentRequests";
 import ActivityChart from "../../lib/components/admin/home/ActivityChart";
+import { useQuery } from "@tanstack/react-query";
+import { getAdminStat } from "../../lib/services/api/adminApi";
+import Alerts from "../../lib/components/provider/home/Alerts";
 // import ColumnChart from "../../lib/components/admin/home/ActivityChart";
 
 const AdminDashboardHome = () => {
+  const { data: stat } = useQuery({
+    queryKey: ["get-adminr-stat"],
+    queryFn: getAdminStat,
+  });
   const serviceData = [
     {
-      name: "Services Delivered",
+      name: "Services Rendered",
       rate: "+15%",
-      value: "53557",
+      value: stat?.data?.totalRendered || "0",
     },
     {
       name: "Total Services",
       rate: "+115%",
-      value: "81498",
+      value: stat?.data?.totalServices || "0",
     },
     {
       name: "Total Users",
       rate: "+55%",
-      value: "35413",
+      value: stat?.data?.totalUsers || "0",
     },
     {
       name: "Total Providers",
       rate: "+55%",
-      value: "35513",
+      value: stat?.data?.totalProviders || "0",
     },
   ];
   return (
@@ -34,8 +41,8 @@ const AdminDashboardHome = () => {
         <div className="lg:w-[70%]">
           <div className="rounded-xl bg-review text-white p-5">
             <p>Total services amount</p>
-            <p className="text-4xl fw-700 my-3">$7,456,097.00</p>
-            <p>45 services providers has rendered 234 services</p>
+            <p className="text-4xl fw-700 my-3">{stat?.data?.serviceAmount || "$0"}</p>
+            <p>{stat?.data?.totalProviders || 0} services providers has rendered {stat?.data?.totalRendered || 0 } services</p>
           </div>
           <div>
             <div className="grid lg:grid-cols-2 gap-y-3 gap-x-4 mt-5 lg:mt-7">
@@ -58,9 +65,9 @@ const AdminDashboardHome = () => {
                       </p>
                       <div className="relative">
                         <BsBarChartLine className="text-[#0DA54E] absolute right-1" />
-                        <p className="fs-300 text-[#0DA54E] fw-600 mt-4">
+                        {/* <p className="fs-300 text-[#0DA54E] fw-600 mt-4">
                           {item.rate}
-                        </p>
+                        </p> */}
                       </div>
                     </div>
                   </div>
@@ -68,11 +75,11 @@ const AdminDashboardHome = () => {
             </div>
           </div>
           <div className="mt-6">
-            <ActivityChart/>
+            <Alerts data={stat?.data?.alerts || []}/>
           </div>
         </div>
         <div className="lg:w-[30%] mt-6 lg:mt-0">
-            <RecentRequests/>
+            <RecentRequests request={stat?.data?.pendingRequests || []}/>
         </div>
       </div>
     </>

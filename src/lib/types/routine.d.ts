@@ -77,3 +77,12 @@ export interface NotifyItem {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface ContactUsInput {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  message: string;
+  platform: string;
+}

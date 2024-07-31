@@ -1,6 +1,9 @@
 import { SiFacebook, SiLinkedin, SiTwitter } from "react-icons/si";
 import { BiLogoInstagramAlt } from "react-icons/bi";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { toast } from "react-toastify";
+import { subscribeNews } from "../../../../services/api/routineApi";
 
 export const socials = [
   {
@@ -27,6 +30,28 @@ export const socials = [
 
 const Footer = () => {
   const date = new Date();
+  const [email, setEmail] = useState("");
+  const validateEmail = (email: string): boolean => {
+    const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailPattern.test(email);
+  };
+  const handleSubmit = async () => {
+    if (validateEmail(email)) {
+      const payload = {
+        email: email,
+      };
+      await subscribeNews(payload)
+        .then((res) => {
+          toast.success(res.message);
+          setEmail("");
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message);
+        });
+    } else {
+      toast.error("Invalid Email");
+    }
+  };
   return (
     <div className="bg-[#172748] ">
       <div className="box text-white">
@@ -110,10 +135,15 @@ const Footer = () => {
               <input
                 type="text"
                 name="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Your email"
-                className="rounded-l-[10px] pl-2 border-none outline-none w-full"
+                className="rounded-l-[10px] text-black fs-500 pl-2 border-none outline-none w-full"
               />
-              <button className="p-3 rounded-[10px] bg-[#FEB470] text-black fw-500">
+              <button
+                onClick={handleSubmit}
+                className="p-3 rounded-[10px] bg-[#FEB470] text-black fw-500"
+              >
                 Join
               </button>
             </div>

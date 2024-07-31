@@ -6,20 +6,28 @@ import { getMe } from "../../lib/services/api/usersApi";
 import { useEffect, useState } from "react";
 import useDialog from "../../lib/hooks/useDialog";
 import WithdrawModal from "../../lib/components/provider/home/WithdrawModal";
+import { useQuery } from "@tanstack/react-query";
+import { getProviderStat } from "../../lib/services/api/companyApi";
+import { GrUserWorker } from "react-icons/gr";
+import { BsTools } from "react-icons/bs";
+import { SiCashapp } from "react-icons/si";
 
 const ProviderHomePage = () => {
   const { user } = useAuth();
-  const [userData, setUserData] = useState<any>()
+  const [userData, setUserData] = useState<any>();
+  const { data: stat } = useQuery({
+    queryKey: ["get-provider-stat"],
+    queryFn: getProviderStat,
+  });
   useEffect(() => {
     const handleFetch = async () => {
-      await getMe('professional')
-      .then((res) => {
-        setUserData(res.user)
-      })
-    }
-    handleFetch()
-  },[])
-  const {Dialog, setShowModal} = useDialog()
+      await getMe("professional").then((res) => {
+        setUserData(res.user);
+      });
+    };
+    handleFetch();
+  }, []);
+  const { Dialog, setShowModal } = useDialog();
   return (
     <>
       <div>
@@ -28,12 +36,15 @@ const ProviderHomePage = () => {
             <div className="mb-2">
               <p>Pending Balance</p>
               <p className="fw-600 text-xl mt-1">
-              {formatAsNgnMoney(userData?.pendingBal) || '$0'}.00
-            </p>
+                {formatAsNgnMoney(userData?.pendingBal) || "$0"}.00
+              </p>
             </div>
             <div className="flex items-center justify-between">
               <p className="fw-500">Current Balance</p>
-              <div className="flex gap-x-1 items-center cursor-pointer" onClick={() => setShowModal(true)}>
+              <div
+                className="flex gap-x-1 items-center cursor-pointer"
+                onClick={() => setShowModal(true)}
+              >
                 <BiMoneyWithdraw />
                 <p className="fs-500 fw-600">Withdraw</p>
               </div>
@@ -49,8 +60,10 @@ const ProviderHomePage = () => {
               </p>
               <p className="lg:w-8/12 mt-3 text-gray-400 fw-500 fs-400 ">
                 Your company have rendered a total of{" "}
-                <span className="fw-500">0</span> services to ALLDRIVE SOS users
-                this month.
+                <span className="fw-500">
+                  {stat?.data?.totalCompletedServiceForOneMonth || 0}
+                </span>{" "}
+                services to ALLDRIVE SOS users this month.
               </p>
               <p className="lg:w-8/12 text-gray-400 fw-500 fs-400 ">
                 We appreciate your contribution.
@@ -60,53 +73,46 @@ const ProviderHomePage = () => {
         </div>
         <div className="grid lg:grid-cols-3 gap-y-6 gap-x-6 dash-shade p-5 py-8 rounded-lg">
           <div className="flex items-center gap-x-3 border-r border-[#00000059]">
-            <img
-              src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1686663402/pikaboo/Group_46754_rum9nv.png"
-              alt="fleet"
-              width={80}
-              height={80}
-              className="circle w-[56px]"
-            />
+            <div className="circle h-[56px] w-[56px] bg-review text-white place-center">
+              <SiCashapp className="text-2xl" />
+            </div>
             <div>
-              <p className="fs-700 fw-600">{formatAsNgnMoney(3400)}</p>
-              <p className="fs-400 fw-500 text-primary">Total Amount Made</p>
+              <p className="fs-700 fw-600">{stat?.data?.totalAmount || "$0"}</p>
+              <p className="fs-500 fw-500 text-primary">Total Amount Made</p>
             </div>
           </div>
           <div className="flex items-center gap-x-3 border-r border-[#00000059]">
-            <img
-              src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1686663402/pikaboo/Group_46755_way6dw.png"
-              alt="fleet"
-              width={80}
-              height={80}
-              className="circle w-[56px]"
-            />
+            <div className="circle h-[56px] w-[56px] bg-review text-white place-center">
+              <BsTools className="text-2xl" />
+            </div>
             <div>
-              <p className="text-lg fw-600">56</p>
-              <p className="fs-400 fw-500 text-primary">Total Services</p>
+              <p className="text-lg fw-600">
+                {stat?.data?.totalServices || "0"}
+              </p>
+              <p className="fs-500 fw-500 text-primary">Total Services</p>
             </div>
           </div>
           <div className="flex items-center gap-x-3 border-r border-[#00000059] lg:border-none">
-            <img
-              src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1686663402/pikaboo/Group_46758_pfi4y0.png"
-              alt="fleet"
-              width={80}
-              height={80}
-              className="circle w-[56px]"
-            />
+            <div className="circle h-[56px] w-[56px] bg-review text-white place-center">
+              <GrUserWorker className="text-2xl" />
+            </div>
             <div>
-              <p className="text-lg fw-600">10</p>
-              <p className="fs-400 fw-500 text-primary">Service Staff</p>
+              <p className="text-lg fw-600">{stat?.data?.totalDrivers || 0}</p>
+              <p className="fs-500 fw-500 text-primary">Service Staff</p>
             </div>
           </div>
         </div>
         <div>
           <div>
-            <Alerts />
+            <Alerts data={stat?.data?.alerts || []} />
           </div>
         </div>
       </div>
       <Dialog title="Request Withdrawal" size="lg">
-        <WithdrawModal close={() => setShowModal(false)} avail_bal={userData?.walletBal}/>
+        <WithdrawModal
+          close={() => setShowModal(false)}
+          avail_bal={userData?.walletBal}
+        />
       </Dialog>
     </>
   );

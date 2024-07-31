@@ -50,6 +50,12 @@ export const getDrivers = async () => {
   return axios.get(`${ENDPOINT.GET_DRIVERS}`).then((response) => response.data);
 };
 
+export const getProviderStat = async () => {
+  return axios
+    .get(`${ENDPOINT.PROVIDER_STATS}`)
+    .then((response) => response.data);
+};
+
 export const getDriversDetail = async (payload: string) => {
   return axios
     .get(`${ENDPOINT.GET_DRIVER_DETAILS}/${payload}`)

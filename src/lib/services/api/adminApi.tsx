@@ -43,6 +43,10 @@ export const adminGetRates = async () => {
     .then((response) => response.data);
 };
 
+export const getAdminStat = async () => {
+  return axios.get(`${ENDPOINT.ADMIN_STATS}`).then((response) => response.data);
+};
+
 export const adminGetPayoutCap = async () => {
   return axios
     .get(`${ENDPOINT.ADMIN_GET_PAYOUT_CAP}`)
@@ -97,9 +101,7 @@ export const adminIniatePayout = async (id: string) => {
 
 export const getAdminTransactions = async (params: any) => {
   return axios
-    .get(
-      `${ENDPOINT.FETCH_PAYOUT_TRANSACTIONS}?page=${params.page}`
-    )
+    .get(`${ENDPOINT.FETCH_PAYOUT_TRANSACTIONS}?page=${params.page}`)
     .then((response) => response.data);
 };
 
@@ -115,7 +117,10 @@ export const approveRefund = async (id: string) => {
     .then((response) => response.data);
 };
 
-export const disapproveRefund = async (id: string, payload: {reason: string}) => {
+export const disapproveRefund = async (
+  id: string,
+  payload: { reason: string }
+) => {
   return axios
     .post(`${ENDPOINT.DISAPPROVE_REFUND}/${id}`, payload)
     .then((response) => response.data);
