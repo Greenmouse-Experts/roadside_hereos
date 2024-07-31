@@ -13,12 +13,8 @@ import { markAsRead } from "../../../services/api/notifyApi";
 import { useMutation } from "@tanstack/react-query";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import EmptyState from "../../ui/EmptyState";
-// import { toast } from "react-toastify";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime"
-// dayjs time format
-// const dayjs = require("dayjs");
-// const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
 
 interface Props {
@@ -28,7 +24,7 @@ interface Props {
   isError: boolean;
   refetch: () => void;
 }
-const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
+const NotifyList: FC<Props> = ({ status, data, isLoading, refetch }) => {
   const [notify, setNotify] = useState<NotifyItem[]>([]);
   useEffect(() => {
     if (status === "unread") {
@@ -45,6 +41,7 @@ const NotifyList: FC<Props> = ({ status, data, isLoading }) => {
     markRead.mutateAsync(item, {
       onSuccess: (data) => {
         toast.success(data.message);
+        refetch()
       },
       onError: () => {
         toast.error("Something went wrong");

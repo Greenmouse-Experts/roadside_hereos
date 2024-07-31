@@ -2,7 +2,6 @@ import { BiFilter } from "react-icons/bi";
 import { BsBarChartLine } from "react-icons/bs";
 import { formatNumber } from "../../lib/utils";
 import RecentRequests from "../../lib/components/admin/home/RecentRequests";
-import ActivityChart from "../../lib/components/admin/home/ActivityChart";
 import { useQuery } from "@tanstack/react-query";
 import { getAdminStat } from "../../lib/services/api/adminApi";
 import Alerts from "../../lib/components/provider/home/Alerts";
