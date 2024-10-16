@@ -53,8 +53,11 @@ const AddCategory = () => {
             name: datas.name,
             icon: data[0],
             slug: datas.pricing,
-            questionNote: data.questionNote
-          }
+            minimumQuote: datas.pricing,
+            questionNote: datas?.questionNote,
+          };
+          console.log(payload);
+          
           addCat.mutate(payload)
         },
         onError: (error) => {

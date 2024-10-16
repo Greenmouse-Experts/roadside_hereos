@@ -59,7 +59,8 @@ const EditCategory: FC<Props> = ({ close, item, refetch }) => {
             icon: data[0],
             slug: datas.pricing,
             id: item?.id,
-            questionNote: datas.questionNote
+            minimumQuote: datas.pricing,
+            questionNote: datas.questionNote,
           };
           addCat.mutate(payload);
         },
