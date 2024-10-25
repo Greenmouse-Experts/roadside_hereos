@@ -58,7 +58,7 @@ const ServicesPage = () => {
                         </div>
                       ))}
                   <div
-                    onClick={() => navigate("/request")}
+                    onClick={() => navigate("/career")}
                     className="bg-[#172748] relative new-shade p-6 h-[250px] rounded-[13px] w-full place-center hover:scale-105 duration-100 cursor-pointer"
                   >
                     <div className="text-white lg:text-xl mb-3">

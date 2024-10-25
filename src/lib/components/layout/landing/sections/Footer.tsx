@@ -118,7 +118,7 @@ const Footer = () => {
             <p className="fw-600 mb-4 mt-10 lg:mt-0">Support</p>
             <ul className="grid gap-6 fs-500">
               <li>
-                <Link to={"/contact"}>Help</Link>
+                <Link to={"/request"}>Get Help</Link>
               </li>
               <li>
                 <Link to={"/contact"}>Contact Us</Link>

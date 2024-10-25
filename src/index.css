@@ -433,4 +433,12 @@ input[type="checkbox"]:checked {
   .bg-policy{
     background: radial-gradient(50% 50% at 50% 50%, #0D2E74 0%, #172748 100%);
   }
+
+  .my-list{
+    list-style: disc !important;
+    list-style-position: inside !important;
+    padding-left: 10px;
+    display: grid;
+    gap: 10px;
+  }
 }

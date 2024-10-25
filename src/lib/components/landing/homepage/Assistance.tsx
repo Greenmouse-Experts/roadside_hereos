@@ -27,8 +27,8 @@ const Assistance = () => {
                 </p>
               </div>
               <Button
-                title={"View all"}
-                onClick={() => navigate("/request")}
+                title={"Become a Service Provider"}
+                onClick={() => navigate("/career")}
                 altClassName="btn-feel mt-5 lg:mt-0 fs-500 fw-500 bg-[#FEB470] text-black px-6 py-2"
               />
             </div>
@@ -56,10 +56,10 @@ const Assistance = () => {
                   className="bg-[#172748] relative new-shade p-6 h-[250px] rounded-[13px] w-full place-center hover:scale-105 duration-100 cursor-pointer"
                 >
                   <div className="text-white lg:text-xl mb-3">
-                    <p className="fw-600">Become a Service Provider</p>
+                    <p className="fw-600">View all services</p>
                     <p className="mt-4 fs-400">
-                      Join our nationwide network of service providers and start
-                      earning with ALLDRIVE SOS!
+                      Explore the wide array of roadside assistance services we
+                      offer, tailored to meet your specific needs!
                     </p>
                   </div>
                   <FaArrowRightLong className="absolute top-[190px] right-10 cursor-pointer text-white text-xl" />

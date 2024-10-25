@@ -28,6 +28,7 @@ interface Props {
 const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
   const saveServiceId = useRequestStore((state) => state.saveRequest);
   const [fcmToken, setFcmToken] = useState("");
+  const [locationType, setLocationType] = useState("auto");
   const [locationDetail, setLocationDetail] = useState<LocationProps>({
     city: "",
     location: "",
@@ -35,6 +36,8 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
     longitude: "",
     postal: "",
   });
+
+  const locationList = ["auto", "manual"];
 
   const [isBusy, setIsBusy] = useState(false);
 
@@ -66,6 +69,8 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
       car_year: "",
       car_color: "",
       location: "",
+      zipcode: "",
+      city: "",
       other: "",
     },
   });
@@ -234,29 +239,127 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
               />
             </div>
             <div>
-              <Controller
-                name="location"
-                control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Please enter a value",
-                  },
-                }}
-                render={({ field }) => (
-                  <TextInput
-                    label="Current Location"
-                    labelClassName="text-[#000000B2] fw-600"
-                    error={errors.other?.message}
-                    type={InputType.textarea}
-                    {...field}
-                    disabled
-                    ref={null}
-                  />
+              <div className="flex items-center gap-x-5 mt-3">
+                <p className="text-[#000000B2] fw-600">Current Location</p>
+                <div className="flex items-center gap-x-4 ">
+                  {locationList.map((item: string) => (
+                    <div
+                      className="flex items-center cursor-pointer gap-x-1"
+                      key={item}
+                      onClick={() => setLocationType(item)}
+                    >
+                      <input
+                        checked={locationType === item}
+                        type="radio"
+                        name="location"
+                        id=""
+                        className="w-4 h-4"
+                      />
+                      <label htmlFor="" className="cursor-pointer">
+                        {item}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div>
+                {locationType === "auto" && (
+                  <>
+                    <Controller
+                      name="location"
+                      control={control}
+                      rules={{
+                        required: {
+                          value: true,
+                          message: "Please enter a value",
+                        },
+                      }}
+                      render={({ field }) => (
+                        <TextInput
+                          label=""
+                          labelClassName="text-[#000000B2] fw-600"
+                          error={errors.other?.message}
+                          type={InputType.textarea}
+                          disabled
+                          {...field}
+                          ref={null}
+                        />
+                      )}
+                    />
+                    <div className="mt-3">
+                      <GetCurrentLocation setValue={setLocationDetail} />
+                    </div>
+                  </>
                 )}
-              />
-              <div className="mt-3">
-                <GetCurrentLocation setValue={setLocationDetail} />
+                {locationType === "manual" && (
+                  <>
+                    <Controller
+                      name="location"
+                      control={control}
+                      rules={{
+                        required: {
+                          value: true,
+                          message: "Please enter a value",
+                        },
+                      }}
+                      render={({ field }) => (
+                        <TextInput
+                          label=""
+                          labelClassName="text-[#000000B2] fw-600"
+                          placeholder="Please enter your current location"
+                          error={errors.other?.message}
+                          type={InputType.textarea}
+                          {...field}
+                          ref={null}
+                        />
+                      )}
+                    />
+                    <div className="grid grid-cols-2 gap-4">
+                      <Controller
+                        name="city"
+                        control={control}
+                        rules={{
+                          required: {
+                            value: true,
+                            message: "Please enter a value",
+                          },
+                        }}
+                        render={({ field }) => (
+                          <TextInput
+                            label=""
+                            labelClassName="text-[#000000B2] fw-600"
+                            placeholder="Current city"
+                            error={errors.other?.message}
+                            type={InputType.text}
+                            {...field}
+                            ref={null}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="zipcode"
+                        control={control}
+                        rules={{
+                          required: {
+                            value: true,
+                            message: "Please enter a value",
+                          },
+                        }}
+                        render={({ field }) => (
+                          <TextInput
+                            label=""
+                            labelClassName="text-[#000000B2] fw-600"
+                            placeholder="Postal Code"
+                            error={errors.other?.message}
+                            type={InputType.text}
+                            {...field}
+                            ref={null}
+                          />
+                        )}
+                      />
+                    </div>
+                  </>
+                )}
               </div>
             </div>
             <div>
