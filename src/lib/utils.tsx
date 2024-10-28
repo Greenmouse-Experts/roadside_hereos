@@ -47,7 +47,7 @@ export const FormatStatus = {
   inactive: (
     <div className="flex items-center gap-x-2">
       <span className="bg-orange-600 w-4 h-4 circle"></span>{" "}
-      <span className="fw-500 text-orange-600">Inctive</span>
+      <span className="fw-500 text-orange-600">Inactive</span>
     </div>
   ),
   Deactivate: (

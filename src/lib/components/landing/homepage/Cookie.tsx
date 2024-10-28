@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
 
 const CookieModal = () => {
     const [show, setShow] = useState(false)
-  let cookie = localStorage.getItem("rhs_cookie");
+  let cookie = Cookies.get("rhs_cookie");
+  
   const checkCookie = () => {
-    localStorage.setItem("rhs_cookie", "no");
+    Cookies.set("rhs_cookie", "no");
     setShow(false)
   }
   useEffect(() => {

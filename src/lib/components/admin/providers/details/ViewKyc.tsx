@@ -129,7 +129,7 @@ const ViewKyc: FC<Props> = ({ id, refetch }) => {
                 </div>
                 <div>
                   <p className="fw-500 text-gray-500">
-                    Device Ip:
+                    Device Ip Address:
                   </p>
                   <p className="fw-600 mt-2">
                     {data?.data?.device_ip}
@@ -147,7 +147,7 @@ const ViewKyc: FC<Props> = ({ id, refetch }) => {
                 </div>
                 <div>
                   <p className="fw-500 text-gray-500">
-                    Comapany Contact Information
+                    Company Contact Information
                   </p>
                   <p className="fw-600 mt-2">{data?.data?.business_email}</p>
                   <p className="fw-600 mt-1">{formatPhoneNumber(data?.data?.business_phone)}</p>
@@ -265,7 +265,7 @@ const ViewKyc: FC<Props> = ({ id, refetch }) => {
           isBusy={false}
         />
       </Modal>
-      <DisApproval title="Disapprove Comapny Kyc" size="sm">
+      <DisApproval title="Disapprove Company Kyc" size="sm">
         <DisapproveKyc
           id={data?.data?.id}
           userId={data?.data?.userId}

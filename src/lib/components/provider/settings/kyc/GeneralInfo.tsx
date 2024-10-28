@@ -21,6 +21,8 @@ import {
   getPostalCodeFromGoogle,
   getStateFromGoogle,
 } from "../../../../utils";
+import useModal from "../../../../hooks/useModal";
+import { MdCancel } from "react-icons/md";
 
 interface Props {
   next: () => void;
@@ -30,6 +32,7 @@ interface Props {
 const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
   const { user } = useAuth();
   const kyc = useKycStore((state) => state.kyc);
+  const { Modal, setShowModal } = useModal();
   const saveKyc = useKycStore((state) => state.saveKyc);
   const [imageVal, setImageVal] = useState<Array<File>>();
   const [uploading, setUploading] = useState(0);
@@ -44,8 +47,6 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
       types: ["address"],
     },
     onPlaceSelected: (place) => {
-      console.log(place);
-
       setValue("address", place.formatted_address || "");
       setValue(
         "business_state",
@@ -134,7 +135,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
   });
   // for insurance
   const handleUpload = () => {
-    if (imageVal) {
+    if (imageVal?.length) {
       setUploading(1);
       const fd = new FormData();
       for (let i = 0; i < imageVal.length; i++) {
@@ -142,7 +143,8 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
       }
       upload.mutateAsync(fd, {
         onSuccess: (data) => {
-          saveKyc({ ...kyc, insurance_doc: data });
+          setImageVal([])
+          saveKyc({ ...kyc, insurance_doc: [...kyc.insurance_doc, ...data] });
           setUploading(2);
         },
         onError: (error) => {
@@ -152,12 +154,24 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
       });
     }
   };
+
   useEffect(() => {
     handleUpload();
   }, [imageVal]);
+
+  const removeFromSelected = (url: string) => {
+    const data = kyc.insurance_doc;
+    const filtered = data.filter((where: string) => where !== url);
+    saveKyc({ ...kyc, insurance_doc: filtered });
+  };
+
   // for business certificate
   const handleCertUpload = () => {
-    if (bizCert) {
+    if(kyc.insurance_doc.length > 4){
+      toast.info("Maximum upload reached")
+      return;
+    }
+    if (bizCert?.length) {
       setSending(1);
       const fd = new FormData();
       fd.append("image", bizCert[0]);
@@ -328,7 +342,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
                       {...field}
                       ref={ref as any}
                       className="w-full bg-white outline-none p-2 lg:p-[10px] mt-[5px] rounded-lg border border-gray-400 placeholder:text-black"
-                      placeholder="Enter city or region"
+                      placeholder="Enter operational full address"
                     />
                   </div>
                 )}
@@ -453,12 +467,26 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
                   Document is uploaded
                 </p>
               )}
+              <div className="pt-6 flex overflow-x-auto scroll-pro gap-x-2">
+                {kyc.insurance_doc.map((item) => (
+                  <div className="relative w-[200px] h-[140px]">
+                    <img src={item} key={item} className="w-[100%] h-full" />
+                    <MdCancel
+                      className="text-red-500 cursor-pointer absolute text-xl -top-2 -right-1"
+                      onClick={() => removeFromSelected(item)}
+                    />
+                  </div>
+                ))}
+              </div>
               <div
                 className="absolute top-1 left-[260px]"
-                onMouseEnter={() => setShowTip(true)}
-                onMouseLeave={() => setShowTip(false)}
+                // onMouseEnter={() => setShowTip(true)}
+                // onMouseLeave={() => setShowTip(false)}
               >
-                <FaCircleInfo className="cursor-pointer" />
+                <FaCircleInfo
+                  className="cursor-pointer"
+                  onClick={() => setShowModal(true)}
+                />
                 {showTip && (
                   <p className="w-60 lg:w-[350px] fw-500 shadow bg-white rounded-lg p-3 fs-400 relative top-1">
                     Upload General Liability Insurance and Commercial Vehicle
@@ -468,7 +496,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
               </div>
             </div>
             <div>
-              <p className="fw-500 mt-3">Comapany Contact Information</p>
+              <p className="fw-500 mt-3">Company Contact Information</p>
               <div className="grid lg:grid-cols-2 gap-x-4 gap-y-3">
                 <Controller
                   name="business_email"
@@ -530,6 +558,39 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
           </div>
         </form>
       </div>
+      <Modal title="">
+        <div className="text-black">
+          <p className="fw-500 fs-500 relative -top-5">
+            Upload General Liability Insurance and Commercial Vehicle Insurance
+            (if rendering towing service).
+          </p>
+          <div className="">
+            <p className="fw-600 fs-500">
+              Insurance Policy Requirements Guideline:
+            </p>
+            <ul className="grid gap-2 mt-3">
+              <li className="fs-500">
+                <span className="fw-500">Insurance Company Rating:</span> All
+                insurance policies must be issued by a reputable insurance
+                company with an A- or better rating from A.M. Best.
+              </li>
+              <li className="fs-500">
+                <span className="fw-500">Additional Insured:</span> ALLDRIVE SOS
+                LLC must be included as an additional insured on both your
+                Commercial General Liability and Commercial Automobile insurance
+                policies.
+              </li>
+              <li className="fs-500">
+                <span className="fw-500">Policy Renewal:</span> When your
+                insurance policies are renewed, you must provide ALLDRIVE SOS
+                LLC with an updated certificate of insurance. You can do this by
+                logging into your account and updating your KYC information
+                under the "Settings" tab.
+              </li>
+            </ul>
+          </div>
+        </div>
+      </Modal>
     </>
   );
 };

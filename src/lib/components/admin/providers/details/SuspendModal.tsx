@@ -38,7 +38,7 @@ const SuspendModal: FC<Props> = ({ id, refetch, close }) => {
   };
   return (
     <>
-      <div>
+      <div className="text-black">
         <p>Reason For Suspension</p>
         <TextInput
           value={reason}
@@ -51,6 +51,7 @@ const SuspendModal: FC<Props> = ({ id, refetch, close }) => {
               isBusy ? <ScaleSpinner size={14} color="white" /> : "Suspend"
             }
             onClick={Suspend}
+            disabled={!reason?.length}
           />
         </div>
       </div>

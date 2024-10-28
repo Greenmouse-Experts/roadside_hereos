@@ -103,7 +103,7 @@ const ProviderDetailsHeader: FC<Props> = ({
           <ProfileAvatar url={picture} name={name} size={130} font={35} />
         </div>
       </div>
-      <Suspend title="Suspend Comapny" size="sm" type="withCancel">
+      <Suspend title="Suspend Company" size="sm" type="withCancel">
         <SuspendModal
           id={id}
           close={() => ShowSuspend(false)}

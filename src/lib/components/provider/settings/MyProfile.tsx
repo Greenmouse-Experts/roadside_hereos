@@ -110,7 +110,7 @@ const MyProfileSettings = () => {
             <p className="fw-500 ">Company Information</p>
             <button
               className="font-light flex gap-x-1 items-center px-3 py-1 text-gray-400 border border-gray-400 rounded-[15px]"
-              onClick={() => toast.info("Cannot edit comapny information")}
+              onClick={() => toast.info("Cannot edit company information")}
             >
               Edit <BiEditAlt />
             </button>

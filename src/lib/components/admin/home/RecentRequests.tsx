@@ -2,6 +2,8 @@ import { FaRegUser } from "react-icons/fa";
 import { GrTransaction } from "react-icons/gr";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { FC } from "react";
+import { IoTimeOutline } from "react-icons/io5";
+import dayjs from "dayjs";
 
 interface Props{
   request: any[]
@@ -14,6 +16,7 @@ const RecentRequests:FC<Props> = ({request}) => {
     "border-pink-500",
     "border-orange-500",
   ];
+  
   return (
     <>
       <div className="w-full rounded-xl">
@@ -25,7 +28,7 @@ const RecentRequests:FC<Props> = ({request}) => {
             const colorIndex = index % colors.length;
             const color = colors[colorIndex];
             return (
-              <div className={`border-l-[5px] ${color} cursor-pointer pl-2 py-2 mb-3 bg-gray-50 hover:scale-105 duration-100`}>
+              <div className={`border-l-[5px] ${color} grid gap-1 cursor-pointer pl-2 py-2 mb-3 bg-gray-50 hover:scale-105 duration-100`}>
                 <div className="flex items-center gap-x-2">
                   <FaRegUser className='text-gray-500 shrink-0'/>
                   <p className="fs-500">{item.user?.name}</p>
@@ -34,9 +37,13 @@ const RecentRequests:FC<Props> = ({request}) => {
                   <GrTransaction className='text-gray-500 shrink-0'/>
                   <p className="text-primary fw-600">{item?.service?.name}</p>
                 </div>
-                <div className="flex items-center gap-x-2">
-                  <MdOutlineLocationOn className='text-gray-500 shrink-0 text-lg'/>
+                <div className="flex items-start gap-x-2">
+                  <MdOutlineLocationOn className='text-gray-500 shrink-0 text-lg relative top-1'/>
                   <p className="fw-500 fs-500">{item?.location}</p>
+                </div>
+                <div className="flex items-start gap-x-2">
+                  <IoTimeOutline className="text-gray-500 shrink-0 text-lg relative top-[2px]"/>
+                  <p className="fw-500 fs-500">{dayjs(item?.createdAt).format('hh:mm a, dddd DD, MM YYYY')}</p>
                 </div>
               </div>
             );

@@ -194,7 +194,7 @@ const CategoryList = () => {
         <ReusableModal
           title="Are you sure you want to unpublish this service Category"
           actionTitle="Unpublish"
-          action={() => handlePublish('inctive')}
+          action={() => handlePublish('inactive')}
           cancelTitle="Close"
           closeModal={() => setPublish(false)}
           isBusy={isBusy}

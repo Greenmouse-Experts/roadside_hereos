@@ -19,10 +19,10 @@ interface Props {
   users: any;
 }
 const ProvidersList: FC<Props> = ({ users }) => {
-  const navigate = useNavigate()
-    const gotoDetails = (id:string) => {
-        navigate(`/admin/providers/${id}`)
-    }
+  const navigate = useNavigate();
+  const gotoDetails = (id: string) => {
+    navigate(`/admin/providers/${id}`);
+  };
   // Table components
   const columnHelper = createColumnHelper<any>();
   const columns = [
@@ -57,8 +57,21 @@ const ProvidersList: FC<Props> = ({ users }) => {
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.isActive, {
-      id: "Status",
-      cell: (info) => <>{info.getValue()? FormatStatus['active'] : FormatStatus['inactive']}</>,
+      id: "Account Status",
+      cell: (info) => (
+        <>
+          {info.getValue() ? FormatStatus["active"] : FormatStatus["inactive"]}
+        </>
+      ),
+      header: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.isSuspended, {
+      id: "Activity Status",
+      cell: (info) => (
+        <>
+          {info.getValue() ? FormatStatus["inactive"] : FormatStatus["active"]}
+        </>
+      ),
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.id, {
@@ -77,7 +90,7 @@ const ProvidersList: FC<Props> = ({ users }) => {
                 className="my-1 fw-500 flex items-center gap-x-2 pt-1"
                 onClick={() => gotoDetails(info.getValue())}
               >
-                <BsArrowsExpand/> View Details
+                <BsArrowsExpand /> View Details
               </MenuItem>
             </MenuList>
           </Menu>
@@ -88,10 +101,7 @@ const ProvidersList: FC<Props> = ({ users }) => {
   return (
     <>
       <div>
-        <DataTable
-          columns={columns}
-          data={users}
-        />
+        <DataTable columns={columns} data={users} />
       </div>
     </>
   );

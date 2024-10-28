@@ -65,7 +65,7 @@ const LoginForm = () => {
         navigate("/provider");
         toast.success("Login Success");
       } else {
-        toast.info("User not available on web platform");
+        toast.info("This account is mobile-only. Please use our app");
       }
       setIsBusy(false);
     },
