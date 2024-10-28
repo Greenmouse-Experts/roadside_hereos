@@ -38,7 +38,6 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
   const [uploading, setUploading] = useState(0);
   const [bizCert, setbizCert] = useState<Array<File>>();
   const [sending, setSending] = useState(0);
-  const [showTip, setShowTip] = useState(false);
   const [disabledField, setDisabledField] = useState(false);
 
   const { ref } = usePlacesWidget({
@@ -487,12 +486,6 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
                   className="cursor-pointer"
                   onClick={() => setShowModal(true)}
                 />
-                {showTip && (
-                  <p className="w-60 lg:w-[350px] fw-500 shadow bg-white rounded-lg p-3 fs-400 relative top-1">
-                    Upload General Liability Insurance and Commercial Vehicle
-                    Insurance (if rendering towing service).
-                  </p>
-                )}
               </div>
             </div>
             <div>
