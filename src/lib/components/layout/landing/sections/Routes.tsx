@@ -15,6 +15,10 @@ export const NAV_LIST = [
     url: "/request",
     name: "Request a Service",
   },
+  {
+    url: "/blog",
+    name: "Blog",
+  },
 ];
 export const FOOTER_LIST = [
   {

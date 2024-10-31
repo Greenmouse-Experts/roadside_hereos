@@ -1,4 +1,7 @@
+import BlogPage from "../../pages/admin/blog";
+import BlogCategory from "../../pages/admin/blog-category";
 import AdminCategory from "../../pages/admin/category";
+import EditBlog from "../../pages/admin/edit-blog";
 import AdminFulfilledServices from "../../pages/admin/fulfilledService";
 import AdminDashboardHome from "../../pages/admin/home";
 import AdminNotification from "../../pages/admin/notify";
@@ -101,5 +104,20 @@ export const adminRoutes = [
         id: 'refund-request',
         path: 'refund-request',
         component: <RefundRequests/>
+    },
+    {
+        id: 'admin-19',
+        path: 'blog',
+        component: <BlogPage/>
+    },
+    {
+        id: 'admin-20',
+        path: 'blog-category',
+        component: <BlogCategory/>
+    },
+    {
+        id: 'admin-21',
+        path: 'blog/:id',
+        component: <EditBlog/>
     }
 ]

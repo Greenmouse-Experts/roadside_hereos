@@ -123,7 +123,7 @@ const Footer = () => {
               <li>
                 <Link to={"/contact"}>Contact Us</Link>
               </li>
-              {/* <li><Link to={'/'}>Feedback</Link></li> */}
+              <li><Link to={'/providers-faqs'}>Provider&apos;s FAQs</Link></li>
             </ul>
           </div>
           <div>

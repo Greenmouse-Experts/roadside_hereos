@@ -23,6 +23,7 @@ import {
 } from "../../../../utils";
 import useModal from "../../../../hooks/useModal";
 import { MdCancel } from "react-icons/md";
+import { Link } from "react-router-dom";
 
 interface Props {
   next: () => void;
@@ -565,7 +566,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
               <li className="fs-500">
                 <span className="fw-500">Insurance Company Rating:</span> All
                 insurance policies must be issued by a reputable insurance
-                company with an A- or better rating from A.M. Best.
+                company with an A- or better rating from <Link to={'https://web.ambest.com/home'} className="text-blue-500">A.M. Best</Link>.
               </li>
               <li className="fs-500">
                 <span className="fw-500">Additional Insured:</span> ALLDRIVE SOS

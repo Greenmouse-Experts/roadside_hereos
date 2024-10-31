@@ -121,3 +121,18 @@ export const SUBSCRIBE_NEWSLETTER = `/newsletter/subscribe`
 export const CONTACT_US = `/user/contact-admin`
 export const PROVIDER_STATS = `/user/fetch-provider-stats`
 export const ADMIN_STATS = `/user/fetch-stats`
+
+// blog
+export const CREATE_BLOG_CATEGORY = `blog-category/create`
+export const GET_BLOG_CATEGORY = `blog-category`
+export const UPDATE_BLOG_CATEGORY = `blog-category/update`
+export const DELETE_BLOG_CATEGORY = `blog-category/delete`
+export const CREATE_BLOG = `blog-post/create`
+export const GET_BLOG = `blog-post`
+export const GET_BLOG_SINGLE = `blog-post/retrieve`
+export const UPDATE_BLOG = `blog-post/update`
+export const DELETE_BLOG = `blog-post/delete`
+export const GET_BLOG_TAGS = `blog-category/public`
+export const GET_BLOGS = `blog-post/public`
+export const GET_SINGLE_BLOG = `/blog-post`
+export const GET_BLOG_BY_CATEGORY = `blog-post/retrieve-by-category`

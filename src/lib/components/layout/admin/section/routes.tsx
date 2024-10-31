@@ -7,6 +7,7 @@ import { BiCategoryAlt, BiGitPullRequest } from 'react-icons/bi';
 import { LuServerCog } from 'react-icons/lu';
 import { IoNotificationsCircleOutline } from "react-icons/io5";
 import { BsCashCoin } from 'react-icons/bs';
+import { FaBloggerB } from 'react-icons/fa6';
 
 export interface RouteType {
   name:string;
@@ -72,6 +73,25 @@ export const Routes = [
     icon: <MdOutlineRateReview className="text-xl" />,
     route: '/admin/reviews',
     submenu: [],
+  },
+  {
+    name: 'Blog',
+    icon: <FaBloggerB className="text-xl" />,
+    route: '/admin/blog',
+    submenu: [
+      {
+        name: 'Blog',
+        icon: <FaBloggerB className="text-xl" />,
+        route: '/admin/blog',
+        submenu: [],
+      },
+      {
+        name: 'Blog Category',
+        icon: <FaBloggerB className="text-xl" />,
+        route: '/admin/blog-category',
+        submenu: [],
+      },
+    ],
   },
   {
     name: 'Notifications',

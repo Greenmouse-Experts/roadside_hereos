@@ -192,6 +192,12 @@ input[type="checkbox"]:checked {
 .react-datepicker__view-calendar-icon input{
   margin-left: 10px;
 }
+.css-1ichst0{
+  background: #111827 !important;
+}
+.css-14xmt93 >.ps-menu-button:hover{
+  background: #111827 !important;
+}
 
 @layer components {
   /* container settings */

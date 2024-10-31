@@ -16,6 +16,9 @@ import ScrollToTop from "./lib/scrollTop";
 import CookieModal from "./lib/components/landing/homepage/Cookie";
 import RequestSuccess from "./pages/landing/RequestSuccess";
 import DeleteAccount from "./pages/landing/DeleteAccount";
+import ProvidersFaqPage from "./pages/landing/ProvidersFaqs";
+import BlogPage from "./pages/landing/Blog";
+import BlogDetail from "./pages/landing/BlogDetail";
 
 function App() {
   return (
@@ -24,6 +27,9 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/faqs" element={<FaqPage />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:id" element={<BlogDetail />} />
+        <Route path="/providers-faqs" element={<ProvidersFaqPage />} />
         <Route path="/request" element={<ServicesPage />} />
         <Route path="/request/:id" element={<RequestPage />} />
         <Route path="/contact" element={<ContactUsPage />} />
