@@ -42,6 +42,7 @@ const EditCategory: FC<Props> = ({ close, item, refetch }) => {
     setIsBusy(true);
       const payload = {
         name: datas.name,
+        id: item?.id
       };
       addCat.mutate(payload);
   };

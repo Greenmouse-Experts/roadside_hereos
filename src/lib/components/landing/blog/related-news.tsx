@@ -12,13 +12,14 @@ const RelatedNews:FC<Props> = ({id}) => {
         queryKey: ['post-by-category', id],
         queryFn: () => getPostsByCategory(id)
     })
+    
   return (
     <div className="bg-blue-gray-50">
         <div className="bg-primary w-full p-3 text-white fw-600">Related News</div>
         <div className="mt-3 p-2 grid gap-3">
             {
                 data && data?.data?.map((item:any, i:number) => (
-                    <div className="flex items-center gap-x-3" key={i} onClick={() => navigate(`/blog/${item.id}`)}>
+                    <div className="flex items-center gap-x-3 cursor-pointer" key={i} onClick={() => navigate(`/blog/${item.id}`)}>
                         <img src={item.coverImage} alt="cover-image" className="w-[100px] h-[80px]" />
                         <div>
                             <p className="fs-400">{item.title}</p>

@@ -50,7 +50,7 @@ export const createBlogCategory = async (payload: any) => {
 
   export const deleteBlogCategory = async (payload:string) => {
     return axios
-      .patch(`${ENDPOINT.DELETE_BLOG_CATEGORY}/${payload}`,)
+      .delete(`${ENDPOINT.DELETE_BLOG_CATEGORY}/${payload}`,)
       .then((response) => response.data);
   };
 
