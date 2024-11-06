@@ -10,7 +10,10 @@ const BlogItem: FC<Props> = ({ data }) => {
   const navigate = useNavigate();
   return (
     <div>
-      <div>
+      <div
+        className="cursor-pointer"
+        onClick={() => navigate(`/blog/${data.id}`)}
+      >
         <img
           src={data?.coverImage}
           alt="blog-img"
@@ -20,11 +23,15 @@ const BlogItem: FC<Props> = ({ data }) => {
       <div className="p-4 mt-2 shadow-lg bg-white">
         <div className="h-40 2xl:h-36">
           <p className="text-lg lg:text-xl fw-500 !syne">{data?.title}</p>
-          <div className="mt-2">{data.body && <div
-            dangerouslySetInnerHTML={{
-              __html: `${formatName(data.body, 74)}`,
-            }}
-          />}</div>
+          <div className="mt-2">
+            {data.body && (
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: `${formatName(data.body, 74)}`,
+                }}
+              />
+            )}
+          </div>
         </div>
         <div className="flex justify-end">
           <button

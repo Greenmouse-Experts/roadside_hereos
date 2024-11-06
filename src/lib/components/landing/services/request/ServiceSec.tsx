@@ -37,7 +37,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
     postal: "",
   });
 
-  const locationList = ["auto", "manual"];
+  const locationList = ["autofill", "manual"];
 
   const [isBusy, setIsBusy] = useState(false);
 
