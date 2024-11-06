@@ -2,8 +2,22 @@ import { BsClock } from "react-icons/bs";
 import LandingLayout from "../../lib/components/layout/landing";
 import FaqList from "../../lib/components/landing/faqs/FaqList";
 import DownloadApp from "../../lib/components/landing/homepage/DownloadApp";
+import ProviderFaqList from "../../lib/components/landing/faqs/ProviderFaqList";
+import { useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 const FaqPage = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
   return (
     <>
       <LandingLayout>
@@ -26,8 +40,11 @@ const FaqPage = () => {
             </div>
           </div>
           <div className="section">
-            <div className="box py-10">
+            <div className="box pt-10">
               <div className="lg:w-11/12 mx-auto">
+                <p className="text-2xl lg:w-9/12 font-bold mb-8">
+                  Customers (Motorists)
+                </p>
                 <p className="text-lg lg:w-9/12 fw-500 mb-7">
                   We've got you covered, mile after mile! Here are some
                   frequently asked questions to help you get the most out of
@@ -38,6 +55,28 @@ const FaqPage = () => {
                   We hope this helps! If you have any other questions, feel free
                   to contact our friendly customer support team. We're always
                   happy to assist you!
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="section" id="provider-faqs">
+            <div className="box">
+              <div className="lg:w-11/12 mx-auto">
+                <p className="text-2xl lg:w-9/12 font-bold mb-8">
+                  Service Providers (Technicians).
+                </p>
+                <p className="text-lg lg:w-9/12 fw-500 mb-7">
+                  Here is a detailed Frequently Asked Questions (FAQ) section
+                  for Service Providers offering services on the AllDrive SOS
+                  platform:
+                </p>
+                <ProviderFaqList />
+                <p className="mt-10">
+                  These FAQs provide detailed answers to questions that Service
+                  Providers may have about offering services on the AllDrive SOS
+                  platform. If there are additional queries, please reach out to
+                  support for more information.
                 </p>
               </div>
             </div>

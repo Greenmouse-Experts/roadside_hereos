@@ -50,83 +50,83 @@ const BlogPage = () => {
                   </p>
                 </div>
               </div>
-              <p className="text-4xl fw-700 mt-5">Blog</p>
+              <p className="text-4xl fw-700 mt-5">Latest News</p>
             </div>
           </div>
         </div>
-       <div className="section">
-       <div className="box">
-          <p className="text-2xl fw-600">All Blog Post</p>
-          <div className="mt-4">
-            <div className="flex gap-x-2 items-center w-full scroll-pro overflow-x-auto relative z-10">
-              {tags?.data?.map((item: any, i: number) => (
-                <p
-                  className={`px-3 py-1 bg-blue-50 rounded-xl fs-400 cursor-pointer hover:bg-blue-400 whitespace-nowrap ${
-                    activeTag === item.id && "bg-blue-400"
-                  }`}
-                  key={i}
-                  onClick={() => setActiveTag(item.id)}
-                >
-                  {item.name}
-                </p>
-              ))}
-            </div>
-            <div></div>
-          </div>
-          <div className="mt-6 pb-24">
-            {isLoading && (
-              <div className="py-12 flex justify-center items-center text-black">
-                <div>
-                  <div className="flex place-center">
-                    <CurveLoader />
-                  </div>
-                  <p className="text-center mt-5 fw-500">
-                    Fetching Blog posts...
+        <div className="section">
+          <div className="box">
+            <p className="text-2xl fw-600">All Latest News</p>
+            <div className="mt-4">
+              <div className="flex gap-x-2 items-center w-full scroll-pro overflow-x-auto relative z-10">
+                {tags?.data?.map((item: any, i: number) => (
+                  <p
+                    className={`px-3 py-1 bg-blue-50 rounded-xl fs-400 cursor-pointer hover:bg-blue-400 whitespace-nowrap ${
+                      activeTag === item.id && "bg-blue-400"
+                    }`}
+                    key={i}
+                    onClick={() => setActiveTag(item.id)}
+                  >
+                    {item.name}
                   </p>
-                </div>
-              </div>
-            )}
-            <div className="grid lg:grid-cols-3 gap-6 lg:gap-9">
-              {!isLoading &&
-                data &&
-                data?.data?.map((item: any, i: number) => (
-                  <BlogItem data={item} key={i} />
                 ))}
+              </div>
+              <div></div>
             </div>
-            <div>
-              {!isLoading && data && (
-                <div className="box mt-6 flex justify-end">
-                  <div className="flex gap-x-4 items-center">
-                    <p className="fw-600">Page {page}</p>
-                    <div className="flex gap-x-2 items-center">
-                      <div
-                        onClick={handlePrev}
-                        className={`px-2 py-1 rounded ${
-                          page === 1
-                            ? "bg-gray-300 cursor-not-allowed"
-                            : "bg-primary text-white cursor-pointer"
-                        }`}
-                      >
-                        Prev
-                      </div>
-                      <div
-                        onClick={handleNext}
-                        className={`px-2 py-1 rounded ${
-                          page * 6 >= data?.count
-                            ? "bg-gray-300 cursor-not-allowed"
-                            : "bg-primary text-white cursor-pointer"
-                        }`}
-                      >
-                        Next
-                      </div>
+            <div className="mt-6 pb-24">
+              {isLoading && (
+                <div className="py-12 flex justify-center items-center text-black">
+                  <div>
+                    <div className="flex place-center">
+                      <CurveLoader />
                     </div>
+                    <p className="text-center mt-5 fw-500">
+                      Fetching Blog posts...
+                    </p>
                   </div>
                 </div>
               )}
+              <div className="grid lg:grid-cols-3 gap-6 lg:gap-9">
+                {!isLoading &&
+                  data &&
+                  data?.data?.map((item: any, i: number) => (
+                    <BlogItem data={item} key={i} />
+                  ))}
+              </div>
+              <div>
+                {!isLoading && data && (
+                  <div className="box mt-6 flex justify-end">
+                    <div className="flex gap-x-4 items-center">
+                      <p className="fw-600">Page {page}</p>
+                      <div className="flex gap-x-2 items-center">
+                        <div
+                          onClick={handlePrev}
+                          className={`px-2 py-1 rounded ${
+                            page === 1
+                              ? "bg-gray-300 cursor-not-allowed"
+                              : "bg-primary text-white cursor-pointer"
+                          }`}
+                        >
+                          Prev
+                        </div>
+                        <div
+                          onClick={handleNext}
+                          className={`px-2 py-1 rounded ${
+                            page * 6 >= data?.count
+                              ? "bg-gray-300 cursor-not-allowed"
+                              : "bg-primary text-white cursor-pointer"
+                          }`}
+                        >
+                          Next
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
-       </div>
       </LandingLayout>
     </>
   );
