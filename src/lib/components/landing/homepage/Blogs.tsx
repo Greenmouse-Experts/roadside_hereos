@@ -6,7 +6,6 @@ import { getBlogPosts, getBlogTags } from "../../../services/api/blogApi";
 
 const BlogPage = () => {
   const [activeTag, setActiveTag] = useState("");
-  const [page, setPage] = useState(1);
 
   const { data: tags } = useQuery({
     queryKey: ["getTags"],
