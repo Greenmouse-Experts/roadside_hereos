@@ -40,7 +40,7 @@ const FaqPage = () => {
             </div>
           </div>
           <div className="section">
-            <div className="box pt-10">
+            <div className="box">
               <div className="lg:w-11/12 mx-auto">
                 <p className="text-2xl lg:w-9/12 font-bold mb-8">
                   Customers (Motorists)
