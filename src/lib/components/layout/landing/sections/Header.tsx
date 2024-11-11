@@ -53,7 +53,7 @@ const Header: FC<Props> = ({ fixed }) => {
                   </li>
                 ))}
               </ul>
-              <ul>
+              <ul className="flex mx-7">
                 {isLoggedIn ? (
                   <li>
                     <Link

@@ -4,20 +4,20 @@ export const NAV_LIST = [
     name: "Home",
   },
   {
-    url: "/faqs",
-    name: "FAQs",
-  },
-  {
-    url: "/contact",
-    name: "Contact Us",
-  },
-  {
     url: "/request",
     name: "Request a Service",
   },
   {
+    url: "/faqs",
+    name: "FAQs",
+  },
+  {
     url: "/blog",
     name: "Blog",
+  },
+  {
+    url: "/contact",
+    name: "Contact Us",
   },
 ];
 export const FOOTER_LIST = [

@@ -3,6 +3,7 @@ import { useState } from "react";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import BlogItem from "../blog/blog-item";
 import { getBlogPosts, getBlogTags } from "../../../services/api/blogApi";
+import { Link } from "react-router-dom";
 
 const BlogPage = () => {
   const [activeTag, setActiveTag] = useState("");
@@ -22,8 +23,21 @@ const BlogPage = () => {
     <>
       <div className="section">
         <div className="box">
-          <p className="text-2xl fw-600">All Latest News</p>
-          <div className="mt-4">
+          <div className="w-full flex justify-between">
+            <p className="flex w-full text-2xl fw-600">All Latest News</p>
+            <div className="flex w-full justify-end">
+              {!isLoading && data && (
+                <div className="flex justify-end">
+                  <div className="flex gap-x-4 items-center">
+                    <p className="fw-600">
+                      <Link to="/blog">View All</Link>
+                    </p>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+          <div className="mt-2">
             <div className="flex gap-x-2 items-center w-full scroll-pro overflow-x-auto relative z-10">
               {tags?.data?.map((item: any, i: number) => (
                 <p

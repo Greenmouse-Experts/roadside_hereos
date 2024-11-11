@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 
 const ProviderFaqList = () => {
   const [open, setOpen] = React.useState(1);
+  const divReffs = useRef<(HTMLDivElement | null)[]>([]);
 
   const faqArray = [
     {
@@ -52,10 +53,58 @@ const ProviderFaqList = () => {
       label: "How do I receive job requests?",
       key: 11,
     },
+    {
+      label: "How are payments handled?",
+      key: 12,
+    },
+    {
+      label: "What are the cancellation fees and policies?",
+      key: 13,
+    },
+    {
+      label: "Can I set my own rates?",
+      key: 14,
+    },
+    {
+      label: "How do I contact support if I have an issue?",
+      key: 15,
+    },
+    {
+      label: "Can I operate outside of the United States?",
+      key: 16,
+    },
+    {
+      label: "What are the requirements for my business registration?",
+      key: 17,
+    },
+    {
+      label: "What type of vehicles can I use to offer my services?",
+      key: 18,
+    },
+    {
+      label: "How do I handle disputes with customers?",
+      key: 19,
+    },
+    {
+      label: " How do I update my service areas?",
+      key: 20,
+    },
+    {
+      label: "How do I track my service history?",
+      key: 21,
+    },
+    {
+      label: "Can I offer multiple services at once?",
+      key: 22,
+    },
   ];
 
   const Accordion1 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[1] = el)}
+    >
+      <p className="my-5 font-bold">What is AllDrive SOS?</p>
       AllDrive SOS is a web and mobile platform that connects distressed
       motorists in need of roadside assistance with qualified service providers,
       such as tow truck operators and roadside technicians, across the United
@@ -64,10 +113,16 @@ const ProviderFaqList = () => {
   );
 
   const Accordion2 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[2] = el)}
+    >
+      <p className="my-5 font-bold">
+        What types of services can I offer on the AllDrive SOS platform?
+      </p>
       As a Service Provider, you can offer a range of roadside assistance
       services, including but not limited to:
-      <ul className="grid gap-2 mt-4 my-list">
+      <ul className="grid gap-2 mt-2 my-list">
         <li>Towing</li>
         <li>Jump-starts</li>
         <li>Flat tire replacements</li>
@@ -83,7 +138,13 @@ const ProviderFaqList = () => {
   );
 
   const Accordion3 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[3] = el)}
+    >
+      <p className="my-5 font-bold">
+        What are the insurance requirements to offer services on the platform?
+      </p>
       All Service Providers are required to maintain specific insurance
       coverages, depending on the services they offer:
       <ul className="grid gap-2 mt-4 my-list">
@@ -140,7 +201,13 @@ const ProviderFaqList = () => {
   );
 
   const Accordion4 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[4] = el)}
+    >
+      <p className="my-5 font-bold">
+        How do I submit my insurance documents to AllDrive SOS?
+      </p>
       You must submit a copy of your certificate of insurance that meets the
       coverage requirements and names AllDrive SOS as an additional insured. You
       can upload the document through your provider account on the platform.
@@ -150,7 +217,13 @@ const ProviderFaqList = () => {
   );
 
   const Accordion5 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[5] = el)}
+    >
+      <p className="my-5 font-bold">
+        What happens if my insurance expires or lapses?
+      </p>
       It is your responsibility to ensure that your insurance coverage is
       current and active. If your insurance expires or lapses, you will be
       temporarily suspended from offering services on the AllDrive SOS platform
@@ -159,7 +232,13 @@ const ProviderFaqList = () => {
   );
 
   const Accordion6 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[6] = el)}
+    >
+      <p className="my-5 font-bold">
+        What is On-Hook Insurance and why is it required?
+      </p>
       On-Hook Insurance provides coverage for damages to vehicles that are being
       towed. If you're offering towing services, this insurance is required to
       cover the cost of any potential damages that might occur to the vehicle
@@ -168,7 +247,13 @@ const ProviderFaqList = () => {
   );
 
   const Accordion7 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[7] = el)}
+    >
+      <p className="my-5 font-bold">
+        How does Garage Keepers Legal Liability Insurance apply to my services?
+      </p>
       If you provide storage facility services (such as parking or storing
       vehicles at your facility), Garage Keepers Legal Liability Insurance
       protects against damages to vehicles parked in your care, custody, or
@@ -177,7 +262,13 @@ const ProviderFaqList = () => {
   );
 
   const Accordion8 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[8] = el)}
+    >
+      <p className="my-5 font-bold">
+        How are taxes handled on the AllDrive SOS platform?
+      </p>
       As a Service Provider, you are responsible for paying any taxes (including
       VAT, if applicable) that may be required on the services you provide
       through the AllDrive SOS platform. AllDrive SOS is not responsible for
@@ -186,7 +277,14 @@ const ProviderFaqList = () => {
   );
 
   const Accordion9 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[9] = el)}
+    >
+      <p className="my-5 font-bold">
+        What qualifications do I need to become a Service Provider on AllDrive
+        SOS?
+      </p>
       You must hold all required licenses and certifications as per state or
       federal laws for the services you offer. You must also carry and maintain
       the necessary insurance coverages. Additionally, your business should be
@@ -195,7 +293,13 @@ const ProviderFaqList = () => {
   );
 
   const Accordion10 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[10] = el)}
+    >
+      <p className="my-5 font-bold">
+        How do I register as a Service Provider on AllDrive SOS?
+      </p>
       To register, visit the AllDrive SOS website or mobile app and complete the
       Service Provider registration form. You will need to submit proof of
       licensing, insurance documentation, and any required certifications to
@@ -204,7 +308,13 @@ const ProviderFaqList = () => {
   );
 
   const Accordion11 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[11] = el)}
+    >
+      <p className="my-5 font-bold">
+        How do I request a roadside assistance service?
+      </p>
       Once registered and approved, you will receive job requests through the
       AllDrive SOS app. These requests will be based on your location, service
       availability, and the type of services you offer. You can accept or
@@ -212,47 +322,182 @@ const ProviderFaqList = () => {
     </div>
   );
 
-  const renderContent = () => {
-    switch (open) {
-      case 1:
-        return <Accordion1 />;
-      case 2:
-        return <Accordion2 />;
-      case 3:
-        return <Accordion3 />;
-      case 4:
-        return <Accordion4 />;
-      case 5:
-        return <Accordion5 />;
-      case 6:
-        return <Accordion6 />;
-      case 7:
-        return <Accordion7 />;
-      case 8:
-        return <Accordion8 />;
-      case 9:
-        return <Accordion9 />;
-      case 10:
-        return <Accordion10 />;
-      case 11:
-        return <Accordion11 />;
-    }
-  };
+  const Accordion12 = () => (
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[12] = el)}
+    >
+      <p className="my-5 font-bold">How are payments handled?</p>
+      Payments for jobs are processed directly through the AllDrive SOS
+      platform. After completing a job, your payment will be credited to your
+      account, minus any applicable platform fees. You can set up your bank
+      account details to receive payments via direct deposit.
+    </div>
+  );
+
+  const Accordion13 = () => (
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[13] = el)}
+    >
+      <p className="my-5 font-bold">
+        What are the cancellation fees and policies?
+      </p>
+      If a job is canceled, a 15% cancellation fee will be charged to the party
+      that initiated the cancellation. If the motorist cancels the job after
+      you've already been dispatched, they will be responsible for the fee.
+      However, if you cancel the job after accepting it, you will be charged the
+      cancellation fee.
+    </div>
+  );
+
+  const Accordion14 = () => (
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[14] = el)}
+    >
+      <p className="my-5 font-bold">Can I set my own rates?</p>
+      AllDrive SOS sets standard pricing for specific services, but you may have
+      the ability to adjust rates based on factors like location and the
+      complexity of the service. Rate adjustments must comply with AllDrive
+      SOS's guidelines.
+    </div>
+  );
+
+  const Accordion15 = () => (
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[15] = el)}
+    >
+      <p className="my-5 font-bold">
+        How do I contact support if I have an issue?
+      </p>
+      You can contact AllDrive SOS Support through the platform's app or
+      website. There is also a dedicated email address and phone number for
+      Service Providers experiencing issues or needing assistance with their
+      account or jobs.
+    </div>
+  );
+
+  const Accordion16 = () => (
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[16] = el)}
+    >
+      <p className="my-5 font-bold">
+        Can I operate outside of the United States?
+      </p>
+      No, the AllDrive SOS platform operates only within the United States.
+      Service Providers must comply with U.S. regulations and provide services
+      within the country. You are responsible for legal compliance if you
+      attempt to offer services outside of the U.S.
+    </div>
+  );
+
+  const Accordion17 = () => (
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[17] = el)}
+    >
+      <p className="my-5 font-bold">
+        What are the requirements for my business registration?
+      </p>
+      Your business must be legally registered and hold all necessary licenses
+      required by state or federal law to provide roadside assistance services.
+      You will need to provide proof of registration when signing up as a
+      Service Provider on the platform.
+    </div>
+  );
+
+  const Accordion18 = () => (
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[18] = el)}
+    >
+      <p className="my-5 font-bold">
+        What type of vehicles can I use to offer my services?
+      </p>
+      You can use any vehicle that meets the legal and insurance requirements
+      for the services you provide. For example, tow truck operators must use
+      vehicles properly equipped for towing. Your vehicles must also be insured
+      under your Commercial Automobile Insurance policy, which should cover both
+      owned and non-owned vehicles.
+    </div>
+  );
+
+  const Accordion19 = () => (
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[19] = el)}
+    >
+      <p className="my-5 font-bold">How do I handle disputes with customers?</p>
+      In the event of a dispute with a customer, you can contact AllDrive SOS
+      Support to open a case. The platform provides a mediation process to help
+      resolve conflicts fairly. Be sure to provide all relevant documentation
+      and evidence, such as photos or service reports, to support your case.
+    </div>
+  );
+
+  const Accordion20 = () => (
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[20] = el)}
+    >
+      <p className="my-5 font-bold">How do I update my service areas?</p>
+      You can update your service areas by logging into your AllDrive SOS
+      account and adjusting your geographic availability settings. This ensures
+      that you receive job requests only within the regions you are able to
+      serve.
+    </div>
+  );
+
+  const Accordion21 = () => (
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[21] = el)}
+    >
+      <p className="my-5 font-bold">How do I track my service history?</p>
+      Your service history, including completed jobs, customer ratings, and
+      payment records, is available in your AllDrive SOS account dashboard. You
+      can review past jobs, payments received, and your overall performance
+      metrics.
+    </div>
+  );
+
+  const Accordion22 = () => (
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divReffs.current[22] = el)}
+    >
+      <p className="my-5 font-bold">Can I offer multiple services at once?</p>
+      Yes, you can offer multiple services simultaneously, such as towing and
+      roadside assistance. Be sure to select all relevant services when setting
+      up your profile to receive job requests that match your capabilities.
+      However, make sure you have the required equipment, skills, and insurance
+      for each service type.{" "}
+    </div>
+  );
 
   // const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
 
   return (
     <>
-      <div className="w-full flex flex-row">
-        <div className="lg:w-1/4 md:w-1/3 py-6 px-3 hidden lg:flex md:flex">
-          <div className="w-full flex flex-col border-r-2 border-gray-500">
+      <div className="w-full flex flex-col gap-10">
+        <div className="w-full flex">
+          <div className="lg:w-3/5 border rounded-md p-4 flex flex-col gap-5">
+            <p className="text-lg font-bold mb-3">Frequently Asked Questions</p>
             {faqArray.map((item) => (
-              <div key={item.key} className="w-full p-2">
+              <div key={item.key} className="w-full">
                 <span
                   className={`text-base cursor-pointer ${
-                    open === item.key ? "font-bold" : ""
+                    open === item.key ? "font-semibold" : ""
                   }`}
-                  onClick={() => setOpen(item.key)}
+                  onClick={() => [
+                    setOpen(item.key),
+                    divReffs.current[item.key]?.scrollIntoView({
+                      behavior: "smooth",
+                    }),
+                  ]}
                 >
                   {item.label}
                 </span>
@@ -261,11 +506,9 @@ const ProviderFaqList = () => {
           </div>
         </div>
 
-        <div className="w-full lg:w-3/4 md:w-2/3 flex flex-col my-4">
-          <div className="hidden lg:flex md:flex w-full">{renderContent()}</div>
-
+        <div className="w-full flex flex-col mt-4">
           {/* For mobile view, all content is displayed */}
-          <div className="lg:hidden md:hidden block w-full">
+          <div className="flex flex-col gap-7 w-full">
             <Accordion1 />
             <Accordion2 />
             <Accordion3 />
@@ -274,6 +517,20 @@ const ProviderFaqList = () => {
             <Accordion6 />
             <Accordion7 />
             <Accordion8 />
+            <Accordion9 />
+            <Accordion10 />
+            <Accordion11 />
+            <Accordion12 />
+            <Accordion13 />
+            <Accordion14 />
+            <Accordion15 />
+            <Accordion16 />
+            <Accordion17 />
+            <Accordion18 />
+            <Accordion19 />
+            <Accordion20 />
+            <Accordion21 />
+            <Accordion22 />
           </div>
         </div>
       </div>

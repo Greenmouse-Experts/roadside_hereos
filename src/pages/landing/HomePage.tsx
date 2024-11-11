@@ -15,8 +15,8 @@ const HomePage = () => {
           <Assistance />
           <Stranded />
           <Works />
-          <DownloadApp />
           <BlogPage />
+          <DownloadApp />
         </div>
       </LandingLayout>
     </>

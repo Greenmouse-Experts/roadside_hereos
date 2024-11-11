@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
 
 const FaqList = () => {
-  const [open, setOpen] = React.useState(1);
+  const [open, setOpen] = React.useState(0);
+
+  const divRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const faqArray = [
     {
@@ -41,7 +43,13 @@ const FaqList = () => {
   ];
 
   const Accordion1 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divRefs.current[1] = el)}
+    >
+      <p className="my-5 font-bold">
+        What roadside assistance services do you provide?
+      </p>
       At AllDrive SOS, we offer comprehensive maintenance and emergency roadside
       assistance services for all motor vehicles. Our service list is
       continually expanding to meet your needs. For the most up-to-date list of
@@ -54,7 +62,13 @@ const FaqList = () => {
   );
 
   const Accordion2 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divRefs.current[2] = el)}
+    >
+      <p className="my-5 font-bold">
+        How do I request a roadside assistance service?
+      </p>
       Getting roadside assistance is simple! Just open the AllDrive SOS app or
       visit our website. Select the service you need, fill out the quick request
       form, and we'll connect you with nearby service providers ready to assist
@@ -65,7 +79,13 @@ const FaqList = () => {
   );
 
   const Accordion3 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divRefs.current[3] = el)}
+    >
+      <p className="my-5 font-bold">
+        How do I get charged for my roadside assistance?
+      </p>
       Our pricing is transparent and follows a cost-efficient pay-as-you-go
       model, ensuring you save money without worrying about membership fees or
       monthly subscriptions. Pricing varies based on factors such as service
@@ -74,7 +94,11 @@ const FaqList = () => {
   );
 
   const Accordion4 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divRefs.current[4] = el)}
+    >
+      <p className="my-5 font-bold">How long will it take to get help?</p>
       For a faster response, make sure your location services are enabled on
       your device. This helps us find service providers closest to you. When you
       request a service, you&apos;ll be able to choose a nearby provider and see
@@ -83,7 +107,13 @@ const FaqList = () => {
   );
 
   const Accordion5 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divRefs.current[5] = el)}
+    >
+      <p className="my-5 font-bold">
+        Should I tip my roadside assistance providers?
+      </p>
       While tipping roadside assistance providers is not mandatory in the US,
       it&apos;s a common way to show appreciation for good service, especially
       during inconvenient times or challenging tasks. Tipping is an individual
@@ -92,7 +122,13 @@ const FaqList = () => {
   );
 
   const Accordion6 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divRefs.current[6] = el)}
+    >
+      <p className="my-5 font-bold">
+        Do I need Auto Insurance to use AllDrive SOS?
+      </p>
       No! AllDrive SOS offers a convenient pay-as-you-go option. However, if
       your Auto insurance covers roadside assistance, we will provide you with a
       payment receipt via email to help you claim reimbursement from your
@@ -101,7 +137,13 @@ const FaqList = () => {
   );
 
   const Accordion7 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divRefs.current[7] = el)}
+    >
+      <p className="my-5 font-bold">
+        Can I cancel a pending roadside assistance request and get a refund?
+      </p>
       We aim to fulfill every roadside assistance request promptly and
       professionally. However, if you need to cancel a pending request, you can
       do so and receive a refund, subject to a 15% service charge deduction.
@@ -109,48 +151,37 @@ const FaqList = () => {
   );
 
   const Accordion8 = () => (
-    <div className="px-5 py-1 rounded-xl text-black">
+    <div
+      className="px-5 py-1 rounded-xl text-black"
+      ref={(el) => (divRefs.current[8] = el)}
+    >
+      <p className="my-5 font-bold">Why isn't my refund full?</p>
       We use secure third-party processors for all transactions, including banks
       and payment gateways. These institutions may charge fees for processing
       refunds, which is why a small service fee applies.
     </div>
   );
 
-  const renderContent = () => {
-    switch (open) {
-      case 1:
-        return <Accordion1 />;
-      case 2:
-        return <Accordion2 />;
-      case 3:
-        return <Accordion3 />;
-      case 4:
-        return <Accordion4 />;
-      case 5:
-        return <Accordion5 />;
-      case 6:
-        return <Accordion6 />;
-      case 7:
-        return <Accordion7 />;
-      case 8:
-        return <Accordion8 />;
-    }
-  };
-
   // const handleOpen = (value: number) => setOpen(open === value ? 0 : value);
 
   return (
     <>
-      <div className="w-full flex flex-row">
-        <div className="lg:w-1/4 md:w-1/3 py-6 px-3 hidden lg:flex md:flex">
-          <div className="w-full flex flex-col border-r-2 border-gray-500">
+      <div className="w-full flex flex-col gap-10">
+        <div className="w-full flex">
+          <div className="lg:w-3/5 border rounded-md p-4 flex flex-col gap-5">
+            <p className="text-lg font-bold mb-3">Frequently Asked Questions</p>
             {faqArray.map((item) => (
-              <div key={item.key} className="w-full p-2">
+              <div key={item.key} className="w-full">
                 <span
                   className={`text-base cursor-pointer ${
-                    open === item.key ? "font-bold" : ""
+                    open === item.key ? "font-semibold" : ""
                   }`}
-                  onClick={() => setOpen(item.key)}
+                  onClick={() => [
+                    setOpen(item.key),
+                    divRefs.current[item.key]?.scrollIntoView({
+                      behavior: "smooth",
+                    }),
+                  ]}
                 >
                   {item.label}
                 </span>
@@ -159,11 +190,9 @@ const FaqList = () => {
           </div>
         </div>
 
-        <div className="w-full lg:w-3/4 md:w-2/3 flex flex-col my-4">
-          <div className="hidden lg:flex md:flex w-full">{renderContent()}</div>
-
+        <div className="w-full flex flex-col mt-4">
           {/* For mobile view, all content is displayed */}
-          <div className="lg:hidden md:hidden block w-full">
+          <div className="flex flex-col gap-7 w-full">
             <Accordion1 />
             <Accordion2 />
             <Accordion3 />
