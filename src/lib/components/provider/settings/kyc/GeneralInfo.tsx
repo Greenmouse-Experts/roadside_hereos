@@ -143,7 +143,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
       }
       upload.mutateAsync(fd, {
         onSuccess: (data) => {
-          setImageVal([])
+          setImageVal([]);
           saveKyc({ ...kyc, insurance_doc: [...kyc.insurance_doc, ...data] });
           setUploading(2);
         },
@@ -167,8 +167,8 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
 
   // for business certificate
   const handleCertUpload = () => {
-    if(kyc.insurance_doc.length > 4){
-      toast.info("Maximum upload reached")
+    if (kyc.insurance_doc.length > 4) {
+      toast.info("Maximum upload reached");
       return;
     }
     if (bizCert?.length) {
@@ -401,27 +401,6 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
                   )}
                 />
               </div>
-              <Controller
-                name="tin"
-                control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: "Please enter category tin",
-                  },
-                }}
-                disabled={disabledField}
-                render={({ field }) => (
-                  <TextInput
-                    label="Tax Identification Number"
-                    labelClassName="text-[#000000B2] fw-500"
-                    error={errors.tin?.message}
-                    type={InputType.text}
-                    {...field}
-                    ref={null}
-                  />
-                )}
-              />
             </div>
             <div className="mt-3 relative">
               {!isLoading && (
@@ -566,7 +545,14 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
               <li className="fs-500">
                 <span className="fw-500">Insurance Company Rating:</span> All
                 insurance policies must be issued by a reputable insurance
-                company with an A- or better rating from <Link to={'https://web.ambest.com/home'} className="text-blue-500">A.M. Best</Link>.
+                company with an A- or better rating from{" "}
+                <Link
+                  to={"https://web.ambest.com/home"}
+                  className="text-blue-500"
+                >
+                  A.M. Best
+                </Link>
+                .
               </li>
               <li className="fs-500">
                 <span className="fw-500">Additional Insured:</span> ALLDRIVE SOS

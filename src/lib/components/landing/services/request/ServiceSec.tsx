@@ -263,7 +263,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                 </div>
               </div>
               <div>
-                {locationType === "auto" && (
+                {locationType === "autofill" && (
                   <>
                     <Controller
                       name="location"

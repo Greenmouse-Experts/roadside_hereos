@@ -30,6 +30,8 @@ const ProviderDetails = () => {
       ),
     },
   ];
+
+  console.log(data);
   return (
     <>
       {isLoading && (
@@ -51,7 +53,7 @@ const ProviderDetails = () => {
             <ProviderDetailsHeader
               picture={data?.data?.photo}
               name={data?.data?.name}
-              status={data?.data?.isSuspended}
+              status={data?.data?.isActive}
               id={`${id}`}
               email={data?.data?.email}
               refetch={refetch}

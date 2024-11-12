@@ -58,23 +58,38 @@ const ProviderDetailsHeader: FC<Props> = ({
       },
     });
   };
+
+  console.log(status);
+
   return (
     <>
       <div className="relative">
         <div className="bg-primary flex justify-end gap-x-3 pb-16 lg:pb-8 p-8 w-full rounded-lg">
           <div className="text-end">
             <div className="flex flex-row-reverse lg:gap-x-12 items-center gap-x-5">
-            <div className="text-white">
-               <p> Pending Balance: <span className="text-lg fw-600">{formatAsNgnMoney(pendingBal) || '$0'}</span></p>
-               <p> Available Balance: <span className="text-lg fw-600">{formatAsNgnMoney(walletBal) || '$0'}</span></p>
+              <div className="text-white">
+                <p>
+                  {" "}
+                  Pending Balance:{" "}
+                  <span className="text-lg fw-600">
+                    {formatAsNgnMoney(pendingBal) || "$0"}
+                  </span>
+                </p>
+                <p>
+                  {" "}
+                  Available Balance:{" "}
+                  <span className="text-lg fw-600">
+                    {formatAsNgnMoney(walletBal) || "$0"}
+                  </span>
+                </p>
               </div>
               <Menu placement="bottom-end">
                 <MenuHandler>
                   <Button className="bg-transparent px-0 mx-0 hover:shadow-none text-md flex items-center font-normal shadow-none capitalize">
                     <>
                       {!status
-                        ? FormatStatus["active"]
-                        : FormatStatus["inactive"]}
+                        ? FormatStatus["inactive"]
+                        : FormatStatus["active"]}
                     </>
                   </Button>
                 </MenuHandler>

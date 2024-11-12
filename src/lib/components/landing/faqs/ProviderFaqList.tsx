@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { FaCheck } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const ProviderFaqList = () => {
@@ -488,19 +489,24 @@ const ProviderFaqList = () => {
             <p className="text-lg font-bold mb-3">Frequently Asked Questions</p>
             {faqArray.map((item) => (
               <div key={item.key} className="w-full">
-                <span
-                  className={`text-base cursor-pointer ${
-                    open === item.key ? "font-semibold" : ""
-                  }`}
-                  onClick={() => [
-                    setOpen(item.key),
-                    divReffs.current[item.key]?.scrollIntoView({
-                      behavior: "smooth",
-                    }),
-                  ]}
-                >
-                  {item.label}
-                </span>
+                <div className="w-full flex gap-3">
+                  <div className="w-5 lg:w-6 h-5 lg:h-6 mt-2 lg:mt-[4px] circle place-center bg-pri">
+                    <FaCheck className="text-ter fs-300 lg:fs-500" />
+                  </div>
+                  <span
+                    className={`text-base mt-1 cursor-pointer ${
+                      open === item.key ? "font-semibold" : ""
+                    }`}
+                    onClick={() => [
+                      setOpen(item.key),
+                      divReffs.current[item.key]?.scrollIntoView({
+                        behavior: "smooth",
+                      }),
+                    ]}
+                  >
+                    {item.label}
+                  </span>
+                </div>
               </div>
             ))}
           </div>

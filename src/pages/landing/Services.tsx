@@ -74,6 +74,16 @@ const ServicesPage = () => {
               </div>
             </div>
           </div>
+
+          {/**   <div className="section">
+            <div className="box">
+              <p className="text-2xl fw-600">Explanation of Services</p>
+              <p className="text-lg lg:w-9/12 fw-500 mt-4 mb-7">
+                Here's a breakdown of our services to help you select the best
+                option:
+              </p>
+            </div>
+                      </div> **/}
           <DownloadApp />
         </div>
       </LandingLayout>
