@@ -33,7 +33,7 @@ function App() {
         <Route path="/request" element={<ServicesPage />} />
         <Route path="/request/:id" element={<RequestPage />} />
         <Route path="/contact" element={<ContactUsPage />} />
-        <Route path="/career" element={<CareersPage />} />
+        <Route path="/join-us" element={<CareersPage />} />
         <Route path="/terms" element={<TermsPage />} />
         <Route path="/cookie" element={<CookiePage />} />
         <Route path="/privacy" element={<PolicyPage />} />

@@ -34,8 +34,8 @@ export const FOOTER_LIST = [
     name: "FAQs",
   },
   {
-    url: "/career",
-    name: "Careers",
+    url: "/join-us",
+    name: "Join Us",
   },
   {
     url: "/privacy",

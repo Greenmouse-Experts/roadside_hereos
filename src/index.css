@@ -180,22 +180,22 @@ input[type="checkbox"]:checked {
   grid-auto-rows: max-content; /* Ensure each row takes the height of its content */
   gap: 10px; /* Add gap between grid items if desired */
 }
-.input-gray input{
-  background: #F3F3F3;
+.input-gray input {
+  background: #f3f3f3;
 }
-.react-datepicker-wrapper{
+.react-datepicker-wrapper {
   width: 100%;
   padding: 4px;
   outline: none;
   border: none;
 }
-.react-datepicker__view-calendar-icon input{
+.react-datepicker__view-calendar-icon input {
   margin-left: 10px;
 }
-.css-1ichst0{
+.css-1ichst0 {
   background: #111827 !important;
 }
-.css-14xmt93 >.ps-menu-button:hover{
+.css-14xmt93 > .ps-menu-button:hover {
   background: #111827 !important;
 }
 
@@ -430,17 +430,17 @@ input[type="checkbox"]:checked {
     background-image: url("https://res.cloudinary.com/greenmouse-tech/image/upload/v1692974015/globfolio/Group_48466_1_afdkbj.png");
     background-size: cover;
   }
-  .box-shade{
+  .box-shade {
     box-shadow: rgba(17, 17, 26, 0.1) 0px 0px 16px;
-    }
-  .new-shade{
+  }
+  .new-shade {
     box-shadow: 0px 4px 27.6px -1px rgba(0, 0, 0, 0.07);
   }
-  .bg-policy{
-    background: radial-gradient(50% 50% at 50% 50%, #0D2E74 0%, #172748 100%);
+  .bg-policy {
+    background: radial-gradient(50% 50% at 50% 50%, #0d2e74 0%, #172748 100%);
   }
 
-  .my-list{
+  .my-list {
     list-style: disc !important;
     list-style-position: inside !important;
     padding-left: 10px;

@@ -28,7 +28,7 @@ const Assistance = () => {
               </div>
               <Button
                 title={"Become a Service Provider"}
-                onClick={() => navigate("/career")}
+                onClick={() => navigate("/join-us")}
                 altClassName="btn-feel mt-5 lg:mt-0 fs-500 fw-500 bg-[#FEB470] text-black px-6 py-2"
               />
             </div>
