@@ -352,7 +352,7 @@ const TermsPage = () => {
         ALLDRIVE SOS via our customer support chat or by submitting a detailed
         form on our{" "}
         <Link to={"/contact"} className="text-blue-700 fw-500">
-          Contact page{" "}
+          Contact Us page{" "}
         </Link>
         for further legal action.
       </p>
