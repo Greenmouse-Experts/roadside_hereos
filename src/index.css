@@ -199,6 +199,38 @@ input[type="checkbox"]:checked {
   background: #111827 !important;
 }
 
+/* Outer list styling */
+.outer-list {
+  counter-reset: section; /* Reset counter for outer list */
+  list-style: none; /* Remove default list styling */
+}
+
+.outer-list > li {
+  counter-increment: section; /* Increment outer list counter */
+  margin-bottom: 1rem;
+}
+
+.outer-list > li::before {
+  content: counter(section) ". "; /* Display outer counter */
+  font-weight: bold;
+}
+
+.outer-list ol {
+  counter-reset: subsection; /* Reset counter for inner list */
+  list-style: none;
+}
+
+.outer-list ol > li {
+  counter-increment: subsection; /* Increment inner list counter */
+  margin-bottom: 0.5rem;
+}
+
+.outer-list ol > li::before {
+  content: counter(section) "." counter(subsection) " "; /* Display inner counter */
+  font-weight: normal;
+  padding-right: 0.3em;
+}
+
 @layer components {
   /* container settings */
   .box {

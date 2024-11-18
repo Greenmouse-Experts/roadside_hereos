@@ -310,7 +310,11 @@ const TermsPage = () => {
         ALLDRIVE SOS collects personal, payment, and location data necessary to
         provide services. We comply with U.S. data privacy regulations to
         protect user information. For details on how your data is collected and
-        used, please refer to our Privacy Policy.
+        used, please refer to our{" "}
+        <Link to={"/privacy"} className="text-blue-700 fw-500">
+          Privacy Policy
+        </Link>
+        .
       </p>
     </div>
   );
@@ -346,7 +350,11 @@ const TermsPage = () => {
         contact emergency services by calling 911 or following the appropriate
         emergency procedures. Once safe, the incident should be reported to
         ALLDRIVE SOS via our customer support chat or by submitting a detailed
-        form on our contact page for further legal action.
+        form on our{" "}
+        <Link to={"/contact"} className="text-blue-700 fw-500">
+          contact page{" "}
+        </Link>
+        for further legal action.
       </p>
     </div>
   );
@@ -382,7 +390,7 @@ const TermsPage = () => {
       <p className="mt-3">
         If you have any questions, concerns, or disputes, please contact our
         support team by completing the form on our{" "}
-        <Link to={"/contant"} className="text-blue-700 fw-500">
+        <Link to={"/contact"} className="text-blue-700 fw-500">
           Contact Us
         </Link>{" "}
         page.
@@ -403,7 +411,7 @@ const TermsPage = () => {
       <p className="mt-3">
         By accessing or using the ALLDRIVE SOS Platform, you agree to be bound
         by these Terms. If you have any questions or concerns, please{" "}
-        <Link to={"/contant"} className="text-blue-700 fw-500">
+        <Link to={"/contact"} className="text-blue-700 fw-500">
           Contact Us.
         </Link>{" "}
       </p>
