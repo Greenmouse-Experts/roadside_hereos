@@ -72,6 +72,9 @@ const ProviderRegisterForm = () => {
       password: data.password,
       userType: "professional",
       serviceTypeId: values,
+      referralSource: data.referralSource
+        ? data.referralSource
+        : selectedAvenue,
       captcha: captchaRef.current.getValue(),
     };
     mutation.mutate(payload, {
@@ -81,6 +84,7 @@ const ProviderRegisterForm = () => {
         setShowModal(true);
       },
       onError: (error: any) => {
+        console.log(error);
         toast.error(error.response.data.message);
         setIsBusy(false);
       },
@@ -93,7 +97,7 @@ const ProviderRegisterForm = () => {
     const handleOutsideClick = (e: any) => {
       if (!ref?.current?.contains(e.target)) {
         setShowDrop(false);
-        setSelectDrop(false);
+        // setSelectDrop(false);
       }
     };
 
@@ -324,11 +328,11 @@ const ProviderRegisterForm = () => {
         </div>
 
         <div className=" grid lg:grid-cols-2 gap-4">
-          <div className="mt-4" ref={ref}>
+          <div className="mt-4">
             <label className="fw-500 text-[#000000B2]">
               How did you hear about us?
             </label>
-            <div className="border border-gray-400 w-full mt-[4px] px-[9px] py-[9px] rounded flex items-center gap-x-2">
+            <div className="border border-gray-400 w-full mt-[4px] px-[9px] py-[10px] rounded flex items-center gap-x-2">
               <div className="w-full relative">
                 <div
                   className="rounded cursor-pointer flex items-center justify-between"
@@ -377,19 +381,19 @@ const ProviderRegisterForm = () => {
           {selectedAvenue === "Other (Please Specify)" && (
             <div className="mt-8">
               <Controller
-                name="email"
+                name="referralSource"
                 control={control}
                 rules={{
                   required: {
                     value: true,
-                    message: "Please enter your email",
+                    message: "Please specify",
                   },
                 }}
                 render={({ field }) => (
                   <TextInput
                     label=""
                     labelClassName="text-[#000000B2] fw-500"
-                    error={errors.email?.message}
+                    error={errors?.referralSource?.message}
                     type={InputType.text}
                     {...field}
                     ref={null}
