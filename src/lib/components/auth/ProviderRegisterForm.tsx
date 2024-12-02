@@ -19,18 +19,20 @@ import useModal from "../../hooks/useModal";
 import RegisterSuccess from "./RegisterSuccess";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
-
-
 const ProviderRegisterForm = () => {
   const [isBusy, setIsBusy] = useState(false);
   const { Modal, setShowModal } = useModal();
   const [showDrop, setShowDrop] = useState(false);
+  const [selectDrop, setSelectDrop] = useState(false);
+  const [selectedAvenue, setSelectedAvenue] = useState("");
+
   // const [selectedCat, setSelectedCat] = useState([]);
   const [values, setValues] = useState<string[]>([]);
   const { data: services } = useQuery({
     queryKey: ["getCat"],
     queryFn: getCategories,
   });
+
   const handleCheckboxChange = (event: any) => {
     if (event.target.checked) {
       const newValue = event.target.value; // Replace this with the value you want to add
@@ -39,7 +41,7 @@ const ProviderRegisterForm = () => {
       values.splice(values.indexOf(event.target.value), 1);
     }
   };
-  
+
   const {
     control,
     handleSubmit,
@@ -60,8 +62,7 @@ const ProviderRegisterForm = () => {
     mutationFn: registerProvider,
   });
   const onSubmit = (data: any) => {
-    if(data.email.includes('+')){
-
+    if (data.email.includes("+")) {
     }
     setIsBusy(true);
     const payload = {
@@ -77,7 +78,7 @@ const ProviderRegisterForm = () => {
       onSuccess: (data) => {
         setIsBusy(false);
         toast.success(data?.message);
-        setShowModal(true)
+        setShowModal(true);
       },
       onError: (error: any) => {
         toast.error(error.response.data.message);
@@ -89,9 +90,10 @@ const ProviderRegisterForm = () => {
   const ref = useRef<any>(null);
 
   useEffect(() => {
-    const handleOutsideClick = (e:any) => {
+    const handleOutsideClick = (e: any) => {
       if (!ref?.current?.contains(e.target)) {
-        setShowDrop(false)
+        setShowDrop(false);
+        setSelectDrop(false);
       }
     };
 
@@ -100,6 +102,41 @@ const ProviderRegisterForm = () => {
       document.removeEventListener("click", handleOutsideClick, false);
     };
   }, [close]);
+
+  const selectOptions = [
+    "Google",
+    "Bing",
+    "Facebook",
+    "Instagram",
+    "Twitter/X",
+    "TikTok",
+    "Friend or Family Recommendation",
+    "Referral from Another Technician",
+    "Google Ads",
+    "Email Newsletter",
+    "Roadside Assistance Comparison Website",
+    "Blog or Article",
+    "YouTube or Video Ad",
+    "Radio or Podcast",
+    "Television Ad",
+    "Returning Service Provider",
+    "Google Play",
+    "Apple App Store",
+    "Billboard or Outdoor Signage",
+    "Flyer or Brochure",
+    "Indeed",
+    "LinkedIn",
+    "ZipRecruiter",
+    "Glassdoor",
+    "Craigslist",
+    "Yelp Business Directory",
+    "Industry Partner",
+    "Trade Shows or Industry Events",
+    "Community Center or Bulletin Board",
+    "Referral from AllDrive SOS Customer",
+    "Other (Please Specify)",
+  ];
+
   return (
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
@@ -135,8 +172,8 @@ const ProviderRegisterForm = () => {
                 value: true,
                 message: "Please enter your email",
               },
-              validate:(val) => {
-                if (val.includes('+')) {
+              validate: (val) => {
+                if (val.includes("+")) {
                   return "  Invalid Email";
                 }
               },
@@ -184,7 +221,10 @@ const ProviderRegisterForm = () => {
             <div className="border border-gray-400 w-full mt-[4px] px-[9px] py-[9px] rounded flex items-center gap-x-2">
               <MdOutlineHomeRepairService className="text-2xl text-gray-700" />
               <div className="w-full relative">
-                <div className="rounded cursor-pointer flex items-center justify-between" onClick={() => setShowDrop(!showDrop)}>
+                <div
+                  className="rounded cursor-pointer flex items-center justify-between"
+                  onClick={() => setShowDrop(!showDrop)}
+                >
                   <div className="w-[90%] flex items-center gapx-2 overflow-x-auto scroll-pro whitespace-nowrap">
                     {/* {selectedCat.map((item: selectedCatType) => (
                       <span className="px-1 rounded">{item.name},</span>
@@ -226,6 +266,7 @@ const ProviderRegisterForm = () => {
             </div>
           </div>
         </div>
+
         <div className=" grid lg:grid-cols-2 gap-4">
           <Controller
             name="password"
@@ -281,12 +322,90 @@ const ProviderRegisterForm = () => {
             )}
           />
         </div>
-        <div className="mt-8">
-            <ReCAPTCHA
-              sitekey={`6Leno1MpAAAAAO0BmPjneoVUVd5FKfw0ED40qvpc`}
-              ref={captchaRef}
-            />
+
+        <div className=" grid lg:grid-cols-2 gap-4">
+          <div className="mt-4" ref={ref}>
+            <label className="fw-500 text-[#000000B2]">
+              How did you hear about us?
+            </label>
+            <div className="border border-gray-400 w-full mt-[4px] px-[9px] py-[9px] rounded flex items-center gap-x-2">
+              <div className="w-full relative">
+                <div
+                  className="rounded cursor-pointer flex items-center justify-between"
+                  onClick={() => setSelectDrop(!selectDrop)}
+                >
+                  <div className="w-[100%] flex items-center gapx-2 overflow-x-auto scroll-pro whitespace-nowrap">
+                    {/* {selectedCat.map((item: selectedCatType) => (
+                      <span className="px-1 rounded">{item.name},</span>
+                    ))} */}
+                    <p>{selectedAvenue}</p>
+                  </div>
+                  <div onClick={(e) => e.preventDefault()}>
+                    {selectDrop ? (
+                      <FaChevronUp
+                        className="text-[13px]"
+                        onClick={() => setSelectDrop(false)}
+                      />
+                    ) : (
+                      <FaChevronDown
+                        className="text-[13px]"
+                        onClick={() => setSelectDrop(true)}
+                      />
+                    )}
+                  </div>
+                </div>
+                {selectDrop && (
+                  <div className="absolute grid gap-2 z-10 top-8 left-0 h-[250px] overflow-y-scroll bg-white w-full p-3 border shadow">
+                    {selectOptions.map((options, index) => (
+                      <div
+                        className="flex items-center cursor-pointer gap-x-2 gap-y-2"
+                        onClick={() => [
+                          setSelectedAvenue(options),
+                          setSelectDrop(false),
+                        ]}
+                        key={index}
+                      >
+                        {options}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
           </div>
+
+          {selectedAvenue === "Other (Please Specify)" && (
+            <div className="mt-8">
+              <Controller
+                name="email"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Please enter your email",
+                  },
+                }}
+                render={({ field }) => (
+                  <TextInput
+                    label=""
+                    labelClassName="text-[#000000B2] fw-500"
+                    error={errors.email?.message}
+                    type={InputType.text}
+                    {...field}
+                    ref={null}
+                  />
+                )}
+              />
+            </div>
+          )}
+        </div>
+
+        <div className="mt-8">
+          <ReCAPTCHA
+            sitekey={`6Leno1MpAAAAAO0BmPjneoVUVd5FKfw0ED40qvpc`}
+            ref={captchaRef}
+          />
+        </div>
         <div className="mt-12">
           <Button
             title={
