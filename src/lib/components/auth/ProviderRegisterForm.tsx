@@ -56,6 +56,7 @@ const ProviderRegisterForm = () => {
       password: "",
       confirm_password: "",
       serviceTypeId: [],
+      referralSource: "",
     },
   });
   const mutation = useMutation({
@@ -342,7 +343,7 @@ const ProviderRegisterForm = () => {
                     {/* {selectedCat.map((item: selectedCatType) => (
                       <span className="px-1 rounded">{item.name},</span>
                     ))} */}
-                    <p>{selectedAvenue}</p>
+                    <p className="">{selectedAvenue}</p>
                   </div>
                   <div onClick={(e) => e.preventDefault()}>
                     {selectDrop ? (
