@@ -106,7 +106,7 @@ const Footer = () => {
             <p className="fw-600 mb-4 mt-10 lg:mt-0">Legal</p>
             <ul className="grid gap-6 fs-500">
               <li>
-                <Link to={"/terms"}>Terms and Conditions</Link>
+                <Link to={"/terms"}>Terms of Service</Link>
               </li>
               <li>
                 <Link to={"/privacy"}>Privacy Policy</Link>
