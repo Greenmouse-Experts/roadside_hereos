@@ -289,26 +289,11 @@ const ServicesPage = () => {
                 </div>
 
                 <div className="lg:w-4/12 md:w-6/12 hidden md:flex flex-col justify-start">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                    {service &&
-                      !!service.data.length &&
-                      service.data
-                        .filter((where: ServiceCatItem) => where.isPublished)
-                        .map((item: ServiceCatItem) => (
-                          <div
-                            key={item.id}
-                            onClick={() => navigate(`/request/${item.id}`)}
-                            className="text-center w-full flex flex-col hover:scale-105 duration-100"
-                          >
-                            <div>
-                              <img
-                                src={item.icon}
-                                alt="icon"
-                                className="w-16 h-16 object-contain mx-auto"
-                              />
-                            </div>
-                          </div>
-                        ))}
+                  <div className="w-full h-full relative">
+                    <img
+                      src="https://res.cloudinary.com/do2kojulq/image/upload/v1733139197/Group_1171275284-min_1_mc29mv.png"
+                      className="absolute top-[5%]"
+                    />
                   </div>
                 </div>
               </div>
