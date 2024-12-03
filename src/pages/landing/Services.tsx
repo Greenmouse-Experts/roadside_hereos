@@ -77,7 +77,7 @@ const ServicesPage = () => {
 
           <div className="section">
             <div className="box">
-              <div className="mt-6 lg:flex gap-8 lg:mt-16">
+              <div className="lg:flex gap-8 lg:mt-16 min-h-screen">
                 <div className="box flex flex-col lg:w-8/12 md:w-6/12 w-full">
                   <p className="text-2xl fw-600">Explanation of Services</p>
                   <p className="text-lg lg:w-9/12 fw-500 mt-4 mb-7">
@@ -288,11 +288,11 @@ const ServicesPage = () => {
                   </span>
                 </div>
 
-                <div className="lg:w-4/12 md:w-6/12 hidden md:flex flex-col justify-start">
+                <div className="lg:w-4/12 md:w-6/12 md:sticky top-20 hidden md:flex flex-col justify-start">
                   <div className="w-full h-full relative">
                     <img
                       src="https://res.cloudinary.com/do2kojulq/image/upload/v1733139197/Group_1171275284-min_1_mc29mv.png"
-                      className="absolute top-[5%]"
+                      className="top-[5%]"
                     />
                   </div>
                 </div>

@@ -390,22 +390,45 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
                       {...field}
                     >
                       <option value="">Please select an option</option>
-                      <option value="Corporation (federal or provincial/territorial)">
-                        Corporation (federal or provincial/territorial)
+                      <option value="Limited Liability Company (LLC)">
+                        Limited Liability Company (LLC)
                       </option>
-                      <option value="Sole proprietorship or partnership">
-                        Sole proprietorship or partnership
+                      <option value="Sole Proprietorship">
+                        Sole Proprietorship
                       </option>
-                      <option value="Cooperative">Cooperative</option>
+                      <option value="Partnership">Partnership</option>
+                      <option value="Corporation">Corporation</option>
                     </select>
                   )}
                 />
               </div>
+
+              <Controller
+                name="tin"
+                control={control}
+                rules={{
+                  required: {
+                    value: true,
+                    message: "Please enter category tin",
+                  },
+                }}
+                disabled={disabledField}
+                render={({ field }) => (
+                  <TextInput
+                    label="Tax Identification Number"
+                    labelClassName="text-[#000000B2] fw-500"
+                    error={errors.tin?.message}
+                    type={InputType.text}
+                    {...field}
+                    ref={null}
+                  />
+                )}
+              />
             </div>
             <div className="mt-3 relative">
               {!isLoading && (
                 <ImageInput
-                  label="Upload Business Registration Certificate"
+                  label="Upload Business Registration Certificate (File must be in jpg or jpeg format)"
                   setImage={setbizCert}
                   prevValue={prevKyc?.business_reg_certificate}
                   disabled={disabledField}
@@ -425,7 +448,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
             <div className="mt-3 relative">
               {!isLoading && (
                 <ImageInput
-                  label="Upload Insurance Requirement"
+                  label="Upload Insurance Requirement (File must be in jpg or jpeg format)"
                   setImage={setImageVal}
                   prevValue={
                     (prevKyc &&
@@ -458,7 +481,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
                 ))}
               </div>
               <div
-                className="absolute top-1 left-[260px]"
+                className="absolute top-1 left-[550px]"
                 // onMouseEnter={() => setShowTip(true)}
                 // onMouseLeave={() => setShowTip(false)}
               >

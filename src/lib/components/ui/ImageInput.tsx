@@ -16,11 +16,10 @@ const ImageInput: FC<Props> = ({
   prevValue,
   disabled,
 }) => {
- 
   const [preview, setPreview] = useState<any>(prevValue);
   useEffect(() => {
-    setPreview(prevValue)
-  },[prevValue])
+    setPreview(prevValue);
+  }, [prevValue]);
   //   handle drag and drop
   const onDrop = useCallback((acceptedFiles: Array<File>) => {
     setImage(acceptedFiles);

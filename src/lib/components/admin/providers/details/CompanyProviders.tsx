@@ -9,7 +9,7 @@ interface Props {
   id: string;
 }
 const CompanyProviders: FC<Props> = ({ id }) => {
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, refetch } = useQuery({
     queryFn: () => getCompanyProviders(id),
     queryKey: ["companyProviders"],
   });
@@ -33,7 +33,7 @@ const CompanyProviders: FC<Props> = ({ id }) => {
             <EmptyState msg="There are no providers currently in this company." />
           </div>
         )}
-        {data && <StaffList data={data?.data} />}
+        {data && <StaffList data={data?.data} refetch={refetch} />}
       </div>
     </>
   );
