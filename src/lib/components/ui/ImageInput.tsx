@@ -1,6 +1,7 @@
 import React, { useState, useCallback, FC, useEffect } from "react";
 import { useDropzone } from "react-dropzone";
 import { AiFillPicture } from "react-icons/ai";
+import { toast } from "react-toastify";
 
 interface Props {
   label: string;
@@ -20,18 +21,41 @@ const ImageInput: FC<Props> = ({
   useEffect(() => {
     setPreview(prevValue);
   }, [prevValue]);
+
   //   handle drag and drop
-  const onDrop = useCallback((acceptedFiles: Array<File>) => {
-    setImage(acceptedFiles);
-    const file = new FileReader();
-    file.onload = function () {
-      setPreview(file.result);
-    };
-    file.readAsDataURL(acceptedFiles[0]);
+  const onDrop = useCallback(
+    (acceptedFiles: Array<File>) => {
+      if (acceptedFiles.length === 0) {
+        return;
+      }
+
+      setImage(acceptedFiles);
+
+      const file = acceptedFiles[0];
+      if (file instanceof Blob) {
+        const reader = new FileReader();
+        reader.onload = () => setPreview(reader.result);
+        reader.readAsDataURL(file);
+      } else {
+        toast.error("Invalid file type. Please upload an image.");
+      }
+    },
+    [setImage]
+  );
+
+  // Handle rejected files
+  const onDropRejected = useCallback(() => {
+    toast.error(
+      "Only image files are allowed. Please upload files in formats like JPG"
+    );
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
+    onDropRejected,
+    accept: {
+      "image/jpeg": [], // Accept only image types
+    },
   });
   return (
     <>
@@ -68,7 +92,11 @@ const ImageInput: FC<Props> = ({
             {...getRootProps()}
             className="w-full border bg-white border-gray-400 rounded-lg min-h-[120px] p-4 flex justify-between items-center"
           >
-            <input {...getInputProps()} disabled={disabled} />
+            <input
+              {...getInputProps()}
+              disabled={disabled}
+              accept="image/jpeg"
+            />
             {preview ? (
               ""
             ) : isDragActive ? (

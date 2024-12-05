@@ -39,7 +39,7 @@ const StaffDetail = () => {
   });
   const { Modal, setShowModal } = useModal();
   const { Modal: DisApproval, setShowModal: SetDisApproval } = useModal();
-  const {Dialog, setShowModal:ShowDialog} = useDialog()
+  const { Dialog, setShowModal: ShowDialog } = useDialog();
   const approveKyc = async () => {
     const payload = {
       approved: true,
@@ -81,8 +81,20 @@ const StaffDetail = () => {
           <div>
             <div className="w-full h-[140px] flex justify-end bg-review border p-3 rounded-t-lg lg:px-5 items-center">
               <div className="text-white">
-               <p> Pending Balance: <span className="text-lg fw-600">{formatAsNgnMoney(data.data.pendingBal) || '$0'}</span></p>
-               <p> Available Balance: <span className="text-lg fw-600">{formatAsNgnMoney(data.data.walletBal) || '$0'}</span></p>
+                <p>
+                  {" "}
+                  Pending Balance:{" "}
+                  <span className="text-lg fw-600">
+                    {formatAsNgnMoney(data.data.pendingBal) || "$0"}
+                  </span>
+                </p>
+                <p>
+                  {" "}
+                  Available Balance:{" "}
+                  <span className="text-lg fw-600">
+                    {formatAsNgnMoney(data.data.walletBal) || "$0"}
+                  </span>
+                </p>
               </div>
             </div>
             <div className="flex relative justify-end px-8">
@@ -99,12 +111,22 @@ const StaffDetail = () => {
                   {data?.data?.reviewsAvg ? (
                     <Rating value={Number(data?.data?.reviewsAvg)} readonly />
                   ) : (
-                    <Rating value={0} readonly onClick={() => ShowDialog(true)}/>
+                    <Rating
+                      value={0}
+                      readonly
+                      onClick={() => ShowDialog(true)}
+                    />
                   )}
                   <div className="text-center">
                     {data?.data?.reviewsAvg ? (
-                      <p className="fs-400 inline fw-500 cursor-pointer" onClick={() => ShowDialog(true)}>
-                        <span className="fw-600 text-lg">{data?.data?.reviewsAvg}</span>/5 Rating
+                      <p
+                        className="fs-400 inline fw-500 cursor-pointer"
+                        onClick={() => ShowDialog(true)}
+                      >
+                        <span className="fw-600 text-lg">
+                          {data?.data?.reviewsAvg}
+                        </span>
+                        /5 Rating
                       </p>
                     ) : (
                       <p className="fs-400 fw-500">No Rating Yet</p>
@@ -124,7 +146,7 @@ const StaffDetail = () => {
                 <p className="fs-500 text-gray-500 fw-500 pl-3 mb-3">
                   Service Provider
                 </p>
-                {!data?.data.verified  && (
+                {!data?.data.verified && (
                   <div className="text-red-600 fw-600 flex items-center gap-x-2">
                     <span className="w-3 h-3 circle bg-red-600 block"></span>{" "}
                     Not Verified
@@ -136,22 +158,22 @@ const StaffDetail = () => {
                     Verified
                   </div>
                 )}
-                {!data?.data.verified  && (
-                    <div className="flex gap-x-2 mt-2">
-                      <button
-                        className="btn-like px-3 py-1 fs-400"
-                        onClick={() => setShowModal(true)}
-                      >
-                        Approve
-                      </button>
-                      <button
-                        className="border border-gray-600 px-2 py-1 rounded-[4px] fs-400"
-                        onClick={() => SetDisApproval(true)}
-                      >
-                        Disapprove
-                      </button>
-                    </div>
-                  )}
+                {!data?.data.verified && (
+                  <div className="flex gap-x-2 mt-2">
+                    <button
+                      className="btn-like px-3 py-1 fs-400"
+                      onClick={() => setShowModal(true)}
+                    >
+                      Approve
+                    </button>
+                    <button
+                      className="border border-gray-600 px-2 py-1 rounded-[4px] fs-400"
+                      onClick={() => SetDisApproval(true)}
+                    >
+                      Disapprove
+                    </button>
+                  </div>
+                )}
               </div>
               <div>
                 <p className="fw-500 text-gray-500 mb-4">Phone</p>
@@ -159,7 +181,9 @@ const StaffDetail = () => {
                   <div className="bg-review w-10 h-10 circle place-center text-white">
                     <BsTelephone />
                   </div>
-                  <p className="fw-500">{formatPhoneNumber(data?.data.phone)}</p>
+                  <p className="fw-500">
+                    {formatPhoneNumber(data?.data.phone)}
+                  </p>
                 </div>
               </div>
               <div>
@@ -177,7 +201,9 @@ const StaffDetail = () => {
                   <div className="bg-review shrink-0 w-10 h-10 circle place-center text-white">
                     <MdLocationCity />
                   </div>
-                  <p className="fw-500 text-black">{kyc?.data?.city}</p>
+                  <p className="fw-500 text-black uppercase">
+                    {kyc?.data?.city}
+                  </p>
                 </div>
               </div>
               <div>
@@ -227,7 +253,7 @@ const StaffDetail = () => {
                   <p className="w-3/12 shrink-0 text-gray-600 ">
                     Account Name:
                   </p>
-                  <p className="fw-500">{kyc?.data?.account_name}</p>
+                  <p className="fw-500 uppercase">{kyc?.data?.account_name}</p>
                 </div>
                 <div className="flex items-center">
                   <p className="w-3/12 shrink-0 text-gray-600 ">
@@ -237,7 +263,7 @@ const StaffDetail = () => {
                 </div>
                 <div className="flex items-center">
                   <p className="w-3/12 shrink-0 text-gray-600 ">Bank Name:</p>
-                  <p className="fw-500">{kyc?.data?.bank_name}</p>
+                  <p className="fw-500 uppercase">{kyc?.data?.bank_name}</p>
                 </div>
                 <div className="flex items-center">
                   <p className="w-3/12 shrink-0 text-gray-600 ">
@@ -249,13 +275,15 @@ const StaffDetail = () => {
                   <p className="w-3/12 shrink-0 text-gray-600 ">
                     Car Description:
                   </p>
-                  <p className="fw-500">{kyc?.data?.car_description}</p>
+                  <p className="fw-500 uppercase">
+                    {kyc?.data?.car_description}
+                  </p>
                 </div>
                 <div className="flex items-center">
                   <p className="w-3/12 shrink-0 text-gray-600 ">
                     Plate Number:
                   </p>
-                  <p className="fw-500">{kyc?.data?.plate_number}</p>
+                  <p className="fw-500 uppercase">{kyc?.data?.plate_number}</p>
                 </div>
               </div>
             </div>
@@ -280,7 +308,7 @@ const StaffDetail = () => {
         />
       </DisApproval>
       <Dialog title="Driver Reviews" size="lg">
-        <ViewReviewsModal id={`${id}`}/>
+        <ViewReviewsModal id={`${id}`} />
       </Dialog>
     </>
   );

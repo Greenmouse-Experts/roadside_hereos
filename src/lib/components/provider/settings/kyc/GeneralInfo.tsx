@@ -10,7 +10,7 @@ import ImageInput from "../../../ui/ImageInput";
 import { useMutation } from "@tanstack/react-query";
 import { uploadFile } from "../../../../services/api/routineApi";
 import { toast } from "react-toastify";
-import { FaCircleInfo } from "react-icons/fa6";
+import { FaCheck, FaCircleInfo } from "react-icons/fa6";
 import dayjs from "dayjs";
 import { usePlacesWidget } from "react-google-autocomplete";
 import { GOOGLE_API_KEY } from "../../../../services/constant";
@@ -23,7 +23,6 @@ import {
 } from "../../../../utils";
 import useModal from "../../../../hooks/useModal";
 import { MdCancel } from "react-icons/md";
-import { Link } from "react-router-dom";
 
 interface Props {
   next: () => void;
@@ -428,7 +427,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
             <div className="mt-3 relative">
               {!isLoading && (
                 <ImageInput
-                  label="Upload Business Registration Certificate"
+                  label="Upload Business Registration Certificate (File must be in jpg or jpeg format)"
                   setImage={setbizCert}
                   prevValue={prevKyc?.business_reg_certificate}
                   disabled={disabledField}
@@ -448,7 +447,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
             <div className="mt-3 relative">
               {!isLoading && (
                 <ImageInput
-                  label="Upload Insurance Requirement"
+                  label="Upload Insurance Requirement (File must be in jpg or jpeg format)"
                   setImage={setImageVal}
                   prevValue={
                     (prevKyc &&
@@ -481,7 +480,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
                 ))}
               </div>
               <div
-                className="absolute top-1 left-[260px]"
+                className="absolute top-1 left-[550px]"
                 // onMouseEnter={() => setShowTip(true)}
                 // onMouseLeave={() => setShowTip(false)}
               >
@@ -556,41 +555,93 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
       </div>
       <Modal title="">
         <div className="text-black">
-          <p className="fw-500 fs-500 relative -top-5">
-            Upload General Liability Insurance and Commercial Vehicle Insurance
-            (if rendering towing service).
-          </p>
-          <div className="">
-            <p className="fw-600 fs-500">
-              Insurance Policy Requirements Guideline:
-            </p>
-            <ul className="grid gap-2 mt-3">
-              <li className="fs-500">
-                <span className="fw-500">Insurance Company Rating:</span> All
-                insurance policies must be issued by a reputable insurance
-                company with an A- or better rating from{" "}
-                <Link
-                  to={"https://web.ambest.com/home"}
-                  className="text-blue-500"
-                >
-                  A.M. Best
-                </Link>
-                .
-              </li>
-              <li className="fs-500">
-                <span className="fw-500">Additional Insured:</span> ALLDRIVE SOS
-                LLC must be included as an additional insured on both your
-                Commercial General Liability and Commercial Automobile insurance
-                policies.
-              </li>
-              <li className="fs-500">
-                <span className="fw-500">Policy Renewal:</span> When your
-                insurance policies are renewed, you must provide ALLDRIVE SOS
-                LLC with an updated certificate of insurance. You can do this by
-                logging into your account and updating your KYC information
-                under the "Settings" tab.
-              </li>
-            </ul>
+          <div className="px-5">
+            <div className="w-full flex gap-3">
+              <div className="w-5 lg:w-6 h-5 lg:h-6 mt-2 lg:mt-[4px] circle place-center bg-pri">
+                <FaCheck className="text-ter fs-300 lg:fs-500" />
+              </div>
+              <span className="fs-700 fw-700 mt-1">Insurance Requirements</span>
+            </div>
+            <div className="mt-3 w-full">
+              <ul
+                className="flex flex-col gap-3"
+                style={{ listStyle: "circle" }}
+              >
+                <li>
+                  <span className="fw-700">Certificate of Insurance</span>: Hold
+                  active Commercial General Liability and Commercial Automobile
+                  Insurance from a reputable insurance company with an A- or
+                  better rating from
+                  <a href="https://web.ambest.com/home" target="_blank">
+                    {" "}
+                    <span className="underline">A.M. BEST</span>
+                  </a>
+                  <ul
+                    className="md:mx-6 flex flex-col gap-3 my-3"
+                    style={{ listStyle: "disc" }}
+                  >
+                    <li>
+                      <span className="fw-700">For roadside/soft services</span>
+                      :
+                      <ul
+                        className="md:mx-9 mx-3 flex flex-col gap-3 my-2"
+                        style={{ listStyle: "disc" }}
+                      >
+                        <li>
+                          <span className="fw-500">
+                            Commercial General Liability Insurance: Minimum
+                            $1,000,000
+                          </span>
+                        </li>
+                        <li>
+                          <span className="fw-500">
+                            Commercial Automobile Insurance: Minimum $1,000,000
+                          </span>
+                        </li>
+                      </ul>
+                    </li>
+
+                    <li>
+                      <span className="fw-700">Towing Services</span>:
+                      <ul
+                        className="md:mx-9 mx-3 flex flex-col gap-3 mt-2"
+                        style={{ listStyle: "disc" }}
+                      >
+                        <li>
+                          <span className="fw-500">
+                            On-Hook Insurance: Minimum $100,000
+                          </span>
+                        </li>
+                        <li>
+                          <span className="fw-500">
+                            Garage Keepers Legal Liability Insurance (if you
+                            provide storage services): Minimum $100,000
+                          </span>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+                <li>
+                  <span className="fw-700">Additional Insured</span>: ALLDRIVE
+                  SOS LLC must be included as an additional insured on both your
+                  Commercial General Liability and Commercial Automobile
+                  insurance policies.
+                </li>
+                <li>
+                  <span className="fw-700">Proof of Insurance</span>: Submit a
+                  certificate of insurance that satisfies the requirements
+                  above.
+                </li>
+                <li>
+                  <span className="fw-700">Policy Renewal</span>: When your
+                  insurance policies are renewed, you must provide ALLDRIVE SOS
+                  LLC with an updated certificate of insurance. You can do this
+                  by logging into your account and updating your KYC information
+                  under the "Settings" tab.
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </Modal>
