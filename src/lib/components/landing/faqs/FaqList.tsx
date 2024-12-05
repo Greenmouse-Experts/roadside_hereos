@@ -45,7 +45,7 @@ const FaqList = () => {
 
   const Accordion1 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-lg text-black"
       ref={(el) => (divRefs.current[1] = el)}
     >
       <p className="my-5 font-bold">
@@ -64,7 +64,7 @@ const FaqList = () => {
 
   const Accordion2 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-lg text-black"
       ref={(el) => (divRefs.current[2] = el)}
     >
       <p className="my-5 font-bold">
@@ -81,7 +81,7 @@ const FaqList = () => {
 
   const Accordion3 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-lg text-black"
       ref={(el) => (divRefs.current[3] = el)}
     >
       <p className="my-5 font-bold">
@@ -96,7 +96,7 @@ const FaqList = () => {
 
   const Accordion4 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-lg text-black"
       ref={(el) => (divRefs.current[4] = el)}
     >
       <p className="my-5 font-bold">How long will it take to get help?</p>
@@ -109,7 +109,7 @@ const FaqList = () => {
 
   const Accordion5 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-lg text-black"
       ref={(el) => (divRefs.current[5] = el)}
     >
       <p className="my-5 font-bold">
@@ -124,7 +124,7 @@ const FaqList = () => {
 
   const Accordion6 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divRefs.current[6] = el)}
     >
       <p className="my-5 font-bold">
@@ -139,7 +139,7 @@ const FaqList = () => {
 
   const Accordion7 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divRefs.current[7] = el)}
     >
       <p className="my-5 font-bold">
@@ -153,7 +153,7 @@ const FaqList = () => {
 
   const Accordion8 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divRefs.current[8] = el)}
     >
       <p className="my-5 font-bold">Why isn't my refund full?</p>

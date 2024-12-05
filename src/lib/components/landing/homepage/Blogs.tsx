@@ -21,10 +21,10 @@ const BlogPage = () => {
 
   return (
     <>
-      <div className="section">
+      <div className="section bg-[#FEB470] mb-16">
         <div className="box">
           <div className="w-full flex justify-between">
-            <p className="flex w-full text-2xl fw-600">All Latest News</p>
+            <p className="flex w-full text-2xl fw-600">Latest News</p>
             <div className="flex w-full justify-end">
               {!isLoading && data && (
                 <div className="flex justify-end">
@@ -53,7 +53,7 @@ const BlogPage = () => {
             </div>
             <div></div>
           </div>
-          <div className="mt-6 pb-24">
+          <div className="mt-6 pb-16">
             {isLoading && (
               <div className="py-12 flex justify-center items-center text-black">
                 <div>

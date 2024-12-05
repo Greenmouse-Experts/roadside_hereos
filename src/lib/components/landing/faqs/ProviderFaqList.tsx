@@ -102,7 +102,7 @@ const ProviderFaqList = () => {
 
   const Accordion1 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[1] = el)}
     >
       <p className="my-5 font-bold">What is AllDrive SOS?</p>
@@ -115,7 +115,7 @@ const ProviderFaqList = () => {
 
   const Accordion2 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[2] = el)}
     >
       <p className="my-5 font-bold">
@@ -140,7 +140,7 @@ const ProviderFaqList = () => {
 
   const Accordion3 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[3] = el)}
     >
       <p className="my-5 font-bold">
@@ -203,7 +203,7 @@ const ProviderFaqList = () => {
 
   const Accordion4 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[4] = el)}
     >
       <p className="my-5 font-bold">
@@ -219,7 +219,7 @@ const ProviderFaqList = () => {
 
   const Accordion5 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[5] = el)}
     >
       <p className="my-5 font-bold">
@@ -234,7 +234,7 @@ const ProviderFaqList = () => {
 
   const Accordion6 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[6] = el)}
     >
       <p className="my-5 font-bold">
@@ -249,7 +249,7 @@ const ProviderFaqList = () => {
 
   const Accordion7 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[7] = el)}
     >
       <p className="my-5 font-bold">
@@ -264,7 +264,7 @@ const ProviderFaqList = () => {
 
   const Accordion8 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[8] = el)}
     >
       <p className="my-5 font-bold">
@@ -279,7 +279,7 @@ const ProviderFaqList = () => {
 
   const Accordion9 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[9] = el)}
     >
       <p className="my-5 font-bold">
@@ -295,7 +295,7 @@ const ProviderFaqList = () => {
 
   const Accordion10 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[10] = el)}
     >
       <p className="my-5 font-bold">
@@ -310,7 +310,7 @@ const ProviderFaqList = () => {
 
   const Accordion11 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[11] = el)}
     >
       <p className="my-5 font-bold">
@@ -325,7 +325,7 @@ const ProviderFaqList = () => {
 
   const Accordion12 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[12] = el)}
     >
       <p className="my-5 font-bold">How are payments handled?</p>
@@ -338,7 +338,7 @@ const ProviderFaqList = () => {
 
   const Accordion13 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[13] = el)}
     >
       <p className="my-5 font-bold">
@@ -354,7 +354,7 @@ const ProviderFaqList = () => {
 
   const Accordion14 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[14] = el)}
     >
       <p className="my-5 font-bold">Can I set my own rates?</p>
@@ -367,7 +367,7 @@ const ProviderFaqList = () => {
 
   const Accordion15 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[15] = el)}
     >
       <p className="my-5 font-bold">
@@ -382,7 +382,7 @@ const ProviderFaqList = () => {
 
   const Accordion16 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[16] = el)}
     >
       <p className="my-5 font-bold">
@@ -397,7 +397,7 @@ const ProviderFaqList = () => {
 
   const Accordion17 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[17] = el)}
     >
       <p className="my-5 font-bold">
@@ -412,7 +412,7 @@ const ProviderFaqList = () => {
 
   const Accordion18 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[18] = el)}
     >
       <p className="my-5 font-bold">
@@ -428,7 +428,7 @@ const ProviderFaqList = () => {
 
   const Accordion19 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[19] = el)}
     >
       <p className="my-5 font-bold">How do I handle disputes with customers?</p>
@@ -441,7 +441,7 @@ const ProviderFaqList = () => {
 
   const Accordion20 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[20] = el)}
     >
       <p className="my-5 font-bold">How do I update my service areas?</p>
@@ -454,7 +454,7 @@ const ProviderFaqList = () => {
 
   const Accordion21 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[21] = el)}
     >
       <p className="my-5 font-bold">How do I track my service history?</p>
@@ -467,7 +467,7 @@ const ProviderFaqList = () => {
 
   const Accordion22 = () => (
     <div
-      className="px-5 py-1 rounded-xl text-black"
+      className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[22] = el)}
     >
       <p className="my-5 font-bold">Can I offer multiple services at once?</p>

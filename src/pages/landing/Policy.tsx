@@ -69,7 +69,7 @@ const PolicyPage = () => {
   ];
 
   const Accordion1 = () => (
-    <div className="mt-7 text-base" ref={(el) => (divRefs.current[1] = el)}>
+    <div className="mt-7 text-lg" ref={(el) => (divRefs.current[1] = el)}>
       <p className="fw-600">Information We Collect</p>
       <p className="">
         We collect several types of information to provide a smooth and secure
@@ -113,7 +113,7 @@ const PolicyPage = () => {
   );
 
   const Accordion2 = () => (
-    <div className="mt-4" ref={(el) => (divRefs.current[2] = el)}>
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[2] = el)}>
       <p className="mt-5 fw-600">How We Use Your Information</p>
       <p className="">
         We use the information we collect for various purposes, all aimed at
@@ -158,7 +158,7 @@ const PolicyPage = () => {
   );
 
   const Accordion3 = () => (
-    <div className="mt-4" ref={(el) => (divRefs.current[3] = el)}>
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[3] = el)}>
       <p className="mt-5 fw-600">Sharing of Information</p>
       <p className="">
         We share your information only in limited circumstances and with the
@@ -194,7 +194,7 @@ const PolicyPage = () => {
   );
 
   const Accordion4 = () => (
-    <div className="mt-4" ref={(el) => (divRefs.current[4] = el)}>
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[4] = el)}>
       <p className="mt-5 fw-600">Cookies and Tracking Technologies</p>
       <p className="">
         We use cookies and similar tracking technologies on the ALLDRIVE SOS
@@ -224,7 +224,7 @@ const PolicyPage = () => {
   );
 
   const Accordion5 = () => (
-    <div className="mt-4" ref={(el) => (divRefs.current[5] = el)}>
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[5] = el)}>
       <p className="mt-5 fw-600">Data Security</p>
       <p className="">
         We take the security of your data very seriously. We implement robust
@@ -237,7 +237,7 @@ const PolicyPage = () => {
   );
 
   const Accordion6 = () => (
-    <div className="mt-4" ref={(el) => (divRefs.current[6] = el)}>
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[6] = el)}>
       <p className="mt-5 fw-600">User Rights and Choices</p>
       <p className="">
         We respect your right to control your personal information. Here's how
@@ -265,7 +265,7 @@ const PolicyPage = () => {
   );
 
   const Accordion7 = () => (
-    <div className="mt-4" ref={(el) => (divRefs.current[7] = el)}>
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[7] = el)}>
       <p className="mt-5 fw-600">Third-Party Advertisements</p>
       <p className="">
         We may partner with third-party advertising platforms like Google
@@ -281,7 +281,7 @@ const PolicyPage = () => {
   );
 
   const Accordion8 = () => (
-    <div className="mt-4" ref={(el) => (divRefs.current[8] = el)}>
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[8] = el)}>
       <p className="mt-5 fw-600">Children's Privacy</p>
       <p className="">
         The ALLDRIVE SOS Platform is not intended for use by individuals under
@@ -292,7 +292,7 @@ const PolicyPage = () => {
   );
 
   const Accordion9 = () => (
-    <div className="mt-4" ref={(el) => (divRefs.current[9] = el)}>
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[9] = el)}>
       <p className="mt-5 fw-600">International Data Transfers</p>
       <p className="">
         The ALLDRIVE SOS Platform primarily operates within the United States.
@@ -304,7 +304,7 @@ const PolicyPage = () => {
   );
 
   const Accordion10 = () => (
-    <div className="mt-4" ref={(el) => (divRefs.current[10] = el)}>
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[10] = el)}>
       <p className="mt-5 fw-600">Data Retention</p>
       <p className="">
         We retain your personal information for as long as necessary to fulfill
@@ -315,7 +315,7 @@ const PolicyPage = () => {
   );
 
   const Accordion11 = () => (
-    <div className="mt-4" ref={(el) => (divRefs.current[11] = el)}>
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[11] = el)}>
       <p className="mt-5 fw-600">Updates to the Privacy Policy</p>
       <p className="">
         ALLDRIVE SOS retains the right to modify this Privacy Policy at any
@@ -329,7 +329,7 @@ const PolicyPage = () => {
   );
 
   const Accordion12 = () => (
-    <div className="mt-4" ref={(el) => (divRefs.current[12] = el)}>
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[12] = el)}>
       <p className="mt-5 fw-600">Contact Information</p>
       <p className="">
         If you have any questions or concerns about this Privacy Policy or our
@@ -354,7 +354,7 @@ const PolicyPage = () => {
   );
 
   const Accordion13 = () => (
-    <div className="mt-4" ref={(el) => (divRefs.current[13] = el)}>
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[13] = el)}>
       <p className="mt-5 fw-600">Governing Law</p>
       <p className="">
         This Privacy Policy is governed by and construed in accordance with the
@@ -364,7 +364,7 @@ const PolicyPage = () => {
   );
 
   const Accordion14 = () => (
-    <div className="mt-4" ref={(el) => (divRefs.current[14] = el)}>
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[14] = el)}>
       <p className="mt-5 fw-600">User Responsibilities</p>
       <p className="">
         You are responsible for maintaining the security of your account
@@ -459,14 +459,18 @@ const PolicyPage = () => {
                 <div className="lg:w-4/12 md:w-6/12 hidden md:flex flex-col justify-start">
                   <div className="w-full h-full relative">
                     <img
-                      src="https://res.cloudinary.com/do2kojulq/image/upload/v1733139197/Group_1171275284-min_1_mc29mv.png"
-                      className="absolute top-[10%]"
+                      src="https://res.cloudinary.com/do2kojulq/image/upload/v1733405932/MixCollage-05-Dec-2024-02-22-PM-7001_bxfb8y.jpg"
+                      className="mt-[50px]"
                     />
-                  </div>
-                  <div className="w-full h-full relative">
+
                     <img
                       src="https://res.cloudinary.com/do2kojulq/image/upload/v1733171505/fjovk92ibfi4argdrscm.jpg"
-                      className="absolute top-[5%]"
+                      className="mt-[350px]"
+                    />
+
+                    <img
+                      src="https://res.cloudinary.com/do2kojulq/image/upload/v1733139197/Group_1171275284-min_1_mc29mv.png"
+                      className="mt-[450px]"
                     />
                   </div>
                 </div>

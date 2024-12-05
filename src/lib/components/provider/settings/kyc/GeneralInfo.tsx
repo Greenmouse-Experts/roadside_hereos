@@ -428,7 +428,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
             <div className="mt-3 relative">
               {!isLoading && (
                 <ImageInput
-                  label="Upload Business Registration Certificate (File must be in jpg or jpeg format)"
+                  label="Upload Business Registration Certificate"
                   setImage={setbizCert}
                   prevValue={prevKyc?.business_reg_certificate}
                   disabled={disabledField}
@@ -448,7 +448,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
             <div className="mt-3 relative">
               {!isLoading && (
                 <ImageInput
-                  label="Upload Insurance Requirement (File must be in jpg or jpeg format)"
+                  label="Upload Insurance Requirement"
                   setImage={setImageVal}
                   prevValue={
                     (prevKyc &&
@@ -481,7 +481,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
                 ))}
               </div>
               <div
-                className="absolute top-1 left-[550px]"
+                className="absolute top-1 left-[260px]"
                 // onMouseEnter={() => setShowTip(true)}
                 // onMouseLeave={() => setShowTip(false)}
               >

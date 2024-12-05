@@ -51,7 +51,7 @@ const FaqPage = () => {
                   AllDrive SOS:
                 </p>
                 <FaqList />
-                <p className="mt-10">
+                <p className="mt-10 text-lg fw-500">
                   We hope this helps! If you have any other questions, feel free
                   to contact our friendly customer support team. We're always
                   happy to assist you!
@@ -72,7 +72,7 @@ const FaqPage = () => {
                   platform:
                 </p>
                 <ProviderFaqList />
-                <p className="mt-10">
+                <p className="mt-10 text-lg fw-500">
                   These FAQs provide detailed answers to questions that Service
                   Providers may have about offering services on the AllDrive SOS
                   platform. If there are additional queries, please reach out to

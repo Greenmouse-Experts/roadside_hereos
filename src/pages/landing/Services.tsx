@@ -1,5 +1,5 @@
 import { BsClock } from "react-icons/bs";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LandingLayout from "../../lib/components/layout/landing";
 import { useQuery } from "@tanstack/react-query";
 import { getCategories } from "../../lib/services/api/serviceApi";
@@ -77,7 +77,7 @@ const ServicesPage = () => {
 
           <div className="section">
             <div className="box">
-              <div className="lg:flex gap-8 lg:mt-16 min-h-screen">
+              <div className="lg:flex gap-8 min-h-screen">
                 <div className="box flex flex-col lg:w-8/12 md:w-6/12 w-full">
                   <p className="text-2xl fw-600">Explanation of Services</p>
                   <p className="text-lg lg:w-9/12 fw-500 mt-4 mb-7">
@@ -87,16 +87,30 @@ const ServicesPage = () => {
 
                   <div className="my-8">
                     <div className="w-full">
-                      <ol className="flex flex-col md:mx-9 gap-6 outer-list">
+                      <ol className="flex flex-col md:mx-9 text-lg gap-6 outer-list">
                         <li>
-                          <span className="fw-700 text-base">Basic Tow</span>:
-                          Designed for standard towing needs, this service helps
-                          transport your vehicle to a nearby repair shop, home,
-                          or other safe location when it cannot be driven.
+                          <span className="fw-700 text-lg">
+                            <Link
+                              to={
+                                "/request/a0e0b7df-00b8-4f92-93dc-bce6568be673"
+                              }
+                            >
+                              Basic Tow
+                            </Link>
+                          </span>
+                          : Designed for standard towing needs, this service
+                          helps transport your vehicle to a nearby repair shop,
+                          home, or other safe location when it cannot be driven.
                         </li>
                         <li>
-                          <span className="fw-700 text-base">
-                            Exotic Car Transport
+                          <span className="fw-700 text-lg">
+                            <Link
+                              to={
+                                "/request/b3c6048d-5cc1-42b6-bc5e-703e5e8f231d"
+                              }
+                            >
+                              Exotic Car Transport
+                            </Link>
                           </span>
                           : Specialized service to handle high-end, classic, or
                           exotic cars with extra care, using appropriate
@@ -104,7 +118,13 @@ const ServicesPage = () => {
                         </li>
                         <li>
                           <span className="fw-700 text-base">
-                            Motorcycle Towing
+                            <Link
+                              to={
+                                "/request/a0e0b7df-00b8-4f92-93dc-bce6568be673"
+                              }
+                            >
+                              Motorcycle Towing
+                            </Link>
                           </span>
                           : Towing service specifically for motorcycles, with
                           secure equipment to keep your bike safe during
@@ -115,13 +135,27 @@ const ServicesPage = () => {
                           destination.
                         </li>
                         <li>
-                          <span className="fw-700 text-base">Jump-Starts</span>:
-                          If your vehicle battery dies, this service provides a
-                          jump-start to get your car running again.
+                          <span className="fw-700 text-base">
+                            <Link
+                              to={
+                                "/request/cd97fff5-07f4-48bd-967f-45bffefa2a63"
+                              }
+                            >
+                              Jump-Starts
+                            </Link>
+                          </span>
+                          : If your vehicle battery dies, this service provides
+                          a jump-start to get your car running again.
                         </li>
                         <li>
                           <span className="fw-700 text-base">
-                            Battery Installation
+                            <Link
+                              to={
+                                "/request/25cc0925-b325-4721-801b-3b983361fce8"
+                              }
+                            >
+                              Battery Installation
+                            </Link>
                           </span>
                           : This service provides the delivery and installation
                           of a new battery if your current battery needs
@@ -149,7 +183,13 @@ const ServicesPage = () => {
                         </li>
                         <li>
                           <span className="fw-700 text-base">
-                            Flat Tire Assistance
+                            <Link
+                              to={
+                                "/request/e2502deb-a9d0-4c8f-bb8f-577bba12cdca"
+                              }
+                            >
+                              Flat Tire Assistance
+                            </Link>
                           </span>
                           : If you experience a flat, this service offers help
                           to get you moving again. Choose between the following
@@ -176,7 +216,13 @@ const ServicesPage = () => {
 
                         <li>
                           <span className="fw-700 text-base">
-                            Vehicle Lockout
+                            <Link
+                              to={
+                                "/request/5e436f4b-b633-4b22-8f44-79f3e98f04f6"
+                              }
+                            >
+                              Vehicle Lockout
+                            </Link>
                           </span>
                           : This service helps you regain access to your locked
                           vehicle and includes options based on your situation:
@@ -213,7 +259,13 @@ const ServicesPage = () => {
 
                         <li>
                           <span className="fw-700 text-base">
-                            Fuel Delivery
+                            <Link
+                              to={
+                                "/request/bbe6e2f8-c3e3-4bca-80be-b6cc0b206e49"
+                              }
+                            >
+                              Fuel Delivery
+                            </Link>
                           </span>
                           : If you run out of gas, we’ll deliver enough fuel to
                           get you to the nearest station or a safe location
@@ -222,7 +274,13 @@ const ServicesPage = () => {
 
                         <li>
                           <span className="fw-700 text-base">
-                            Vehicle Fluid Top-Up
+                            <Link
+                              to={
+                                "/request/cf6a9ab4-2f0d-4bed-9d83-cd8f8d47c1da"
+                              }
+                            >
+                              Vehicle Fluid Top-Up
+                            </Link>
                           </span>
                           : Helps you top up critical fluids like oil, coolant,
                           or windshield washer fluid to keep your vehicle
@@ -231,7 +289,13 @@ const ServicesPage = () => {
 
                         <li>
                           <span className="fw-700 text-base">
-                            Winch-Out Rescue
+                            <Link
+                              to={
+                                "/request/45404df6-0695-45bf-8e37-4f824f28b551"
+                              }
+                            >
+                              Winch-Out Rescue
+                            </Link>
                           </span>
                           : This service assists if your vehicle is stuck in
                           mud, snow, sand, or a ditch. Using a winch, we can
@@ -240,7 +304,13 @@ const ServicesPage = () => {
 
                         <li>
                           <span className="fw-700 text-base">
-                            Mobile Detailing
+                            <Link
+                              to={
+                                "/request/fb36f088-f84d-42a3-a751-fff3d75b305e"
+                              }
+                            >
+                              Mobile Detailing
+                            </Link>
                           </span>
                           : On-site car detailing to clean and maintain the
                           appearance of your vehicle, with both interior and
@@ -249,7 +319,13 @@ const ServicesPage = () => {
 
                         <li>
                           <span className="fw-700 text-base">
-                            Mobile Mechanic
+                            <Link
+                              to={
+                                "/request/f285a589-2abd-4f2f-a07b-636f11c86475"
+                              }
+                            >
+                              Mobile Mechanic
+                            </Link>
                           </span>
                           : Offers mobile mechanic services for minor repairs
                           and diagnostics at the vehicle’s location. Common
@@ -260,7 +336,13 @@ const ServicesPage = () => {
 
                         <li>
                           <span className="fw-700 text-base">
-                            Mobile Motorcycle Repair
+                            <Link
+                              to={
+                                "/request/1800ae3f-be16-49e9-b056-9c30a9414a2c"
+                              }
+                            >
+                              Mobile Motorcycle Repair
+                            </Link>
                           </span>
                           : Designed for motorcycle riders, this service
                           provides on-the-spot repairs for minor issues to get
@@ -269,7 +351,13 @@ const ServicesPage = () => {
 
                         <li>
                           <span className="fw-700 text-base">
-                            Accident Cleanup
+                            <Link
+                              to={
+                                "/request/a9087c16-a32d-4778-ab0b-ed8a4b67ac6f"
+                              }
+                            >
+                              Accident Cleanup
+                            </Link>
                           </span>
                           : Following an accident, this service offers a
                           professional cleanup to remove debris and any
@@ -291,8 +379,18 @@ const ServicesPage = () => {
                 <div className="lg:w-4/12 md:w-6/12 md:sticky top-20 hidden md:flex flex-col justify-start">
                   <div className="w-full h-full relative">
                     <img
+                      src="https://res.cloudinary.com/do2kojulq/image/upload/v1733405932/MixCollage-05-Dec-2024-02-22-PM-7001_bxfb8y.jpg"
+                      className="mt-[50px]"
+                    />
+
+                    <img
+                      src="https://res.cloudinary.com/do2kojulq/image/upload/v1733171505/fjovk92ibfi4argdrscm.jpg"
+                      className="mt-[350px]"
+                    />
+
+                    <img
                       src="https://res.cloudinary.com/do2kojulq/image/upload/v1733139197/Group_1171275284-min_1_mc29mv.png"
-                      className="top-[5%]"
+                      className="mt-[450px]"
                     />
                   </div>
                 </div>

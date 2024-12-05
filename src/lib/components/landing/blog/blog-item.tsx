@@ -17,10 +17,10 @@ const BlogItem: FC<Props> = ({ data }) => {
         <img
           src={data?.coverImage}
           alt="blog-img"
-          className="w-full h-[200px] lg:h-[220px] object-cover"
+          className="w-full h-[200px] rounded-t-lg lg:h-[220px] object-cover"
         />
       </div>
-      <div className="p-4 mt-2 shadow-lg bg-white">
+      <div className="p-4 rounded-b-lg shadow-lg bg-white">
         <div className="h-40 2xl:h-36">
           <p className="text-lg lg:text-xl fw-500 !syne">{data?.title}</p>
           <div className="mt-2">

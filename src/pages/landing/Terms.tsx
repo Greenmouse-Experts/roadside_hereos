@@ -522,6 +522,21 @@ const TermsPage = () => {
                       alt="stranded-img"
                       className="w-full object-cover h-[600px] rounded-lg"
                     />
+
+                    <img
+                      src="https://res.cloudinary.com/do2kojulq/image/upload/v1733405932/MixCollage-05-Dec-2024-02-22-PM-7001_bxfb8y.jpg"
+                      className="mt-[350px]"
+                    />
+
+                    <img
+                      src="https://res.cloudinary.com/do2kojulq/image/upload/v1733171505/fjovk92ibfi4argdrscm.jpg"
+                      className="mt-[650px]"
+                    />
+
+                    <img
+                      src="https://res.cloudinary.com/do2kojulq/image/upload/v1733139197/Group_1171275284-min_1_mc29mv.png"
+                      className="mt-[750px]"
+                    />
                   </div>
                 </div>
               </div>
