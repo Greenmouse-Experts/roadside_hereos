@@ -54,7 +54,8 @@ const ImageInput: FC<Props> = ({
     onDrop,
     onDropRejected,
     accept: {
-      "image/jpeg": [], // Accept only image types
+      "image/jpeg": [], // Accepts JPEG images
+      "image/png": [], // Accepts PNG images
     },
   });
   return (
@@ -95,7 +96,7 @@ const ImageInput: FC<Props> = ({
             <input
               {...getInputProps()}
               disabled={disabled}
-              accept="image/jpeg"
+              accept="image/jpeg, image/png"
             />
             {preview ? (
               ""
