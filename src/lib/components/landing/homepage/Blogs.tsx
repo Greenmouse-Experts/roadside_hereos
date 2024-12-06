@@ -21,15 +21,17 @@ const BlogPage = () => {
 
   return (
     <>
-      <div className="section bg-[#FEB470] mb-16">
+      <div className="section bg-[#C97833] mb-16">
         <div className="box">
           <div className="w-full flex justify-between">
-            <p className="flex w-full text-2xl fw-600">Latest News</p>
+            <p className="flex w-full text-2xl fw-600 text-white">
+              Latest News
+            </p>
             <div className="flex w-full justify-end">
               {!isLoading && data && (
                 <div className="flex justify-end">
                   <div className="flex gap-x-4 items-center">
-                    <p className="fw-600">
+                    <p className="fw-600 text-white">
                       <Link to="/blog">View All</Link>
                     </p>
                   </div>

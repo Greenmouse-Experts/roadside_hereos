@@ -2,19 +2,74 @@ import AdminPendingService from "../../lib/components/admin/services/RequestList
 import AdminOngoingService from "../../lib/components/admin/services/OngoingList";
 import Tabs from "../../lib/components/ui/Tabs";
 import AdminProcessingService from "../../lib/components/admin/services/ProcessingList";
+import { Tooltip } from "@material-tailwind/react";
+import { FaCircleInfo } from "react-icons/fa6";
 
 const AdminRequests = () => {
   const tab = [
     {
-      title: <>Pending</>,
+      title: (
+        <div className="relative w-full">
+          Pending
+          <Tooltip
+            className="bg-[#E5944C]"
+            content={
+              <div className="my-2">
+                User just made a service request but has not made payment
+              </div>
+            }
+            placement="bottom"
+          >
+            <div className="absolute top-1 left-[260px]">
+              <FaCircleInfo className="cursor-pointer" />
+            </div>
+          </Tooltip>
+        </div>
+      ),
       content: <AdminPendingService />,
     },
     {
-      title: <>Processing Requests</>,
+      title: (
+        <div className="relative w-full">
+          Processing Requests
+          <Tooltip
+            className="bg-[#E5944C]"
+            content={
+              <div className="my-2">
+                User has made payment and is waiting for service personnel to
+                accept
+              </div>
+            }
+            placement="bottom"
+          >
+            <div className="absolute top-1 left-[260px]">
+              <FaCircleInfo className="cursor-pointer" />
+            </div>
+          </Tooltip>
+        </div>
+      ),
       content: <AdminProcessingService />,
     },
     {
-      title: <>Ongoing Request</>,
+      title: (
+        <div className="relative w-full">
+          Ongoing Request
+          <Tooltip
+            className="bg-[#E5944C]"
+            content={
+              <div className="my-2">
+                The service personnel have accepted the request and the service
+                is ongoing.
+              </div>
+            }
+            placement="bottom"
+          >
+            <div className="absolute top-1 left-[260px]">
+              <FaCircleInfo className="cursor-pointer" />
+            </div>
+          </Tooltip>
+        </div>
+      ),
       content: <AdminOngoingService />,
     },
   ];

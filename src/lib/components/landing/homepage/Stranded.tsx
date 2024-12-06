@@ -104,7 +104,7 @@ const Stranded = () => {
         </div>
       </div>
 
-      <div className="section bg-[#E5944C] text-white">
+      <div className="section bg-[#C97833] text-white">
         <div className="box">
           <div className="lg:flex items-center mt-8 lg:mt-2">
             <div className="lg:w-6/12">
@@ -116,9 +116,9 @@ const Stranded = () => {
             </div>
             <div className="lg:w-6/12 mt-8 lg:mt-0">
               <div className="grid gap-3 lg:gap-4">
-                <p className="fw-500 text-lg">Benefits for Technicians</p>
+                <p className="fw-500 text-2xl">Benefits for Technicians</p>
                 {data2.map((item) => (
-                  <div className="flex gap-x-3">
+                  <div className="flex gap-x-3 mt-2">
                     <div className="w-5 lg:w-6 h-5 lg:h-6 mt-2 lg:mt-[4px] circle place-center bg-white shadow-lg">
                       <FaCheck className="text-[#E5944C] fs-300 lg:fs-500" />
                     </div>
@@ -132,13 +132,13 @@ const Stranded = () => {
               <div className="md:flex mt-8 lg:mt-10 gap-x-5">
                 <Link
                   to={"/request"}
-                  className="btn-feel flex w-6/12 md:w-auto items-center gap-x-4 fs-500 !fw-600 bg-[#FEB470] text-black px-4 py-2"
+                  className="btn-feel flex w-6/12 md:w-auto items-center gap-x-4 fs-500 !fw-600 bg-[#172748] text-white px-4 py-2"
                 >
                   Get Help <HiOutlineArrowNarrowRight />
                 </Link>
                 <Link
                   to={"/auth/register"}
-                  className="btn-feel flex mt-6 lg:mt-0 w-11/12 md:w-auto  items-center gap-x-4 fs-500 !fw-600 bg-[#FEB470] text-black px-4 py-2"
+                  className="btn-feel flex mt-6 lg:mt-0 w-11/12 md:w-auto  items-center gap-x-4 fs-500 !fw-600 bg-[#172748] text-white px-4 py-2"
                 >
                   Sign Up as a Service Provider <HiOutlineArrowNarrowRight />
                 </Link>
