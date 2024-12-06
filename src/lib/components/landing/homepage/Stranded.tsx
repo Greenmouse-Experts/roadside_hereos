@@ -36,25 +36,25 @@ const Stranded = () => {
   const data2 = [
     {
       name: "Steady Work Opportunities",
-      desc: "Join a thriving network and receive consistent job offers"
+      desc: "Join a thriving network and receive consistent job offers",
     },
     {
       name: "Flexible Schedule",
-      desc: "Work on your terms and at your convenience."
+      desc: "Work on your terms and at your convenience.",
     },
     {
       name: "Fair Compensation",
-      desc: "Set your own rates and receive prompt payment for your services."
+      desc: "Set your own rates and receive prompt payment for your services.",
     },
     {
       name: "Supportive Community",
-      desc: "Be part of a network that values your skills and professionalism."
+      desc: "Be part of a network that values your skills and professionalism.",
     },
     {
       name: "Easy-to-Use App",
-      desc: "Streamlined job management and navigation to provide the best service possible."
+      desc: "Streamlined job management and navigation to provide the best service possible.",
     },
-  ]
+  ];
   return (
     <>
       <div className="section bg-[#172748] text-white">
@@ -101,7 +101,12 @@ const Stranded = () => {
               </div>
             </div>
           </div>
-          <div className="lg:flex items-center mt-8 lg:mt-16">
+        </div>
+      </div>
+
+      <div className="section bg-[#E5944C] text-white">
+        <div className="box">
+          <div className="lg:flex items-center mt-8 lg:mt-2">
             <div className="lg:w-6/12">
               <img
                 src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1722434847/rsh/Gemini_Generated_Image_kana84kana84kana_rpcmr8.jpg"
@@ -114,8 +119,8 @@ const Stranded = () => {
                 <p className="fw-500 text-lg">Benefits for Technicians</p>
                 {data2.map((item) => (
                   <div className="flex gap-x-3">
-                    <div className="w-5 lg:w-6 h-5 lg:h-6 mt-2 lg:mt-[4px] circle place-center bg-pri">
-                      <FaCheck className="text-ter fs-300 lg:fs-500" />
+                    <div className="w-5 lg:w-6 h-5 lg:h-6 mt-2 lg:mt-[4px] circle place-center bg-white shadow-lg">
+                      <FaCheck className="text-[#E5944C] fs-300 lg:fs-500" />
                     </div>
                     <div className="w-[90%]">
                       <p className="fw-600 lg:text-lg">{item.name}</p>

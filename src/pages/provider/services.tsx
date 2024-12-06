@@ -10,6 +10,7 @@ const ProviderServices = () => {
         <div className="relative w-full">
           <p>Processing Service</p>
           <Tooltip
+            className="bg-[#E5944C]"
             content={
               <div className="my-2">
                 User(s) have completed payment and are waiting for service
@@ -18,7 +19,7 @@ const ProviderServices = () => {
             }
             placement="bottom"
           >
-            <div className="absolute top-1 left-[260px]">
+            <div className="absolute top-1 left-[300px]">
               <FaCircleInfo className="cursor-pointer" />
             </div>
           </Tooltip>
@@ -31,6 +32,7 @@ const ProviderServices = () => {
         <div className="relative w-full">
           <p>Ongoing Service</p>
           <Tooltip
+            className="bg-[#E5944C]"
             content={
               <div className="my-2">
                 The service personnel have accepted the request and the service
@@ -52,6 +54,7 @@ const ProviderServices = () => {
         <div className="relative w-full">
           <p>Fulfilled Service</p>
           <Tooltip
+            className="bg-[#E5944C]"
             content={
               <div className="my-2">
                 Service personnel have marked service as completed but the user
