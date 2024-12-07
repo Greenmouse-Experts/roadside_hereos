@@ -5,6 +5,7 @@ import DownloadApp from "../../lib/components/landing/homepage/DownloadApp";
 import ProviderFaqList from "../../lib/components/landing/faqs/ProviderFaqList";
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import FeaturedBlogPage from "./FeaturedBlog";
 
 const FaqPage = () => {
   const location = useLocation();
@@ -39,46 +40,54 @@ const FaqPage = () => {
               </div>
             </div>
           </div>
-          <div className="section">
-            <div className="box">
-              <div className="lg:w-11/12 mx-auto">
-                <p className="text-2xl lg:w-9/12 font-bold mb-8">
-                  Customers (Motorists)
-                </p>
-                <p className="text-lg lg:w-9/12 fw-500 mb-7">
-                  We've got you covered, mile after mile! Here are some
-                  frequently asked questions to help you get the most out of
-                  AllDrive SOS:
-                </p>
-                <FaqList />
-                <p className="mt-10 text-lg fw-500">
-                  We hope this helps! If you have any other questions, feel free
-                  to contact our friendly customer support team. We're always
-                  happy to assist you!
-                </p>
+          <div className="w-full flex gap-1">
+            <div className="flex flex-col w-full px-20 lg:w-3/5">
+              <div className="section">
+                <div className="">
+                  <div className="w-full">
+                    <p className="text-2xl lg:w-9/12 font-bold mb-8">
+                      Customers (Motorists)
+                    </p>
+                    <p className="text-lg w-full fw-500 mb-7">
+                      We've got you covered, mile after mile! Here are some
+                      frequently asked questions to help you get the most out of
+                      AllDrive SOS:
+                    </p>
+                    <FaqList />
+                    <p className="mt-10 text-lg fw-500">
+                      We hope this helps! If you have any other questions, feel
+                      free to contact our friendly customer support team. We're
+                      always happy to assist you!
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="section" id="provider-faqs">
+                <div className="">
+                  <div className="w-full">
+                    <p className="text-2xl lg:w-9/12 font-bold mb-8">
+                      Service Providers (Technicians).
+                    </p>
+                    <p className="text-lg w-full fw-500 mb-7">
+                      Here is a detailed Frequently Asked Questions (FAQ)
+                      section for Service Providers offering services on the
+                      AllDrive SOS platform:
+                    </p>
+                    <ProviderFaqList />
+                    <p className="mt-10 text-lg fw-500">
+                      These FAQs provide detailed answers to questions that
+                      Service Providers may have about offering services on the
+                      AllDrive SOS platform. If there are additional queries,
+                      please reach out to support for more information.
+                    </p>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
 
-          <div className="section" id="provider-faqs">
-            <div className="box">
-              <div className="lg:w-11/12 mx-auto">
-                <p className="text-2xl lg:w-9/12 font-bold mb-8">
-                  Service Providers (Technicians).
-                </p>
-                <p className="text-lg lg:w-9/12 fw-500 mb-7">
-                  Here is a detailed Frequently Asked Questions (FAQ) section
-                  for Service Providers offering services on the AllDrive SOS
-                  platform:
-                </p>
-                <ProviderFaqList />
-                <p className="mt-10 text-lg fw-500">
-                  These FAQs provide detailed answers to questions that Service
-                  Providers may have about offering services on the AllDrive SOS
-                  platform. If there are additional queries, please reach out to
-                  support for more information.
-                </p>
-              </div>
+            <div className="md:flex hidden w-2/5">
+              <FeaturedBlogPage />
             </div>
           </div>
         </div>

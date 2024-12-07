@@ -169,7 +169,7 @@ const FaqList = () => {
     <>
       <div className="w-full flex flex-col gap-10">
         <div className="w-full flex">
-          <div className="lg:w-3/5 border rounded-md p-4 flex flex-col gap-5">
+          <div className="w-full border rounded-md p-4 flex flex-col gap-5">
             <p className="text-lg font-bold mb-3">Frequently Asked Questions</p>
             {faqArray.map((item) => (
               <div key={item.key} className="w-full">

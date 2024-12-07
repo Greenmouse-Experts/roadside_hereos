@@ -349,7 +349,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                           <TextInput
                             label=""
                             labelClassName="text-[#000000B2] fw-600"
-                            placeholder="Postal Code"
+                            placeholder="Zip Code"
                             error={errors.other?.message}
                             type={InputType.text}
                             {...field}
