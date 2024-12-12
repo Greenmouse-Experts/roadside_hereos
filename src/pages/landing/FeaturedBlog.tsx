@@ -5,6 +5,7 @@ import BlogItem from "../../lib/components/landing/blog/blog-item";
 import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
 
 const FeaturedBlogPage = () => {
+  const [activeTag] = useState("");
   const [page] = useState(1);
 
   const { data, isLoading } = useQuery({
