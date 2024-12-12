@@ -105,7 +105,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[1] = el)}
     >
-      <p className="my-5 font-bold">What is AllDrive SOS?</p>
+      <p className="my-5 font-bold uppercase">What is AllDrive SOS?</p>
       AllDrive SOS is a web and mobile platform that connects distressed
       motorists in need of roadside assistance with qualified service providers,
       such as tow truck operators and roadside technicians, across the United
@@ -118,7 +118,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[2] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         What types of services can I offer on the AllDrive SOS platform?
       </p>
       As a Service Provider, you can offer a range of roadside assistance
@@ -143,7 +143,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[3] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         What are the insurance requirements to offer services on the platform?
       </p>
       All Service Providers are required to maintain specific insurance
@@ -206,7 +206,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[4] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         How do I submit my insurance documents to AllDrive SOS?
       </p>
       You must submit a copy of your certificate of insurance that meets the
@@ -222,7 +222,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[5] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         What happens if my insurance expires or lapses?
       </p>
       It is your responsibility to ensure that your insurance coverage is
@@ -237,7 +237,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[6] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         What is On-Hook Insurance and why is it required?
       </p>
       On-Hook Insurance provides coverage for damages to vehicles that are being
@@ -252,7 +252,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[7] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         How does Garage Keepers Legal Liability Insurance apply to my services?
       </p>
       If you provide storage facility services (such as parking or storing
@@ -267,7 +267,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[8] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         How are taxes handled on the AllDrive SOS platform?
       </p>
       As a Service Provider, you are responsible for paying any taxes (including
@@ -282,7 +282,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[9] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         What qualifications do I need to become a Service Provider on AllDrive
         SOS?
       </p>
@@ -298,7 +298,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[10] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         How do I register as a Service Provider on AllDrive SOS?
       </p>
       To register, visit the AllDrive SOS website or mobile app and complete the
@@ -313,7 +313,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[11] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         How do I request a roadside assistance service?
       </p>
       Once registered and approved, you will receive job requests through the
@@ -328,7 +328,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[12] = el)}
     >
-      <p className="my-5 font-bold">How are payments handled?</p>
+      <p className="my-5 font-bold uppercase">How are payments handled?</p>
       Payments for jobs are processed directly through the AllDrive SOS
       platform. After completing a job, your payment will be credited to your
       account, minus any applicable platform fees. You can set up your bank
@@ -341,7 +341,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[13] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         What are the cancellation fees and policies?
       </p>
       If a job is canceled, a 15% cancellation fee will be charged to the party
@@ -357,7 +357,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[14] = el)}
     >
-      <p className="my-5 font-bold">Can I set my own rates?</p>
+      <p className="my-5 font-bold uppercase">Can I set my own rates?</p>
       AllDrive SOS sets standard pricing for specific services, but you may have
       the ability to adjust rates based on factors like location and the
       complexity of the service. Rate adjustments must comply with AllDrive
@@ -370,7 +370,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[15] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         How do I contact support if I have an issue?
       </p>
       You can contact AllDrive SOS Support through the platform's app or
@@ -385,7 +385,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[16] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         Can I operate outside of the United States?
       </p>
       No, the AllDrive SOS platform operates only within the United States.
@@ -400,7 +400,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[17] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         What are the requirements for my business registration?
       </p>
       Your business must be legally registered and hold all necessary licenses
@@ -415,7 +415,7 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[18] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         What type of vehicles can I use to offer my services?
       </p>
       You can use any vehicle that meets the legal and insurance requirements
@@ -431,7 +431,9 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[19] = el)}
     >
-      <p className="my-5 font-bold">How do I handle disputes with customers?</p>
+      <p className="my-5 font-bold uppercase">
+        How do I handle disputes with customers?
+      </p>
       In the event of a dispute with a customer, you can contact AllDrive SOS
       Support to open a case. The platform provides a mediation process to help
       resolve conflicts fairly. Be sure to provide all relevant documentation
@@ -444,7 +446,9 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[20] = el)}
     >
-      <p className="my-5 font-bold">How do I update my service areas?</p>
+      <p className="my-5 font-bold uppercase">
+        How do I update my service areas?
+      </p>
       You can update your service areas by logging into your AllDrive SOS
       account and adjusting your geographic availability settings. This ensures
       that you receive job requests only within the regions you are able to
@@ -457,7 +461,9 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[21] = el)}
     >
-      <p className="my-5 font-bold">How do I track my service history?</p>
+      <p className="my-5 font-bold uppercase">
+        How do I track my service history?
+      </p>
       Your service history, including completed jobs, customer ratings, and
       payment records, is available in your AllDrive SOS account dashboard. You
       can review past jobs, payments received, and your overall performance
@@ -470,7 +476,9 @@ const ProviderFaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divReffs.current[22] = el)}
     >
-      <p className="my-5 font-bold">Can I offer multiple services at once?</p>
+      <p className="my-5 font-bold uppercase">
+        Can I offer multiple services at once?
+      </p>
       Yes, you can offer multiple services simultaneously, such as towing and
       roadside assistance. Be sure to select all relevant services when setting
       up your profile to receive job requests that match your capabilities.
@@ -494,7 +502,7 @@ const ProviderFaqList = () => {
                     <FaCheck className="text-ter fs-300 lg:fs-500" />
                   </div>
                   <span
-                    className={`text-base mt-1 cursor-pointer ${
+                    className={`text-base mt-1 uppercase cursor-pointer ${
                       open === item.key ? "font-semibold" : ""
                     }`}
                     onClick={() => [

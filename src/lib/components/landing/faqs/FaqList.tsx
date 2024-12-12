@@ -48,7 +48,7 @@ const FaqList = () => {
       className="px-5 py-1 rounded-xl text-lg text-black"
       ref={(el) => (divRefs.current[1] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         What roadside assistance services do you provide?
       </p>
       At AllDrive SOS, we offer comprehensive maintenance and emergency roadside
@@ -67,7 +67,7 @@ const FaqList = () => {
       className="px-5 py-1 rounded-xl text-lg text-black"
       ref={(el) => (divRefs.current[2] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         How do I request a roadside assistance service?
       </p>
       Getting roadside assistance is simple! Just open the AllDrive SOS app or
@@ -84,7 +84,7 @@ const FaqList = () => {
       className="px-5 py-1 rounded-xl text-lg text-black"
       ref={(el) => (divRefs.current[3] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         How do I get charged for my roadside assistance?
       </p>
       Our pricing is transparent and follows a cost-efficient pay-as-you-go
@@ -99,7 +99,9 @@ const FaqList = () => {
       className="px-5 py-1 rounded-xl text-lg text-black"
       ref={(el) => (divRefs.current[4] = el)}
     >
-      <p className="my-5 font-bold">How long will it take to get help?</p>
+      <p className="my-5 font-bold uppercase">
+        How long will it take to get help?
+      </p>
       For a faster response, make sure your location services are enabled on
       your device. This helps us find service providers closest to you. When you
       request a service, you&apos;ll be able to choose a nearby provider and see
@@ -112,7 +114,7 @@ const FaqList = () => {
       className="px-5 py-1 rounded-xl text-lg text-black"
       ref={(el) => (divRefs.current[5] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         Should I tip my roadside assistance providers?
       </p>
       While tipping roadside assistance providers is not mandatory in the US,
@@ -127,7 +129,7 @@ const FaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divRefs.current[6] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         Do I need Auto Insurance to use AllDrive SOS?
       </p>
       No! AllDrive SOS offers a convenient pay-as-you-go option. However, if
@@ -142,7 +144,7 @@ const FaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divRefs.current[7] = el)}
     >
-      <p className="my-5 font-bold">
+      <p className="my-5 font-bold uppercase">
         Can I cancel a pending roadside assistance request and get a refund?
       </p>
       We aim to fulfill every roadside assistance request promptly and
@@ -156,7 +158,7 @@ const FaqList = () => {
       className="px-5 py-1 rounded-xl text-black text-lg"
       ref={(el) => (divRefs.current[8] = el)}
     >
-      <p className="my-5 font-bold">Why isn't my refund full?</p>
+      <p className="my-5 font-bold uppercase">Why isn't my refund full?</p>
       We use secure third-party processors for all transactions, including banks
       and payment gateways. These institutions may charge fees for processing
       refunds, which is why a small service fee applies.
@@ -178,7 +180,7 @@ const FaqList = () => {
                     <FaCheck className="text-ter fs-300 lg:fs-500" />
                   </div>
                   <span
-                    className={`text-base mt-1 cursor-pointer ${
+                    className={`text-base mt-1 uppercase cursor-pointer ${
                       open === item.key ? "font-semibold" : ""
                     }`}
                     onClick={() => [
