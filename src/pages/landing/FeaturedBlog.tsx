@@ -1,18 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
-import { getBlogPosts, getBlogTags } from "../../lib/services/api/blogApi";
-import { Link } from "react-router-dom";
+import { getBlogPosts } from "../../lib/services/api/blogApi";
 import BlogItem from "../../lib/components/landing/blog/blog-item";
 import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
 
 const FeaturedBlogPage = () => {
-  const [activeTag, setActiveTag] = useState("");
   const [page] = useState(1);
-
-  const { data: tags } = useQuery({
-    queryKey: ["getTags"],
-    queryFn: getBlogTags,
-  });
 
   const { data, isLoading } = useQuery({
     queryKey: ["getPosts", page, activeTag],
