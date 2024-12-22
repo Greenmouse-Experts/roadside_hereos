@@ -285,6 +285,23 @@ const StaffDetail = () => {
                   </p>
                   <p className="fw-500 uppercase">{kyc?.data?.plate_number}</p>
                 </div>
+                <div className="flex gap-5 items-center">
+                  <p className="w-3/12 shrink-0 text-gray-600 ">ID Card:</p>
+                  <a
+                    href={kyc?.data?.identityFront}
+                    className="w-1/12 -ml-5"
+                    target="_blank"
+                  >
+                    <img src={kyc?.data?.identityFront} />
+                  </a>
+                  <a
+                    href={kyc?.data?.identityFront}
+                    className="w-1/12"
+                    target="_blank"
+                  >
+                    <img src={kyc?.data?.identityBack} />
+                  </a>
+                </div>
               </div>
             </div>
           </div>

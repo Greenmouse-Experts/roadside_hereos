@@ -41,7 +41,7 @@ const UserServices = () => {
             >
               <div className="text-white lg:text-xl mb-3">
                 <p className="fw-600 fs-400"></p>
-                <p className="mt-4 fs-300 hidden 2xl:blockBecome a Service Provider">
+                <p className="mt-4 fs-300 2xl:blockBecome a Service Provider">
                   Join our nationwide network of service providers and start
                   earning with ALLDRIVE SOS!
                 </p>

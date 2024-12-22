@@ -88,7 +88,9 @@ const PendingService = () => {
                     {item.location}
                   </p>
                   <p className=" fs-300 fw-600 text-primary">
-                    {dayjs(item.createdAt).format("hh:mma dddd DD, MMMM YYYY")}
+                    {dayjs(item.serviceRequestCreatedAt).format(
+                      "hh:mma dddd DD, MMMM YYYY"
+                    )}
                   </p>
                 </div>
                 <div className="flex gap-x-3 ">
