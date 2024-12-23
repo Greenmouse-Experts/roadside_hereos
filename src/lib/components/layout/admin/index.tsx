@@ -26,6 +26,11 @@ const AdminDashboardLayout: React.FC<Props> = ({ children }) => {
   const navigate = useNavigate();
   const { Modal, setShowModal } = useModal();
   const [toggled, setToggled] = React.useState(false);
+
+  const displayLogOut = () => {
+    setShowModal(true);
+  };
+
   return (
     <>
       <Notification />
@@ -69,7 +74,7 @@ const AdminDashboardLayout: React.FC<Props> = ({ children }) => {
                           </MenuItem>
                           <MenuItem
                             className="flex gap-x-2 items-center fw-500"
-                            onClick={() => setShowModal(true)}
+                            onClick={() => displayLogOut()}
                           >
                             <IoLogOutOutline className="text-2xl" />
                             Logout

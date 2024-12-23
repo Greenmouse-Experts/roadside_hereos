@@ -38,7 +38,7 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
   const [uploading, setUploading] = useState(0);
   const [bizCert, setbizCert] = useState<Array<File>>();
   const [sending, setSending] = useState(0);
-  const [disabledField, setDisabledField] = useState(false);
+  const [disabledField] = useState(false);
 
   const { ref } = usePlacesWidget({
     apiKey: GOOGLE_API_KEY,
@@ -64,9 +64,6 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
 
   useEffect(() => {
     if (prevKyc) {
-      if (prevKyc?.isVerified) {
-        setDisabledField(true);
-      }
       setTimeout(() => {
         reset({
           address: kyc.address ? kyc.address : prevKyc.address || "",
@@ -166,24 +163,26 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
 
   // for business certificate
   const handleCertUpload = () => {
-    if (kyc.insurance_doc.length > 4) {
-      toast.info("Maximum upload reached");
-      return;
-    }
-    if (bizCert?.length) {
-      setSending(1);
-      const fd = new FormData();
-      fd.append("image", bizCert[0]);
-      upload.mutateAsync(fd, {
-        onSuccess: (data) => {
-          saveKyc({ ...kyc, business_reg_certificate: data[0] });
-          setSending(2);
-        },
-        onError: (error) => {
-          toast.error(error.message);
-          setSending(3);
-        },
-      });
+    if (kyc.insurance_doc.length > 0) {
+      if (kyc.insurance_doc.length > 4) {
+        toast.info("Maximum upload reached");
+        return;
+      }
+      if (bizCert?.length) {
+        setSending(1);
+        const fd = new FormData();
+        fd.append("image", bizCert[0]);
+        upload.mutateAsync(fd, {
+          onSuccess: (data) => {
+            saveKyc({ ...kyc, business_reg_certificate: data[0] });
+            setSending(2);
+          },
+          onError: (error) => {
+            toast.error(error.message);
+            setSending(3);
+          },
+        });
+      }
     }
   };
 
@@ -235,7 +234,6 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
                   message: "Please enter category company",
                 },
               }}
-              disabled
               render={({ field }) => (
                 <TextInput
                   label="Company Name (optional)"
@@ -469,15 +467,19 @@ const GeneralInfo: FC<Props> = ({ next, prevKyc, isLoading }) => {
                 </p>
               )}
               <div className="pt-6 flex overflow-x-auto scroll-pro gap-x-2">
-                {kyc.insurance_doc.map((item) => (
-                  <div className="relative w-[200px] h-[140px]">
-                    <img src={item} key={item} className="w-[100%] h-full" />
-                    <MdCancel
-                      className="text-red-500 cursor-pointer absolute text-xl -top-2 -right-1"
-                      onClick={() => removeFromSelected(item)}
-                    />
-                  </div>
-                ))}
+                {kyc?.insurance_doc?.length ? (
+                  kyc.insurance_doc.map((item) => (
+                    <div className="relative w-[200px] h-[140px]">
+                      <img src={item} key={item} className="w-[100%] h-full" />
+                      <MdCancel
+                        className="text-red-500 cursor-pointer absolute text-xl -top-2 -right-1"
+                        onClick={() => removeFromSelected(item)}
+                      />
+                    </div>
+                  ))
+                ) : (
+                  <></>
+                )}
               </div>
               <div
                 className="absolute top-1 left-[550px]"

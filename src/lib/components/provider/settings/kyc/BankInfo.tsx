@@ -15,7 +15,6 @@ const BankInfo: FC<Props> = ({ prev }) => {
   const [isBusy, setIsBusy] = useState(false);
   const kyc = useKycStore((state) => state.kyc);
   const saveKyc = useKycStore((state) => state.saveKyc);
-  const isDisabled = kyc.isVerified;
   const {
     control,
     handleSubmit,
@@ -38,14 +37,17 @@ const BankInfo: FC<Props> = ({ prev }) => {
       setIsBusy(false);
     },
     onError: (err: any) => {
-      if(err.response.data.message){
+      if (err.response.data.message) {
         toast.error(err.response.data.message);
         setIsBusy(false);
-      } else{
-      Object.entries<any>(err?.response.data?.errors).forEach(([_, value]) => {
-        toast.error(value.message);
-      });
-      setIsBusy(false);}
+      } else {
+        Object.entries<any>(err?.response.data?.errors).forEach(
+          ([_, value]) => {
+            toast.error(value.message);
+          }
+        );
+        setIsBusy(false);
+      }
     },
   });
   const onSubmit = (data: any) => {
@@ -58,7 +60,7 @@ const BankInfo: FC<Props> = ({ prev }) => {
       account_type: data.account_type,
       routing_number: data.routing_num,
       insurance_doc: kyc?.insurance_doc,
-      business_phone: kyc.business_phone_number
+      business_phone: kyc.business_phone_number,
     };
     saveKyc(payload);
     mutation.mutate(payload);
@@ -77,7 +79,6 @@ const BankInfo: FC<Props> = ({ prev }) => {
                   message: "Please enter an input",
                 },
               }}
-              disabled={isDisabled}
               render={({ field }) => (
                 <TextInput
                   label="Bank Name"
@@ -98,7 +99,6 @@ const BankInfo: FC<Props> = ({ prev }) => {
                   message: "Please enter an input",
                 },
               }}
-              disabled={isDisabled}
               render={({ field }) => (
                 <TextInput
                   label="Routing Number"
@@ -119,7 +119,6 @@ const BankInfo: FC<Props> = ({ prev }) => {
                   message: "Please enter an input",
                 },
               }}
-              disabled={isDisabled}
               render={({ field }) => (
                 <TextInput
                   label="Account Name"
@@ -140,7 +139,6 @@ const BankInfo: FC<Props> = ({ prev }) => {
                   message: "Please enter an input",
                 },
               }}
-              disabled={isDisabled}
               render={({ field }) => (
                 <TextInput
                   label="Account Number"
@@ -161,7 +159,6 @@ const BankInfo: FC<Props> = ({ prev }) => {
                   message: "Please enter an input",
                 },
               }}
-              disabled={isDisabled}
               render={({ field }) => (
                 <TextInput
                   label="Account Type"
@@ -184,7 +181,7 @@ const BankInfo: FC<Props> = ({ prev }) => {
                   title={
                     isBusy ? <ScaleSpinner size={14} color="white" /> : "Submit"
                   }
-                  disabled={!isValid || isDisabled}
+                  disabled={!isValid}
                 />
               </div>
             </div>
