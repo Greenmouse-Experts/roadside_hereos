@@ -18,29 +18,31 @@ interface Props {
 const CheckoutForm: FC<Props> = ({ prev }) => {
   const stripe = useStripe();
   const elements = useElements();
-  const navigate = useNavigate()
-    const {id} = useParams()
-    const clear = useRequestStore((state) => state.clearRequest)
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const clear = useRequestStore((state) => state.clearRequest);
 
-  const confirmPayment = async (secret:string | null) => {
+  const confirmPayment = async (secret: string | null) => {
     const payload = {
-      clientSecret: secret
-    }
+      clientSecret: secret,
+    };
     await confirmPay(payload)
-    .then((res) => {
-      toast.success(res.message)
-      navigate(`/success/${id}`)
-      clear()
-    })
-    .catch((err) => {
-      toast.error(err.response.data.message)
-    })
-  }
+      .then((res) => {
+        toast.success(res.message);
+        navigate(`/success/${id}`);
+        clear();
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message);
+      });
+  };
 
   const handleSubmit = async (event: any) => {
     // We don't want to let default form submission happen here,
     // which would refresh the page.
     event.preventDefault();
+
+    console.log(elements);
 
     if (!stripe || !elements) {
       // Stripe.js hasn't yet loaded.
@@ -52,7 +54,7 @@ const CheckoutForm: FC<Props> = ({ prev }) => {
       //`Elements` instance that was used to create the Payment Element
       elements,
       confirmParams: {
-        return_url: "https://roadside-heroes.netlify.app/",
+        return_url: "https://alldrivesos.com/",
       },
       redirect: "if_required",
     });
@@ -61,7 +63,7 @@ const CheckoutForm: FC<Props> = ({ prev }) => {
       // Show error to your customer (for example, payment details incomplete)
       console.log(result.error.message);
     } else {
-      confirmPayment(result.paymentIntent.client_secret)
+      confirmPayment(result.paymentIntent.client_secret);
       // Your customer will be redirected to your `return_url`. For some payment
       // methods like iDEAL, your customer will be redirected to an intermediate
       // site first to authorize the payment, then redirected to the `return_url`.
