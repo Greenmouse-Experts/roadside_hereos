@@ -221,7 +221,7 @@ const StaffDetail = () => {
                 <p className="p-3 border-b-2 fw-500 text-gray-600">
                   Service Category
                 </p>
-                <div className="px-4 py-3">
+                <div className="px-4 py-3 h-[245px] overflow-y-auto">
                   <ServiceCategory cat={kyc?.data?.service_rendered} />
                 </div>
               </div>
@@ -301,7 +301,7 @@ const StaffDetail = () => {
                     <img src={kyc?.data?.identityFront} />
                   </a>
                   <a
-                    href={kyc?.data?.identityFront}
+                    href={kyc?.data?.identityBack}
                     className="w-1/12"
                     target="_blank"
                   >

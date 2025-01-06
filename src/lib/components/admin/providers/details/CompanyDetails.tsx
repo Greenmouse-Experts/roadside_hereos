@@ -70,11 +70,11 @@ const CompanyDetails: FC<Props> = ({ data }) => {
               <p>Services</p>
             </div>
             <div className="mt-2 lg:mt-0">
-                <ul className="list-disc pl-5">
-                {data?.service_rendered.map((service: Service, index: number) => (
+              <ul className="list-disc pl-5">
+                {data?.service_rendered?.length > 0 ? data?.service_rendered.map((service: Service, index: number) => (
                   <li key={index} className="fw-600">{service.name}</li>
-                ))}
-                </ul>
+                )) : 'N/A'}
+              </ul>
             </div>
           </div>
           <div className="lg:flex items-center gap-x-4 lg:gap-x-12">
