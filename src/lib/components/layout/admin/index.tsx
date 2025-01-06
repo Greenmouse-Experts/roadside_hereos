@@ -17,6 +17,7 @@ import NotifyDrop from "../../admin/home/NotifyDrop";
 import LogoutModal from "../../auth/AdminLogoutModal";
 import Notification from "../../../services/pushNotify";
 import { useNavigate } from "react-router-dom";
+import { FaLongArrowAltLeft } from "react-icons/fa";
 
 interface Props {
   children: React.ReactNode;
@@ -46,7 +47,17 @@ const AdminDashboardLayout: React.FC<Props> = ({ children }) => {
                   className="lg:hidden text-4xl"
                   onClick={() => setToggled(true)}
                 />
-                <p className="fw-600 lg:text-lg">Admin Dashboard</p>
+                <div className="flex">
+                  <div
+                    className="flex gap-x-2 items-center cursor-pointer"
+                    onClick={() => navigate(-1)}
+                  >
+                    <div className="w-8 h-8 p-2 rounded-md bg-black text-white">
+                      <FaLongArrowAltLeft />
+                    </div>
+                    <p className="fw-600 lg:text-lg">Admin Dashboard</p>
+                  </div>
+                </div>
                 <div className="flex gap-x-5 items-center">
                   <NotifyDrop />
                   <div className="flex gap-x-4 items-center">

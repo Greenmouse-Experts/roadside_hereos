@@ -4,14 +4,24 @@ import {
   MdOutlineHomeRepairService,
   MdOutlineMailOutline,
 } from "react-icons/md";
-import { UserItemType } from "../../../../types/auth";
 import { FC } from "react";
 import dayjs from "dayjs";
 import { FaRegAddressCard } from "react-icons/fa6";
 import { BsCalendar4Week } from "react-icons/bs";
 
+interface Service {
+  name: string;
+}
+
 interface Props {
-  data: UserItemType;
+  data: {
+    name: string;
+    email: string;
+    phone: string;
+    address: string;
+    service_rendered: Service[];
+    createdAt: string;
+  };
 }
 const CompanyDetails: FC<Props> = ({ data }) => {
   return (
@@ -51,7 +61,7 @@ const CompanyDetails: FC<Props> = ({ data }) => {
               <p>Address</p>
             </div>
             <div className="mt-2 lg:mt-0">
-              <p className="fw-600">N/A</p>
+              <p className="fw-600">{data?.address || 'N/A'}</p>
             </div>
           </div>
           <div className="lg:flex items-center gap-x-4 lg:gap-x-12">
@@ -60,7 +70,11 @@ const CompanyDetails: FC<Props> = ({ data }) => {
               <p>Services</p>
             </div>
             <div className="mt-2 lg:mt-0">
-              <p className="fw-600">N/A</p>
+                <ul className="list-disc pl-5">
+                {data?.service_rendered.map((service: Service, index: number) => (
+                  <li key={index} className="fw-600">{service.name}</li>
+                ))}
+                </ul>
             </div>
           </div>
           <div className="lg:flex items-center gap-x-4 lg:gap-x-12">

@@ -144,7 +144,7 @@ const StaffDetail = () => {
               <div className="lg:row-span-2">
                 <p className="fw-600 text-lg lg:text-xl">{`${data?.data.fname} ${data?.data.lname}`}</p>
                 <p className="fs-500 text-gray-500 fw-500 pl-3 mb-3">
-                  Service Provider
+                  Service Provider (Technician)
                 </p>
                 {!data?.data.verified && (
                   <div className="text-red-600 fw-600 flex items-center gap-x-2">
@@ -196,7 +196,7 @@ const StaffDetail = () => {
                 </div>
               </div>
               <div>
-                <p className="fw-500 text-gray-500 mb-4">City</p>
+                <p className="fw-500 text-gray-500 mb-4">City (Service Areas)</p>
                 <div className="flex gap-x-2 items-center w-full overflow-x-auto scroll-pro">
                   <div className="bg-review shrink-0 w-10 h-10 circle place-center text-white">
                     <MdLocationCity />
@@ -254,6 +254,12 @@ const StaffDetail = () => {
                     Account Name:
                   </p>
                   <p className="fw-500 uppercase">{kyc?.data?.account_name}</p>
+                </div>
+                <div className="flex items-center">
+                  <p className="w-3/12 shrink-0 text-gray-600 ">
+                    Residential Address:
+                  </p>
+                  <p className="fw-500 uppercase">{kyc?.data?.address}</p>
                 </div>
                 <div className="flex items-center">
                   <p className="w-3/12 shrink-0 text-gray-600 ">
