@@ -6,12 +6,11 @@ import { Link } from "react-router-dom";
 import { IoMdTime } from "react-icons/io";
 import { HiCurrencyDollar } from "react-icons/hi2";
 import { GiAutoRepair } from "react-icons/gi";
-import { ServiceRequestItem2 } from "../../../../types/service";
 import { FC } from "react";
 import { formatAsNgnMoney } from "../../../../utils";
 
 interface Props {
-  data: ServiceRequestItem2;
+  data: any;
 }
 const UserInfo: FC<Props> = ({ data }) => {
   const {
@@ -27,6 +26,7 @@ const UserInfo: FC<Props> = ({ data }) => {
     vehicleYear,
     quote,
     customer,
+    company
   } = data;
 
   return (
@@ -72,15 +72,18 @@ const UserInfo: FC<Props> = ({ data }) => {
               </p>
               <p className="my-1 fw-500 flex gap-x-2 items-center">
                 <HiCurrencyDollar className="text-lg lg:text-2xl text-gray-500" />
-                Qouted fee{" "}
+                Quoted fee{" "}
                 <span className="fw-600">{formatAsNgnMoney(quote)}</span>
               </p>
               <p className="my-1 fw-500 flex gap-x-2 items-center">
                 <GiAutoRepair className="text-lg lg:text-2xl text-gray-500" />
-                Service Provider{" "}
-                <Link to={""} className="fw-600">
-                  {`${fname} ${lname}`}
-                </Link>
+                Service Provider{" "} -
+                <div className="mt-2 lg:mt-0">
+                  <ul className="pl-5">
+                    <li>Company : <Link to={""} className="fw-600">{company.name}</Link></li>
+                    <li>Technician : <Link to={""} className="fw-600">{`${fname} ${lname}`}</Link></li>
+                  </ul>
+                </div>
               </p>
             </div>
             <div className="bg-light p-2 lg:p-4 rounded mt-2">
