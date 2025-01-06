@@ -38,7 +38,7 @@ const ProviderRegisterForm = () => {
       const newValue = event.target.value; // Replace this with the value you want to add
       setValues((prevValues) => [...prevValues, newValue]);
     } else {
-      values.splice(values.indexOf(event.target.value), 1);
+      setValues((prevValues) => prevValues.filter((value) => value !== event.target.value));
     }
   };
 
