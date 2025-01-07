@@ -47,7 +47,7 @@ const RequestList: FC<Props> = ({ status, paymentStatus }) => {
       id: "Service Location",
       cell: (info) => <p className="fw-500">{info.getValue()}</p>,
     }),
-    columnHelper.accessor((row) => row.createdAt, {
+    columnHelper.accessor((row) => row.serviceRequestCreatedAt, {
       id: "Date Requested",
       header: (info) => info.column.id,
       cell: (info) => (
