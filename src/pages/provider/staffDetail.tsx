@@ -22,6 +22,7 @@ import useDialog from "../../lib/hooks/useDialog";
 import ViewReviewsModal from "../../lib/components/admin/providers/staff/ViewReviewsModal";
 import { MdLocationCity, MdSignpost } from "react-icons/md";
 import { formatAsNgnMoney, formatPhoneNumber } from "../../lib/utils";
+import ViewCityCodes from "../../lib/components/admin/providers/staff/ViewCityCodes";
 
 const StaffDetail = () => {
   const { id } = useParams();
@@ -40,6 +41,7 @@ const StaffDetail = () => {
   const { Modal, setShowModal } = useModal();
   const { Modal: DisApproval, setShowModal: SetDisApproval } = useModal();
   const { Dialog, setShowModal: ShowDialog } = useDialog();
+  const { Dialog: CityCodes, setShowModal: ShowCityCode } = useDialog();
   const approveKyc = async () => {
     const payload = {
       approved: true,
@@ -196,7 +198,10 @@ const StaffDetail = () => {
                 </div>
               </div>
               <div>
+                <span className="flex justify-between">
                 <p className="fw-500 text-gray-500 mb-4">City (Service Areas)</p>
+                <p className="fw-500 text-sm mx-4 text-blue-500 cursor-pointer" onClick={() => ShowCityCode(true)}>View more</p>
+                </span>
                 <div className="flex gap-x-2 items-center w-full overflow-x-auto scroll-pro">
                   <div className="bg-review shrink-0 w-10 h-10 circle place-center text-white">
                     <MdLocationCity />
@@ -229,7 +234,7 @@ const StaffDetail = () => {
                 <p className="p-3 border-b-2 fw-500 text-gray-600">
                   Service Brands
                 </p>
-                <div className="px-4 py-3">
+                <div className="px-4 py-3 h-[245px] overflow-y-auto">
                   <ServiceBrands brands={kyc?.data?.brands} />
                 </div>
               </div>
@@ -333,6 +338,9 @@ const StaffDetail = () => {
       <Dialog title="Driver Reviews" size="lg">
         <ViewReviewsModal id={`${id}`} />
       </Dialog>
+      <CityCodes title="City (Service Areas)" size="lg">
+        <ViewCityCodes codes={kyc?.data?.city} />
+      </CityCodes>
     </>
   );
 };
