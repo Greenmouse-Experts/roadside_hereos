@@ -42,6 +42,18 @@ export const createBlogCategory = async (payload: any) => {
       .then((response) => response.data);
   };
 
+  export const getBlogComments = async (payload: any) => {
+    return axios
+      .get(`${ENDPOINT.GET_BLOG_COMMENTS}/${payload}`)
+      .then((response) => response.data);
+  };
+
+  export const createBlogComments = async (payload: any) => {
+    return axios 
+      .post(`${ENDPOINT.CREATE_BLOG_COMMENTS}`, payload)
+      .then((response) => response.data);
+  };
+
   export const editBlogCategory = async (payload:any) => {
     return axios
       .patch(`${ENDPOINT.UPDATE_BLOG_CATEGORY}/${payload.id}`, payload)

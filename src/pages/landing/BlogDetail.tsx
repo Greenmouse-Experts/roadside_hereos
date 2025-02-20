@@ -6,10 +6,14 @@ import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader"
 import dayjs from "dayjs";
 import { TbArrowBackUpDouble } from "react-icons/tb";
 import RelatedNews from "../../lib/components/landing/blog/related-news";
+import useAuth from "../../lib/hooks/authUser";
+import BlogComments from "./BlogComments";
 
 const BlogDetail = () => {
   const { id } = useParams();
+  const { user } = useAuth();
   const navigate = useNavigate();
+
   const { data, isLoading } = useQuery({
     queryKey: ["getSinglePost"],
     queryFn: () => getSingleBlogPost(`${id}`),
@@ -54,7 +58,7 @@ const BlogDetail = () => {
                     {/* {data?.tags.map((item: any) => ( */}
                     <p
                       className="px-2 py-[2px] bg-blue-50 fw-500 rounded-xl fs-400"
-                      // key={item.id}
+                    // key={item.id}
                     >
                       {data?.data?.category?.name}
                     </p>
@@ -76,10 +80,15 @@ const BlogDetail = () => {
                       }}
                     />
                   </div>
+                  <div className="mt-3">
+                    {user.token !== '' &&
+                      <BlogComments id={id} />
+                    }
+                  </div>
                 </div>
               </div>
               <div className="lg:w-[30%] lg:pt-12">
-                <RelatedNews id={data?.data?.categoryId}/>
+                <RelatedNews id={data?.data?.categoryId} />
               </div>
             </div>
           )}

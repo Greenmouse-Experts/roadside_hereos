@@ -136,3 +136,5 @@ export const GET_BLOG_TAGS = `blog-category/public`
 export const GET_BLOGS = `blog-post/public`
 export const GET_SINGLE_BLOG = `/blog-post`
 export const GET_BLOG_BY_CATEGORY = `blog-post/retrieve-by-category`
+export const GET_BLOG_COMMENTS = `/blog-comment/retrieve`
+export const CREATE_BLOG_COMMENTS = `/blog-comment/create`

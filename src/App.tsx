@@ -45,7 +45,6 @@ function App() {
         <Route path="/admin/*" element={<AdminDashboard />} />
       </Routes>
       <CookieModal />
-
     </>
   );
 }
