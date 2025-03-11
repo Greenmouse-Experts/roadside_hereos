@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
+import { City, Country, ICity, IState, State } from "country-state-city";
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import { Link, useParams } from "react-router-dom";
@@ -12,51 +13,74 @@ import useModal from "../../lib/hooks/useModal";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../lib/services/constant";
 
+
 const OnboardStaff = () => {
   const { code } = useParams();
   const token = code?.replace("token=", "");
   const [user, setUser] = useState<string>();
   const [isBusy, setIsBusy] = useState(false);
-  const getMe = async () => {
-    try {
-      const response = await fetch(`${BASE_URL}/invitation-request/account`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `${token}`,
-        },
-      });
+  const [countries] = useState(Country.getAllCountries());
+  const [states, setStates] = useState<IState[]>([]);
+  const [cities, setCities] = useState<ICity[]>([]);
 
-      const result = await response.json();
-      if (result) {
-        setUser(result?.data?.first_name);
-      }
-    } catch (error: any) {
-      toast.error(error.message);
-    }
-  };
-  useEffect(() => {
-    getMe();
-  }, []);
+
   const {
     control,
     handleSubmit,
     watch,
     formState: { errors, isValid },
+    setValue,
   } = useForm({
     mode: "onChange",
     defaultValues: {
       phone: "",
-      address: "",
+      country: "",
+      state: "",
+      city: "",
       password: "",
       confirm_password: "",
     },
   });
+
   const { Modal, setShowModal } = useModal();
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const response = await fetch(`${BASE_URL}/invitation-request/account`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `${token}`,
+          },
+        });
+        const result = await response.json();
+        if (result) setUser(result?.data?.first_name);
+      } catch (error: any) {
+        toast.error(error.message);
+      }
+    };
+    fetchUser();
+  }, []);
+
+  const handleCountryChange = (countryCode: string) => {
+    setValue("country", countryCode);
+    setValue("state", "");
+    setValue("city", "");
+    setStates(State.getStatesOfCountry(countryCode));
+    setCities([]);
+  };
+
+  const handleStateChange = (stateCode: string, countryCode: string) => {
+    setValue("state", stateCode);
+    setValue("city", "");
+    setCities(City.getCitiesOfState(countryCode, stateCode));
+  };
+
   const submitAction = async (data: any) => {
     setIsBusy(true);
     const payload = {
-      address: data.address,
+      address: `${data.city}, ${data.state}, ${data.country}`,
       password: data.password,
       phone_number: data.phone,
     };
@@ -67,9 +91,8 @@ const OnboardStaff = () => {
           "Content-Type": "application/json",
           Authorization: `${token}`,
         },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       });
-
       const result = await response.json();
       if (result) {
         toast.success(result?.message);
@@ -77,10 +100,11 @@ const OnboardStaff = () => {
         setShowModal(true);
       }
     } catch (error: any) {
-      setIsBusy(false)
+      setIsBusy(false);
       toast.error(error.message);
     }
   };
+
   return (
     <>
       <div className="bg-primary h-screen">
@@ -131,26 +155,59 @@ const OnboardStaff = () => {
                   </div>
                   <div>
                     <Controller
-                      name="address"
+                      name="country"
                       control={control}
-                      rules={{
-                        required: {
-                          value: true,
-                          message: "Please enter your address",
-                        },
-                      }}
                       render={({ field }) => (
                         <TextInput
-                          label="Address"
-                          labelClassName="text-[#000000B2] fw-500"
-                          error={errors.address?.message}
-                          type={InputType.textarea}
+                          label="Country"
+                          type={InputType.select}
+                          options={countries.map((c) => ({
+                            value: c.isoCode,
+                            label: c.name,
+                          }))}
                           {...field}
-                          ref={null}
+                          onChange={(e) => {
+                            field.onChange(e);
+                            handleCountryChange(e.target.value);
+                          }}
                         />
                       )}
                     />
-                  </div>
+                    <Controller
+                      name="state"
+                      control={control}
+                      render={({ field }) => (
+                        <TextInput
+                          label="State"
+                          type={InputType.select}
+                          options={states.map((s) => ({
+                            value: s.isoCode,
+                            label: s.name,
+                          }))}
+                          {...field}
+                          onChange={(e) => {
+                            field.onChange(e);
+                            handleStateChange(e.target.value, watch("country"));
+                          }}
+                        />
+                      )}
+                    />
+                    <Controller
+                      name="city"
+                      control={control}
+                      render={({ field }) => (
+                        <TextInput
+                          label="City"
+                          type={InputType.select}
+                          options={cities.map((c) => ({
+                            value: c.name,
+                            label: c.name,
+                          }))}
+                          {...field}
+                        />
+                      )}
+                    />                 
+                     </div>
                   <div className=" grid lg:grid-cols-2 gap-4">
                     <Controller
                       name="password"

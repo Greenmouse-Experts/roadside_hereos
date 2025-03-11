@@ -4,24 +4,23 @@ import { FieldError, FieldErrorsImpl, Merge } from 'react-hook-form';
 import { classNames } from '../../utils';
 
 export enum InputType {
-  email = 'email',
-  password = 'password',
-  radio = 'radio',
-  tel = 'tel',
-  text = 'text',
-  textarea = 'textarea',
-  number = 'number',
-  checkbox = 'checkbox',
-  search = 'search',
+  email = "email",
+  password = "password",
+  radio = "radio",
+  tel = "tel",
+  text = "text",
+  textarea = "textarea",
+  number = "number",
+  checkbox = "checkbox",
+  search = "search",
+  select = "select",
 }
 
 interface Props {
   type: InputType;
   name?: string;
-  onChange?:
-    | React.ChangeEvent<HTMLInputElement>
-    | React.ChangeEvent<HTMLTextAreaElement>
-    | any;
+  options?: { value: string | number; label: string }[]; // 🆕 Added options for select
+  onChange?: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
   label?: string;
   error?:
     | string
@@ -83,6 +82,7 @@ const TextInput: React.FC<Props> = ({
   icon,
   readonly,
   contact,
+  options,
   ...rest
 }) => {
   const [isPasswordType, setIsPasswordType] = useState<boolean>(false);
@@ -101,7 +101,7 @@ const TextInput: React.FC<Props> = ({
             id={name}
             className={
               altClassName ||
-              classNames(fullWidth ? 'w-full p-2' : 'p-2 h-24', className)
+              classNames(fullWidth ? "w-full p-2" : "p-2 h-24", className)
             }
             name={name}
             required={required}
@@ -117,13 +117,14 @@ const TextInput: React.FC<Props> = ({
             {...rest}
           />
         );
+  
       case InputType.checkbox:
         return (
           <input
             type="checkbox"
             className={
               altClassName ||
-              classNames(fullWidth ? '' : 'p-2 w-[16px] h-[16px]', className)
+              classNames(fullWidth ? "" : "p-2 w-[16px] h-[16px]", className)
             }
             name={name}
             required={required}
@@ -139,7 +140,31 @@ const TextInput: React.FC<Props> = ({
             {...rest}
           />
         );
-
+  
+      case InputType.select: // 🆕 Handle select field
+        return (
+          <select
+            id={name}
+            name={name}
+            className={
+              altClassName ||
+              classNames(fullWidth ? "w-full p-2" : "p-2", className)
+            }
+            required={required}
+            onChange={onChange}
+            disabled={disabled}
+            ref={inputRef}
+            {...rest}
+          >
+            <option value="">{placeholder || "Select an option"}</option>
+            {options?.map((option: any) => (
+              <option key={option.value} value={option.value}>
+                {option.label}
+              </option>
+            ))}
+          </select>
+        );
+  
       default:
         return (
           <input
@@ -148,7 +173,7 @@ const TextInput: React.FC<Props> = ({
             className={
               altClassName ||
               classNames(
-                fullWidth ? 'w-full' : 'text-black lg:p-2 rounded-[4px]',
+                fullWidth ? "w-full" : "text-black lg:p-2 rounded-[4px]",
                 className
               )
             }
@@ -172,7 +197,7 @@ const TextInput: React.FC<Props> = ({
         );
     }
   };
-
+  
   return (
     <div
       className={`mt-3 ${
