@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
-import { City, Country, ICity, IState, State } from "country-state-city";
+import { City, ICity, IState, State } from "country-state-city";
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import { Link, useParams } from "react-router-dom";
@@ -19,7 +19,6 @@ const OnboardStaff = () => {
   const token = code?.replace("token=", "");
   const [user, setUser] = useState<string>();
   const [isBusy, setIsBusy] = useState(false);
-  const [countries] = useState(Country.getAllCountries());
   const [states, setStates] = useState<IState[]>([]);
   const [cities, setCities] = useState<ICity[]>([]);
 
@@ -166,10 +165,12 @@ const OnboardStaff = () => {
                         <TextInput
                           label="Country"
                           type={InputType.select}
-                          options={countries.map((c) => ({
-                            value: c.isoCode,
-                            label: c.name,
-                          }))}
+                          options={[
+                            {
+                              value: "US",
+                              label: "United States",
+                            },
+                          ]}
                           {...field}
                           onChange={(e) => {
                             field.onChange(e);
