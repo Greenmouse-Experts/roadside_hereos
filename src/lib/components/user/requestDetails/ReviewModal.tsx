@@ -81,7 +81,7 @@ const ReviewModal: FC<Props> = ({ id, close }) => {
               <TextInput
                 label="Review"
                 type={InputType.textarea}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement>) =>
                   setReview(e.target.value)
                 }
               />

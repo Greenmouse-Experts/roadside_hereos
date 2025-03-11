@@ -61,7 +61,7 @@ const QueryModal: FC<Props> = ({ id, close, refetch }) => {
           label="Query"
           labelClassName="fw-500"
           type={InputType.textarea}
-          onChange={(e: ChangeEvent<HTMLInputElement>) =>
+          onChange={(e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement>) =>
             setReview(e.target.value)
           }
         />

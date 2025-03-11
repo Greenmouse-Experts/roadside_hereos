@@ -33,6 +33,7 @@ const OnboardStaff = () => {
   } = useForm({
     mode: "onChange",
     defaultValues: {
+      street: "",
       phone: "",
       country: "",
       state: "",
@@ -80,7 +81,7 @@ const OnboardStaff = () => {
   const submitAction = async (data: any) => {
     setIsBusy(true);
     const payload = {
-      address: `${data.city}, ${data.state}, ${data.country}`,
+      address: `${data.street}, ${data.city}, ${data.state}, ${data.country}`,
       password: data.password,
       phone_number: data.phone,
     };
@@ -206,7 +207,25 @@ const OnboardStaff = () => {
                           {...field}
                         />
                       )}
-                    />                 
+                    /> 
+                    <Controller
+                      name="street"
+                      control={control}
+                      rules={{
+                        required: true
+                      }}
+                      render={({ field }) => (
+                        <TextInput
+                          label="Street"
+                          labelClassName="text-[#000000B2] fw-500"
+                          placeholder="Enter Street"
+                          error={errors.street?.message}
+                          type={InputType.text}
+                          {...field}
+                          ref={null}
+                        />
+                      )}
+                    />              
                      </div>
                   <div className=" grid lg:grid-cols-2 gap-4">
                     <Controller
