@@ -2,7 +2,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import commonjs from "vite-plugin-commonjs";
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
     react(),
@@ -15,6 +14,14 @@ export default defineConfig({
     }),
   ],
   optimizeDeps: {
-    exclude: ["react-apexcharts"],
+    include: ["react-apexcharts"], // Pre-bundle react-apexcharts
+  },
+  build: {
+    sourcemap: false, // Disable sourcemaps to reduce memory usage
+    rollupOptions: {
+      output: {
+        manualChunks: undefined, // Reduce chunk splitting
+      },
+    },
   },
 });
