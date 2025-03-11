@@ -95,10 +95,14 @@ const OnboardStaff = () => {
         body: JSON.stringify(payload),
       });
       const result = await response.json();
-      if (result) {
+      if (result.success) {
         toast.success(result?.message);
         setIsBusy(false);
         setShowModal(true);
+      }
+      else {
+        toast.error(result?.message);
+        setIsBusy(false);
       }
     } catch (error: any) {
       setIsBusy(false);
@@ -108,7 +112,7 @@ const OnboardStaff = () => {
 
   return (
     <>
-      <div className="bg-primary h-screen">
+      <div className="bg-primary h-full">
         <div className="w-full h-full bg-login">
           <div className="box h-full place-center">
             <div className="lg:w-[550px] mx-auto bg-white lg:px-16 p-6">
