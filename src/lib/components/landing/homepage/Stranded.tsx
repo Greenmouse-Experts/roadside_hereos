@@ -99,6 +99,14 @@ const Stranded = () => {
                   </div>
                 ))}
               </div>
+              <div className="md:flex mt-8 lg:mt-10 gap-x-5">
+                <Link
+                  to={"/request"}
+                  className="btn-feel flex w-6/12 md:w-auto items-center gap-x-4 fs-500 !fw-600 bg-[#C97833] text-white px-4 py-2"
+                >
+                  Get Help <HiOutlineArrowNarrowRight />
+                </Link>
+              </div>
             </div>
           </div>
         </div>
@@ -130,12 +138,6 @@ const Stranded = () => {
                 ))}
               </div>
               <div className="md:flex mt-8 lg:mt-10 gap-x-5">
-                <Link
-                  to={"/request"}
-                  className="btn-feel flex w-6/12 md:w-auto items-center gap-x-4 fs-500 !fw-600 bg-[#172748] text-white px-4 py-2"
-                >
-                  Get Help <HiOutlineArrowNarrowRight />
-                </Link>
                 <Link
                   to={"/auth/register"}
                   className="btn-feel flex mt-6 lg:mt-0 w-11/12 md:w-auto  items-center gap-x-4 fs-500 !fw-600 bg-[#172748] text-white px-4 py-2"
