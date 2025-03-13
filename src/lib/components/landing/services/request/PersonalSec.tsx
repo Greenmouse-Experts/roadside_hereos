@@ -1,5 +1,6 @@
 import { Controller, useForm } from "react-hook-form";
 import TextInput, { InputType } from "../../../ui/TextInput";
+import { City, ICity, IState, State } from "country-state-city";
 import "react-phone-number-input/style.css";
 import PhoneInputWithCountry from "react-phone-number-input/react-hook-form";
 import { Button } from "@material-tailwind/react";
@@ -17,21 +18,29 @@ interface Props {
   prev: () => void;
 }
 const PersonalSec: FC<Props> = ({ next }) => {
+  const [states, setStates] = useState<IState[]>([]);
+  const [cities, setCities] = useState<ICity[]>([]);
   const requestInfo = useRequestStore((store) => store.request);
   const saveRequest = useRequestStore((state) => state.saveRequest);
-  const {user, firstName, lastName} = useAuth()
+  const { user, firstName, lastName } = useAuth()
   const {
     control,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
   } = useForm({
     mode: "onChange",
     defaultValues: {
+      street: "",
+      country: "",
+      state: "",
+      city: "",
       first_name: firstName || "",
       last_name: lastName || "",
       email: user.email || "",
       phone: user.phone || "",
-      address: user.state || "",
+      address: "",
     },
   });
   const [isBusy, setIsBusy] = useState(false);
@@ -47,7 +56,7 @@ const PersonalSec: FC<Props> = ({ next }) => {
       last_name: data.last_name,
       email: data.email,
       phone: data.phone,
-      address: data.address,
+      address: `${data.street}, ${data.city}, ${data.state}, ${data.country}`
     };
     request.mutate(payload, {
       onSuccess: () => {
@@ -63,12 +72,27 @@ const PersonalSec: FC<Props> = ({ next }) => {
         });
         next();
       },
-      onError: (err:any) => {
+      onError: (err: any) => {
         setIsBusy(false)
         toast.error(err?.response?.data?.message)
       }
     })
   };
+
+  const handleCountryChange = (countryCode: string) => {
+    setValue("country", countryCode);
+    setValue("state", "");
+    setValue("city", "");
+    setStates(State.getStatesOfCountry(countryCode));
+    setCities([]);
+  };
+
+  const handleStateChange = (stateCode: string, countryCode: string) => {
+    setValue("state", stateCode);
+    setValue("city", "");
+    setCities(City.getCitiesOfState(countryCode, stateCode));
+  };
+
   return (
     <>
       <div className="bg-gray-100 lg:p-10 lg:pb-20 p-4 pb-8 rounded-md">
@@ -166,23 +190,75 @@ const PersonalSec: FC<Props> = ({ next }) => {
                 )}
               </div>
             </div>
-            <div>
+            <div className="grid lg:grid-cols-2 gap-x-4 gap-y-3">
               <Controller
-                name="address"
+                name="country"
+                control={control}
+                render={({ field }) => (
+                  <TextInput
+                    label="Country"
+                    type={InputType.select}
+                    options={[
+                      {
+                        value: "US",
+                        label: "United States",
+                      },
+                    ]}
+                    {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      handleCountryChange(e.target.value);
+                    }}
+                  />
+                )}
+              />
+              <Controller
+                name="state"
+                control={control}
+                render={({ field }) => (
+                  <TextInput
+                    label="State"
+                    type={InputType.select}
+                    options={states.map((s) => ({
+                      value: s.isoCode,
+                      label: s.name,
+                    }))}
+                    {...field}
+                    onChange={(e) => {
+                      field.onChange(e);
+                      handleStateChange(e.target.value, watch("country"));
+                    }}
+                  />
+                )}
+              />
+              <Controller
+                name="city"
+                control={control}
+                render={({ field }) => (
+                  <TextInput
+                    label="City"
+                    type={InputType.select}
+                    options={cities.map((c) => ({
+                      value: c.name,
+                      label: c.name,
+                    }))}
+                    {...field}
+                  />
+                )}
+              />
+              <Controller
+                name="street"
                 control={control}
                 rules={{
-                  required: {
-                    value: false,
-                    message: "Please enter a value",
-                  },
+                  required: true
                 }}
                 render={({ field }) => (
                   <TextInput
-                    label="Home Address"
+                    label="Street"
                     labelClassName="text-[#000000B2] fw-500"
-                    error={errors.address?.message}
-                    type={InputType.textarea}
-                    required
+                    placeholder="Enter Street"
+                    error={errors.street?.message}
+                    type={InputType.text}
                     {...field}
                     ref={null}
                   />
@@ -195,7 +271,7 @@ const PersonalSec: FC<Props> = ({ next }) => {
               type={"submit"}
               className="btn-feel flex gap-x-2 items-center"
             >
-              {isBusy? <BeatLoader size={13}/> : <>Next <FaArrowRightLong /></>}
+              {isBusy ? <BeatLoader size={13} /> : <>Next <FaArrowRightLong /></>}
             </Button>
           </div>
         </form>
