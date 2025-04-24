@@ -115,10 +115,10 @@ const UserInfo: FC<Props> = ({ data }) => {
                     <span className="fw-500 text-gray-700">{company.name}</span>
                   </p>
                   <p>
-                    Email: <span className="fw-500 text-gray-700">{company.email}</span>
+                    Email: {" "} <span className="fw-500 text-gray-700">{company.email}</span>
                   </p>
                   <p>
-                    Phone Number:{" "}
+                    Phone Number: {" "}
                     <span className="fw-500 text-gray-700">{company.phone}</span>
                   </p>
                 </div>
@@ -134,11 +134,15 @@ const UserInfo: FC<Props> = ({ data }) => {
                     <span className="fw-500 text-gray-700">{fname} {lname}</span>
                   </p>
                   <p>
-                    Email: <span className="fw-500 text-gray-700">{email}</span>
+                    Email: {"  "} <span className="fw-500 text-gray-700">{email}</span>
                   </p>
                   <p>
-                    Phone Number:{" "}
+                    Phone Number:{"  "}
                     <span className="fw-500 text-gray-700">{phone}</span>
+                  </p>
+                  <p>
+                    Address:{"  "}
+                    <span className="fw-500 text-gray-700">{address}</span>
                   </p>
                 </div>
               </div>
