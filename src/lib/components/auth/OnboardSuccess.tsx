@@ -10,10 +10,10 @@ const OnboardSuccess = () => {
           Registration Successful !!
         </p>
         <div className="mt-5">
-          <p className="text-center">
+            <p className="text-center">
             Thanks for signing up. Welcome to our community. We are happy to
-            have you on board. Click on the link below to download the App.
-          </p>
+            have you on board. Click on the link below to download the App, install it and complete KYC
+            </p>
           <div className="flex justify-center mt-8">
             <Link
               to="https://play.google.com/store"
