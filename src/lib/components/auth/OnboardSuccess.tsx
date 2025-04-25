@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import happy from "../../../assets/happystate.gif";
 
 const OnboardSuccess = () => {
