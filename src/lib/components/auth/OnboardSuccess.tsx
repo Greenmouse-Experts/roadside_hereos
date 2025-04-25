@@ -35,14 +35,6 @@ const OnboardSuccess = () => {
             </a>
             , then log in to complete your KYC and start receiving service requests from clients.
           </p>
-          <div className="flex justify-center mt-8">
-            <Link
-              to="https://play.google.com/store"
-              className="fw-500 text-[#172748] mt-3 lg:mt-0 border-2 border-[#172748] rounded-[100px] px-4 py-2"
-            >
-              Proceed to Download
-            </Link>
-          </div>
         </div>
       </div>
     </>
