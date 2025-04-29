@@ -103,6 +103,7 @@ const MapLocation: FC<Props> = ({ setValue, close }) => {
       longitude: String(lon),
       postal: selectedPostal,
       city: selectedCity,
+      state: "", // Add logic to fetch or set the state if available
     });
     close()
   }
