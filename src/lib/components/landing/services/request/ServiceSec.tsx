@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Controller, useForm } from "react-hook-form";
+import { City, ICity, IState, State } from "country-state-city";
 import TextInput, { InputType } from "../../../ui/TextInput";
 import { Button } from "@material-tailwind/react";
 import { carsList } from "../../../../services/hardData/cars";
@@ -18,6 +19,7 @@ export interface LocationProps {
   latitude: string;
   longitude: string;
   postal: string;
+  state: string;
 }
 interface Props {
   next: () => void;
@@ -26,6 +28,8 @@ interface Props {
   activeQuestion: string;
 }
 const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
+  const [states, setStates] = useState<IState[]>(State.getStatesOfCountry('US'));
+  const [cities, setCities] = useState<ICity[]>([]);
   const saveServiceId = useRequestStore((state) => state.saveRequest);
   const [fcmToken, setFcmToken] = useState("");
   const [locationType, setLocationType] = useState("auto");
@@ -35,7 +39,10 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
     latitude: "",
     longitude: "",
     postal: "",
+    state: ""
   });
+
+  console.log(locationDetail)
 
   const locationList = ["autofill", "manual"];
 
@@ -59,6 +66,8 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
     control,
     handleSubmit,
     getValues,
+    setValue,
+    watch,
     reset,
     formState: { errors, isValid },
   } = useForm({
@@ -71,6 +80,8 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
       location: "",
       zipcode: "",
       city: "",
+      country: "US",
+      state: "",
       other: "",
     },
   });
@@ -92,6 +103,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
       location: locationDetail.location || data.location,
       zipcode: locationDetail.postal || data.zipcode,
       city: locationDetail.city || data.city,
+      state: locationDetail.state || data.state,
       longitude: locationDetail.longitude || 0,
       latitude: locationDetail.latitude || 0,
       requestNote: data.other,
@@ -121,6 +133,21 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
       },
     });
   };
+
+  const handleCountryChange = (countryCode: string) => {
+    setValue("country", countryCode);
+    setValue("state", "");
+    setValue("city", "");
+    setStates(State.getStatesOfCountry(countryCode));
+    setCities([]);
+  };
+
+  const handleStateChange = (stateCode: string, countryCode: string) => {
+    setValue("state", stateCode);
+    setValue("city", "");
+    setCities(City.getCitiesOfState(countryCode, stateCode));
+  };
+
   return (
     <>
       <div className="bg-gray-100 lg:p-10 lg:pb-20 p-4 pb-8 rounded-md">
@@ -293,30 +320,64 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                 )}
                 {locationType === "manual" && (
                   <>
-                    <Controller
-                      name="location"
-                      control={control}
-                      rules={{
-                        required: {
-                          value: true,
-                          message: "Please enter a value",
-                        },
-                      }}
-                      render={({ field }) => (
-                        <TextInput
-                          label=""
-                          labelClassName="text-[#000000B2] fw-600"
-                          placeholder="Please enter your current location"
-                          error={errors.other?.message}
-                          type={InputType.textarea}
-                          {...field}
-                          ref={null}
-                        />
-                      )}
-                    />
-                    <div className="grid grid-cols-2 gap-4">
+                    <div className="grid lg:grid-cols-2 gap-x-4 gap-y-3">
+                      <Controller
+                        name="country"
+                        control={control}
+                        render={({ field }) => (
+                          <TextInput
+                            label="Country"
+                            type={InputType.select}
+                            options={[
+                              {
+                                value: "US",
+                                label: "United States",
+                              },
+                            ]}
+                            {...field}
+                            onChange={(e) => {
+                              field.onChange(e);
+                              handleCountryChange(e.target.value);
+                            }}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="state"
+                        control={control}
+                        render={({ field }) => (
+                          <TextInput
+                            label="State"
+                            type={InputType.select}
+                            options={states.map((s) => ({
+                              value: s.isoCode,
+                              label: s.name,
+                            }))}
+                            {...field}
+                            onChange={(e) => {
+                              field.onChange(e);
+                              handleStateChange(e.target.value, watch("country"));
+                            }}
+                          />
+                        )}
+                      />
                       <Controller
                         name="city"
+                        control={control}
+                        render={({ field }) => (
+                          <TextInput
+                            label="City"
+                            type={InputType.select}
+                            options={cities.map((c) => ({
+                              value: c.name,
+                              label: c.name,
+                            }))}
+                            {...field}
+                          />
+                        )}
+                      />
+                      <Controller
+                        name="location"
                         control={control}
                         rules={{
                           required: {
@@ -326,9 +387,8 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                         }}
                         render={({ field }) => (
                           <TextInput
-                            label=""
-                            labelClassName="text-[#000000B2] fw-600"
-                            placeholder="Current city"
+                            label="Location"
+                            placeholder="Please enter your current location"
                             error={errors.other?.message}
                             type={InputType.text}
                             {...field}
@@ -336,6 +396,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                           />
                         )}
                       />
+
                       <Controller
                         name="zipcode"
                         control={control}
@@ -347,8 +408,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                         }}
                         render={({ field }) => (
                           <TextInput
-                            label=""
-                            labelClassName="text-[#000000B2] fw-600"
+                            label="Zip Code"
                             placeholder="Zip Code"
                             error={errors.other?.message}
                             type={InputType.text}

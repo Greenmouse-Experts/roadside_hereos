@@ -5,7 +5,7 @@ import { BeatLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import MapLocation from "./MapLocation";
 import { GOOGLE_API_KEY } from "../../../../../services/constant";
-import { getCityFromGoogle, getPostalCodeFromGoogle } from "../../../../../utils";
+import { getCityFromGoogle, getPostalCodeFromGoogle, getStateFromGoogle } from "../../../../../utils";
 import useCustomModal from "../../../../../hooks/useCustomModal";
 import { LocationProps } from "../ServiceSec";
 
@@ -65,7 +65,8 @@ const GetCurrentLocation: FC<Props> = ({ setValue }) => {
           postal:  getPostalCodeFromGoogle(result?.results[0].address_components),
           latitude: String(data.latitude),
           longitude: String(data.longitude),
-          city: getCityFromGoogle(result?.results[0].address_components)
+          city: getCityFromGoogle(result?.results[0].address_components),
+          state: getStateFromGoogle(result?.results[0].address_components)
         });
       }
     } catch (error: any) {
