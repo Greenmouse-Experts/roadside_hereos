@@ -114,3 +114,9 @@ export const declineStaffRequest = async (payload: string) => {
     .post(`${ENDPOINT.DECLINE_STAFF_REQUEST}/${payload}`)
     .then((response) => response.data);
 };
+
+export const companyInitiatePayout = async (id: string) => {
+  return axios
+    .post(`${ENDPOINT.COMPANY_INITIATE_PAYOUT}/${id}`)
+    .then((response) => response.data);
+};

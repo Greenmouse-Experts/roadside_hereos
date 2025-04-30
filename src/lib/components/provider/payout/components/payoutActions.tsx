@@ -3,11 +3,10 @@ import Button from "../../../ui/Button";
 import useDialog from "../../../../hooks/useDialog";
 import {
   adminApprovePayout,
-  adminIniatePayout,
 } from "../../../../services/api/adminApi";
 import { toast } from "react-toastify";
 import ReusableModal from "../../../ui/ReusableModal";
-import { declineStaffRequest } from "../../../../services/api/companyApi";
+import { companyInitiatePayout, declineStaffRequest } from "../../../../services/api/companyApi";
 
 interface Props {
   id: string;
@@ -20,7 +19,7 @@ const PayoutActions: FC<Props> = ({ id, status, refetch }) => {
   const { Dialog: Decline, setShowModal: ShowDecline } = useDialog();
 
   const handleInitate = async () => {
-    await adminIniatePayout(id)
+    await companyInitiatePayout(id)
       .then((res) => {
         toast.success(res.message);
         ShowApprove(false);
@@ -53,7 +52,7 @@ const PayoutActions: FC<Props> = ({ id, status, refetch }) => {
     } else {
       await adminApprovePayout(id)
         .then(() => {
-          handleInitate();
+          refetch();
         })
         .catch((err: any) => {
           toast.error(err.response.data.message);
@@ -91,7 +90,7 @@ const PayoutActions: FC<Props> = ({ id, status, refetch }) => {
       </div>
       <Approve title="" size="md">
         <ReusableModal
-          title="Are you sure want to Approve this withdrawal request?"
+          title={`${status === 'pending' ? 'Are you sure want to Approve this withdrawal request?' : 'Are you sure want to Initiate this transfer?'}`}
           action={handleApprove}
           actionTitle="Approve"
           cancelTitle="No, Close"
@@ -101,7 +100,7 @@ const PayoutActions: FC<Props> = ({ id, status, refetch }) => {
       </Approve>
       <Decline title="" size="md">
         <ReusableModal
-          title="Are you sure want to decline this withdrawal request?"
+          title={`${status === 'pending' ? 'Are you sure want to decline this withdrawal request?' : 'Are you sure want to decline this transfer request?'}`}
           action={handleDecline}
           actionTitle="Decline"
           cancelTitle="No, Close"

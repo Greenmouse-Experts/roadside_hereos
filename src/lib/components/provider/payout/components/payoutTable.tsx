@@ -14,7 +14,6 @@ interface Props {
   next: () => void;
   prev: () => void;
   refetch: () => void;
-  status: string;
 }
 const PayoutTable: FC<Props> = ({
   data,
@@ -23,72 +22,73 @@ const PayoutTable: FC<Props> = ({
   next,
   prev,
   refetch,
-  status
 }) => {
- // Table components
- const columnHelper = createColumnHelper<PayoutItem>();
- const columns = [
-   columnHelper.accessor((row) => row.fname, {
-     id: "Staff Name",
-     cell: (info) => <p className="fw-600">{`${info.getValue()} ${info.row.original.lname}`}</p>,
-   }),
-   columnHelper.accessor((row) => row.amount, {
-     id: "Requested Amount",
-     cell: (info) => (
-       <p className="fw-600">{formatAsNgnMoney(info.getValue())}</p>
-     ),
-   }),
-   columnHelper.accessor((row) => row.walletBal, {
-     id: "Wallet Balance",
-     cell: (info) => <p className="">{info.getValue()}</p>,
-     header: (info) => info.column.id,
-   }),
-   columnHelper.accessor((row) => row.payoutCreatedAt, {
-     id: "Date Requested",
-     header: (info) => info.column.id,
-     cell: (info) => (
-       <p className="fw-600">
-         {dayjs(info.getValue()).format("ddd DD, MMM YYYY")}
-       </p>
-     ),
-   }),
-   columnHelper.accessor((row) => row.status, {
-     id: "Status",
-     header: (info) => info.column.id,
-     cell: (info) => (
-       <>{FormatStatus[info.getValue() as keyof typeof FormatStatus]}</>
-     ),
-   }),
-   columnHelper.accessor((row) => row.PayoutRequestId, {
-     id: "Action",
-     header: (info) => info.column.id,
-     cell: (info) => (
-      <>
-      {status === "pending" || status === "approved" && (
-        <PayoutActions
-          id={info.getValue()}
-          status={info.row.original.status}
-          refetch={refetch}
+  // Table components
+  const columnHelper = createColumnHelper<PayoutItem>();
+  const columns = [
+    columnHelper.accessor((row) => row.fname, {
+      id: "Staff Name",
+      cell: (info) => <p className="fw-600">{`${info.getValue()} ${info.row.original.lname}`}</p>,
+    }),
+    columnHelper.accessor((row) => row.amount, {
+      id: "Requested Amount",
+      cell: (info) => (
+        <p className="fw-600">{formatAsNgnMoney(info.getValue())}</p>
+      ),
+    }),
+    columnHelper.accessor((row) => row.walletBal, {
+      id: "Wallet Balance",
+      cell: (info) => <p className="">{info.getValue()}</p>,
+      header: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.payoutCreatedAt, {
+      id: "Date Requested",
+      header: (info) => info.column.id,
+      cell: (info) => (
+        <p className="fw-600">
+          {dayjs(info.getValue()).format("ddd DD, MMM YYYY")}
+        </p>
+      ),
+    }),
+    columnHelper.accessor((row) => row.status, {
+      id: "Status",
+      header: (info) => info.column.id,
+      cell: (info) => (
+        <>{FormatStatus[info.getValue() as keyof typeof FormatStatus]}</>
+      ),
+    }),
+    columnHelper.accessor((row) => row.PayoutRequestId, {
+      id: "Action",
+      header: (info) => info.column.id,
+      cell: (info) => (
+        <>
+          {info.row.original.status === "pending" || info.row.original.status === "approved" ? (
+            <PayoutActions
+              id={info.getValue()}
+              status={info.row.original.status}
+              refetch={refetch}
+            />
+          )
+            :
+            <></>}
+        </>
+      ),
+    }),
+  ];
+  return (
+    <>
+      <div className="lg:p-4 w-full">
+        <DynamicTable
+          columns={columns}
+          data={data}
+          count={count}
+          prev={prev}
+          next={next}
+          page={page}
         />
-      )}
-      </>
-     ),
-   }),
- ];
- return (
-   <>
-     <div className="lg:p-4 w-full">
-       <DynamicTable
-         columns={columns}
-         data={data}
-         count={count}
-         prev={prev}
-         next={next}
-         page={page}
-       />
-     </div>
-   </>
- );
+      </div>
+    </>
+  );
 };
 
 export default PayoutTable;

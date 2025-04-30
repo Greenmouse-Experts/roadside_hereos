@@ -53,7 +53,7 @@ const PayoutActions: FC<Props> = ({ id, status, refetch }) => {
     } else {
       await adminApprovePayout(id)
         .then(() => {
-          handleInitate();
+          refetch();
         })
         .catch((err: any) => {
           toast.error(err.response.data.message);
@@ -64,22 +64,33 @@ const PayoutActions: FC<Props> = ({ id, status, refetch }) => {
   return (
     <>
       <div>
-        <div className="fw-600 flex gap-x-3">
-          <Button
-            title={"Approve"}
-            onClick={() => ShowApprove(true)}
-            altClassName="py-2 px-5 btn-primary"
-          />
-          <Button
-            title={"Decline"}
-            onClick={() => ShowDecline(true)}
-            altClassName="py-2 px-5 btn-primary bg-red-600"
-          />
-        </div>
+        {status === "pending" && (
+          <div className="fw-600 flex gap-x-3">
+            <Button
+              title={"Approve"}
+              onClick={() => ShowApprove(true)}
+              altClassName="py-2 px-5 btn-primary"
+            />
+            <Button
+              title={"Decline"}
+              onClick={() => ShowDecline(true)}
+              altClassName="py-2 px-5 btn-primary bg-red-600"
+            />
+          </div>
+        )}
+        {status === "approved" && (
+          <div className="fw-600 flex gap-x-3">
+            <Button
+              title={"Initiate Transfer"}
+              onClick={() => ShowApprove(true)}
+              altClassName="py-2 px-5 btn-primary"
+            />
+          </div>
+        )}
       </div>
       <Approve title="" size="md">
         <ReusableModal
-          title="Are you sure want to Approve this withdrawal request?"
+          title={`${status === 'pending' ? 'Are you sure want to Approve this withdrawal request?' : 'Are you sure want to Initiate this transfer?'}`}
           action={handleApprove}
           actionTitle="Approve"
           cancelTitle="No, Close"
@@ -89,7 +100,7 @@ const PayoutActions: FC<Props> = ({ id, status, refetch }) => {
       </Approve>
       <Decline title="" size="md">
         <ReusableModal
-          title="Are you sure want to decline this withdrawal request?"
+          title={`${status === 'pending' ? 'Are you sure want to decline this withdrawal request?' : 'Are you sure want to decline this transfer request?'}`}
           action={handleDecline}
           actionTitle="Decline"
           cancelTitle="No, Close"

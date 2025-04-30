@@ -64,13 +64,13 @@ const PayoutTable: FC<Props> = ({
       header: (info) => info.column.id,
       cell: (info) => (
         <>
-          {status === "pending" && (
+          {status === "pending" || status === "approved" ? (
             <PayoutActions
               id={info.getValue()}
-              status={info.row.original.status}
+              status={info.row.original.status} 
               refetch={refetch}
             />
-          )}
+          ) : null}
         </>
       ),
     }),
