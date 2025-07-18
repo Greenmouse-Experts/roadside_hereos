@@ -35,60 +35,64 @@ const TermsPage = () => {
       key: 6,
     },
     {
-      label: "Service Fees and Payment",
+      label: "SMS and Voice Call Communications",
       key: 7,
     },
     {
-      label: "Refund Policy and Cancellation Charges",
+      label: "Service Fees and Payment",
       key: 8,
     },
     {
-      label: "Liability and Insurance",
+      label: "Refund Policy and Cancellation Charges",
       key: 9,
     },
     {
-      label: "User Responsibilities",
+      label: "Liability and Insurance",
       key: 10,
     },
     {
-      label: "Technician Reviews and Ratings",
+      label: "User Responsibilities",
       key: 11,
     },
     {
-      label: "Termination of Services",
+      label: "Technician Reviews and Ratings",
       key: 12,
     },
     {
-      label: "Geographical Restrictions and Legal Compliance",
+      label: "Termination of Services",
       key: 13,
     },
     {
-      label: "Data Collection and Privacy",
+      label: "Geographical Restrictions and Legal Compliance",
       key: 14,
     },
     {
-      label: "Third-Party Links and Integrations",
+      label: "Data Collection and Privacy",
       key: 15,
     },
     {
-      label: "Dispute Resolution and Arbitration",
+      label: "Third-Party Links and Integrations",
       key: 16,
     },
     {
-      label: "Modifications to Terms",
+      label: "Dispute Resolution and Arbitration",
       key: 17,
     },
     {
-      label: "Intellectual Property",
+      label: "Modifications to Terms",
       key: 18,
     },
     {
-      label: "Contact Information",
+      label: "Intellectual Property",
       key: 19,
     },
     {
-      label: "Governing Law and Jurisdiction",
+      label: "Contact Information",
       key: 20,
+    },
+    {
+      label: "Governing Law and Jurisdiction",
+      key: 21,
     },
   ];
 
@@ -205,6 +209,38 @@ const TermsPage = () => {
 
   const Accordion7 = () => (
     <div className="mt-6" ref={(el) => (divRefs.current[7] = el)}>
+      <p className="fw-600">SMS and Voice Call Communications</p>
+      <p className="mt-3">
+        By using the ALLDRIVE SOS Platform and its services, you expressly consent to receive SMS text messages and voice calls to the phone numbers you provide during registration, service request, or through your user account.
+      </p>
+      <p className="mt-3">
+        These communications are essential to the operation of our platform and are used solely to facilitate service delivery, including but not limited to:
+      </p>
+      <ul className="mt-3 my-list">
+        <li>
+          <span className="fw-500">Confirming service requests</span>
+        </li>
+        <li>
+          <span className="fw-500">Providing technician arrival updates</span>
+        </li>
+        <li>
+          <span className="fw-500">Delivering job status changes or confirmations</span>
+        </li>
+        <li>
+          <span className="fw-500">Communicating account-related notifications</span>
+        </li>
+      </ul>
+      <p className="mt-3">
+        Standard message and data rates may apply. You may opt out of non-essential or promotional messages at any time by following opt-out instructions provided in such communications. However, opting out of service-related communications may impact your ability to fully use the Platform.
+      </p>
+      <p className="mt-3">
+        Your consent to receive these communications is an integral condition of using the ALLDRIVE SOS services.
+      </p>
+    </div>
+  );
+
+  const Accordion8 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[8] = el)}>
       <p className="fw-600">Service Fees and Payment </p>
       <p className="mt-3">
         ALLDRIVE SOS operates on a pay-as-you-go model with no membership or
@@ -221,8 +257,8 @@ const TermsPage = () => {
     </div>
   );
 
-  const Accordion8 = () => (
-    <div className="mt-6" ref={(el) => (divRefs.current[8] = el)}>
+  const Accordion9 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[9] = el)}>
       <p className="fw-600">Refund Policy and Cancellation Charges </p>
       <p className="mt-3">
         ALLDRIVE SOS is committed to fair policies regarding cancellations and
@@ -236,8 +272,8 @@ const TermsPage = () => {
     </div>
   );
 
-  const Accordion9 = () => (
-    <div className="mt-6" ref={(el) => (divRefs.current[9] = el)}>
+  const Accordion10 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[10] = el)}>
       <p className="fw-600">Liability and Insurance </p>
       <p className="mt-3">
         ALLDRIVE SOS acts solely as a platform connecting customers with
@@ -255,8 +291,8 @@ const TermsPage = () => {
     </div>
   );
 
-  const Accordion10 = () => (
-    <div className="mt-6" ref={(el) => (divRefs.current[10] = el)}>
+  const Accordion11 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[11] = el)}>
       <p className="fw-600">User Responsibilities</p>
       <p className="mt-3">
         Customers are required to provide accurate location and service details
@@ -267,8 +303,8 @@ const TermsPage = () => {
     </div>
   );
 
-  const Accordion11 = () => (
-    <div className="mt-6" ref={(el) => (divRefs.current[11] = el)}>
+  const Accordion12 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[12] = el)}>
       <p className="fw-600">Technician Reviews and Ratings</p>
       <p className="mt-3">
         Customers are encouraged to rate and review technicians after services
@@ -279,8 +315,8 @@ const TermsPage = () => {
     </div>
   );
 
-  const Accordion12 = () => (
-    <div className="mt-6" ref={(el) => (divRefs.current[12] = el)}>
+  const Accordion13 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[13] = el)}>
       <p className="fw-600">Termination of Services</p>
       <p className="mt-3">
         ALLDRIVE SOS may ban or suspend users who abuse or misuse the platform,
@@ -292,8 +328,8 @@ const TermsPage = () => {
     </div>
   );
 
-  const Accordion13 = () => (
-    <div className="mt-6" ref={(el) => (divRefs.current[13] = el)}>
+  const Accordion14 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[14] = el)}>
       <p className="fw-600">Geographical Restrictions and Legal Compliance</p>
       <p className="mt-3">
         ALLDRIVE SOS services are only available within the United States. Users
@@ -303,8 +339,8 @@ const TermsPage = () => {
     </div>
   );
 
-  const Accordion14 = () => (
-    <div className="mt-6" ref={(el) => (divRefs.current[14] = el)}>
+  const Accordion15 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[15] = el)}>
       <p className="fw-600">Data Collection and Privacy</p>
       <p className="mt-3">
         ALLDRIVE SOS collects personal, payment, and location data necessary to
@@ -319,8 +355,8 @@ const TermsPage = () => {
     </div>
   );
 
-  const Accordion15 = () => (
-    <div className="mt-6" ref={(el) => (divRefs.current[15] = el)}>
+  const Accordion16 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[16] = el)}>
       <p className="fw-600">Third-Party Links and Integrations</p>
       <p className="mt-3">
         ALLDRIVE SOS may include third-party services, such as ads and payment
@@ -333,8 +369,8 @@ const TermsPage = () => {
     </div>
   );
 
-  const Accordion16 = () => (
-    <div className="mt-6" ref={(el) => (divRefs.current[16] = el)}>
+  const Accordion17 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[17] = el)}>
       <p className="fw-600">Dispute Resolution and Arbitration</p>
       <p className="mt-3">
         In the event of a dispute between a customer and a technician, ALLDRIVE
@@ -359,8 +395,8 @@ const TermsPage = () => {
     </div>
   );
 
-  const Accordion17 = () => (
-    <div className="mt-6" ref={(el) => (divRefs.current[17] = el)}>
+  const Accordion18 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[18] = el)}>
       <p className="fw-600">Modifications to Terms</p>
       <p className="mt-3">
         ALLDRIVE SOS retains the right to modify these Terms of Service at any
@@ -372,8 +408,8 @@ const TermsPage = () => {
     </div>
   );
 
-  const Accordion18 = () => (
-    <div className="mt-6" ref={(el) => (divRefs.current[18] = el)}>
+  const Accordion19 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[19] = el)}>
       <p className="fw-600">Intellectual Property</p>
       <p className="mt-3">
         All content, trademarks, and intellectual property on the ALLDRIVE SOS
@@ -384,8 +420,8 @@ const TermsPage = () => {
     </div>
   );
 
-  const Accordion19 = () => (
-    <div className="mt-6" ref={(el) => (divRefs.current[19] = el)}>
+  const Accordion20 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[20] = el)}>
       <p className="fw-600">Contact Information</p>
       <p className="mt-3">
         If you have any questions, concerns, or disputes, please contact our
@@ -398,8 +434,8 @@ const TermsPage = () => {
     </div>
   );
 
-  const Accordion20 = () => (
-    <div className="mt-6" ref={(el) => (divRefs.current[20] = el)}>
+  const Accordion21 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[21] = el)}>
       <p className="fw-600">Governing Law and Jurisdiction</p>
       <p className="mt-3">
         These Terms will be governed by and interpreted according to the laws of
@@ -444,7 +480,7 @@ const TermsPage = () => {
               <div className="flex items-stretch relative gap-x-6">
                 <div className="lg:w-[65%]">
                   <div>
-                    <p>Last Updated: September 15th, 2024</p>
+                    {/* <p>Last Updated: September 15th, 2024</p> */}
                     <p className="fw-600 text-lg mt-4">
                       Introduction and Acceptance of Terms
                     </p>
@@ -512,6 +548,7 @@ const TermsPage = () => {
                       <Accordion18 />
                       <Accordion19 />
                       <Accordion20 />
+                      <Accordion21 />
                     </div>
                   </div>
                 </div>
