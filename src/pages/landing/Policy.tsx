@@ -19,52 +19,56 @@ const PolicyPage = () => {
       key: 2,
     },
     {
-      label: "Sharing of Information",
+      label: "SMS and Voice Communications",
       key: 3,
     },
     {
-      label: "Cookies and Tracking Technologies",
+      label: "Sharing of Information",
       key: 4,
     },
     {
-      label: "Data Security",
+      label: "Cookies and Tracking Technologies",
       key: 5,
     },
     {
-      label: "User Rights and Choices",
+      label: "Data Security",
       key: 6,
     },
     {
-      label: "Third-Party Advertisements",
+      label: "User Rights and Choices",
       key: 7,
     },
     {
-      label: "Children's Privacy",
+      label: "Third-Party Advertisements",
       key: 8,
     },
     {
-      label: "International Data Transfers",
+      label: "Children's Privacy",
       key: 9,
     },
     {
-      label: "Data Retention",
+      label: "International Data Transfers",
       key: 10,
     },
     {
-      label: "Updates to the Privacy Policy",
+      label: "Data Retention",
       key: 11,
     },
     {
-      label: "Contact Information",
+      label: "Updates to the Privacy Policy",
       key: 12,
     },
     {
-      label: "Governing Law",
+      label: "Contact Information",
       key: 13,
     },
     {
-      label: "User Responsibilities",
+      label: "Governing Law",
       key: 14,
+    },
+    {
+      label: "User Responsibilities",
+      key: 15,
     },
   ];
 
@@ -159,6 +163,47 @@ const PolicyPage = () => {
 
   const Accordion3 = () => (
     <div className="mt-4 text-lg" ref={(el) => (divRefs.current[3] = el)}>
+      <p className="mt-5 fw-600">SMS and Voice Communications</p>
+      <p className="">
+        By using the ALLDRIVE SOS Platform and its services, you acknowledge and
+        consent to receiving SMS messages and voice calls to the phone number(s)
+        you provide during registration or while using the Platform. These
+        communications are strictly transactional and are used to help deliver
+        our services efficiently and effectively.
+      </p>
+      <p className="mt-3">
+        This may include, but is not limited to:
+      </p>
+      <ul className="mt-3 my-list">
+        <li>
+          <span className="fw-500">
+            Real-time notifications about service requests
+          </span>
+        </li>
+        <li>
+          <span className="fw-500">Updates on technician arrival times</span>
+        </li>
+        <li>
+          <span className="fw-500">Job confirmations or cancellations</span>
+        </li>
+        <li>
+          <span className="fw-500">
+            Status updates regarding your account or ongoing service
+          </span>
+        </li>
+      </ul>
+      <p className="mt-3">
+        You may opt-out of non-essential messages at any time by following the
+        instructions provided in the SMS or contacting
+        support@alldrivesos.com. However, opting out of essential
+        service-related communications may affect your ability to use the
+        Platform effectively.
+      </p>
+    </div>
+  );
+
+  const Accordion4 = () => (
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[4] = el)}>
       <p className="mt-5 fw-600">Sharing of Information</p>
       <p className="">
         We share your information only in limited circumstances and with the
@@ -193,8 +238,8 @@ const PolicyPage = () => {
     </div>
   );
 
-  const Accordion4 = () => (
-    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[4] = el)}>
+  const Accordion5 = () => (
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[5] = el)}>
       <p className="mt-5 fw-600">Cookies and Tracking Technologies</p>
       <p className="">
         We use cookies and similar tracking technologies on the ALLDRIVE SOS
@@ -223,8 +268,8 @@ const PolicyPage = () => {
     </div>
   );
 
-  const Accordion5 = () => (
-    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[5] = el)}>
+  const Accordion6 = () => (
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[6] = el)}>
       <p className="mt-5 fw-600">Data Security</p>
       <p className="">
         We take the security of your data very seriously. We implement robust
@@ -236,8 +281,8 @@ const PolicyPage = () => {
     </div>
   );
 
-  const Accordion6 = () => (
-    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[6] = el)}>
+  const Accordion7 = () => (
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[7] = el)}>
       <p className="mt-5 fw-600">User Rights and Choices</p>
       <p className="">
         We respect your right to control your personal information. Here's how
@@ -264,8 +309,8 @@ const PolicyPage = () => {
     </div>
   );
 
-  const Accordion7 = () => (
-    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[7] = el)}>
+  const Accordion8 = () => (
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[8] = el)}>
       <p className="mt-5 fw-600">Third-Party Advertisements</p>
       <p className="">
         We may partner with third-party advertising platforms like Google
@@ -280,8 +325,8 @@ const PolicyPage = () => {
     </div>
   );
 
-  const Accordion8 = () => (
-    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[8] = el)}>
+  const Accordion9 = () => (
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[9] = el)}>
       <p className="mt-5 fw-600">Children's Privacy</p>
       <p className="">
         The ALLDRIVE SOS Platform is not intended for use by individuals under
@@ -291,8 +336,8 @@ const PolicyPage = () => {
     </div>
   );
 
-  const Accordion9 = () => (
-    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[9] = el)}>
+  const Accordion10 = () => (
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[10] = el)}>
       <p className="mt-5 fw-600">International Data Transfers</p>
       <p className="">
         The ALLDRIVE SOS Platform primarily operates within the United States.
@@ -303,8 +348,8 @@ const PolicyPage = () => {
     </div>
   );
 
-  const Accordion10 = () => (
-    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[10] = el)}>
+  const Accordion11 = () => (
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[11] = el)}>
       <p className="mt-5 fw-600">Data Retention</p>
       <p className="">
         We retain your personal information for as long as necessary to fulfill
@@ -314,8 +359,8 @@ const PolicyPage = () => {
     </div>
   );
 
-  const Accordion11 = () => (
-    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[11] = el)}>
+  const Accordion12 = () => (
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[12] = el)}>
       <p className="mt-5 fw-600">Updates to the Privacy Policy</p>
       <p className="">
         ALLDRIVE SOS retains the right to modify this Privacy Policy at any
@@ -328,8 +373,8 @@ const PolicyPage = () => {
     </div>
   );
 
-  const Accordion12 = () => (
-    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[12] = el)}>
+  const Accordion13 = () => (
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[13] = el)}>
       <p className="mt-5 fw-600">Contact Information</p>
       <p className="">
         If you have any questions or concerns about this Privacy Policy or our
@@ -353,8 +398,8 @@ const PolicyPage = () => {
     </div>
   );
 
-  const Accordion13 = () => (
-    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[13] = el)}>
+  const Accordion14 = () => (
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[14] = el)}>
       <p className="mt-5 fw-600">Governing Law</p>
       <p className="">
         This Privacy Policy is governed by and construed in accordance with the
@@ -363,8 +408,8 @@ const PolicyPage = () => {
     </div>
   );
 
-  const Accordion14 = () => (
-    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[14] = el)}>
+  const Accordion15 = () => (
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[15] = el)}>
       <p className="mt-5 fw-600">User Responsibilities</p>
       <p className="">
         You are responsible for maintaining the security of your account
@@ -452,6 +497,7 @@ const PolicyPage = () => {
                       <Accordion12 />
                       <Accordion13 />
                       <Accordion14 />
+                      <Accordion15 />
                     </div>
                   </div>
                 </div>
