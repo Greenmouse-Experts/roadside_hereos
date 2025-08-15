@@ -15,6 +15,7 @@ interface Props {
   prev: () => void;
   refetch: () => void;
   status: string;
+  action_allowed?: boolean;
 }
 const PayoutTable: FC<Props> = ({
   data,
@@ -24,6 +25,7 @@ const PayoutTable: FC<Props> = ({
   prev,
   refetch,
   status,
+  action_allowed = true, // ✅ works
 }) => {
   // Table components
   const columnHelper = createColumnHelper<PayoutItem>();
@@ -61,21 +63,23 @@ const PayoutTable: FC<Props> = ({
         <>{FormatStatus[info.getValue() as keyof typeof FormatStatus]}</>
       ),
     }),
-    columnHelper.accessor((row) => row.PayoutRequestId, {
-      id: "Action",
-      header: (info) => info.column.id,
-      cell: (info) => (
-        <>
-          {status === "pending" || status === "approved" ? (
-            <PayoutActions
-              id={info.getValue()}
-              status={info.row.original.status}
-              refetch={refetch}
-            />
-          ) : null}
-        </>
-      ),
-    }),
+    ...(action_allowed
+      ? [
+          columnHelper.accessor((row) => row.PayoutRequestId, {
+            id: "Action",
+            header: (info) => info.column.id,
+            cell: (info) =>
+              info.row.original.status === "pending" ||
+              info.row.original.status === "approved" ? (
+                <PayoutActions
+                  id={info.getValue()}
+                  status={info.row.original.status}
+                  refetch={refetch}
+                />
+              ) : null,
+          }),
+        ]
+      : []),
   ];
   return (
     <>

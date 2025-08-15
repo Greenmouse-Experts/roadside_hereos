@@ -50,15 +50,18 @@ const StaffPayoutRequest = () => {
           </div>
         )}
         {datas && !!datas?.length && (
-          <PayoutTable
-            isLoading={isLoading}
-            data={datas || []}
-            page={params.page}
-            next={handleNext}
-            prev={handlePrev}
-            count={count || 0}
-            refetch={refetch}
-          />
+          <>
+            {" "}
+            <PayoutTable
+              isLoading={isLoading}
+              data={datas || []}
+              page={params.page}
+              next={handleNext}
+              prev={handlePrev}
+              count={count || 0}
+              refetch={refetch}
+            />
+          </>
         )}
       </div>
     </div>

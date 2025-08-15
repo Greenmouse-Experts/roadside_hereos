@@ -51,6 +51,7 @@ const StaffPayoutRequest = () => {
         )}
         {datas && !!datas?.length && (
           <PayoutTable
+            action_allowed={false}
             isLoading={isLoading}
             data={datas || []}
             page={params.page}
