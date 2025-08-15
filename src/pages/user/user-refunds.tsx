@@ -105,7 +105,7 @@ export default function UserRefunds() {
     status: "pending",
   });
   const query = useQuery<RefundApiResponse>({
-    queryKey: ["refunds-user"],
+    queryKey: ["refunds-user", tableParams],
     queryFn: async () => {
       let resp = await apiClient.get("/services-quote/fetch-refund-requests", {
         params: {
