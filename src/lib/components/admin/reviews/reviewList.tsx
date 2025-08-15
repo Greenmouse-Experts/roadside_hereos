@@ -18,6 +18,7 @@ const ReviewList: FC<Props> = ({ data }) => {
     "border-red-500",
     "border-brown-500",
   ];
+  return <>{JSON.stringify(data)}</>;
   return (
     <div>
       {data.length &&
@@ -33,8 +34,8 @@ const ReviewList: FC<Props> = ({ data }) => {
                 <div className="w-8/12">
                   <p
                     className="fw-600 cursor-pointer"
-                    onClick={() => navigate(`/admin/users/${item.userId}`)}
-                  >{`${item.user.fname} ${item.user.lname}`}</p>
+                    onClick={() => navigate(`/admin/users/${item?.userId}`)}
+                  >{`${item?.user?.fname} ${item?.user?.lname}`}</p>
                   <p>{item.comment}</p>
                   <div>
                     <Rating value={5} readonly />

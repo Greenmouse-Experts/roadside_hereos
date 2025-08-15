@@ -34,7 +34,7 @@ const ProviderHomePage = () => {
         <div className="lg:flex items-stretch gap-6 flex-row-reverse">
           <div className="bg-review w-[500px] rounded-lg text-white p-4 lg:p-8">
             <div className="mb-2">
-              <p>Pending Balance</p>
+              <p>Technicians Pending balance</p>
               <p className="fw-600 text-xl mt-1">
                 {formatAsNgnMoney(userData?.pendingBal) || "$0"}.00
               </p>
