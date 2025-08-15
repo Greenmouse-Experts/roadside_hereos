@@ -3,6 +3,7 @@ import { apiClient } from "../../lib/services/api/serviceApi";
 import { DynamicTable } from "../../lib/components/ui/DynamicTable";
 import { useState } from "react";
 import { table } from "console";
+import { createColumnHelper } from "@tanstack/react-table";
 interface TABLE_PARAMS {
   page: number;
 }
@@ -54,6 +55,26 @@ export default function ComapanyRefunds() {
       return { ...prev, page: prev.page - 1 };
     });
   };
+
+  const columnHelper = createColumnHelper<any>();
+  const columns = [
+    columnHelper.accessor((row) => row.fname, {
+      id: "Name",
+      cell: () => "dummy",
+    }),
+    columnHelper.accessor((row) => row.fname, {
+      id: "Amount",
+      cell: () => "dummy",
+    }),
+    columnHelper.accessor((row) => row.fname, {
+      id: "Date requested",
+      cell: () => "dummy",
+    }),
+    columnHelper.accessor((row) => row.fname, {
+      id: "Status",
+      cell: () => "dummy",
+    }),
+  ];
   return (
     <div>
       {/*<>{JSON.stringify(query.data)}</>*/}
@@ -64,7 +85,7 @@ export default function ComapanyRefunds() {
         next={handleNext}
         page={tableParams.page}
         // maxPage={10}
-        columns={[]}
+        columns={columns}
         count={count}
         prev={handlePrev}
       />
