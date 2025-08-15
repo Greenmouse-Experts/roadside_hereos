@@ -150,13 +150,13 @@ const ServiceDetails = () => {
             <div className="grid lg:grid-cols-3 mt-6">
               <div className="grid gap-5">
                 <div className="flex gap-x-2">
-                  <p>Car Make:</p>
+                  <p>Vehicle Make:</p>
                   <p className="fw-500">
                     {data?.data?.serviceRequest?.vehicleMake}
                   </p>
                 </div>
                 <div className="flex gap-x-2">
-                  <p>Car Model:</p>
+                  <p>Vehcile Model:</p>
                   <p className="fw-500">{data?.data?.serviceRequest?.model}</p>
                 </div>
                 <div className="flex gap-x-2">

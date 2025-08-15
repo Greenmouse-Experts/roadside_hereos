@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "../../lib/services/api/serviceApi";
 import { DynamicTable } from "../../lib/components/ui/DynamicTable";
 import { useState } from "react";
-import { table } from "console";
+// import { table } from "console";
 import { createColumnHelper } from "@tanstack/react-table";
 interface TABLE_PARAMS {
   page: number;
