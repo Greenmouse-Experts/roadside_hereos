@@ -58,21 +58,38 @@ export default function ComapanyRefunds() {
 
   const columnHelper = createColumnHelper<any>();
   const columns = [
-    columnHelper.accessor((row) => row.fname, {
+    columnHelper.accessor((row) => row.user.fname, {
       id: "Name",
-      cell: () => "dummy",
+      cell: (info) => `${info.getValue()} ${info.row.original.user.lname}`,
     }),
-    columnHelper.accessor((row) => row.fname, {
+    columnHelper.accessor((row) => row.serviceRequest.amount, {
       id: "Amount",
-      cell: () => "dummy",
+      cell: (info) => info.getValue() ?? "N/A",
     }),
-    columnHelper.accessor((row) => row.fname, {
+    columnHelper.accessor((row) => row.createdAt, {
       id: "Date requested",
-      cell: () => "dummy",
+      cell: (info) => new Date(info.getValue()).toLocaleDateString(),
     }),
-    columnHelper.accessor((row) => row.fname, {
+    columnHelper.accessor((row) => row.status, {
       id: "Status",
-      cell: () => "dummy",
+      cell: (info) => {
+        const status = info.getValue();
+        let badgeColor = "bg-slate-400"; // Default color
+        if (status === "approved") {
+          badgeColor = "bg-green-600";
+        } else if (status === "rejected") {
+          badgeColor = "bg-red-600";
+        } else if (status === "pending") {
+          badgeColor = "bg-yellow-800";
+        }
+        return (
+          <span
+            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize ${badgeColor} text-white`}
+          >
+            {status}
+          </span>
+        );
+      },
     }),
   ];
   return (
@@ -80,15 +97,19 @@ export default function ComapanyRefunds() {
       {/*<>{JSON.stringify(query.data)}</>*/}
       <h2 className="py-2 font-bold text-xl">Refunds</h2>
       {query.isFetching && <>fetching</>}
-      <DynamicTable
-        data={query.data?.data.refundRequests || []}
-        next={handleNext}
-        page={tableParams.page}
-        // maxPage={10}
-        columns={columns}
-        count={count}
-        prev={handlePrev}
-      />
+      {query.data?.data?.total > 0 ? (
+        <DynamicTable
+          data={query.data?.data.refundRequests || []}
+          next={handleNext}
+          page={tableParams.page}
+          // maxPage={10}
+          columns={columns}
+          count={count}
+          prev={handlePrev}
+        />
+      ) : (
+        <>No Refunds Requested</>
+      )}
     </div>
   );
 }
