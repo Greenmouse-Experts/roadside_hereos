@@ -1,76 +1,83 @@
 import {
   MdInsertInvitation,
   MdOutlineCrisisAlert,
-  MdOutlineDashboard, MdOutlineHomeRepairService,
-} from 'react-icons/md';
-import {  BiGitPullRequest } from 'react-icons/bi';
-import { LuServerCog } from 'react-icons/lu';
+  MdOutlineDashboard,
+  MdOutlineHomeRepairService,
+} from "react-icons/md";
+import { BiGitPullRequest } from "react-icons/bi";
+import { LuServerCog } from "react-icons/lu";
 import { IoNotificationsCircleOutline } from "react-icons/io5";
-import { RiSecurePaymentFill } from 'react-icons/ri';
-import { PiListChecksFill } from 'react-icons/pi';
+import { RiSecurePaymentFill } from "react-icons/ri";
+import { PiListChecksFill } from "react-icons/pi";
 export interface RouteType {
-  name:string;
+  name: string;
   icon: any;
-  route:string;
+  route: string;
   submenu: {
-    name:string;
+    name: string;
     icon: any;
-    route:string;
-  }[]
+    route: string;
+  }[];
 }
 export const Routes = [
   {
-    name: 'Dashboard',
+    name: "Dashboard",
     icon: <MdOutlineDashboard className="text-xl" />,
-    route: '/provider',
+    route: "/provider",
     submenu: [],
   },
   {
-    name: 'Invites',
+    name: "Invites",
     icon: <MdInsertInvitation className="text-xl" />,
-    route: '/provider/invite',
+    route: "/provider/invite",
     submenu: [],
   },
   {
-    name: 'Staff',
+    name: "Staff",
     icon: <MdOutlineHomeRepairService className="text-xl" />,
-    route: '/provider/staff',
+    route: "/provider/staff",
     submenu: [],
   },
   {
-    name: 'Services',
+    name: "Services",
     icon: <BiGitPullRequest className="text-xl" />,
-    route: '/provider/services',
+    route: "/provider/services",
     submenu: [],
   },
   {
-    name: 'Completed Services',
+    name: "Completed Services",
     icon: <PiListChecksFill className="text-xl" />,
-    route: '/provider/completed-services',
+    route: "/provider/completed-services",
     submenu: [],
   },
   {
-    name: 'Services Alerts',
+    name: "Services Alerts",
     icon: <MdOutlineCrisisAlert className="text-xl" />,
-    route: '/provider/services-alerts',
+    route: "/provider/services-alerts",
     submenu: [],
   },
   {
-    name: 'Notifications',
+    name: "Notifications",
     icon: <IoNotificationsCircleOutline className="text-xl" />,
-    route: '/provider/notify',
+    route: "/provider/notify",
     submenu: [],
   },
   {
-    name: 'Payouts',
+    name: "Payouts",
     icon: <RiSecurePaymentFill className="text-xl" />,
-    route: '/provider/payouts',
+    route: "/provider/payouts",
     submenu: [],
   },
   {
-    name: 'Payments',
+    name: "Payments",
     icon: <LuServerCog className="text-xl" />,
-    route: '/provider/payments',
+    route: "/provider/payments",
     submenu: [],
   },
-]
+  {
+    name: "Refunds",
+    icon: <LuServerCog className="text-xl" />,
+    route: "/provider/refunds",
+    submenu: [],
+  },
+];
