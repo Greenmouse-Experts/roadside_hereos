@@ -50,6 +50,7 @@ const StaffPayoutRequest = () => {
           </div>
         )}
         {datas && !!datas?.length && (
+          //@ts-ignore
           <PayoutTable
             action_allowed={false}
             isLoading={isLoading}

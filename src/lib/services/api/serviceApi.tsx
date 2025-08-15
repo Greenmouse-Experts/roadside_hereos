@@ -19,7 +19,7 @@ axios.interceptors.request.use(
   },
   function (error) {
     return Promise.reject(error);
-  }
+  },
 );
 axios.interceptors.response.use(
   (response) => {
@@ -31,9 +31,10 @@ axios.interceptors.response.use(
       return (window.location.href = "/auth/login");
     }
     return Promise.reject(error);
-  }
+  },
 );
 
+export const apiClient = axios;
 export const createCategory = async (payload: CreateCatType) => {
   return axios
     .post(`${ENDPOINT.CREATE_CATEGORY}`, payload)
@@ -158,7 +159,7 @@ export const fetchAdminRequests = async (payload: {
 }) => {
   return axios
     .get(
-      `${ENDPOINT.ADMIN_GET_REQUESTS}?page=${payload.page}&status=${payload.status}&paymentStatus=${payload.payment}`
+      `${ENDPOINT.ADMIN_GET_REQUESTS}?page=${payload.page}&status=${payload.status}&paymentStatus=${payload.payment}`,
     )
     .then((response) => response.data);
 };
@@ -170,7 +171,7 @@ export const getMyServices = async (payload: {
 }) => {
   return axios
     .get(
-      `${ENDPOINT.GET_MY_SERVICES}?page=${payload.page}&status=${payload.status}&paymentStatus=${payload.paymentStatus}`
+      `${ENDPOINT.GET_MY_SERVICES}?page=${payload.page}&status=${payload.status}&paymentStatus=${payload.paymentStatus}`,
     )
     .then((response) => response.data);
 };

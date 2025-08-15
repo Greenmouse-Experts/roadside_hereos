@@ -1,5 +1,5 @@
 import ApprovedRequests from "../../lib/components/admin/technician-payouts/approvedRequest";
-import DisapprovedRequests from "../../lib/components/admin/technician-payouts/disapprovedRequest";
+// import DisapprovedRequests from "../../lib/components/admin/technician-payouts/disapprovedRequest";
 import StaffPayoutRequest from "../../lib/components/admin/technician-payouts/staffPayoutRequest";
 import Tabs from "../../lib/components/ui/Tabs";
 

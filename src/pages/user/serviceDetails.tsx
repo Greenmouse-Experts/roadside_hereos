@@ -89,10 +89,12 @@ const ServiceDetails = () => {
                       <p className="fw-500 mb-2 text-lg">{`${data?.data?.driver?.fname} ${data?.data?.driver?.lname}`}</p>
                       <div className="flex items-center gap-2 font-bold text-blue-gray-500">
                         {data?.data?.driver?.reviewsAvg}.0
-                        {data?.data?.driver?.reviewsAvg && <Rating
-                          value={Number(data?.data?.driver?.reviewsAvg)}
-                          readonly
-                        />}
+                        {data?.data?.driver?.reviewsAvg && (
+                          <Rating
+                            value={Number(data?.data?.driver?.reviewsAvg)}
+                            readonly
+                          />
+                        )}
                       </div>
                     </div>
                   </div>
@@ -185,7 +187,7 @@ const ServiceDetails = () => {
                   <p>Request Time:</p>
                   <p className="fw-500">
                     {dayjs(data?.data?.serviceRequest?.createdAt).format(
-                      "hh:mmA, ddd DD, MMMM YYYY"
+                      "hh:mmA, ddd DD, MMMM YYYY",
                     )}
                   </p>
                 </div>
@@ -193,7 +195,7 @@ const ServiceDetails = () => {
                   <p>Response Time:</p>
                   <p className="fw-500">
                     {dayjs(data?.data?.serviceRequest?.updatedAt).format(
-                      "hh:mmA, ddd DD, MMMM YYYY"
+                      "hh:mmA, ddd DD, MMMM YYYY",
                     )}
                     .
                   </p>
