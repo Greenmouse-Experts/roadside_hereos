@@ -21,7 +21,7 @@ const RequestPage = () => {
   const [active, setActive] = useState<ServiceCatItem>();
   const getActiveService = () => {
     const activeService = service?.data?.filter(
-      (where: ServiceCatItem) => where.id === id
+      (where: ServiceCatItem) => where.id === id,
     );
     setActive(activeService[0]);
   };

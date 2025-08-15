@@ -28,7 +28,9 @@ interface Props {
   activeQuestion: string;
 }
 const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
-  const [states, setStates] = useState<IState[]>(State.getStatesOfCountry('US'));
+  const [states, setStates] = useState<IState[]>(
+    State.getStatesOfCountry("US"),
+  );
   const [cities, setCities] = useState<ICity[]>([]);
   const saveServiceId = useRequestStore((state) => state.saveRequest);
   const [fcmToken, setFcmToken] = useState("");
@@ -39,10 +41,10 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
     latitude: "",
     longitude: "",
     postal: "",
-    state: ""
+    state: "",
   });
 
-  console.log(locationDetail)
+  console.log(locationDetail);
 
   const locationList = ["autofill", "manual"];
 
@@ -87,7 +89,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
   });
   const getYears = Array.from(
     { length: 20 },
-    (_, i) => new Date().getFullYear() - i
+    (_, i) => new Date().getFullYear() - i,
   );
   const request = useMutation({
     mutationFn: requestService,
@@ -156,7 +158,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
             <div className="grid lg:grid-cols-2 gap-x-4 gap-y-3">
               <div>
                 <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
-                  Car Make
+                  Vehicle Make
                 </label>
                 <Controller
                   name="car_make"
@@ -199,7 +201,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                 }}
                 render={({ field }) => (
                   <TextInput
-                    label="Model"
+                    label="Vehicle Model"
                     labelClassName="text-[#000000B2] fw-600"
                     error={errors.car_model?.message}
                     type={InputType.text}
@@ -356,7 +358,10 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                             {...field}
                             onChange={(e) => {
                               field.onChange(e);
-                              handleStateChange(e.target.value, watch("country"));
+                              handleStateChange(
+                                e.target.value,
+                                watch("country"),
+                              );
                             }}
                           />
                         )}
