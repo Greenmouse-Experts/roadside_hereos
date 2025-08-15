@@ -5,6 +5,7 @@ import UserRequests from "../../pages/user/requests";
 import ServiceDetails from "../../pages/user/serviceDetails";
 import UserServices from "../../pages/user/services";
 import UserSettings from "../../pages/user/settings";
+import UserRefunds from "../../pages/user/user-refunds";
 
 export const userRoutes = [
   {
@@ -21,6 +22,11 @@ export const userRoutes = [
     id: "user8",
     path: "requests/:id",
     component: <ServiceDetails />,
+  },
+  {
+    id: "refund-request",
+    path: "refund-request",
+    component: <UserRefunds />,
   },
   {
     id: "user3",
