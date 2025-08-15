@@ -20,6 +20,7 @@ const CompanyPayouts = () => {
   ];
   return (
     <div className="bg-white p-6 rounded-lg shadow min-h-[80vh]">
+      <h2 className="py-2 text-xl font-bold">Company Payout</h2>
       <div className="mt-5">
         <Tabs tabs={payTabs} type="charts" />
       </div>
