@@ -97,16 +97,21 @@ interface RefundApiResponse {
 }
 interface TABLE_PARAMS {
   page: number;
+  status: "pending" | "approved" | "dissaproved";
 }
 export default function UserRefunds() {
   const [tableParams, setParams] = useState<TABLE_PARAMS>({
     page: 1,
-    // status:
+    status: "pending",
   });
   const query = useQuery<RefundApiResponse>({
     queryKey: ["refunds-user"],
     queryFn: async () => {
-      let resp = await apiClient.get("/services-quote/fetch-refund-requests");
+      let resp = await apiClient.get("/services-quote/fetch-refund-requests", {
+        params: {
+          ...tableParams,
+        },
+      });
       return resp.data;
     },
   });
@@ -163,11 +168,29 @@ export default function UserRefunds() {
       },
     }),
   ];
+  const tabs = ["pending", "approved", "disapproved"];
   return (
     <div>
       <div></div>
       <h2 className="py-2 text-xl font-bold">Refund Requests</h2>
       <div className="bg-white shadow p-4 rounded-md">
+        <div className="flex space-x-4 border-b pb-2">
+          {tabs.map((tab) => (
+            <button
+              key={tab}
+              className={`px-4 py-2 rounded-md font-semibold ${
+                tableParams.status === tab
+                  ? "bg-review text-white"
+                  : "text-gray-600 hover:bg-gray-100"
+              }`}
+              onClick={() =>
+                setParams((prev) => ({ ...prev, page: 1, status: tab }))
+              }
+            >
+              {tab.charAt(0).toUpperCase() + tab.slice(1)}
+            </button>
+          ))}
+        </div>
         {/*<div className="p-2"></div>*/}
         {/*{query.isFetching && <>fetching</>}*/}
         {/*<div>{JSON.stringify(query.data)}</div>*/}
