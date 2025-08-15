@@ -50,19 +50,22 @@ const ApprovedRequests = () => {
           </div>
         )}
         {datas && !!datas?.length && (
-          <PayoutTable
-            isLoading={isLoading}
-            data={datas || []}
-            page={params.page}
-            next={handleNext}
-            prev={handlePrev}
-            count={count || 0}
-            refetch={refetch}
-          />
+          <>
+            <PayoutTable
+              action_allowed={false}
+              isLoading={isLoading}
+              data={datas || []}
+              page={params.page}
+              next={handleNext}
+              prev={handlePrev}
+              count={count || 0}
+              refetch={refetch}
+            />
+          </>
         )}
       </div>
     </div>
   );
-}
+};
 
-export default ApprovedRequests
+export default ApprovedRequests;

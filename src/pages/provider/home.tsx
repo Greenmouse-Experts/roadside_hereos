@@ -12,9 +12,71 @@ import { GrUserWorker } from "react-icons/gr";
 import { BsTools } from "react-icons/bs";
 import { SiCashapp } from "react-icons/si";
 
+interface User {
+  id: string;
+  fname: string | null;
+  lname: string | null;
+  name: string;
+  email: string;
+  address: string | null;
+  phone: string;
+  sms_opt_in: boolean;
+  password: string;
+  isActive: boolean;
+  isSuspended: boolean | null;
+  photo: string | null;
+  hasActiveSubscription: boolean | null;
+  isAvailableForService: boolean | null;
+  verified: boolean;
+  expiredAt: string | null;
+  planId: string | null;
+  token: string | null;
+  state: string | null;
+  city: string | null;
+  zipcode: string | null;
+  street: string | null;
+  userType: string;
+  level: string | null;
+  referralId: string;
+  invitationId: string | null;
+  companyId: string | null;
+  reviewsAvg: number;
+  serviceCharge: number;
+  last_login: string;
+  fcmToken: string | null;
+  walletBal: string;
+  pendingBal: string;
+  referralSource: string;
+  driverOverallPendingBal: string;
+  driverOverallWalletBal: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+  profile: {
+    id: string;
+    userId: string;
+    userType: string;
+    isVerified: boolean | null;
+    company_address: string | null;
+    company_state: string | null;
+    company_city: string | null;
+    company_street: string | null;
+    company_name: string | null;
+    years_of_experience: number | null;
+    certificate_of_operation: string | null;
+    tax_certificate: string | null;
+    serviceTypeId: string;
+    hasActiveSubscription: boolean | null;
+    expiredAt: string | null;
+    planId: string | null;
+    rating: number | null;
+    service_category: string | null;
+  };
+  rating: string;
+}
 const ProviderHomePage = () => {
   const { user } = useAuth();
-  const [userData, setUserData] = useState<any>();
+  const [userData, setUserData] = useState<User>();
   const { data: stat } = useQuery({
     queryKey: ["get-provider-stat"],
     queryFn: getProviderStat,
@@ -32,26 +94,46 @@ const ProviderHomePage = () => {
     <>
       <div>
         <div className="lg:flex items-stretch gap-6 flex-row-reverse">
-          <div className="bg-review w-[500px] rounded-lg text-white p-4 lg:p-8">
-            <div className="mb-2">
-              <p>Technicians Pending balance</p>
-              <p className="fw-600 text-xl mt-1">
+          <div className="bg-review w-[500px] rounded-lg text-white p-4 lg:p-8 shadow-xl">
+            <div className="mb-4">
+              <p className="text-gray-200 text-sm">Pending balance</p>
+              <p className="fw-600 text-2xl mt-1">
                 {formatAsNgnMoney(userData?.pendingBal) || "$0"}.00
               </p>
-            </div>
-            <div className="flex items-center justify-between">
-              <p className="fw-500">Current Balance</p>
-              <div
-                className="flex gap-x-1 items-center cursor-pointer"
-                onClick={() => setShowModal(true)}
-              >
-                <BiMoneyWithdraw />
-                <p className="fs-500 fw-600">Withdraw</p>
+              <div className="mt-2">
+                <p className="text-gray-200 text-sm">
+                  Tecnhician Pending balance
+                </p>
+                <p className="fw-600 text-md mt-1">
+                  {formatAsNgnMoney(userData?.driverOverallPendingBal) || "$0"}
+                  .00
+                </p>
               </div>
+              <div>
+                {" "}
+                <p className="text-gray-200 text-sm">
+                  Tecnhician Approved Balance
+                </p>
+                <p className="fw-600 md mt-1">
+                  {formatAsNgnMoney(userData?.driverOverallWalletBal) || "$0"}
+                  .00
+                </p>
+              </div>
+              {/*{userData.driverOverallPendingBal}*/}
             </div>
-            <p className="fw-600 text-3xl mt-3">
+            <div className="flex items-center justify-between mt-6">
+              <p className="fw-500 text-gray-200 text-base">Current Balance</p>
+            </div>
+            <p className="fw-600 text-3xl  mb-6">
               {formatAsNgnMoney(userData?.walletBal)}.00
             </p>
+            <button
+              className="flex gap-x-2 bg-blue-900 items-center bg-all text-review rounded px-4 py-2 fw-600 hover:opacity-80 transition-opacity shadow-md"
+              onClick={() => setShowModal(true)}
+            >
+              <BiMoneyWithdraw className="text-xl" />
+              <p className="text-lg">Withdraw</p>
+            </button>
           </div>
           <div className="w-full h-[140px] lg:h-auto bg-review rounded-lg border p-3 lg:px-5 flex items-center">
             <div className="w-full">
