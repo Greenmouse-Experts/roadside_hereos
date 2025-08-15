@@ -7,11 +7,11 @@ import { BsGear } from "react-icons/bs";
 import LogoutModal from "../../../auth/AdminLogoutModal";
 import { FC } from "react";
 
-interface Props{
-  toggled: boolean
-  setToggled: React.Dispatch<React.SetStateAction<boolean>>
+interface Props {
+  toggled: boolean;
+  setToggled: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const SidebarLayout:FC<Props> = ({toggled, setToggled}) => {
+const SidebarLayout: FC<Props> = ({ toggled, setToggled }) => {
   const path = useLocation();
   const { Modal, setShowModal } = useModal();
 
@@ -21,12 +21,16 @@ const SidebarLayout:FC<Props> = ({toggled, setToggled}) => {
         customBreakPoint="1024px"
         className="h-screen overflow-y-hidden scroll-pro lg:pb-4 fs-700 fw-500 lg:px-4"
         backgroundColor="#111827"
-        onBackdropClick={() => setToggled(false)} 
+        onBackdropClick={() => setToggled(false)}
         toggled={toggled}
       >
         <div className="flex justify-center py-6 lg:py-9 lg:pb-8 items-center">
           <Link to="/" className="flex justify-center gap-x-1">
-            <img src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1706192917/rsh/Group_48097864_1_mopmlj.png" alt="logo" className="w-10/12" />
+            <img
+              src="https://res.cloudinary.com/greenmouse-tech/image/upload/v1706192917/rsh/Group_48097864_1_mopmlj.png"
+              alt="logo"
+              className="w-10/12"
+            />
             {/* <p className="fw-700 text-[19px] uppercase">Roadside Heroes</p> */}
           </Link>
         </div>
