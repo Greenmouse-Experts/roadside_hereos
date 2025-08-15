@@ -13,10 +13,10 @@ export default function TechniciansPayout() {
       title: <p>Approved Payouts</p>,
       content: <ApprovedRequests />,
     },
-    {
-      title: <p>Disapproved Payouts</p>,
-      content: <DisapprovedRequests />,
-    },
+    // {
+    //   title: <p>Disapproved Payouts</p>,
+    //   content: <DisapprovedRequests />,
+    // },
   ];
   return (
     <div className="bg-white p-6 rounded-lg shadow min-h-[80vh]">
