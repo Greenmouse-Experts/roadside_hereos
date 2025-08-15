@@ -4,6 +4,7 @@ import EmptyState from "../../../ui/EmptyState";
 import CurveLoader from "../../../ui/loader/curveLoader/CurveLoader";
 import { getAdminRefunds } from "../../../../services/api/adminApi";
 import RefundTable from "../components/refundTable";
+import { apiClient } from "../../../../services/api/serviceApi";
 
 interface User {
   id: string;
@@ -74,7 +75,7 @@ interface ServiceRequest {
   updatedAt: string;
 }
 
-interface RefundRequest {
+export interface RefundRequest {
   id: string;
   userId: string;
   serviceRequestId: string;
@@ -88,8 +89,10 @@ interface RefundRequest {
   serviceRequest: ServiceRequest;
 }
 
-interface RefundResponse {
-  refundRequests: RefundRequest[];
+export interface RefundResponse {
+  data: {
+    refundRequests: RefundRequest[];
+  };
   total: number;
 }
 
@@ -101,10 +104,17 @@ const RefundApprovedRequest = () => {
 
   const { data, isLoading, refetch } = useQuery<RefundResponse>({
     queryKey: ["admin-refund-request", params],
-    queryFn: () => getAdminRefunds(params),
+    queryFn: async () => {
+      let resp = await apiClient.get("services-quote/fetch-refund-requests", {
+        params: { ...params },
+      });
+      return resp.data;
+    },
   });
 
+  //@ts-ignore
   const refundRequests = data?.data?.refundRequests || [];
+  // @ts-ignore
   const totalRefunds = data?.data?.total || 0;
 
   const handleNext = () => {
@@ -143,7 +153,7 @@ const RefundApprovedRequest = () => {
         {refundRequests.length > 0 && (
           <RefundTable
             isLoading={isLoading}
-            data={refundRequests}
+            data={refundRequests as unknown as any}
             page={params.page}
             next={handleNext}
             prev={handlePrev}

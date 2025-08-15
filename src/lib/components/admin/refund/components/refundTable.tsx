@@ -5,6 +5,7 @@ import { FormatStatus } from "../../../../utils";
 import { DynamicTable } from "../../../ui/DynamicTable";
 import PayoutActions from "./refundActions";
 import { Link } from "react-router-dom";
+import { RefundRequest } from "../approvedRequest";
 
 interface RefundItem {
   createdAt: string;
@@ -24,6 +25,7 @@ interface Props {
   prev: () => void;
   refetch: () => void;
   status: string;
+  action?: boolean;
 }
 const RefundTable: FC<Props> = ({
   data,
@@ -33,9 +35,10 @@ const RefundTable: FC<Props> = ({
   prev,
   refetch,
   status,
+  action = false,
 }) => {
   // Table components
-  const columnHelper = createColumnHelper<RefundItem>();
+  const columnHelper = createColumnHelper<RefundRequest>();
   const columns = [
     columnHelper.accessor((row) => row.userId, {
       id: "Provider Id",
@@ -66,24 +69,31 @@ const RefundTable: FC<Props> = ({
       id: "Status",
       header: (info) => info.column.id,
       cell: (info) => (
-        <>{FormatStatus[info.getValue() as keyof typeof FormatStatus]}</>
+        <span className="fw-600">
+          {info.getValue()}
+          {/*{FormatStatus[info.getValue() as keyof typeof FormatStatus]}*/}
+        </span>
       ),
     }),
-    columnHelper.accessor((row) => row.serviceRequestId, {
-      id: "Action",
-      header: (info) => info.column.id,
-      cell: (info) => (
-        <>
-          {(status === "pending" || status === "approved") && (
-            <PayoutActions
-              id={info.getValue()}
-              status={info.row.original.status}
-              refetch={refetch}
-            />
-          )}
-        </>
-      ),
-    }),
+    ...(action
+      ? [
+          columnHelper.accessor((row) => row.serviceRequestId, {
+            id: "Action",
+            header: (info) => info.column.id,
+            cell: (info) => (
+              <>
+                {(status === "pending" || status === "approved") && (
+                  <PayoutActions
+                    id={info.getValue()}
+                    status={info.row.original.status}
+                    refetch={refetch}
+                  />
+                )}
+              </>
+            ),
+          }),
+        ]
+      : []),
   ];
   return (
     <>

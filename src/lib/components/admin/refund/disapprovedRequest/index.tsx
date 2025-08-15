@@ -2,21 +2,28 @@ import { useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import EmptyState from "../../../ui/EmptyState";
 import CurveLoader from "../../../ui/loader/curveLoader/CurveLoader";
-import {  getAdminRefunds } from "../../../../services/api/adminApi";
+import { getAdminRefunds } from "../../../../services/api/adminApi";
 import RefundTable from "../components/refundTable";
+import { RefundResponse } from "../approvedRequest";
+import { apiClient } from "../../../../services/api/serviceApi";
 
 const RefundDisapprovedRequest = () => {
   const [params, setParams] = useState({
     page: 1,
     status: "disapproved",
   });
-  const { data, isLoading, refetch } = useQuery({
+  const { data, isLoading, refetch } = useQuery<RefundResponse>({
     queryKey: ["admin-refund-request", params],
-    queryFn: () => getAdminRefunds(params),
+    queryFn: async () => {
+      let resp = await apiClient.get("services-quote/fetch-refund-requests", {
+        params: { ...params },
+      });
+      return resp.data;
+    },
   });
 
-  const datas = data?.data;
-  const count = data?.data?.total;
+  const datas = data?.data.refundRequests;
+  const count = data?.data?.total || 10;
 
   const handleNext = () => {
     if (count > params.page * 10) {
