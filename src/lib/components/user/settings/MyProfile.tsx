@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import React, { useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import { BiEditAlt } from "react-icons/bi";
@@ -12,7 +12,7 @@ import { adminUpdateAvatar } from "../../../services/api/authApi";
 import { formatPhoneNumber } from "react-phone-number-input";
 
 const MyProfileSettings = () => {
-  const {user, firstName, lastName, saveUser} = useAuth();
+  const { user, firstName, lastName, saveUser } = useAuth();
   const { Modal, setShowModal } = useModal();
   const [isBusy, setIsBusy] = useState(false);
   const mutation = useMutation({
@@ -20,10 +20,10 @@ const MyProfileSettings = () => {
     onSuccess: (data) => {
       const payload = {
         ...user,
-        image: data.user.photo
+        image: data.user.photo,
       };
-      toast.success(data.message)
-      saveUser(payload)
+      toast.success(data.message);
+      saveUser(payload);
       setIsBusy(false);
     },
     onError: () => {
@@ -32,14 +32,14 @@ const MyProfileSettings = () => {
     },
   });
   const handleChangePicture = async (
-    e: React.ChangeEvent<HTMLInputElement | null>
+    e: React.ChangeEvent<HTMLInputElement | null>,
   ) => {
-    setIsBusy(true)
+    setIsBusy(true);
     if (!e.target.files) return;
     const files = e.target.files[0];
     const fd = new FormData();
     fd.append("photo", files);
-    mutation.mutate(fd)
+    mutation.mutate(fd);
   };
   return (
     <>
@@ -48,7 +48,12 @@ const MyProfileSettings = () => {
         <div className="mt-4 border-2 border-[#808080] px-8 py-4 lg:py-6 flex justify-between rounded-[15px]">
           <div className="lg:flex items-center">
             <div className="flex">
-              <ProfileAvatar size={102} url={user.image} name={user.name} font={28}/>
+              <ProfileAvatar
+                size={102}
+                url={user.image}
+                name={user.name}
+                font={28}
+              />
               <div className="relative overflow-hidden bg-gray-600 h-9 w-9 flex items-center justify-center circle top-[73px] -left-7 ">
                 {!isBusy && <FaCamera className="text-lg text-white mb-1" />}
                 <input

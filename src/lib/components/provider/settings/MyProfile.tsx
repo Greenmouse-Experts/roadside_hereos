@@ -1,4 +1,4 @@
-"use client";
+// "use client";
 import React, { useState } from "react";
 import { FaCamera } from "react-icons/fa";
 import { BiEdit, BiEditAlt } from "react-icons/bi";
@@ -47,7 +47,7 @@ const MyProfileSettings = () => {
     },
   });
   const handleChangePicture = async (
-    e: React.ChangeEvent<HTMLInputElement | null>
+    e: React.ChangeEvent<HTMLInputElement | null>,
   ) => {
     setIsBusy(true);
     if (!e.target.files) return;
