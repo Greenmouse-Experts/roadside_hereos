@@ -5,7 +5,11 @@ import { BeatLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import MapLocation from "./MapLocation";
 import { GOOGLE_API_KEY } from "../../../../../services/constant";
-import { getCityFromGoogle, getPostalCodeFromGoogle, getStateFromGoogle } from "../../../../../utils";
+import {
+  getCityFromGoogle,
+  getPostalCodeFromGoogle,
+  getStateFromGoogle,
+} from "../../../../../utils";
 import useCustomModal from "../../../../../hooks/useCustomModal";
 import { LocationProps } from "../ServiceSec";
 
@@ -36,13 +40,13 @@ const GetCurrentLocation: FC<Props> = ({ setValue }) => {
           console.log(error);
           toast.error("Something went wrong getting your position!");
         },
-        options
+        options,
       );
     }
   };
 
   const fetchCoordinateDetailsWithGoogle = async (
-    data: GeolocationCoordinates
+    data: GeolocationCoordinates,
   ) => {
     try {
       const response = await fetch(
@@ -50,23 +54,25 @@ const GetCurrentLocation: FC<Props> = ({ setValue }) => {
       &location_type=ROOFTOP&result_type=street_address&key=${GOOGLE_API_KEY}`,
         {
           method: "GET",
-        }
+        },
       );
 
       const result = await response.json();
       if (result) {
-        if(result?.results[0]?.formatted_address){
+        if (result?.results[0]?.formatted_address) {
           toast.success("Nearest Location Fetched");
         }
         setIsBusy(false);
         console.log(result);
         setValue({
           location: result?.results[0]?.formatted_address,
-          postal:  getPostalCodeFromGoogle(result?.results[0].address_components),
+          postal: getPostalCodeFromGoogle(
+            result?.results[0].address_components,
+          ),
           latitude: String(data.latitude),
           longitude: String(data.longitude),
           city: getCityFromGoogle(result?.results[0].address_components),
-          state: getStateFromGoogle(result?.results[0].address_components)
+          state: getStateFromGoogle(result?.results[0].address_components),
         });
       }
     } catch (error: any) {

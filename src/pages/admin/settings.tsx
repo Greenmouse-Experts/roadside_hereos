@@ -3,6 +3,7 @@ import MyProfileSettings from "../../lib/components/admin/settings/MyProfile";
 import SecuritySetting from "../../lib/components/admin/settings/Security";
 import AdminRates from "../../lib/components/admin/settings/AdminRates";
 import PayoutSettings from "../../lib/components/admin/settings/Payouts";
+import AdminCharges from "../../lib/components/admin/settings/AdminCharges";
 
 const AdminSettings = () => {
   const [active, setActive] = useState(1);
@@ -47,15 +48,24 @@ const AdminSettings = () => {
                   }`}
                   onClick={() => handleActive(4)}
                 >
-                  Payouts
+                  Payout
+                </li>
+                <li
+                  className={`cursor-pointer px-4 py-2  whitespace-nowrap rounded-lg hover:scale-105 duration-100 hover:bg-white ${
+                    active === 4 && "bg-white fw-600"
+                  }`}
+                  onClick={() => handleActive(5)}
+                >
+                  Charges
                 </li>
               </ul>
             </div>
             <div className="w-[83%]">
               {active === 1 && <MyProfileSettings />}
-              {active === 2 && <SecuritySetting/>}
-              {active === 3 && <AdminRates/>}
-              {active === 4 && <PayoutSettings/>}
+              {active === 2 && <SecuritySetting />}
+              {active === 3 && <AdminRates />}
+              {active === 4 && <PayoutSettings />}
+              {active === 5 && <AdminCharges />}
             </div>
           </div>
         </div>

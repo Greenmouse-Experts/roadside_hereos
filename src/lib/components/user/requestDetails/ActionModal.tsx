@@ -2,6 +2,7 @@ import { FC } from "react";
 import ReviewModal from "./ReviewModal";
 import Tabs from "../../ui/Tabs";
 import QueryModal from "./QueryModal";
+import CancelModal from "./CancelJob";
 
 interface Props {
   id: string;
@@ -17,6 +18,10 @@ const ActionModal: FC<Props> = ({ id, refetch, close }) => {
     {
       title: <p>Submit Query</p>,
       content: <QueryModal id={id} close={close} refetch={refetch} />,
+    },
+    {
+      title: <p>Cancel Job</p>,
+      content: <CancelModal id={id} close={close} refetch={refetch} />,
     },
   ];
   return (

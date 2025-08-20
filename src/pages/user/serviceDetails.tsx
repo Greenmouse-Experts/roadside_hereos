@@ -22,6 +22,7 @@ const ServiceDetails = () => {
       Number(payment?.amount) + Number(payment?.charge) + Number(payment?.tax);
     return totalPay;
   };
+  // return <></>;
 
   return (
     <div className="pb-24">
