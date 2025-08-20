@@ -3,6 +3,7 @@ import SecuritySetting from "../../lib/components/admin/settings/Security";
 import KycIndex from "../../lib/components/provider/settings/kyc";
 import MyProfileSettings from "../../lib/components/provider/settings/MyProfile";
 import ServicesAdded from "../../lib/components/provider/settings/Services";
+import SmsSettings from "../../lib/components/user/settings/SmsSettings";
 
 const ProviderSettings = () => {
   const [active, setActive] = useState(1);
@@ -49,13 +50,22 @@ const ProviderSettings = () => {
                 >
                   Security
                 </li>
+                <li
+                  className={`cursor-pointer px-4 py-2  whitespace-nowrap rounded-lg hover:scale-105 duration-100 hover:bg-white ${
+                    active === 4 && "bg-white fw-600"
+                  }`}
+                  onClick={() => handleActive(5)}
+                >
+                  Sms
+                </li>
               </ul>
             </div>
             <div className="lg:w-[83%] pt-6 lg:pt-0">
               {active === 1 && <MyProfileSettings />}
-              {active ===2 && <KycIndex/>}
-              {active ===3 && <ServicesAdded/>}
+              {active === 2 && <KycIndex />}
+              {active === 3 && <ServicesAdded />}
               {active === 4 && <SecuritySetting />}
+              {active === 5 && <SmsSettings />}
             </div>
           </div>
         </div>
