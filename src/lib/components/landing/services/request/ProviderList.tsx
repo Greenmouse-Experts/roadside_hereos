@@ -73,7 +73,7 @@ const ProviderList: FC<Props> = ({ next }) => {
   const formatTimeTaken = (time: any) => {
     const parse = JSON.parse(time);
     const vals = Object.values(parse) as unknown as string;
-    return `${vals[0]} - ${vals[1]}`
+    return `${vals[0]} - ${vals[1]}`;
   };
   return (
     <>
@@ -109,7 +109,7 @@ const ProviderList: FC<Props> = ({ next }) => {
                       <p>
                         Distance:{" "}
                         <span className="fw-600">{`${getJustNumbers(
-                          item.distance
+                          item.distance,
                         )}`}</span>
                       </p>
                       <p>{formatTimeTaken(item.timeTaken)}</p>
@@ -137,7 +137,7 @@ const ProviderList: FC<Props> = ({ next }) => {
                 className="underline px-4 py-2 flex items-center gap-x-1"
                 onClick={() => fetchProviders()}
               >
-                <MdRefresh /> Retry Again
+                <MdRefresh /> Search Again
               </button>
             </div>
           )}

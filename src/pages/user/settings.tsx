@@ -2,6 +2,7 @@ import { useState } from "react";
 import MyProfileSettings from "../../lib/components/user/settings/MyProfile";
 import SecuritySetting from "../../lib/components/user/settings/Security";
 import DeleteProfile from "../../lib/components/user/settings/DeleteProfile";
+import SmsSettings from "../../lib/components/user/settings/SmsSettings";
 
 const UserSettings = () => {
   const [active, setActive] = useState(1);
@@ -40,18 +41,27 @@ const UserSettings = () => {
                 >
                   Account
                 </li>
+                <li
+                  className={`cursor-pointer px-4 py-2  whitespace-nowrap rounded-lg hover:scale-105 duration-100 hover:bg-white ${
+                    active === 3 && "bg-white fw-600"
+                  }`}
+                  onClick={() => handleActive(4)}
+                >
+                  Sms
+                </li>
               </ul>
             </div>
             <div className="lg:w-[83%]">
               {active === 1 && <MyProfileSettings />}
               {active === 2 && <SecuritySetting />}
-              {active === 3 && <DeleteProfile/>}
+              {active === 3 && <DeleteProfile />}
+              {active === 4 && <SmsSettings />}
             </div>
           </div>
         </div>
       </div>
     </>
   );
-}
+};
 
-export default UserSettings
+export default UserSettings;
