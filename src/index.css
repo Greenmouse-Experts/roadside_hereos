@@ -375,12 +375,12 @@ input[type="checkbox"]:checked {
         background: #e4b080;
     }
     .bg-review {
-        background: rgb(17, 24, 39);
+        background: #111827;
         background: linear-gradient(
             90deg,
-            rgba(17, 24, 39, 1) 0%,
-            rgba(9, 9, 121, 1) 78%,
-            rgba(17, 24, 39, 1) 100%
+            #111827 0%,
+            #090979 78%,
+            #111827 100%
         );
     }
     .text-primary {
@@ -485,5 +485,11 @@ input[type="checkbox"]:checked {
         padding-left: 10px;
         display: grid;
         gap: 10px;
+    }
+}
+
+@layer components {
+    .bg-grad {
+        @apply bg-gradient-to-r from-[#111827] to-[#090979];
     }
 }

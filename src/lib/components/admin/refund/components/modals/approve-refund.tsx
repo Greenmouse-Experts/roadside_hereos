@@ -17,7 +17,7 @@ const ApproveRefund: FC<Props> = ({ id, close, refetch, status }) => {
   const [amt, setAmt] = useState("");
   const [isBusy, setIsBusy] = useState(false);
   console.log(status);
-  
+
   const handleInitate = async () => {
     const payload = {
       refundReqId: id,

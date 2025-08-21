@@ -93,99 +93,119 @@ const ProviderHomePage = () => {
   return (
     <>
       <div>
-        <div className="lg:flex items-stretch gap-6 flex-row-reverse">
-          <div className="bg-review w-[500px] rounded-lg text-white p-4 lg:p-8 shadow-xl">
-            <div className="mb-4">
-              <p className="text-gray-200 text-sm">Pending balance</p>
-              <p className="fw-600 text-2xl mt-1">
-                {formatAsNgnMoney(userData?.pendingBal) || "$0"}.00
-              </p>
-              <div className="mt-2">
-                <p className="text-gray-200 text-sm">
-                  Tecnhician Pending balance
-                </p>
-                <p className="fw-600 text-md mt-1">
-                  {formatAsNgnMoney(userData?.driverOverallPendingBal) || "$0"}
-                  .00
-                </p>
+        <div className="lg:flex items-stretch gap-8 flex-row-reverse">
+          {/* Wallet Card - leave as is */}
+          <div className="bg-gradient-to-br bg-grad w-full mb-6 lg:mb-0 lg:max-w-[500px] rounded-2xl text-white p-6 shadow-2xl flex flex-col gap-6">
+            <div className="flex items-center gap-4 mb-2">
+              <div className="bg-white/10 rounded-full p-3 flex items-center justify-center">
+                <SiCashapp className="text-3xl text-yellow-400" />
               </div>
               <div>
-                {" "}
-                <p className="text-gray-200 text-sm">
-                  Tecnhician Approved Balance
+                <p className="text-gray-200 text-xs uppercase tracking-wider">
+                  Profit Balance
                 </p>
-                <p className="fw-600 md mt-1">
-                  {formatAsNgnMoney(userData?.driverOverallWalletBal) || "$0"}
-                  .00
+                <p className="fw-700 text-4xl mt-1 tracking-tight">
+                  {formatAsNgnMoney(userData?.walletBal ?? 0)}.00
                 </p>
               </div>
-              {/*{userData.driverOverallPendingBal}*/}
             </div>
-            <div className="flex items-center justify-between mt-6">
-              <p className="fw-500 text-gray-200 text-base">Current Balance</p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div className="bg-white/5 rounded-lg p-4 flex flex-col items-center">
+                <p className="text-gray-300 text-xs mb-1">Pending Balance</p>
+                <p className="fw-600 text-xl">
+                  {formatAsNgnMoney(userData?.pendingBal ?? 0)}.00
+                </p>
+              </div>
+              <div className="bg-white/5 rounded-lg p-4 flex flex-col items-center">
+                <p className="text-gray-300 text-xs mb-1">Technician Pending</p>
+                <p className="fw-600 text-xl">
+                  {formatAsNgnMoney(userData?.driverOverallPendingBal ?? 0)}.00
+                </p>
+              </div>
+              <div className="bg-white/5 rounded-lg p-4 flex flex-col items-center">
+                <p className="text-gray-300 text-xs mb-1">
+                  Technician Approved
+                </p>
+                <p className="fw-600 text-xl">
+                  {formatAsNgnMoney(userData?.driverOverallWalletBal ?? 0)}.00
+                </p>
+              </div>
             </div>
-            <p className="fw-600 text-3xl  mb-6">
-              {formatAsNgnMoney(userData?.walletBal)}.00
-            </p>
             <button
-              className="flex gap-x-2 bg-blue-900 items-center bg-all text-review rounded px-4 py-2 fw-600 hover:opacity-80 transition-opacity shadow-md"
+              className="flex gap-x-2 bg-yellow-400 text-blue-900 items-center rounded-lg px-6 py-3 fw-700 hover:bg-yellow-300 transition-colors shadow-lg self-end mt-2"
               onClick={() => setShowModal(true)}
             >
-              <BiMoneyWithdraw className="text-xl" />
-              <p className="text-lg">Withdraw</p>
+              <BiMoneyWithdraw className="text-2xl" />
+              <span className="text-lg">Withdraw</span>
             </button>
           </div>
-          <div className="w-full h-[140px] lg:h-auto bg-review rounded-lg border p-3 lg:px-5 flex items-center">
-            <div className="w-full">
-              <p className="fw-600 text-white text-lg uppercase">
-                WELCOME BACK! {user.name}
-              </p>
-              <p className="lg:w-8/12 mt-3 text-gray-400 fw-500 fs-400 ">
-                Your company have rendered a total of{" "}
-                <span className="fw-500">
+
+          {/* Welcome Card */}
+          <div className="w-full bg-gradient-to-br bg-grad rounded-2xl border border-blue-900 p-7 flex items-center shadow-2xl mb-6 lg:mb-0 min-h-[160px]">
+            <div className="w-full flex flex-col gap-2">
+              <h2 className="fw-800 text-2xl text-yellow-400 mb-1 flex items-center gap-2">
+                👋 Welcome, <span className="capitalize">{user.name}</span>
+              </h2>
+              <p className="text-gray-100 fw-500 text-lg">
+                This month, your company has completed&nbsp;
+                <span className="fw-800 text-yellow-300 text-xl">
                   {stat?.data?.totalCompletedServiceForOneMonth || 0}
-                </span>{" "}
-                services to ALLDRIVE SOS users this month.
+                </span>
+                &nbsp;service
+                {(stat?.data?.totalCompletedServiceForOneMonth || 0) === 1
+                  ? ""
+                  : "s"}{" "}
+                for ALLDRIVE SOS users.
               </p>
-              <p className="lg:w-8/12 text-gray-400 fw-500 fs-400 ">
-                We appreciate your contribution.
-              </p>
+              <div className="mt-2">
+                <span className="inline-block bg-yellow-400/10 text-yellow-300 px-4 py-1 rounded-full fw-600 text-sm">
+                  Thank you for your outstanding work!
+                </span>
+              </div>
             </div>
           </div>
         </div>
-        <div className="grid lg:grid-cols-3 gap-y-6 gap-x-6 dash-shade p-5 py-8 rounded-lg">
-          <div className="flex items-center gap-x-3 border-r border-[#00000059]">
-            <div className="circle h-[56px] w-[56px] bg-review text-white place-center">
+
+        {/* Stats Cards */}
+        <div className="grid lg:grid-cols-3 gap-y-6 gap-x-8 dash-shade p-6 py-10 rounded-2xl mt-6 shadow-lg">
+          <div className="flex items-center gap-x-4 border-r border-[#00000029] pr-6">
+            <div className="circle h-[56px] w-[56px] bg-gradient-to-br from-yellow-400 to-yellow-600 text-white flex items-center justify-center shadow-lg">
               <SiCashapp className="text-2xl" />
             </div>
             <div>
-              <p className="fs-700 fw-600">{stat?.data?.totalAmount || "$0"}</p>
+              <p className="fs-700 fw-700 text-gray-900">
+                {stat?.data?.totalAmount || "$0"}
+              </p>
               <p className="fs-500 fw-500 text-primary">Total Amount Made</p>
             </div>
           </div>
-          <div className="flex items-center gap-x-3 border-r border-[#00000059]">
-            <div className="circle h-[56px] w-[56px] bg-review text-white place-center">
+          <div className="flex items-center gap-x-4 border-r border-[#00000029] pr-6">
+            <div className="circle h-[56px] w-[56px] bg-gradient-to-br from-blue-500 to-blue-700 text-white flex items-center justify-center shadow-lg">
               <BsTools className="text-2xl" />
             </div>
             <div>
-              <p className="text-lg fw-600">
+              <p className="text-lg fw-700 text-gray-900">
                 {stat?.data?.totalServices || "0"}
               </p>
               <p className="fs-500 fw-500 text-primary">Total Services</p>
             </div>
           </div>
-          <div className="flex items-center gap-x-3 border-r border-[#00000059] lg:border-none">
-            <div className="circle h-[56px] w-[56px] bg-review text-white place-center">
+          <div className="flex items-center gap-x-4 lg:border-none">
+            <div className="circle h-[56px] w-[56px] bg-gradient-to-br from-green-500 to-green-700 text-white flex items-center justify-center shadow-lg">
               <GrUserWorker className="text-2xl" />
             </div>
             <div>
-              <p className="text-lg fw-600">{stat?.data?.totalDrivers || 0}</p>
+              <p className="text-lg fw-700 text-gray-900">
+                {stat?.data?.totalDrivers || 0}
+              </p>
               <p className="fs-500 fw-500 text-primary">Service Staff</p>
             </div>
           </div>
         </div>
-        <div>
-          <div>
+
+        {/* Alerts Section */}
+        <div className="mt-8">
+          <div className="bg-white rounded-2xl shadow-lg p-5">
             <Alerts data={stat?.data?.alerts || []} />
           </div>
         </div>
@@ -193,7 +213,7 @@ const ProviderHomePage = () => {
       <Dialog title="Request Withdrawal" size="lg">
         <WithdrawModal
           close={() => setShowModal(false)}
-          avail_bal={userData?.walletBal}
+          avail_bal={userData?.walletBal ?? ""}
         />
       </Dialog>
     </>
