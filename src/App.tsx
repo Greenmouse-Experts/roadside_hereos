@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import AdminDashboard from "./pages/admin";
 import HomePage from "./pages/landing/HomePage";
@@ -19,6 +20,69 @@ import DeleteAccount from "./pages/landing/DeleteAccount";
 import ProvidersFaqPage from "./pages/landing/ProvidersFaqs";
 import BlogPage from "./pages/landing/Blog";
 import BlogDetail from "./pages/landing/BlogDetail";
+
+function CookieConsent() {
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const consent = localStorage.getItem("cookie_consent");
+    if (!consent) {
+      setVisible(true);
+    }
+  }, []);
+
+  const handleAccept = () => {
+    localStorage.setItem("cookie_consent", "accepted");
+    setVisible(false);
+  };
+
+  if (!visible) return null;
+
+  return (
+    <div
+      style={{
+        position: "fixed",
+        bottom: 0,
+        left: 0,
+        right: 0,
+        background: "#222",
+        color: "#fff",
+        padding: "1rem",
+        zIndex: 1000,
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        flexWrap: "wrap",
+      }}
+    >
+      <span>
+        We use cookies to improve your experience. By using our site, you agree
+        to our{" "}
+        <a
+          href="/cookie"
+          style={{ color: "#fff", textDecoration: "underline" }}
+        >
+          cookie policy
+        </a>
+        .
+      </span>
+      <button
+        onClick={handleAccept}
+        style={{
+          marginLeft: "1rem",
+          background: "#fff",
+          color: "#222",
+          border: "none",
+          borderRadius: "4px",
+          padding: "0.5rem 1rem",
+          cursor: "pointer",
+        }}
+      >
+        Accept
+      </button>
+    </div>
+  );
+}
 
 function App() {
   return (
@@ -45,6 +109,7 @@ function App() {
         <Route path="/admin/*" element={<AdminDashboard />} />
       </Routes>
       <CookieModal />
+      <CookieConsent />
     </>
   );
 }

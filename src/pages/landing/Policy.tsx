@@ -27,48 +27,52 @@ const PolicyPage = () => {
       key: 4,
     },
     {
-      label: "Cookies and Tracking Technologies",
+      label: "GDPR and CCPA Compliance Message",
       key: 5,
     },
     {
-      label: "Data Security",
+      label: "Cookies and Tracking Technologies",
       key: 6,
     },
     {
-      label: "User Rights and Choices",
+      label: "Data Security",
       key: 7,
     },
     {
-      label: "Third-Party Advertisements",
+      label: "User Rights and Choices",
       key: 8,
     },
     {
-      label: "Children's Privacy",
+      label: "Third-Party Advertisements",
       key: 9,
     },
     {
-      label: "International Data Transfers",
+      label: "Children's Privacy",
       key: 10,
     },
     {
-      label: "Data Retention",
+      label: "International Data Transfers",
       key: 11,
     },
     {
-      label: "Updates to the Privacy Policy",
+      label: "Data Retention",
       key: 12,
     },
     {
-      label: "Contact Information",
+      label: "Updates to the Privacy Policy",
       key: 13,
     },
     {
-      label: "Governing Law",
+      label: "Contact Information",
       key: 14,
     },
     {
-      label: "User Responsibilities",
+      label: "Governing Law",
       key: 15,
+    },
+    {
+      label: "User Responsibilities",
+      key: 16,
     },
   ];
 
@@ -171,9 +175,7 @@ const PolicyPage = () => {
         communications are strictly transactional and are used to help deliver
         our services efficiently and effectively.
       </p>
-      <p className="mt-3">
-        This may include, but is not limited to:
-      </p>
+      <p className="mt-3">This may include, but is not limited to:</p>
       <ul className="mt-3 my-list">
         <li>
           <span className="fw-500">
@@ -194,10 +196,9 @@ const PolicyPage = () => {
       </ul>
       <p className="mt-3">
         You may opt-out of non-essential messages at any time by following the
-        instructions provided in the SMS or contacting
-        support@alldrivesos.com. However, opting out of essential
-        service-related communications may affect your ability to use the
-        Platform effectively.
+        instructions provided in the SMS or contacting support@alldrivesos.com.
+        However, opting out of essential service-related communications may
+        affect your ability to use the Platform effectively.
       </p>
     </div>
   );
@@ -265,6 +266,43 @@ const PolicyPage = () => {
           some functionalities of the ALLDRIVE SOS Platform.
         </li>
       </ul>
+    </div>
+  );
+
+  const Accordion32 = () => (
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[5] = el)}>
+      <p className="mt-5 fw-600">GDPR and CCPA Compliance Message</p>
+      <p className="">
+        <span className="fw-500">GDPR Compliance (For Users in the EEA): </span>
+        If you are located in the European Economic Area (EEA), we will process
+        your personal data only when we have a lawful basis to do so. Lawful
+        bases include your consent, the fulfillment of a contract, compliance
+        with legal obligations, and legitimate interests that do not override
+        your rights and freedoms. Under the GDPR, you have the right to access
+        the personal data we hold about you, correct any inaccuracies, request
+        the deletion of your data (also known as the “right to be forgotten”),
+        restrict certain types of processing, and receive your data in a
+        portable format. You also have the right to object to specific
+        processing activities.
+      </p>
+      <p className="mt-4">
+        <span className="fw-500">
+          CCPA/CPRA Compliance (For California Residents):{" "}
+        </span>
+        If you are a resident of California, you are entitled to certain rights
+        under the California Consumer Privacy Act (CCPA) and California Privacy
+        Rights Act (CPRA). These rights include the ability to know the
+        categories and specific pieces of personal information we collect and
+        how we use them, access your personal data, and request its deletion.
+        You also have the right to opt out of the sale or sharing of your
+        personal information; however, please note that AllDriveSOS does not
+        sell personal data. Additionally, you are protected from discrimination
+        for exercising any of your privacy rights under these laws.
+      </p>
+      <p className="mt-4 text-sm text-gray-600">
+        <span className="fw-500">Note for Developer:</span> please remember to
+        update this on the mobile app too.
+      </p>
     </div>
   );
 
@@ -487,7 +525,9 @@ const PolicyPage = () => {
                       <Accordion2 />
                       <Accordion3 />
                       <Accordion4 />
+                      <Accordion32 />
                       <Accordion5 />
+
                       <Accordion6 />
                       <Accordion7 />
                       <Accordion8 />

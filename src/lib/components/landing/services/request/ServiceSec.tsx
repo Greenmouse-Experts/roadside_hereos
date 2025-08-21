@@ -12,7 +12,8 @@ import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
 import useRequestStore from "../../../../store/serviceStore";
 import { requestForTokenForService } from "../../../../firebase/firebase";
-
+import { CountrySelect } from "react-country-state-city";
+import "react-country-state-city/dist/react-country-state-city.css";
 export interface LocationProps {
   city: string;
   location: string;
@@ -344,6 +345,14 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                           />
                         )}
                       />
+                      {/*<Controller>
+                        <CountrySelect
+                          className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+                          onChange={(e) => {
+                            console.log(e);
+                          }}
+                        />
+                      </Controller>*/}
                       <Controller
                         name="state"
                         control={control}

@@ -25,6 +25,7 @@
         "react": "^18.2.0",
         "react-apexcharts": "^1.4.1",
         "react-countdown-circle-timer": "^3.2.1",
+        "react-country-state-city": "^1.1.12",
         "react-datepicker": "^7.3.0",
         "react-dom": "^18.2.0",
         "react-dropzone": "^14.2.3",
@@ -1152,6 +1153,8 @@
     "react-clientside-effect": ["react-clientside-effect@1.2.6", "", { "dependencies": { "@babel/runtime": "^7.12.13" }, "peerDependencies": { "react": "^15.3.0 || ^16.0.0 || ^17.0.0 || ^18.0.0" } }, "sha512-XGGGRQAKY+q25Lz9a/4EPqom7WRjz3z9R2k4jhVKA/puQFH/5Nt27vFZYql4m4NVNdUvX8PS3O7r/Zzm7cjUlg=="],
 
     "react-countdown-circle-timer": ["react-countdown-circle-timer@3.2.1", "", { "peerDependencies": { "react": ">=16.8.0" } }, "sha512-yBAy/9ILXOiFbLBM+3jS72TW5LeRcH8wkRC9NNqMpUkCXkGjSnaeRbJMsR9lsYF0oVXjSDbJaRbCuVMT+9HnKA=="],
+
+    "react-country-state-city": ["react-country-state-city@1.1.12", "", { "peerDependencies": { "react": ">=16" } }, "sha512-9xOfUvm5uw5zZEjjNT3eooWvrJB08Hv1MITPYfgeQUttCHEpxbD/iqMzXNBF2g3Owc9MEnhrKCSpKn5DpTDHqg=="],
 
     "react-datepicker": ["react-datepicker@7.3.0", "", { "dependencies": { "@floating-ui/react": "^0.26.2", "clsx": "^2.1.0", "date-fns": "^3.3.1", "prop-types": "^15.7.2", "react-onclickoutside": "^6.13.0" }, "peerDependencies": { "react": "^16.9.0 || ^17 || ^18", "react-dom": "^16.9.0 || ^17 || ^18" } }, "sha512-EqRKLAtLZUTztiq6a+tjSjQX9ES0Xd229JPckAtyZZ4GoY3rtvNWAzkYZnQUf6zTWT50Ki0+t+W9VRQIkSJLfg=="],
 
