@@ -75,6 +75,16 @@ const RefundTable: FC<Props> = ({
         </span>
       ),
     }),
+    columnHelper.accessor((row) => row.serviceRequest.amount || "N/A", {
+      id: "Amount",
+      header: (info) => info.column.id,
+      cell: (info) => (
+        <span className="fw-600">
+          {info.getValue()}
+          {/*{FormatStatus[info.getValue() as keyof typeof FormatStatus]}*/}
+        </span>
+      ),
+    }),
     ...(action
       ? [
           columnHelper.accessor((row) => row.serviceRequestId, {
@@ -91,6 +101,14 @@ const RefundTable: FC<Props> = ({
                 )}
               </>
             ),
+            //   cell: (info) => (
+            //     <button
+            //       onClick={(e) => console.log(info.row.original)}
+            //       className="btn btn-primary"
+            //     >
+            //       Action
+            //     </button>
+            //   ),
           }),
         ]
       : []),

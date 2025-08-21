@@ -3,31 +3,57 @@ import Button from "../../../../ui/Button";
 import { BeatLoader } from "react-spinners";
 import { disapproveRefund } from "../../../../../services/api/adminApi";
 import { toast } from "react-toastify";
+import { useMutation } from "@tanstack/react-query";
+import { apiClient } from "../../../../../services/api/serviceApi";
 
 interface Props {
   id: string;
   close: () => void;
   refetch: () => void;
 }
-const DisapproveModal:FC<Props> = ({id, close, refetch}) => {
-    const [reason, setReason] = useState('')
-    const [isBusy, setIsBusy] = useState(false)
-     const handleDecline = async () => {
-       setIsBusy(true);
-       const payload = {
-        reason: reason
-       }
-       await disapproveRefund(id, payload)
-         .then((res) => {
-           toast.success(res.message);
-           refetch();
-           close()
-         })
-         .catch((err: any) => {
-           toast.error(err.response.data.message);
-           setIsBusy(false);
-         });
-     };
+const DisapproveModal: FC<Props> = ({ id, close, refetch }) => {
+  const [reason, setReason] = useState("");
+  const [isBusy, setIsBusy] = useState(false);
+  const dissaprove_mutation = useMutation({
+    mutationKey: ["disapproveRefund", id],
+    mutationFn: async () => {
+      let resp = await apiClient.post(
+        "/services-quote/admin-disapprove-refund/" + id,
+        {
+          reason: reason.toString(),
+        },
+      );
+      return resp.data;
+    },
+    onSuccess: () => {
+      toast.success("Refund disapproved");
+      refetch();
+      close();
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+      setIsBusy(false);
+    },
+    onSettled: () => {
+      setIsBusy(false);
+    },
+  });
+  // const handleDecline = async () => {
+  //   setIsBusy(true);
+  //   const payload = {
+  //    reason: reason
+  //   }
+  //   await disapproveRefund(id, payload)
+  //     .then((res) => {
+  //       toast.success(res.message);
+  //       refetch();
+  //       close()
+  //     })
+  //     .catch((err: any) => {
+  //       toast.error(err.response.data.message);
+  //       setIsBusy(false);
+  //     });
+  // };
   return (
     <div>
       <div>
@@ -45,12 +71,23 @@ const DisapproveModal:FC<Props> = ({id, close, refetch}) => {
         />
         <Button
           title={isBusy ? <BeatLoader /> : "Disapprove"}
-          onClick={handleDecline}
+          onClick={() => {
+            if (!reason.trim()) {
+              toast.error("Reason is required");
+              return;
+            }
+            const payload = {
+              reason: reason.toString(),
+            };
+            toast.promise(async () => dissaprove_mutation.mutateAsync(), {
+              pending: "loading",
+            });
+          }}
           altClassName="px-6 bg-primary text-white py-3 rounded-lg fw-600"
         />
       </div>
     </div>
   );
-}
+};
 
-export default DisapproveModal
+export default DisapproveModal;
