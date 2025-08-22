@@ -97,7 +97,7 @@ export default function ComapanyRefunds() {
       {/*<>{JSON.stringify(query.data)}</>*/}
       <h2 className="py-2 font-bold text-xl">Refunds</h2>
       {query.isFetching && <>fetching</>}
-      {query.data?.data?.total > 0 ? (
+      {(query.data?.data?.total ?? 0) > 0 ? (
         <DynamicTable
           data={query.data?.data.refundRequests || []}
           next={handleNext}
@@ -107,9 +107,9 @@ export default function ComapanyRefunds() {
           count={count}
           prev={handlePrev}
         />
-      ) : (
-        <>No Refunds Requested</>
-      )}
+      ) : !query.isFetching ? ( // Only show empty state when not fetching
+        <> No Refunds Requested</>
+      ) : null}
     </div>
   );
 }

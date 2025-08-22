@@ -95,7 +95,7 @@ export const GET_USER_NOTIFY = "/notifications/user";
 export const SUSPEND_DRIVER = "/users/suspend-driver";
 export const UNSUSPEND_DRIVER = "/users/unsuspend-driver";
 export const REQUEST_PAYOUT = "/service-request/request-withdrawal";
-export const GET_STAFF_REQUEST = `/service-request/fetch-user-withdrawals`;
+export const GET_STAFF_REQUEST = `/service-request/fetch-withdrawals`;
 export const DECLINE_STAFF_REQUEST = `/service-request/disapprove-withdrawal`;
 export const COMPANY_INITIATE_PAYOUT = `/service-request/initiate-vendor-payout`;
 
