@@ -93,49 +93,61 @@ const ProviderHomePage = () => {
   return (
     <>
       <div>
-        <div className="lg:flex items-stretch gap-8 flex-row-reverse">
+        <div className="lg:flex items-stretch gap-4 flex-row-reverse">
           {/* Wallet Card - leave as is */}
-          <div className="bg-gradient-to-br bg-grad w-full mb-6 lg:mb-0 lg:max-w-[500px] rounded-2xl text-white p-6 shadow-2xl flex flex-col gap-6">
-            <div className="flex items-center gap-4 mb-2">
-              <div className="bg-white/10 rounded-full p-3 flex items-center justify-center">
-                <SiCashapp className="text-3xl text-yellow-400" />
-              </div>
-              <div>
-                <p className="text-gray-200 text-xs uppercase tracking-wider">
-                  Profit Balance
-                </p>
-                <p className="fw-700 text-4xl mt-1 tracking-tight">
+          <div className="bg-gradient-to-br bg-grad w-full mb-6 lg:mb-0 lg:max-w-[500px] rounded-2xl text-white p-6  shadow-2xl flex flex-col gap-4 pt-8 px-8">
+            <div className="grid grid-cols-2 gap-2 ">
+              <div className="bg-white/5 p-2 rounded-md">
+                <div className="flex items-center gap-1">
+                  <div className="bg-white/10 rounded-full p-1 flex items-center justify-center ">
+                    <SiCashapp size={16} className="text-xl text-pri" />
+                  </div>
+                  <p className="text-gray-200 text-xs uppercase tracking-wider ">
+                    Profit Balance
+                  </p>
+                </div>
+                <p className="fw-700 text-xl tracking-tight mt-1">
                   {formatAsNgnMoney(userData?.walletBal ?? 0)}.00
                 </p>
               </div>
-            </div>
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-              <div className="bg-white/5 rounded-lg p-4 flex flex-col items-center">
-                <p className="text-gray-300 text-xs mb-1">Pending Balance</p>
-                <p className="fw-600 text-xl">
+              <div className="bg-white/5 p-2 rounded-md">
+                <div className="flex  gap-1">
+                  <div className="bg-white/10 rounded-full p-1 flex items-center justify-center ">
+                    <SiCashapp size={16} className="text-xl text-pri" />
+                  </div>
+                  <p className="text-gray-200 text-xs uppercase tracking-wider ">
+                    Pending Balance
+                  </p>
+                </div>
+                <p className="fw-700 text-xl mt-1 tracking-tight">
                   {formatAsNgnMoney(userData?.pendingBal ?? 0)}.00
                 </p>
               </div>
-              <div className="bg-white/5 rounded-lg p-4 flex flex-col items-center">
+            </div>
+
+            <div className="grid grid-cols-2 gap-2">
+              <div className="bg-white/5 rounded-lg p-3 flex flex-col items-center">
                 <p className="text-gray-300 text-xs mb-1">Technician Pending</p>
-                <p className="fw-600 text-xl">
+                <p className="fw-600 text-lg">
                   {formatAsNgnMoney(userData?.driverOverallPendingBal ?? 0)}.00
                 </p>
               </div>
-              <div className="bg-white/5 rounded-lg p-4 flex flex-col items-center">
+
+              <div className="bg-white/5 rounded-lg p-3 flex flex-col items-center">
                 <p className="text-gray-300 text-xs mb-1">
                   Technician Approved
                 </p>
-                <p className="fw-600 text-xl">
+                <p className="fw-600 text-lg">
                   {formatAsNgnMoney(userData?.driverOverallWalletBal ?? 0)}.00
                 </p>
               </div>
             </div>
+
             <button
-              className="flex gap-x-2 bg-yellow-400 text-blue-900 items-center rounded-lg px-6 py-3 fw-700 hover:bg-yellow-300 transition-colors shadow-lg self-end mt-2"
+              className="flex gap-x-2 bg-pri text-blue-900 items-center rounded-lg px-4 py-2 fw-700 hover:bg-yellow-300 transition-colors shadow-lg self-end mt-2"
               onClick={() => setShowModal(true)}
             >
-              <BiMoneyWithdraw className="text-2xl" />
+              <BiMoneyWithdraw className="text-xl" />
               <span className="text-lg">Withdraw</span>
             </button>
           </div>
@@ -143,12 +155,13 @@ const ProviderHomePage = () => {
           {/* Welcome Card */}
           <div className="w-full bg-gradient-to-br bg-grad rounded-2xl border border-blue-900 p-7 flex items-center shadow-2xl mb-6 lg:mb-0 min-h-[160px]">
             <div className="w-full flex flex-col gap-2">
-              <h2 className="fw-800 text-2xl text-yellow-400 mb-1 flex items-center gap-2">
-                👋 Welcome, <span className="capitalize">{user.name}</span>
+              <h2 className=" font-bold text-white text-xl">
+                Welcome,{" "}
+                <span className="capitalize text-pri">{user.name}</span>
               </h2>
               <p className="text-gray-100 fw-500 text-lg">
                 This month, your company has completed&nbsp;
-                <span className="fw-800 text-yellow-300 text-xl">
+                <span className="fw-800 text-pri text-xl">
                   {stat?.data?.totalCompletedServiceForOneMonth || 0}
                 </span>
                 &nbsp;service
@@ -158,7 +171,7 @@ const ProviderHomePage = () => {
                 for ALLDRIVE SOS users.
               </p>
               <div className="mt-2">
-                <span className="inline-block bg-yellow-400/10 text-yellow-300 px-4 py-1 rounded-full fw-600 text-sm">
+                <span className="inline-block bg-yellow-400/10 text-pri px-4 py-1 rounded-full fw-600 text-sm">
                   Thank you for your outstanding work!
                 </span>
               </div>

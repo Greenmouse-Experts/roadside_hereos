@@ -19,6 +19,7 @@
     "@tanstack/react-table": "^8.11.3",
     "apexcharts": "^3.49.1",
     "axios": "^1.6.5",
+    "caniuse-lite": "^1.0.30001737",
     "country-state-city": "^3.2.1",
     "dayjs": "^1.11.10",
     "firebase": "^10.12.0",
