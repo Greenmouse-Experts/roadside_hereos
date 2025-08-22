@@ -97,8 +97,8 @@ const ProviderHomePage = () => {
           {/* Wallet Card - leave as is */}
           <div className="bg-gradient-to-br bg-grad w-full mb-6 lg:mb-0 lg:max-w-[500px] rounded-2xl text-white p-6  shadow-2xl flex flex-col gap-4 pt-8 px-8">
             <div className="grid grid-cols-2 gap-2 ">
-              <div className="bg-white/5 p-2 rounded-md">
-                <div className="flex items-center gap-1">
+              <div className="bg-white/5 p-2 flex flex-col items-center rounded-md">
+                <div className="flex items-center  gap-1">
                   <div className="bg-white/10 rounded-full p-1 flex items-center justify-center ">
                     <SiCashapp size={16} className="text-xl text-pri" />
                   </div>
@@ -110,8 +110,8 @@ const ProviderHomePage = () => {
                   {formatAsNgnMoney(userData?.walletBal ?? 0)}.00
                 </p>
               </div>
-              <div className="bg-white/5 p-2 rounded-md">
-                <div className="flex  gap-1">
+              <div className="bg-white/5 p-2 rounded-md flex flex-col items-center">
+                <div className="flex items-center    gap-1">
                   <div className="bg-white/10 rounded-full p-1 flex items-center justify-center ">
                     <SiCashapp size={16} className="text-xl text-pri" />
                   </div>
