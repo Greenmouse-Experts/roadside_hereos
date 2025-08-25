@@ -15,14 +15,14 @@ const RefundPendingRequest = () => {
   const { data, isLoading, refetch } = useQuery<RefundResponse>({
     queryKey: ["admin-refund-request", params],
     queryFn: async () => {
-      let resp = await apiClient.get("services-quote/fetch-refund-requests", {
+      let resp = await apiClient.get("service-request/fetch-withdrawals", {
         params: { ...params },
       });
       return resp.data;
     },
   });
 
-  const datas = data?.data.refundRequests;
+  const datas = data?.data.withdrawalRequests;
   const count = data?.data.total || 10;
 
   const handleNext = () => {
@@ -58,18 +58,21 @@ const RefundPendingRequest = () => {
           </div>
         )}
         {datas && !!datas?.length && (
-          <RefundTable
-            isLoading={isLoading}
-            //@ts-ignore
-            data={datas || []}
-            action={true}
-            page={params.page}
-            next={handleNext}
-            prev={handlePrev}
-            count={count || 0}
-            refetch={refetch}
-            status={params.status}
-          />
+          <>
+            {" "}
+            <RefundTable
+              isLoading={isLoading}
+              //@ts-ignore
+              data={datas || []}
+              action={true}
+              page={params.page}
+              next={handleNext}
+              prev={handlePrev}
+              count={count || 0}
+              refetch={refetch}
+              status={params.status}
+            />
+          </>
         )}
       </div>
     </div>

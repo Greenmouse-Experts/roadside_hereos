@@ -15,15 +15,15 @@ const RefundDisapprovedRequest = () => {
   const { data, isLoading, refetch } = useQuery<RefundResponse>({
     queryKey: ["admin-refund-request", params],
     queryFn: async () => {
-      let resp = await apiClient.get("services-quote/fetch-refund-requests", {
-        params: { ...params },
+      let resp = await apiClient.get("service-request/fetch-withdrawals", {
+        params: { ...params, status: "DISSAPPROVED" },
       });
       return resp.data;
     },
   });
 
-  const datas = data?.data.refundRequests;
-  const count = data?.data?.total || 10;
+  const datas = data?.data.withdrawalRequests;
+  const count = data?.data?.withdrawalRequests.length || 10;
 
   const handleNext = () => {
     if (count > params.page * 10) {

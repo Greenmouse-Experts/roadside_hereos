@@ -5,93 +5,57 @@ import CurveLoader from "../../../ui/loader/curveLoader/CurveLoader";
 import { getAdminRefunds } from "../../../../services/api/adminApi";
 import RefundTable from "../components/refundTable";
 import { apiClient } from "../../../../services/api/serviceApi";
-
-interface User {
-  id: string;
-  fname: string;
-  lname: string;
-  name: string | null;
-  email: string;
-  address: string;
-  phone: string;
-  sms_opt_in: boolean;
-  password?: string;
-  isActive: boolean;
-  isSuspended: boolean;
-  photo: string | null;
-  hasActiveSubscription: null;
-  isAvailableForService: null;
-  verified: boolean;
-  expiredAt: null;
-  planId: null;
-  token: null;
-  state: null;
-  city: string | null;
-  zipcode: string | null;
-  street: string | null;
-  userType: string;
-  level: number;
-  referralId: null;
-  invitationId: null;
-  companyId: null;
-  reviewsAvg: number;
-  serviceCharge: null;
-  last_login: string;
-  fcmToken: string;
-  walletBal: null;
-  pendingBal: null;
-  referralSource: null;
-  driverOverallPendingBal: null;
-  driverOverallWalletBal: null;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt: null;
-}
-
-interface ServiceRequest {
-  id: string;
-  ref: null;
-  userId: string;
-  userType: string;
-  providerId: null;
-  status: string;
-  processStatus: null;
-  serviceId: string;
-  amount: null;
-  vehicleMake: string;
-  model: string;
-  vehicleYear: string;
-  color: string;
-  location: string;
-  zipcode: string;
-  requestNote: string;
-  longitude: string;
-  latitude: string;
-  city: string;
-  state: null;
-  queryNote: null;
-  userFcmToken: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
 export interface RefundRequest {
   id: string;
   userId: string;
-  serviceRequestId: string;
-  disapprovalReason: string | null;
-  adminDisapprovalReason: string | null;
-  refundType: string;
+  amount: number;
   status: string;
+  userType: string;
   createdAt: string;
   updatedAt: string;
-  user: User;
-  serviceRequest: ServiceRequest;
+  fname: string | null;
+  lname: string | null;
+  name: string;
+  email: string;
+  phone: string;
+  password?: string; // Optional as it's sensitive and might not always be needed
+  isActive: number;
+  isSuspended: number | null;
+  token: string | null;
+  state: string | null;
+  city: string | null;
+  street: string | null;
+  referralId: string;
+  level: number | null;
+  hasActiveSubscription: number | null;
+  isAvailableForService: number | null;
+  expiredAt: string | null;
+  planId: string | null;
+  invitationId: string | null;
+  verified: number;
+  companyId: string | null;
+  reviewsAvg: number;
+  serviceCharge: number;
+  fcmToken: string | null;
+  pendingBal: string;
+  address: string | null;
+  deletedAt: string | null;
+  photo: string | null;
+  last_login: string;
+  walletBal: string;
+  zipcode: string | null;
+  referralSource: string;
+  service_area: string | null;
+  driverOverallPendingBal: string;
+  driverOverallWalletBal: string;
+  sms_opt_in: number;
+  PayoutRequestId: string;
+  payoutCreatedAt: string;
 }
 
 export interface RefundResponse {
   data: {
-    refundRequests: RefundRequest[];
+    withdrawalRequests: RefundRequest[];
   };
   total: number;
 }
@@ -105,15 +69,15 @@ const RefundApprovedRequest = () => {
   const { data, isLoading, refetch } = useQuery<RefundResponse>({
     queryKey: ["admin-refund-request", params],
     queryFn: async () => {
-      let resp = await apiClient.get("services-quote/fetch-refund-requests", {
-        params: { ...params },
+      let resp = await apiClient.get("service-request/fetch-withdrawals", {
+        params: { ...params, status: "APPROVED" },
       });
       return resp.data;
     },
   });
 
   //@ts-ignore
-  const refundRequests = data?.data?.refundRequests || [];
+  const refundRequests = data?.data?.withdrawalRequests || [];
   // @ts-ignore
   const totalRefunds = data?.data?.total || 0;
 

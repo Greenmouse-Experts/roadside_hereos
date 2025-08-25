@@ -41,21 +41,21 @@ const RefundTable: FC<Props> = ({
   const columnHelper = createColumnHelper<RefundRequest>();
   const columns = [
     columnHelper.accessor((row) => row.userId, {
-      id: "Provider Id",
+      id: "User Id",
       cell: (info) => (
         <Link to={`/admin/users/${info.getValue()}`} className="fw-600">
           {info.getValue()}
         </Link>
       ),
     }),
-    columnHelper.accessor((row) => row.serviceRequestId, {
-      id: "Service Id",
-      cell: (info) => (
-        <Link to={`/admin/services/${info.getValue()}`} className="fw-600">
-          {info.getValue()}
-        </Link>
-      ),
-    }),
+    // columnHelper.accessor((row) => row.isActive, {
+    //   id: "Service Id",
+    //   cell: (info) => (
+    //     <Link to={`/admin/services/${info.getValue()}`} className="fw-600">
+    //       {info.getValue()}
+    //     </Link>
+    //   ),
+    // }),
     columnHelper.accessor((row) => row.createdAt, {
       id: "Date Requested",
       header: (info) => info.column.id,
@@ -75,7 +75,7 @@ const RefundTable: FC<Props> = ({
         </span>
       ),
     }),
-    columnHelper.accessor((row) => row.serviceRequest.amount || "N/A", {
+    columnHelper.accessor((row) => row.amount || "N/A", {
       id: "Amount",
       header: (info) => info.column.id,
       cell: (info) => (
