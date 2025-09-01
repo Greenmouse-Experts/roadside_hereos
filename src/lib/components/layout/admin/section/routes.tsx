@@ -6,7 +6,7 @@ import {
   RiSecurePaymentFill,
   RiUserSettingsLine,
 } from "react-icons/ri";
-import { BiCategoryAlt, BiGitPullRequest } from "react-icons/bi";
+import { BiCar, BiCategoryAlt, BiGitPullRequest } from "react-icons/bi";
 import { LuServerCog } from "react-icons/lu";
 import { IoNotificationsCircleOutline } from "react-icons/io5";
 import { BsCashCoin } from "react-icons/bs";
@@ -75,6 +75,12 @@ export const Routes = [
     name: "Service Reviews",
     icon: <MdOutlineRateReview className="text-xl" />,
     route: "/admin/reviews",
+    submenu: [],
+  },
+  {
+    name: "Car Makes",
+    icon: <BiCar className="text-xl" />,
+    route: "/admin/car-makes",
     submenu: [],
   },
   {

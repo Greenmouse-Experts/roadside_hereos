@@ -1,5 +1,6 @@
 import BlogPage from "../../pages/admin/blog";
 import BlogCategory from "../../pages/admin/blog-category";
+import CarMakes from "../../pages/admin/car-makes";
 import AdminCategory from "../../pages/admin/category";
 import EditBlog from "../../pages/admin/edit-blog";
 import AdminFulfilledServices from "../../pages/admin/fulfilledService";
@@ -125,5 +126,10 @@ export const adminRoutes = [
     id: "admin-21",
     path: "blog/:id",
     component: <EditBlog />,
+  },
+  {
+    id: "admin-22",
+    path: "car-makes",
+    component: <CarMakes />,
   },
 ];
