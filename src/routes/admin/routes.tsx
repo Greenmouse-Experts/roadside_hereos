@@ -5,6 +5,7 @@ import AdminCategory from "../../pages/admin/category";
 import EditBlog from "../../pages/admin/edit-blog";
 import AdminFulfilledServices from "../../pages/admin/fulfilledService";
 import AdminDashboardHome from "../../pages/admin/home";
+import MotocycleMakes from "../../pages/admin/motocycle-makes";
 import AdminNotification from "../../pages/admin/notify";
 import AdminPayments from "../../pages/admin/payment";
 import CompanyPayouts from "../../pages/admin/payouts";
@@ -131,5 +132,10 @@ export const adminRoutes = [
     id: "admin-22",
     path: "car-makes",
     component: <CarMakes />,
+  },
+  {
+    id: "admin-23",
+    path: "motorcycle-makes",
+    component: <MotocycleMakes />,
   },
 ];

@@ -11,6 +11,7 @@ import { LuServerCog } from "react-icons/lu";
 import { IoNotificationsCircleOutline } from "react-icons/io5";
 import { BsCashCoin } from "react-icons/bs";
 import { FaBloggerB } from "react-icons/fa6";
+import { FaMotorcycle } from "react-icons/fa";
 
 export interface RouteType {
   name: string;
@@ -81,6 +82,12 @@ export const Routes = [
     name: "Car Makes",
     icon: <BiCar className="text-xl" />,
     route: "/admin/car-makes",
+    submenu: [],
+  },
+  {
+    name: "Motorcycle Makes",
+    icon: <FaMotorcycle className="text-xl" />,
+    route: "/admin/motorcycle-makes",
     submenu: [],
   },
   {
