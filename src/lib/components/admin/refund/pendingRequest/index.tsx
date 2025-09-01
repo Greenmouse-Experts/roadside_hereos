@@ -15,15 +15,15 @@ const RefundPendingRequest = () => {
   const { data, isLoading, refetch } = useQuery<RefundResponse>({
     queryKey: ["admin-refund-request", params],
     queryFn: async () => {
-      let resp = await apiClient.get("service-request/fetch-withdrawals", {
+      let resp = await apiClient.get("/services-quote/fetch-refund-requests", {
         params: { ...params },
       });
       return resp.data;
     },
   });
 
-  const datas = data?.data.withdrawalRequests;
-  const count = data?.data.total || 10;
+  const datas = data?.data?.refundRequests;
+  const count = data?.data?.total || 10;
 
   const handleNext = () => {
     if (count && count > params.page * 10) {

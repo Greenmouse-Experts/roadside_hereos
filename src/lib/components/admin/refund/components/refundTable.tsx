@@ -87,7 +87,7 @@ const RefundTable: FC<Props> = ({
     }),
     ...(action
       ? [
-          columnHelper.accessor((row) => row.serviceRequestId, {
+          columnHelper.accessor((row) => row.id, {
             id: "Action",
             header: (info) => info.column.id,
             cell: (info) => (

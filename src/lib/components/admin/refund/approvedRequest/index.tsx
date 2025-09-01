@@ -54,10 +54,11 @@ export interface RefundRequest {
 }
 
 export interface RefundResponse {
+  success: boolean;
   data: {
-    withdrawalRequests: RefundRequest[];
+    refundRequests: RefundRequest;
+    total: number;
   };
-  total: number;
 }
 
 const RefundApprovedRequest = () => {
@@ -69,7 +70,7 @@ const RefundApprovedRequest = () => {
   const { data, isLoading, refetch } = useQuery<RefundResponse>({
     queryKey: ["admin-refund-request", params],
     queryFn: async () => {
-      let resp = await apiClient.get("service-request/fetch-withdrawals", {
+      let resp = await apiClient.get("/services-quote/fetch-refund-requests", {
         params: { ...params, status: "APPROVED" },
       });
       return resp.data;
@@ -77,7 +78,7 @@ const RefundApprovedRequest = () => {
   });
 
   //@ts-ignore
-  const refundRequests = data?.data?.withdrawalRequests || [];
+  const refundRequests = data?.data?.refundRequests || [];
   // @ts-ignore
   const totalRefunds = data?.data?.total || 0;
 
