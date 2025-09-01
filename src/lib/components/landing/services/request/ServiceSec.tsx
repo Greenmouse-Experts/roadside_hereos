@@ -6,8 +6,8 @@ import TextInput, { InputType } from "../../../ui/TextInput";
 import { Button } from "@material-tailwind/react";
 import { carsList } from "../../../../services/hardData/cars";
 import GetCurrentLocation from "./Extra/GetCurrentLocation";
-import { requestService } from "../../../../services/api/serviceApi";
-import { useMutation } from "@tanstack/react-query";
+import { apiClient, requestService } from "../../../../services/api/serviceApi";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { toast } from "react-toastify";
 import { BeatLoader } from "react-spinners";
 import useRequestStore from "../../../../store/serviceStore";
@@ -32,6 +32,22 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
   const [states, setStates] = useState<IState[]>(
     State.getStatesOfCountry("US"),
   );
+  const [pageData, setPageData] = useState({
+    limit: 20,
+    page: 1,
+  });
+  const carList = useQuery({
+    queryKey: ["cars"],
+    queryFn: async () => {
+      const response = await apiClient.get("/vehicle/carmakes", {
+        params: {
+          limit: pageData.limit,
+          page: pageData.page,
+        },
+      });
+      return response.data;
+    },
+  });
   const [cities, setCities] = useState<ICity[]>([]);
   const saveServiceId = useRequestStore((state) => state.saveRequest);
   const [fcmToken, setFcmToken] = useState("");
@@ -97,8 +113,10 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
     mutationKey: ["request"],
   });
   const handleForm = (data: any) => {
+    // return next();
     setIsBusy(true);
     const payload = {
+      vehicleType: data.vehicleType,
       vehicleMake: data.car_make,
       model: data.car_model,
       vehicleYear: data.car_year,
@@ -107,8 +125,8 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
       zipcode: locationDetail.postal || data.zipcode,
       city: locationDetail.city || data.city,
       state: locationDetail.state || data.state,
-      longitude: locationDetail.longitude || 0,
-      latitude: locationDetail.latitude || 0,
+      longitude: parseInt(locationDetail.longitude) || 0,
+      latitude: parseInt(locationDetail.latitude) || 0,
       requestNote: data.other,
       serviceId: activeId,
       userFcmToken: fcmToken,
@@ -116,6 +134,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
     request.mutate(payload, {
       onSuccess: (data) => {
         setIsBusy(false);
+        toast.success("Request submitted successfully");
         saveServiceId({
           id: data.data.id,
           firstName: "",
@@ -130,6 +149,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
         });
         next();
       },
+
       onError: (err: any) => {
         setIsBusy(false);
         toast.error(err.response.data.message);
