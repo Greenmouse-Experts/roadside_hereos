@@ -36,6 +36,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
     limit: 20,
     page: 1,
   });
+  const [vehicleType, setVehicleType] = useState<"car" | "motorcycle">("car");
   const carList = useQuery({
     queryKey: ["cars"],
     queryFn: async () => {
@@ -116,7 +117,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
     // return next();
     setIsBusy(true);
     const payload = {
-      vehicleType: "car",
+      vehicleType: vehicleType,
       vehicleMake: data.car_make,
       model: data.car_model,
       vehicleYear: data.car_year,
@@ -171,11 +172,42 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
     setCities(City.getCitiesOfState(countryCode, stateCode));
   };
 
+  const get_motors = useQuery({
+    queryKey: ["vehicle-type", vehicleType],
+    queryFn: async () => {
+      let resp = await apiClient.get(
+        vehicleType == "car" ? "/vehicle/carmakes" : `/vehicle/motorcyclemakes`,
+        {
+          params: {
+            page: 1,
+            limit: 10,
+          },
+        },
+      );
+      return resp.data;
+    },
+  });
+
+  const car_data = get_motors.data?.data;
+
   return (
     <>
       <div className="bg-gray-100 lg:p-10 lg:pb-20 p-4 pb-8 rounded-md">
         <form onSubmit={handleSubmit(handleForm)}>
           <div className="grid gap-3">
+            <div className="mb-4">
+              <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+                Vehicle Type
+              </label>
+              <select
+                value={vehicleType}
+                onChange={(e) => setVehicleType(e.target.value)}
+                className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+              >
+                <option value={"car"}>Car</option>
+                <option value={"motorcycle"}>Motorcycle</option>
+              </select>
+            </div>
             <div className="grid lg:grid-cols-2 gap-x-4 gap-y-3">
               <div>
                 <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
@@ -197,9 +229,9 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                       ref={null}
                     >
                       <option value="">Select an option</option>
-                      {carsList.map((item) => (
-                        <option value={item} key={item}>
-                          {item}
+                      {car_data?.map((item) => (
+                        <option value={item.name} key={item.id}>
+                          {item.name}
                         </option>
                       ))}
                     </select>
