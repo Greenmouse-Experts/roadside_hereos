@@ -195,7 +195,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
       <div className="bg-gray-100 lg:p-10 lg:pb-20 p-4 pb-8 rounded-md">
         <form onSubmit={handleSubmit(handleForm)}>
           <div className="grid gap-3">
-            <div className="mb-4">
+            <div className="mb-2">
               <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
                 Vehicle Type
               </label>
