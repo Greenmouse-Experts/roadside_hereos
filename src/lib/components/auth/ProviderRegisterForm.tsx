@@ -38,7 +38,9 @@ const ProviderRegisterForm = () => {
       const newValue = event.target.value; // Replace this with the value you want to add
       setValues((prevValues) => [...prevValues, newValue]);
     } else {
-      setValues((prevValues) => prevValues.filter((value) => value !== event.target.value));
+      setValues((prevValues) =>
+        prevValues.filter((value) => value !== event.target.value),
+      );
     }
   };
 
@@ -57,6 +59,7 @@ const ProviderRegisterForm = () => {
       confirm_password: "",
       serviceTypeId: [],
       referralSource: "",
+      sms_opt_in: false,
     },
   });
   const mutation = useMutation({
@@ -77,6 +80,7 @@ const ProviderRegisterForm = () => {
         ? data.referralSource
         : selectedAvenue,
       captcha: captchaRef.current.getValue(),
+      smsOptIn: data.smsOptIn,
     };
     mutation.mutate(payload, {
       onSuccess: (data) => {
@@ -404,7 +408,25 @@ const ProviderRegisterForm = () => {
             </div>
           )}
         </div>
-
+        <div className="mt-4 ml-2">
+          <Controller
+            name="sms_opt_in"
+            control={control}
+            render={({ field }) => (
+              <div className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  id="sms_opt_in"
+                  {...field}
+                  className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
+                />
+                <label htmlFor="smsOptIn" className="text-gray-700">
+                  I agree to receive SMS notifications.
+                </label>
+              </div>
+            )}
+          />
+        </div>
         <div className="mt-8">
           <ReCAPTCHA
             sitekey={`6Leno1MpAAAAAO0BmPjneoVUVd5FKfw0ED40qvpc`}
