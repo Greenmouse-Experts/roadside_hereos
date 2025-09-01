@@ -1,15 +1,19 @@
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiClient } from "../../lib/services/api/serviceApi";
-import { Button } from "@material-tailwind/react";
+import { Button, Checkbox } from "@material-tailwind/react";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify";
-import { BiX } from "react-icons/bi";
+import { BiEdit, BiX } from "react-icons/bi";
+import { MdDelete } from "react-icons/md";
+import { BsCheckCircleFill } from "react-icons/bs";
+import { IoCheckmarkCircleOutline } from "react-icons/io5";
+import { VscLoading } from "react-icons/vsc";
 interface Main_Response {
   data: {
     name: string;
     id: string;
     active: boolean;
-  };
+  }[];
 }
 export default function CarMakes() {
   const edit_mutate = useMutation({
@@ -52,10 +56,16 @@ export default function CarMakes() {
     setAddOpen(false);
     setEditOpen(true);
   };
+  const [page_params, setPageParams] = useState({
+    page: 1,
+    limit: 10,
+  });
   const car_makes = useQuery<Main_Response>({
-    queryKey: ["car-makes"],
+    queryKey: ["car-makes", page_params],
     queryFn: async () => {
-      const response = await apiClient.get("/carmakes/");
+      const response = await apiClient.get("/carmakes/", {
+        params: page_params,
+      });
       return response.data;
     },
   });
@@ -70,7 +80,7 @@ export default function CarMakes() {
         </Button>
       </div>
       <div className="flex flex-col gap-2">
-        {car_makes.data?.data?.map((make) => {
+        {car_makes.data?.data?.map((make: any) => {
           return (
             <CarMakeCard
               setEdit={setEdit}
@@ -80,6 +90,38 @@ export default function CarMakes() {
             />
           );
         })}
+
+        <div className="w-full py-2 bg-white justify-center flex items-center gap-2">
+          <Button
+            disabled={car_makes.isPending || page_params.page <= 1}
+            size="sm"
+            onClick={() => {
+              if (page_params.page > 1) {
+                setPageParams({ ...page_params, page: page_params.page - 1 });
+              }
+            }}
+          >
+            prev
+          </Button>
+          <div className=" py-2 ">Page: {page_params.page}</div>
+          <Button
+            size="sm"
+            disabled={
+              car_makes.isPending ||
+              car_makes.data?.data?.length < page_params.limit
+            }
+            onClick={() => {
+              if (car_makes.data?.data.length == page_params.limit) {
+                console.log("Reached limit");
+                setPageParams({ ...page_params, page: page_params.page + 1 });
+                return;
+              }
+              return;
+            }}
+          >
+            Next
+          </Button>
+        </div>
       </div>
       <dialog
         open={isEditOpen}
@@ -198,23 +240,28 @@ const CarMakeCard = ({ item, refetch, setEdit }: Props) => {
   });
   return (
     <>
-      <div className="p-3 flex items-center shadow bg-white">
-        <h2>{item.name}</h2>
+      <div className="p-3 flex items-center shadow bg-white rounded-md">
+        <h2 className="font-bold">{item.name}</h2>
         <div className="flex items-center gap-2 ml-auto">
           <Button size="sm" onClick={() => setEdit(item)} className="ml-auto">
-            Edit Car
+            <BiEdit />
           </Button>
-          <Button
+          <div
             size="sm"
             onClick={() => change_state.mutate()}
-            className={`ml-auto ${item.active ? "bg-yellow-500" : "bg-green-500"}`}
+            // className={`ml-auto ${!item.active ? "bg-yellow-500" : "bg-green-500"}`}
           >
-            {change_state.isPending
-              ? "updating"
-              : item.active
-                ? "Deactivate"
-                : "Activate"}
-          </Button>
+            {change_state.isPending ? (
+              <div className="p-3">
+                <VscLoading />
+              </div>
+            ) : (
+              <Checkbox
+                checked={item.active}
+                disabled={change_state.isPending}
+              />
+            )}
+          </div>
           <Button
             size="sm"
             disabled={del_car.isPending}
@@ -227,7 +274,7 @@ const CarMakeCard = ({ item, refetch, setEdit }: Props) => {
             }}
             className="ml-auto bg-red-500 text-white"
           >
-            {del_car.isPending ? "Deleting..." : "Delete Car"}
+            {del_car.isPending ? "Deleting..." : <MdDelete />}
           </Button>
         </div>
       </div>
