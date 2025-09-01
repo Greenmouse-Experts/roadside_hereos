@@ -417,10 +417,12 @@ const ProviderRegisterForm = () => {
                 <input
                   type="checkbox"
                   id="sms_opt_in"
-                  {...field}
+                  checked={field.value}
+                  onChange={field.onChange}
+                  onBlur={field.onBlur}
                   className="h-5 w-5 text-blue-600 focus:ring-blue-500 border-gray-300 rounded"
                 />
-                <label htmlFor="smsOptIn" className="text-gray-700">
+                <label htmlFor="sms_opt_in" className="text-gray-700">
                   I agree to receive SMS notifications.
                 </label>
               </div>

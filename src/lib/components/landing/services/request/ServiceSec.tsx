@@ -116,7 +116,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
     // return next();
     setIsBusy(true);
     const payload = {
-      vehicleType: data.vehicleType,
+      vehicleType: "car",
       vehicleMake: data.car_make,
       model: data.car_model,
       vehicleYear: data.car_year,
@@ -125,8 +125,8 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
       zipcode: locationDetail.postal || data.zipcode,
       city: locationDetail.city || data.city,
       state: locationDetail.state || data.state,
-      longitude: parseInt(locationDetail.longitude) || 0,
-      latitude: parseInt(locationDetail.latitude) || 0,
+      longitude: parseFloat(locationDetail.longitude) || 0,
+      latitude: parseFloat(locationDetail.latitude) || 0,
       requestNote: data.other,
       serviceId: activeId,
       userFcmToken: fcmToken,
