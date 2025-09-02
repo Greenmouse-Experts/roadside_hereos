@@ -18,7 +18,7 @@ const ReviewList: FC<Props> = ({ data }) => {
     "border-red-500",
     "border-brown-500",
   ];
-  return <>{JSON.stringify(data)}</>;
+  // return <>{JSON.stringify(data)}</>;
   return (
     <div>
       {data.length &&
@@ -36,11 +36,11 @@ const ReviewList: FC<Props> = ({ data }) => {
                     className="fw-600 cursor-pointer"
                     onClick={() => navigate(`/admin/users/${item?.userId}`)}
                   >{`${item?.user?.fname} ${item?.user?.lname}`}</p>
-                  <p>{item.comment}</p>
+                  <p>{item?.comment}</p>
                   <div>
                     <Rating value={5} readonly />
                   </div>
-                  <p>{dayjs(item.createdAt).format("ddd DD, MMM YYYY")}</p>
+                  <p>{dayjs(item?.createdAt).format("ddd DD, MMM YYYY")}</p>
                 </div>
                 <div className="hidden lg:block border-l pl-4 w-4/12 p-2">
                   <p
@@ -48,13 +48,20 @@ const ReviewList: FC<Props> = ({ data }) => {
                     onClick={() =>
                       navigate(`/admin/providers/staff/${item.vendorId}`)
                     }
-                  >{`${item.vendor.fname} ${item.vendor.lname}`}</p>
+                  >{`${item?.vendor?.fname} ${item?.vendor?.lname}`}</p>
                   <div className="mt-2">
-                    <Rating
+                    {item?.vendor?.reviewsAvg && (
+                      <Rating
+                        count={5}
+                        value={Number(item?.vendor?.reviewsAvg)}
+                        readonly
+                      />
+                    )}
+                    {/*<Rating
                       count={5}
-                      value={Number(item.vendor.reviewsAvg)}
+                      value={Number(item?.vendor?.reviewsAvg)}
                       readonly
-                    />
+                    />*/}
                   </div>
                 </div>
               </div>
