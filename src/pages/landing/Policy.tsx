@@ -299,10 +299,10 @@ const PolicyPage = () => {
         sell personal data. Additionally, you are protected from discrimination
         for exercising any of your privacy rights under these laws.
       </p>
-      <p className="mt-4 text-sm text-gray-600">
+      {/*<p className="mt-4 text-sm text-gray-600">
         <span className="fw-500">Note for Developer:</span> please remember to
         update this on the mobile app too.
-      </p>
+      </p>*/}
     </div>
   );
 

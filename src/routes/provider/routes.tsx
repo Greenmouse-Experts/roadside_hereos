@@ -11,6 +11,7 @@ import ProviderServices from "../../pages/provider/services";
 import ProviderSetting from "../../pages/provider/settings";
 import CompanyStaffs from "../../pages/provider/staff";
 import StaffDetail from "../../pages/provider/staffDetail";
+import UserWallet from "../../pages/user/wallet";
 
 export const providerRoutes = [
   {
@@ -77,5 +78,10 @@ export const providerRoutes = [
     id: "users-11",
     path: "refunds",
     component: <ComapanyRefunds />,
+  },
+  {
+    id: "user-12",
+    path: "wallet",
+    component: <UserWallet />,
   },
 ];

@@ -6,6 +6,7 @@ import ServiceDetails from "../../pages/user/serviceDetails";
 import UserServices from "../../pages/user/services";
 import UserSettings from "../../pages/user/settings";
 import UserRefunds from "../../pages/user/user-refunds";
+import UserWallet from "../../pages/user/wallet";
 
 export const userRoutes = [
   {
@@ -47,5 +48,10 @@ export const userRoutes = [
     id: "user5",
     path: "settings",
     component: <UserSettings />,
+  },
+  {
+    id: "user12",
+    path: "wallet",
+    component: <UserWallet />,
   },
 ];

@@ -33,6 +33,13 @@ export const Routes = [
     route: "/user/services",
     submenu: [],
   },
+  // {
+  //   name: "Wallet",
+  //   icon: <LuServerCog className="text-xl" />,
+  //   route: "/user/wallet",
+  //   submenu: [],
+  // },
+
   {
     name: "Notifications",
     icon: <IoNotificationsCircleOutline className="text-xl" />,
