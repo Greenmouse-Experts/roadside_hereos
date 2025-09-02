@@ -9,6 +9,7 @@ const StaffPayoutRequest = () => {
   const [params, setParams] = useState({
     page: 1,
     status: "pending",
+    user_type: "vendor",
   });
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["staff-payout-request", params],

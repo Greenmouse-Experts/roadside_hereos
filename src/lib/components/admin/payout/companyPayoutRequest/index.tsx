@@ -4,15 +4,22 @@ import EmptyState from "../../../ui/EmptyState";
 import CurveLoader from "../../../ui/loader/curveLoader/CurveLoader";
 import { admingetPayoutRequest } from "../../../../services/api/adminApi";
 import PayoutTable from "../components/payoutTable";
+import { apiClient } from "../../../../services/api/serviceApi";
 
 const CompanyPayoutRequest = () => {
   const [params, setParams] = useState({
     page: 1,
     status: "pending",
+    user_type: "professional",
   });
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["admin-payout-request", params],
-    queryFn: () => admingetPayoutRequest(params),
+    queryFn: async () => {
+      let response = await apiClient.get("/service-request/fetch-withdrawals", {
+        params,
+      });
+      return response.data;
+    },
   });
 
   const datas = data?.data?.withdrawalRequests;
@@ -29,6 +36,7 @@ const CompanyPayoutRequest = () => {
       setParams({ ...params, page: params.page + 1 });
     }
   };
+  // return <></>;
   return (
     <div>
       <div className="">

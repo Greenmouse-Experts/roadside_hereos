@@ -9,6 +9,7 @@ const ApprovedRequests = () => {
   const [params, setParams] = useState({
     page: 1,
     status: "approved",
+    user_type: "vendor",
   });
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["staff-payout-request", params],

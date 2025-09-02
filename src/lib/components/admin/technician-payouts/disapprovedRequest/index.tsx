@@ -9,6 +9,7 @@ const DisapprovedRequests = () => {
   const [params, setParams] = useState({
     page: 1,
     status: "disapproved",
+    user_type: "vendor",
   });
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["staff-payout-request", params],
@@ -63,6 +64,6 @@ const DisapprovedRequests = () => {
       </div>
     </div>
   );
-}
+};
 
-export default DisapprovedRequests
+export default DisapprovedRequests;
