@@ -1,12 +1,13 @@
 import { FC, useState } from "react";
 import Button from "../../../ui/Button";
 import useDialog from "../../../../hooks/useDialog";
-import {
-  adminApprovePayout,
-} from "../../../../services/api/adminApi";
+import { adminApprovePayout } from "../../../../services/api/adminApi";
 import { toast } from "react-toastify";
 import ReusableModal from "../../../ui/ReusableModal";
-import { companyInitiatePayout, declineStaffRequest } from "../../../../services/api/companyApi";
+import {
+  companyInitiatePayout,
+  declineStaffRequest,
+} from "../../../../services/api/companyApi";
 
 interface Props {
   id: string;
@@ -52,6 +53,7 @@ const PayoutActions: FC<Props> = ({ id, status, refetch }) => {
     } else {
       await adminApprovePayout(id)
         .then(() => {
+          toast.success("Payout approved successfully");
           refetch();
         })
         .catch((err: any) => {
@@ -90,7 +92,7 @@ const PayoutActions: FC<Props> = ({ id, status, refetch }) => {
       </div>
       <Approve title="" size="md">
         <ReusableModal
-          title={`${status === 'pending' ? 'Are you sure want to Approve this withdrawal request?' : 'Are you sure want to Initiate this transfer?'}`}
+          title={`${status === "pending" ? "Are you sure want to Approve this withdrawal request?" : "Are you sure want to Initiate this transfer?"}`}
           action={handleApprove}
           actionTitle="Approve"
           cancelTitle="No, Close"
@@ -100,7 +102,7 @@ const PayoutActions: FC<Props> = ({ id, status, refetch }) => {
       </Approve>
       <Decline title="" size="md">
         <ReusableModal
-          title={`${status === 'pending' ? 'Are you sure want to decline this withdrawal request?' : 'Are you sure want to decline this transfer request?'}`}
+          title={`${status === "pending" ? "Are you sure want to decline this withdrawal request?" : "Are you sure want to decline this transfer request?"}`}
           action={handleDecline}
           actionTitle="Decline"
           cancelTitle="No, Close"
