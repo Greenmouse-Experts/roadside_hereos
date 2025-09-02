@@ -94,6 +94,7 @@ const RefundTable: FC<Props> = ({
               <>
                 {(status === "pending" || status === "approved") && (
                   <PayoutActions
+                    item={info.row.original}
                     id={info.getValue()}
                     status={info.row.original.status}
                     refetch={refetch}

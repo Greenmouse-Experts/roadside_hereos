@@ -15,12 +15,13 @@ interface Props {
   refetch: () => void;
   status: string;
 }
-export default function AdmunRefundDetails({
+export default function AdminRefundDetails({
   id,
   close,
   refetch,
   status,
 }: Props) {
+  return <></>;
   const [amt, setAmt] = useState("");
   const [isBusy, setIsBusy] = useState(false);
   console.log(status);
@@ -50,11 +51,11 @@ export default function AdmunRefundDetails({
     <div>
       <div>
         <p>Refund Amount</p>
-        <input
+        {/*<input
           type="number"
           onChange={(e) => setAmt(e.target.value)}
           className="p-2 mt-3 rounded-lg w-full border border-gray-400"
-        />
+        />*/}
       </div>
       <div className="mt-7 flex justify-between">
         <Button

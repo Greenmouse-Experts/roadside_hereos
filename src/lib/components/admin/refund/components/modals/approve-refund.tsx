@@ -22,7 +22,10 @@ const ApproveRefund: FC<Props> = ({ id, close, refetch, status }) => {
   const approve_mutate = useMutation({
     // queryKey: ["approveRefund", id],
     mutationFn: async () => {
-      let resp = await apiClient.post("/services-quote/approve-refund/" + id);
+      let resp = await apiClient.post("/service-quote/initiate-refund", {
+        refundReqId: id,
+        // amountToClient: Number(amt),
+      });
       return resp.data;
     },
     onSuccess: () => {
@@ -69,12 +72,12 @@ const ApproveRefund: FC<Props> = ({ id, close, refetch, status }) => {
   return (
     <div>
       <div>
-        <p>Refund Amount</p>
-        <input
+        {/*<p>Initiate</p>*/}
+        {/*<input
           type="number"
           onChange={(e) => setAmt(e.target.value)}
           className="p-2 mt-3 rounded-lg w-full border border-gray-400"
-        />
+        />*/}
       </div>
       <div className="mt-7 flex justify-between">
         <Button
