@@ -1,12 +1,13 @@
 import { useCallback, useState, useEffect } from "react";
 import { useLocation } from "../../request/ServiceSec";
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiClient } from "../../../../../services/api/serviceApi";
 import useRequestStore from "../../../../../store/serviceStore";
 import ReusableModal from "../../../../ui/ReusableModal";
 import ViewOnMap from "./ViewOnMap";
 import useDialog from "../../../../../hooks/useDialog";
 import { Portal } from "../../../../portal/portal";
+import { toast } from "react-toastify";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -126,6 +127,7 @@ export default function NewProviderList({ next }: { next: () => void }) {
     setIsOpen(false);
     setVendor(null);
   };
+  const saveRequest = useRequestStore((state) => state.saveRequest);
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const { data, refetch, isFetching } = useQuery<VendorResponse>({
     queryKey: ["vendors", location, radius],
@@ -136,9 +138,26 @@ export default function NewProviderList({ next }: { next: () => void }) {
       return response.data;
     },
   });
+  const [selectProv, setProv] = useState({ id: "", amount: "" });
+
+  const select_mutation = useMutation({
+    mutationFn: async (vendorId: string) => {
+      const response = await apiClient.post(
+        `/service-quote/select-driver-quote/${vendorId}`,
+        // { provider_id: vendorId },
+      );
+      return response.data;
+    },
+    onSuccess: (data) => {
+      toast.success("selected");
+      console.log(data);
+
+      // next();
+      // close();
+    },
+  });
 
   const [countdown, setCountdown] = useState(120); // 2 minutes in seconds
-
   useEffect(() => {
     if (isFetching) {
       setCountdown(120);
@@ -210,16 +229,29 @@ export default function NewProviderList({ next }: { next: () => void }) {
             >
               <div className="flex items-center justify-between">
                 <h3 className="font-medium text-lg">{vendor.profile.name}</h3>
-                <button
-                  className="bg-primary text-sm text-white py-2 px-4 rounded-md cursor-pointer"
-                  onClick={() => {
-                    console.log(vendor);
-                    setVendor(vendor);
-                    setIsOpen(true);
-                  }}
-                >
-                  View on Map
-                </button>
+                <div className="flex flex-col gap-1">
+                  <button
+                    className="bg-primary text-sm text-white py-2 px-4 rounded-md cursor-pointer"
+                    onClick={() => {
+                      console.log(vendor);
+                      setVendor(vendor);
+                      setIsOpen(true);
+                    }}
+                  >
+                    View on Map
+                  </button>
+                  <button
+                    disabled={select_mutation.isPending}
+                    className="bg-primary text-sm text-white py-2 px-4 rounded-md cursor-pointer"
+                    onClick={() => {
+                      // return console.log(vendor);
+                      setProv((prev) => ({ ...prev, id: vendor.id }));
+                      select_mutation.mutate(vendor.id);
+                    }}
+                  >
+                    Select
+                  </button>
+                </div>
               </div>
               <p className="text-gray-600">
                 Distance: {vendor.distance_in_km?.toFixed(2)} km
