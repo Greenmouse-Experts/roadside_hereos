@@ -23,7 +23,7 @@ interface Props {
 }
 
 const ProviderList: FC<Props> = ({ next }) => {
-  return <NewProviderList />;
+  return <NewProviderList next={next} />;
   const request = useRequestStore((state) => state.request);
   const saveRequest = useRequestStore((state) => state.saveRequest);
   const [location] = useLocation();
