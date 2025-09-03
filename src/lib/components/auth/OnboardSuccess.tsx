@@ -14,7 +14,7 @@ const OnboardSuccess = () => {
             have you on board.
           </p>
           <p className="text-base text-gray-700">
-            You can proceed to download and install the app from the{' '}
+            You can proceed to download and install the app from the{" "}
             <a
               href="https://apps.apple.com"
               target="_blank"
@@ -22,17 +22,18 @@ const OnboardSuccess = () => {
               className="text-blue-600 underline hover:text-blue-800"
             >
               App Store
-            </a>{' '}
-            or{' '}
+            </a>{" "}
+            or{" "}
             <a
-              href="https://play.google.com"
+              href="https://play.google.com/store/apps/details?id=com.alldrivesos.app"
               target="_blank"
               rel="noopener noreferrer"
               className="text-blue-600 underline hover:text-blue-800"
             >
               Google Play Store
             </a>
-            , then log in to complete your KYC and start receiving service requests from clients.
+            , then log in to complete your KYC and start receiving service
+            requests from clients.
           </p>
         </div>
       </div>
