@@ -14,6 +14,17 @@ import useRequestStore from "../../../../store/serviceStore";
 import { requestForTokenForService } from "../../../../firebase/firebase";
 import { CountrySelect } from "react-country-state-city";
 import "react-country-state-city/dist/react-country-state-city.css";
+import { CarIcon, UserIcon, SettingsIcon } from "lucide-react";
+import { atom, useAtom } from "jotai";
+import { atomWithStorage } from "jotai/utils";
+
+let location_atom = atomWithStorage<LocationProps | null>("location", null);
+
+export const useLocation = () => {
+  const [location, setLocation] = useAtom(location_atom);
+  return [location, setLocation] as const;
+};
+
 export interface LocationProps {
   city: string;
   location: string;
@@ -53,6 +64,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
   const saveServiceId = useRequestStore((state) => state.saveRequest);
   const [fcmToken, setFcmToken] = useState("");
   const [locationType, setLocationType] = useState("auto");
+  const [location, setLocation] = useLocation();
   const [locationDetail, setLocationDetail] = useState<LocationProps>({
     city: "",
     location: "",
@@ -369,7 +381,12 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
                       )}
                     />
                     <div className="mt-3">
-                      <GetCurrentLocation setValue={setLocationDetail} />
+                      <GetCurrentLocation
+                        setValue={(e) => {
+                          setLocationDetail(e);
+                          setLocation(e);
+                        }}
+                      />
                     </div>
                   </>
                 )}

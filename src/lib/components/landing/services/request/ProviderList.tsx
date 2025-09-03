@@ -14,6 +14,8 @@ import CurveLoader from "../../../ui/loader/curveLoader/CurveLoader";
 import { ServiceQouteItem } from "../../../../types/service";
 import ProfileAvatar from "../../../ui/ProfileAvatar";
 import { MdRefresh } from "react-icons/md";
+import { useLocation } from "./ServiceSec";
+import NewProviderList from "../new-request/forms/new-provider-list";
 
 interface Props {
   next: () => void;
@@ -21,8 +23,11 @@ interface Props {
 }
 
 const ProviderList: FC<Props> = ({ next }) => {
+  return <NewProviderList />;
   const request = useRequestStore((state) => state.request);
   const saveRequest = useRequestStore((state) => state.saveRequest);
+  const [location] = useLocation();
+
   const [loading, setLoading] = useState(false);
   const [providers, setProviders] = useState([]);
   const star = Array(5).fill("");

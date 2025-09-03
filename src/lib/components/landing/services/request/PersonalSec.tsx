@@ -22,7 +22,7 @@ const PersonalSec: FC<Props> = ({ next }) => {
   const [cities, setCities] = useState<ICity[]>([]);
   const requestInfo = useRequestStore((store) => store.request);
   const saveRequest = useRequestStore((state) => state.saveRequest);
-  const { user, firstName, lastName } = useAuth()
+  const { user, firstName, lastName } = useAuth();
   const {
     control,
     handleSubmit,
@@ -56,11 +56,11 @@ const PersonalSec: FC<Props> = ({ next }) => {
       last_name: data.last_name,
       email: data.email,
       phone: data.phone,
-      address: `${data.street}, ${data.city}, ${data.state}, ${data.country}`
+      address: `${data.street}, ${data.city}, ${data.state}, ${data.country}`,
     };
     request.mutate(payload, {
       onSuccess: () => {
-        setIsBusy(false)
+        setIsBusy(false);
         saveRequest({
           ...requestInfo,
           firstName: data.first_name,
@@ -68,15 +68,15 @@ const PersonalSec: FC<Props> = ({ next }) => {
           email: data.email,
           homeAddress: data.address,
           phone: data.phone,
-          level: 1
+          level: 1,
         });
         next();
       },
       onError: (err: any) => {
-        setIsBusy(false)
-        toast.error(err?.response?.data?.message)
-      }
-    })
+        setIsBusy(false);
+        toast.error(err?.response?.data?.message);
+      },
+    });
   };
 
   const handleCountryChange = (countryCode: string) => {
@@ -170,7 +170,7 @@ const PersonalSec: FC<Props> = ({ next }) => {
                 </label>
                 <PhoneInputWithCountry
                   defaultCountry="US"
-                  countries={['US']}
+                  countries={["US"]}
                   name="phone"
                   control={control}
                   rules={{
@@ -250,7 +250,7 @@ const PersonalSec: FC<Props> = ({ next }) => {
                 name="street"
                 control={control}
                 rules={{
-                  required: true
+                  required: true,
                 }}
                 render={({ field }) => (
                   <TextInput
@@ -271,7 +271,13 @@ const PersonalSec: FC<Props> = ({ next }) => {
               type={"submit"}
               className="btn-feel flex gap-x-2 items-center"
             >
-              {isBusy ? <BeatLoader size={13} /> : <>Next <FaArrowRightLong /></>}
+              {isBusy ? (
+                <BeatLoader size={13} />
+              ) : (
+                <>
+                  Next <FaArrowRightLong />
+                </>
+              )}
             </Button>
           </div>
         </form>
