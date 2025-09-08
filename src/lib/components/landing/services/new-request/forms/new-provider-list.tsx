@@ -9,6 +9,8 @@ import useDialog from "../../../../../hooks/useDialog";
 import { Portal } from "../../../../portal/portal";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
+import DriverCard from "./components/driver-list";
+import AllQuotes from "./components/all-quotes";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -154,6 +156,10 @@ export default function NewProviderList({ next }: { next: () => void }) {
     setIsOpen(false);
     setVendor(null);
   };
+  const open = (vend: any) => {
+    setVendor(vend);
+    setIsOpen(true);
+  };
   const [reqPayload, setRequestPayload] = useRequest();
   const [serviceInformationResponse, setServiceInformationResponse] =
     useState<ServiceInformationResponse | null>(null);
@@ -185,36 +191,23 @@ export default function NewProviderList({ next }: { next: () => void }) {
       return response.data;
     },
   });
+
   const [selectProv, setProv] = useState({ id: "", amount: "" });
-  const select_mutation = useMutation({
-    mutationFn: async (vendorId: string) => {
-      const response = await apiClient.post(
-        `/service-quote/select-driver-quote/${vendorId}`,
-        // { provider_id: vendorId },
-      );
-      console.log(response.data);
-      return response.data;
-    },
-    onSuccess: (data) => {
-      toast.success("selected");
-      console.log(data);
-
-      // next();
-      // close();
-    },
-  });
-
-  const [countdown, setCountdown] = useState(120); // 2 minutes in seconds
+  const count_default = 30;
+  const [countdown, setCountdown] = useState(count_default); // 2 minutes in seconds
   const [req, saveReq] = useRequest();
   useEffect(() => {
     if (isFetching) {
-      setCountdown(120);
+      setCountdown(count_default);
     }
     if (countdown > 0 && !isFetching) {
       const timer = setTimeout(() => {
         setCountdown(countdown - 1);
       }, 1000);
       return () => clearTimeout(timer);
+    }
+    if (countdown === 0 && !isFetching) {
+      refetch();
     }
   }, [countdown, isFetching]);
 
@@ -233,7 +226,10 @@ export default function NewProviderList({ next }: { next: () => void }) {
     <div className="flex h-full flex-col">
       <div className="p-4 overflow-y-auto">
         <div className="flex items-center gap-2 mb-4 w-full ">
-          <h2 className="text-lg font-semibold ">Available Providers</h2>
+          <h2 className="text-lg font-semibold ">
+            <span className="opacity-80"> Available Providers</span>:
+            {data?.data?.vendors?.length}
+          </h2>
           {isFetching ? <p>Loading providers...</p> : null}
           <button
             disabled={isFetching}
@@ -271,48 +267,23 @@ export default function NewProviderList({ next }: { next: () => void }) {
         {isFetching && <p>Loading providers...</p>}
         <ul className="space-y-4">
           {data?.data?.vendors?.map((vendor) => (
-            <li
-              key={vendor.id}
-              className="border p-4 rounded-md shadow-sm bg-white"
-            >
-              <div className="flex items-center justify-between">
-                <h3 className="font-medium text-lg">{vendor.profile.name}</h3>
-                <div className="flex flex-col gap-1">
-                  <button
-                    className="bg-primary text-sm text-white py-2 px-4 rounded-md cursor-pointer"
-                    onClick={() => {
-                      console.log(vendor);
-                      setVendor(vendor);
-                      setIsOpen(true);
-                    }}
-                  >
-                    View on Map
-                  </button>
-                  <button
-                    disabled={select_mutation.isPending}
-                    className="bg-primary text-sm text-white py-2 px-4 rounded-md cursor-pointer"
-                    onClick={() => {
-                      // return console.log(vendor);
-                      setProv((prev) => ({ ...prev, id: vendor.id }));
-                      select_mutation.mutate(vendor.id);
-                    }}
-                  >
-                    Select
-                  </button>
-                </div>
-              </div>
-              <p className="text-gray-600">
-                Distance: {vendor.distance_in_km?.toFixed(2)} km
-              </p>
-              <p className="text-gray-600">
-                Rating: {vendor.profile.reviewsAvg?.toFixed(1) || "N/A"}
-              </p>
-              <p className="text-gray-600">City: {vendor.city || "N/A"}</p>
-              {/* Add more vendor details here */}
-            </li>
+            <>{/*<DriverCard vendor={vendor} key={vendor.id} />*/}</>
           ))}
+          {/*{data?.data?.vendors?.map((vendor) => (
+
+          ))}*/}
         </ul>
+        <AllQuotes
+          countdown={countdown}
+          setCountdown={setCountdown}
+          open={open}
+          next={next}
+        />
+        {/*{quotes.data.data?.map((quote) => (
+          <li key={quote.id}>{quote.price}</li>
+        ))}*/}
       </div>
+
       <Portal>
         {isOpen && (
           <ViewOnMap
