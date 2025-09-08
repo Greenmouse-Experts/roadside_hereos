@@ -1,5 +1,5 @@
 import { useCallback, useState, useEffect } from "react";
-import { useLocation } from "../../request/ServiceSec";
+import { useLocation, useRequest } from "../../request/ServiceSec";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiClient } from "../../../../../services/api/serviceApi";
 import useRequestStore from "../../../../../store/serviceStore";
@@ -8,6 +8,7 @@ import ViewOnMap from "./ViewOnMap";
 import useDialog from "../../../../../hooks/useDialog";
 import { Portal } from "../../../../portal/portal";
 import { toast } from "react-toastify";
+import { useParams } from "react-router-dom";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -112,11 +113,37 @@ interface VendorResponse {
   };
 }
 
+interface ServiceInformationResponse {
+  success: true;
+  message: string;
+  data: {
+    serviceRequest: {
+      id: string;
+      status: string;
+      queryNote: any;
+      serviceId: string;
+      vehicleMake: string;
+      model: string;
+      vehicleYear: string;
+      vehicleType: string;
+      color: string;
+      location: string;
+      city: string;
+      requestNote: string;
+      userType: string;
+      updatedAt: string;
+      createdAt: string;
+    };
+    totalTechniciansFound: number;
+  };
+}
+
 export default function NewProviderList({ next }: { next: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const [vendor, setVendor] = useState<Vendor | null>(null);
   const [radius, setRadius] = useState(40); // Default radius in miles
   const [location] = useLocation();
+  const { id } = useParams();
   const request = useRequestStore((state) => state.request);
   let request_id = request?.id;
   const center = {
@@ -127,25 +154,45 @@ export default function NewProviderList({ next }: { next: () => void }) {
     setIsOpen(false);
     setVendor(null);
   };
+  const [reqPayload, setRequestPayload] = useRequest();
+  const [serviceInformationResponse, setServiceInformationResponse] =
+    useState<ServiceInformationResponse | null>(null);
+
   const saveRequest = useRequestStore((state) => state.saveRequest);
   const [map, setMap] = useState<google.maps.Map | null>(null);
   const { data, refetch, isFetching } = useQuery<VendorResponse>({
     queryKey: ["vendors", location, radius],
     queryFn: async () => {
+      const temp = await apiClient.post(
+        `/service-request/service-information/create/nearby-technicians?latitude=${center?.lat}&longitude=${center?.lng}&radius=${radius}&limit=10`,
+        {
+          serviceId: reqPayload.serviceId,
+          vehicleMake: reqPayload.vehicleMake,
+          model: reqPayload.model,
+          vehicleYear: reqPayload.vehicleYear,
+          vehicleType: reqPayload.vehicleType,
+          color: reqPayload.color,
+          location: reqPayload.location,
+          city: reqPayload.city,
+          requestNote: reqPayload.requestNote,
+        },
+      );
+      setServiceInformationResponse(temp.data);
       const response = await apiClient.post(
         `/service-request/service-information/${request_id}/notify?latitude=${center?.lat}&longitude=${center?.lng}&prev_radius=1&radius=${radius}`,
       );
+
       return response.data;
     },
   });
   const [selectProv, setProv] = useState({ id: "", amount: "" });
-
   const select_mutation = useMutation({
     mutationFn: async (vendorId: string) => {
       const response = await apiClient.post(
         `/service-quote/select-driver-quote/${vendorId}`,
         // { provider_id: vendorId },
       );
+      console.log(response.data);
       return response.data;
     },
     onSuccess: (data) => {
@@ -158,6 +205,7 @@ export default function NewProviderList({ next }: { next: () => void }) {
   });
 
   const [countdown, setCountdown] = useState(120); // 2 minutes in seconds
+  const [req, saveReq] = useRequest();
   useEffect(() => {
     if (isFetching) {
       setCountdown(120);
@@ -180,7 +228,7 @@ export default function NewProviderList({ next }: { next: () => void }) {
     const newRadius = Math.max(5, radius + change);
     setRadius(newRadius);
   };
-
+  // return <>{JSON.stringify(req)}</>;
   return (
     <div className="flex h-full flex-col">
       <div className="p-4 overflow-y-auto">

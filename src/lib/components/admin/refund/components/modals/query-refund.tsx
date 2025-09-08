@@ -135,8 +135,24 @@ export default function AdmunRefundDetails({
   };
   const handleApprove = async () => {};
   return (
-    <div>
-      <div className="grid grid-cols-2 gap-4">
+    <div className=" p-2 bg-white rounded-lg ">
+      <div className="mb-6">
+        {item.disapprovalReason && (
+          <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+            <p className="text-lg font-bold text-red-600">Disapproval Reason</p>
+            <p className="text-gray-700 mt-2">{item.disapprovalReason}</p>
+          </div>
+        )}
+        {item.adminDisapprovalReason && (
+          <div className="bg-red-50 p-4 rounded-lg border border-red-200 mt-4">
+            <p className="text-lg font-bold text-red-600">
+              Admin Disapproval Reason
+            </p>
+            <p className="text-gray-700 mt-2">{item.adminDisapprovalReason}</p>
+          </div>
+        )}
+      </div>
+      <div className="grid grid-cols-2 gap-6">
         <div>
           <p className="text-sm font-semibold">User Name</p>
           <p className="text-gray-700">
@@ -163,18 +179,6 @@ export default function AdmunRefundDetails({
           <p className="text-sm font-semibold">Status</p>
           <p className="text-gray-700 capitalize">{item.status}</p>
         </div>
-        {item.disapprovalReason && (
-          <div>
-            <p className="text-sm font-semibold">Disapproval Reason</p>
-            <p className="text-gray-700">{item.disapprovalReason}</p>
-          </div>
-        )}
-        {item.adminDisapprovalReason && (
-          <div>
-            <p className="text-sm font-semibold">Admin Disapproval Reason</p>
-            <p className="text-gray-700">{item.adminDisapprovalReason}</p>
-          </div>
-        )}
       </div>
       <div className="mt-7 flex justify-end gap-4">
         <Button

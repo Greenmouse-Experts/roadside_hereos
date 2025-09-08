@@ -17,6 +17,40 @@ import "react-country-state-city/dist/react-country-state-city.css";
 import { CarIcon, UserIcon, SettingsIcon } from "lucide-react";
 import { atom, useAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
+interface RequestProps {
+  id: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  location: string;
+  price: number;
+  homeAddress: string;
+  level: number;
+  qouteId: string;
+  status: string;
+  queryNote: null;
+  vehicleType: string;
+  vehicleMake: string;
+  model: string;
+  vehicleYear: string;
+  color: string;
+  zipcode: string;
+  city: string;
+  state: string;
+  longitude: number;
+  latitude: number;
+  requestNote: string;
+  serviceId: string;
+  userType: string;
+  updatedAt: string;
+  createdAt: string;
+}
+const requestAtom = atomWithStorage<RequestProps | null>("request", null);
+export const useRequest = () => {
+  const [request, setRequest] = useAtom(requestAtom);
+  return [request, setRequest] as const;
+};
 
 let location_atom = atomWithStorage<LocationProps | null>("location", null);
 
@@ -40,6 +74,8 @@ interface Props {
   activeQuestion: string;
 }
 const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
+  // return <>servicese</>;
+
   const [states, setStates] = useState<IState[]>(
     State.getStatesOfCountry("US"),
   );
@@ -125,6 +161,7 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
     mutationFn: requestService,
     mutationKey: ["request"],
   });
+  const [req, saveReq] = useRequest();
   const handleForm = (data: any) => {
     // return next();
     setIsBusy(true);
@@ -148,7 +185,10 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
       onSuccess: (data) => {
         setIsBusy(false);
         toast.success("Request submitted successfully");
+        saveReq(data.data);
         saveServiceId({
+          // ...data.data,
+
           id: data.data.id,
           firstName: "",
           lastName: "",
@@ -201,7 +241,6 @@ const ServiceSec: FC<Props> = ({ next, activeId, activeQuestion }) => {
   });
 
   const car_data = get_motors.data?.data;
-
   return (
     <>
       <div className="bg-gray-100 lg:p-10 lg:pb-20 p-4 pb-8 rounded-md">

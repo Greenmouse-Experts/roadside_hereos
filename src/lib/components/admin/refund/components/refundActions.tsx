@@ -24,7 +24,7 @@ const RefundActions: FC<Props> = ({ id, status, refetch, item }) => {
             onClick={() => ShowQuery(true)}
             altClassName="py-2 px-5 btn-primary"
           />
-          {status === "pending" && (
+          {/*{status === "pending" && (
             <>
               <Button
                 title={"Initiate"}
@@ -37,7 +37,7 @@ const RefundActions: FC<Props> = ({ id, status, refetch, item }) => {
                 altClassName="py-2 px-5 btn-primary bg-red-600"
               />
             </>
-          )}
+          )}*/}
         </div>
       </div>
       <Query

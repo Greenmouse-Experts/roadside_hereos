@@ -1,6 +1,7 @@
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { apiClient } from "../../../services/api/serviceApi";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 interface ChargesData {
   id: string;
@@ -19,7 +20,6 @@ interface Charges {
   data: ChargesData;
 }
 export default function AdminCharges() {
-  const queryClient = useQueryClient();
   const {
     data: chargesData,
     isLoading,
@@ -56,47 +56,88 @@ export default function AdminCharges() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
+    console.log(charges);
+    toast.promise(update_mutation.mutateAsync(charges), {
+      pending: "updating",
+    });
   };
+  const update_mutation = useMutation({
+    mutationFn: async (charges: ChargesData) => {
+      const response = await apiClient.post("/charge/save-charges", charges);
+      return response.data;
+    },
+    onSuccess: () => {
+      toast.success("Charges updated successfully!");
+    },
+    onError: (err) => {
+      console.error(err);
+      toast.error("Failed to update charges!");
+    },
+  });
 
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error fetching charges.</div>;
+  if (isLoading) return <div className="text-center">Loading...</div>;
+  if (isError)
+    return <div className="text-center">Error fetching charges.</div>;
 
   return (
-    <div>
-      <h1>Update Charges</h1>
-      <form onSubmit={handleSubmit}>
+    <div className="p-5 bg-gray-100 rounded-lg shadow-md">
+      <h1 className="text-2xl font-semibold text-center text-gray-800 mb-5">
+        Update Charges
+      </h1>
+      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
         <div>
-          <label htmlFor="tax_percent">Tax Percent:</label>
+          <label
+            htmlFor="tax_percent"
+            className="font-medium mb-2 block text-gray-700"
+          >
+            Tax Percent:
+          </label>
           <input
             type="number"
             id="tax_percent"
             name="tax_percent"
             value={charges.tax_percent}
             onChange={handleChange}
+            className="w-full px-3 py-2 rounded-md border border-gray-300 text-gray-700 text-base shadow-sm focus:outline-none focus:border-blue-500"
           />
         </div>
         <div>
-          <label htmlFor="service_percent">Service Percent:</label>
+          <label
+            htmlFor="service_percent"
+            className="font-medium mb-2 block text-gray-700"
+          >
+            Service Percent:
+          </label>
           <input
             type="number"
             id="service_percent"
             name="service_percent"
             value={charges.service_percent}
             onChange={handleChange}
+            className="w-full px-3 py-2 rounded-md border border-gray-300 text-gray-700 text-base shadow-sm focus:outline-none focus:border-blue-500"
           />
         </div>
         <div>
-          <label htmlFor="company_percent">Company Percent:</label>
+          <label
+            htmlFor="company_percent"
+            className="font-medium mb-2 block text-gray-700"
+          >
+            Company Percent:
+          </label>
           <input
             type="number"
             id="company_percent"
             name="company_percent"
             value={charges.company_percent}
             onChange={handleChange}
+            className="w-full px-3 py-2 rounded-md border border-gray-300 text-gray-700 text-base shadow-sm focus:outline-none focus:border-blue-500"
           />
         </div>
         <div>
-          <label htmlFor="driver_cancellation_fee_percent">
+          <label
+            htmlFor="driver_cancellation_fee_percent"
+            className="font-medium mb-2 block text-gray-700"
+          >
             Driver Cancellation Fee Percent:
           </label>
           <input
@@ -105,10 +146,14 @@ export default function AdminCharges() {
             name="driver_cancellation_fee_percent"
             value={charges.driver_cancellation_fee_percent}
             onChange={handleChange}
+            className="w-full px-3 py-2 rounded-md border border-gray-300 text-gray-700 text-base shadow-sm focus:outline-none focus:border-blue-500"
           />
         </div>
         <div>
-          <label htmlFor="client_refund_charge_percent">
+          <label
+            htmlFor="client_refund_charge_percent"
+            className="font-medium mb-2 block text-gray-700"
+          >
             Client Refund Charge Percent:
           </label>
           <input
@@ -117,9 +162,16 @@ export default function AdminCharges() {
             name="client_refund_charge_percent"
             value={charges.client_refund_charge_percent}
             onChange={handleChange}
+            className="w-full px-3 py-2 rounded-md border border-gray-300 text-gray-700 text-base shadow-sm focus:outline-none focus:border-blue-500"
           />
         </div>
-        <button type="submit">Update Charges</button>
+        <button
+          disabled={update_mutation.isPending}
+          type="submit"
+          className="px-6 py-3 bg-primary text-white rounded-md text-base font-medium hover:bg-primary/50 transition duration-200 ease-in-out"
+        >
+          {update_mutation.isPending ? "Updating..." : "Update Charges"}
+        </button>
       </form>
     </div>
   );
