@@ -81,7 +81,7 @@ export default function AdminCharges() {
 
   return (
     <div className="p-5 bg-gray-100 rounded-lg shadow-md">
-      <h1 className="text-2xl font-semibold text-center text-gray-800 mb-5">
+      <h1 className="text-xl font-semibold  text-gray-800 mb-5">
         Update Charges
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
