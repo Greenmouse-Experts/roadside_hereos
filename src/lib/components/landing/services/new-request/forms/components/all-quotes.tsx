@@ -74,6 +74,7 @@ interface Props {
   setCountdown: (countdown: number) => void;
   open: (vend: any) => void;
   next: () => void;
+  p_loading: boolean;
 }
 
 const selected_driver_atom = atomWithStorage<Quote | null>(
@@ -104,11 +105,15 @@ export default function AllQuotes(props: Props) {
     if (props.countdown === 0 && !quotes.isFetching) {
       quotes.refetch();
     }
+    if (props.p_loading && !quotes.isFetching) {
+      quotes.refetch();
+    }
   }, [props.countdown, quotes.isFetching]);
   const data = quotes.data?.data;
 
   return (
     <div className="flex flex-col gap-2">
+      {quotes.isFetching && <>Loading Quotes...</>}
       {data?.map((quote) => (
         <div
           key={quote.id}

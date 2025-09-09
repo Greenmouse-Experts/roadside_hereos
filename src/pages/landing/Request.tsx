@@ -9,11 +9,13 @@ import { useQuery } from "@tanstack/react-query";
 import useRequestStore from "../../lib/store/serviceStore";
 import { RiDeleteBin5Fill } from "react-icons/ri";
 import DownloadApp from "../../lib/components/landing/homepage/DownloadApp";
+import { useDriver } from "../../lib/components/landing/services/new-request/forms/components/all-quotes";
 
 const RequestPage = () => {
   const { id } = useParams();
   const requestInfo = useRequestStore((store) => store.request);
   const clearRequest = useRequestStore((store) => store.clearRequest);
+  const [driver, setDriver] = useDriver();
   const { data: service } = useQuery({
     queryKey: ["getCat"],
     queryFn: getCategories,
@@ -30,6 +32,11 @@ const RequestPage = () => {
       getActiveService();
     }
   }, [service]);
+  const restart = () => {
+    clearRequest();
+    setDriver(null);
+    window.location.reload();
+  };
   return (
     <>
       <LandingLayout>
@@ -60,7 +67,7 @@ const RequestPage = () => {
                   </p>
                   {requestInfo.level > 0 && (
                     <p
-                      onClick={clearRequest}
+                      onClick={restart}
                       className="flex items-center gap-x-2 cursor-pointer text-red-600 fw-600 fs-500"
                     >
                       <RiDeleteBin5Fill /> Clear Request

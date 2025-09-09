@@ -1,4 +1,4 @@
-import { useCallback, useState, useEffect } from "react";
+import { useCallback, useState, useEffect, useLayoutEffect } from "react";
 import { useLocation, useRequest } from "../../request/ServiceSec";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { apiClient } from "../../../../../services/api/serviceApi";
@@ -10,7 +10,7 @@ import { Portal } from "../../../../portal/portal";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import DriverCard from "./components/driver-list";
-import AllQuotes from "./components/all-quotes";
+import AllQuotes, { useDriver } from "./components/all-quotes";
 const containerStyle = {
   width: "100%",
   height: "400px",
@@ -144,6 +144,8 @@ export default function NewProviderList({ next }: { next: () => void }) {
   const [isOpen, setIsOpen] = useState(false);
   const [vendor, setVendor] = useState<Vendor | null>(null);
   const [radius, setRadius] = useState(40); // Default radius in miles
+
+  const [driver, setDriver] = useDriver();
   const [location] = useLocation();
   const { id } = useParams();
   const request = useRequestStore((state) => state.request);
@@ -184,8 +186,9 @@ export default function NewProviderList({ next }: { next: () => void }) {
         },
       );
       setServiceInformationResponse(temp.data);
+      let new_id = serviceInformationResponse.data.serviceRequest.id;
       const response = await apiClient.post(
-        `/service-request/service-information/${request_id}/notify?latitude=${center?.lat}&longitude=${center?.lng}&prev_radius=1&radius=${radius}`,
+        `/service-request/service-information/${new_id}/notify?latitude=${center?.lat}&longitude=${center?.lng}&prev_radius=1&radius=${radius}`,
       );
 
       return response.data;
@@ -193,7 +196,7 @@ export default function NewProviderList({ next }: { next: () => void }) {
   });
 
   const [selectProv, setProv] = useState({ id: "", amount: "" });
-  const count_default = 30;
+  const count_default = 10;
   const [countdown, setCountdown] = useState(count_default); // 2 minutes in seconds
   const [req, saveReq] = useRequest();
   useEffect(() => {
@@ -222,6 +225,12 @@ export default function NewProviderList({ next }: { next: () => void }) {
     setRadius(newRadius);
   };
   // return <>{JSON.stringify(req)}</>;
+  //
+  useLayoutEffect(() => {
+    console.log("drivers");
+    if (driver) next();
+  }, [driver]);
+
   return (
     <div className="flex h-full flex-col">
       <div className="p-4 overflow-y-auto">
@@ -278,6 +287,7 @@ export default function NewProviderList({ next }: { next: () => void }) {
           setCountdown={setCountdown}
           open={open}
           next={next}
+          p_loading={isFetching}
         />
         {/*{quotes.data.data?.map((quote) => (
           <li key={quote.id}>{quote.price}</li>
