@@ -4,7 +4,8 @@ import { apiClient } from "../../../../../../services/api/serviceApi";
 import Button from "../../../../../ui/Button";
 import { atom, useAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useServiceSec } from "../../../../../../../pages/user/components/request-comps/service-sec";
 
 interface Quote {
   id: string;
@@ -70,8 +71,6 @@ interface QuotesResponse {
   data: Quote[];
 }
 interface Props {
-  countdown: number;
-  setCountdown: (countdown: number) => void;
   open: (vend: any) => void;
   next: () => void;
   p_loading: boolean;
@@ -85,35 +84,62 @@ export const useDriver = () => {
   const [driver, setDriver] = useAtom(selected_driver_atom);
   return [driver, setDriver] as const;
 };
+
 export default function AllQuotes(props: Props) {
   const request = useRequestStore((state) => state.request);
   const [driver, setDriver] = useDriver();
   let request_id = request?.id;
+  const [service, setService] = useServiceSec();
   const quotes = useQuery<QuotesResponse>({
     queryKey: ["quotes", request_id],
     queryFn: async () => {
       const response = await apiClient.get(
-        `/service-quote/fetch-quotes/${request_id}`,
+        `/service-quote/fetch-quotes/${service.data.serviceRequest.id}`,
       );
       return response.data;
     },
   });
+
+  const data = quotes.data?.data;
+
+  const count_default = 10;
+
+  const [countdown, setCountdown] = useState(count_default); // 2 minutes in seconds
+  // const [req, saveReq] = useRequest();
   useEffect(() => {
-    // if (isFetching) {
-    //   setCountdown(count_default);
-    // }
-    if (props.countdown === 0 && !quotes.isFetching) {
+    if (quotes.isFetching) {
+      setCountdown(count_default);
+    }
+    if (countdown > 0 && !quotes.isFetching) {
+      const timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+      return () => clearTimeout(timer);
+    }
+    if (countdown === 0 && !quotes.isFetching) {
+      // refetch();
+    }
+  }, [countdown, quotes.isFetching]);
+  useEffect(() => {
+    if (quotes.isFetching) {
+      setCountdown(count_default);
+    }
+    if (countdown === 0 && !quotes.isFetching) {
       quotes.refetch();
     }
     if (props.p_loading && !quotes.isFetching) {
       quotes.refetch();
     }
-  }, [props.countdown, quotes.isFetching]);
-  const data = quotes.data?.data;
-
+  }, [countdown, quotes.isFetching]);
+  const formatTime = (seconds: number) => {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = seconds % 60;
+    return `${minutes}:${remainingSeconds < 10 ? "0" : ""}${remainingSeconds}`;
+  };
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 p-4 bg-white w-full shadow-xl">
       {quotes.isFetching && <>Loading Quotes...</>}
+      {!quotes.isFetching && data?.length < 1 && <>No Quotes Found</>}
       {data?.map((quote) => (
         <div
           key={quote.id}

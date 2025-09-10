@@ -1,4 +1,5 @@
 import UsersHome from "../../pages/user/home";
+import NewRequests from "../../pages/user/new-request";
 import UserNotification from "../../pages/user/notify";
 import UserPayments from "../../pages/user/payment";
 import UserRequests from "../../pages/user/requests";
@@ -53,5 +54,10 @@ export const userRoutes = [
     id: "user12",
     path: "wallet",
     component: <UserWallet />,
+  },
+  {
+    id: "user13",
+    path: "new-request/:id",
+    component: <NewRequests />,
   },
 ];
