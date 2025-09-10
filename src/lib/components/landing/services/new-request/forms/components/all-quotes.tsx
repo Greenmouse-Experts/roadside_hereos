@@ -92,6 +92,7 @@ export default function AllQuotes(props: Props) {
   const [driver, setDriver] = useDriver();
   const [isOpen, setIsOpen] = useState(false);
   const [vendor, setVendor] = useState<any>(null);
+  const [radius, setRadius] = useState(10); // Add radius state
   const close = () => {
     setVendor(null);
     setIsOpen(false);
@@ -103,10 +104,10 @@ export default function AllQuotes(props: Props) {
   let request_id = request?.id;
   const [service, setService] = useServiceSec();
   const quotes = useQuery<QuotesResponse>({
-    queryKey: ["quotes", request_id],
+    queryKey: ["quotes", request_id, radius], // Add radius to query key
     queryFn: async () => {
       const response = await apiClient.get(
-        `/service-quote/fetch-quotes/${service.data.serviceRequest.id}`,
+        `/service-quote/fetch-quotes/${service.data.serviceRequest.id}?radius=${radius}`, // Add radius parameter
       );
       return response.data;
     },
@@ -116,8 +117,7 @@ export default function AllQuotes(props: Props) {
 
   const count_default = 10;
 
-  const [countdown, setCountdown] = useState(count_default); // 2 minutes in seconds
-  // const [req, saveReq] = useRequest();
+  const [countdown, setCountdown] = useState(count_default);
   useEffect(() => {
     if (quotes.isFetching) {
       setCountdown(count_default);
@@ -154,11 +154,19 @@ export default function AllQuotes(props: Props) {
   };
   return (
     <div className="flex flex-col gap-2 p-4 bg-white w-full shadow-xl">
-      <div className="flex items-center  mb-2">
-        Refreshing in : {formatTime(countdown)}
-        <span className="ml-auto">
+      <div className="flex items-center mb-2 gap-4">
+        <div>Refreshing in : {formatTime(countdown)}</div>
+        <div>Radius: {radius} miles</div>
+        <span className="ml-auto flex gap-2">
           <button
-            className="p-2 bg-review text-white rounded-md "
+            disabled={quotes.isFetching}
+            className="p-2 bg-blue-500 text-white rounded-md"
+            onClick={() => setRadius((prev) => prev + 10)}
+          >
+            Increase Radius (10)
+          </button>
+          <button
+            className="p-2 bg-review text-white rounded-md"
             onClick={() => quotes.refetch()}
           >
             Refresh
@@ -170,17 +178,13 @@ export default function AllQuotes(props: Props) {
       {data?.map((quote) => (
         <div
           key={quote.id}
-          className="bg-white flex rounded-lg shadow-md p-4 border border-gray-200" // Consistent card styling
+          className="bg-white flex rounded-lg shadow-md p-4 border border-gray-200"
         >
           <div className="flex-1">
-            {" "}
             <p className="text-lg font-semibold text-gray-800">
-              {" "}
-              {/* Heading style */}
-              Quote: <span className="font-medium">${quote.quote}</span>{" "}
+              Quote: <span className="font-medium">${quote.quote}</span>
             </p>
             <p className="text-base text-gray-700 mt-2">
-              {" "}
               Driver: <span className="font-medium">{quote.driver.name}</span>
             </p>
             <p className="text-base text-gray-700 mt-2">
@@ -214,7 +218,6 @@ export default function AllQuotes(props: Props) {
                     return;
                   }
                 }
-                // Handle select action
               }}
               title={"Select"}
               className="bg-primary disabled:bg-gray-300 p-2 text-white cursor-pointer rounded-md text-sm ml-auto"
@@ -224,15 +227,6 @@ export default function AllQuotes(props: Props) {
             <button
               onClick={async () => {
                 return open(quote);
-                try {
-                  let resp = await apiClient.post(
-                    `/service-quote/select-driver-quote/${quote.id}`,
-                  );
-                  console.log(resp.data);
-                  return resp.data;
-                } catch (error) {
-                  console.log(error);
-                }
               }}
               title={"Select"}
               className="bg-primary disabled:bg-gray-300 p-2 text-white cursor-pointer rounded-md text-sm ml-auto"
