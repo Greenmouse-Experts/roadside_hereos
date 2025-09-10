@@ -8,27 +8,37 @@ interface Props {
   id: string;
   status: string;
   refetch: () => void;
+  item: any;
 }
-const RefundActions: FC<Props> = ({ id, status, refetch }) => {
-  const { Dialog: Query, setShowModal: ShowApprove } = useDialog();
-  // const { Dialog: Decline, setShowModal: ShowDecline } = useDialog();
+const RefundActions: FC<Props> = ({ id, status, refetch, item }) => {
+  const { Dialog: Query, setShowModal: ShowQuery } = useDialog();
+  const { Dialog: Approve, setShowModal: ShowApprove } = useDialog();
   const { Dialog: Decline, setShowModal: ShowDecline } = useDialog();
   const dialogRef = useRef<HTMLDialogElement>(null);
+  // return <>{JSON.stringify(item)}</>;
   return (
     <>
       <div>
         <div className="fw-600 flex gap-x-3">
           <Button
             title={"View Query"}
-            onClick={() => ShowApprove(true)}
+            onClick={() => ShowQuery(true)}
             altClassName="py-2 px-5 btn-primary"
           />
+
           {status === "pending" && (
-            <Button
-              title={"Decline"}
-              onClick={() => ShowDecline(true)}
-              altClassName="py-2 px-5 btn-primary bg-red-600"
-            />
+            <>
+              <Button
+                title={"Approve"}
+                onClick={() => ShowApprove(true)}
+                altClassName="py-2 px-5 btn-primary"
+              />
+              <Button
+                title={"Decline"}
+                onClick={() => ShowDecline(true)}
+                altClassName="py-2 px-5 btn-primary bg-red-600"
+              />
+            </>
           )}
         </div>
       </div>
@@ -37,16 +47,16 @@ const RefundActions: FC<Props> = ({ id, status, refetch }) => {
         size="md"
         close={() => dialogRef.current?.close()}
       >
-        <AdminModal id={id} refetch={refetch} />
+        <AdminModal id={item} refetch={refetch} item={item} />
       </Query>
-      {/*<Approve title="Approve Refund" size="md">
+      <Approve title="Approve Refund" size="md">
         <ApproveRefund
           id={id}
           status={status}
           refetch={refetch}
           close={() => ShowApprove(false)}
         />
-      </Approve>*/}
+      </Approve>
       <Decline title="Decline Refund" size="md">
         <DisapproveModal
           id={id}

@@ -1,73 +1,93 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import Button from "../../../../ui/Button";
-import {
-  approveRefund,
-  initiateRefund,
-} from "../../../../../services/api/adminApi";
-import { toast } from "react-toastify";
-import { BeatLoader } from "react-spinners";
-import { useMutation, useQueries, useQuery } from "@tanstack/react-query";
-import { apiClient } from "../../../../../services/api/serviceApi";
+
+interface RefundDetails {
+  id: string;
+  refId: string;
+  userId: string;
+  companyId: string;
+  serviceRequestId: string;
+  disapprovalReason: string;
+  amount: number;
+  adminDisapprovalReason: null | string;
+  refundType: string;
+  status: string;
+  createdAt: string;
+  updatedAt: string;
+  user: {
+    id: string;
+    fname: string;
+    lname: string;
+    email: string;
+    phone: string;
+  };
+  serviceRequest: {
+    vehicleMake: string;
+    vehicleType: string;
+    model: string;
+    vehicleYear: string;
+    color: string;
+    location: string;
+  };
+}
 
 interface Props {
-  id: string;
+  id: RefundDetails;
   close: () => void;
   refetch: () => void;
+  item: any;
   status: string;
 }
-export default function AdminRefundDetails({
-  id,
-  close,
-  refetch,
-  status,
-}: Props) {
-  return <></>;
-  const [amt, setAmt] = useState("");
-  const [isBusy, setIsBusy] = useState(false);
-  console.log(status);
-  const query = useQuery({
-    queryKey: ["refund", id],
-    queryFn: () => apiClient.get(`/service-quote/fetch-quotes/${id}`),
-    enabled: !!id,
-  });
-  const handleInitate = async () => {
-    const payload = {
-      refundReqId: id,
-      amountToClient: Number(amt),
-    };
-    await initiateRefund(payload)
-      .then((res) => {
-        toast.success(res.message);
-        refetch();
-        close();
-      })
-      .catch((err: any) => {
-        toast.error(err.response.data.message);
-        setIsBusy(false);
-      });
-  };
-  const handleApprove = async () => {};
+
+export default function AdminRefundDetails({ id, close }: Props) {
   return (
-    <div>
-      <div>
-        <p>Refund Amount</p>
-        {/*<input
-          type="number"
-          onChange={(e) => setAmt(e.target.value)}
-          className="p-2 mt-3 rounded-lg w-full border border-gray-400"
-        />*/}
+    <div className=" max-w-5xl mb-2 ">
+      <div className="bg-red-50 p-4 rounded-lg border border-red-200">
+        <h3 className="font-semibold text-red-700 mb-2">Disapproval Reason</h3>
+        <p className="text-sm text-red-600 whitespace-pre-wrap bg-white p-3 rounded">
+          {id.disapprovalReason}
+        </p>
       </div>
-      <div className="mt-7 flex justify-between">
-        <Button
-          title={"Close"}
-          onClick={close}
-          altClassName="px-6 bg-red-500 text-white py-3 rounded-lg fw-600"
-        />
-        {/*<Button
-          title={approve_mutate.isPending ? <BeatLoader /> : "Approve"}
-          onClick={() => approve_mutate.mutate()}
-          altClassName="px-6 bg-primary text-white py-3 rounded-lg fw-600"
-        />*/}
+
+      <div className="space-y-6">
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <h3 className="font-semibold mb-2">User Information</h3>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <p className="text-sm text-gray-600">
+                Name: {id.user.fname} {id.user.lname}
+              </p>
+              <p className="text-sm text-gray-600">Email: {id.user.email}</p>
+            </div>
+            <div>
+              <p className="text-sm text-gray-600">Phone: {id.user.phone}</p>
+              <p className="text-sm text-gray-600">User ID: {id.userId}</p>
+            </div>
+          </div>
+        </div>
+
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <h3 className="font-semibold mb-2">Service Request Details</h3>
+          <div className="grid grid-cols-2 gap-4">
+            <div>
+              <p className="text-sm text-gray-600">
+                Vehicle: {id.serviceRequest.vehicleMake}{" "}
+                {id.serviceRequest.model}
+              </p>
+              <p className="text-sm text-gray-600">
+                Year: {id.serviceRequest.vehicleYear}
+              </p>
+            </div>
+            <div>
+              <p className="text-sm text-gray-600">
+                Color: {id.serviceRequest.color}
+              </p>
+              <p className="text-sm text-gray-600">
+                Location: {id.serviceRequest.location}
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

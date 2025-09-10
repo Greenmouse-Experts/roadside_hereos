@@ -97,6 +97,7 @@ const RefundTable: FC<Props> = ({
                     id={info.getValue()}
                     status={info.row.original.status}
                     refetch={refetch}
+                    item={info.row.original}
                   />
                 )}
               </>

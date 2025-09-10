@@ -64,7 +64,7 @@ const RefundPendingRequest = () => {
               isLoading={isLoading}
               //@ts-ignore
               data={datas || []}
-              // action={true}
+              action={true}
               page={params.page}
               next={handleNext}
               prev={handlePrev}
