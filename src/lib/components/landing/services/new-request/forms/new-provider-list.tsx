@@ -283,7 +283,6 @@ export default function NewProviderList({ next }: { next: () => void }) {
           ))}*/}
         </ul>
         <AllQuotes
-          countdown={countdown}
           setCountdown={setCountdown}
           open={open}
           next={next}

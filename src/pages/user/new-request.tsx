@@ -1,13 +1,17 @@
-import { useEffect, useLayoutEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import ServiceSection, {
   useServiceSec,
 } from "./components/request-comps/service-sec";
-import { List, User } from "lucide-react";
+import { List, User, Check } from "lucide-react";
 import { BsCash } from "react-icons/bs";
 import ProviderLists from "./components/request-comps/provider-list";
 import { atomWithStorage } from "jotai/utils";
 import { useAtom } from "jotai";
 import { useParams } from "react-router-dom";
+import ProfileSection, {
+  useProfileSec,
+} from "./components/request-comps/profile-sec";
+import PaymentSection from "./components/request-comps/payment-sec";
 
 const steps = [
   {
@@ -17,12 +21,17 @@ const steps = [
   },
   {
     step: 2,
+    title: "Personal Information",
+    Icon: User,
+  },
+  {
+    step: 3,
     title: "Provider Lists",
     Icon: List,
   },
   {
-    step: 3,
-    title: "Payment Lists",
+    step: 4,
+    title: "Payment Information",
     Icon: BsCash,
   },
 ];
@@ -37,19 +46,22 @@ export const useCurrentId = () => {
 export default function NewRequests() {
   const [step, setStep] = useState<number>(0);
   const [service, setService] = useServiceSec();
+
   const { id } = useParams();
-  const [currentId, setCurrentId] = useCurrentId();
+  const [currentId] = useCurrentId();
   const reset = () => {
     setStep(0);
     setService(null);
+    setProfile(null);
   };
   useEffect(() => {
-    if (currentId === null) return; // ✅ correct check
+    if (currentId === null) return;
 
     if (id !== currentId) {
       reset();
     }
-  }, [id, currentId]); // also include `id` here
+  }, [id, currentId]);
+  const [profile, setProfile] = useProfileSec();
   useEffect(() => {
     if (!service) {
       console.log("No service selected");
@@ -60,59 +72,93 @@ export default function NewRequests() {
     if (service && step < 1) {
       setStep(1);
     }
-  }, [service]);
+    if (profile && step < 2) {
+      setStep(2);
+    }
+    if (!service && step > 0) {
+      setStep(0);
+    }
+  }, [service, step, profile]);
+  const next = () => {
+    setStep(step + 1);
+  };
+
+  const current_step = step + 1;
+  const progressWidth = ((current_step - 1) / (steps.length - 1)) * 100;
+
   return (
-    <div className="container mx-auto ">
-      {/*{currentId} {id}*/}
-      <div className="flex justify-between items-center mb-2">
-        {steps.map((item, index) => {
-          let onClick = () => {
-            setStep(item.step - 1);
-          };
-          let current_step = step + 1;
-          if (current_step >= item.step) {
+    <div className="container mx-auto px-4 py-8">
+      <div className="relative mb-12">
+        <div className="absolute inset-0 flex items-center">
+          <div className="w-full h-1 bg-gray-200" />
+        </div>
+        <div className="absolute inset-0 flex items-center">
+          <div
+            className="h-1 bg-primary transition-all duration-500"
+            style={{ width: `${progressWidth}%` }}
+          />
+        </div>
+        <div className="relative flex justify-between">
+          {steps.map((item) => {
+            const isCompleted = item.step < current_step;
+            const isCurrent = item.step === current_step;
+
             return (
               <button
-                onClick={onClick}
-                className="flex flex-col items-center gap-2 200"
+                key={item.step}
+                // onClick={() => setStep(item.step - 1)}
+                className="flex flex-col items-center gap-2 z-10"
               >
-                <div className="aspect-square h-12 w-12 rounded-full grid place-items-center bg-primary">
-                  {/*{item.step}*/}
-                  {item.Icon && <item.Icon className="text-white" />}
+                <div
+                  className={`h-10 w-10 rounded-full flex items-center justify-center transition-colors ${
+                    isCompleted
+                      ? "bg-green-500"
+                      : isCurrent
+                        ? "bg-primary ring-4 ring-primary/20"
+                        : "bg-white border-2 border-gray-300"
+                  }`}
+                >
+                  {isCompleted ? (
+                    <Check className="h-5 w-5 text-white" />
+                  ) : (
+                    <item.Icon
+                      className={`h-5 w-5 ${
+                        isCompleted
+                          ? "text-white"
+                          : isCurrent
+                            ? "text-white"
+                            : "text-gray-400"
+                      }`}
+                    />
+                  )}
                 </div>
-                <span className="font-bold text-lg">Step: {item.step}</span>
-                <span>{item.title}</span>
+                <span
+                  className={`text-sm font-medium ${
+                    isCompleted || isCurrent ? "text-primary" : "text-gray-500"
+                  }`}
+                >
+                  {item.title}
+                </span>
               </button>
             );
-          }
-          return (
-            <button
-              onClick={() => setStep(item.step - 1)}
-              className="flex flex-col items-center gap-2 200"
-            >
-              <div className="aspect-square h-12 w-12 rounded-full border border-primary grid place-items-center bg-white">
-                {/*{item.step}*/}
-                {item.Icon && <item.Icon className="text-primary" />}
-              </div>
-              <span className="font-bold text-lg">Step: {item.step}</span>
-              <span>{item.title}</span>
-            </button>
-          );
-        })}
+          })}
+        </div>
       </div>
-      <div>
+
+      <div className="flex justify-end mb-8">
         <button
-          onClick={() => {
-            reset();
-          }}
-          className="p-2 px-4 bg-primary text-white rounded-xl"
+          onClick={reset}
+          className="px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors duration-200"
         >
-          Reset
+          Reset Form
         </button>
       </div>
+
       <div className="mt-8">
-        {step === 0 && <ServiceSection />}
-        {step === 1 && <ProviderLists />}
+        {step === 0 && <ServiceSection next={next} />}
+        {step === 1 && <ProfileSection next={next} />}
+        {step === 2 && <ProviderLists next={next} />}
+        {step === 3 && <PaymentSection next={next} />}
       </div>
     </div>
   );

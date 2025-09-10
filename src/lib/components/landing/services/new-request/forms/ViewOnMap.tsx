@@ -10,6 +10,7 @@ import {
 } from "@vis.gl/react-google-maps";
 import GoogleMapReact from "google-map-react";
 import { User } from "lucide-react";
+import { useServiceSec } from "../../../../../../pages/user/components/request-comps/service-sec";
 
 interface VendorData {
   id: string;
@@ -111,9 +112,13 @@ export default function ViewOnMap({
   vendor?: VendorData;
   close: () => void;
 }) {
-  const [location] = useLocation();
-  const lat = parseFloat(location?.latitude);
-  const lng = parseFloat(location?.longitude);
+  const [service, setService] = useServiceSec();
+  const location = {
+    latitude: service?.data?.serviceRequest.latitude,
+    longitude: service?.data?.serviceRequest.longitude,
+  };
+  const lat = parseFloat(location?.latitude as unknown as any);
+  const lng = parseFloat(location?.longitude as unknown as any);
   const new_center = {
     lat: lat || center.lat,
     lng: lng || center.lng,

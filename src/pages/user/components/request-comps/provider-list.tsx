@@ -3,6 +3,9 @@ import { useServiceSec } from "./service-sec";
 import { apiClient } from "../../../../lib/services/api/serviceApi";
 import AllQuotes from "../../../../lib/components/landing/services/new-request/forms/components/all-quotes";
 import { useEffect, useState } from "react";
+import { Portal } from "../../../../lib/components/portal/portal";
+import ViewOnMap from "../../../../lib/components/landing/services/new-request/forms/ViewOnMap";
+import { SectionProps } from "./profile-sec";
 interface ServiceRendered {
   id: string;
   fee: number;
@@ -100,7 +103,7 @@ interface VendorResponse {
     total: number;
   };
 }
-export default function ProviderLists() {
+export default function ProviderLists(props: SectionProps) {
   const [service] = useServiceSec();
   const { data, refetch, isFetching } = useQuery<VendorResponse>({
     queryKey: ["vendors", location],
@@ -117,14 +120,12 @@ export default function ProviderLists() {
     },
   });
 
-  const next = () => {
-    // setCountdown(count_default);
-    // refetch();
-  };
+  const next = () => {};
 
   return (
     <div className="flex  min-h-screen">
-      <AllQuotes open={open} next={next} p_loading={isFetching} />
+      <AllQuotes open={open} next={props.next} p_loading={isFetching} />
+
       {/*<div className="min-h-screen w-12"></div>*/}
     </div>
   );

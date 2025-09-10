@@ -4,8 +4,10 @@ import { apiClient } from "../../../../../../services/api/serviceApi";
 import Button from "../../../../../ui/Button";
 import { atom, useAtom } from "jotai";
 import { atomWithStorage } from "jotai/utils";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import { useServiceSec } from "../../../../../../../pages/user/components/request-comps/service-sec";
+import { Portal } from "../../../../../portal/portal";
+import ViewOnMap from "../ViewOnMap";
 
 interface Quote {
   id: string;
@@ -88,6 +90,16 @@ export const useDriver = () => {
 export default function AllQuotes(props: Props) {
   const request = useRequestStore((state) => state.request);
   const [driver, setDriver] = useDriver();
+  const [isOpen, setIsOpen] = useState(false);
+  const [vendor, setVendor] = useState<any>(null);
+  const close = () => {
+    setVendor(null);
+    setIsOpen(false);
+  };
+  const open = (vendor: any) => {
+    setVendor(vendor);
+    setIsOpen(true);
+  };
   let request_id = request?.id;
   const [service, setService] = useServiceSec();
   const quotes = useQuery<QuotesResponse>({
@@ -110,7 +122,11 @@ export default function AllQuotes(props: Props) {
     if (quotes.isFetching) {
       setCountdown(count_default);
     }
-    if (countdown > 0 && !quotes.isFetching) {
+    if (
+      countdown > 0 &&
+      !quotes.isFetching &&
+      quotes.data?.data?.length === 0
+    ) {
       const timer = setTimeout(() => {
         setCountdown(countdown - 1);
       }, 1000);
@@ -138,6 +154,17 @@ export default function AllQuotes(props: Props) {
   };
   return (
     <div className="flex flex-col gap-2 p-4 bg-white w-full shadow-xl">
+      <div className="flex items-center  mb-2">
+        Refreshing in : {formatTime(countdown)}
+        <span className="ml-auto">
+          <button
+            className="p-2 bg-review text-white rounded-md "
+            onClick={() => quotes.refetch()}
+          >
+            Refresh
+          </button>
+        </span>
+      </div>
       {quotes.isFetching && <>Loading Quotes...</>}
       {!quotes.isFetching && data?.length < 1 && <>No Quotes Found</>}
       {data?.map((quote) => (
@@ -174,7 +201,6 @@ export default function AllQuotes(props: Props) {
                     `/service-quote/select-driver-quote/${quote.id}`,
                   );
                   setDriver(quote);
-
                   console.log(resp.data);
                   props.next();
                 } catch (error) {
@@ -197,7 +223,7 @@ export default function AllQuotes(props: Props) {
             </button>
             <button
               onClick={async () => {
-                return props.open(quote);
+                return open(quote);
                 try {
                   let resp = await apiClient.post(
                     `/service-quote/select-driver-quote/${quote.id}`,
@@ -216,6 +242,14 @@ export default function AllQuotes(props: Props) {
           </div>
         </div>
       ))}
+      <Portal>
+        {isOpen && (
+          <ViewOnMap
+            close={close}
+            vendor={vendor as unknown as any}
+          ></ViewOnMap>
+        )}
+      </Portal>
     </div>
   );
 }
