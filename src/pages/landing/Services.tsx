@@ -85,6 +85,7 @@ const ServicesPage = () => {
                   <p className="text-lg lg:w-9/12 fw-500 mt-4 mb-7">
                     Here's a breakdown of our services to help you select the
                     best option:
+                    <p className="gidden">sos</p>
                   </p>
 
                   <div className="my-8">
