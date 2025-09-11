@@ -30,13 +30,15 @@ const ServiceProgress: FC<Props> = ({ id, status, query, refetch }) => {
               <span className="block w-4 h-4 circle bg-primary"></span> Service
               Progress
             </p>
-            <p
-              className="fw-600 underline cursor-pointer flex gap-x-2"
-              onClick={() => setShowModal(true)}
-            >
-              <RiLightbulbFlashFill className="text-orange-500 text-2xl" />
-              Actions
-            </p>
+            {status == "Approved" && (
+              <p
+                className="fw-600 underline cursor-pointer flex gap-x-2"
+                onClick={() => setShowModal(true)}
+              >
+                <RiLightbulbFlashFill className="text-orange-500 text-2xl" />
+                Actions
+              </p>
+            )}
           </div>
         </div>
         <div>
@@ -65,7 +67,11 @@ const ServiceProgress: FC<Props> = ({ id, status, query, refetch }) => {
             </div>
             <div
               className={`w-12 h-12 lg:w-16 lg:h-16 circle place-center ${
-                status === "ongoing" || status === "completed" || status === "fulfilled" ? "bg-orange-500" : "bg-gray-400"
+                status === "ongoing" ||
+                status === "completed" ||
+                status === "fulfilled"
+                  ? "bg-orange-500"
+                  : "bg-gray-400"
               }`}
             >
               <p className="fw-700 text-lg">
@@ -93,11 +99,20 @@ const ServiceProgress: FC<Props> = ({ id, status, query, refetch }) => {
           </div>
         </div>
         <div className="">
-              {query && <div className="bg-red-100 p-4 rounded"><p className="fw-600 mb-1">Query:</p><p className="fw-500">{query}</p></div>}
+          {query && (
+            <div className="bg-red-100 p-4 rounded">
+              <p className="fw-600 mb-1">Query:</p>
+              <p className="fw-500">{query}</p>
+            </div>
+          )}
         </div>
       </div>
       <Dialog title="" size="xl">
-        <ActionModal refetch={refetch} id={`${id}`} close={() => setShowModal(false)} />
+        <ActionModal
+          refetch={refetch}
+          id={`${id}`}
+          close={() => setShowModal(false)}
+        />
       </Dialog>
     </div>
   );
