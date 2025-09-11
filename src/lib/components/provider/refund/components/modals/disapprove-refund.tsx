@@ -18,7 +18,7 @@ const DisapproveModal: FC<Props> = ({ id, close, refetch }) => {
     mutationKey: ["disapproveRefund", id],
     mutationFn: async () => {
       let resp = await apiClient.post(
-        "/services-quote/admin-disapprove-refund/" + id,
+        "/services-quote/provider-disapprove-refund/" + id,
         {
           reason: reason.toString(),
         },
