@@ -4,6 +4,7 @@ import EmptyState from "../../../ui/EmptyState";
 import CurveLoader from "../../../ui/loader/curveLoader/CurveLoader";
 import PayoutTable from "../components/payoutTable";
 import { useState } from "react";
+import { apiClient } from "../../../../services/api/serviceApi";
 
 const ApprovedRequests = () => {
   const [params, setParams] = useState({
@@ -13,7 +14,12 @@ const ApprovedRequests = () => {
   });
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["admin-payout-request", params],
-    queryFn: () => admingetPayoutRequest(params),
+    queryFn: async () => {
+      let resp = await apiClient.get("/service-request/fetch-withdrawals", {
+        params: params,
+      });
+      return resp.data;
+    },
   });
 
   const datas = data?.data?.withdrawalRequests;
