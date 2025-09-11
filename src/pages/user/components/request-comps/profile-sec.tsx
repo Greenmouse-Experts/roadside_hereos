@@ -28,8 +28,11 @@ export default function ProfileSection(props: SectionProps) {
     formState: { errors },
   } = useForm({
     defaultValues: {
+      firstname: user.name,
+      lastname: user.name,
       email: user.email,
       phone: user.phone,
+      address: "",
     },
   });
   const onSubmit = (data: any) => {
@@ -55,6 +58,7 @@ export default function ProfileSection(props: SectionProps) {
       props.next();
     },
   });
+  // return <>{JSON.stringify(user)}</>;
   return (
     <div className="w-full mx-auto p-4">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">

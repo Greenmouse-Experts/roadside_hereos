@@ -39,9 +39,9 @@ export default function PaymentSection() {
       );
       return response.data;
     },
+    enabled: !!driver,
   });
   const prev = () => {};
-  const stripePromise = loadStripe(PAYMENT_KEY);
 
   if (!driver) return null;
   const temp = client_secret.data;
@@ -49,12 +49,22 @@ export default function PaymentSection() {
   if (!data) {
     return <div className="p-4 text-gray-600">Loading payment details...</div>;
   }
-  if (client_secret.isLoading) {
+  if (client_secret.isFetching) {
     return <>loading</>;
   }
-  if (!client_secret.data.data) {
+  if (!client_secret.data?.data) {
     return <>no data</>;
   }
+  if (client_secret.isError) {
+    return (
+      <div className="p-4 text-red-600">Error loading payment details</div>
+    );
+  }
+  if (!data || !data.id) {
+    return <div className="p-4 text-gray-600">No payment data available</div>;
+  }
+  const stripePromise = loadStripe(PAYMENT_KEY);
+
   const options = {
     clientSecret: data.clientSecret,
   };
@@ -111,7 +121,7 @@ export default function PaymentSection() {
         </div>
       </div>
       <div className="mt-4">
-        {data && (
+        {data && options.clientSecret && (
           <Elements stripe={stripePromise} options={options}>
             <CheckoutForm prev={prev} secret_key={data.clientSecret} />
           </Elements>
