@@ -30,15 +30,16 @@ const ServiceProgress: FC<Props> = ({ id, status, query, refetch }) => {
               <span className="block w-4 h-4 circle bg-primary"></span> Service
               Progress
             </p>
-            {status == "Approved" && (
-              <p
-                className="fw-600 underline cursor-pointer flex gap-x-2"
-                onClick={() => setShowModal(true)}
-              >
-                <RiLightbulbFlashFill className="text-orange-500 text-2xl" />
-                Actions
-              </p>
-            )}
+            {status == "Approved" ||
+              (status == "Ongoing" && (
+                <p
+                  className="fw-600 underline cursor-pointer flex gap-x-2"
+                  onClick={() => setShowModal(true)}
+                >
+                  <RiLightbulbFlashFill className="text-orange-500 text-2xl" />
+                  Actions
+                </p>
+              ))}
           </div>
         </div>
         <div>
