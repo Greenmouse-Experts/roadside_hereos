@@ -5,6 +5,7 @@ import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { PAYMENT_KEY } from "../../../../lib/services/constant";
 import CheckoutForm from "../../../../lib/components/landing/services/request/CheckoutForm";
+import { useEffect } from "react";
 interface PaymentData {
   id: string;
   serviceRequestId: string;
@@ -42,8 +43,11 @@ export default function PaymentSection() {
     enabled: !!driver,
   });
   const prev = () => {};
-
+  useEffect(() => {
+    client_secret.refetch();
+  }, [driver]);
   if (!driver) return null;
+
   const temp = client_secret.data;
   const data = temp?.data;
   if (!data) {
