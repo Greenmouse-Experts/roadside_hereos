@@ -4,6 +4,7 @@ import { getStaffRequest } from "../../../../services/api/companyApi";
 import EmptyState from "../../../ui/EmptyState";
 import CurveLoader from "../../../ui/loader/curveLoader/CurveLoader";
 import PayoutTable from "../components/payoutTable";
+import { apiClient } from "../../../../services/api/serviceApi";
 
 const StaffPayoutRequest = () => {
   const [params, setParams] = useState({
@@ -13,7 +14,12 @@ const StaffPayoutRequest = () => {
   });
   const { data, isLoading, refetch } = useQuery({
     queryKey: ["staff-payout-request", params],
-    queryFn: () => getStaffRequest(params),
+    queryFn: async () => {
+      let resp = await apiClient.get("/service-request/fetch-withdrawals", {
+        params: params,
+      });
+      return resp.data;
+    },
   });
 
   const datas = data?.data?.withdrawalRequests;
