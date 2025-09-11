@@ -138,7 +138,7 @@ export default function UserRefunds() {
       id: "Name",
       cell: (info) => `${info.getValue()} ${info.row.original.user.lname}`,
     }),
-    columnHelper.accessor((row) => row.serviceRequest.amount, {
+    columnHelper.accessor((row) => row.amount, {
       id: "Amount",
       cell: (info) => info.getValue() ?? "N/A",
     }),
