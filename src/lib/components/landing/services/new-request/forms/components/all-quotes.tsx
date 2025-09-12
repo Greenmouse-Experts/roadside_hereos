@@ -103,6 +103,18 @@ export default function AllQuotes(props: Props) {
       );
       return response.data;
     },
+    select: (data) => {
+      return {
+        ...data,
+        data: data.data.map((quote) => ({
+          ...quote,
+          timeTaken:
+            typeof quote.timeTaken === "string"
+              ? JSON.parse(quote.timeTaken)
+              : quote.timeTaken,
+        })),
+      };
+    },
   });
 
   const data = quotes.data?.data;
@@ -183,7 +195,7 @@ export default function AllQuotes(props: Props) {
               Distance: <span className="font-medium">{quote.distance}</span>
             </p>
             <p className="text-base text-gray-700 mt-2">
-              Time:{" "}
+              Time:
               <span className="font-medium">
                 {quote.timeTaken["City driving car speed"]}
               </span>
