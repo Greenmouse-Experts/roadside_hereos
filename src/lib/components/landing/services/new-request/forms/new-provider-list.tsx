@@ -10,7 +10,8 @@ import { Portal } from "../../../../portal/portal";
 import { toast } from "react-toastify";
 import { useParams } from "react-router-dom";
 import DriverCard from "./components/driver-list";
-import AllQuotes, { useDriver } from "./components/all-quotes";
+import AllQuotes from "./components/all-quotes";
+import { useDriver } from "../../../../../../pages/user/new-request";
 const containerStyle = {
   width: "100%",
   height: "400px",

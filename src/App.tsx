@@ -95,7 +95,7 @@ function App() {
         <Route path="/blog/:id" element={<BlogDetail />} />
         <Route path="/providers-faqs" element={<ProvidersFaqPage />} />
         <Route path="/request" element={<ServicesPage />} />
-        <Route path="/request/:id" element={<RequestPage />} />
+        {/*<Route path="/request/:id" element={<RequestPage />} />*/}
         <Route path="/contact" element={<ContactUsPage />} />
         <Route path="/join-us" element={<CareersPage />} />
         <Route path="/terms" element={<TermsPage />} />

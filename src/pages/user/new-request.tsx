@@ -12,7 +12,15 @@ import ProfileSection, {
   useProfileSec,
 } from "./components/request-comps/profile-sec";
 import PaymentSection from "./components/request-comps/payment-sec";
-
+import { Quote } from "../../lib/components/landing/services/new-request/forms/components/all-quotes";
+const selected_driver_atom = atomWithStorage<Quote | null>(
+  "selected_driver",
+  null,
+);
+export const useDriver = () => {
+  const [driver, setDriver] = useAtom(selected_driver_atom);
+  return [driver, setDriver] as const;
+};
 const steps = [
   {
     step: 1,

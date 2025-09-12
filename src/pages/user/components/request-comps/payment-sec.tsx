@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import { useDriver } from "../../../../lib/components/landing/services/new-request/forms/components/all-quotes";
 import { apiClient } from "../../../../lib/services/api/serviceApi";
 import { loadStripe } from "@stripe/stripe-js";
 import { Elements } from "@stripe/react-stripe-js";
 import { PAYMENT_KEY } from "../../../../lib/services/constant";
 import CheckoutForm from "../../../../lib/components/landing/services/request/CheckoutForm";
 import { useEffect } from "react";
+import { useDriver } from "../../new-request";
 interface PaymentData {
   id: string;
   serviceRequestId: string;
@@ -33,7 +33,7 @@ interface PaymentResponse {
 export default function PaymentSection() {
   const [driver] = useDriver();
   const client_secret = useQuery<PaymentResponse>({
-    queryKey: ["client_secret", driver?.id],
+    queryKey: ["client_secret", driver],
     queryFn: async () => {
       const response = await apiClient.post(
         "/service-quote/pay-selected-quote/" + driver.id,
@@ -46,7 +46,7 @@ export default function PaymentSection() {
   useEffect(() => {
     client_secret.refetch();
   }, [driver]);
-  if (!driver) return null;
+  if (!driver || !client_secret.data?.data) return null;
 
   const temp = client_secret.data;
   const data = temp?.data;

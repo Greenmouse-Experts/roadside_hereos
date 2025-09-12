@@ -6,8 +6,8 @@ import { apiClient, initiatePay } from "../../../../services/api/serviceApi";
 import useRequestStore from "../../../../store/serviceStore";
 import { formatNumber } from "../../../../utils";
 import { PAYMENT_KEY } from "../../../../services/constant";
-import { useDriver } from "../new-request/forms/components/all-quotes";
 import { useQueries, useQuery } from "@tanstack/react-query";
+import { useDriver } from "../../../../../pages/user/new-request";
 
 interface Props {
   prev: () => void;

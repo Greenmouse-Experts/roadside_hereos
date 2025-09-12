@@ -8,8 +8,9 @@ import { useEffect, useLayoutEffect, useState } from "react";
 import { useServiceSec } from "../../../../../../../pages/user/components/request-comps/service-sec";
 import { Portal } from "../../../../../portal/portal";
 import ViewOnMap from "../ViewOnMap";
+import { useDriver } from "../../../../../../../pages/user/new-request";
 
-interface Quote {
+export interface Quote {
   id: string;
   serviceRequestId: string;
   quote: number;
@@ -77,15 +78,6 @@ interface Props {
   next: () => void;
   p_loading: boolean;
 }
-
-const selected_driver_atom = atomWithStorage<Quote | null>(
-  "selected_driver",
-  null,
-);
-export const useDriver = () => {
-  const [driver, setDriver] = useAtom(selected_driver_atom);
-  return [driver, setDriver] as const;
-};
 
 export default function AllQuotes(props: Props) {
   const request = useRequestStore((state) => state.request);

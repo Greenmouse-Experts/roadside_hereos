@@ -30,7 +30,7 @@ const ServiceProgress: FC<Props> = ({ id, status, query, refetch }) => {
               <span className="block w-4 h-4 circle bg-primary"></span> Service
               Progress
             </p>
-            {JSON.stringify(status)}
+            {/*{JSON.stringify(status)}*/}
             <p
               className="fw-600 underline cursor-pointer flex gap-x-2"
               onClick={() => setShowModal(true)}
