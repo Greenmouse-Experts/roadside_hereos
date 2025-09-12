@@ -8,6 +8,8 @@ import {
 } from "../../../../services/api/adminApi";
 import { toast } from "react-toastify";
 import ReusableModal from "../../../ui/ReusableModal";
+import { useMutation } from "@tanstack/react-query";
+import { apiClient } from "../../../../services/api/serviceApi";
 
 interface Props {
   id: string;
@@ -45,9 +47,29 @@ const PayoutActions: FC<Props> = ({ id, status, refetch }) => {
         setIsBusy(false);
       });
   };
+  const approve_mutation = useMutation({
+    mutationFn: async () => {
+      let resp = await apiClient.post(
+        "/service-request/initiate-vendor-payout/" + id,
+      );
+      return resp.data;
+    },
+    onSuccess: () => {
+      refetch();
+    },
+    onError: (err: any) => {
+      toast.error(err.response.data.message);
+    },
+  });
 
   const handleApprove = async () => {
-    setIsBusy(true);
+    // return toast.success(id);
+    //
+    return toast.promise(approve_mutation.mutateAsync(), {
+      pending: "Approving...",
+      success: "Approved!",
+      error: "Failed to approve",
+    });
     if (status === "approved") {
       handleInitate();
     } else {
@@ -61,6 +83,7 @@ const PayoutActions: FC<Props> = ({ id, status, refetch }) => {
         });
     }
   };
+  // return <>{id}</>;
   return (
     <>
       <div>
@@ -90,12 +113,13 @@ const PayoutActions: FC<Props> = ({ id, status, refetch }) => {
       </div>
       <Approve title="" size="md">
         <ReusableModal
+          // id={id}
           title={`${status === "pending" ? "Are you sure want to Approve this withdrawal request?" : "Are you sure want to Initiate this transfer?"}`}
           action={handleApprove}
           actionTitle="Approve"
           cancelTitle="No, Close"
           closeModal={() => ShowApprove(false)}
-          isBusy={isBusy}
+          isBusy={approve_mutation.isPending}
         />
       </Approve>
       <Decline title="" size="md">
