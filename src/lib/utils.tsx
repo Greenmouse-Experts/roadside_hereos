@@ -108,7 +108,7 @@ export const FormatStatus = {
   fulfilled: (
     <div className="flex items-center gap-x-2">
       <span className="bg-green-600 w-4 h-4 circle"></span>{" "}
-      <span className="fw-500 text-green-600">Completed</span>
+      <span className="fw-500 text-green-600">Fulfilled</span>
     </div>
   ),
   succeeded: (
@@ -180,7 +180,7 @@ export const getPageCount = (count: number, limit: number) => {
 
 export const generatePaginationNumbers = (
   currentPage: number,
-  totalPages: number
+  totalPages: number,
 ) => {
   const pagesToShow = 4;
   const paginationNumbers = [];
@@ -220,9 +220,9 @@ export const getPostalCodeFromGoogle = (address: AddressType[]) => {
     return "";
   }
   const selectedAdd = address.filter((where) =>
-    where.types.includes("postal_code")
+    where.types.includes("postal_code"),
   );
-  if(!selectedAdd.length) return "";
+  if (!selectedAdd.length) return "";
   const postal = selectedAdd[0].long_name;
   return postal;
 };
@@ -232,9 +232,9 @@ export const getCityFromGoogle = (address: AddressType[]) => {
     return "";
   }
   const selectedAdd = address.filter((where) =>
-    where.types.includes("political")
+    where.types.includes("political"),
   );
-  if(!selectedAdd.length) return "";
+  if (!selectedAdd.length) return "";
   const postal = selectedAdd[0].long_name;
   return postal;
 };
@@ -244,9 +244,9 @@ export const getStateFromGoogle = (address: AddressType[]) => {
     return "";
   }
   const selectedAdd = address.filter((where) =>
-    where.types.includes("administrative_area_level_1")
+    where.types.includes("administrative_area_level_1"),
   );
-  if(!selectedAdd.length) return "";
+  if (!selectedAdd.length) return "";
   const postal = selectedAdd[0].long_name;
   return postal;
 };
@@ -279,7 +279,7 @@ export const getBearing = (
   lat1: number,
   lon1: number,
   lat2: number,
-  lon2: number
+  lon2: number,
 ) => {
   const dLon = lon2 - lon1;
   const y = Math.sin(dLon) * Math.cos(lat2);
