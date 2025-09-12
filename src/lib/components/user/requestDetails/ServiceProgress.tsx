@@ -32,8 +32,8 @@ const ServiceProgress: FC<Props> = ({ id, status, query, refetch }) => {
               Progress
             </p>
             {/*{JSON.stringify(status)}*/}
-            {(status === "completed" ||
-              status === "fulfilled" ||
+            {(status === "fulfilled" ||
+              status === "ongoing" ||
               status === "pending") && (
               <p
                 className="fw-600 underline cursor-pointer flex gap-x-2"
