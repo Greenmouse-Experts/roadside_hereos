@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import useDialog from "../../../hooks/useDialog";
 import { FormatStatus } from "../../../utils";
 import { RiExchangeDollarLine, RiLightbulbFlashFill } from "react-icons/ri";
@@ -21,6 +21,7 @@ const ServiceProgress: FC<Props> = ({ id, status, query, refetch }) => {
     fulfilled: "w-[85%]",
     completed: "w-[100%]",
   };
+  useEffect(() => {}, []);
   return (
     <div>
       <div className="bg-white shadow mt-6 rounded-lg p-4">
@@ -31,13 +32,15 @@ const ServiceProgress: FC<Props> = ({ id, status, query, refetch }) => {
               Progress
             </p>
             {/*{JSON.stringify(status)}*/}
-            <p
-              className="fw-600 underline cursor-pointer flex gap-x-2"
-              onClick={() => setShowModal(true)}
-            >
-              <RiLightbulbFlashFill className="text-orange-500 text-2xl" />
-              Actions
-            </p>
+            {status == "completed" && (
+              <p
+                className="fw-600 underline cursor-pointer flex gap-x-2"
+                onClick={() => setShowModal(true)}
+              >
+                <RiLightbulbFlashFill className="text-orange-500 text-2xl" />
+                Actions
+              </p>
+            )}
           </div>
         </div>
         <div>
