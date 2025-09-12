@@ -32,16 +32,17 @@ const ServiceProgress: FC<Props> = ({ id, status, query, refetch }) => {
               Progress
             </p>
             {/*{JSON.stringify(status)}*/}
-            {status == "completed" ||
-              (status == "fulfilled" && (
-                <p
-                  className="fw-600 underline cursor-pointer flex gap-x-2"
-                  onClick={() => setShowModal(true)}
-                >
-                  <RiLightbulbFlashFill className="text-orange-500 text-2xl" />
-                  Actions
-                </p>
-              ))}
+            {(status === "completed" ||
+              status === "fulfilled" ||
+              status === "pending") && (
+              <p
+                className="fw-600 underline cursor-pointer flex gap-x-2"
+                onClick={() => setShowModal(true)}
+              >
+                <RiLightbulbFlashFill className="text-orange-500 text-2xl" />
+                Actions
+              </p>
+            )}
           </div>
         </div>
         <div>

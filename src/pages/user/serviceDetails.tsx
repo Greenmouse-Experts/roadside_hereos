@@ -8,6 +8,8 @@ import dayjs from "dayjs";
 import { formatAsNgnMoney } from "../../lib/utils";
 import TrackingBtn from "../../lib/components/user/requestDetails/TrackingBtn";
 import ServiceProgress from "../../lib/components/user/requestDetails/ServiceProgress";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -23,7 +25,15 @@ const ServiceDetails = () => {
     return totalPay;
   };
   // return <></>;
-
+  useEffect(() => {
+    // console.log(data.data.s);
+    // if (data?.data) {
+    //   if (data?.data?.status == "fulfilled" || data?.data?.status == "Paid") {
+    //     console.log("data");
+    //     toast("complete order by clicking action button");
+    //   }
+    // }
+  }, [data]);
   return (
     <div className="pb-24">
       <div className="lg:flex justify-between items-start">
