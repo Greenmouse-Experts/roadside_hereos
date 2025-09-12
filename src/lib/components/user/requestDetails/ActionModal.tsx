@@ -8,13 +8,18 @@ interface Props {
   id: string;
   refetch: () => void;
   close: () => void;
+  status: string;
 }
-const ActionModal: FC<Props> = ({ id, refetch, close }) => {
+const ActionModal: FC<Props> = ({ id, status, refetch, close }) => {
   const tabs = [
-    {
-      title: <p>Complete Action</p>,
-      content: <ReviewModal id={id} close={close} />,
-    },
+    ...(status == "ongoing"
+      ? [
+          {
+            title: <p>Complete Action</p>,
+            content: <ReviewModal id={id} close={close} />,
+          },
+        ]
+      : []),
     {
       title: <p>Submit Query</p>,
       content: <QueryModal id={id} close={close} refetch={refetch} />,
@@ -24,6 +29,7 @@ const ActionModal: FC<Props> = ({ id, refetch, close }) => {
       content: <CancelModal id={id} close={close} refetch={refetch} />,
     },
   ];
+
   return (
     <div>
       <Tabs tabs={tabs} type="charts" />

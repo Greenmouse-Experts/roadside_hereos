@@ -2,6 +2,7 @@ import { Rating } from "@material-tailwind/react";
 import { ChangeEvent, FC, useState } from "react";
 import TextInput, { InputType } from "../../ui/TextInput";
 import {
+  apiClient,
   clientUpdateService,
   submitReview,
 } from "../../../services/api/serviceApi";
@@ -9,7 +10,7 @@ import { toast } from "react-toastify";
 import { ScaleSpinner } from "../../ui/Loading";
 import Button from "../../ui/Button";
 import { FaRegStar, FaStar } from "react-icons/fa";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useMutationState } from "@tanstack/react-query";
 
 interface Props {
   id: string;
@@ -23,44 +24,76 @@ const ReviewModal: FC<Props> = ({ id, close }) => {
   // const review_mutation = useMutation({
 
   // })
-  const handleSubmit = async () => {
+  // const handleSubmit = async () => {
+  //   const payload = {
+  //     serviceRequestId: id,
+  //     rating: ratings,
+  //     comment: review,
+  //   };
+  //   return console.log(payload);
+  //   await submitReview(payload)
+  //     .then((res) => {
+  //       toast.success(res.message);
+  //       setIsBusy(false);
+  //       close();
+  //     })
+  //     .catch((err: any) => {
+  //       toast.error(err.response.data.message);
+  //       setIsBusy(false);
+  //     });
+  // };
+
+  // const handleAction = async () => {
+  //   setIsBusy(true);
+  //   const payload = {
+  //     status: "completed",
+  //   };
+  //   await clientUpdateService(id, payload)
+  //     .then((res) => {
+  //       if (review || ratings) {
+  //         handleSubmit();
+  //       } else {
+  //         toast.success(res.message);
+  //         setIsBusy(false);
+  //         close();
+  //       }
+  //     })
+  //     .catch((err: any) => {
+  //       toast.error(err.response.data.message);
+  //       console.log(err);
+  //       setIsBusy(false);
+  //     });
+  // };
+  //
+  //
+  const review_mutation = useMutation({
+    mutationFn: async (payload: any) => {
+      let resp = await apiClient.patch(
+        "/service-request/client-update/" + payload.id,
+        payload,
+      );
+      return resp.data;
+    },
+    onSuccess: () => {
+      toast.success("Review submitted successfully!");
+      close();
+    },
+    onError: (error: any) => {
+      toast.error(error.response.data.message);
+    },
+  });
+  const handleAction = () => {
     const payload = {
-      serviceRequestId: id,
+      id: id,
+      status: "completed",
       rating: ratings,
       comment: review,
     };
-    await submitReview(payload)
-      .then((res) => {
-        toast.success(res.message);
-        setIsBusy(false);
-        close();
-      })
-      .catch((err: any) => {
-        toast.error(err.response.data.message);
-        setIsBusy(false);
-      });
-  };
-
-  const handleAction = async () => {
-    setIsBusy(true);
-    const payload = {
-      status: "completed",
-    };
-    await clientUpdateService(id, payload)
-      .then((res) => {
-        if (review || ratings) {
-          handleSubmit();
-        } else {
-          toast.success(res.message);
-          setIsBusy(false);
-          close();
-        }
-      })
-      .catch((err: any) => {
-        toast.error(err.response.data.message);
-        console.log(err);
-        setIsBusy(false);
-      });
+    toast.promise(review_mutation.mutateAsync(payload), {
+      pending: "Submitting review...",
+      success: "Review submitted successfully!",
+      error: "Failed to submit review",
+    });
   };
   return (
     <div>
@@ -107,7 +140,13 @@ const ReviewModal: FC<Props> = ({ id, close }) => {
       <div className="mt-6">
         <Button
           onClick={handleAction}
-          title={isBusy ? <ScaleSpinner size={14} color="white" /> : "Complete"}
+          title={
+            review_mutation.isPending ? (
+              <ScaleSpinner size={14} color="white" />
+            ) : (
+              "Complete"
+            )
+          }
         />
       </div>
     </div>
