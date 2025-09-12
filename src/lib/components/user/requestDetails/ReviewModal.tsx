@@ -15,8 +15,9 @@ import { useMutation, useMutationState } from "@tanstack/react-query";
 interface Props {
   id: string;
   close: () => void;
+  refetch: () => void;
 }
-const ReviewModal: FC<Props> = ({ id, close }) => {
+const ReviewModal: FC<Props> = ({ id, close, refetch }) => {
   const [ratings, setRatings] = useState(0);
   const [showRev, setShowRev] = useState(false);
   const [review, setReview] = useState("");
@@ -77,6 +78,7 @@ const ReviewModal: FC<Props> = ({ id, close }) => {
     onSuccess: () => {
       toast.success("Review submitted successfully!");
       close();
+      refetch();
     },
     onError: (error: any) => {
       toast.error(error.response.data.message);

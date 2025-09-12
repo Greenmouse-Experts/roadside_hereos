@@ -14,25 +14,24 @@ interface Props {
   paymentStatus: string;
 }
 const RequestList: FC<Props> = ({ status, paymentStatus }) => {
-  
   const [params, setParams] = useState({
     page: 1,
     status: status,
-    paymentStatus: paymentStatus
-  })
+    paymentStatus: paymentStatus,
+  });
 
   useEffect(() => {
     setParams({
       ...params,
       status: status,
-      paymentStatus: paymentStatus
-    })
-  }, [status, paymentStatus])
+      paymentStatus: paymentStatus,
+    });
+  }, [status, paymentStatus]);
 
-  const {data, isLoading} = useQuery({
-    queryKey: ['getMyService', params],
-    queryFn: () => getMyServices(params)
-})
+  const { data, isLoading } = useQuery({
+    queryKey: ["getMyService", params],
+    queryFn: () => getMyServices(params),
+  });
 
   const navigate = useNavigate();
   // Table components
@@ -90,7 +89,7 @@ const RequestList: FC<Props> = ({ status, paymentStatus }) => {
       ),
     }),
   ];
-  
+
   return (
     <div className="lg:p-4 w-full">
       {isLoading && (
@@ -105,7 +104,9 @@ const RequestList: FC<Props> = ({ status, paymentStatus }) => {
           </div>
         </div>
       )}
-      {!isLoading && data && <DataTable columns={columns} data={data?.data?.serviceRequests} />}
+      {!isLoading && data && (
+        <DataTable columns={columns} data={data?.data?.serviceRequests} />
+      )}
     </div>
   );
 };

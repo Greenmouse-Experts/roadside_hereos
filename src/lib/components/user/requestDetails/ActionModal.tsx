@@ -12,11 +12,11 @@ interface Props {
 }
 const ActionModal: FC<Props> = ({ id, status, refetch, close }) => {
   const tabs = [
-    ...(status == "ongoing"
+    ...(status == "fulfilled" || status == "ongoing"
       ? [
           {
             title: <p>Complete Action</p>,
-            content: <ReviewModal id={id} close={close} />,
+            content: <ReviewModal id={id} close={close} refetch={refetch} />,
           },
         ]
       : []),
