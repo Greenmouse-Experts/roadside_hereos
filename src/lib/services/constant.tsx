@@ -37,7 +37,7 @@ export const APPROVE_REFUND = `/services-quote/approve-refund`;
 export const INITIATE_REFUND = `/service-quote/initiate-refund`;
 
 // Auth endpoints
-export const USER_LOGIN = "/user/login";
+export const USER_LOGIN = "/user/login/v2";
 export const UPDATE_ACCOUNT = "/user/update-account";
 export const UPDATE_PASSWORD = "/user/change-password";
 export const USER_SIGNUP = "/user/signup";

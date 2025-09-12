@@ -15,7 +15,7 @@ axios.interceptors.request.use(
   },
   function (error) {
     return Promise.reject(error);
-  }
+  },
 );
 axios.interceptors.response.use(
   (response) => {
@@ -27,7 +27,7 @@ axios.interceptors.response.use(
       return (window.location.href = "/auth/login");
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export const getUsers = async () => {
@@ -76,7 +76,7 @@ export const deleteMe = async () => {
     .then((response) => response.data);
 };
 
-export const requestRefund = async (payload: {serviceRequestId: string}) => {
+export const requestRefund = async (payload: { serviceRequestId: string }) => {
   return axios
     .post(`${ENDPOINT.USER_REQUEST_REFUND}`, payload)
     .then((response) => response.data);

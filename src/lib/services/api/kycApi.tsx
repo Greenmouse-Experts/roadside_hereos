@@ -15,7 +15,7 @@ axios.interceptors.request.use(
   },
   function (error) {
     return Promise.reject(error);
-  }
+  },
 );
 axios.interceptors.response.use(
   (response) => {
@@ -27,21 +27,20 @@ axios.interceptors.response.use(
       return (window.location.href = "/auth/login");
     }
     return Promise.reject(error);
-  }
+  },
 );
 
-export const getCompanyKyc = async(payload:string) => {
+export const getCompanyKyc = async (payload: string) => {
   return axios
     .get(`${ENDPOINT.GET_COMPANY_KYC}/${payload}`)
     .then((response) => response.data);
-}
+};
 
-export const getDriverKyc = async(payload:string) => {
+export const getDriverKyc = async (payload: string) => {
   return axios
     .get(`${ENDPOINT.GET_DRIVER_KYC}/${payload}`)
     .then((response) => response.data);
-}
-
+};
 
 export const submitKyc = async (payload: kycProps) => {
   return axios
@@ -53,13 +52,13 @@ export const getKyc = async () => {
   return axios.get(`${ENDPOINT.GET_KYC}`).then((response) => response.data);
 };
 
-export const approveCompanyKyc = async (data:any, payload:any ) => {
+export const approveCompanyKyc = async (data: any, payload: any) => {
   return axios
     .patch(`${ENDPOINT.APPROVE_COMPANY_KYC}/${data.id}/${data.userId}`, payload)
     .then((response) => response.data);
 };
 
-export const approveDriverKyc = async (id:string, payload:any ) => {
+export const approveDriverKyc = async (id: string, payload: any) => {
   return axios
     .patch(`${ENDPOINT.APPROVE_DRIVER_KYC}/${id}`, payload)
     .then((response) => response.data);

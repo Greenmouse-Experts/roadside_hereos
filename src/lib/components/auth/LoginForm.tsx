@@ -13,11 +13,14 @@ import useAuthStore from "../../store/userStore";
 import useModal from "../../hooks/useModal";
 import AccontNotVerified from "./AccontNotVerified";
 import { removeSpace } from "../../utils";
+import { apiClient } from "../../services/api/serviceApi";
+import { useTempUser } from "../../../pages/auth/UserSignUp";
 
 const LoginForm = () => {
   const [isBusy, setIsBusy] = useState(false);
   const navigate = useNavigate();
   const saveUser = useAuthStore((state) => state.saveUser);
+  const [user, setUser] = useTempUser();
   const {
     control,
     handleSubmit,
@@ -31,7 +34,13 @@ const LoginForm = () => {
     },
   });
   const mutation = useMutation({
-    mutationFn: userLogin,
+    mutationFn: async () => {
+      let resp = await apiClient.post("/user/login/v2", {
+        email: getValues("email"),
+        password: getValues("password"),
+      });
+      return resp.data;
+    },
     onSuccess: (data) => {
       const payload = {
         token: data.token,
@@ -56,7 +65,7 @@ const LoginForm = () => {
           account: data.user.userType,
           id: data.user.id,
           name: `${removeSpace(data?.user?.fname)} ${removeSpace(
-            data?.user?.lname
+            data?.user?.lname,
           )}`,
         });
         navigate("/user");
@@ -67,9 +76,17 @@ const LoginForm = () => {
       } else {
         toast.info("This account is mobile-only. Please use our app");
       }
-      setIsBusy(false);
     },
     onError: (error: any) => {
+      if (error.status == 403) {
+        setUser(error.response.data);
+        toast.error(error.response.data.message);
+        navigate("/auth/verify/user", {
+          viewTransition: true,
+        });
+        return console.log(error.response.data);
+      }
+      return console.log(error.status);
       toast.error(error.response.data.message);
       if (error.response.data.message === "Please Verify account") {
         setShowModal(true);
@@ -148,9 +165,13 @@ const LoginForm = () => {
           <div className="mt-12">
             <Button
               title={
-                isBusy ? <ScaleSpinner size={14} color="white" /> : "Login"
+                mutation.isPending ? (
+                  <ScaleSpinner size={14} color="white" />
+                ) : (
+                  "Login"
+                )
               }
-              disabled={!isValid}
+              disabled={!isValid || mutation.isPending}
             />
           </div>
         </form>

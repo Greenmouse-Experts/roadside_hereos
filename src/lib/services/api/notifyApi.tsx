@@ -14,7 +14,7 @@ axios.interceptors.request.use(
   },
   function (error) {
     return Promise.reject(error);
-  }
+  },
 );
 axios.interceptors.response.use(
   (response) => {
@@ -26,24 +26,23 @@ axios.interceptors.response.use(
       return (window.location.href = "/auth/login");
     }
     return Promise.reject(error);
-  }
+  },
 );
 
-
 export const getAdminNotify = async () => {
-    return axios
-      .get(`${ENDPOINT.GET_ADMIN_NOTIFY}`)
-      .then((response) => response.data);
-  };
+  return axios
+    .get(`${ENDPOINT.GET_ADMIN_NOTIFY}`)
+    .then((response) => response.data);
+};
 
-  export const getUserNotify = async (payload:string) => {
-    return axios
-      .get(`${ENDPOINT.GET_USER_NOTIFY}/${payload}`)
-      .then((response) => response.data);
-  };
+export const getUserNotify = async (payload: string) => {
+  return axios
+    .get(`${ENDPOINT.GET_USER_NOTIFY}/${payload}`)
+    .then((response) => response.data);
+};
 
-  export const markAsRead = async (payload:string) => {
-    return axios
-      .patch(`${ENDPOINT.MARK_NOTIFY_READ}/${payload}`,)
-      .then((response) => response.data);
-  };
+export const markAsRead = async (payload: string) => {
+  return axios
+    .patch(`${ENDPOINT.MARK_NOTIFY_READ}/${payload}`)
+    .then((response) => response.data);
+};

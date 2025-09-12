@@ -14,7 +14,7 @@ axios.interceptors.request.use(
   },
   function (error) {
     return Promise.reject(error);
-  }
+  },
 );
 axios.interceptors.response.use(
   (response) => {
@@ -26,9 +26,8 @@ axios.interceptors.response.use(
       return (window.location.href = "/auth/login");
     }
     return Promise.reject(error);
-  }
+  },
 );
-
 
 export const createBlogCategory = async (payload: any) => {
   return axios
@@ -62,7 +61,7 @@ export const editBlogComments = async (id: any, payload: any) => {
 
 export const deleteBlogComments = async (payload: string) => {
   return axios
-    .delete(`${ENDPOINT.DELETE_BLOG_COMMENTS}/${payload}`,)
+    .delete(`${ENDPOINT.DELETE_BLOG_COMMENTS}/${payload}`)
     .then((response) => response.data);
 };
 
@@ -74,7 +73,7 @@ export const editBlogCategory = async (payload: any) => {
 
 export const deleteBlogCategory = async (payload: string) => {
   return axios
-    .delete(`${ENDPOINT.DELETE_BLOG_CATEGORY}/${payload}`,)
+    .delete(`${ENDPOINT.DELETE_BLOG_CATEGORY}/${payload}`)
     .then((response) => response.data);
 };
 
@@ -85,9 +84,7 @@ export const createBlog = async (payload: any) => {
 };
 
 export const getBlog = async () => {
-  return axios
-    .get(`${ENDPOINT.GET_BLOG}`)
-    .then((response) => response.data);
+  return axios.get(`${ENDPOINT.GET_BLOG}`).then((response) => response.data);
 };
 
 export const getSingleBlog = async (id: string) => {
@@ -104,7 +101,7 @@ export const editBlog = async (payload: any) => {
 
 export const deleteBlog = async (payload: string) => {
   return axios
-    .delete(`${ENDPOINT.DELETE_BLOG}/${payload}`,)
+    .delete(`${ENDPOINT.DELETE_BLOG}/${payload}`)
     .then((response) => response.data);
 };
 
@@ -136,4 +133,4 @@ export const getPostsByCategory = async (id: string) => {
   return axios
     .get(`${ENDPOINT.GET_BLOG_BY_CATEGORY}/${id}?page=${1}`)
     .then((response) => response.data);
-}
+};

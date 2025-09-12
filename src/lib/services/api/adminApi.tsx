@@ -16,7 +16,7 @@ axios.interceptors.request.use(
   },
   function (error) {
     return Promise.reject(error);
-  }
+  },
 );
 axios.interceptors.response.use(
   (response) => {
@@ -28,7 +28,7 @@ axios.interceptors.response.use(
       return (window.location.href = "/auth/login");
     }
     return Promise.reject(error);
-  }
+  },
 );
 
 export const adminAddRates = async (payload: any) => {
@@ -62,7 +62,7 @@ export const adminSetPayoutCap = async (payload: { amount: number }) => {
 export const admingetPayoutRequest = async (params: any) => {
   return axios
     .get(
-      `${ENDPOINT.ADMIN_GET_PAYOUT_REQUESTS}?page=${params.page}&status=${params.status}`
+      `${ENDPOINT.ADMIN_GET_PAYOUT_REQUESTS}?page=${params.page}&status=${params.status}`,
     )
     .then((response) => response.data);
 };
@@ -76,7 +76,7 @@ export const adminDeclinePayoutRequests = async (id: string) => {
 export const getAdminPayments = async (params: any) => {
   return axios
     .get(
-      `${ENDPOINT.ADMIN_GET_PAYMENTS}?page=${params.page}&status=${params.status}`
+      `${ENDPOINT.ADMIN_GET_PAYMENTS}?page=${params.page}&status=${params.status}`,
     )
     .then((response) => response.data);
 };
@@ -119,7 +119,7 @@ export const approveRefund = async (id: string) => {
 
 export const disapproveRefund = async (
   id: string,
-  payload: { reason: string }
+  payload: { reason: string },
 ) => {
   return axios
     .post(`${ENDPOINT.DISAPPROVE_REFUND}/${id}`, payload)

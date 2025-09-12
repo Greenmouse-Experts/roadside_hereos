@@ -30,7 +30,7 @@ const UserLogin = () => {
                 <p className="fs-500">
                   Not yet registered?{" "}
                   <Link
-                    to={"/auth/register"}
+                    to={"/auth/register/user"}
                     className="underline fw-500 text-primary"
                   >
                     Register now
