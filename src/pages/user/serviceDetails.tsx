@@ -131,17 +131,17 @@ const ServiceDetails = () => {
                       </p>
                     </div>
                   </div>
-                  <div className="grid gap-5">
+                  <div className="flex flex-col gap-5">
                     <div className="flex gap-x-2">
                       <p>Service Cost:</p>
                       <p className="fw-500">{formatAsNgnMoney(getTotal())}</p>
                     </div>
-                    <div className="flex gap-x-2">
+                    {/*<div className="flex gap-x-2">
                       <p>Contact Info:</p>
                       <p className="fw-500">
                         {data?.data?.driverCompany?.phone}
                       </p>
-                    </div>
+                    </div>*/}
                     <div className="flex gap-x-2">
                       <p>Addition Info:</p>
                       <p className="fw-500"></p>
@@ -167,7 +167,7 @@ const ServiceDetails = () => {
                   </p>
                 </div>
                 <div className="flex gap-x-2">
-                  <p>Vehcile Model:</p>
+                  <p>Vehicle Model:</p>
                   <p className="fw-500">{data?.data?.serviceRequest?.model}</p>
                 </div>
                 <div className="flex gap-x-2">

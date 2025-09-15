@@ -47,7 +47,7 @@ const UserSettings = () => {
                   }`}
                   onClick={() => handleActive(4)}
                 >
-                  Sms
+                  SMS
                 </li>
               </ul>
             </div>

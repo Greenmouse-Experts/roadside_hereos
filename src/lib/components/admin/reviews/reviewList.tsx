@@ -3,6 +3,7 @@ import { ReviewItem } from "../../../types/routine";
 import { Rating } from "@material-tailwind/react";
 import dayjs from "dayjs";
 import { useNavigate } from "react-router-dom";
+import { est_day } from "../services/RequestList";
 
 interface Props {
   data: any[];
@@ -40,7 +41,11 @@ const ReviewList: FC<Props> = ({ data }) => {
                   <div>
                     <Rating value={5} readonly />
                   </div>
-                  <p>{dayjs(item?.createdAt).format("ddd DD, MMM YYYY")}</p>
+                  <p>
+                    {est_day(item?.createdAt)
+                      .tz("America/New_York")
+                      .format("ddd DD, MMM YYYY")}
+                  </p>
                 </div>
                 <div className="hidden lg:block border-l pl-4 w-4/12 p-2">
                   <p

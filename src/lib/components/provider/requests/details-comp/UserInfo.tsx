@@ -28,7 +28,7 @@ const UserInfo: FC<Props> = ({ data }) => {
     vehicleYear,
     quote,
     customer,
-    company
+    company,
   } = data;
 
   return (
@@ -59,7 +59,7 @@ const UserInfo: FC<Props> = ({ data }) => {
               </div>
             </div>
 
-            <div className="bg-light p-2 lg:p-4 rounded mt-2">
+            {/*<div className="bg-light p-2 lg:p-4 rounded mt-2">
               <p className="my-1 fw-500 flex gap-x-2 items-center fw-600 text-gray-600">
                 User Details
               </p>
@@ -76,13 +76,15 @@ const UserInfo: FC<Props> = ({ data }) => {
                   <span className="fw-500 text-gray-700">{customer.phone}</span>
                 </p>
               </div>
-            </div>
+            </div>*/}
 
             <div className="mt-3 mb-2 grid gap-2">
               <p className="my-1 fw-500 flex gap-x-2 items-center">
                 <IoMdTime className="text-lg lg:text-2xl text-gray-500" />
                 Requested <span className="fw-600">{name}</span> at{" "}
-                {dayjs(serviceRequestCreatedAt).format("hh:mma dddd DD, MMMM YYYY")}
+                {dayjs(serviceRequestCreatedAt).format(
+                  "hh:mma dddd DD, MMMM YYYY",
+                )}
               </p>
               <p className="my-1 fw-500 flex gap-x-2 items-center">
                 <MdLocationPin className="text-lg lg:text-2xl text-gray-500" />
@@ -115,11 +117,16 @@ const UserInfo: FC<Props> = ({ data }) => {
                     <span className="fw-500 text-gray-700">{company.name}</span>
                   </p>
                   <p>
-                    Email: {" "} <span className="fw-500 text-gray-700">{company.email}</span>
+                    Email:{" "}
+                    <span className="fw-500 text-gray-700">
+                      {company.email}
+                    </span>
                   </p>
                   <p>
-                    Phone Number: {" "}
-                    <span className="fw-500 text-gray-700">{company.phone}</span>
+                    Phone Number:{" "}
+                    <span className="fw-500 text-gray-700">
+                      {company.phone}
+                    </span>
                   </p>
                 </div>
               </div>
@@ -131,10 +138,13 @@ const UserInfo: FC<Props> = ({ data }) => {
                 <div className="grid gap-3 lg:grid-cols-2 mt-4">
                   <p>
                     Name:{" "}
-                    <span className="fw-500 text-gray-700">{fname} {lname}</span>
+                    <span className="fw-500 text-gray-700">
+                      {fname} {lname}
+                    </span>
                   </p>
                   <p>
-                    Email: {"  "} <span className="fw-500 text-gray-700">{email}</span>
+                    Email: {"  "}{" "}
+                    <span className="fw-500 text-gray-700">{email}</span>
                   </p>
                   <p>
                     Phone Number:{"  "}
