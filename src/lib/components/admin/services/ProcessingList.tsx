@@ -10,14 +10,15 @@ import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import { fetchAdminRequests } from "../../../services/api/serviceApi";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import { est_day } from "./RequestList";
 
 const AdminProcessingService = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [params, setParams] = useState({
     status: "Pending",
     page: 1,
-    payment: "Paid"
-  })
+    payment: "Paid",
+  });
 
   const { data, isLoading } = useQuery({
     queryKey: ["getServices", params],
@@ -44,7 +45,7 @@ const AdminProcessingService = () => {
       });
     }
   };
-  
+
   const handlePrev = () => {
     if (params.page === 1) {
       toast.info("This is the first page");
@@ -59,7 +60,7 @@ const AdminProcessingService = () => {
   return (
     <>
       <div>
-        {(data && !data?.data?.serviceRequests?.length) && (
+        {data && !data?.data?.serviceRequests?.length && (
           <div>
             <EmptyState msg="There's no processed request currently on the system." />
           </div>
@@ -78,9 +79,8 @@ const AdminProcessingService = () => {
         )}
         {data &&
           !!data?.data?.serviceRequests?.length &&
-          data?.data
-            ?.serviceRequests
-            .map((item: ServiceRequestItem2, index: number) => {
+          data?.data?.serviceRequests.map(
+            (item: ServiceRequestItem2, index: number) => {
               const colorIndex = index % colors.length;
               const color = colors[colorIndex];
               return (
@@ -96,9 +96,9 @@ const AdminProcessingService = () => {
                       {item.location}
                     </p>
                     <p className=" fs-300 fw-600 text-primary">
-                      {dayjs(item.createdAt).format(
-                        "hh:mma dddd DD, MMMM YYYY"
-                      )}
+                      {est_day(item.createdAt)
+                        ?.tz("America/New_York")
+                        .format("hh:mma dddd DD, MMMM YYYY")}
                     </p>
                   </div>
                   <div className="flex gap-x-3 ">
@@ -115,10 +115,13 @@ const AdminProcessingService = () => {
                   </div>
                 </div>
               );
-            })}
+            },
+          )}
         <div className="mt-6 flex justify-end">
           <div className="flex gap-x-4 items-center">
-            <p className="fw-600">Page {params.page} / {Math.ceil(count/10)}</p>
+            <p className="fw-600">
+              Page {params.page} / {Math.ceil(count / 10)}
+            </p>
             <div className="flex gap-x-2 items-center">
               <div
                 onClick={handlePrev}

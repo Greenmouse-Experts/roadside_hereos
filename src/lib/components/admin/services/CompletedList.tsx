@@ -10,11 +10,12 @@ import { useQuery } from "@tanstack/react-query";
 import EmptyState from "../../ui/EmptyState";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import { useNavigate } from "react-router-dom";
+import { est_day } from "./RequestList";
 
-interface Props{
-  status: string
+interface Props {
+  status: string;
 }
-const AdminCompletedService:FC<Props> = ({status}) => {
+const AdminCompletedService: FC<Props> = ({ status }) => {
   const navigate = useNavigate();
   const [params, setParams] = useState({
     status: status,
@@ -61,7 +62,9 @@ const AdminCompletedService:FC<Props> = ({status}) => {
       <div>
         {data && !data?.data?.serviceRequests.length && (
           <div>
-            <EmptyState msg={`There's no ${status} request currently on the system.`} />
+            <EmptyState
+              msg={`There's no ${status} request currently on the system.`}
+            />
           </div>
         )}
         {isLoading && (
@@ -95,9 +98,9 @@ const AdminCompletedService:FC<Props> = ({status}) => {
                       {item.location}
                     </p>
                     <p className=" fs-300 fw-600 text-primary">
-                      {dayjs(item.createdAt).format(
-                        "hh:mma dddd DD, MMMM YYYY"
-                      )}
+                      {est_day(item.createdAt)
+                        ?.tz("America/New_York")
+                        .format("hh:mma dddd DD, MMMM YYYY")}
                     </p>
                   </div>
                   <div className="flex gap-x-3 ">
@@ -114,7 +117,7 @@ const AdminCompletedService:FC<Props> = ({status}) => {
                   </div>
                 </div>
               );
-            }
+            },
           )}
         <div className="mt-6 flex justify-end">
           <div className="flex gap-x-4 items-center">

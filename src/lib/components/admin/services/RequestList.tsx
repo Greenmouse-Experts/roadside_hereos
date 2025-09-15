@@ -2,6 +2,8 @@ import { Button, Tooltip } from "@material-tailwind/react";
 import { TbListDetails } from "react-icons/tb";
 import { ServiceRequestItem2 } from "../../../types/service";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 import { MdLocationPin } from "react-icons/md";
 import useModal from "../../../hooks/useModal";
 import RequestDetailsModal from "./RequestDetailsModal";
@@ -11,6 +13,11 @@ import { useQuery } from "@tanstack/react-query";
 import { fetchAdminRequests } from "../../../services/api/serviceApi";
 import EmptyState from "../../ui/EmptyState";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
+export const est_day = dayjs;
 
 const AdminPendingService = () => {
   const [params, setParams] = useState({
@@ -96,9 +103,9 @@ const AdminPendingService = () => {
                       {item.location}
                     </p>
                     <p className=" fs-300 fw-600 text-primary">
-                      {dayjs(item.createdAt).format(
-                        "hh:mma dddd DD, MMMM YYYY"
-                      )}
+                      {est_day(item.createdAt)
+                        .tz("America/New_York")
+                        .format("hh:mma dddd DD, MMMM YYYY")}
                     </p>
                   </div>
                   <div className="flex gap-x-3 ">
@@ -113,11 +120,13 @@ const AdminPendingService = () => {
                   </div>
                 </div>
               );
-            }
+            },
           )}
         <div className="mt-6 flex justify-end">
           <div className="flex gap-x-4 items-center">
-            <p className="fw-600">Page {params.page} / {Math.ceil(count/10)}</p>
+            <p className="fw-600">
+              Page {params.page} / {Math.ceil(count / 10)}
+            </p>
             <div className="flex gap-x-2 items-center">
               <div
                 onClick={handlePrev}
