@@ -16,7 +16,7 @@ import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
-
+dayjs.tz.setDefault("America/New_York");
 export const est_day = dayjs;
 
 const AdminPendingService = () => {

@@ -56,7 +56,7 @@ const ProviderSettings = () => {
                   }`}
                   onClick={() => handleActive(5)}
                 >
-                  Sms
+                  SMS
                 </li>
               </ul>
             </div>

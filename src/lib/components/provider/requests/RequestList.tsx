@@ -11,6 +11,7 @@ import useModal from "../../../hooks/useModal";
 import RequestDetailsModal from "./RequestDetailsModal";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import { est_day } from "../../admin/services/RequestList";
 
 const PendingService = () => {
   const [page, setPage] = useState(1);
@@ -88,9 +89,9 @@ const PendingService = () => {
                     {item.location}
                   </p>
                   <p className=" fs-300 fw-600 text-primary">
-                    {dayjs(item.serviceRequestCreatedAt).format(
-                      "hh:mma dddd DD, MMMM YYYY"
-                    )}
+                    {est_day(item.createdAt)
+                      .tz("America/New_York")
+                      .format("hh:mma dddd DD, MMMM YYYY")}
                   </p>
                 </div>
                 <div className="flex gap-x-3 ">

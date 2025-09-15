@@ -3,6 +3,7 @@ import { ServiceRequestItem2 } from "../../../types/service";
 import dayjs from "dayjs";
 import { MdLocationPin, MdOutlineStickyNote2 } from "react-icons/md";
 import { FaCar } from "react-icons/fa6";
+import { est_day } from "../../admin/services/RequestList";
 
 interface Props {
   item: ServiceRequestItem2 | undefined;
@@ -14,7 +15,9 @@ const RequestDetailsModal: FC<Props> = ({ item }) => {
         <p className="fw-600 lg:text-lg">{item?.name}</p>
         <p>
           Requested at{" "}
-          {dayjs(item?.serviceRequestCreatedAt).format("hh:mma dddd DD, MMMM YYYY")}
+          {est_day(item.createdAt)
+            .tz("America/New_York")
+            .format("hh:mma dddd DD, MMMM YYYY")}
         </p>
       </div>
       <div>

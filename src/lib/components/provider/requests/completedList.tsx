@@ -10,13 +10,14 @@ import { useQuery } from "@tanstack/react-query";
 import EmptyState from "../../ui/EmptyState";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import { useNavigate } from "react-router-dom";
+import { est_day } from "../../admin/services/RequestList";
 
 const CompanyCompletedService = () => {
   const [page, setPage] = useState(1);
   const navigate = useNavigate();
   const { isLoading, data } = useQuery({
-    queryKey: ["getServices", 'completed'],
-    queryFn: () => getPendingServices({ status: 'completed', page: page }),
+    queryKey: ["getServices", "completed"],
+    queryFn: () => getPendingServices({ status: "completed", page: page }),
   });
   const colors: string[] = [
     "border-purple-500",
@@ -81,14 +82,18 @@ const CompanyCompletedService = () => {
                     {item.location}
                   </p>
                   <p className=" fs-300 fw-600 text-primary">
-                    {dayjs(item.createdAt).format("hh:mma dddd DD, MMMM YYYY")}
+                    {est_day(item.createdAt)
+                      .tz("America/New_York")
+                      .format("hh:mma dddd DD, MMMM YYYY")}
                   </p>
                 </div>
                 <div className="flex gap-x-3 ">
                   <Tooltip content="View Service Details">
                     <Button
                       className="m-0 p-0 shadow-none hover:shadow-none bg-transparent text-black"
-                      onClick={() => navigate(`/provider/services/${item.serviceRequestId}`)}
+                      onClick={() =>
+                        navigate(`/provider/services/${item.serviceRequestId}`)
+                      }
                     >
                       <TbListDetails className="text-3xl" />
                     </Button>
