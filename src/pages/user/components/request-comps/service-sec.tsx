@@ -130,6 +130,7 @@ export default function ServiceSection() {
     });
   }, [errors]);
   const location = watch("location");
+  const zipcode = watch("zipcode");
   const vehicleType = watch("vehicleType");
   const get_motors = useQuery({
     queryKey: ["vehicle-type", vehicleType],
@@ -258,11 +259,22 @@ export default function ServiceSection() {
         </div>
         <GetCurrentLocation
           setValue={(e) => {
-            console.log(e);
+            // console.log("dlos");
+            // console.log("zipcode", e.postal);
+            setValue("zipcode", e.postal);
             Object.entries(e).forEach(([key, value]) => {
               setValue(key as any, value as any);
             });
           }}
+        />
+      </div>
+      <div className="col-span-2 ">
+        <label className="mb-2 block mt-2 fw-600 text-[#000000B2]">
+          Zip Code
+        </label>
+        <input
+          {...register("zipcode")}
+          className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
         />
       </div>
       <div className="mb-2 col-span-2 mt-2">

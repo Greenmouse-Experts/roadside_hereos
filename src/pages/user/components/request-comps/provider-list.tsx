@@ -105,6 +105,8 @@ interface VendorResponse {
 }
 export default function ProviderLists(props: SectionProps) {
   const [service] = useServiceSec();
+  const [radius, setRadius] = useState(40);
+  const [prevRadius, setPrevRadius] = useState(1);
   const { data, refetch, isFetching } = useQuery<VendorResponse>({
     queryKey: ["vendors", location],
     queryFn: async () => {
@@ -119,12 +121,23 @@ export default function ProviderLists(props: SectionProps) {
       return response.data;
     },
   });
+  const setNewRadius = (num: any) => {
+    setPrevRadius(radius);
+    setRadius(num);
+    refetch();
+  };
 
   const next = () => {};
 
   return (
     <div className="flex  min-h-screen">
-      <AllQuotes open={open} next={props.next} p_loading={isFetching} />
+      <AllQuotes
+        open={open}
+        next={props.next}
+        p_loading={isFetching}
+        setRadius={setNewRadius}
+        radius={radius}
+      />
 
       {/*<div className="min-h-screen w-12"></div>*/}
     </div>

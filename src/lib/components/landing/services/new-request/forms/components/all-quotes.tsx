@@ -77,6 +77,8 @@ interface Props {
   open: (vend: any) => void;
   next: () => void;
   p_loading: boolean;
+  setRadius: (num: any) => void;
+  radius: number;
 }
 
 export default function AllQuotes(props: Props) {
@@ -84,7 +86,7 @@ export default function AllQuotes(props: Props) {
   const [driver, setDriver] = useDriver();
   const [isOpen, setIsOpen] = useState(false);
   const [vendor, setVendor] = useState<any>(null);
-  const [radius, setRadius] = useState(10); // Add radius state
+  // const [radius, setRadius] = useState(10); // Add radius state
   const close = () => {
     setVendor(null);
     setIsOpen(false);
@@ -96,10 +98,10 @@ export default function AllQuotes(props: Props) {
   let request_id = request?.id;
   const [service, setService] = useServiceSec();
   const quotes = useQuery<QuotesResponse>({
-    queryKey: ["quotes", request_id, radius], // Add radius to query key
+    queryKey: ["quotes", request_id, props.radius], // Add radius to query key
     queryFn: async () => {
       const response = await apiClient.get(
-        `/service-quote/fetch-quotes/${service.data.serviceRequest.id}?radius=${radius}`, // Add radius parameter
+        `/service-quote/fetch-quotes/${service.data.serviceRequest.id}?radius=${props.radius}`, // Add radius parameter
       );
       return response.data;
     },
@@ -160,12 +162,12 @@ export default function AllQuotes(props: Props) {
     <div className="flex flex-col gap-2 p-4 bg-white w-full shadow-xl">
       <div className="flex items-center mb-2 gap-4">
         <div>Refreshing in : {formatTime(countdown)}</div>
-        <div>Radius: {radius} miles</div>
+        <div>Radius: {props.radius} miles</div>
         <span className="ml-auto flex gap-2">
           <button
             disabled={quotes.isFetching}
             className="p-2 bg-blue-500 text-white rounded-md"
-            onClick={() => setRadius((prev) => prev + 10)}
+            onClick={() => props.setRadius(props.radius + 10)}
           >
             Increase Radius (10)
           </button>
