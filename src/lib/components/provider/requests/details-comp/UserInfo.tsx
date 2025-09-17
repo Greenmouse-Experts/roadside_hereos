@@ -7,9 +7,167 @@ import { HiCurrencyDollar } from "react-icons/hi2";
 import { GiAutoRepair } from "react-icons/gi";
 import { FC } from "react";
 import { formatAsNgnMoney } from "../../../../utils";
+import { format_time } from "../../../../../utils/utils";
 
 interface Props {
-  data: any;
+  data: {
+    id: string;
+    ref: null | string;
+    userId: string;
+    userType: string;
+    providerId: null | string;
+    status: string;
+    processStatus: null | string;
+    serviceId: string;
+    amount: null | number;
+    vehicleMake: string;
+    model: string;
+    vehicleYear: string;
+    color: string;
+    location: string;
+    zipcode: string;
+    requestNote: string;
+    createdAt: string;
+    updatedAt: string;
+    latitude: string;
+    longitude: string;
+    city: string;
+    queryNote: null | string;
+    userFcmToken: string;
+    state: string;
+    vehicleType: string;
+    completionTime: null | string;
+    serviceRequestId: string;
+    quote: number;
+    selected: number;
+    paid: number;
+    distance: string;
+    timeTaken: string;
+    fname: string;
+    lname: string;
+    name: string;
+    email: string;
+    phone: string;
+    password: string;
+    isActive: number;
+    isSuspended: number;
+    token: null | string;
+    street: null | string;
+    referralId: null | string;
+    level: number;
+    hasActiveSubscription: null | boolean;
+    isAvailableForService: null | boolean;
+    expiredAt: null | string;
+    planId: null | string;
+    invitationId: string;
+    verified: number;
+    companyId: string;
+    reviewsAvg: number;
+    serviceCharge: null | number;
+    fcmToken: string;
+    pendingBal: string;
+    address: string;
+    deletedAt: null | string;
+    photo: null | string;
+    last_login: string;
+    walletBal: string;
+    referralSource: null | string;
+    service_area: null | string;
+    driverOverallPendingBal: string;
+    driverOverallWalletBal: string;
+    sms_opt_in: number;
+    slug: string;
+    icon: string;
+    isPublished: number;
+    questionNote: string;
+    minimumQuote: null | number;
+    serviceRequestStatus: string;
+    serviceRequestCreatedAt: string;
+    customerId: string;
+    driverQuoteId: string;
+    customer: {
+      id: string;
+      fname: string;
+      lname: string;
+      name: null | string;
+      email: string;
+      address: string;
+      phone: string;
+      sms_opt_in: boolean;
+      password: string;
+      isActive: boolean;
+      isSuspended: boolean;
+      photo: null | string;
+      hasActiveSubscription: null | boolean;
+      isAvailableForService: null | boolean;
+      verified: boolean;
+      expiredAt: null | string;
+      planId: null | string;
+      token: null | string;
+      state: null | string;
+      city: null | string;
+      zipcode: null | string;
+      street: null | string;
+      userType: string;
+      level: number;
+      referralId: null | string;
+      invitationId: null | string;
+      companyId: null | string;
+      reviewsAvg: number;
+      serviceCharge: null | number;
+      last_login: string;
+      fcmToken: string;
+      walletBal: null | number;
+      pendingBal: null | number;
+      referralSource: null | string;
+      driverOverallPendingBal: null | number;
+      driverOverallWalletBal: null | number;
+      createdAt: string;
+      updatedAt: string;
+      deletedAt: null | string;
+    };
+    company: {
+      id: string;
+      fname: null | string;
+      lname: null | string;
+      name: string;
+      email: string;
+      address: null | string;
+      phone: string;
+      sms_opt_in: boolean;
+      password: string;
+      isActive: boolean;
+      isSuspended: boolean;
+      photo: null | string;
+      hasActiveSubscription: null | boolean;
+      isAvailableForService: null | boolean;
+      verified: boolean;
+      expiredAt: null | string;
+      planId: null | string;
+      token: null | string;
+      state: null | string;
+      city: null | string;
+      zipcode: null | string;
+      street: null | string;
+      userType: string;
+      level: null | number;
+      referralId: string;
+      invitationId: null | string;
+      companyId: null | string;
+      reviewsAvg: number;
+      serviceCharge: number;
+      last_login: string;
+      fcmToken: string;
+      walletBal: string;
+      pendingBal: string;
+      referralSource: null | string;
+      driverOverallPendingBal: string;
+      driverOverallWalletBal: string;
+      createdAt: string;
+      updatedAt: string;
+      deletedAt: null | string;
+    };
+  };
 }
 const UserInfo: FC<Props> = ({ data }) => {
   const {
@@ -29,8 +187,10 @@ const UserInfo: FC<Props> = ({ data }) => {
     quote,
     customer,
     company,
+    completionTime,
+    timeTaken,
   } = data;
-
+  // return <>{JSON.stringify(data)}</>;
   return (
     <div className="bg-white shadow mt-6 rounded-lg p-4">
       <div>
@@ -82,9 +242,10 @@ const UserInfo: FC<Props> = ({ data }) => {
               <p className="my-1 fw-500 flex gap-x-2 items-center">
                 <IoMdTime className="text-lg lg:text-2xl text-gray-500" />
                 Requested <span className="fw-600">{name}</span> at{" "}
-                {dayjs(serviceRequestCreatedAt).format(
+                {/*{dayjs(serviceRequestCreatedAt).format(
                   "hh:mma dddd DD, MMMM YYYY",
-                )}
+                )}*/}
+                {format_time(serviceRequestCreatedAt)}
               </p>
               <p className="my-1 fw-500 flex gap-x-2 items-center">
                 <MdLocationPin className="text-lg lg:text-2xl text-gray-500" />
@@ -99,6 +260,20 @@ const UserInfo: FC<Props> = ({ data }) => {
                 Quoted fee{" "}
                 <span className="fw-600">{formatAsNgnMoney(quote)}</span>
               </p>
+              {completionTime && (
+                <p className="my-1 fw-500 flex gap-x-2 items-center">
+                  <IoMdTime className="text-lg lg:text-2xl text-gray-500" />
+                  Completion Time:{" "}
+                  <span className="fw-600">{format_time(completionTime)}</span>
+                </p>
+              )}
+              {data.completionTime && (
+                <p className="my-1 fw-500 flex gap-x-2 items-center">
+                  <IoMdTime className="text-lg lg:text-2xl text-gray-500" />
+                  Response Time:{" "}
+                  <span className="fw-600">{format_time(completionTime)}</span>
+                </p>
+              )}
             </div>
 
             <div className="border p-2 lg:p-4 rounded mt-2">
