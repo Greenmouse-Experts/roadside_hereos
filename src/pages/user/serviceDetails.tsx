@@ -10,6 +10,7 @@ import TrackingBtn from "../../lib/components/user/requestDetails/TrackingBtn";
 import ServiceProgress from "../../lib/components/user/requestDetails/ServiceProgress";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
+import { format_time } from "../../utils/utils";
 
 const ServiceDetails = () => {
   const { id } = useParams();
@@ -205,10 +206,15 @@ const ServiceDetails = () => {
                 <div className="flex gap-x-2">
                   <p>Response Time:</p>
                   <p className="fw-500">
-                    {dayjs(data?.data?.serviceRequest?.updatedAt).format(
-                      "hh:mmA, ddd DD, MMMM YYYY",
-                    )}
-                    .
+                    {format_time(data?.data?.serviceRequest?.updatedAt)}
+                  </p>
+                </div>
+                <div className="flex gap-x-2">
+                  <p>Completion Time:</p>
+                  <p className="fw-500">
+                    {data?.data?.serviceRequest?.completionTime
+                      ? format_time(data?.data?.serviceRequest?.completionTime)
+                      : "Not Completed"}
                   </p>
                 </div>
               </div>
