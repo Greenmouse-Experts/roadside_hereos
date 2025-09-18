@@ -32,7 +32,7 @@ const CheckoutForm: FC<Props> = ({ prev }) => {
     await confirmPay(payload)
       .then((res) => {
         toast.success(res.message);
-        setService(null);
+        // setService(null);
         setProfile(null);
         navigate(`/success/${id}`);
         clear();
