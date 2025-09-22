@@ -13,31 +13,31 @@ import useAuthStore from "../../lib/store/userStore";
 const SERVICES_DATA = [
   {
     title: "Basic Tow",
-    link: "/request/a0e0b7df-00b8-4f92-93dc-bce6568be673",
+    link: "/user/new-request/a0e0b7df-00b8-4f92-93dc-bce6568be673",
     description:
       "Designed for standard towing needs, this service helps transport your vehicle to a nearby repair shop, home, or other safe location when it cannot be driven.",
   },
   {
     title: "Exotic Car Transport",
-    link: "/request/b3c6048d-5cc1-42b6-bc5e-703e5e8f231d",
+    link: "/user/new-request/b3c6048d-5cc1-42b6-bc5e-703e5e8f231d",
     description:
       "Specialized service to handle high-end, classic, or exotic cars with extra care, using appropriate equipment to ensure secure and damage-free transport.",
   },
   {
     title: "Motorcycle Towing",
-    link: "/request/a0e0b7df-00b8-4f92-93dc-bce6568be673",
+    link: "/user/new-request/a0e0b7df-00b8-4f92-93dc-bce6568be673",
     description:
       "Towing service specifically for motorcycles, with secure equipment to keep your bike safe during transport to a repair facility or chosen destination.Towing service specifically for motorcycles, with secure equipment to keep your bike safe during transport to a repair facility or chosen destination.",
   },
   {
     title: "Jump-Starts",
-    link: "/request/cd97fff5-07f4-48bd-967f-45bffefa2a63",
+    link: "/user/new-request/cd97fff5-07f4-48bd-967f-45bffefa2a63",
     description:
       "If your vehicle battery dies, this service provides a jump-start to get your car running again.",
   },
   {
     title: "Battery Installation",
-    link: "/request/25cc0925-b325-4721-801b-3b983361fce8",
+    link: "/user/new-request/25cc0925-b325-4721-801b-3b983361fce8",
     description:
       "This service provides the delivery and installation of a new battery if your current battery needs replacement. You can request this service in two ways:",
     options: [
@@ -55,7 +55,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Flat Tire Assistance",
-    link: "/request/e2502deb-a9d0-4c8f-bb8f-577bba12cdca",
+    link: "/user/new-request/e2502deb-a9d0-4c8f-bb8f-577bba12cdca",
     description:
       "If you experience a flat, this service offers help to get you moving again. Choose between the following options:",
     options: [
@@ -73,7 +73,7 @@ const SERVICES_DATA = [
   },
   {
     title: "Vehicle Lockout",
-    link: "/request/5e436f4b-b633-4b22-8f44-79f3e98f04f6",
+    link: "/user/new-request/5e436f4b-b633-4b22-8f44-79f3e98f04f6",
     description:
       "This service helps you regain access to your locked vehicle and includes options based on your situation: Please specify the exact service you need when requesting vehicle lockout assistance to ensure we dispatch the right technician.",
     options: [
@@ -96,43 +96,43 @@ const SERVICES_DATA = [
   },
   {
     title: "Fuel Delivery",
-    link: "/request/bbe6e2f8-c3e3-4bca-80be-b6cc0b206e49",
+    link: "/user/new-request/bbe6e2f8-c3e3-4bca-80be-b6cc0b206e49",
     description:
       "If you run out of gas, we’ll deliver enough fuel to get you to the nearest station or a safe location where you can refuel.",
   },
   {
     title: "Vehicle Fluid Top-Up",
-    link: "/request/cf6a9ab4-2f0d-4bed-9d83-cd8f8d47c1da",
+    link: "/user/new-request/cf6a9ab4-2f0d-4bed-9d83-cd8f8d47c1da",
     description:
       "Helps you top up critical fluids like oil, coolant, or windshield washer fluid to keep your vehicle running smoothly.",
   },
   {
     title: "Winch-Out Rescue",
-    link: "/request/45404df6-0695-45bf-8e37-4f824f28b551",
+    link: "/user/new-request/45404df6-0695-45bf-8e37-4f824f28b551",
     description:
       "This service assists if your vehicle is stuck in mud, snow, sand, or a ditch. Using a winch, we can safely pull your vehicle back onto stable ground.",
   },
   {
     title: "Mobile Detailing",
-    link: "/request/fb36f088-f84d-42a3-a751-fff3d75b305e",
+    link: "/user/new-request/fb36f088-f84d-42a3-a751-fff3d75b305e",
     description:
       "On-site car detailing to clean and maintain the appearance of your vehicle, with both interior and exterior cleaning options for convenience.",
   },
   {
     title: "Mobile Mechanic",
-    link: "/request/f285a589-2abd-4f2f-a07b-636f11c86475",
+    link: "/user/new-request/f285a589-2abd-4f2f-a07b-636f11c86475",
     description:
       "Offers mobile mechanic services for minor repairs and diagnostics at the vehicle’s location. Common issues like brake repairs, oil change, belt replacements, or battery installation can be handled without the need for a tow.",
   },
   {
     title: "Mobile Motorcycle Repair",
-    link: "/request/1800ae3f-be16-49e9-b056-9c30a9414a2c",
+    link: "/user/new-request/1800ae3f-be16-49e9-b056-9c30a9414a2c",
     description:
       "Designed for motorcycle riders, this service provides on-the-spot repairs for minor issues to get you back on the road quickly.",
   },
   {
     title: "Accident Cleanup",
-    link: "/request/fffad1bf-97dc-44c5-a314-52b2862d9688",
+    link: "/user/new-request/fffad1bf-97dc-44c5-a314-52b2862d9688",
     description:
       "Following an accident, this service offers a professional cleanup to remove debris and any hazardous materials, ensuring safety for all drivers in the area.",
   },
