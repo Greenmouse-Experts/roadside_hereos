@@ -52,6 +52,7 @@ const Footer = () => {
       toast.error("Invalid Email");
     }
   };
+  // return <></>;
   return (
     <div className="bg-[#172748] ">
       <div className="box text-white">

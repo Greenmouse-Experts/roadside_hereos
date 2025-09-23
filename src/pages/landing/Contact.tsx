@@ -53,7 +53,7 @@ const ContactUsPage = () => {
                 </div>
                 <div className="relative text-center box-shade p-5 pt-12">
                   <p className="fw-600">Hotlines</p>
-                  <p className="mt-4 fs-500">+1 915 400 1465</p>
+                  <p className="mt-4 fs-500"> +(410) 849-9222‬</p>
                   <div className="absolute -top-12 left-0 w-full flex justify-center">
                     <div className="w-[76px] h-[76px] place-center bg-[#172748]">
                       <GiRotaryPhone className="text-[#FEB470] text-4xl" />
