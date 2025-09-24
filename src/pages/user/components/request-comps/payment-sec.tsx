@@ -133,7 +133,7 @@ export default function PaymentSection() {
 
       {/* Stripe Checkout */}
       {client_secret.isFetching ? (
-        <>loading</>
+        <div className="p-2 text-xl font-bold">Loading</div>
       ) : (
         !client_secret.isError && (
           //@ts-ignore
