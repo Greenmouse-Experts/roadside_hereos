@@ -68,15 +68,7 @@ const ApproveRefund: FC<Props> = ({ id, close, refetch, status }) => {
   };
   return (
     <div>
-      <div>
-        <p>Refund Amount</p>
-        <input
-          type="number"
-          onChange={(e) => setAmt(e.target.value)}
-          className="p-2 mt-3 rounded-lg w-full border border-gray-400"
-        />
-      </div>
-      <div className="mt-7 flex justify-between">
+      <div className="mt-2 flex justify-between">
         <Button
           title={"Close"}
           onClick={close}
