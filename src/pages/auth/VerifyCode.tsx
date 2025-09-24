@@ -100,7 +100,7 @@ export default function OtpForm() {
               <div className="mt-6 lg:mt-6 text-center">
                 <p className="text-2xl fw-600 text-gray-800">Enter OTP Code</p>
                 <p className="mt-3 fs-500 text-gray-600">
-                  Please enter the 6-digit verification code.
+                  Please enter the 6-digit verification code sent to your email.
                 </p>
               </div>
               <div className="my-8 lg:mt-8 mb-5 mx-auto  p-2">
