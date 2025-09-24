@@ -86,7 +86,7 @@ const LoginForm = () => {
         });
         return console.log(error.response.data);
       }
-      return console.log(error.status);
+      // return console.log(error.status);
       toast.error(error.response.data.message);
       if (error.response.data.message === "Please Verify account") {
         setShowModal(true);

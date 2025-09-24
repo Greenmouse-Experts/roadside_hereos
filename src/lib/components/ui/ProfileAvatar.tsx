@@ -5,7 +5,7 @@ interface Props {
   name?: string;
   size?: number;
   font?: number;
-  square?: boolean
+  square?: boolean;
 }
 const ProfileAvatar: React.FC<Props> = ({ url, name, size, font, square }) => {
   const nameRow = name?.split(" ");
@@ -18,13 +18,17 @@ const ProfileAvatar: React.FC<Props> = ({ url, name, size, font, square }) => {
         alt="profile"
         width={size}
         height={size}
-        className={square? 'aspect-square object-cover' : 'circle object-cover aspect-square'}
+        className={
+          square
+            ? "aspect-square object-cover"
+            : "circle object-cover aspect-square"
+        }
       />
     );
   } else
     return (
       <div
-        className={`${square? '' : 'circle'} relative border-2 flex gap-x-[1px] justify-center items-center fw-600 bg-primary text-white`}
+        className={`${square ? "" : "circle"} relative border-2 flex gap-x-[1px] justify-center items-center fw-600 bg-primary text-white`}
         style={{ width: size, height: size }}
       >
         <p style={{ fontSize: font }} className="uppercase">

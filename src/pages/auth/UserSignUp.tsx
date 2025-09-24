@@ -299,7 +299,7 @@ export default function UserSignUp() {
                   </div>
 
                   {/* Referral Source (optional) */}
-                  <div>
+                  {/*<div>
                     <label
                       htmlFor="referralSource"
                       className="block text-sm font-medium text-gray-700 mb-1"
@@ -318,7 +318,7 @@ export default function UserSignUp() {
                         {errors.referralSource.message}
                       </p>
                     )}
-                  </div>
+                  </div>*/}
 
                   {/* SMS Opt-in */}
                   <div className="flex items-center space-x-2">

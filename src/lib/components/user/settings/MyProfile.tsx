@@ -10,13 +10,17 @@ import UpdateProfile from "./UpdateProfile";
 import { useMutation } from "@tanstack/react-query";
 import { adminUpdateAvatar } from "../../../services/api/authApi";
 import { formatPhoneNumber } from "react-phone-number-input";
+import { apiClient } from "../../../services/api/serviceApi";
 
 const MyProfileSettings = () => {
   const { user, firstName, lastName, saveUser } = useAuth();
   const { Modal, setShowModal } = useModal();
   const [isBusy, setIsBusy] = useState(false);
   const mutation = useMutation({
-    mutationFn: adminUpdateAvatar,
+    mutationFn: async (fd: any) => {
+      let resp = await apiClient.patch("/user/update-account", fd);
+      return resp.data;
+    },
     onSuccess: (data) => {
       const payload = {
         ...user,
@@ -24,21 +28,21 @@ const MyProfileSettings = () => {
       };
       toast.success(data.message);
       saveUser(payload);
-      setIsBusy(false);
     },
-    onError: () => {
-      toast.error("Something went wrong");
-      setIsBusy(false);
+    onError: (error) => {
+      toast.error(JSON.stringify(error.message));
     },
   });
   const handleChangePicture = async (
     e: React.ChangeEvent<HTMLInputElement | null>,
   ) => {
-    setIsBusy(true);
-    if (!e.target.files) return;
+    // if (e.target.files.length < 1) return;
     const files = e.target.files[0];
     const fd = new FormData();
     fd.append("photo", files);
+    // const fd = {
+    //   photo: files,
+    // };
     mutation.mutate(fd);
   };
   return (
@@ -55,12 +59,17 @@ const MyProfileSettings = () => {
                 font={28}
               />
               <div className="relative overflow-hidden bg-gray-600 h-9 w-9 flex items-center justify-center circle top-[73px] -left-7 ">
-                {!isBusy && <FaCamera className="text-lg text-white mb-1" />}
+                {mutation.isPending && (
+                  <FaCamera className="text-lg text-white mb-1" />
+                )}
                 <input
                   type="file"
                   accept="image/*"
                   name="profile"
                   id="profile"
+                  // onInput={(e) => {
+                  //   // console.log("input");
+                  // }}
                   onChange={handleChangePicture}
                   className="absolute top-0 -left-6 opacity-0"
                 />

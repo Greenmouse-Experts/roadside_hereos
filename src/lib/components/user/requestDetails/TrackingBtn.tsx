@@ -14,9 +14,18 @@ interface Props {
   driverLng: string;
   time: string;
   miles: string;
+  item?: any;
 }
-const TrackingBtn: FC<Props> = ({ id, lat, lng, driverLat, driverLng, time, miles }) => {
-  
+const TrackingBtn: FC<Props> = ({
+  id,
+  lat,
+  lng,
+  driverLat,
+  driverLng,
+  time,
+  miles,
+  item,
+}) => {
   const { Dialog: TrackModal, setShowModal: ShowTrackModal } = useCustomModal();
   return (
     <div>
