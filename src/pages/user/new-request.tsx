@@ -21,6 +21,24 @@ export const useDriver = () => {
   const [driver, setDriver] = useAtom(selected_driver_atom);
   return [driver, setDriver] as const;
 };
+
+const SERVICES_OBJECT = {
+  "a0e0b7df-00b8-4f92-93dc-bce6568be673": "Motorcycle Towing",
+  "a9087c16-a32d-4778-ab0b-ed8a4b67ac6f": "Tire-Pump",
+  "b3c6048d-5cc1-42b6-bc5e-703e5e8f231d": "Exotic Car Transport",
+  "cd97fff5-07f4-48bd-967f-45bffefa2a63": "Jump-Starts",
+  "25cc0925-b325-4721-801b-3b983361fce8": "Battery Installation",
+  "e2502deb-a9d0-4c8f-bb8f-577bba12cdca": "Flat Tire Assistance",
+  "5e436f4b-b633-4b22-8f44-79f3e98f04f6": "Vehicle Lockout",
+  "bbe6e2f8-c3e3-4bca-80be-b6cc0b206e49": "Fuel Delivery",
+  "cf6a9ab4-2f0d-4bed-9d83-cd8f8d47c1da": "Vehicle Fluid Top-Up",
+  "45404df6-0695-45bf-8e37-4f824f28b551": "Winch-Out Rescue",
+  "fb36f088-f84d-42a3-a751-fff3d75b305e": "Mobile Detailing",
+  "f285a589-2abd-4f2f-a07b-636f11c86475": "Mobile Mechanic",
+  "1800ae3f-be16-49e9-b056-9c30a9414a2c": "Mobile Motorcycle Repair",
+  "fffad1bf-97dc-44c5-a314-52b2862d9688": "Accident Cleanup",
+};
+
 const steps = [
   {
     step: 1,
@@ -152,8 +170,10 @@ export default function NewRequests() {
           })}
         </div>
       </div>
-
-      <div className="flex justify-end mb-8">
+      <div className="flex justify-end mb-8 items-center">
+        <div className="py-2 text-xl font-bold mr-auto">
+          {SERVICES_OBJECT[id]}
+        </div>
         <button
           onClick={reset}
           className="px-6 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition-colors duration-200"
@@ -161,7 +181,6 @@ export default function NewRequests() {
           Reset Form
         </button>
       </div>
-
       <div className="mt-8">
         {step === 0 && <ServiceSection next={next} />}
         {step === 1 && <ProfileSection next={next} />}

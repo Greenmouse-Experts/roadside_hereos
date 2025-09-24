@@ -15,21 +15,20 @@ const RequestSuccess = () => {
             <div>
               <img src={paid} alt="paid" className="mx-auto" />
               <p className="text-2xl fw-600 text-center">
-                Service Requested Successfully!
+                Congratulations, Help is on the way! 😀
               </p>
               <div className="mt-4">
                 <p className="lg:w-10/12 mx-auto text-center">
-                  You have successfully requested a service. If you are a new
-                  user, please check your mailbox to verify your details.
-                  Otherwise, click the on the right button to redirect to your
-                  dashboard and monitor service details.
+                  Your service request is complete, and we're working hard to
+                  get you back on the road. Thank you for trusting us. 👉 Tap
+                  below to view your account or check updates.
                 </p>
               </div>
               <div className="lg:w-10/12 mx-auto mt-10">
                 <div className="flex items-center gap-x-2 md:gap-x-0 justify-between">
                   <div className="w-6/12 md:w-5/12">
                     <Button
-                      title={"Dashboard"}
+                      title={"Go To Dashboard"}
                       onClick={() => {
                         setServiceInfo(null);
                         navigate("/user");

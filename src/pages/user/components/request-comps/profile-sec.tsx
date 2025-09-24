@@ -20,6 +20,8 @@ export default function ProfileSection(props: SectionProps) {
   const { id } = useParams();
   const [profile, setProfile] = useProfileSec();
   const { user } = useAuth();
+  const auth = useAuth();
+
   const [service, setService] = useServiceSec();
   const {
     register,
@@ -28,8 +30,8 @@ export default function ProfileSection(props: SectionProps) {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      firstname: user.name,
-      lastname: user.name,
+      first_name: auth.firstName,
+      last_name: auth.lastName,
       email: user.email,
       phone: user.phone,
       address: "",
@@ -62,6 +64,9 @@ export default function ProfileSection(props: SectionProps) {
   return (
     <div className="w-full mx-auto p-4">
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
+        <div>
+          *Make sure all fields are filled in correctly before proceeding
+        </div>
         <div className="mb-2 col-span-2">
           <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
             First Name
@@ -120,7 +125,7 @@ export default function ProfileSection(props: SectionProps) {
 
         <div className="mb-2 col-span-2">
           <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
-            email
+            Email
           </label>
           <input
             {...register("email", { required: "Email is required" })}
