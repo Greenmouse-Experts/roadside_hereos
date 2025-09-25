@@ -35,7 +35,7 @@ interface PaymentDataV2 {
     service_amount: number;
     subtotal: number;
   };
-  clientSecret: string;
+  client_secret: string;
   currency: string;
   status: string;
   created: number;
@@ -74,8 +74,12 @@ export default function PaymentSection() {
   const data = client_secret.data?.data;
   if (!data) return <div>No payment data available</div>;
 
-  const stripePromise = loadStripe(PAYMENT_KEY);
-  const options = { clientSecret: data.clientSecret };
+  const getClientSecret = (data: PaymentData): string => {
+    if ("amount_breakdown" in data) {
+      return data.client_secret;
+    }
+    return data.clientSecret;
+  };
 
   return (
     <div className="font-sans p-6 bg-white rounded-xl shadow-sm border border-gray-200">
@@ -136,10 +140,7 @@ export default function PaymentSection() {
         <div className="p-2 text-xl font-bold">Loading</div>
       ) : (
         !client_secret.isError && (
-          //@ts-ignore
-          <Checkout
-            clientSecret={client_secret?.data?.data?.clientSecret as string}
-          />
+          <Checkout clientSecret={getClientSecret(data)} />
         )
       )}
     </div>
@@ -159,11 +160,13 @@ const Checkout = (props: { clientSecret: string }) => {
   const stripePromise = loadStripe(PAYMENT_KEY);
   const options = { clientSecret: props.clientSecret };
 
-  <div className="mt-4">
-    {props.clientSecret && (
-      <Elements stripe={stripePromise} options={options}>
-        <CheckoutForm prev={() => {}} secret_key={props.clientSecret} />
-      </Elements>
-    )}
-  </div>;
+  return (
+    <div className="mt-4">
+      {props.clientSecret && (
+        <Elements stripe={stripePromise} options={options}>
+          <CheckoutForm prev={() => {}} secret_key={props.clientSecret} />
+        </Elements>
+      )}
+    </div>
+  );
 };

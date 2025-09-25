@@ -9,6 +9,7 @@ import { useServiceSec } from "../../../../../../../pages/user/components/reques
 import { Portal } from "../../../../../portal/portal";
 import ViewOnMap from "../ViewOnMap";
 import { useDriver } from "../../../../../../../pages/user/new-request";
+import { Rating } from "@material-tailwind/react";
 
 export interface Quote {
   id: string;
@@ -197,11 +198,15 @@ export default function AllQuotes(props: Props) {
               Distance: <span className="font-medium">{quote.distance}</span>
             </p>
             <p className="text-base text-gray-700 mt-2">
-              Time:
+              Time:{" "}
               <span className="font-medium">
                 {quote.timeTaken["City driving car speed"]}
               </span>
             </p>
+            <div className="flex items-center gap-2 mt-2">
+              <span className="text-base text-gray-700 ">Rating:</span>
+              <Rating value={quote?.driver?.reviewsAvg || 3} />
+            </div>
           </div>
           <div className="flex flex-col gap-2">
             <button
