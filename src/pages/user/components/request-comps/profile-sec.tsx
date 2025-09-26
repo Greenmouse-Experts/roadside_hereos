@@ -34,11 +34,27 @@ export default function ProfileSection(props: SectionProps) {
       last_name: auth.lastName,
       email: user.email,
       phone: user.phone,
-      address: "",
+      street_address: "",
+      apartment_unit: "",
+      city_state_zip: "",
     },
   });
   const onSubmit = (data: any) => {
-    toast.promise(create_mutation.mutateAsync(data), {
+    // Combine address fields into single address
+    const combinedAddress = [
+      data.street_address,
+      data.apartment_unit,
+      data.city_state_zip,
+    ]
+      .filter(Boolean)
+      .join(", ");
+
+    const submitData = {
+      ...data,
+      address: combinedAddress,
+    };
+
+    toast.promise(create_mutation.mutateAsync(submitData), {
       pending: "Creating profile...",
       success: "Profile created successfully!",
       error: "Failed to create profile",
@@ -138,15 +154,47 @@ export default function ProfileSection(props: SectionProps) {
 
         <div className="mb-2 col-span-2">
           <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
-            Home Address
+            Street Address
           </label>
           <input
-            {...register("address", { required: "Address is required" })}
+            {...register("street_address", {
+              required: "Street address is required",
+            })}
             className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+            placeholder="123 MAIN ST"
           />
-          {errors.address && (
+          {errors.street_address && (
             <p className="error text-red-400 text-sm">
-              {errors?.address?.message}
+              {errors?.street_address?.message}
+            </p>
+          )}
+        </div>
+
+        <div className="mb-2 col-span-2">
+          <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+            Apartment/Unit (if applicable)
+          </label>
+          <input
+            {...register("apartment_unit")}
+            className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+            placeholder="APT 101"
+          />
+        </div>
+
+        <div className="mb-2 col-span-2">
+          <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+            City, State, ZIP Code
+          </label>
+          <input
+            {...register("city_state_zip", {
+              required: "City, state, and ZIP code are required",
+            })}
+            className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+            placeholder="ANYTOWN, CA 90210"
+          />
+          {errors.city_state_zip && (
+            <p className="error text-red-400 text-sm">
+              {errors?.city_state_zip?.message}
             </p>
           )}
         </div>
