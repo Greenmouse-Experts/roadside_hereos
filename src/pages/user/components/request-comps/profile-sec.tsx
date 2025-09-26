@@ -138,7 +138,7 @@ export default function ProfileSection(props: SectionProps) {
 
         <div className="mb-2 col-span-2">
           <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
-            Address
+            Home Address
           </label>
           <input
             {...register("address", { required: "Address is required" })}

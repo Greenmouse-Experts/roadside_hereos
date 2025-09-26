@@ -14,7 +14,8 @@ import { useMutation } from "@tanstack/react-query";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import EmptyState from "../../ui/EmptyState";
 import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime"
+import relativeTime from "dayjs/plugin/relativeTime";
+import { Link } from "react-router-dom";
 dayjs.extend(relativeTime);
 
 interface Props {
@@ -41,7 +42,7 @@ const NotifyList: FC<Props> = ({ status, data, isLoading, refetch }) => {
     markRead.mutateAsync(item, {
       onSuccess: (data) => {
         toast.success(data.message);
-        refetch()
+        refetch();
       },
       onError: () => {
         toast.error("Something went wrong");
@@ -63,8 +64,7 @@ const NotifyList: FC<Props> = ({ status, data, isLoading, refetch }) => {
             </div>
           </div>
         )}
-        {notify &&
-            !notify.length && (
+        {notify && !notify.length && (
           <div>
             <EmptyState msg="You have not received any notification." />
           </div>
@@ -73,7 +73,8 @@ const NotifyList: FC<Props> = ({ status, data, isLoading, refetch }) => {
           {notify &&
             !!notify.length &&
             notify.map((item, i: number) => (
-              <div
+              <Link
+                to={item.id}
                 key={i}
                 className={`bg-primary p-3 rounded-[15px] text-white flex items-center justify-between hover:scale-105 duration-100 ${
                   !item.isRead && `border-[3px] border-blue-400`
@@ -117,7 +118,7 @@ const NotifyList: FC<Props> = ({ status, data, isLoading, refetch }) => {
                     </MenuList>
                   </Menu>
                 </div>
-              </div>
+              </Link>
             ))}
         </div>
       </div>

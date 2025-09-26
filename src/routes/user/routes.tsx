@@ -1,3 +1,4 @@
+import GeneralNotificationPage from "../../lib/components/shared/NotificationPage";
 import UsersHome from "../../pages/user/home";
 import NewRequests from "../../pages/user/new-request";
 import UserNotification from "../../pages/user/notify";
@@ -39,6 +40,11 @@ export const userRoutes = [
     id: "user4",
     path: "notify",
     component: <UserNotification />,
+  },
+  {
+    id: "user4",
+    path: "notify/:id",
+    component: <GeneralNotificationPage />,
   },
   {
     id: "user8",

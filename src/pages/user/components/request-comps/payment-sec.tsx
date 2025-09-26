@@ -91,46 +91,19 @@ export default function PaymentSection() {
       {"amount_breakdown" in data ? (
         <>
           <div className="space-y-4 text-gray-700">
-            <Row label="ID" value={data.id} />
-            <Row label="Service Request ID" value={data.serviceRequestId} />
-            <Row label="Driver Quote ID" value={data.driverQuoteId} />
-            <Row label="Amount" value={`$${data.amount} ${data.currency}`} />
+            <Row label="Total" value={`$${data.amount} ${data.currency}`} />
             <Row
               label="Subtotal"
               value={`$${data.amount_breakdown.subtotal}`}
             />
             <Row label="Tax" value={`$${data.amount_breakdown.tax_amount}`} />
-            <Row
-              label="Service Amount"
-              value={`$${data.amount_breakdown.service_amount}`}
-            />
-            <Row
-              label="Created"
-              value={new Date(data.created * 1000).toLocaleString()}
-            />
-            <Row label="Status" value={data.status} />
           </div>
         </>
       ) : (
         <>
           <div className="space-y-4 text-gray-700">
-            <Row label="ID" value={data.id} />
-            <Row label="Service Request ID" value={data.serviceRequestId} />
-            <Row label="Driver Quote ID" value={data.driverQuoteId} />
-            <Row label="Amount" value={`$${data.amount}`} />
-            <Row label="Company Charge" value={`$${data.companyCharge}`} />
-            <Row label="Charge" value={`$${data.charge}`} />
+            <Row label="Total" value={`$${data.amount}`} />
             <Row label="Tax" value={`$${data.tax}`} />
-            <Row label="Status" value={data.status} />
-            <Row label="Payment Ref" value={data.paymentRef} />
-            <Row
-              label="Created At"
-              value={new Date(data.createdAt).toLocaleString()}
-            />
-            <Row
-              label="Updated At"
-              value={new Date(data.updatedAt).toLocaleString()}
-            />
           </div>
         </>
       )}
