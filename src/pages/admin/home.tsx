@@ -5,6 +5,7 @@ import RecentRequests from "../../lib/components/admin/home/RecentRequests";
 import { useQuery } from "@tanstack/react-query";
 import { getAdminStat } from "../../lib/services/api/adminApi";
 import Alerts from "../../lib/components/provider/home/Alerts";
+import { Link } from "react-router-dom";
 // import ColumnChart from "../../lib/components/admin/home/ActivityChart";
 
 const AdminDashboardHome = () => {
@@ -17,21 +18,25 @@ const AdminDashboardHome = () => {
       name: "Services Rendered",
       rate: "+15%",
       value: stat?.data?.totalRendered || "0",
+      path: "/admin/services",
     },
     {
       name: "Total Services",
       rate: "+115%",
       value: stat?.data?.totalServices || "0",
+      path: "/admin/requests",
     },
     {
       name: "Total Users",
       rate: "+55%",
       value: stat?.data?.totalUsers || "0",
+      path: "/admin/users",
     },
     {
       name: "Total Providers",
       rate: "+55%",
       value: stat?.data?.totalProviders || "0",
+      path: "/admin/providers",
     },
   ];
   return (
@@ -40,15 +45,21 @@ const AdminDashboardHome = () => {
         <div className="lg:w-[70%]">
           <div className="rounded-xl bg-review text-white p-5">
             <p>Total services amount</p>
-            <p className="text-4xl fw-700 my-3">{stat?.data?.serviceAmount || "$0"}</p>
-            <p>{stat?.data?.totalProviders || 0} services providers has rendered {stat?.data?.totalRendered || 0 } services</p>
+            <p className="text-4xl fw-700 my-3">
+              {stat?.data?.serviceAmount || "$0"}
+            </p>
+            <p>
+              {stat?.data?.totalProviders || 0} services providers has rendered{" "}
+              {stat?.data?.totalRendered || 0} services
+            </p>
           </div>
           <div>
             <div className="grid lg:grid-cols-2 gap-y-3 gap-x-4 mt-5 lg:mt-7">
               {serviceData &&
                 !!serviceData.length &&
                 serviceData.map((item, index) => (
-                  <div
+                  <Link
+                    to={item.path}
                     className="p-[22px] xl:grow cursor-default rounded-[10px] bg-white shadow hover:scale-x-105 duration-100"
                     key={index}
                   >
@@ -69,16 +80,16 @@ const AdminDashboardHome = () => {
                         </p> */}
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 ))}
             </div>
           </div>
           <div className="mt-6">
-            <Alerts data={stat?.data?.alerts || []}/>
+            <Alerts data={stat?.data?.alerts || []} />
           </div>
         </div>
         <div className="lg:w-[30%] mt-6 lg:mt-0">
-            <RecentRequests request={stat?.data?.pendingRequests || []}/>
+          <RecentRequests request={stat?.data?.pendingRequests || []} />
         </div>
       </div>
     </>
