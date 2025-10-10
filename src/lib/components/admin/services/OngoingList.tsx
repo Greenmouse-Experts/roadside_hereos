@@ -3,16 +3,17 @@ import { TbListDetails } from "react-icons/tb";
 import { ServiceRequestItem2 } from "../../../types/service";
 import dayjs from "dayjs";
 import { MdLocationPin } from "react-icons/md";
-import {  useState } from "react";
+import { useState } from "react";
 import { toast } from "react-toastify";
 import { fetchAdminRequests } from "../../../services/api/serviceApi";
 import { useQuery } from "@tanstack/react-query";
 import EmptyState from "../../ui/EmptyState";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import { useNavigate } from "react-router-dom";
+import { format_time } from "../../../../utils/utils";
 
 const AdminOngoingService = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [params, setParams] = useState({
     status: "Ongoing",
     page: 1,
@@ -23,7 +24,7 @@ const AdminOngoingService = () => {
     queryKey: ["getServices", params],
     queryFn: () => fetchAdminRequests(params),
   });
-  
+
   const colors: string[] = [
     "border-purple-500",
     "border-blue-500",
@@ -76,8 +77,8 @@ const AdminOngoingService = () => {
         )}
         {data &&
           !!data?.data.serviceRequests.length &&
-          data?.data?.serviceRequests
-            .map((item: ServiceRequestItem2, index: number) => {
+          data?.data?.serviceRequests.map(
+            (item: ServiceRequestItem2, index: number) => {
               const colorIndex = index % colors.length;
               const color = colors[colorIndex];
               return (
@@ -93,9 +94,11 @@ const AdminOngoingService = () => {
                       {item.location}
                     </p>
                     <p className=" fs-300 fw-600 text-primary">
-                      {dayjs(item.createdAt).format(
+                      {format_time(item.createdAt)}
+
+                      {/*{dayjs(item.createdAt).format(
                         "hh:mma dddd DD, MMMM YYYY"
-                      )}
+                      )}*/}
                     </p>
                   </div>
                   <div className="flex gap-x-3 ">
@@ -112,7 +115,8 @@ const AdminOngoingService = () => {
                   </div>
                 </div>
               );
-            })}
+            },
+          )}
         <div className="mt-6 flex justify-end">
           <div className="flex gap-x-4 items-center">
             <p className="fw-600">Page {params.page}</p>

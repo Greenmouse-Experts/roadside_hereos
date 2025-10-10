@@ -11,6 +11,7 @@ import { fetchAdminRequests } from "../../../services/api/serviceApi";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
 import { est_day } from "./RequestList";
+import { format_time } from "../../../../utils/utils";
 
 const AdminProcessingService = () => {
   const navigate = useNavigate();
@@ -96,9 +97,10 @@ const AdminProcessingService = () => {
                       {item.location}
                     </p>
                     <p className=" fs-300 fw-600 text-primary">
-                      {est_day(item.createdAt)
+                      {format_time(item.createdAt)}
+                      {/*{est_day(item.createdAt)
                         ?.tz("America/New_York")
-                        .format("hh:mma dddd DD, MMMM YYYY")}
+                        .format("hh:mma dddd DD, MMMM YYYY")}*/}
                     </p>
                   </div>
                   <div className="flex gap-x-3 ">

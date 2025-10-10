@@ -289,18 +289,20 @@ const UserInfo: FC<Props> = ({ data }) => {
                 <div className="grid gap-3 lg:grid-cols-2 mt-4">
                   <p>
                     Name:{" "}
-                    <span className="fw-500 text-gray-700">{company.name}</span>
+                    <span className="fw-500 text-gray-700">
+                      {company?.name}
+                    </span>
                   </p>
                   <p>
                     Email:{" "}
                     <span className="fw-500 text-gray-700">
-                      {company.email}
+                      {company?.email}
                     </span>
                   </p>
                   <p>
                     Phone Number:{" "}
                     <span className="fw-500 text-gray-700">
-                      {company.phone}
+                      {company?.phone}
                     </span>
                   </p>
                 </div>

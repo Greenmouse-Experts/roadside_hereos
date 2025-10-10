@@ -7,6 +7,7 @@ interface Props {
   data: ServiceRequestItem2;
 }
 const AdminServiceDetailsIndex: FC<Props> = ({ data }) => {
+  // return <>{JSON.stringify(data)}</>;
   return (
     <div>
       <div>

@@ -4,7 +4,8 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { FC } from "react";
 import { IoTimeOutline } from "react-icons/io5";
 import dayjs from "dayjs";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { format_time } from "../../../../utils/utils";
 
 interface Props {
   request: any[];
@@ -17,6 +18,7 @@ const RecentRequests: FC<Props> = ({ request }) => {
     "border-pink-500",
     "border-orange-500",
   ];
+  const nav = useNavigate();
 
   return (
     <>
@@ -30,8 +32,12 @@ const RecentRequests: FC<Props> = ({ request }) => {
               const colorIndex = index % colors.length;
               const color = colors[colorIndex];
               return (
-                <Link
-                  to={"/admin/services/" + item.id}
+                <div
+                  onClick={() => {
+                    const to = "/admin/services/" + item.id;
+                    console.log(item);
+                    nav(to);
+                  }}
                   className={`border-l-[5px] ${color} grid gap-1 cursor-pointer pl-2 py-2 mb-3 bg-gray-50 hover:scale-105 duration-100`}
                 >
                   <div className="flex items-center gap-x-2">
@@ -49,12 +55,10 @@ const RecentRequests: FC<Props> = ({ request }) => {
                   <div className="flex items-start gap-x-2">
                     <IoTimeOutline className="text-gray-500 shrink-0 text-lg relative top-[2px]" />
                     <p className="fw-500 fs-500">
-                      {dayjs(item?.createdAt).format(
-                        "hh:mm a, dddd DD, MM YYYY",
-                      )}
+                      {format_time(item?.createdAt)}
                     </p>
                   </div>
-                </Link>
+                </div>
               );
             })}
         </div>

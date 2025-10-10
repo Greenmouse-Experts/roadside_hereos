@@ -11,6 +11,7 @@ import EmptyState from "../../ui/EmptyState";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import { useNavigate } from "react-router-dom";
 import { est_day } from "./RequestList";
+import { format_time } from "../../../../utils/utils";
 
 interface Props {
   status: string;
@@ -98,9 +99,10 @@ const AdminCompletedService: FC<Props> = ({ status }) => {
                       {item.location}
                     </p>
                     <p className=" fs-300 fw-600 text-primary">
-                      {est_day(item.createdAt)
+                      {format_time(item.createdAt)}
+                      {/*{est_day(item.createdAt)
                         ?.tz("America/New_York")
-                        .format("hh:mma dddd DD, MMMM YYYY")}
+                        .format("hh:mma dddd DD, MMMM YYYY")}*/}
                     </p>
                   </div>
                   <div className="flex gap-x-3 ">
