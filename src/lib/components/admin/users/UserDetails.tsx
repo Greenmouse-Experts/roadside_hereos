@@ -7,6 +7,7 @@ import { MdLocationPin } from "react-icons/md";
 import { TbListDetails } from "react-icons/tb";
 import { Button, Tooltip } from "@material-tailwind/react";
 import { useNavigate } from "react-router-dom";
+import { format_time } from "../../../../utils/utils";
 
 interface Props {
   data: UserItemType;
@@ -23,6 +24,17 @@ const UserDetailsIndex: FC<Props> = ({ data }) => {
     "border-pink-500",
     "border-orange-500",
   ];
+  const active = data.isActive;
+
+  const userStatus = () => {
+    if (isSuspended) {
+      return FormatStatus["Inactive"];
+    }
+    if (active) {
+      return FormatStatus["active"];
+    }
+    return FormatStatus["Inactive"];
+  };
 
   return (
     <div>
@@ -42,8 +54,8 @@ const UserDetailsIndex: FC<Props> = ({ data }) => {
             </div>
           </div>
           <div>
-            <p className="mb-2">{dayjs(createdAt).format("DD/MM/YYYY")}</p>
-            {isSuspended ? FormatStatus["Inactive"] : FormatStatus["active"]}
+            <p className="mb-2 ">{format_time(createdAt)}</p>
+            {userStatus()}
           </div>
         </div>
       </div>
@@ -68,7 +80,7 @@ const UserDetailsIndex: FC<Props> = ({ data }) => {
                     </p>
                     <p className=" fs-300 fw-600 text-primary">
                       {dayjs(item.createdAt).format(
-                        "hh:mma dddd DD, MMMM YYYY"
+                        "hh:mma dddd DD, MMMM YYYY",
                       )}
                     </p>
                   </div>
@@ -85,7 +97,7 @@ const UserDetailsIndex: FC<Props> = ({ data }) => {
                         </Button>
                       </Tooltip>
                     </div>
-                    <div>
+                    <div className="">
                       {
                         FormatStatus[
                           item.serviceRequestStatus as keyof typeof FormatStatus
