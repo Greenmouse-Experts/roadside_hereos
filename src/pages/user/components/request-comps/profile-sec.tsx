@@ -36,7 +36,9 @@ export default function ProfileSection(props: SectionProps) {
       phone: user.phone,
       street_address: "",
       apartment_unit: "",
-      city_state_zip: "",
+      city: "",
+      state: "",
+      zipcode: "",
     },
   });
   const onSubmit = (data: any) => {
@@ -44,7 +46,7 @@ export default function ProfileSection(props: SectionProps) {
     const combinedAddress = [
       data.street_address,
       data.apartment_unit,
-      data.city_state_zip,
+      `${data.city}, ${data.state} ${data.zipcode}`,
     ]
       .filter(Boolean)
       .join(", ");
@@ -183,18 +185,54 @@ export default function ProfileSection(props: SectionProps) {
 
         <div className="mb-2 col-span-2">
           <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
-            City, State, ZIP Code
+            City
           </label>
           <input
-            {...register("city_state_zip", {
-              required: "City, state, and ZIP code are required",
+            {...register("city", {
+              required: "City is required",
             })}
             className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
-            placeholder="ANYTOWN, CA 90210"
+            placeholder="ANYTOWN"
           />
-          {errors.city_state_zip && (
+          {errors.city && (
             <p className="error text-red-400 text-sm">
-              {errors?.city_state_zip?.message}
+              {errors?.city?.message}
+            </p>
+          )}
+        </div>
+
+        <div className="mb-2 col-span-2">
+          <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+            State
+          </label>
+          <input
+            {...register("state", {
+              required: "State is required",
+            })}
+            className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+            placeholder="CA"
+          />
+          {errors.state && (
+            <p className="error text-red-400 text-sm">
+              {errors?.state?.message}
+            </p>
+          )}
+        </div>
+
+        <div className="mb-2 col-span-2">
+          <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+            ZIP Code
+          </label>
+          <input
+            {...register("zipcode", {
+              required: "ZIP code is required",
+            })}
+            className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+            placeholder="90210"
+          />
+          {errors.zipcode && (
+            <p className="error text-red-400 text-sm">
+              {errors?.zipcode?.message}
             </p>
           )}
         </div>
