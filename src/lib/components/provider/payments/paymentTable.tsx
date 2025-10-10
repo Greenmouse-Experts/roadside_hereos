@@ -13,13 +13,7 @@ interface Props {
   next: () => void;
   prev: () => void;
 }
-const PaymentTable: FC<Props> = ({
-  data,
-  count,
-  page,
-  next,
-  prev,
-}) => {
+const PaymentTable: FC<Props> = ({ data, count, page, next, prev }) => {
   // Table components
   const columnHelper = createColumnHelper<PaymentItem>();
   const columns = [
@@ -38,7 +32,7 @@ const PaymentTable: FC<Props> = ({
       cell: (info) => <p className="">{info.getValue()}</p>,
       header: (info) => info.column.id,
     }),
-    columnHelper.accessor((row) => row.city, {
+    columnHelper.accessor((row) => row.location, {
       id: "Service Location",
       cell: (info) => <p className="">{info.getValue()}</p>,
       header: (info) => info.column.id,
@@ -53,14 +47,14 @@ const PaymentTable: FC<Props> = ({
       ),
     }),
     columnHelper.accessor((row) => row.fname, {
-        id: "Service Provider",
-        header: (info) => info.column.id,
-        cell: (info) => (
-          <p className="fw-600">
-            {info.getValue()} {info.row.original.lname}
-          </p>
-        ),
-      }),
+      id: "Service Provider",
+      header: (info) => info.column.id,
+      cell: (info) => (
+        <p className="fw-600">
+          {info.getValue()} {info.row.original.lname}
+        </p>
+      ),
+    }),
     columnHelper.accessor((row) => row.paymentStatus, {
       id: "Status",
       header: (info) => info.column.id,
@@ -77,14 +71,14 @@ const PaymentTable: FC<Props> = ({
   ];
   return (
     <div className="lg:p-4 w-full">
-        <DynamicTable
-          columns={columns}
-          data={data}
-          count={count}
-          prev={prev}
-          next={next}
-          page={page}
-        />
+      <DynamicTable
+        columns={columns}
+        data={data}
+        count={count}
+        prev={prev}
+        next={next}
+        page={page}
+      />
     </div>
   );
 };
