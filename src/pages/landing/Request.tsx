@@ -25,18 +25,18 @@ const RequestPage = () => {
     return (
       <>
         <LandingLayout>
-          <div className="min-h-screen grid  place-items-center">
-            <div className="flex flex-col items-center justify-center p-2 max-w-xl shadow-md py-12">
-              <h2 className="text-2xl font-bold mb-4 text-center">
-                We are ready to serve you!
+          <div className="min-h-screen grid place-items-center p-4 bg-gray-50">
+            <div className="flex flex-col items-center justify-center p-8 max-w-lg w-full bg-white rounded-xl shadow-2xl border border-gray-100">
+              <h2 className="text-3xl font-extrabold mb-3 text-gray-800 text-center">
+                Ready to Get Back on the Road?
               </h2>
-              <p className="text-lg mb-6 text-center">
-                To Make a Request, login or sign up, it only takes a few minute,
-                and well be on the way to help you.
+              <p className="text-lg mb-8 text-gray-600 text-center">
+                Log in or create an account to quickly submit your service
+                request.
               </p>
-              <div className="flex flex-col md:flex-row gap-4 w-full justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 w-full justify-center">
                 <button
-                  className="bg-primary hover:bg-[#e0a263] text-white fw-600 py-3 px-6 rounded-lg transition-colors duration-200 w-full md:w-auto"
+                  className="bg-primary hover:bg-amber-600 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-300 shadow-md hover:shadow-lg w-full sm:w-auto"
                   onClick={() => {
                     nav("/auth/login");
                   }}
@@ -44,12 +44,12 @@ const RequestPage = () => {
                   Login
                 </button>
                 <button
-                  className="border border-[#FEB470] text-[#FEB470] fw-600 py-3 px-6 rounded-lg hover:bg-[#FEB470] hover:text-white transition-colors duration-200 w-full md:w-auto"
+                  className="border-2 border-amber-400 text-amber-600 font-semibold py-3 px-8 rounded-lg hover:bg-amber-50 transition-colors duration-300 w-full sm:w-auto"
                   onClick={() => {
                     nav("/auth/register/user");
                   }}
                 >
-                  Register as new user
+                  Register
                 </button>
               </div>
             </div>
@@ -60,7 +60,7 @@ const RequestPage = () => {
 
   const requestInfo = useRequestStore((store) => store.request);
   const clearRequest = useRequestStore((store) => store.clearRequest);
-  const [driver, setDriver] = useDriver();
+  const [, setDriver] = useDriver();
   const { data: service } = useQuery({
     queryKey: ["getCat"],
     queryFn: getCategories,
@@ -85,49 +85,51 @@ const RequestPage = () => {
   return (
     <>
       <LandingLayout>
-        <div>
-          <div className="h-[250px] lg:h-[300px]  bg-[url('https://res.cloudinary.com/greenmouse-tech/image/upload/v1705590870/rsh/Group_59_3_ewquaq.png')] lg:bg-fit">
-            <div className="box h-full text-white flex items-center">
-              <div>
-                <div className="flex">
-                  <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#FEB470]">
-                    <BsClock className="text-[#FEB470] text-[14px]" />
-                    <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-[#FEB470]">
+        <div className="bg-gray-50 min-h-screen">
+          <header className="py-16 bg-white shadow-sm border-b border-gray-100">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div className="mb-4 md:mb-0">
+                  <div className="flex items-center gap-3 mb-3 p-2 bg-amber-50 border border-amber-200 rounded-full max-w-fit">
+                    <BsClock className="text-amber-500 text-lg" />
+                    <p className="text-sm font-medium text-amber-700">
                       Available 24/7 for emergency road service
                     </p>
                   </div>
+                  <h1 className="text-4xl lg:text-5xl font-extrabold text-gray-900 mt-2">
+                    Request Expert Roadside Assistance
+                  </h1>
                 </div>
-                <p className="text-3xl fw-700 mt-4">
-                  Need Help Now? Request Our Expert Services.
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="section">
-            <div className="box">
-              <div className="lg:w-11/12 mx-auto">
-                <div className="flex justify-between items-center">
-                  <p className="mb-4 text-lg lg:text-3xl fw-600">
-                    Service: {active?.name}
-                  </p>
-                  {requestInfo.level > 0 && (
-                    <p
-                      onClick={restart}
-                      className="flex items-center gap-x-2 cursor-pointer text-red-600 fw-600 fs-500"
-                    >
-                      <RiDeleteBin5Fill /> Clear Request
-                    </p>
-                  )}
-                </div>
-                {active && (
-                  <RequestForm
-                    activeId={`${id}`}
-                    activeQuestion={active?.questionNote}
-                  />
+                {requestInfo.level > 0 && (
+                  <button
+                    onClick={restart}
+                    className="flex items-center gap-x-2 px-4 py-2 text-sm font-semibold rounded-lg text-red-600 border border-red-300 hover:bg-red-50 transition duration-200 shadow-sm"
+                  >
+                    <RiDeleteBin5Fill className="text-lg" /> Clear Current
+                    Request
+                  </button>
                 )}
               </div>
             </div>
-          </div>
+          </header>
+
+          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div className="bg-white p-6 sm:p-10 rounded-xl shadow-lg border border-gray-100">
+              <h2 className="text-2xl font-bold text-gray-800 mb-6 border-b pb-3">
+                Service Selection: {active?.name || "Loading..."}
+              </h2>
+              {active ? (
+                <RequestForm
+                  activeId={`${id}`}
+                  activeQuestion={active?.questionNote}
+                />
+              ) : (
+                <div className="text-center py-10 text-gray-500">
+                  Loading service details...
+                </div>
+              )}
+            </div>
+          </main>
         </div>
         <DownloadApp />
       </LandingLayout>
