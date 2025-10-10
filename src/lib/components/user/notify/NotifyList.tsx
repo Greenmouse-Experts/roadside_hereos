@@ -15,18 +15,22 @@ import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import EmptyState from "../../ui/EmptyState";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 dayjs.extend(relativeTime);
-
+interface Notify extends NotifyItem {
+  notificationType: "SERVICE_REQUEST" | string;
+  notificationId: string;
+}
 interface Props {
   status: string;
-  data: NotifyItem[];
+  data: Notify[];
   isLoading: boolean;
   isError: boolean;
   refetch: () => void;
 }
 const NotifyList: FC<Props> = ({ status, data, isLoading, refetch }) => {
   const [notify, setNotify] = useState<NotifyItem[]>([]);
+  const nav = useNavigate();
   useEffect(() => {
     if (status === "unread") {
       const filtered = data?.filter((where) => !where.isRead);
@@ -72,9 +76,13 @@ const NotifyList: FC<Props> = ({ status, data, isLoading, refetch }) => {
         <div className="grid gap-4">
           {notify &&
             !!notify.length &&
-            notify.map((item, i: number) => (
-              <Link
-                to={item.id}
+            notify.map((item: Notify, i: number) => (
+              <div
+                onClick={() => {
+                  if (item.notificationType == "SERVICE_REQUEST") {
+                    return nav("/user/requests/" + item.notificationId);
+                  }
+                }}
                 key={i}
                 className={`bg-primary p-3 rounded-[15px] text-white flex items-center justify-between hover:scale-105 duration-100 ${
                   !item.isRead && `border-[3px] border-blue-400`
@@ -118,7 +126,7 @@ const NotifyList: FC<Props> = ({ status, data, isLoading, refetch }) => {
                     </MenuList>
                   </Menu>
                 </div>
-              </Link>
+              </div>
             ))}
         </div>
       </div>
