@@ -80,7 +80,10 @@ const NotifyList: FC<Props> = ({ status, data, isLoading, refetch }) => {
               <div
                 onClick={() => {
                   if (item.notificationType == "SERVICE_REQUEST") {
-                    return nav("/user/requests/" + item.notificationId);
+                    if (window.location.pathname.includes("/user/notify")) {
+                      return nav("/user/requests/" + item.notificationId);
+                    }
+                    return nav("/provider/services/" + item.notificationId);
                   }
                 }}
                 key={i}
