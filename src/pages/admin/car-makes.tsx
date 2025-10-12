@@ -240,28 +240,37 @@ const CarMakeCard = ({ item, refetch, setEdit }: Props) => {
   });
   return (
     <>
-      <div className="p-3 flex items-center shadow bg-white rounded-md">
-        <h2 className="font-bold">{item.name}</h2>
-        <div className="flex items-center gap-2 ml-auto">
-          <Button size="sm" onClick={() => setEdit(item)} className="ml-auto">
-            <BiEdit />
-          </Button>
+      <div className="p-4 flex items-center shadow-md bg-white rounded-lg hover:shadow-lg transition-shadow duration-300">
+        <h2 className="font-semibold text-lg text-gray-800">{item.name}</h2>
+        <div className="flex items-center gap-3 ml-auto">
+          {/* Status Indicator / Toggle */}
           <div
-            size="sm"
             onClick={() => change_state.mutate()}
-            // className={`ml-auto ${!item.active ? "bg-yellow-500" : "bg-green-500"}`}
+            className="flex items-center cursor-pointer"
+            title={item.active ? "Deactivate" : "Activate"}
           >
             {change_state.isPending ? (
-              <div className="p-3">
-                <VscLoading />
-              </div>
+              <VscLoading className="animate-spin text-blue-500 text-xl" />
             ) : (
               <Checkbox
                 checked={item.active}
                 disabled={change_state.isPending}
+                color={item.active ? "green" : "blue"}
+                className="h-5 w-5 rounded-full border-gray-400 transition-colors duration-200"
               />
             )}
           </div>
+
+          {/* Edit Button */}
+          <Button
+            size="sm"
+            onClick={() => setEdit(item)}
+            className="p-2 bg-blue-500 hover:bg-blue-600 shadow-none hover:shadow-none transition-all duration-200"
+          >
+            <BiEdit className="text-lg" />
+          </Button>
+
+          {/* Delete Button */}
           <Button
             size="sm"
             disabled={del_car.isPending}
@@ -272,9 +281,13 @@ const CarMakeCard = ({ item, refetch, setEdit }: Props) => {
                 error: "Failed to delete",
               });
             }}
-            className="ml-auto bg-red-500 text-white"
+            className="p-2 bg-red-500 hover:bg-red-600 shadow-none hover:shadow-none transition-all duration-200"
           >
-            {del_car.isPending ? "Deleting..." : <MdDelete />}
+            {del_car.isPending ? (
+              <VscLoading className="animate-spin text-lg" />
+            ) : (
+              <MdDelete className="text-lg" />
+            )}
           </Button>
         </div>
       </div>
