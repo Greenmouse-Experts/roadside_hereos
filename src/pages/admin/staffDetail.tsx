@@ -91,12 +91,12 @@ const StaffDetail = () => {
                       className="flex items-center gap-2 font-bold text-blue-gray-500 pt-10 lg:pt-0 px-2 lg:pr-4 cursor-pointer"
                       onClick={() => setShowModal(true)}
                     >
-                      {data?.data?.avgRating === null
+                      {data?.data?.reviewsAvg === null
                         ? "No Ratings Yet"
-                        : `${data?.data?.avgRating}/5`}
-                      {data?.data?.avgRating && (
+                        : `${data?.data?.reviewsAvg}/5`}
+                      {data?.data?.reviewsAvg && (
                         <Rating
-                          value={Number(data?.data?.avgRating) || 0}
+                          value={Number(data?.data?.reviewsAvg) || 0}
                           ratedColor={"amber"}
                           className="scale-120"
                           readonly

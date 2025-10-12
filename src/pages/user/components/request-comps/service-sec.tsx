@@ -72,6 +72,19 @@ export const useServiceSec = () => {
   const [service, setService] = useAtom(service_sec_atom);
   return [service, setService] as const;
 };
+
+interface VehicleMake {
+  id: string;
+  name: string;
+  active: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface GetMotorsResponse {
+  success: boolean;
+  data: VehicleMake[];
+}
 export default function ServiceSection() {
   const { id } = useParams();
   const [service, setService] = useServiceSec();
@@ -132,7 +145,7 @@ export default function ServiceSection() {
   const location = watch("location");
   const zipcode = watch("zipcode");
   const vehicleType = watch("vehicleType");
-  const get_motors = useQuery({
+  const get_motors = useQuery<GetMotorsResponse>({
     queryKey: ["vehicle-type", vehicleType],
     queryFn: async () => {
       let resp = await apiClient.get(
@@ -140,7 +153,7 @@ export default function ServiceSection() {
         {
           params: {
             page: 1,
-            limit: 10,
+            limit: 1000,
           },
         },
       );
