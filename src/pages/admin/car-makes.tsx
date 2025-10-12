@@ -169,7 +169,7 @@ export default function CarMakes() {
         open={addOpen}
         // ref={addRef}
         aria-modal
-        className="top-0 z-20 bg-transparent"
+        className="top-0 z-20 bg-transparent fixed"
       >
         <div className="h-screen w-screen grid place-items-center backdrop-blur-sm">
           <div className="bg-white w-full max-w-sm shadow-2xl p-6 rounded-xl flex flex-col gap-4">
