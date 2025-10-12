@@ -2,6 +2,7 @@ import { FC } from "react";
 import { ServiceRequestItem2 } from "../../../../types/service";
 import ServiceProgress from "../../../provider/requests/details-comp/ServiceProgress";
 import UserInfo from "../../../provider/requests/details-comp/UserInfo";
+import AdminServiceInfo from "../AdminServiceInfo";
 
 interface Props {
   data: ServiceRequestItem2;
@@ -15,7 +16,7 @@ const AdminServiceDetailsIndex: FC<Props> = ({ data }) => {
           <ServiceProgress status={data.status} query={data.queryNote} />
         </div>
         <div>
-          <UserInfo data={data} />
+          <AdminServiceInfo data={data} />
         </div>
       </div>
     </div>

@@ -11,19 +11,21 @@ const ProfileAvatar: React.FC<Props> = ({ url, name, size, font, square }) => {
   const nameRow = name?.split(" ");
   const firstLetter = nameRow && nameRow[0]?.charAt(0);
   const lastLetter = nameRow && nameRow?.length > 1 && nameRow[1]?.charAt(0);
-  if (url) {
+  if (url?.trim()) {
     return (
-      <img
-        src={url}
-        alt="profile"
-        width={size}
-        height={size}
-        className={
-          square
-            ? "aspect-square object-cover"
-            : "circle object-cover aspect-square"
-        }
-      />
+      <>
+        <img
+          src={url}
+          alt="profile"
+          width={size}
+          height={size}
+          className={
+            square
+              ? "aspect-square object-cover"
+              : "circle object-cover aspect-square"
+          }
+        />
+      </>
     );
   } else
     return (

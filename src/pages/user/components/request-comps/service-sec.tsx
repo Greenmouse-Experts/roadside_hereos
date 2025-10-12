@@ -274,6 +274,7 @@ export default function ServiceSection() {
           setValue={(e) => {
             // console.log("dlos");
             // console.log("zipcode", e.postal);
+            //@ts-ignore
             setValue("zipcode", e.postal);
             Object.entries(e).forEach(([key, value]) => {
               setValue(key as any, value as any);
