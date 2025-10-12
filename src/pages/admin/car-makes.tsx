@@ -8,6 +8,7 @@ import { MdDelete } from "react-icons/md";
 import { BsCheckCircleFill } from "react-icons/bs";
 import { IoCheckmarkCircleOutline } from "react-icons/io5";
 import { VscLoading } from "react-icons/vsc";
+import useModal from "../../lib/hooks/useModal";
 interface Main_Response {
   data: {
     name: string;
@@ -125,9 +126,8 @@ export default function CarMakes() {
       </div>
       <dialog
         open={isEditOpen}
-        // ref={addRef}
         aria-modal
-        className="top-0 z-20 bg-transparent"
+        className="top-0 z-20 bg-transparent fixed"
       >
         <div className="h-screen w-screen grid place-items-center backdrop-blur-sm">
           <div className="bg-white w-full max-w-sm shadow-2xl p-6 rounded-xl flex flex-col gap-4">
