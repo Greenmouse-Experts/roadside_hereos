@@ -12,27 +12,31 @@ import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import { useMutation } from "@tanstack/react-query";
 import { markAsRead } from "../../../services/api/notifyApi";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 // dayjs time format
 const dayjs = require("dayjs");
 const relativeTime = require("dayjs/plugin/relativeTime");
 dayjs.extend(relativeTime);
+interface NEW_NOTIFY extends NotifyItem {
+  notificationType: "NEW_USER" | "SERVICE_REQUEST" | "JOINED_SERVICE_PROVIDER";
+}
 
 interface Props {
   status: string;
-  data: NotifyItem[];
+  data: NEW_NOTIFY[];
   isLoading: boolean;
   isError: boolean;
   refetch: () => void;
 }
 const NotifyList: FC<Props> = ({ status, data, isLoading, refetch }) => {
-  const [notify, setNotify] = useState<NotifyItem[]>([]);
+  const [notify, setNotify] = useState<NEW_NOTIFY[]>([]);
   useEffect(() => {
     if (status === "unread") {
       const filtered = data?.filter((where) => !where.isRead);
       setNotify(filtered);
     } else setNotify(data);
   }, [status, data]);
-
+  const nav = useNavigate();
   const markRead = useMutation({
     mutationFn: markAsRead,
     mutationKey: ["markRead"],
@@ -41,13 +45,14 @@ const NotifyList: FC<Props> = ({ status, data, isLoading, refetch }) => {
     markRead.mutateAsync(item, {
       onSuccess: (data) => {
         toast.success(data.message);
-        refetch()
+        refetch();
       },
       onError: () => {
         toast.error("Something went wrong");
       },
     });
   };
+  // return <></>;
   return (
     <>
       <div>
@@ -68,6 +73,17 @@ const NotifyList: FC<Props> = ({ status, data, isLoading, refetch }) => {
             !!notify.length &&
             notify.slice(0, 20).map((item, i: number) => (
               <div
+                onClick={() => {
+                  console.log(item);
+                  switch (item.notificationType) {
+                    case "NEW_USER":
+                      nav("/admin/users/" + item.userId);
+                      break;
+                    case "JOINED_SERVICE_PROVIDER":
+                      nav("/admin/providers/staff/" + item.userId);
+                      break;
+                  }
+                }}
                 key={i}
                 className={`bg-primary p-3 rounded-[15px] text-white flex items-center justify-between hover:scale-105 duration-100 ${
                   !item.isRead && `border-[3px] border-blue-400`
