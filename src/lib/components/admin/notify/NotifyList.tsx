@@ -74,7 +74,7 @@ const NotifyList: FC<Props> = ({ status, data, isLoading, refetch }) => {
             notify.slice(0, 20).map((item, i: number) => (
               <div
                 onClick={() => {
-                  console.log(item);
+                  // console.log(item);
                   switch (item.notificationType) {
                     case "NEW_USER":
                       nav("/admin/users/" + item.userId);
