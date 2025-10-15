@@ -267,7 +267,7 @@ export default function ServiceSection() {
         <label className="mb-2 block mt-2 fw-600 text-[#000000B2]">
           Location
         </label>
-        <div className="p-2 bg-white border border-gray-400 mb-2 text-gray-700">
+        <div className="p-2 h-[44px] rounded-md  bg-white border border-gray-400 mb-2 text-gray-700">
           {location}
         </div>
         <GetCurrentLocation

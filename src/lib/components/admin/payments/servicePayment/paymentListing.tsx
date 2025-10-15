@@ -26,7 +26,11 @@ const PaymentListing: FC<Props> = ({ data, count, page, prev, next }) => {
     }),
     columnHelper.accessor((row) => row.fname, {
       id: "Customer",
-      cell: (info) => <p className="">{info.getValue()} {info.row.original.lname}</p>,
+      cell: (info) => (
+        <p className="">
+          {info.getValue()} {info.row.original.lname}
+        </p>
+      ),
     }),
     columnHelper.accessor((row) => row.serviceName, {
       id: "Service Category",
@@ -42,9 +46,7 @@ const PaymentListing: FC<Props> = ({ data, count, page, prev, next }) => {
       id: "Date Requested",
       header: (info) => info.column.id,
       cell: (info) => (
-        <p className="">
-          {dayjs(info.getValue()).format("ddd DD, MMM YYYY")}
-        </p>
+        <p className="">{dayjs(info.getValue()).format("ddd DD, MMM YYYY")}</p>
       ),
     }),
     columnHelper.accessor((row) => row.paymentStatus, {
@@ -52,7 +54,11 @@ const PaymentListing: FC<Props> = ({ data, count, page, prev, next }) => {
       header: (info) => info.column.id,
       cell: (info) => (
         <div className="fw-600">
-          {FormatStatus[info.getValue().toLowerCase() as keyof typeof FormatStatus]}
+          {
+            FormatStatus[
+              info.getValue().toLowerCase() as keyof typeof FormatStatus
+            ]
+          }
         </div>
       ),
     }),

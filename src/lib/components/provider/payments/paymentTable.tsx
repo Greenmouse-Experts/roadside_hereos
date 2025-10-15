@@ -27,11 +27,11 @@ const PaymentTable: FC<Props> = ({ data, count, page, next, prev }) => {
         <p className="fw-600">{formatAsNgnMoney(info.getValue())}</p>
       ),
     }),
-    columnHelper.accessor((row) => row.name, {
-      id: "Service Category",
-      cell: (info) => <p className="">{info.getValue()}</p>,
-      header: (info) => info.column.id,
-    }),
+    // columnHelper.accessor((row) => row?.serviceCategory, {
+    //   id: "Service Category",
+    //   cell: (info) => <p className="">{info.getValue()}</p>,
+    //   header: (info) => info.column.id,
+    // }),
     columnHelper.accessor((row) => row.location, {
       id: "Service Location",
       cell: (info) => <p className="">{info.getValue()}</p>,
