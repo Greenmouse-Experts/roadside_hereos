@@ -211,6 +211,7 @@ export default function AllQuotes(props: Props) {
             </p>
             <div className="flex items-center gap-2 mt-2">
               <span className="text-base text-gray-700">Driver Rating:</span>
+              {/*@ts-ignore*/}
               <Rating value={quote?.driver?.reviewsAvg || 3} readonly />
             </div>
           </div>
