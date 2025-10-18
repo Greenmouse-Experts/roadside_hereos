@@ -65,14 +65,45 @@ export default function PaymentSection() {
   });
 
   if (!driverId) return null;
-  if (client_secret.isLoading) return <div>Loading...</div>;
+  if (client_secret.isLoading)
+    return (
+      <div className="flex items-center justify-center p-6 bg-white rounded-xl shadow-sm border border-gray-200">
+        <svg
+          className="animate-spin h-5 w-5 mr-3 text-blue-500"
+          viewBox="0 0 24 24"
+        >
+          <circle
+            className="opacity-25"
+            cx="12"
+            cy="12"
+            r="10"
+            stroke="currentColor"
+            strokeWidth="4"
+          ></circle>
+          <path
+            className="opacity-75"
+            fill="currentColor"
+            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+          ></path>
+        </svg>
+        Loading payment details...
+      </div>
+    );
   if (client_secret.isError)
     return (
-      <div className="p-4 text-red-600">Error loading payment details</div>
+      <div className="p-6 bg-white rounded-xl shadow-sm border border-red-300 text-red-700">
+        <h2 className="text-xl font-semibold mb-2">Payment Error</h2>
+        <p>There was an error loading the payment details. Please try again.</p>
+      </div>
     );
 
   const data = client_secret.data?.data;
-  if (!data) return <div>No payment data available</div>;
+  if (!data)
+    return (
+      <div className="p-6 bg-white rounded-xl shadow-sm border border-gray-200 text-gray-700">
+        No payment data available.
+      </div>
+    );
 
   const getClientSecret = (data: PaymentData): string => {
     if ("amount_breakdown" in data) {
@@ -81,36 +112,95 @@ export default function PaymentSection() {
     return data.clientSecret;
   };
 
+  const formatCurrency = (amount: number, currency: string = "USD") => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: currency,
+    }).format(amount);
+  };
+
   return (
-    <div className="font-sans p-6 bg-white rounded-xl shadow-sm border border-gray-200">
-      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
-        Payment Details
+    <div className="font-sans p-6 bg-white rounded-xl shadow-lg border border-gray-100">
+      <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
+        Confirm Your Payment
       </h2>
 
-      {/* ✅ Render based on type */}
-      {"amount_breakdown" in data ? (
-        <>
-          <div className="space-y-4 text-gray-700">
-            <Row label="Total" value={`$${data.amount} ${data.currency}`} />
-            <Row
-              label="Subtotal"
-              value={`$${data.amount_breakdown.subtotal}`}
-            />
-            <Row label="Tax" value={`$${data.amount_breakdown.tax_amount}`} />
-          </div>
-        </>
-      ) : (
-        <>
-          <div className="space-y-4 text-gray-700">
-            <Row label="Total" value={`$${data.amount}`} />
-            <Row label="Tax" value={`$${data.tax}`} />
-          </div>
-        </>
-      )}
+      <div className="mb-8 border-b border-gray-200 pb-6">
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">
+          Order Summary
+        </h3>
+        <div className="space-y-3 text-gray-700">
+          {"amount_breakdown" in data ? (
+            <>
+              <Row
+                label="Service Amount"
+                value={formatCurrency(
+                  data.amount_breakdown.service_amount,
+                  data.currency,
+                )}
+              />
+              <Row
+                label="Subtotal"
+                value={formatCurrency(
+                  data.amount_breakdown.subtotal,
+                  data.currency,
+                )}
+                isSubtotal
+              />
+              <Row
+                label="Tax"
+                value={formatCurrency(
+                  data.amount_breakdown.tax_amount,
+                  data.currency,
+                )}
+              />
+              <div className="pt-4 border-t border-gray-300 mt-4">
+                <Row
+                  label="Total Amount"
+                  value={formatCurrency(data.amount, data.currency)}
+                  isTotal
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <Row label="Service Amount" value={formatCurrency(data.amount)} />
+              <Row label="Tax" value={formatCurrency(data.tax)} />
+              <div className="pt-4 border-t border-gray-300 mt-4">
+                <Row
+                  label="Total Amount"
+                  value={formatCurrency(data.amount + data.tax)}
+                  isTotal
+                />
+              </div>
+            </>
+          )}
+        </div>
+      </div>
 
       {/* Stripe Checkout */}
       {client_secret.isFetching ? (
-        <div className="p-2 text-xl font-bold">Loading</div>
+        <div className="flex items-center justify-center p-4 text-lg font-medium text-gray-600">
+          <svg
+            className="animate-spin h-5 w-5 mr-3 text-blue-500"
+            viewBox="0 0 24 24"
+          >
+            <circle
+              className="opacity-25"
+              cx="12"
+              cy="12"
+              r="10"
+              stroke="currentColor"
+              strokeWidth="4"
+            ></circle>
+            <path
+              className="opacity-75"
+              fill="currentColor"
+              d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+            ></path>
+          </svg>
+          Preparing payment gateway...
+        </div>
       ) : (
         !client_secret.isError && (
           <Checkout clientSecret={getClientSecret(data)} />
@@ -120,11 +210,24 @@ export default function PaymentSection() {
   );
 }
 
-function Row({ label, value }: { label: string; value: string | number }) {
+function Row({
+  label,
+  value,
+  isTotal = false,
+  isSubtotal = false,
+}: {
+  label: string;
+  value: string | number;
+  isTotal?: boolean;
+  isSubtotal?: boolean;
+}) {
+  const labelClasses = `font-medium ${isTotal ? "text-lg text-gray-900" : isSubtotal ? "text-base text-gray-800" : "text-gray-700"}`;
+  const valueClasses = `font-semibold ${isTotal ? "text-lg text-gray-900" : isSubtotal ? "text-base text-gray-800" : "text-gray-700"}`;
+
   return (
-    <div className="flex justify-between border-b pb-2">
-      <span className="font-medium">{label}:</span>
-      <span>{value}</span>
+    <div className="flex justify-between items-center py-1">
+      <span className={labelClasses}>{label}</span>
+      <span className={valueClasses}>{value}</span>
     </div>
   );
 }
@@ -134,11 +237,19 @@ const Checkout = (props: { clientSecret: string }) => {
   const options = { clientSecret: props.clientSecret };
 
   return (
-    <div className="mt-4">
+    <div className="mt-8 p-6 border border-gray-200 rounded-lg bg-gray-50">
+      <h3 className="text-xl font-semibold text-gray-800 mb-4">
+        Complete Your Payment
+      </h3>
       {props.clientSecret && (
         <Elements stripe={stripePromise} options={options}>
           <CheckoutForm prev={() => {}} secret_key={props.clientSecret} />
         </Elements>
+      )}
+      {!props.clientSecret && (
+        <div className="text-red-500 text-sm">
+          Payment gateway could not be initialized. Please try again.
+        </div>
       )}
     </div>
   );

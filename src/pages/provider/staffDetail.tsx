@@ -199,8 +199,15 @@ const StaffDetail = () => {
               </div>
               <div>
                 <span className="flex justify-between">
-                <p className="fw-500 text-gray-500 mb-4">City (Service Areas)</p>
-                <p className="fw-500 text-sm mx-4 text-blue-500 cursor-pointer" onClick={() => ShowCityCode(true)}>View more</p>
+                  <p className="fw-500 text-gray-500 mb-4">
+                    City (Service Areas)
+                  </p>
+                  <p
+                    className="fw-500 text-sm mx-4 text-blue-500 cursor-pointer"
+                    onClick={() => ShowCityCode(true)}
+                  >
+                    View more
+                  </p>
                 </span>
                 <div className="flex gap-x-2 items-center w-full overflow-x-auto scroll-pro">
                   <div className="bg-review shrink-0 w-10 h-10 circle place-center text-white">

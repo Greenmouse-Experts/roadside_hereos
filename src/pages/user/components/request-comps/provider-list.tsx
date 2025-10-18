@@ -1,11 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
 import { useServiceSec } from "./service-sec";
 import { apiClient } from "../../../../lib/services/api/serviceApi";
-import AllQuotes from "../../../../lib/components/landing/services/new-request/forms/components/all-quotes";
 import { useEffect, useState } from "react";
 import { Portal } from "../../../../lib/components/portal/portal";
 import ViewOnMap from "../../../../lib/components/landing/services/new-request/forms/ViewOnMap";
 import { SectionProps } from "./profile-sec";
+import AllQuotes from "./all-quotes";
 interface ServiceRendered {
   id: string;
   fee: number;

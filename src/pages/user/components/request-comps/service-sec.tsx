@@ -6,7 +6,7 @@ import { apiClient } from "../../../../lib/services/api/serviceApi";
 import { useEffect } from "react";
 import { toast } from "react-toastify";
 import { atomWithStorage } from "jotai/utils";
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
 import { useCurrentId } from "../../new-request";
 interface ServResponse {
   message: string;
@@ -143,7 +143,6 @@ export default function ServiceSection() {
     });
   }, [errors]);
   const location = watch("location");
-  const zipcode = watch("zipcode");
   const vehicleType = watch("vehicleType");
   const get_motors = useQuery<GetMotorsResponse>({
     queryKey: ["vehicle-type", vehicleType],
@@ -165,45 +164,50 @@ export default function ServiceSection() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="grid grid-cols-2 gap-4 pb-12"
+      className="grid grid-cols-1 md:grid-cols-2 gap-6 pb-12 p-6 bg-white shadow-lg rounded-lg"
     >
-      <div className="mb-2 col-span-2">
-        <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+      <div className="col-span-full">
+        <label
+          htmlFor="vehicleType"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Vehicle Type
         </label>
         <select
-          {...register("vehicleType")}
-          className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+          id="vehicleType"
+          {...register("vehicleType", { required: "Vehicle Type is required" })}
+          className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md shadow-sm"
         >
-          <option value={""}>Select Vehicle Type</option>
-          <option value={"car"}>Car</option>
-          <option value={"motorcycle"}>Motorcycle</option>
+          <option value="">Select Vehicle Type</option>
+          <option value="car">Car</option>
+          <option value="motorcycle">Motorcycle</option>
         </select>
+        {errors.vehicleType && (
+          <p className="mt-1 text-sm text-red-600">
+            {errors.vehicleType.message}
+          </p>
+        )}
       </div>
-      <div className="mb-2 col-span-2">
-        <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+
+      <div className="col-span-full">
+        <label
+          htmlFor="vehicleMake"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Vehicle Make{" "}
-          {get_motors.isFetching && <span className="ml-2">loading...</span>}
+          {get_motors.isFetching && (
+            <span className="ml-2 text-gray-500">Loading...</span>
+          )}
         </label>
-        {/*
-        <input
-          {...register("vehicleMake")}
-          className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
-        />*/}
         <Controller
           name="vehicleMake"
           control={control}
-          rules={{
-            required: {
-              value: true,
-              message: "Please enter a value",
-            },
-          }}
+          rules={{ required: "Vehicle Make is required" }}
           render={({ field }) => (
             <select
-              className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+              id="vehicleMake"
+              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md shadow-sm"
               {...field}
-              ref={null}
             >
               <option value="">Select an option</option>
               {car_data?.map((item) => (
@@ -214,36 +218,47 @@ export default function ServiceSection() {
             </select>
           )}
         />
+        {errors.vehicleMake && (
+          <p className="mt-1 text-sm text-red-600">
+            {errors.vehicleMake.message}
+          </p>
+        )}
       </div>
-      <div className="mb-2">
-        <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">Model</label>
+
+      <div>
+        <label
+          htmlFor="model"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
+          Model
+        </label>
         <input
-          {...register("model")}
-          className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+          id="model"
+          type="text"
+          {...register("model", { required: "Model is required" })}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
         />
+        {errors.model && (
+          <p className="mt-1 text-sm text-red-600">{errors.model.message}</p>
+        )}
       </div>
-      <div className="mb-2">
-        <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+
+      <div>
+        <label
+          htmlFor="vehicleYear"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Vehicle Year
         </label>
-        {/*<input
-          {...register("vehicleYear")}
-          className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
-        />*/}
         <Controller
           name="vehicleYear"
           control={control}
-          rules={{
-            required: {
-              value: true,
-              message: "Please select an option",
-            },
-          }}
+          rules={{ required: "Vehicle Year is required" }}
           render={({ field }) => (
             <select
-              className="border border-gray-400 w-full mt-[4px] p-[9px]  rounded"
+              id="vehicleYear"
+              className="mt-1 block w-full pl-3 pr-10 py-2 text-base border-gray-300 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm rounded-md shadow-sm"
               {...field}
-              ref={null}
             >
               <option value="">Select an option</option>
               {getYears.map((item) => (
@@ -254,27 +269,40 @@ export default function ServiceSection() {
             </select>
           )}
         />
+        {errors.vehicleYear && (
+          <p className="mt-1 text-sm text-red-600">
+            {errors.vehicleYear.message}
+          </p>
+        )}
       </div>
 
-      <div className="mb-2 col-span-2">
-        <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">Color</label>
+      <div className="col-span-full">
+        <label
+          htmlFor="color"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
+          Color
+        </label>
         <input
-          {...register("color")}
-          className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+          id="color"
+          type="text"
+          {...register("color", { required: "Color is required" })}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
         />
+        {errors.color && (
+          <p className="mt-1 text-sm text-red-600">{errors.color.message}</p>
+        )}
       </div>
-      <div className="col-span-2 ">
-        <label className="mb-2 block mt-2 fw-600 text-[#000000B2]">
+
+      <div className="col-span-full">
+        <label className="block text-sm font-medium text-gray-700 mb-1">
           Location
         </label>
-        <div className="p-2 h-[44px] rounded-md  bg-white border border-gray-400 mb-2 text-gray-700">
-          {location}
+        <div className="mt-1 p-2 min-h-[44px] rounded-md bg-gray-50 border border-gray-300 text-gray-700 shadow-sm flex items-center">
+          {location || "Fetching location..."}
         </div>
         <GetCurrentLocation
           setValue={(e) => {
-            // console.log("dlos");
-            // console.log("zipcode", e.postal);
-            //@ts-ignore
             setValue("zipcode", e.postal);
             Object.entries(e).forEach(([key, value]) => {
               setValue(key as any, value as any);
@@ -282,31 +310,34 @@ export default function ServiceSection() {
           }}
         />
       </div>
-      {/*<div className="col-span-2 ">
-        <label className="mb-2 block mt-2 fw-600 text-[#000000B2]">
-          Zip Code
-        </label>
-        <input
-          {...register("zipcode")}
-          className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
-        />
-      </div>*/}
-      <div className="mb-2 col-span-2 mt-2">
-        <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+
+      <div className="col-span-full">
+        <label
+          htmlFor="requestNote"
+          className="block text-sm font-medium text-gray-700 mb-1"
+        >
           Request Note (required)
         </label>
         <textarea
-          {...register("requestNote")}
-          className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+          id="requestNote"
+          {...register("requestNote", { required: "Request Note is required" })}
+          className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
           rows={4}
         />
+        {errors.requestNote && (
+          <p className="mt-1 text-sm text-red-600">
+            {errors.requestNote.message}
+          </p>
+        )}
       </div>
-      <div className="col-span-2 text-right">
+
+      <div className="col-span-full text-right mt-4">
         <button
           type="submit"
-          className="bg-primary text-white px-4 py-2 rounded mt-4"
+          className="inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+          disabled={service_mutation.isPending}
         >
-          {service_mutation.isPending ? "Loading..." : "Submit"}
+          {service_mutation.isPending ? "Submitting..." : "Submit Request"}
         </button>
       </div>
     </form>
