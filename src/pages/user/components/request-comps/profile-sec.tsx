@@ -22,7 +22,7 @@ export default function ProfileSection(props: SectionProps) {
   const { user } = useAuth();
   const auth = useAuth();
 
-  const [service, setService] = useServiceSec();
+  const [service] = useServiceSec();
   const {
     register,
     handleSubmit,
@@ -80,43 +80,60 @@ export default function ProfileSection(props: SectionProps) {
   });
   // return <>{JSON.stringify(user)}</>;
   return (
-    <div className="w-full mx-auto p-4">
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-4">
-        <div>
+    <div className="p-6 bg-white shadow-lg rounded-lg">
+      <h2 className="text-2xl font-semibold text-gray-800 mb-6">
+        Profile Information
+      </h2>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="grid grid-cols-1 md:grid-cols-2 gap-6"
+      >
+        <div className="col-span-full text-sm text-gray-600 mb-4">
           *Make sure all fields are filled in correctly before proceeding
         </div>
-        <div className="mb-2 col-span-2">
-          <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+        <div>
+          <label
+            htmlFor="first_name"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             First Name
           </label>
           <input
+            id="first_name"
             {...register("first_name", { required: "First name is required" })}
-            className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
           />
           {errors.first_name && (
-            <p className="error text-red-400 text-sm">
+            <p className="mt-1 text-sm text-red-600">
               {errors.first_name.message}
             </p>
           )}
         </div>
 
-        <div className="mb-2 col-span-2">
-          <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+        <div>
+          <label
+            htmlFor="last_name"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Last Name
           </label>
           <input
+            id="last_name"
             {...register("last_name", { required: "Last name is required" })}
-            className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
           />
           {errors.last_name && (
-            <p className="error text-red-400 text-sm">
+            <p className="mt-1 text-sm text-red-600">
               {errors.last_name.message}
             </p>
           )}
         </div>
 
-        <div className="mb-2 col-span-2">
-          <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+        <div className="col-span-full">
+          <label
+            htmlFor="phone"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Phone
           </label>
           <PhoneInputWithCountrySelect
@@ -132,117 +149,148 @@ export default function ProfileSection(props: SectionProps) {
                 message: "Please Enter A Valid Number",
               },
             }}
-            className="border p-2 bg-white border-gray-400 rounded outline-none"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
           />
           {errors.phone && (
-            <p className="error text-red-400 text-sm">
+            <p className="mt-1 text-sm text-red-600">
               {errors.phone.message || "Invalid Phone Number"}
             </p>
           )}
         </div>
 
-        <div className="mb-2 col-span-2">
-          <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+        <div className="col-span-full">
+          <label
+            htmlFor="email"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Email
           </label>
           <input
+            id="email"
+            type="email"
             {...register("email", { required: "Email is required" })}
-            className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
           />
           {errors.email && (
-            <p className="error text-red-400 text-sm">{errors.email.message}</p>
+            <p className="mt-1 text-sm text-red-600">{errors.email.message}</p>
           )}
         </div>
 
-        <div className="mb-2 col-span-2">
-          <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+        <div className="col-span-full">
+          <label
+            htmlFor="street_address"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Street Address
           </label>
           <input
+            id="street_address"
+            type="text"
             {...register("street_address", {
               required: "Street address is required",
             })}
-            className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
             placeholder="123 MAIN ST"
           />
           {errors.street_address && (
-            <p className="error text-red-400 text-sm">
+            <p className="mt-1 text-sm text-red-600">
               {errors?.street_address?.message}
             </p>
           )}
         </div>
 
-        <div className="mb-2 col-span-2">
-          <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+        <div className="col-span-full">
+          <label
+            htmlFor="apartment_unit"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             Apartment/Unit (if applicable)
           </label>
           <input
+            id="apartment_unit"
+            type="text"
             {...register("apartment_unit")}
-            className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
             placeholder="APT 101"
           />
         </div>
 
-        <div className="mb-2 col-span-2">
-          <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+        <div>
+          <label
+            htmlFor="city"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             City
           </label>
           <input
+            id="city"
+            type="text"
             {...register("city", {
               required: "City is required",
             })}
-            className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
             placeholder="ANYTOWN"
           />
           {errors.city && (
-            <p className="error text-red-400 text-sm">
-              {errors?.city?.message}
-            </p>
+            <p className="mt-1 text-sm text-red-600">{errors?.city?.message}</p>
           )}
         </div>
 
-        <div className="mb-2 col-span-2">
-          <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+        <div>
+          <label
+            htmlFor="state"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             State
           </label>
           <input
+            id="state"
+            type="text"
             {...register("state", {
               required: "State is required",
             })}
-            className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
             placeholder="CA"
           />
           {errors.state && (
-            <p className="error text-red-400 text-sm">
+            <p className="mt-1 text-sm text-red-600">
               {errors?.state?.message}
             </p>
           )}
         </div>
 
-        <div className="mb-2 col-span-2">
-          <label className="mb-1 block mt-2 fw-600 text-[#000000B2]">
+        <div className="col-span-full">
+          <label
+            htmlFor="zipcode"
+            className="block text-sm font-medium text-gray-700 mb-1"
+          >
             ZIP Code
           </label>
           <input
+            id="zipcode"
+            type="text"
             {...register("zipcode", {
               required: "ZIP code is required",
             })}
-            className="border border-gray-400 w-full mt-[4px] p-[9px] rounded"
+            className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-primary focus:border-primary sm:text-sm"
             placeholder="90210"
           />
           {errors.zipcode && (
-            <p className="error text-red-400 text-sm">
+            <p className="mt-1 text-sm text-red-600">
               {errors?.zipcode?.message}
             </p>
           )}
         </div>
 
-        <button
-          type="submit"
-          className="bg-primary text-white py-2 px-4 rounded hover:bg-blue-600 transition-colors"
-        >
-          Submit
-        </button>
+        <div className="col-span-full text-right mt-4">
+          <button
+            type="submit"
+            className="inline-flex justify-center py-2 px-6 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-primary hover:bg-primary-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary transition-colors duration-200"
+            disabled={create_mutation.isPending}
+          >
+            {create_mutation.isPending ? "Submitting..." : "Submit Request"}
+          </button>
+        </div>
       </form>
     </div>
   );
