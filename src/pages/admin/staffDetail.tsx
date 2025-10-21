@@ -127,7 +127,7 @@ const StaffDetail = () => {
                           <BsTelephone className="text-lg" />
                         </div>
                         <p className="fw-600 text-gray-800">
-                          {formatPhoneNumber(data?.data?.phone)}
+                          {formatPhoneNumber(data?.data?.phone_number)}
                         </p>
                       </div>
                     </div>
