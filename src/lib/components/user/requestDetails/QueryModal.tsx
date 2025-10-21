@@ -54,8 +54,7 @@ const QueryModal: FC<Props> = ({ id, close, refetch }) => {
   return (
     <div>
       <p className="fw-500 text-black mt-3">
-        We&apos;re sorry for any mishap, please kindly submit a detailed
-        description of the event.
+        Something not right? Let us know — we’re here to help!
       </p>
       <div>
         <TextInput

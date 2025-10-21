@@ -100,8 +100,8 @@ const ReviewModal: FC<Props> = ({ id, close, refetch }) => {
   return (
     <div>
       <p className="fw-500 text-black">
-        We&apos;re glad to have completed your service request please click on
-        option to submit a review on the provider who carried out the task.
+        Thank you for choosing us! Your service is complete — we’d love to hear
+        how your technician did.
       </p>
       <div>
         {/*<div className="mb-4 mt-3">

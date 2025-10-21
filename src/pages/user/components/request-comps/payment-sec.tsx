@@ -23,6 +23,7 @@ interface PaymentDataV1 {
   createdAt: string;
   updatedAt: string;
   clientSecret: string;
+  items?: { description: string; amount: number }[]; // Added for V1
 }
 
 interface PaymentDataV2 {
@@ -39,6 +40,7 @@ interface PaymentDataV2 {
   currency: string;
   status: string;
   created: number;
+  items?: { description: string; amount: number }[]; // Added for V2
 }
 
 type PaymentData = PaymentDataV1 | PaymentDataV2;
@@ -119,6 +121,8 @@ export default function PaymentSection() {
     }).format(amount);
   };
 
+  const currency = "amount_breakdown" in data ? data.currency : "USD";
+
   return (
     <div className="font-sans p-6 bg-white rounded-xl shadow-lg border border-gray-100">
       <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
@@ -130,22 +134,32 @@ export default function PaymentSection() {
           Order Summary
         </h3>
         <div className="space-y-3 text-gray-700">
+          {data.items && data.items.length > 0 && (
+            <>
+              <h4 className="text-lg font-semibold text-gray-800 mb-2">
+                Items
+              </h4>
+              {data.items.map((item, index) => (
+                <Row
+                  key={index}
+                  label={item.description}
+                  value={formatCurrency(item.amount, currency)}
+                />
+              ))}
+              <div className="border-t border-gray-200 my-3"></div>
+            </>
+          )}
+
           {"amount_breakdown" in data ? (
             <>
               <Row
-                label="Service Amount"
+                label="Charge: Processing Fee"
                 value={formatCurrency(
-                  data.amount_breakdown.service_amount,
+                  data.amount -
+                    data.amount_breakdown.service_amount -
+                    data.amount_breakdown.tax_amount,
                   data.currency,
                 )}
-              />
-              <Row
-                label="Subtotal"
-                value={formatCurrency(
-                  data.amount_breakdown.subtotal,
-                  data.currency,
-                )}
-                isSubtotal
               />
               <Row
                 label="Tax"
@@ -164,12 +178,15 @@ export default function PaymentSection() {
             </>
           ) : (
             <>
-              <Row label="Service Amount" value={formatCurrency(data.amount)} />
+              <Row
+                label="Charge: Processing Fee"
+                value={formatCurrency(data.charge)}
+              />
               <Row label="Tax" value={formatCurrency(data.tax)} />
               <div className="pt-4 border-t border-gray-300 mt-4">
                 <Row
                   label="Total Amount"
-                  value={formatCurrency(data.amount + data.tax)}
+                  value={formatCurrency(data.amount + data.tax)} // Assuming total is amount + tax for V1
                   isTotal
                 />
               </div>

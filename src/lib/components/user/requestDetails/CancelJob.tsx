@@ -31,8 +31,8 @@ export default function CancelModal(props: Props) {
     <div className="bg-white rounded-lg p-4 mx-auto">
       <h2 className="text-xl font-semibold text-gray-800 mb-2">Cancel Order</h2>
       <p className="text-gray-700 mb-4">
-        We&apos;re sorry for any mishap. Please kindly submit a detailed
-        description of the event.
+        Cancel this request? A 15% processing fee will be charged for
+        cancellations.
       </p>
       <div className="mb-4">
         <label
