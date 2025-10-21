@@ -104,7 +104,7 @@ const AdminPendingService = () => {
                       {item.location}
                     </p>
                     <p className=" fs-300 fw-600 text-primary">
-                      {format_time(item.createdAt)}
+                      {format_time(item.serviceRequestCreatedAt)}
                       {/*{item.createdAt}*/}
                       {/*{est_day(item.createdAt)
                         .tz("America/New_York")
