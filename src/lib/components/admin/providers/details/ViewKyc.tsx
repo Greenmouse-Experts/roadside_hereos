@@ -120,20 +120,12 @@ const ViewKyc: FC<Props> = ({ id, refetch }) => {
                   <p className="fw-600 mt-2">{data?.data?.address}</p>
                 </div>
                 <div>
-                  <p className="fw-500 text-gray-500">
-                    Business Description:
-                  </p>
-                  <p className="fw-600 mt-2">
-                    {data?.data?.business_desc}
-                  </p>
+                  <p className="fw-500 text-gray-500">Business Description:</p>
+                  <p className="fw-600 mt-2">{data?.data?.business_desc}</p>
                 </div>
                 <div>
-                  <p className="fw-500 text-gray-500">
-                    Device Ip Address:
-                  </p>
-                  <p className="fw-600 mt-2">
-                    {data?.data?.device_ip}
-                  </p>
+                  <p className="fw-500 text-gray-500">Device IP Address:</p>
+                  <p className="fw-600 mt-2">{data?.data?.device_ip}</p>
                 </div>
                 <div>
                   <p className="fw-500 text-gray-500">Nature of Company</p>
@@ -150,11 +142,13 @@ const ViewKyc: FC<Props> = ({ id, refetch }) => {
                     Company Contact Information
                   </p>
                   <p className="fw-600 mt-2">{data?.data?.business_email}</p>
-                  <p className="fw-600 mt-1">{formatPhoneNumber(data?.data?.business_phone)}</p>
+                  <p className="fw-600 mt-1">
+                    {formatPhoneNumber(data?.data?.business_phone)}
+                  </p>
                 </div>
                 <div>
                   <p className="fw-500 text-gray-500">
-                    Business Registartion Certificate
+                    Business Registration Certificate
                   </p>
                   <div className="mt-2">
                     {data?.data?.business_reg_certificate && (
@@ -190,7 +184,7 @@ const ViewKyc: FC<Props> = ({ id, refetch }) => {
                               className="w-32 border-2 cursor-pointer rounded h-16"
                             />
                           </a>
-                        )
+                        ),
                       )}
                   </div>
                 </div>
@@ -218,7 +212,9 @@ const ViewKyc: FC<Props> = ({ id, refetch }) => {
                 </div>
                 <div>
                   <p className="fw-500 text-gray-500">Contact Phone:</p>
-                  <p className="fw-600 mt-2">{formatPhoneNumber(data?.data?.director_phone)}</p>
+                  <p className="fw-600 mt-2">
+                    {formatPhoneNumber(data?.data?.director_phone)}
+                  </p>
                 </div>
               </div>
             </div>

@@ -105,6 +105,7 @@ const AdminPendingService = () => {
                     </p>
                     <p className=" fs-300 fw-600 text-primary">
                       {format_time(item.createdAt)}
+                      {/*{item.createdAt}*/}
                       {/*{est_day(item.createdAt)
                         .tz("America/New_York")
                         .format("hh:mma dddd DD, MMMM YYYY")}*/}
