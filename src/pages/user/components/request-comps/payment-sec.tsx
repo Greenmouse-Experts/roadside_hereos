@@ -153,13 +153,13 @@ export default function PaymentSection() {
           {"amount_breakdown" in data ? (
             <>
               <Row
+                label="Amount"
+                value={formatCurrency(data.amount)}
+                isSubtotal
+              />
+              <Row
                 label="Charge: Processing Fee"
-                value={formatCurrency(
-                  data.amount -
-                    data.amount_breakdown.service_amount -
-                    data.amount_breakdown.tax_amount,
-                  data.currency,
-                )}
+                value={formatCurrency(data.amount_breakdown.service_amount)}
               />
               <Row
                 label="Tax"
@@ -178,6 +178,11 @@ export default function PaymentSection() {
             </>
           ) : (
             <>
+              <Row
+                label="Subtotal"
+                value={formatCurrency(data.amount, currency)} // Assuming 'amount' is subtotal for V1 if no items
+                isSubtotal
+              />
               <Row
                 label="Charge: Processing Fee"
                 value={formatCurrency(data.charge)}
