@@ -99,7 +99,7 @@ const AdminCompletedService: FC<Props> = ({ status }) => {
                       {item.location}
                     </p>
                     <p className=" fs-300 fw-600 text-primary">
-                      {format_time(item.createdAt)}
+                      {format_time(item.serviceRequestCreatedAt)}
                       {/*{est_day(item.createdAt)
                         ?.tz("America/New_York")
                         .format("hh:mma dddd DD, MMMM YYYY")}*/}
