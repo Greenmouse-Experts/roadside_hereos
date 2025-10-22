@@ -94,7 +94,7 @@ const AdminOngoingService = () => {
                       {item.location}
                     </p>
                     <p className=" fs-300 fw-600 text-primary">
-                      {format_time(item.createdAt)}
+                      {format_time(item.serviceRequestCreatedAt)}
 
                       {/*{dayjs(item.createdAt).format(
                         "hh:mma dddd DD, MMMM YYYY"
