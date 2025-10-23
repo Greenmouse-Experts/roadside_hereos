@@ -18,6 +18,7 @@ import { toast } from "react-toastify";
 import useModal from "../../hooks/useModal";
 import RegisterSuccess from "./RegisterSuccess";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
+import { AxiosError } from "axios";
 
 const ProviderRegisterForm = () => {
   const [isBusy, setIsBusy] = useState(false);
@@ -71,6 +72,7 @@ const ProviderRegisterForm = () => {
     setIsBusy(true);
     const payload = {
       name: `${data.first_name}`,
+      platform: "web",
       email: data.email,
       phone: data.phone,
       password: data.password,
@@ -80,20 +82,32 @@ const ProviderRegisterForm = () => {
         ? data.referralSource
         : selectedAvenue,
       captcha: captchaRef.current.getValue(),
-      smsOptIn: data.smsOptIn,
+      sms_opt_in: data.sms_opt_in, // Changed from data.smsOptIn to data.sms_opt_in
     };
-    mutation.mutate(payload, {
-      onSuccess: (data) => {
-        setIsBusy(false);
-        toast.success(data?.message);
-        setShowModal(true);
+    toast.promise(
+      () =>
+        mutation.mutateAsync(payload, {
+          onSuccess: (data) => {
+            setIsBusy(false);
+            toast.success(data?.message);
+            setShowModal(true);
+          },
+          onError: (error: any) => {
+            console.log(error);
+            const errors_arr = error.response.data.errors as {
+              message: string;
+            }[];
+            errors_arr.map((err) => {
+              toast.error(err.message);
+            });
+            setIsBusy(false);
+          },
+        }),
+      {
+        pending: "signing up",
+        success: "signed up",
       },
-      onError: (error: any) => {
-        console.log(error);
-        toast.error(error.response.data.message);
-        setIsBusy(false);
-      },
-    });
+    );
   };
   const captchaRef = useRef<any>(null);
   const ref = useRef<any>(null);
@@ -181,11 +195,11 @@ const ProviderRegisterForm = () => {
                 value: true,
                 message: "Please enter your email",
               },
-              validate: (val) => {
-                if (val.includes("+")) {
-                  return "  Invalid Email";
-                }
-              },
+              // validate: (val) => {
+              //   if (val.includes("+")) {
+              //     return "  Invalid Email";
+              //   }
+              // },
             }}
             render={({ field }) => (
               <TextInput
