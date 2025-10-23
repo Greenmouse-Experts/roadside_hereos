@@ -94,12 +94,13 @@ const ProviderRegisterForm = () => {
           },
           onError: (error: any) => {
             console.log(error);
-            const errors_arr = error.response.data.errors as {
-              message: string;
-            }[];
-            errors_arr.map((err) => {
-              toast.error(err.message);
-            });
+            toast.error(error.response.data.message);
+            // const errors_arr = error.response.data.errors as {
+            //   message: string;
+            // }[];
+            // errors_arr.map((err) => {
+            //   toast.error(err.message);
+            // });
             setIsBusy(false);
           },
         }),
