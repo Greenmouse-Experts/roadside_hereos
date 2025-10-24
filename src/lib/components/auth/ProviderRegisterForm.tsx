@@ -19,6 +19,8 @@ import useModal from "../../hooks/useModal";
 import RegisterSuccess from "./RegisterSuccess";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { AxiosError } from "axios";
+import { Tooltip } from "@chakra-ui/react";
+import { TbTooltip } from "react-icons/tb";
 
 const ProviderRegisterForm = () => {
   const [isBusy, setIsBusy] = useState(false);
@@ -250,7 +252,18 @@ const ProviderRegisterForm = () => {
             )}
           </div>
           <div className="mt-4" ref={ref}>
-            <label className="fw-500 text-[#000000B2]">Service Category</label>
+            <span className="flex  items-center gap-2">
+              {" "}
+              Service Category
+              <Tooltip
+                label="Choose the services you’d like to offer."
+                placement="top"
+              >
+                <span className="p-1 bg-red-500 bg-opacity-10 rounded-full ">
+                  <TbTooltip className="text-red-400" />
+                </span>
+              </Tooltip>
+            </span>
             <div className="border border-gray-400 w-full mt-[4px] px-[9px] py-[9px] rounded flex items-center gap-x-2">
               <MdOutlineHomeRepairService className="text-2xl text-gray-700" />
               <div className="w-full relative">
