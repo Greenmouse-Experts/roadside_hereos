@@ -152,12 +152,12 @@ export default function UserSignUp() {
               </div>
               <div className="mt-3 lg:mt-3 text-center">
                 <p className="fs-500">
-                  Company Register here?{" "}
+                  Company Account? 👉{" "}
                   <Link
                     to={"/auth/register/"}
                     className="underline fw-500 text-primary"
                   >
-                    Register now
+                    Register Here.
                   </Link>
                 </p>
               </div>
