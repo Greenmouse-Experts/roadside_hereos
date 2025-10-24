@@ -20,6 +20,7 @@ import DeleteAccount from "./pages/landing/DeleteAccount";
 import ProvidersFaqPage from "./pages/landing/ProvidersFaqs";
 import BlogPage from "./pages/landing/Blog";
 import BlogDetail from "./pages/landing/BlogDetail";
+import PaymentSettlement from "./pages/landing/Payment";
 
 function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -107,6 +108,7 @@ function App() {
         <Route path="/user/*" element={<UsersDashboardWraper />} />
         <Route path="/provider/*" element={<ProviderDashboardWraper />} />
         <Route path="/admin/*" element={<AdminDashboard />} />
+        <Route path="/payment-settlement" element={<PaymentSettlement />} />
       </Routes>
       <CookieModal />
       <CookieConsent />
