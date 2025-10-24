@@ -94,6 +94,10 @@ const TermsPage = () => {
       label: "Governing Law and Jurisdiction",
       key: 21,
     },
+    {
+      label: "Payment Settlement",
+      key: 22,
+    },
   ];
 
   const Accordion1 = () => (
@@ -211,10 +215,15 @@ const TermsPage = () => {
     <div className="mt-6" ref={(el) => (divRefs.current[7] = el)}>
       <p className="fw-600">SMS and Voice Call Communications</p>
       <p className="mt-3">
-        By using the ALLDRIVE SOS Platform and its services, you expressly consent to receive SMS text messages and voice calls to the phone numbers you provide during registration, service request, or through your user account.
+        By using the ALLDRIVE SOS Platform and its services, you expressly
+        consent to receive SMS text messages and voice calls to the phone
+        numbers you provide during registration, service request, or through
+        your user account.
       </p>
       <p className="mt-3">
-        These communications are essential to the operation of our platform and are used solely to facilitate service delivery, including but not limited to:
+        These communications are essential to the operation of our platform and
+        are used solely to facilitate service delivery, including but not
+        limited to:
       </p>
       <ul className="mt-3 my-list">
         <li>
@@ -224,17 +233,26 @@ const TermsPage = () => {
           <span className="fw-500">Providing technician arrival updates</span>
         </li>
         <li>
-          <span className="fw-500">Delivering job status changes or confirmations</span>
+          <span className="fw-500">
+            Delivering job status changes or confirmations
+          </span>
         </li>
         <li>
-          <span className="fw-500">Communicating account-related notifications</span>
+          <span className="fw-500">
+            Communicating account-related notifications
+          </span>
         </li>
       </ul>
       <p className="mt-3">
-        Standard message and data rates may apply. You may opt out of non-essential or promotional messages at any time by following opt-out instructions provided in such communications. However, opting out of service-related communications may impact your ability to fully use the Platform.
+        Standard message and data rates may apply. You may opt out of
+        non-essential or promotional messages at any time by following opt-out
+        instructions provided in such communications. However, opting out of
+        service-related communications may impact your ability to fully use the
+        Platform.
       </p>
       <p className="mt-3">
-        Your consent to receive these communications is an integral condition of using the ALLDRIVE SOS services.
+        Your consent to receive these communications is an integral condition of
+        using the ALLDRIVE SOS services.
       </p>
     </div>
   );
@@ -334,7 +352,8 @@ const TermsPage = () => {
       <p className="mt-3">
         ALLDRIVE SOS services are only available within the United States. Users
         who access the platform outside the U.S. do so at their own risk and are
-        responsible for ensuring compliance with local laws and regulations.{" "}
+        responsible for ensuring compliance with local laws and
+        regulations.{" "}
       </p>
     </div>
   );
@@ -454,6 +473,22 @@ const TermsPage = () => {
     </div>
   );
 
+  const Accordion22 = () => (
+    <div className="mt-6" ref={(el) => (divRefs.current[22] = el)}>
+      <p className="fw-600">Payment Settlement</p>
+      <p className="mt-3">
+        For detailed information regarding payment settlement procedures,
+        including how technicians receive payments and the timeline for
+        settlements, please refer to our dedicated{" "}
+        <Link to={"/payment-settlement"} className="text-blue-700 fw-500">
+          Payment Settlement Policy
+        </Link>
+        . This policy outlines the terms and conditions related to financial
+        transactions between ALLDRIVE SOS, customers, and technicians.
+      </p>
+    </div>
+  );
+
   return (
     <>
       <LandingLayout>
@@ -549,6 +584,7 @@ const TermsPage = () => {
                       <Accordion19 />
                       <Accordion20 />
                       <Accordion21 />
+                      <Accordion22 />
                     </div>
                   </div>
                 </div>

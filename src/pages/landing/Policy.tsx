@@ -74,6 +74,10 @@ const PolicyPage = () => {
       label: "User Responsibilities",
       key: 16,
     },
+    {
+      label: "Payment Settlement",
+      key: 17,
+    },
   ];
 
   const Accordion1 = () => (
@@ -457,6 +461,23 @@ const PolicyPage = () => {
     </div>
   );
 
+  const Accordion16 = () => (
+    <div className="mt-4 text-lg" ref={(el) => (divRefs.current[16] = el)}>
+      <p className="mt-5 fw-600">Payment Settlement</p>
+      <p className="">
+        For details on how payments are processed and settled on the ALLDRIVE
+        SOS Platform, please refer to our dedicated{" "}
+        <Link
+          to={"/payment-settlement"}
+          className="text-blue-700 fw-500 underline"
+        >
+          Payment Settlement Policy
+        </Link>
+        .
+      </p>
+    </div>
+  );
+
   return (
     <>
       <LandingLayout>
@@ -538,6 +559,7 @@ const PolicyPage = () => {
                       <Accordion13 />
                       <Accordion14 />
                       <Accordion15 />
+                      <Accordion16 />
                     </div>
                   </div>
                 </div>
