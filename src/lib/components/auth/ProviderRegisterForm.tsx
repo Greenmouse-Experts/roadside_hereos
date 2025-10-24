@@ -94,6 +94,15 @@ const ProviderRegisterForm = () => {
           },
           onError: (error: any) => {
             console.log(error);
+            if ("errors" in error.response.data) {
+              let error_arr = error.response.data.errors as {
+                message: string;
+              }[];
+              error_arr.map((err) => {
+                toast.error(err.message);
+              });
+              return setIsBusy(false);
+            }
             toast.error(error.response.data.message);
             // const errors_arr = error.response.data.errors as {
             //   message: string;
