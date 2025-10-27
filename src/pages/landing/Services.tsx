@@ -9,6 +9,7 @@ import DownloadApp from "../../lib/components/landing/homepage/DownloadApp";
 import ReusableModal from "../../lib/components/ui/ReusableModal";
 import useDialog from "../../lib/hooks/useDialog";
 import useAuthStore from "../../lib/store/userStore";
+import RequestPage from "./Request";
 
 const SERVICES_DATA = [
   {
@@ -146,8 +147,7 @@ const ServicesPage = () => {
   const { Dialog: ShowModal, setShowModal } = useDialog();
   const navigate = useNavigate();
   const user = useAuthStore((state) => state.user.name.trim());
-
-  // return <>{JSON.stringify(user)}</>;
+  return <RequestPage />;
   return (
     <>
       <LandingLayout>

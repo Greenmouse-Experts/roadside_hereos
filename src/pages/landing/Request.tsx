@@ -25,7 +25,7 @@ const RequestPage = () => {
     return (
       <>
         <LandingLayout>
-          <div className="min-h-screen grid place-items-center p-4 bg-gray-50">
+          <div className="min-h-screen  grid place-items-center p-4 bg-primary">
             <div className="flex flex-col items-center justify-center p-8 max-w-lg w-full bg-white rounded-xl shadow-2xl border border-gray-100">
               <h2 className="text-3xl font-extrabold mb-3 text-gray-800 text-center">
                 Ready to Get Back on the Road?
