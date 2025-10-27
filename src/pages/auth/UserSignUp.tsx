@@ -9,6 +9,39 @@ import { apiClient } from "../../lib/services/api/serviceApi";
 import { toast } from "react-toastify";
 import { atomWithStorage } from "jotai/utils";
 import { useAtom } from "jotai";
+const selectOptions = [
+  "Google",
+  "Bing",
+  "Facebook",
+  "Instagram",
+  "Twitter/X",
+  "TikTok",
+  "Friend or Family Recommendation",
+  "Referral from Another Technician",
+  "Google Ads",
+  "Email Newsletter",
+  "Roadside Assistance Comparison Website",
+  "Blog or Article",
+  "YouTube or Video Ad",
+  "Radio or Podcast",
+  "Television Ad",
+  "Returning Service Provider",
+  "Google Play",
+  "Apple App Store",
+  "Billboard or Outdoor Signage",
+  "Flyer or Brochure",
+  "Indeed",
+  "LinkedIn",
+  "ZipRecruiter",
+  "Glassdoor",
+  "Craigslist",
+  "Yelp Business Directory",
+  "Industry Partner",
+  "Trade Shows or Industry Events",
+  "Community Center or Bulletin Board",
+  "Referral from AllDrive SOS Customer",
+  "Other (Please Specify)",
+];
 
 type SignUpFormInputs = {
   platform: string;
@@ -17,7 +50,7 @@ type SignUpFormInputs = {
   email: string;
   password: string;
   phone: string; // Storing as string for input flexibility
-  referralSource?: string; // Made optional
+  referralSource?: string; // Changed from howDidYouHear
   captcha: string; // This will now store the reCAPTCHA token
   sms_opt_in: boolean;
 };
@@ -298,27 +331,32 @@ export default function UserSignUp() {
                     )}
                   </div>
 
-                  {/* Referral Source (optional) */}
-                  {/*<div>
+                  {/* Referral Source */}
+                  <div>
                     <label
                       htmlFor="referralSource"
                       className="block text-sm font-medium text-gray-700 mb-1"
                     >
                       Referral Source (Optional)
                     </label>
-                    <input
+                    <select
                       {...register("referralSource")}
                       id="referralSource"
-                      type="text"
                       className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
-                      placeholder="Referral Source (Optional)"
-                    />
+                    >
+                      <option value="">Select an option</option>
+                      {selectOptions.map((option) => (
+                        <option key={option} value={option}>
+                          {option}
+                        </option>
+                      ))}
+                    </select>
                     {errors.referralSource && (
                       <p className="text-red-500 text-sm mt-1">
                         {errors.referralSource.message}
                       </p>
                     )}
-                  </div>*/}
+                  </div>
 
                   {/* SMS Opt-in */}
                   <div className="flex items-center space-x-2">
