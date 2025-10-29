@@ -107,11 +107,12 @@ export default function PaymentSection() {
       </div>
     );
 
-  const getClientSecret = (data: PaymentData): string => {
-    if ("amount_breakdown" in data) {
-      return data.client_secret;
-    }
-    return data.clientSecret;
+  const getClientSecret = (data?: PaymentData): string => {
+    // console.log(data);
+    // if ("amount_breakdown" in data) {
+    //   return data.client_secret;
+    // }
+    return data?.clientSecret || data?.client_secret;
   };
 
   const formatCurrency = (amount: number, currency: string = "USD") => {
@@ -154,7 +155,7 @@ export default function PaymentSection() {
             <>
               <Row
                 label="Amount"
-                value={formatCurrency(data.amount)}
+                value={formatCurrency(data.amount_breakdown.subtotal)}
                 isSubtotal
               />
               <Row

@@ -12,6 +12,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import useRequestStore from "../../../../store/serviceStore";
 import { useServiceSec } from "../../../../../pages/user/components/request-comps/service-sec";
 import { useProfileSec } from "../../../../../pages/user/components/request-comps/profile-sec";
+import { useDriver } from "../../../../../pages/user/new-request";
 
 interface Props {
   prev: () => void;
@@ -25,6 +26,7 @@ const CheckoutForm: FC<Props> = ({ prev }) => {
   const clear = useRequestStore((state) => state.clearRequest);
   const [service, setService] = useServiceSec();
   const [profile, setProfile] = useProfileSec();
+  const [_, setDriver] = useDriver();
   const confirmPayment = async (secret: string | null) => {
     const payload = {
       clientSecret: secret,
@@ -33,6 +35,7 @@ const CheckoutForm: FC<Props> = ({ prev }) => {
       .then((res) => {
         toast.success(res.message);
         // setService(null);
+        setDriver(null);
         setProfile(null);
         navigate(`/success/${id}`);
         clear();

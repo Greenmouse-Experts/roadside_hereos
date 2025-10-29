@@ -1,8 +1,8 @@
-import  { FC } from 'react';
-import Button from './Button';
-import { BeatLoader } from 'react-spinners';
+import { FC, PropsWithChildren } from "react";
+import Button from "./Button";
+import { BeatLoader } from "react-spinners";
 
-interface Props {
+interface Props extends PropsWithChildren {
   title: string;
   closeModal: () => void;
   action: () => void;
@@ -17,6 +17,7 @@ const ReusableModal: FC<Props> = ({
   cancelTitle,
   actionTitle,
   isBusy,
+  children,
 }) => {
   return (
     <div className="px-4">
@@ -28,6 +29,7 @@ const ReusableModal: FC<Props> = ({
         className="mx-auto"
       />
       <div className="px-6 text-black text-center">{title}</div>
+      <div>{children}</div>
       <div className="w-full mt-8 flex justify-between">
         <Button
           altClassName="py-2 px-3 lg:px-6 rounded  bg-red-600 text-white"

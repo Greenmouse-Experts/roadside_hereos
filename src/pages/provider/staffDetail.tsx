@@ -138,6 +138,7 @@ const StaffDetail = () => {
                 <UserAction
                   refetch={refetch}
                   id={data?.data.id}
+                  companyId={data.data.companyId}
                   suspended={data?.data.isSuspended}
                 />
               </div>

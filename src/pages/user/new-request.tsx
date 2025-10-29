@@ -15,7 +15,7 @@ import PaymentSection from "./components/request-comps/payment-sec";
 import { Quote } from "../../lib/components/landing/services/new-request/forms/components/all-quotes";
 const selected_driver_atom = atomWithStorage<Quote | null>(
   "selected_driver",
-  null,
+  JSON.parse(localStorage.getItem("selected_driver")) || null,
 );
 export const useDriver = () => {
   const [driver, setDriver] = useAtom(selected_driver_atom);
@@ -79,6 +79,7 @@ export default function NewRequests() {
     setStep(0);
     setService(null);
     setProfile(null);
+    setDriver(null);
   };
   useEffect(() => {
     if (currentId === null) return;
@@ -88,6 +89,7 @@ export default function NewRequests() {
     }
   }, [id, currentId]);
   const [profile, setProfile] = useProfileSec();
+  const [driver, setDriver] = useDriver();
   useEffect(() => {
     if (!service) {
       console.log("No service selected");
@@ -103,6 +105,9 @@ export default function NewRequests() {
     }
     if (!service && step > 0) {
       setStep(0);
+    }
+    if (driver && step < 3) {
+      setStep(3);
     }
   }, [service, step, profile]);
   const next = () => {
