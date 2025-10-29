@@ -100,13 +100,13 @@ const StaffDetail = () => {
                       onClick={() => setShowModal(true)}
                     >
                       <span className="text-lg">
-                        {data?.data?.reviewsAvg === null
+                        {data?.data?.avgRating === null
                           ? "No Ratings Yet"
-                          : `${data?.data?.reviewsAvg}/5`}
+                          : `${data?.data?.avgRating}/5`}
                       </span>
                       {data?.data?.reviewsAvg && (
                         <Rating
-                          value={Number(data?.data?.reviewsAvg) || 0}
+                          value={Number(data?.data?.avgRating) || 0}
                           ratedColor={"amber"}
                           className="scale-100"
                           readonly
