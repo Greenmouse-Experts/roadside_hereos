@@ -103,7 +103,7 @@ const UserAction: FC<Props> = ({ id, refetch, suspended, companyId }) => {
             }}
             placeholder="reason"
             type="text"
-            className="p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 font-bold"
           />
         </div>
       </ReusableModal>
@@ -131,12 +131,12 @@ const UserAction: FC<Props> = ({ id, refetch, suspended, companyId }) => {
             }}
             placeholder="reason"
             type="text"
-            className="p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+            className="p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 font-bold"
           />
         </div>
       </ReusableModal>
     ),
-    [UnsuspendAction, ShowUnsuspend, unsus.isPending],
+    [UnsuspendAction, ShowUnsuspend],
   );
 
   return (
