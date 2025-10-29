@@ -8,14 +8,14 @@ import LogoutModal from "../../../auth/LogoutModal";
 import { BiLogOutCircle } from "react-icons/bi";
 import { FC } from "react";
 
-interface Props{
-  toggled: boolean
-  setToggled: React.Dispatch<React.SetStateAction<boolean>>
+interface Props {
+  toggled: boolean;
+  setToggled: React.Dispatch<React.SetStateAction<boolean>>;
 }
-const SidebarLayout:FC<Props> = ({toggled, setToggled}) => {
+const SidebarLayout: FC<Props> = ({ toggled, setToggled }) => {
   const path = useLocation();
-  const {user, firstName, lastName} = useAuth()
-  const {Dialog, setShowModal} = useDialog()
+  const { user, firstName, lastName } = useAuth();
+  const { Dialog, setShowModal } = useDialog();
 
   return (
     <div className="left-0 top-0 fixed overflow-y-hidden rounded-r-3xl index-10">
@@ -23,7 +23,7 @@ const SidebarLayout:FC<Props> = ({toggled, setToggled}) => {
         customBreakPoint="1024px"
         className="h-screen overflow-y-hidden scroll-pro lg:pb-4 fs-700 fw-500 lg:px-4"
         backgroundColor="white"
-        onBackdropClick={() => setToggled(false)} 
+        onBackdropClick={() => setToggled(false)}
         toggled={toggled}
       >
         <div className="py-6 text-center lg:pb-8">
@@ -107,7 +107,7 @@ const SidebarLayout:FC<Props> = ({toggled, setToggled}) => {
       </Sidebar>
       <Dialog title="" size="sm">
         <LogoutModal CloseModal={() => setShowModal(false)} />
-        </Dialog>
+      </Dialog>
     </div>
   );
 };

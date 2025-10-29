@@ -90,7 +90,7 @@ const SidebarLayout: FC<Props> = ({ toggled, setToggled }) => {
           <MenuItem
             component={<Link to={"/admin/settings"} />}
             icon={<BsGear className="text-xl" />}
-            className="mt-12"
+            className=""
           >
             <p className="fs-400">Settings</p>
           </MenuItem>
