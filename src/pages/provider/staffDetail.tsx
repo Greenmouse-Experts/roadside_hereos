@@ -110,8 +110,8 @@ const StaffDetail = () => {
               </div>
               <div className="lg:flex gap-x-2 items-start">
                 <div className="pt-2">
-                  {data?.data?.reviewsAvg ? (
-                    <Rating value={Number(data?.data?.reviewsAvg)} readonly />
+                  {data?.data?.avgRating ? (
+                    <Rating value={Number(data?.data?.avgRating)} readonly />
                   ) : (
                     <Rating
                       value={0}
@@ -120,13 +120,13 @@ const StaffDetail = () => {
                     />
                   )}
                   <div className="text-center">
-                    {data?.data?.reviewsAvg ? (
+                    {data?.data?.avgRating ? (
                       <p
                         className="fs-400 inline fw-500 cursor-pointer"
                         onClick={() => ShowDialog(true)}
                       >
                         <span className="fw-600 text-lg">
-                          {data?.data?.reviewsAvg}
+                          {data?.data?.avgRating}
                         </span>
                         /5 Rating
                       </p>
