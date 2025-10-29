@@ -14,6 +14,7 @@ import { formatPhoneNumber } from "react-phone-number-input";
 import { Rating } from "@material-tailwind/react";
 import useDialog from "../../lib/hooks/useDialog";
 import ViewReviewsModal from "../../lib/components/admin/providers/staff/ViewReviewsModal";
+import AdminServiceRenderd from "./_components/AdminServiceRendered";
 
 const StaffDetail = () => {
   const { id } = useParams();
@@ -27,7 +28,6 @@ const StaffDetail = () => {
   //   queryFn: () => getDriverKyc(`${id}`),
   // });
   const { Dialog, setShowModal } = useDialog();
-
   return (
     <>
       <div>
@@ -167,7 +167,9 @@ const StaffDetail = () => {
                         Service Rendered
                       </p>
                       <div className="pt-4">
-                        <ServiceRendered />
+                        <AdminServiceRenderd
+                          serviceData={data?.data.serviceRequests as any}
+                        />
                       </div>
                     </div>
                   </div>
