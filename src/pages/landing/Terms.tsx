@@ -280,7 +280,7 @@ const TermsPage = () => {
       <p className="fw-600">Refund Policy and Cancellation Charges </p>
       <p className="mt-3">
         ALLDRIVE SOS is committed to fair policies regarding cancellations and
-        refunds. A 5% cancellation fee is charged for any cancelled service to
+        refunds. A 15% cancellation fee is charged for any cancelled service to
         cover processing costs incurred by third-party payment systems.
         Customers who cancel a service request will be responsible for this fee.
         If a technician cancels a service, the customer will receive a full
