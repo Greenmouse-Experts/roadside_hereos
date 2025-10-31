@@ -53,7 +53,7 @@ const ProviderDetails = () => {
             <ProviderDetailsHeader
               picture={data?.data?.photo}
               name={data?.data?.name}
-              status={data?.data?.isActive}
+              status={data?.data?.isSuspended}
               id={`${id}`}
               email={data?.data?.email}
               refetch={refetch}

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
 import {
   Button,
   Menu,
@@ -14,6 +14,7 @@ import { useMutation } from "@tanstack/react-query";
 import { unsuspendUser } from "../../../../services/api/usersApi";
 import { toast } from "react-toastify";
 import ReusableModal from "../../../ui/ReusableModal";
+import UnSuspendModal from "./UnSuspendModal";
 
 interface Props {
   id: string;
@@ -37,6 +38,7 @@ const ProviderDetailsHeader: FC<Props> = ({
   const { Modal: Suspend, setShowModal: ShowSuspend } = useModal();
   const { Modal: Unsuspend, setShowModal: ShowUnsuspend } = useModal();
   const [isBusy, setIsBusy] = useState(false);
+  const reason = useRef<string | null>("");
   const unsus = useMutation({
     mutationFn: unsuspendUser,
     mutationKey: ["unsuspend"],
@@ -44,6 +46,7 @@ const ProviderDetailsHeader: FC<Props> = ({
   const UnsuspendAction = () => {
     const payload = {
       userId: id,
+      reason: reason.current,
     };
     unsus.mutate(payload, {
       onSuccess: (data) => {
@@ -54,12 +57,11 @@ const ProviderDetailsHeader: FC<Props> = ({
       },
       onError: (error) => {
         toast.error(error.message);
+        toast.error(JSON.stringify(error.response?.data.messsage));
         setIsBusy(false);
       },
     });
   };
-
-  console.log(status);
 
   return (
     <>
@@ -70,6 +72,7 @@ const ProviderDetailsHeader: FC<Props> = ({
               <div className="text-white">
                 <p>
                   {" "}
+                  {JSON.stringify(status)}
                   Pending Balance:{" "}
                   <span className="text-lg fw-600">
                     {formatAsNgnMoney(pendingBal) || "$0"}
@@ -87,7 +90,7 @@ const ProviderDetailsHeader: FC<Props> = ({
                 <MenuHandler>
                   <Button className="bg-transparent px-0 mx-0 hover:shadow-none text-md flex items-center font-normal shadow-none capitalize">
                     <>
-                      {!status
+                      {status
                         ? FormatStatus["inactive"]
                         : FormatStatus["active"]}
                     </>
@@ -124,16 +127,48 @@ const ProviderDetailsHeader: FC<Props> = ({
           close={() => ShowSuspend(false)}
           refetch={refetch}
         />
+        {/*<div className="space-y-2 py-4">
+          <label htmlFor="" className="font-bold">
+            Reason
+          </label>
+          <input
+            onChange={(e) => {
+              reason.current = e.target.value;
+            }}
+            placeholder="reason"
+            type="text"
+            className="p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 font-bold"
+          />
+        </div>*/}
       </Suspend>
-      <Unsuspend title="" size="sm">
-        <ReusableModal
+      <Unsuspend title="UnSuspend Company" size="sm">
+        <UnSuspendModal
+          id={id}
+          close={() => ShowUnsuspend(false)}
+          refetch={refetch}
+        ></UnSuspendModal>
+        {/*<ReusableModal
           title="Do you want to unsuspend this company/provider"
           action={UnsuspendAction}
           closeModal={() => ShowUnsuspend(true)}
           actionTitle="Unsuspend"
           cancelTitle="Close"
           isBusy={isBusy}
-        />
+        >
+          <div className="space-y-2 py-4">
+            <label htmlFor="" className="font-bold">
+              Reason
+            </label>
+            <input
+              onChange={(e) => {
+                reason.current = e.target.value;
+              }}
+              placeholder="reason"
+              type="text"
+              className="p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 font-bold"
+            />
+          </div>
+        </ReusableModal>*/}
       </Unsuspend>
     </>
   );
