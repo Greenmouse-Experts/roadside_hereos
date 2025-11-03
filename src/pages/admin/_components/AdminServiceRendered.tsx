@@ -90,7 +90,7 @@ export default function AdminServiceRenderd(props: {
   const { serviceData } = props;
   return (
     <ul className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-2 ">
-      {serviceData.map((service) => (
+      {serviceData?.map((service) => (
         <li
           key={service.id}
           className="bg-white shadow-lg rounded-lg p-6 mb-4 border border-gray-200 hover:shadow-xl transition-shadow duration-300"
