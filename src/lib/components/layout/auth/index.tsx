@@ -1,15 +1,11 @@
-import React from 'react'
+import React from "react";
 
-interface Props{
-    children: React.ReactNode
+interface Props {
+  children: React.ReactNode;
 }
 
-const AuthLayout:React.FC<Props> = ({children}) => {
-  return (
-    <>
-        {children}
-    </>
-  )
-}
+const AuthLayout: React.FC<Props> = ({ children }) => {
+  return <>{children}</>;
+};
 
-export default AuthLayout
+export default AuthLayout;
