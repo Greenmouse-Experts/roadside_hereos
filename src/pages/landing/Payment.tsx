@@ -226,11 +226,19 @@ export default function PaymentSettlement() {
                   Customers are charged 15% of the service amount.
                   <ul className="list-disc list-inside ml-4 mt-1">
                     <li>a. 7.5% goes to Technician.</li>
-                    <li>b. 7.5% goes to AllDrive SOS.</li>
+                    <li>
+                      b. 7.5% goes to AllDrive SOS (as administrative charge).
+                    </li>
                   </ul>
                 </td>
                 <td className="py-4 px-5 border border-gray-300">
-                  Protects technician’s lost time and ensures accountability.
+                  <ul className="list-disc list-inside">
+                    <li>
+                      Protects technician’s lost time and ensures
+                      accountability.
+                    </li>
+                    <li>AllDrive SOS Payment Processing overhead</li>
+                  </ul>
                 </td>
               </tr>
               <tr className="even:bg-[#f2f6fa]">
@@ -238,14 +246,21 @@ export default function PaymentSettlement() {
                   Technician cancels after customer payment
                 </td>
                 <td className="py-4 px-5 border border-gray-300">
-                  The technician is charged 15% of the service amount.
+                  The technician is charged 15% of the service amount to his
+                  wallet.
                   <ul className="list-disc list-inside ml-4 mt-1">
                     <li>a. 100% QA refunded to Customer.</li>
-                    <li>b. 15% retained by AllDrive SOS.</li>
+                    <li>
+                      b. 15% of QA charged to Technician is retained by AllDrive
+                      SOS.
+                    </li>
                   </ul>
                 </td>
                 <td className="py-4 px-5 border border-gray-300">
-                  Protects customer experience and maintains trust.
+                  <ul className="list-disc list-inside">
+                    <li>Protects customer experience and maintains trust.</li>
+                    <li>AllDrive SOS Payment Processing overhead</li>
+                  </ul>
                 </td>
               </tr>
               <tr className="even:bg-[#f2f6fa]">
