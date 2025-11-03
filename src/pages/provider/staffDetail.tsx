@@ -25,6 +25,8 @@ import { formatAsNgnMoney, formatPhoneNumber } from "../../lib/utils";
 import ViewCityCodes from "../../lib/components/admin/providers/staff/ViewCityCodes";
 import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
+import { apiClient } from "../../lib/services/api/serviceApi";
+import AdminServiceRenderd from "../admin/_components/AdminServiceRendered";
 
 const StaffDetail = () => {
   const { id } = useParams();
@@ -38,8 +40,13 @@ const StaffDetail = () => {
     data: kyc,
     refetch: refetchKyc,
   } = useQuery({
-    queryKey: ["getDriverKyc"],
+    queryKey: ["getDriverKyc", id],
     queryFn: () => getDriversKyc(`${id}`),
+    // queryFn: async () => {
+    //   // https://api.alldrivesos.com/api/users/get-user/d3f455d6-3c5b-4903-8b61-5411d6313d00
+    //   let resp = await apiClient.get("/users/get-user/" + id);
+    //   return resp.data;
+    // },
   });
   const { Modal, setShowModal } = useModal();
   const { Modal: DisApproval, setShowModal: SetDisApproval } = useModal();
@@ -86,48 +93,52 @@ const StaffDetail = () => {
             There was an issue fetching this provider details
           </p>
         )}
-        {exists && (
-          <div className="flex justify-end p-3">
-            <button
-              className="flex items-center gap-x-2 text-blue-500 hover:text-blue-700"
-              onClick={() => setShowReason(!showReason)}
-            >
-              {showReason ? (
-                <>
-                  <AiOutlineEyeInvisible className="text-lg" />
-                  Hide Reason
-                </>
-              ) : (
-                <>
-                  <AiOutlineEye className="text-lg" />
-                  Show Reason
-                </>
-              )}
-            </button>
-          </div>
-        )}
-        {showReason && (
+        {!isLoading && (
           <>
-            {" "}
-            {isSuspended && data.data?.reason_for_suspension && (
-              <div className="flex flex-col sm:flex-row sm:items-center p-3 bg-red-50 border border-red-200 rounded-md">
-                <p className="w-full sm:w-3/12 shrink-0 text-red-700 font-semibold mb-1 sm:mb-0">
-                  Reason for Suspension:
-                </p>
-                <p className="fw-500 text-red-600">
-                  {data.data.reason_for_suspension}
-                </p>
+            {exists && (
+              <div className="flex justify-end p-3">
+                <button
+                  className="flex items-center gap-x-2 text-blue-500 hover:text-blue-700"
+                  onClick={() => setShowReason(!showReason)}
+                >
+                  {showReason ? (
+                    <>
+                      <AiOutlineEyeInvisible className="text-lg" />
+                      Hide Reason
+                    </>
+                  ) : (
+                    <>
+                      <AiOutlineEye className="text-lg" />
+                      Show Reason
+                    </>
+                  )}
+                </button>
               </div>
             )}
-            {!isSuspended && data.data?.reason_for_unsuspension && (
-              <div className="flex flex-col sm:flex-row sm:items-center p-3 bg-green-50 border border-green-200 rounded-md">
-                <p className="w-full sm:w-3/12 shrink-0 text-green-700 font-semibold mb-1 sm:mb-0">
-                  Reason for Unsuspension:
-                </p>
-                <p className="fw-500 text-green-600">
-                  {data.data.reason_for_unsuspension}
-                </p>
-              </div>
+            {showReason && (
+              <>
+                {" "}
+                {isSuspended && data.data?.reason_for_suspension && (
+                  <div className="flex flex-col sm:flex-row sm:items-center p-3 bg-red-50 border border-red-200 rounded-md">
+                    <p className="w-full sm:w-3/12 shrink-0 text-red-700 font-semibold mb-1 sm:mb-0">
+                      Reason for Suspension:
+                    </p>
+                    <p className="fw-500 text-red-600">
+                      {data.data.reason_for_suspension}
+                    </p>
+                  </div>
+                )}
+                {!isSuspended && data.data?.reason_for_unsuspension && (
+                  <div className="flex flex-col sm:flex-row sm:items-center p-3 bg-green-50 border border-green-200 rounded-md">
+                    <p className="w-full sm:w-3/12 shrink-0 text-green-700 font-semibold mb-1 sm:mb-0">
+                      Reason for Unsuspension:
+                    </p>
+                    <p className="fw-500 text-green-600">
+                      {data.data.reason_for_unsuspension}
+                    </p>
+                  </div>
+                )}
+              </>
             )}
           </>
         )}
@@ -396,7 +407,8 @@ const StaffDetail = () => {
       <div className="border-r-2 h-full">
         <p className="p-3 border-b-2 fw-500 text-gray-600">Service Rendered</p>
         <div className="px-4 py-3">
-          <ServiceRendered />
+          {/*{JSON.stringify(kyc.data.serviceRequests)}*/}
+          <AdminServiceRenderd serviceData={kyc?.data?.serviceRequests} />
         </div>
       </div>
     </>
