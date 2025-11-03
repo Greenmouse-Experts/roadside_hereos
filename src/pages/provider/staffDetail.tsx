@@ -23,6 +23,8 @@ import ViewReviewsModal from "../../lib/components/admin/providers/staff/ViewRev
 import { MdLocationCity, MdSignpost } from "react-icons/md";
 import { formatAsNgnMoney, formatPhoneNumber } from "../../lib/utils";
 import ViewCityCodes from "../../lib/components/admin/providers/staff/ViewCityCodes";
+import { useState } from "react";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 
 const StaffDetail = () => {
   const { id } = useParams();
@@ -30,6 +32,7 @@ const StaffDetail = () => {
     queryKey: ["getProviders", `${id}`],
     queryFn: () => getDriversDetail(`${id}`),
   });
+  const [showReason, setShowReason] = useState(false);
   const {
     isLoading: loading,
     data: kyc,
@@ -82,6 +85,51 @@ const StaffDetail = () => {
           <p className="py-24 text-center">
             There was an issue fetching this provider details
           </p>
+        )}
+        {exists && (
+          <div className="flex justify-end p-3">
+            <button
+              className="flex items-center gap-x-2 text-blue-500 hover:text-blue-700"
+              onClick={() => setShowReason(!showReason)}
+            >
+              {showReason ? (
+                <>
+                  <AiOutlineEyeInvisible className="text-lg" />
+                  Hide Reason
+                </>
+              ) : (
+                <>
+                  <AiOutlineEye className="text-lg" />
+                  Show Reason
+                </>
+              )}
+            </button>
+          </div>
+        )}
+        {showReason && (
+          <>
+            {" "}
+            {isSuspended && data.data?.reason_for_suspension && (
+              <div className="flex flex-col sm:flex-row sm:items-center p-3 bg-red-50 border border-red-200 rounded-md">
+                <p className="w-full sm:w-3/12 shrink-0 text-red-700 font-semibold mb-1 sm:mb-0">
+                  Reason for Suspension:
+                </p>
+                <p className="fw-500 text-red-600">
+                  {data.data.reason_for_suspension}
+                </p>
+              </div>
+            )}
+            {!isSuspended && data.data?.reason_for_unsuspension && (
+              <div className="flex flex-col sm:flex-row sm:items-center p-3 bg-green-50 border border-green-200 rounded-md">
+                <p className="w-full sm:w-3/12 shrink-0 text-green-700 font-semibold mb-1 sm:mb-0">
+                  Reason for Unsuspension:
+                </p>
+                <p className="fw-500 text-green-600">
+                  {data.data.reason_for_unsuspension}
+                </p>
+              </div>
+            )}
+          </>
         )}
         {!isLoading && !loading && data && (
           <div>
@@ -233,7 +281,7 @@ const StaffDetail = () => {
                 </div>
               </div>
             </div>
-            <div className="grid lg:grid-cols-3 border h-[300px] bg-gray-50 mt-6">
+            <div className="grid lg:grid-cols-2 border h-[300px] bg-gray-50 mt-6">
               <div className="border-r-2 h-full">
                 <p className="p-3 border-b-2 fw-500 text-gray-600">
                   Service Category
@@ -248,14 +296,6 @@ const StaffDetail = () => {
                 </p>
                 <div className="px-4 py-3 h-[245px] overflow-y-auto">
                   <ServiceBrands brands={kyc?.data?.brands} />
-                </div>
-              </div>
-              <div className="border-r-2 h-full">
-                <p className="p-3 border-b-2 fw-500 text-gray-600">
-                  Service Rendered
-                </p>
-                <div className="px-4 py-3">
-                  <ServiceRendered />
                 </div>
               </div>
             </div>
@@ -325,26 +365,6 @@ const StaffDetail = () => {
                     <img src={kyc?.data?.identityBack} />
                   </a>
                 </div>
-                {isSuspended && data.data?.reason_for_suspension && (
-                  <div className="flex flex-col sm:flex-row sm:items-center p-3 bg-red-50 border border-red-200 rounded-md">
-                    <p className="w-full sm:w-3/12 shrink-0 text-red-700 font-semibold mb-1 sm:mb-0">
-                      Reason for Suspension:
-                    </p>
-                    <p className="fw-500 text-red-600">
-                      {data.data.reason_for_suspension}
-                    </p>
-                  </div>
-                )}
-                {!isSuspended && data.data?.reason_for_unsuspension && (
-                  <div className="flex flex-col sm:flex-row sm:items-center p-3 bg-green-50 border border-green-200 rounded-md">
-                    <p className="w-full sm:w-3/12 shrink-0 text-green-700 font-semibold mb-1 sm:mb-0">
-                      Reason for Unsuspension:
-                    </p>
-                    <p className="fw-500 text-green-600">
-                      {data.data.reason_for_unsuspension}
-                    </p>
-                  </div>
-                )}
               </div>
             </div>
           </div>
@@ -373,6 +393,12 @@ const StaffDetail = () => {
       <CityCodes title="City (Service Areas)" size="lg">
         <ViewCityCodes codes={kyc?.data?.city} />
       </CityCodes>
+      <div className="border-r-2 h-full">
+        <p className="p-3 border-b-2 fw-500 text-gray-600">Service Rendered</p>
+        <div className="px-4 py-3">
+          <ServiceRendered />
+        </div>
+      </div>
     </>
   );
 };
