@@ -12,6 +12,7 @@ import RequestDetailsModal from "./RequestDetailsModal";
 import { useState } from "react";
 import { toast } from "react-toastify";
 import { est_day } from "../../admin/services/RequestList";
+import { format_time } from "../../../../utils/utils";
 
 const PendingService = () => {
   const [page, setPage] = useState(1);
@@ -89,9 +90,7 @@ const PendingService = () => {
                     {item.location}
                   </p>
                   <p className=" fs-300 fw-600 text-primary">
-                    {est_day(item.createdAt)
-                      .tz("America/New_York")
-                      .format("hh:mma dddd DD, MMMM YYYY")}
+                    {format_time(item.serviceRequestCreatedAt)}
                   </p>
                 </div>
                 <div className="flex gap-x-3 ">

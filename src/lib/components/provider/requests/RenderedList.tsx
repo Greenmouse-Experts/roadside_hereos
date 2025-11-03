@@ -11,6 +11,7 @@ import { FC, useState } from "react";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { est_day } from "../../admin/services/RequestList";
+import { format_time } from "../../../../utils/utils";
 
 interface Props {
   status: string;
@@ -85,9 +86,10 @@ const RenderedServices: FC<Props> = ({ status }) => {
                     {item.location}
                   </p>
                   <p className=" fs-300 fw-600 text-primary">
-                    {est_day(item.createdAt)
+                    {format_time(item.serviceRequestCreatedAt)}
+                    {/*{est_day(item.createdAt)
                       .tz("America/New_York")
-                      .format("hh:mma dddd DD, MMMM YYYY")}
+                      .format("hh:mma dddd DD, MMMM YYYY")}*/}
                   </p>
                 </div>
                 <div className="flex gap-x-3 ">
