@@ -201,162 +201,120 @@ const UserInfo: FC<Props> = ({ data }) => {
           </p>
         </div>
       </div>
-      <div className="mt-6">
-        <div className="text-black">
-          <div>
-            <div className="flex items-center gap-x-2">
-              <div>
-                <ProfileAvatar
-                  name={`${customer.fname} ${customer.lname}`}
-                  url={""}
-                  size={80}
-                  font={20}
-                />
-              </div>
-              <div>
-                <p className="fw-600 lg:text-lg">{`${customer.fname} ${customer.lname}`}</p>
-                <p className="fw-500 opacity-80">Customer</p>
-              </div>
+      <div className="mt-6 text-black">
+        {/* Customer Details */}
+        <div className="mb-6 p-4 border rounded-lg shadow-sm">
+          <div className="flex items-center gap-x-3 mb-4">
+            <ProfileAvatar
+              name={`${customer.fname} ${customer.lname}`}
+              url={""}
+              size={60}
+              font={18}
+            />
+            <div>
+              <p className="fw-600 text-lg">{`${customer.fname} ${customer.lname}`}</p>
+              <p className="fw-500 text-gray-600">Customer</p>
             </div>
+          </div>
+          <div className="space-y-2 text-gray-700">
+            <p className="flex items-center gap-x-2">
+              <MdLocationPin className="text-xl text-gray-500" />
+              <span className="fw-500">{location}</span>
+            </p>
+            <p className="flex items-center gap-x-2">
+              <MdOutlineStickyNote2 className="text-xl text-gray-500" />
+              <span className="fw-500">{requestNote}</span>
+            </p>
+            <p className="flex items-center gap-x-2">
+              <HiCurrencyDollar className="text-xl text-gray-500" />
+              Quoted fee:{" "}
+              <span className="fw-600">{formatAsNgnMoney(quote)}</span>
+            </p>
+            <p className="flex items-center gap-x-2">
+              <IoMdTime className="text-xl text-gray-500" />
+              Requested: <span className="fw-600">{name}</span> at{" "}
+              {format_time(serviceRequestCreatedAt)}
+            </p>
+            {completionTime && (
+              <p className="flex items-center gap-x-2">
+                <IoMdTime className="text-xl text-gray-500" />
+                Completion Time:{" "}
+                <span className="fw-600">{format_time(completionTime)}</span>
+              </p>
+            )}
+            {data.completionTime && (
+              <p className="flex items-center gap-x-2">
+                <IoMdTime className="text-xl text-gray-500" />
+                Response Time:{" "}
+                <span className="fw-600">{format_time(completionTime)}</span>
+              </p>
+            )}
+          </div>
+        </div>
 
-            {/*<div className="bg-light p-2 lg:p-4 rounded mt-2">
-              <p className="my-1 fw-500 flex gap-x-2 items-center fw-600 text-gray-600">
-                User Details
-              </p>
-              <div className="grid gap-3 lg:grid-cols-2 mt-2">
-                <p>
-                  Address:{" "}
-                  <span className="fw-500 text-gray-700">{customer.address}</span>
-                </p>
-                <p>
-                  Email: <span className="fw-500 text-gray-700">{customer.email}</span>
-                </p>
-                <p>
-                  Phone Number:{" "}
-                  <span className="fw-500 text-gray-700">{customer.phone}</span>
-                </p>
-              </div>
-            </div>*/}
+        {/* Service Provider Details */}
+        <div className="mb-6 p-4 border rounded-lg shadow-sm">
+          <p className="fw-600 flex items-center gap-x-2 text-lg text-gray-800 mb-4">
+            <GiAutoRepair className="text-2xl text-gray-600" />
+            Service Provider
+          </p>
 
-            <div className="mt-3 mb-2 grid gap-2">
-              <p className="my-1 fw-500 flex gap-x-2 items-center">
-                <IoMdTime className="text-lg lg:text-2xl text-gray-500" />
-                Requested <span className="fw-600">{name}</span> at{" "}
-                {/*{dayjs(serviceRequestCreatedAt).format(
-                  "hh:mma dddd DD, MMMM YYYY",
-                )}*/}
-                {format_time(serviceRequestCreatedAt)}
+          <div className="mb-4 pl-6 border-l-2 border-gray-200">
+            <p className="fw-600 text-md text-gray-700 mb-2">Company Details</p>
+            <div className="space-y-1 text-gray-700">
+              <p>
+                Name: <span className="fw-500">{company?.name}</span>
               </p>
-              <p className="my-1 fw-500 flex gap-x-2 items-center">
-                <MdLocationPin className="text-lg lg:text-2xl text-gray-500" />
-                {location}
+              <p>
+                Email: <span className="fw-500">{company?.email}</span>
               </p>
-              <p className="my-1 fw-500 flex gap-x-2 items-center">
-                <MdOutlineStickyNote2 className="text-lg lg:text-2xl text-gray-500" />
-                {requestNote}
+              <p>
+                Phone: <span className="fw-500">{company?.phone}</span>
               </p>
-              <p className="my-1 fw-500 flex gap-x-2 items-center">
-                <HiCurrencyDollar className="text-lg lg:text-2xl text-gray-500" />
-                Quoted fee{" "}
-                <span className="fw-600">{formatAsNgnMoney(quote)}</span>
-              </p>
-              {completionTime && (
-                <p className="my-1 fw-500 flex gap-x-2 items-center">
-                  <IoMdTime className="text-lg lg:text-2xl text-gray-500" />
-                  Completion Time:{" "}
-                  <span className="fw-600">{format_time(completionTime)}</span>
-                </p>
-              )}
-              {data.completionTime && (
-                <p className="my-1 fw-500 flex gap-x-2 items-center">
-                  <IoMdTime className="text-lg lg:text-2xl text-gray-500" />
-                  Response Time:{" "}
-                  <span className="fw-600">{format_time(completionTime)}</span>
-                </p>
-              )}
             </div>
+          </div>
 
-            <div className="border p-2 lg:p-4 rounded mt-2">
-              <p className="my-1 fw-500 flex gap-x-2 items-center fw-600 text-gray-600">
-                <GiAutoRepair className="text-lg lg:text-2xl text-gray-500" />
-                Service Provider
+          <div className="pl-6 border-l-2 border-gray-200">
+            <p className="fw-600 text-md text-gray-700 mb-2">Technician</p>
+            <div className="space-y-1 text-gray-700">
+              <p>
+                Name:{" "}
+                <span className="fw-500">
+                  {fname} {lname}
+                </span>
               </p>
-
-              <div className="p-2 lg:p-4 mt-2">
-                <p className="my-1 fw-500 flex gap-x-2 items-center fw-600 text-gray-600">
-                  Company Details
-                </p>
-                <div className="grid gap-3 lg:grid-cols-2 mt-4">
-                  <p>
-                    Name:{" "}
-                    <span className="fw-500 text-gray-700">
-                      {company?.name}
-                    </span>
-                  </p>
-                  <p>
-                    Email:{" "}
-                    <span className="fw-500 text-gray-700">
-                      {company?.email}
-                    </span>
-                  </p>
-                  <p>
-                    Phone Number:{" "}
-                    <span className="fw-500 text-gray-700">
-                      {company?.phone}
-                    </span>
-                  </p>
-                </div>
-              </div>
-
-              <div className="p-2 lg:p-4 mt-2">
-                <p className="my-1 fw-500 flex gap-x-2 items-center fw-600 text-gray-600">
-                  Technician
-                </p>
-                <div className="grid gap-3 lg:grid-cols-2 mt-4">
-                  <p>
-                    Name:{" "}
-                    <span className="fw-500 text-gray-700">
-                      {fname} {lname}
-                    </span>
-                  </p>
-                  <p>
-                    Email: {"  "}{" "}
-                    <span className="fw-500 text-gray-700">{email}</span>
-                  </p>
-                  <p>
-                    Phone Number:{"  "}
-                    <span className="fw-500 text-gray-700">{phone}</span>
-                  </p>
-                  <p>
-                    Address:{"  "}
-                    <span className="fw-500 text-gray-700">{address}</span>
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="bg-light p-2 lg:p-4 rounded mt-2">
-              <p className="my-1 fw-500 flex gap-x-2 items-center fw-600 text-gray-600">
-                <FaCar className="text-lg  text-gray-500" />
-                Car Details
+              <p>
+                Email: <span className="fw-500">{email}</span>
               </p>
-              <div className="grid gap-3 lg:grid-cols-2 mt-2">
-                <p>
-                  Make:{" "}
-                  <span className="fw-500 text-gray-700">{vehicleMake}</span>
-                </p>
-                <p>
-                  Model: <span className="fw-500 text-gray-700">{model}</span>
-                </p>
-                <p>
-                  Year:{" "}
-                  <span className="fw-500 text-gray-700">{vehicleYear}</span>
-                </p>
-                <p>
-                  Color: <span className="fw-500 text-gray-700">{color}</span>
-                </p>
-              </div>
+              <p>
+                Phone: <span className="fw-500">{phone}</span>
+              </p>
+              <p>
+                Address: <span className="fw-500">{address}</span>
+              </p>
             </div>
+          </div>
+        </div>
+
+        {/* Car Details */}
+        <div className="p-4 border rounded-lg shadow-sm">
+          <p className="fw-600 flex items-center gap-x-2 text-lg text-gray-800 mb-4">
+            <FaCar className="text-2xl text-gray-600" />
+            Car Details
+          </p>
+          <div className="space-y-2 text-gray-700 pl-6">
+            <p>
+              Make: <span className="fw-500">{vehicleMake}</span>
+            </p>
+            <p>
+              Model: <span className="fw-500">{model}</span>
+            </p>
+            <p>
+              Year: <span className="fw-500">{vehicleYear}</span>
+            </p>
+            <p>
+              Color: <span className="fw-500">{color}</span>
+            </p>
           </div>
         </div>
       </div>
