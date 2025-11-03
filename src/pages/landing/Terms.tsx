@@ -42,10 +42,7 @@ const TermsPage = () => {
       label: "Service Fees and Payment",
       key: 8,
     },
-    {
-      label: "Refund Policy and Cancellation Charges",
-      key: 9,
-    },
+
     {
       label: "Liability and Insurance",
       key: 10,
@@ -271,6 +268,22 @@ const TermsPage = () => {
         taxes and processing fees are included in the total cost shown to the
         customer during checkout. Customers are responsible for paying the full
         amount for services rendered.
+      </p>
+      <p className="fw-600 mt-3">Fair and Transparent Payment Settlement</p>
+      <p className="mt-3">
+        At AllDrive SOS, we are committed to maintaining a fair, transparent,
+        and accountable payment settlement structure for all parties —
+        customers, technicians, and partner companies. Our payment system
+        ensures that every transaction is processed with clarity, fairness, and
+        balance, rewarding each participant appropriately while sustaining
+        platform operations. It also includes a well-defined cancellation policy
+        designed to protect both customers and service providers from unfair
+        losses. To learn more about how payments, commissions, and cancellations
+        are handled, please visit our detailed{" "}
+        <Link to={"/payment-settlement"} className="text-blue-700 fw-500">
+          Payment Settlement page
+        </Link>
+        .
       </p>
     </div>
   );
