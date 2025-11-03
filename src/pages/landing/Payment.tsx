@@ -1,3 +1,4 @@
+import { BsClock } from "react-icons/bs";
 import Footer from "../../lib/components/layout/landing/sections/Footer";
 import Header from "../../lib/components/layout/landing/sections/Header";
 import { useEffect } from "react";
@@ -26,10 +27,25 @@ export default function PaymentSettlement() {
   return (
     <div className="font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif] bg-gray-50 text-[#222] leading-relaxed text-lg">
       <Header />
-      <section className="max-w-[1000px] mx-auto mt-[60px] mb-[60px] bg-white p-[60px] rounded-2xl shadow-lg shadow-gray-300">
-        <h1 className="text-center text-[#0d4b8b] text-[2.6em] font-bold mb-8 mt-0">
-          Payment Settlement Structure
-        </h1>
+      <div className="h-44 lg:h-[220px] pb-4 bg-policy">
+        <div className="box h-full flex items-center">
+          <div>
+            <div className="flex">
+              <div className="border-2 flex items-center gap-2 text-white px-3 py-2 rounded-[100px] border-[#FEB470]">
+                <BsClock className="text-[#FEB470] text-[14px]" />
+                <p className="fs-200 md:fs-300 lg:fs-400 fw-500 text-[#FEB470]">
+                  Available 24/7 for emergency road service
+                </p>
+              </div>
+            </div>
+            <p className="text-3xl text-white fw-700 mt-4">
+              Payment Settlement Structure
+            </p>
+          </div>
+        </div>
+      </div>
+      <section className=" mx-auto  mb-[60px] bg-white p-[60px] rounded-2xl  shadow-gray-300">
+        <h1 className="text-center text-[#0d4b8b] text-[2.6em] font-bold mb-8 mt-0"></h1>
 
         <p className="mb-4">
           Below is a fair payment settlement structure for AllDrive SOS,
@@ -78,7 +94,11 @@ export default function PaymentSettlement() {
             from company to company.
           </p>
         </div>
-        <img src="payment.jpeg" className="w-full my-4" alt="" />
+        <img
+          src="payment.jpeg"
+          className="w-full max-h-[520px] object-contain my-4"
+          alt=""
+        />
         <h2 className="text-2xl font-semibold text-[#0d4b8b] mt-6 mb-4">
           1. Overview of Transaction Flow
         </h2>
