@@ -89,13 +89,13 @@ export default function AdminServiceRenderd(props: {
 }) {
   const { serviceData } = props;
   return (
-    <ul className="divide-y divide-gray-200 ">
+    <ul className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-2 ">
       {serviceData.map((service) => (
         <li
           key={service.id}
           className="bg-white shadow-lg rounded-lg p-6 mb-4 border border-gray-200 hover:shadow-xl transition-shadow duration-300"
         >
-          <h3 className="text-xl font-semibold text-gray-800 mb-2">
+          <h3 className="text-lg font-semibold text-gray-800 mb-2">
             {service.serviceName}
           </h3>
           <p className="text-gray-700 mb-2">

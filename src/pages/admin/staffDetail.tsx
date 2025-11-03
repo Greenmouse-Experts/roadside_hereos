@@ -145,7 +145,7 @@ const StaffDetail = () => {
                       </div>
                     </div>
                   </div>
-                  <div className="grid lg:grid-cols-3 border-t border-gray-200 mt-6 bg-white">
+                  <div className="grid lg:grid-cols-2 border-t border-gray-200 mt-6 bg-white">
                     <div className="border-r border-gray-200 p-6">
                       <p className="pb-3 border-b fw-600 text-gray-700 text-lg">
                         Service Category
@@ -160,16 +160,6 @@ const StaffDetail = () => {
                       </p>
                       <div className="pt-4">
                         <ServiceBrands brands={data?.data?.brands} />
-                      </div>
-                    </div>
-                    <div className="p-6">
-                      <p className="pb-3 border-b fw-600 text-gray-700 text-lg">
-                        Service Rendered
-                      </p>
-                      <div className="pt-4">
-                        <AdminServiceRenderd
-                          serviceData={data?.data.serviceRequests as any}
-                        />
                       </div>
                     </div>
                   </div>
@@ -234,6 +224,16 @@ const StaffDetail = () => {
             </div>
           </div>
         )}
+        <div className="p-6">
+          <p className="pb-3 border-b fw-600 text-gray-700 text-lg">
+            Service Rendered
+          </p>
+          <div className="pt-4">
+            <AdminServiceRenderd
+              serviceData={data?.data.serviceRequests as any}
+            />
+          </div>
+        </div>
         <Dialog title="View Provider Reviews" size="lg">
           <ViewReviewsModal id={`${id}`} />
         </Dialog>
