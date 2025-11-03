@@ -58,6 +58,9 @@ const StaffDetail = () => {
         toast.error(err.response.data.message);
       });
   };
+  const exists =
+    data.data?.reason_for_suspension?.trim() ||
+    data.data?.reason_for_unsuspension?.trim();
 
   return (
     <>
@@ -321,6 +324,24 @@ const StaffDetail = () => {
                     <img src={kyc?.data?.identityBack} />
                   </a>
                 </div>
+                {data.data?.reason_for_suspension && (
+                  <div className="flex items-center">
+                    <p className="w-3/12 shrink-0 text-gray-600 ">
+                      Reason for Suspension:
+                    </p>
+                    <p className="fw-500">{data.data.reason_for_suspension}</p>
+                  </div>
+                )}
+                {data.data?.reason_for_unsuspension && (
+                  <div className="flex items-center">
+                    <p className="w-3/12 shrink-0 text-gray-600 ">
+                      Reason for Unsuspension:
+                    </p>
+                    <p className="fw-500">
+                      {data.data.reason_for_unsuspension}
+                    </p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
