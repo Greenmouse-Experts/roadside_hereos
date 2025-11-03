@@ -59,8 +59,9 @@ const StaffDetail = () => {
       });
   };
   const exists =
-    data.data?.reason_for_suspension?.trim() ||
-    data.data?.reason_for_unsuspension?.trim();
+    data?.data?.reason_for_suspension?.trim() ||
+    data?.data?.reason_for_unsuspension?.trim();
+  const isSuspended = data?.data.isSuspended;
 
   return (
     <>
@@ -324,20 +325,22 @@ const StaffDetail = () => {
                     <img src={kyc?.data?.identityBack} />
                   </a>
                 </div>
-                {data.data?.reason_for_suspension && (
-                  <div className="flex items-center">
-                    <p className="w-3/12 shrink-0 text-gray-600 ">
+                {isSuspended && data.data?.reason_for_suspension && (
+                  <div className="flex flex-col sm:flex-row sm:items-center p-3 bg-red-50 border border-red-200 rounded-md">
+                    <p className="w-full sm:w-3/12 shrink-0 text-red-700 font-semibold mb-1 sm:mb-0">
                       Reason for Suspension:
                     </p>
-                    <p className="fw-500">{data.data.reason_for_suspension}</p>
+                    <p className="fw-500 text-red-600">
+                      {data.data.reason_for_suspension}
+                    </p>
                   </div>
                 )}
-                {data.data?.reason_for_unsuspension && (
-                  <div className="flex items-center">
-                    <p className="w-3/12 shrink-0 text-gray-600 ">
+                {!isSuspended && data.data?.reason_for_unsuspension && (
+                  <div className="flex flex-col sm:flex-row sm:items-center p-3 bg-green-50 border border-green-200 rounded-md">
+                    <p className="w-full sm:w-3/12 shrink-0 text-green-700 font-semibold mb-1 sm:mb-0">
                       Reason for Unsuspension:
                     </p>
-                    <p className="fw-500">
+                    <p className="fw-500 text-green-600">
                       {data.data.reason_for_unsuspension}
                     </p>
                   </div>
