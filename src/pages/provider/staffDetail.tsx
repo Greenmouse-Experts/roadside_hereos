@@ -27,6 +27,7 @@ import { useState } from "react";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { apiClient } from "../../lib/services/api/serviceApi";
 import AdminServiceRenderd from "../admin/_components/AdminServiceRendered";
+import VehicleInfo from "./_components/VehicleInfo";
 
 const StaffDetail = () => {
   const { id } = useParams();
@@ -306,10 +307,10 @@ const StaffDetail = () => {
               </div>
               <div className="border-r-2 h-full">
                 <p className="p-3 border-b-2 fw-500 text-gray-600">
-                  Service Brands
+                  Vehicle Info
                 </p>
                 <div className="px-4 py-3 h-[245px] overflow-y-auto">
-                  <ServiceBrands brands={kyc?.data?.brands} />
+                  <VehicleInfo item={kyc.data} />
                 </div>
               </div>
             </div>

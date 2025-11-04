@@ -198,9 +198,9 @@ const UserAction: FC<Props> = ({
         <div className="flex items-center gap-x-2 text-sm">
           <span className="font-semibold text-gray-700">Status:</span>
           <span
-            className={`px-2 py-1 rounded-full text-xs font-medium ${
+            className={`px-2 py-1 rounded-full  font-bold text-sm  ${
               isActive
-                ? "bg-green-100 text-green-800"
+                ? "bg-green-100 text-green-500"
                 : "bg-red-100 text-red-800"
             }`}
           >
