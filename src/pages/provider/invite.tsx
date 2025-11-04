@@ -42,7 +42,9 @@ const CompanyInvites = () => {
               <EmptyState msg="You have sent out zero (0) invite(s)." />
             </div>
           )}
-          {!isLoading && !!data?.data?.length && <InviteList data={data.data} />}
+          {!isLoading && !!data?.data?.length && (
+            <InviteList data={data.data} />
+          )}
         </div>
       </div>
       <Modal title="Invite New Staff" size="md" type="withCancel">

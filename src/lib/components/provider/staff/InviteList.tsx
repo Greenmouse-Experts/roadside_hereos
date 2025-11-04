@@ -3,14 +3,17 @@ import { DataTable } from "../../ui/DataTable";
 import ProfileAvatar from "../../ui/ProfileAvatar";
 import dayjs from "dayjs";
 import { FormatStatus } from "../../../utils";
-import { GetInvitedItem } from "../../../types/company";
+import { GetInvitedItem, SendInviteInput } from "../../../types/company";
 import { FC } from "react";
+import Button from "../../ui/Button";
+import { toast } from "react-toastify";
+import { sendInvite } from "../../../services/api/companyApi";
 
 interface Props {
-  data: GetInvitedItem[]
+  data: GetInvitedItem[];
 }
-const InviteList:FC<Props> = (data) => {
-    // Table components
+const InviteList: FC<Props> = (data) => {
+  // Table components
   const columnHelper = createColumnHelper<GetInvitedItem>();
   const columns = [
     columnHelper.accessor((row) => row.first_name, {
@@ -38,21 +41,59 @@ const InviteList:FC<Props> = (data) => {
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.status, {
-        id: "Status",
-        cell: (info) => <>{FormatStatus[info.getValue() as keyof typeof FormatStatus]}</>,
-        header: (info) => info.column.id,
-      }),
+      id: "Status",
+      cell: (info) => {
+        return (
+          <> {FormatStatus[info.getValue() as keyof typeof FormatStatus]}</>
+        );
+      },
+      header: (info) => info.column.id,
+    }),
+    columnHelper.accessor((row) => row.status, {
+      id: "Action",
+      cell: (info) => {
+        let value = info.renderValue();
+        if (value == "pending") {
+          let user = info.row.original;
+          const input: SendInviteInput = {
+            email: user.email,
+            first_name: user.first_name,
+            last_name: user.last_name,
+          };
+          return (
+            <div className="flex gap-2">
+              <button
+                onClick={() => {
+                  toast.promise(
+                    async () => {
+                      return await sendInvite(input);
+                    },
+                    {
+                      pending: "Sending invite...",
+                      success: "Invite resent!",
+                      error: "Failed to send invite",
+                    },
+                  );
+                }}
+                className="bg-primary active:scale-95 p-4 text-white font-bold rounded-md shadow-sm py-2"
+              >
+                Reinvite
+              </button>
+            </div>
+          );
+        }
+        return null;
+      },
+      header: (info) => info.column.id,
+    }),
   ];
   return (
     <>
-        <div>
-        {!!data.data.length && <DataTable
-          columns={columns}
-          data={data.data}
-        />}
+      <div>
+        {!!data.data.length && <DataTable columns={columns} data={data.data} />}
       </div>
     </>
-  )
-}
+  );
+};
 
-export default InviteList
+export default InviteList;
