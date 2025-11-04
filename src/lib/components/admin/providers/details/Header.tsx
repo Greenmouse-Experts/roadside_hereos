@@ -72,7 +72,7 @@ const ProviderDetailsHeader: FC<Props> = ({
               <div className="text-white">
                 <p>
                   {" "}
-                  {JSON.stringify(status)}
+                  {/*{JSON.stringify(status)}*/}
                   Pending Balance:{" "}
                   <span className="text-lg fw-600">
                     {formatAsNgnMoney(pendingBal) || "$0"}

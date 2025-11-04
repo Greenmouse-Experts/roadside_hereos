@@ -55,15 +55,15 @@ const CompanyDetails: FC<Props> = ({ data }) => {
               <p className="fw-600">{data?.phone}</p>
             </div>
           </div>
-          <div className="lg:flex items-center gap-x-4 lg:gap-x-12">
+          {/*<div className="lg:flex items-center gap-x-4 lg:gap-x-12">
             <div className="lg:w-2/12 flex bg-primary text-white p-3 items-center gap-x-2">
               <FaRegAddressCard className="text-xl" />
               <p>Address</p>
             </div>
             <div className="mt-2 lg:mt-0">
-              <p className="fw-600">{data?.address || 'N/A'}</p>
+              <p className="fw-600">{data?.address || "N/A"}</p>
             </div>
-          </div>
+          </div>*/}
           <div className="lg:flex items-center gap-x-4 lg:gap-x-12">
             <div className="lg:w-2/12 flex bg-primary text-white p-3 items-center gap-x-2">
               <MdOutlineHomeRepairService className="text-xl" />
@@ -71,9 +71,15 @@ const CompanyDetails: FC<Props> = ({ data }) => {
             </div>
             <div className="mt-2 lg:mt-0">
               <ul className="list-disc pl-5">
-                {data?.service_rendered?.length > 0 ? data?.service_rendered.map((service: Service, index: number) => (
-                  <li key={index} className="fw-600">{service.name}</li>
-                )) : 'N/A'}
+                {data?.service_rendered?.length > 0
+                  ? data?.service_rendered.map(
+                      (service: Service, index: number) => (
+                        <li key={index} className="fw-600">
+                          {service.name}
+                        </li>
+                      ),
+                    )
+                  : "N/A"}
               </ul>
             </div>
           </div>
