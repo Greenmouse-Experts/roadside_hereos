@@ -216,7 +216,8 @@ const UserAction: FC<Props> = ({
                 : "bg-blue-100 text-blue-800"
             }`}
           >
-            {suspended ? FormatStatus["inactive"] : FormatStatus["active"]}
+            {suspended ? "Suspended" : "Not Suspended"}
+            {/*{!suspended ? FormatStatus["inactive"] : FormatStatus["active"]}*/}
           </span>
         </div>
       </div>
