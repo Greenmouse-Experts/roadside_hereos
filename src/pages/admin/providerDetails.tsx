@@ -7,9 +7,14 @@ import CompanyProviders from "../../lib/components/admin/providers/details/Compa
 import Tabs from "../../lib/components/ui/Tabs";
 import { getProvidersDetails } from "../../lib/services/api/usersApi";
 import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader";
+import useModal from "../../lib/hooks/useModal";
+import { useEffect } from "react";
+import { AiOutlineEye } from "react-icons/ai";
 
 const ProviderDetails = () => {
   const { id } = useParams();
+  const { Modal, setShowModal } = useModal();
+  // Removed useEffect to show modal on initial render, now it's toggled by icon
   const { isLoading, isError, data, refetch } = useQuery({
     queryKey: ["getProviders"],
     queryFn: () => getProvidersDetails(`${id}`),
@@ -61,9 +66,48 @@ const ProviderDetails = () => {
               walletBal={data?.data?.walletBal}
             />
           </div>
+          <div className="flex justify-end mb-4">
+            <button
+              onClick={() => setShowModal(true)}
+              className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
+            >
+              <AiOutlineEye className="text-lg" />
+              View Suspension Reason
+            </button>
+          </div>
           <Tabs tabs={tabs} type="norm" />
         </div>
       )}
+      <Modal title="Reason for Suspension/UnSuspension">
+        <div className="p-6 bg-gray-50 rounded-lg shadow-inner">
+          {data?.data?.reason_for_suspension && (
+            <div className="mb-4 p-3 border border-red-300 bg-red-50 rounded-md">
+              <h4 className="font-semibold text-red-700 mb-1">
+                Suspension Reason:
+              </h4>
+              <p className="text-gray-800">
+                {data?.data?.reason_for_suspension}
+              </p>
+            </div>
+          )}
+          {data?.data?.reason_for_unsuspension && (
+            <div className="p-3 border border-green-300 bg-green-50 rounded-md">
+              <h4 className="font-semibold text-green-700 mb-1">
+                Unsuspension Reason:
+              </h4>
+              <p className="text-gray-800">
+                {data?.data?.reason_for_unsuspension}
+              </p>
+            </div>
+          )}
+          {!data?.data?.reason_for_suspension &&
+            !data?.data?.reason_for_unsuspension && (
+              <p className="text-gray-600 italic">
+                No suspension or unsuspension reason provided.
+              </p>
+            )}
+        </div>
+      </Modal>
     </>
   );
 };
