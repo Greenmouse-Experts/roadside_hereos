@@ -156,68 +156,117 @@ const UnsuspendModalContent: FC<UnsuspendModalContentProps> = ({
     </ReusableModal>
   );
 };
-
 interface Props {
   id: string;
   refetch: () => void;
   suspended: boolean;
   companyId: string;
+  isActive?: boolean;
 }
 
-const UserAction: FC<Props> = ({ id, refetch, suspended, companyId }) => {
-  const { Modal: Suspend, setShowModal: ShowSuspend } = useModal();
-  const { Modal: Unsuspend, setShowModal: ShowUnsuspend } = useModal();
-  const reason = useRef<string | null>(null);
+const UserAction: FC<Props> = ({
+  id,
+  refetch,
+  suspended,
+  companyId,
+  isActive,
+}) => {
+  const { Modal: SuspendModal, setShowModal: setShowSuspendModal } = useModal();
+  const { Modal: UnsuspendModal, setShowModal: setShowUnsuspendModal } =
+    useModal();
+  const reasonRef = useRef<string | null>(null);
+
+  const handleSuspendClick = useCallback(() => {
+    setShowSuspendModal(true);
+  }, [setShowSuspendModal]);
+
+  const handleUnsuspendClick = useCallback(() => {
+    setShowUnsuspendModal(true);
+  }, [setShowUnsuspendModal]);
+
+  const closeSuspendModal = useCallback(() => {
+    setShowSuspendModal(false);
+  }, [setShowSuspendModal]);
+
+  const closeUnsuspendModal = useCallback(() => {
+    setShowUnsuspendModal(false);
+  }, [setShowUnsuspendModal]);
 
   return (
-    <>
-      <div className="flex items-center gap-x-2">
-        {suspended ? FormatStatus["inactive"] : FormatStatus["active"]}
-        <Menu placement="bottom-end">
-          <MenuHandler>
-            <Button className="bg-transparent px-0 mx-0 hover:shadow-none text-md flex items-center font-normal shadow-none capitalize">
-              <BsThreeDotsVertical className="text-xl text-black" />
-            </Button>
-          </MenuHandler>
-          <MenuList className="">
-            {!suspended && (
-              <MenuItem
-                className="my-1 fw-500 flex items-center gap-x-2 pt-1"
-                onClick={() => ShowSuspend(true)}
-              >
-                <BsArrowsExpand /> Suspend User
-              </MenuItem>
-            )}
-            {suspended && (
-              <MenuItem
-                className="my-1 fw-500 flex items-center gap-x-2 pt-1"
-                onClick={() => ShowUnsuspend(true)}
-              >
-                <BsArrowsExpand /> Unuspend User
-              </MenuItem>
-            )}
-          </MenuList>
-        </Menu>
+    <div className="flex items-center gap-2">
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center gap-x-2 text-sm">
+          <span className="font-semibold text-gray-700">Status:</span>
+          <span
+            className={`px-2 py-1 rounded-full text-xs font-medium ${
+              isActive
+                ? "bg-green-100 text-green-800"
+                : "bg-red-100 text-red-800"
+            }`}
+          >
+            {isActive ? FormatStatus["active"] : FormatStatus["inactive"]}
+          </span>
+        </div>
+        <div className="flex items-center gap-x-2 text-sm">
+          <span className="font-semibold text-gray-700">Suspended:</span>
+          <span
+            className={`px-2 py-1 rounded-full text-xs font-medium ${
+              suspended
+                ? "bg-orange-100 text-orange-800"
+                : "bg-blue-100 text-blue-800"
+            }`}
+          >
+            {suspended ? FormatStatus["inactive"] : FormatStatus["active"]}
+          </span>
+        </div>
       </div>
-      <Suspend title="" size="sm">
+      <Menu placement="bottom-end">
+        <MenuHandler>
+          <Button
+            variant="text"
+            className="p-0 m-0 hover:shadow-none text-md flex items-center font-normal shadow-none capitalize text-gray-600 hover:text-gray-900"
+          >
+            <BsThreeDotsVertical className="text-xl" />
+          </Button>
+        </MenuHandler>
+        <MenuList className="z-50 min-w-[150px] p-1 border border-gray-200 rounded-md shadow-lg">
+          {!suspended && (
+            <MenuItem
+              className="flex items-center gap-x-2 py-2 px-3 text-sm text-gray-700 hover:bg-red-50 hover:text-red-600 rounded-md transition-colors duration-200"
+              onClick={handleSuspendClick}
+            >
+              <BsArrowsExpand className="text-base" /> Suspend User
+            </MenuItem>
+          )}
+          {suspended && (
+            <MenuItem
+              className="flex items-center gap-x-2 py-2 px-3 text-sm text-gray-700 hover:bg-green-50 hover:text-green-600 rounded-md transition-colors duration-200"
+              onClick={handleUnsuspendClick}
+            >
+              <BsArrowsExpand className="text-base" /> Unsuspend User
+            </MenuItem>
+          )}
+        </MenuList>
+      </Menu>
+      <SuspendModal title="" size="sm">
         <SuspendModalContent
           id={id}
           companyId={companyId}
           refetch={refetch}
-          closeModal={() => ShowSuspend(false)}
-          reasonRef={reason}
+          closeModal={closeSuspendModal}
+          reasonRef={reasonRef}
         />
-      </Suspend>
-      <Unsuspend title="" size="sm">
+      </SuspendModal>
+      <UnsuspendModal title="" size="sm">
         <UnsuspendModalContent
           id={id}
           companyId={companyId}
           refetch={refetch}
-          closeModal={() => ShowUnsuspend(false)}
-          reasonRef={reason}
+          closeModal={closeUnsuspendModal}
+          reasonRef={reasonRef}
         />
-      </Unsuspend>
-    </>
+      </UnsuspendModal>
+    </div>
   );
 };
 

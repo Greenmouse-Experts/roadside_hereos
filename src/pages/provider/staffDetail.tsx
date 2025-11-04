@@ -171,8 +171,36 @@ const StaffDetail = () => {
                   font={27}
                 />
               </div>
-              <div className="lg:flex gap-x-2 items-start">
-                <div className="pt-2">
+              <div className="lg:flex gap-x-2  mt-2 items-start">
+                <UserAction
+                  isActive={data?.data?.isActive}
+                  refetch={refetch}
+                  id={data?.data.id}
+                  companyId={data.data.companyId}
+                  suspended={data?.data.isSuspended}
+                />
+              </div>
+            </div>
+            <div className="px-6 relative mt-10 grid lg:grid-cols-3 gap-y-6">
+              <div className="lg:row-span-2 flex flex-col gap-y-3">
+                <p className="fw-600 text-2xl text-gray-800">{`${data?.data.fname} ${data?.data.lname}`}</p>
+                <p className="text-sm text-gray-600 fw-500">
+                  Service Provider (Technician)
+                </p>
+
+                {!data?.data.verified && (
+                  <div className="text-red-600 fw-600 flex items-center gap-x-2">
+                    <span className="w-2 h-2 rounded-full bg-red-600 block"></span>{" "}
+                    Not Verified
+                  </div>
+                )}
+                {data?.data.verified && (
+                  <div className="text-green-600 fw-600 flex items-center ">
+                    <span className="w-2 h-2 rounded-full bg-green-600 block"></span>{" "}
+                    Verified
+                  </div>
+                )}
+                <div className="flex items-center gap-x-2">
                   {data?.data?.avgRating ? (
                     <Rating value={Number(data?.data?.avgRating)} readonly />
                   ) : (
@@ -182,58 +210,32 @@ const StaffDetail = () => {
                       onClick={() => ShowDialog(true)}
                     />
                   )}
-                  <div className="text-center">
-                    {data?.data?.avgRating ? (
-                      <p
-                        className="fs-400 inline fw-500 cursor-pointer"
-                        onClick={() => ShowDialog(true)}
-                      >
-                        <span className="fw-600 text-lg">
-                          {data?.data?.avgRating}
-                        </span>
-                        /5 Rating
-                      </p>
-                    ) : (
-                      <p className="fs-400 fw-500">No Rating Yet</p>
-                    )}
-                  </div>
+                  {data?.data?.avgRating ? (
+                    <p
+                      className="text-sm fw-500 cursor-pointer text-gray-700"
+                      onClick={() => ShowDialog(true)}
+                    >
+                      <span className="fw-600 text-base">
+                        {data?.data?.avgRating}
+                      </span>
+                      /5 Rating
+                    </p>
+                  ) : (
+                    <p className="text-sm fw-500 text-gray-500">
+                      No Rating Yet
+                    </p>
+                  )}
                 </div>
-                <UserAction
-                  refetch={refetch}
-                  id={data?.data.id}
-                  companyId={data.data.companyId}
-                  suspended={data?.data.isSuspended}
-                />
-              </div>
-            </div>
-            <div className="px-6 realive mt-10 grid lg:grid-cols-3 gap-y-3">
-              <div className="lg:row-span-2">
-                <p className="fw-600 text-lg lg:text-xl">{`${data?.data.fname} ${data?.data.lname}`}</p>
-                <p className="fs-500 text-gray-500 fw-500 pl-3 mb-3">
-                  Service Provider (Technician)
-                </p>
                 {!data?.data.verified && (
-                  <div className="text-red-600 fw-600 flex items-center gap-x-2">
-                    <span className="w-3 h-3 circle bg-red-600 block"></span>{" "}
-                    Not Verified
-                  </div>
-                )}
-                {data?.data.verified && (
-                  <div className="text-green-600 fw-600 flex items-center gap-x-2">
-                    <span className="w-3 h-3 circle bg-green-600 block"></span>{" "}
-                    Verified
-                  </div>
-                )}
-                {!data?.data.verified && (
-                  <div className="flex gap-x-2 mt-2">
+                  <div className="flex gap-x-3 mt-4">
                     <button
-                      className="btn-like px-3 py-1 fs-400"
+                      className="bg-primary text-white px-4 py-2 rounded-md text-sm fw-500 hover:bg-blue-700 transition-colors"
                       onClick={() => setShowModal(true)}
                     >
                       Approve
                     </button>
                     <button
-                      className="border border-gray-600 px-2 py-1 rounded-[4px] fs-400"
+                      className="border border-gray-400 text-gray-700 px-4 py-2 rounded-md text-sm fw-500 hover:bg-gray-100 transition-colors"
                       onClick={() => SetDisApproval(true)}
                     >
                       Disapprove
@@ -241,54 +243,52 @@ const StaffDetail = () => {
                   </div>
                 )}
               </div>
-              <div>
-                <p className="fw-500 text-gray-500 mb-4">Phone</p>
-                <div className="flex gap-x-2 items-center">
-                  <div className="bg-review w-10 h-10 circle place-center text-white">
+              <div className="border-b pb-4 lg:border-none lg:pb-0">
+                <p className="fw-500 text-gray-500 mb-2">Phone</p>
+                <div className="flex gap-x-3 items-center">
+                  <div className="bg-primary w-10 h-10 rounded-full flex items-center justify-center text-white text-lg">
                     <BsTelephone />
                   </div>
-                  <p className="fw-500">
+                  <p className="fw-500 text-gray-800">
                     {formatPhoneNumber(data?.data.phone)}
                   </p>
                 </div>
               </div>
-              <div>
-                <p className="fw-500 text-gray-500 mb-4">Email</p>
-                <div className="flex gap-x-2 items-center w-full overflow-x-auto scroll-pro">
-                  <div className="bg-review shrink-0 w-10 h-10 circle place-center text-white">
+              <div className="border-b pb-4 lg:border-none lg:pb-0">
+                <p className="fw-500 text-gray-500 mb-2">Email</p>
+                <div className="flex gap-x-3 items-center w-full overflow-x-auto scroll-pro">
+                  <div className="bg-primary shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-white text-lg">
                     <AiOutlineMail />
                   </div>
-                  <p className="fw-500">{data?.data.email}</p>
+                  <p className="fw-500 text-gray-800">{data?.data.email}</p>
                 </div>
               </div>
-              <div>
-                <span className="flex justify-between">
-                  <p className="fw-500 text-gray-500 mb-4">
-                    City (Service Areas)
-                  </p>
+              <div className="border-b pb-4 lg:border-none lg:pb-0">
+                <span className="flex justify-between items-center mb-2">
+                  <p className="fw-500 text-gray-500">City (Service Areas)</p>
                   <p
-                    className="fw-500 text-sm mx-4 text-blue-500 cursor-pointer"
+                    className="fw-500 text-sm text-blue-600 cursor-pointer hover:underline"
                     onClick={() => ShowCityCode(true)}
                   >
                     View more
                   </p>
                 </span>
-                <div className="flex gap-x-2 items-center w-full overflow-x-auto scroll-pro">
-                  <div className="bg-review shrink-0 w-10 h-10 circle place-center text-white">
+                <div className="flex gap-x-3 items-center w-full overflow-x-auto scroll-pro">
+                  <div className="bg-primary shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-white text-lg">
                     <MdLocationCity />
                   </div>
-                  <p className="fw-500 text-black uppercase">
+                  <p className="fw-500 text-gray-800 uppercase">
                     {kyc?.data?.city}
                   </p>
                 </div>
               </div>
               <div>
-                <p className="fw-500 text-gray-500 mb-4">Postal Code</p>
-                <div className="flex gap-x-2 items-center w-full overflow-x-auto scroll-pro">
-                  <div className="bg-review shrink-0 w-10 h-10 circle place-center text-white">
+                <p className="fw-500 text-gray-500 mb-2">Postal Code</p>
+                <div className="flex gap-x-3 items-center w-full overflow-x-auto scroll-pro">
+                  <div className="bg-primary shrink-0 w-10 h-10 rounded-full flex items-center justify-center text-white text-lg">
                     <MdSignpost />
                   </div>
-                  <p className="fw-500 text-black">{kyc?.data?.zipcode}</p>
+                  <p className="fw-500 text-gray-800">{kyc?.data?.zipcode}</p>
                 </div>
               </div>
             </div>
