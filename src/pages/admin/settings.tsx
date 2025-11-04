@@ -35,14 +35,14 @@ const AdminSettings = () => {
                 >
                   Security
                 </li>
-                <li
+                {/*<li
                   className={`cursor-pointer px-4 py-2  whitespace-nowrap rounded-lg hover:scale-105 duration-100 hover:bg-white ${
                     active === 3 && "bg-white fw-600"
                   }`}
                   onClick={() => handleActive(3)}
                 >
                   Rates
-                </li>
+                </li>*/}
                 <li
                   className={`cursor-pointer px-4 py-2  whitespace-nowrap rounded-lg hover:scale-105 duration-100 hover:bg-white ${
                     active === 4 && "bg-white fw-600"
@@ -64,7 +64,7 @@ const AdminSettings = () => {
             <div className="w-[83%]">
               {active === 1 && <MyProfileSettings />}
               {active === 2 && <SecuritySetting />}
-              {active === 3 && <AdminRates />}
+              {/*{active === 3 && <AdminRates />}*/}
               {active === 4 && <PayoutSettings />}
               {active === 5 && <AdminCharges />}
             </div>

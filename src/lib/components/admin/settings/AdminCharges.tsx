@@ -85,7 +85,7 @@ export default function AdminCharges() {
         Update Charges
       </h1>
       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-        <div>
+        {/*<div>
           <label
             htmlFor="tax_percent"
             className="font-medium mb-2 block text-gray-700"
@@ -100,7 +100,7 @@ export default function AdminCharges() {
             onChange={handleChange}
             className="w-full px-3 py-2 rounded-md border border-gray-300 text-gray-700 text-base shadow-sm focus:outline-none focus:border-blue-500"
           />
-        </div>
+        </div>*/}
         <div>
           <label
             htmlFor="service_percent"
