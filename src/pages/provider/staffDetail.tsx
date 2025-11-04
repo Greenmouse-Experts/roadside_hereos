@@ -72,6 +72,7 @@ const StaffDetail = () => {
     data?.data?.reason_for_suspension?.trim() ||
     data?.data?.reason_for_unsuspension?.trim();
   const isSuspended = data?.data.isSuspended;
+  const modal = useModal();
 
   return (
     <>
@@ -99,9 +100,11 @@ const StaffDetail = () => {
               <div className="flex justify-end p-3">
                 <button
                   className="flex items-center gap-x-2 text-blue-500 hover:text-blue-700"
-                  onClick={() => setShowReason(!showReason)}
+                  onClick={() => {
+                    modal.setShowModal(true);
+                  }}
                 >
-                  {showReason ? (
+                  {modal.showModal ? (
                     <>
                       <AiOutlineEyeInvisible className="text-lg" />
                       Hide Reason
@@ -115,7 +118,7 @@ const StaffDetail = () => {
                 </button>
               </div>
             )}
-            {showReason && (
+            {/*{showReason && (
               <>
                 {" "}
                 {isSuspended && data.data?.reason_for_suspension && (
@@ -139,7 +142,7 @@ const StaffDetail = () => {
                   </div>
                 )}
               </>
-            )}
+            )}*/}
           </>
         )}
         {!isLoading && !loading && data && (
@@ -411,6 +414,36 @@ const StaffDetail = () => {
           <AdminServiceRenderd serviceData={kyc?.data?.serviceRequests} />
         </div>
       </div>
+      <modal.Modal title="Reason for Suspension/UnSuspension">
+        <div className="p-6 bg-gray-50 rounded-lg shadow-inner">
+          {data?.data?.reason_for_suspension && (
+            <div className="mb-4 p-3 border border-red-300 bg-red-50 rounded-md">
+              <h4 className="font-semibold text-red-700 mb-1">
+                Suspension Reason:
+              </h4>
+              <p className="text-gray-800">
+                {data?.data?.reason_for_suspension}
+              </p>
+            </div>
+          )}
+          {data?.data?.reason_for_unsuspension && (
+            <div className="p-3 border border-green-300 bg-green-50 rounded-md">
+              <h4 className="font-semibold text-green-700 mb-1">
+                Unsuspension Reason:
+              </h4>
+              <p className="text-gray-800">
+                {data?.data?.reason_for_unsuspension}
+              </p>
+            </div>
+          )}
+          {!data?.data?.reason_for_suspension &&
+            !data?.data?.reason_for_unsuspension && (
+              <p className="text-gray-600 italic">
+                No suspension or unsuspension reason provided.
+              </p>
+            )}
+        </div>
+      </modal.Modal>
     </>
   );
 };
