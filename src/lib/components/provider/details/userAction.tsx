@@ -14,46 +14,40 @@ import ReusableModal from "../../ui/ReusableModal";
 import { FormatStatus } from "../../../utils";
 import { apiClient } from "../../../services/api/serviceApi";
 
-interface Props {
+interface SuspendModalContentProps {
   id: string;
-  refetch: () => void;
-  suspended: boolean;
   companyId: string;
+  refetch: () => void;
+  closeModal: () => void;
+  reasonRef: React.MutableRefObject<string | null>;
 }
-const UserAction: FC<Props> = ({ id, refetch, suspended, companyId }) => {
-  const { Modal: Suspend, setShowModal: ShowSuspend } = useModal();
-  const { Modal: Unsuspend, setShowModal: ShowUnsuspend } = useModal();
-  const reason = useRef<string | null>(null);
+
+const SuspendModalContent: FC<SuspendModalContentProps> = ({
+  id,
+  companyId,
+  refetch,
+  closeModal,
+  reasonRef,
+}) => {
   const sus = useMutation({
-    mutationFn: async (id: string) => {
+    mutationFn: async (driverId: string) => {
       let resp = await apiClient.post("/company/suspend-driver", {
-        driverId: id,
+        driverId: driverId,
         companyId: companyId,
-        reason: reason.current || "",
+        reason: reasonRef.current || "",
         suspended: true,
       });
       return resp.data;
     },
     mutationKey: ["suspend"],
   });
-  const unsus = useMutation({
-    mutationFn: async (id: string) => {
-      let resp = await apiClient.post("/users/unsuspend-driver/" + id, {
-        driverId: id,
-        companyId: companyId,
-        reason: reason.current || "",
-        suspended: false,
-      });
-      return resp.data;
-    },
-    mutationKey: ["unsuspend"],
-  });
-  const suspendAction = useCallback(() => {
-    if (reason.current === null) {
+
+  const suspendAction = () => {
+    if (reasonRef.current === null) {
       toast.error("Please enter a reason");
       return;
     }
-    if (reason.current.length < 3) {
+    if (reasonRef.current.length < 3) {
       toast.error("Reason must be at least 5 characters");
       return;
     }
@@ -61,83 +55,119 @@ const UserAction: FC<Props> = ({ id, refetch, suspended, companyId }) => {
       onSuccess: (data) => {
         toast.success(data.message);
         refetch();
-        ShowSuspend(false); // Changed to Suspend modal
-        reason.current = null;
+        closeModal();
+        reasonRef.current = null;
       },
-      onError: (error) => {
+      onError: (error: any) => {
         toast.error(error.message);
       },
     });
-  }, [id, refetch, sus, ShowSuspend]);
+  };
 
-  const UnsuspendAction = useCallback(() => {
+  return (
+    <ReusableModal
+      title="Do you want to suspend this driver/provider"
+      action={suspendAction}
+      closeModal={closeModal}
+      actionTitle="Suspend"
+      cancelTitle="Close"
+      isBusy={sus.isPending}
+    >
+      <div className="space-y-2 py-4">
+        <label htmlFor="" className="font-bold">
+          Reason
+        </label>
+        <input
+          onChange={(e) => {
+            reasonRef.current = e.target.value;
+          }}
+          placeholder="reason"
+          type="text"
+          className="p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 font-bold"
+        />
+      </div>
+    </ReusableModal>
+  );
+};
+
+interface UnsuspendModalContentProps {
+  id: string;
+  companyId: string;
+  refetch: () => void;
+  closeModal: () => void;
+  reasonRef: React.MutableRefObject<string | null>;
+}
+
+const UnsuspendModalContent: FC<UnsuspendModalContentProps> = ({
+  id,
+  companyId,
+  refetch,
+  closeModal,
+  reasonRef,
+}) => {
+  const unsus = useMutation({
+    mutationFn: async (driverId: string) => {
+      let resp = await apiClient.post("/users/unsuspend-driver/" + driverId, {
+        driverId: driverId,
+        companyId: companyId,
+        reason: reasonRef.current || "",
+        suspended: false,
+      });
+      return resp.data;
+    },
+    mutationKey: ["unsuspend"],
+  });
+
+  const UnsuspendAction = () => {
     unsus.mutate(id || "", {
       onSuccess: (data) => {
         toast.success(data.message);
         refetch();
-        ShowUnsuspend(false);
+        closeModal();
       },
-      onError: (error) => {
+      onError: (error: any) => {
         toast.error(error.message);
       },
     });
-  }, [id, refetch, unsus, ShowUnsuspend]);
+  };
 
-  const SuspendModalContent = useCallback(
-    () => (
-      <ReusableModal
-        title="Do you want to suspend this driver/provider"
-        action={() => suspendAction()}
-        closeModal={() => ShowSuspend(false)}
-        actionTitle="Suspend"
-        cancelTitle="Close"
-        isBusy={sus.isPending}
-      >
-        <div className="space-y-2 py-4">
-          <label htmlFor="" className="font-bold">
-            Reason
-          </label>
-          <input
-            onChange={(e) => {
-              reason.current = e.target.value;
-            }}
-            placeholder="reason"
-            type="text"
-            className="p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 font-bold"
-          />
-        </div>
-      </ReusableModal>
-    ),
-    [suspendAction, ShowSuspend, sus.isPending],
+  return (
+    <ReusableModal
+      title="Do you want to unsuspend this driver/provider"
+      action={UnsuspendAction}
+      closeModal={closeModal}
+      actionTitle="Unsuspend"
+      cancelTitle="Close"
+      isBusy={unsus.isPending}
+    >
+      <div className="space-y-2 py-4">
+        <label htmlFor="" className="font-bold">
+          Reason
+        </label>
+        <input
+          onChange={(e) => {
+            reasonRef.current = e.target.value;
+          }}
+          placeholder="reason"
+          type="text"
+          className="p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 font-bold"
+        />
+      </div>
+    </ReusableModal>
   );
+};
 
-  const UnsuspendModalContent = useCallback(
-    () => (
-      <ReusableModal
-        title="Do you want to unsuspend this driver/provider"
-        action={UnsuspendAction}
-        closeModal={() => ShowUnsuspend(false)}
-        actionTitle="Unsuspend"
-        cancelTitle="Close"
-        isBusy={unsus.isPending}
-      >
-        <div className="space-y-2 py-4">
-          <label htmlFor="" className="font-bold">
-            Reason
-          </label>
-          <input
-            onChange={(e) => {
-              reason.current = e.target.value;
-            }}
-            placeholder="reason"
-            type="text"
-            className="p-2 border border-gray-300 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500 font-bold"
-          />
-        </div>
-      </ReusableModal>
-    ),
-    [UnsuspendAction, ShowUnsuspend],
-  );
+interface Props {
+  id: string;
+  refetch: () => void;
+  suspended: boolean;
+  companyId: string;
+}
+
+const UserAction: FC<Props> = ({ id, refetch, suspended, companyId }) => {
+  const { Modal: Suspend, setShowModal: ShowSuspend } = useModal();
+  const { Modal: Unsuspend, setShowModal: ShowUnsuspend } = useModal();
+  const reason = useRef<string | null>(null);
 
   return (
     <>
@@ -170,10 +200,22 @@ const UserAction: FC<Props> = ({ id, refetch, suspended, companyId }) => {
         </Menu>
       </div>
       <Suspend title="" size="sm">
-        <SuspendModalContent />
+        <SuspendModalContent
+          id={id}
+          companyId={companyId}
+          refetch={refetch}
+          closeModal={() => ShowSuspend(false)}
+          reasonRef={reason}
+        />
       </Suspend>
       <Unsuspend title="" size="sm">
-        <UnsuspendModalContent />
+        <UnsuspendModalContent
+          id={id}
+          companyId={companyId}
+          refetch={refetch}
+          closeModal={() => ShowUnsuspend(false)}
+          reasonRef={reason}
+        />
       </Unsuspend>
     </>
   );
