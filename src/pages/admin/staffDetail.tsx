@@ -15,6 +15,8 @@ import { Rating } from "@material-tailwind/react";
 import useDialog from "../../lib/hooks/useDialog";
 import ViewReviewsModal from "../../lib/components/admin/providers/staff/ViewReviewsModal";
 import AdminServiceRenderd from "./_components/AdminServiceRendered";
+import { apiClient } from "../../lib/services/api/serviceApi";
+import { getDriverKyc } from "../../lib/services/api/kycApi";
 
 const StaffDetail = () => {
   const { id } = useParams();
@@ -22,11 +24,17 @@ const StaffDetail = () => {
   const { isLoading, data } = useQuery({
     queryKey: ["getProviders"],
     queryFn: () => getProvidersDetails(`${id}`),
+    // queryFn: async () => {
+    //   let resp = await apiClient.get(
+    //     "https://api.alldrivesos.com/api/kyc/driver/fetch-details/" + id,
+    //   );
+    //   return resp.data;
+    // },
   });
-  // const { data: kyc } = useQuery({
-  //   queryKey: ["getStaffKyc"],
-  //   queryFn: () => getDriverKyc(`${id}`),
-  // });
+  const { data: kyc } = useQuery({
+    queryKey: ["getStaffKyc"],
+    queryFn: () => getDriverKyc(`${id}`),
+  });
   const { Dialog, setShowModal } = useDialog();
   return (
     <>
