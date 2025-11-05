@@ -10,6 +10,7 @@ import CurveLoader from "../../lib/components/ui/loader/curveLoader/CurveLoader"
 import useModal from "../../lib/hooks/useModal";
 import { useEffect } from "react";
 import { AiOutlineEye } from "react-icons/ai";
+import SuspensionLogs from "../provider/_components/SuspensionLogs";
 
 const ProviderDetails = () => {
   const { id } = useParams();
@@ -78,6 +79,7 @@ const ProviderDetails = () => {
           <Tabs tabs={tabs} type="norm" />
         </div>
       )}
+
       <Modal title="Reason for Suspension/UnSuspension">
         <div className="p-6 bg-gray-50 rounded-lg shadow-inner">
           {data?.data?.reason_for_suspension && (

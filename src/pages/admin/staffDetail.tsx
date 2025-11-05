@@ -18,6 +18,7 @@ import AdminServiceRenderd from "./_components/AdminServiceRendered";
 import { apiClient } from "../../lib/services/api/serviceApi";
 import { getDriverKyc } from "../../lib/services/api/kycApi";
 import VehicleInfo from "../provider/_components/VehicleInfo";
+import SuspensionLogs from "../provider/_components/SuspensionLogs";
 
 const StaffDetail = () => {
   const { id } = useParams();
@@ -240,6 +241,7 @@ const StaffDetail = () => {
             </div>
           </div>
         )}
+        <SuspensionLogs id={id} />
         <div className="p-6">
           <p className="pb-3 border-b fw-600 text-gray-700 text-lg">
             Service Rendered

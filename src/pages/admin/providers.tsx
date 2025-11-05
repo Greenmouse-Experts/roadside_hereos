@@ -5,6 +5,7 @@ import ProvidersList from "../../lib/components/admin/providers/providerList";
 import { useDebounce } from "use-debounce";
 import { useState } from "react";
 import { apiClient } from "../../lib/services/api/serviceApi";
+import Pagination from "../../lib/components/ui/Pagination";
 
 const ServiceProviders = () => {
   const [searchTerm, setSearchTerm] = useState("");
@@ -12,11 +13,12 @@ const ServiceProviders = () => {
   const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value);
   };
+  const [page, setPage] = useState(1);
   const { isLoading, isError, data } = useQuery({
-    queryKey: ["getProviders", searchTerm],
+    queryKey: ["getProviders", searchTerm, page],
     queryFn: async () => {
       let resp = await apiClient.get("all/providers", {
-        params: { search: debouncedSearchTerm },
+        params: { search: debouncedSearchTerm, page: page },
       });
       return resp.data;
     },
@@ -48,6 +50,7 @@ const ServiceProviders = () => {
           )}
           {isError && <p>Error Occured</p>}
           {data && !!data?.data.length && <ProvidersList users={data?.data} />}
+          <Pagination page={page} setPage={setPage} {...data?.pagination} />
         </div>
       </div>
     </>
