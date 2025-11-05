@@ -79,7 +79,7 @@ const ProviderDetails = () => {
           <Tabs tabs={tabs} type="norm" />
         </div>
       )}
-
+      <SuspensionLogs id={id} />
       <Modal title="Reason for Suspension/UnSuspension">
         <div className="p-6 bg-gray-50 rounded-lg shadow-inner">
           {data?.data?.reason_for_suspension && (

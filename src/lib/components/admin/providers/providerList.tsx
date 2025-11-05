@@ -101,7 +101,7 @@ const ProvidersList: FC<Props> = ({ users }) => {
   return (
     <>
       <div>
-        <DataTable columns={columns} data={users} />
+        <DataTable columns={columns} data={users} paginate={false} />
       </div>
     </>
   );

@@ -16,8 +16,9 @@ import {
 interface Props {
   data: any;
   columns: any;
+  paginate?: boolean;
 }
-export const DataTable: FC<Props> = ({ data, columns }) => {
+export const DataTable: FC<Props> = ({ data, columns, paginate = true }) => {
   const table = useReactTable({
     data,
     columns,
@@ -129,44 +130,48 @@ export const DataTable: FC<Props> = ({ data, columns }) => {
                 className="border border-black p-1 rounded w-12"
               />
             </span>
-            {/*<div className="flex justify-center lg:justify-normal mt-3 lg:mt-0">
-              <button
-                className="border-none rounded p-1"
-                onClick={() => table.setPageIndex(0)}
-                disabled={!table.getCanPreviousPage()}
-              >
-                <span className="w-7 h-7 circle bg-primary text-white flex place-center hover:scale-105 duration-100">
-                  <TbArrowBackUpDouble className="text-2xl" />
-                </span>
-              </button>
-              <button
-                className="border-none rounded p-1"
-                onClick={() => table.previousPage()}
-                disabled={!table.getCanPreviousPage()}
-              >
-                <span className="w-7 h-7 circle bg-primary text-white flex place-center hover:scale-105 duration-100">
-                  <TbArrowBackUp className="text-2xl" />
-                </span>
-              </button>
-              <button
-                className="border-none rounded p-1"
-                onClick={() => table.nextPage()}
-                disabled={!table.getCanNextPage()}
-              >
-                <span className="w-7 h-7 circle bg-primary text-white flex place-center hover:scale-105 duration-100">
-                  <TbArrowForwardUp className="text-2xl" />
-                </span>
-              </button>
-              <button
-                className="border-none rounded p-1"
-                onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-                disabled={!table.getCanNextPage()}
-              >
-                <span className="w-7 h-7 circle bg-primary text-white flex place-center hover:scale-105 duration-100">
-                  <TbArrowForwardUpDouble className="text-2xl" />
-                </span>
-              </button>
-            </div>*/}
+            {paginate && (
+              <>
+                <div className="flex justify-center lg:justify-normal mt-3 lg:mt-0">
+                  <button
+                    className="border-none rounded p-1"
+                    onClick={() => table.setPageIndex(0)}
+                    disabled={!table.getCanPreviousPage()}
+                  >
+                    <span className="w-7 h-7 circle bg-primary text-white flex place-center hover:scale-105 duration-100">
+                      <TbArrowBackUpDouble className="text-2xl" />
+                    </span>
+                  </button>
+                  <button
+                    className="border-none rounded p-1"
+                    onClick={() => table.previousPage()}
+                    disabled={!table.getCanPreviousPage()}
+                  >
+                    <span className="w-7 h-7 circle bg-primary text-white flex place-center hover:scale-105 duration-100">
+                      <TbArrowBackUp className="text-2xl" />
+                    </span>
+                  </button>
+                  <button
+                    className="border-none rounded p-1"
+                    onClick={() => table.nextPage()}
+                    disabled={!table.getCanNextPage()}
+                  >
+                    <span className="w-7 h-7 circle bg-primary text-white flex place-center hover:scale-105 duration-100">
+                      <TbArrowForwardUp className="text-2xl" />
+                    </span>
+                  </button>
+                  <button
+                    className="border-none rounded p-1"
+                    onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+                    disabled={!table.getCanNextPage()}
+                  >
+                    <span className="w-7 h-7 circle bg-primary text-white flex place-center hover:scale-105 duration-100">
+                      <TbArrowForwardUpDouble className="text-2xl" />
+                    </span>
+                  </button>
+                </div>
+              </>
+            )}
           </div>
         </div>
       </div>
