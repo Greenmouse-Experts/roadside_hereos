@@ -40,13 +40,10 @@ const RefundTable: FC<Props> = ({
   // Table components
   const columnHelper = createColumnHelper<RefundRequest>();
   const columns = [
-    columnHelper.accessor((row) => row.userId, {
-      id: "User Id",
-      cell: (info) => (
-        <Link to={`/admin/users/${info.getValue()}`} className="fw-600">
-          {info.getValue()}
-        </Link>
-      ),
+    //@ts-ignore
+    columnHelper.accessor((row) => row.refId, {
+      id: "Ref Id",
+      cell: (info) => <span className="font-bold">{info.getValue()}</span>,
     }),
     // columnHelper.accessor((row) => row.isActive, {
     //   id: "Service Id",
