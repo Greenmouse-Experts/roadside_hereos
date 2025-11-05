@@ -35,7 +35,7 @@ const SuspendModalContent: FC<SuspendModalContentProps> = ({
         driverId: driverId,
         companyId: companyId,
         reason: reasonRef.current || "",
-        suspended: true,
+        unsuspend: true,
       });
       return resp.data;
     },

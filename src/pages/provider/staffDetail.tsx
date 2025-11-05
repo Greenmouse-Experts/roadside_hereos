@@ -28,6 +28,7 @@ import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { apiClient } from "../../lib/services/api/serviceApi";
 import AdminServiceRenderd from "../admin/_components/AdminServiceRendered";
 import VehicleInfo from "./_components/VehicleInfo";
+import SuspensionLogs from "./_components/SuspensionLogs";
 
 const StaffDetail = () => {
   const { id } = useParams();
@@ -408,6 +409,9 @@ const StaffDetail = () => {
       <CityCodes title="City (Service Areas)" size="lg">
         <ViewCityCodes codes={kyc?.data?.city} />
       </CityCodes>
+      <div className="">
+        <SuspensionLogs id={id} />
+      </div>
       <div className="border-r-2 h-full">
         <p className="p-3 border-b-2 fw-500 text-gray-600">Service Rendered</p>
         <div className="px-4 py-3">
