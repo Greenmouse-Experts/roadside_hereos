@@ -129,7 +129,7 @@ const ProviderHomePage = () => {
               <div className="bg-white/5 rounded-lg p-3 flex flex-col items-center">
                 <p className="text-gray-300 text-xs mb-1">Technician Pending</p>
                 <p className="fw-600 text-lg">
-                  {formatAsNgnMoney(userData?.driverOverallPendingBal ?? 0)}.00
+                  {formatAsNgnMoney(userData?.driverOverallPendingBal ?? 0)}
                 </p>
               </div>
 
@@ -138,7 +138,7 @@ const ProviderHomePage = () => {
                   Technician Approved
                 </p>
                 <p className="fw-600 text-lg">
-                  {formatAsNgnMoney(userData?.driverOverallWalletBal ?? 0)}.00
+                  {formatAsNgnMoney(userData?.driverOverallWalletBal ?? 0)}
                 </p>
               </div>
             </div>

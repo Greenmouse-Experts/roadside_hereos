@@ -67,15 +67,7 @@ const ProviderDetails = () => {
               walletBal={data?.data?.walletBal}
             />
           </div>
-          <div className="flex justify-end mb-4">
-            <button
-              onClick={() => setShowModal(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 transition-colors"
-            >
-              <AiOutlineEye className="text-lg" />
-              View Suspension Reason
-            </button>
-          </div>
+          {/*<div className="flex justify-end mb-4"></div>*/}
           <Tabs tabs={tabs} type="norm" />
         </div>
       )}
