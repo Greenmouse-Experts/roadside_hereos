@@ -96,57 +96,7 @@ const StaffDetail = () => {
             There was an issue fetching this provider details
           </p>
         )}
-        {!isLoading && (
-          <>
-            {exists && (
-              <div className="flex justify-end p-3">
-                <button
-                  className="flex items-center gap-x-2 text-blue-500 hover:text-blue-700"
-                  onClick={() => {
-                    modal.setShowModal(true);
-                  }}
-                >
-                  {modal.showModal ? (
-                    <>
-                      <AiOutlineEyeInvisible className="text-lg" />
-                      Hide Reason
-                    </>
-                  ) : (
-                    <>
-                      <AiOutlineEye className="text-lg" />
-                      Show Reason
-                    </>
-                  )}
-                </button>
-              </div>
-            )}
-            {/*{showReason && (
-              <>
-                {" "}
-                {isSuspended && data.data?.reason_for_suspension && (
-                  <div className="flex flex-col sm:flex-row sm:items-center p-3 bg-red-50 border border-red-200 rounded-md">
-                    <p className="w-full sm:w-3/12 shrink-0 text-red-700 font-semibold mb-1 sm:mb-0">
-                      Reason for Suspension:
-                    </p>
-                    <p className="fw-500 text-red-600">
-                      {data.data.reason_for_suspension}
-                    </p>
-                  </div>
-                )}
-                {!isSuspended && data.data?.reason_for_unsuspension && (
-                  <div className="flex flex-col sm:flex-row sm:items-center p-3 bg-green-50 border border-green-200 rounded-md">
-                    <p className="w-full sm:w-3/12 shrink-0 text-green-700 font-semibold mb-1 sm:mb-0">
-                      Reason for Unsuspension:
-                    </p>
-                    <p className="fw-500 text-green-600">
-                      {data.data.reason_for_unsuspension}
-                    </p>
-                  </div>
-                )}
-              </>
-            )}*/}
-          </>
-        )}
+        {!isLoading && <></>}
         {!isLoading && !loading && data && (
           <div>
             <div className="w-full h-[140px] flex justify-end bg-review border p-3 rounded-t-lg lg:px-5 items-center">
@@ -297,21 +247,21 @@ const StaffDetail = () => {
                 </div>
               </div>
             </div>
-            <div className="grid lg:grid-cols-2 border h-[300px] bg-gray-50 mt-6">
+            <div className="">
+              <div className="border-r-2 h-fit  ">
+                <p className="p-3 border-b-2 fw-500 text-gray-600">
+                  Vehicle Info
+                </p>
+                <div className="px-4 py-3 ">
+                  <VehicleInfo item={kyc.data} />
+                </div>
+              </div>
               <div className="border-r-2 h-full">
                 <p className="p-3 border-b-2 fw-500 text-gray-600">
                   Service Category
                 </p>
                 <div className="px-4 py-3 h-[245px] overflow-y-auto">
                   <ServiceCategory cat={kyc?.data?.service_rendered} />
-                </div>
-              </div>
-              <div className="border-r-2 h-full">
-                <p className="p-3 border-b-2 fw-500 text-gray-600">
-                  Vehicle Info
-                </p>
-                <div className="px-4 py-3 h-[245px] overflow-y-auto">
-                  <VehicleInfo item={kyc.data} />
                 </div>
               </div>
             </div>
