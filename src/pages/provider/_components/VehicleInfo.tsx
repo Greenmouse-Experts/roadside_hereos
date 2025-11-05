@@ -190,32 +190,30 @@ interface Item {
 }
 export default function VehicleInfo({ item }: { item: Item }) {
   return (
-    <div className="">
-      <div className="border-t border-gray-200">
+    <div className="font-bold">
+      <div className="border-t border-gray-200 ">
         <dl>
           <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">
-              Car Description
-            </dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
+            <dt className="text-sm  text-gray-700 ">Car Description</dt>
+            <dd className="mt-1 text-sm text-black sm:mt-0 sm:col-span-2">
               {/*{JSON.stringify(item)}*/}
               {item.car_description}
             </dd>
           </div>
           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Plate Number</dt>
+            <dt className="text-sm  text-gray-700">Plate Number</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {item.plate_number}
             </dd>
           </div>
-          <div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
+          {/*<div className="bg-gray-50 px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Brands</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:mt-0 sm:col-span-2">
               {item.brands && item.brands.length > 0
                 ? item.brands.join(", ")
                 : "N/A"}
             </dd>
-          </div>
+          </div>*/}
         </dl>
       </div>
     </div>
