@@ -17,6 +17,7 @@ import ViewReviewsModal from "../../lib/components/admin/providers/staff/ViewRev
 import AdminServiceRenderd from "./_components/AdminServiceRendered";
 import { apiClient } from "../../lib/services/api/serviceApi";
 import { getDriverKyc } from "../../lib/services/api/kycApi";
+import VehicleInfo from "../provider/_components/VehicleInfo";
 
 const StaffDetail = () => {
   const { id } = useParams();
@@ -163,11 +164,18 @@ const StaffDetail = () => {
                       </div>
                     </div>
                     <div className="border-r border-gray-200 p-6">
-                      <p className="pb-3 border-b fw-600 text-gray-700 text-lg">
+                      {/*<p className="pb-3 border-b fw-600 text-gray-700 text-lg">
                         Service Brands
                       </p>
                       <div className="pt-4">
                         <ServiceBrands brands={data?.data?.brands} />
+                      </div>*/}
+
+                      <p className="p-3 border-b-2 fw-500 text-gray-600">
+                        Vehicle Info
+                      </p>
+                      <div className="px-4 py-3 h-[245px] overflow-y-auto">
+                        <VehicleInfo item={data.data} />
                       </div>
                     </div>
                   </div>
