@@ -50,6 +50,7 @@ type SignUpFormInputs = {
   email: string;
   password: string;
   phone: string; // Storing as string for input flexibility
+  zipcode: string; // Added zipcode field
   referralSource?: string; // Changed from howDidYouHear
   captcha: string; // This will now store the reCAPTCHA token
   sms_opt_in: boolean;
@@ -327,6 +328,34 @@ export default function UserSignUp() {
                     {errors.phone && (
                       <p className="text-red-500 text-sm mt-1">
                         {errors.phone.message}
+                      </p>
+                    )}
+                  </div>
+
+                  {/* Zip Code */}
+                  <div>
+                    <label
+                      htmlFor="zipcode"
+                      className="block text-sm font-medium text-gray-700 mb-1"
+                    >
+                      Zip Code
+                    </label>
+                    <input
+                      {...register("zipcode", {
+                        required: "Zip code is required",
+                        pattern: {
+                          value: /^\d{5}(-\d{4})?$/, // Basic US zip code pattern
+                          message: "Invalid zip code",
+                        },
+                      })}
+                      id="zipcode"
+                      type="text"
+                      className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent"
+                      placeholder="e.g., 90210"
+                    />
+                    {errors.zipcode && (
+                      <p className="text-red-500 text-sm mt-1">
+                        {errors.zipcode.message}
                       </p>
                     )}
                   </div>
