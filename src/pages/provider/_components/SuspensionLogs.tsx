@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "../../../lib/services/api/serviceApi";
 import { useState } from "react";
+import { Eye, EyeOff, RefreshCcw, UserX, UserCheck } from "lucide-react";
 
 interface SuspensionLog {
   id: string;
@@ -27,31 +28,56 @@ interface SuspensionLogsResponse {
 export default function SuspensionLogs({ id }: { id: string }) {
   const [isExpanded, setIsExpanded] = useState(false);
 
-  const { data, isLoading, isError, error } = useQuery<SuspensionLogsResponse>({
-    queryKey: ["suspensionLogs", id],
-    queryFn: async () => {
-      const response = await apiClient.get(`/users/suspension-logs/${id}`, {
-        params: { limit: 20 },
-      });
-      return response.data;
-    },
-    enabled: isExpanded, // Only fetch data when expanded
-  });
+  const { data, isLoading, isError, error, refetch, isRefetching } =
+    useQuery<SuspensionLogsResponse>({
+      queryKey: ["suspensionLogs", id],
+      queryFn: async () => {
+        const response = await apiClient.get(`/users/suspension-logs/${id}`, {
+          params: { limit: 20 },
+        });
+        return response.data;
+      },
+      enabled: isExpanded, // Only fetch data when expanded
+    });
 
   const toggleExpansion = () => {
     setIsExpanded(!isExpanded);
   };
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container mx-auto p-4 ring mt-4 ring-gray-300 rounded-md bg-white">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-2xl font-bold text-gray-800">Suspension Logs</h2>
-        <button
-          onClick={toggleExpansion}
-          className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-200"
-        >
-          {isExpanded ? "Hide Logs" : "Show Logs"}
-        </button>
+        <h2 className="text-lg font-bold text-gray-800">Suspension Logs</h2>
+        <div className="flex space-x-2">
+          {isExpanded && (
+            <button
+              onClick={() => refetch()}
+              disabled={isLoading || isRefetching}
+              className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-opacity-50 transition-colors duration-200 flex items-center space-x-2"
+            >
+              <RefreshCcw
+                className={`w-4 h-4 ${isRefetching ? "animate-spin" : ""}`}
+              />
+              <span>{isRefetching ? "Refreshing..." : "Refresh"}</span>
+            </button>
+          )}
+          <button
+            onClick={toggleExpansion}
+            className="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 transition-colors duration-200 flex items-center space-x-2"
+          >
+            {isExpanded ? (
+              <>
+                <EyeOff className="w-4 h-4" />
+                <span>Hide Logs</span>
+              </>
+            ) : (
+              <>
+                <Eye className="w-4 h-4" />
+                <span>Show Logs</span>
+              </>
+            )}
+          </button>
+        </div>
       </div>
 
       {isExpanded && (
@@ -81,7 +107,7 @@ export default function SuspensionLogs({ id }: { id: string }) {
                 >
                   <div className="flex items-center justify-between mb-4">
                     <span
-                      className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                      className={`px-3 py-1 rounded-full text-sm font-semibold flex items-center space-x-1 ${
                         log.suspensionStatus === "suspended"
                           ? "bg-red-100 text-red-800"
                           : log.suspensionStatus === "unsuspended"
@@ -89,8 +115,16 @@ export default function SuspensionLogs({ id }: { id: string }) {
                             : "bg-gray-100 text-gray-800"
                       }`}
                     >
-                      {log.suspensionStatus.charAt(0).toUpperCase() +
-                        log.suspensionStatus.slice(1)}
+                      {log.suspensionStatus === "suspended" && (
+                        <UserX className="w-4 h-4" />
+                      )}
+                      {log.suspensionStatus === "unsuspended" && (
+                        <UserCheck className="w-4 h-4" />
+                      )}
+                      <span>
+                        {log.suspensionStatus.charAt(0).toUpperCase() +
+                          log.suspensionStatus.slice(1)}
+                      </span>
                     </span>
                     <span className="text-sm text-gray-500">
                       {new Date(log.actionDate).toLocaleDateString()}

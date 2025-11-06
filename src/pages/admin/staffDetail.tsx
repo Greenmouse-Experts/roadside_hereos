@@ -248,6 +248,7 @@ const StaffDetail = () => {
           </p>
           <div className="pt-4">
             <AdminServiceRenderd
+              id={id}
               serviceData={data?.data.serviceRequests as any}
             />
           </div>

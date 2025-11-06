@@ -1,4 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import { format_time } from "../../../utils/utils";
+import { apiClient } from "../../../lib/services/api/serviceApi";
 
 interface ServiceData {
   id: string;
@@ -86,8 +88,19 @@ interface ServiceData {
 
 export default function AdminServiceRenderd(props: {
   serviceData: ServiceData[];
+  id?: string;
 }) {
+  // const query = useQuery({
+  //   queryKey: ["serviceData", props.id as string],
+  //   queryFn: async () => {
+  //     let resp = await apiClient.get(
+  //       "/service-request/fetch-driver-service/" + props.id,
+  //     );
+  //     return resp.data;
+  //   },
+  // });
   const { serviceData } = props;
+  // return <>{JSON.stringify(query.data)}</>;
   return (
     <ul className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-2 ">
       {serviceData?.map((service) => (
@@ -101,9 +114,13 @@ export default function AdminServiceRenderd(props: {
           <p className="text-gray-700 mb-2">
             <span
               className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${
+                //@ts-ignore
                 service.serviceRequestStatus === "pending"
                   ? "bg-yellow-100 text-yellow-800"
-                  : service.serviceRequestStatus === "fulfilled" ||
+                  : //@ts-ignore
+
+                    service.serviceRequestStatus === "fulfilled" ||
+                      //@ts-ignore
                       service.serviceRequestStatus === "completed"
                     ? "bg-green-100 text-green-800"
                     : service.serviceRequestStatus === "cancelled"

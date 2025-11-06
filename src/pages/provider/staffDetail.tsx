@@ -366,7 +366,10 @@ const StaffDetail = () => {
         <p className="p-3 border-b-2 fw-500 text-gray-600">Service Rendered</p>
         <div className="px-4 py-3">
           {/*{JSON.stringify(kyc.data.serviceRequests)}*/}
-          <AdminServiceRenderd serviceData={kyc?.data?.serviceRequests} />
+          <AdminServiceRenderd
+            serviceData={kyc?.data?.serviceRequests}
+            id={id}
+          />
         </div>
       </div>
       <modal.Modal title="Reason for Suspension/UnSuspension">
