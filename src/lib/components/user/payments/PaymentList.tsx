@@ -35,11 +35,12 @@ const PaymentList: FC<Props> = ({
         <p className="fw-600">{formatAsNgnMoney(info.getValue())}</p>
       ),
     }),
-    columnHelper.accessor((row) => row.name, {
-      id: "Service Category",
-      cell: (info) => <p className="">{info.getValue()}</p>,
-      header: (info) => info.column.id,
-    }),
+    //@ts-ignore
+    // columnHelper.accessor((row) => row?.tax_breakdown[0].amount, {
+    //   id: "Service Amount",
+    //   cell: (info) => <p className="">{JSON.stringify(info.getValue())}</p>,
+    //   header: (info) => info.column.id,
+    // }),
     columnHelper.accessor((row) => row.city, {
       id: "Service Location",
       cell: (info) => <p className="">{info.getValue()}</p>,

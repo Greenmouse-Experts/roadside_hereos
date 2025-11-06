@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import { DataTable } from "../../ui/DataTable";
 import { createColumnHelper } from "@tanstack/react-table";
-import { FormatStatus } from "../../../utils";
+import { formatAsNgnMoney, FormatStatus } from "../../../utils";
 import { ServiceRequestItem2 } from "../../../types/service";
 import CurveLoader from "../../ui/loader/curveLoader/CurveLoader";
 import dayjs from "dayjs";
@@ -40,6 +40,14 @@ const RequestList: FC<Props> = ({ status, paymentStatus }) => {
     columnHelper.accessor((row) => row.name, {
       id: "Service Category",
       cell: (info) => <p className="fw-600">{info.getValue()}</p>,
+      header: (info) => info.column.id,
+    }),
+    //@ts-ignore
+    columnHelper.accessor((row) => row?.amount, {
+      id: "Service Amount",
+      cell: (info) => (
+        <p className="font-bold">{formatAsNgnMoney(info.getValue())}</p>
+      ),
       header: (info) => info.column.id,
     }),
     columnHelper.accessor((row) => row.location, {
