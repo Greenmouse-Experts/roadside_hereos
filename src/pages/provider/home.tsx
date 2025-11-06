@@ -200,7 +200,9 @@ const ProviderHomePage = () => {
               <p className="text-lg fw-700 text-gray-900">
                 {stat?.data?.totalServices || "0"}
               </p>
-              <p className="fs-500 fw-500 text-primary">Total Services</p>
+              <p className="fs-500 fw-500 text-primary">
+                Total Services Rendered
+              </p>
             </div>
           </div>
           <div className="flex items-center gap-x-4 lg:border-none">
