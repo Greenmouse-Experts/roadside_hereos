@@ -21,6 +21,7 @@ import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import { AxiosError } from "axios";
 import { Tooltip } from "@chakra-ui/react";
 import { TbTooltip } from "react-icons/tb";
+import { useNavigate } from "react-router-dom";
 
 const ProviderRegisterForm = () => {
   const [isBusy, setIsBusy] = useState(false);
@@ -28,7 +29,7 @@ const ProviderRegisterForm = () => {
   const [showDrop, setShowDrop] = useState(false);
   const [selectDrop, setSelectDrop] = useState(false);
   const [selectedAvenue, setSelectedAvenue] = useState("");
-
+  const navigate = useNavigate();
   // const [selectedCat, setSelectedCat] = useState([]);
   const [values, setValues] = useState<string[]>([]);
   const { data: services } = useQuery({
@@ -92,7 +93,7 @@ const ProviderRegisterForm = () => {
           onSuccess: (data) => {
             setIsBusy(false);
             toast.success(data?.message);
-            setShowModal(true);
+            navigate("/auth/verify/user");
           },
           onError: (error: any) => {
             console.log(error);
