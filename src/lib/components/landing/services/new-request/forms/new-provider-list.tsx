@@ -173,7 +173,7 @@ export default function NewProviderList({ next }: { next: () => void }) {
     queryKey: ["vendors", location, radius],
     queryFn: async () => {
       const temp = await apiClient.post(
-        `/service-request/service-information/create/nearby-technicians?latitude=${center?.lat}&longitude=${center?.lng}&radius=${radius}&limit=10`,
+        `/service-request/service-information/create/nearby-technicians?latitude=${center?.lat}&longitude=${center?.lng}&radius=${radius * 1.6}&limit=10`,
         {
           serviceId: reqPayload.serviceId,
           vehicleMake: reqPayload.vehicleMake,
@@ -189,7 +189,7 @@ export default function NewProviderList({ next }: { next: () => void }) {
       setServiceInformationResponse(temp.data);
       let new_id = serviceInformationResponse.data.serviceRequest.id;
       const response = await apiClient.post(
-        `/service-request/service-information/${new_id}/notify?latitude=${center?.lat}&longitude=${center?.lng}&prev_radius=1&radius=${radius}`,
+        `/service-request/service-information/${new_id}/notify?latitude=${center?.lat}&longitude=${center?.lng}&prev_radius=1&radius=${radius * 1.6}`,
       );
 
       return response.data;

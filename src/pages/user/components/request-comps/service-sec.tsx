@@ -118,7 +118,7 @@ export default function ServiceSection() {
   const service_mutation = useMutation({
     mutationFn: async (data: FormProps) => {
       let resp = await apiClient.post(
-        `/service-request/service-information/create/nearby-technicians?latitude=${data.latitude}&longitude=${data.longitude}&radius=40&limit=10`,
+        `/service-request/service-information/create/nearby-technicians?latitude=${data.latitude}&longitude=${data.longitude}&radius=64&limit=10`,
         data,
       );
       setService(resp.data);

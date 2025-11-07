@@ -101,7 +101,7 @@ export default function AllQuotes(props: Props) {
     queryKey: ["quotes", request_id, props.radius], // Add radius to query key
     queryFn: async () => {
       const response = await apiClient.get(
-        `/service-quote/fetch-quotes/${service.data.serviceRequest.id}?radius=${props.radius}`, // Add radius parameter
+        `/service-quote/fetch-quotes/${service.data.serviceRequest.id}?radius=${props.radius * 1.6}`, // Add radius parameter
       );
       return response.data;
     },

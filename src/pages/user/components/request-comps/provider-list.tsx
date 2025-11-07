@@ -116,7 +116,7 @@ export default function ProviderLists(props: SectionProps) {
         lng: service.data.serviceRequest.longitude,
       };
       const response = await apiClient.post(
-        `/service-request/service-information/${new_id}/notify?latitude=${center?.lat}&longitude=${center?.lng}&prev_radius=1&radius=${40}`,
+        `/service-request/service-information/${new_id}/notify?latitude=${center?.lat}&longitude=${center?.lng}&prev_radius=1&radius=${40 * 1.6}`,
       );
       return response.data;
     },
