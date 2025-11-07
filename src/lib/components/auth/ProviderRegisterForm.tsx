@@ -11,7 +11,7 @@ import Button from "../ui/Button";
 import { ScaleSpinner } from "../ui/Loading";
 import { MdOutlineHomeRepairService } from "react-icons/md";
 import { useMutation, useQuery } from "@tanstack/react-query";
-import { getCategories } from "../../services/api/serviceApi";
+import { apiClient, getCategories } from "../../services/api/serviceApi";
 import { ServiceCatItem } from "../../types/service";
 import { registerProvider } from "../../services/api/authApi";
 import { toast } from "react-toastify";
@@ -22,6 +22,7 @@ import { AxiosError } from "axios";
 import { Tooltip } from "@chakra-ui/react";
 import { TbTooltip } from "react-icons/tb";
 import { useNavigate } from "react-router-dom";
+import { useTempUser } from "../../../pages/auth/UserSignUp";
 
 const ProviderRegisterForm = () => {
   const [isBusy, setIsBusy] = useState(false);
@@ -29,6 +30,7 @@ const ProviderRegisterForm = () => {
   const [showDrop, setShowDrop] = useState(false);
   const [selectDrop, setSelectDrop] = useState(false);
   const [selectedAvenue, setSelectedAvenue] = useState("");
+  const [temp, setUserDetails] = useTempUser();
   const navigate = useNavigate();
   // const [selectedCat, setSelectedCat] = useState([]);
   const [values, setValues] = useState<string[]>([]);
@@ -67,7 +69,10 @@ const ProviderRegisterForm = () => {
     },
   });
   const mutation = useMutation({
-    mutationFn: registerProvider,
+    mutationFn: async (data: any) => {
+      let resp = await apiClient.post("/user/provider/signup", data);
+      return resp.data;
+    },
   });
   const onSubmit = (data: any) => {
     if (data.email.includes("+")) {
@@ -94,6 +99,11 @@ const ProviderRegisterForm = () => {
             setIsBusy(false);
             toast.success(data?.message);
             navigate("/auth/verify/user");
+            const payload = { ...data };
+            const resp_data = data;
+            //@ts-ignore
+            setUserDetails(resp_data);
+            return resp_data;
           },
           onError: (error: any) => {
             console.log(error);
