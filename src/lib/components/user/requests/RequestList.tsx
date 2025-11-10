@@ -80,9 +80,9 @@ const RequestList: FC<Props> = ({ status, paymentStatus }) => {
       id: "Status",
       header: (info) => info.column.id,
       cell: (info) => (
-        <p className="fw-600">
+        <span className="fw-600">
           {FormatStatus[info.getValue() as keyof typeof FormatStatus]}
-        </p>
+        </span>
       ),
     }),
     columnHelper.accessor((row) => row.serviceRequestId, {
@@ -98,6 +98,7 @@ const RequestList: FC<Props> = ({ status, paymentStatus }) => {
     }),
   ];
 
+  // return <></>;
   return (
     <div className="lg:p-4 w-full">
       {isLoading && (

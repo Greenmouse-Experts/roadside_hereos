@@ -17,33 +17,39 @@ const MyProfileSettings = () => {
   const { Modal, setShowModal } = useModal();
   const [isBusy, setIsBusy] = useState(false);
   const mutation = useMutation({
-    mutationFn: async (fd: any) => {
-      let resp = await apiClient.patch("/user/update-account", fd);
+    mutationFn: async (file: File) => {
+      const fd = new FormData();
+      fd.append("photo", file);
+      fd.append("id", user.id);
+      let resp = await apiClient.patch("/user/update-account", fd, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      const acct = await apiClient.get("/user/me");
+      console.log(acct.data.user);
+      const new_user_data = { ...user, image: acct.data.user.photo };
+      saveUser(new_user_data);
       return resp.data;
     },
     onSuccess: (data) => {
-      const payload = {
-        ...user,
-        image: data.user.photo,
-      };
+      // const payload = {
+      //   ...user,
+      //   image: data.user.photo,
+      // };
       toast.success(data.message);
-      saveUser(payload);
+      // saveUser(payload);
     },
-    onError: (error) => {
-      toast.error(JSON.stringify(error.message));
+    onError: (error: any) => {
+      toast.error(error.response?.data?.message || error.message);
     },
   });
   const handleChangePicture = async (
     e: React.ChangeEvent<HTMLInputElement | null>,
   ) => {
-    // if (e.target.files.length < 1) return;
-    const files = e.target.files[0];
-    const fd = new FormData();
-    fd.append("photo", files);
-    // const fd = {
-    //   photo: files,
-    // };
-    mutation.mutate(fd);
+    if (!e.target || !e.target.files || e.target.files.length < 1) return;
+    const file = e.target.files[0];
+    mutation.mutate(file);
   };
   return (
     <>
@@ -62,14 +68,13 @@ const MyProfileSettings = () => {
                 {mutation.isPending && (
                   <FaCamera className="text-lg text-white mb-1" />
                 )}
+                <FaCamera className="text-lg text-white mb-1" />
+
                 <input
                   type="file"
                   accept="image/*"
                   name="profile"
                   id="profile"
-                  // onInput={(e) => {
-                  //   // console.log("input");
-                  // }}
                   onChange={handleChangePicture}
                   className="absolute top-0 -left-6 opacity-0"
                 />

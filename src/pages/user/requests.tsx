@@ -12,6 +12,10 @@ const UserRequests = () => {
       content: <RequestList status="Ongoing" paymentStatus="Paid" />,
     },
     {
+      title: <p>UnPaid</p>,
+      content: <RequestList status="Pending" paymentStatus="1" />,
+    },
+    {
       title: <p>Fulfilled</p>,
       content: <RequestList status="fulfilled" paymentStatus="Paid" />,
     },
