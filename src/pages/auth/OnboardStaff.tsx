@@ -13,7 +13,6 @@ import useModal from "../../lib/hooks/useModal";
 import { toast } from "react-toastify";
 import { BASE_URL } from "../../lib/services/constant";
 
-
 const OnboardStaff = () => {
   const { code } = useParams();
   const token = code?.replace("token=", "");
@@ -21,7 +20,6 @@ const OnboardStaff = () => {
   const [isBusy, setIsBusy] = useState(false);
   const [states, setStates] = useState<IState[]>([]);
   const [cities, setCities] = useState<ICity[]>([]);
-
 
   const {
     control,
@@ -37,6 +35,7 @@ const OnboardStaff = () => {
       country: "",
       state: "",
       city: "",
+      zipcode: "", // Added zipcode to defaultValues
       password: "",
       confirm_password: "",
     },
@@ -80,7 +79,7 @@ const OnboardStaff = () => {
   const submitAction = async (data: any) => {
     setIsBusy(true);
     const payload = {
-      address: `${data.street}, ${data.city}, ${data.state}, ${data.country}`,
+      address: `${data.street}, ${data.city}, ${data.state}, ${data.zipcode}, ${data.country}`, // Included zipcode in address
       password: data.password,
       phone_number: data.phone,
     };
@@ -98,8 +97,7 @@ const OnboardStaff = () => {
         toast.success(result?.message);
         setIsBusy(false);
         setShowModal(true);
-      }
-      else {
+      } else {
         toast.error(result?.message);
         setIsBusy(false);
       }
@@ -212,12 +210,12 @@ const OnboardStaff = () => {
                           {...field}
                         />
                       )}
-                    /> 
+                    />
                     <Controller
                       name="street"
                       control={control}
                       rules={{
-                        required: true
+                        required: true,
                       }}
                       render={({ field }) => (
                         <TextInput
@@ -230,8 +228,34 @@ const OnboardStaff = () => {
                           ref={null}
                         />
                       )}
-                    />              
-                     </div>
+                    />
+                    {/* New Zipcode Field */}
+                    <Controller
+                      name="zipcode"
+                      control={control}
+                      rules={{
+                        required: {
+                          value: true,
+                          message: "Zipcode is required",
+                        },
+                        pattern: {
+                          value: /^\d{5}(?:[-\s]\d{4})?$/, // Basic US zipcode regex
+                          message: "Invalid Zipcode",
+                        },
+                      }}
+                      render={({ field }) => (
+                        <TextInput
+                          label="Zipcode"
+                          labelClassName="text-[#000000B2] fw-500"
+                          placeholder="Enter Zipcode"
+                          error={errors.zipcode?.message}
+                          type={InputType.text}
+                          {...field}
+                          ref={null}
+                        />
+                      )}
+                    />
+                  </div>
                   <div className=" grid lg:grid-cols-2 gap-4">
                     <Controller
                       name="password"
