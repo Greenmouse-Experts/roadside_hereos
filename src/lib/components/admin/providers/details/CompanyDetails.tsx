@@ -8,6 +8,7 @@ import { FC } from "react";
 import dayjs from "dayjs";
 import { FaRegAddressCard } from "react-icons/fa6";
 import { BsCalendar4Week } from "react-icons/bs";
+import { PiShareNetworkDuotone } from "react-icons/pi";
 
 interface Service {
   name: string;
@@ -21,6 +22,8 @@ interface Props {
     address: string;
     service_rendered: Service[];
     createdAt: string;
+    [key: string]: any;
+    referralSource: string;
   };
 }
 const CompanyDetails: FC<Props> = ({ data }) => {
@@ -81,6 +84,15 @@ const CompanyDetails: FC<Props> = ({ data }) => {
                     )
                   : "N/A"}
               </ul>
+            </div>
+          </div>
+          <div className="lg:flex items-center gap-x-4 lg:gap-x-12">
+            <div className="lg:w-2/12 flex bg-primary text-white p-3 items-center gap-x-2">
+              <PiShareNetworkDuotone className="text-xl" />
+              <p>Referral Source</p>
+            </div>
+            <div className="mt-2 lg:mt-0">
+              <p className="fw-600">{data?.referralSource || "N/A"}</p>
             </div>
           </div>
           <div className="lg:flex items-center gap-x-4 lg:gap-x-12">
