@@ -35,7 +35,7 @@ const OnboardStaff = () => {
       country: "",
       state: "",
       city: "",
-      zipcode: "", // Added zipcode to defaultValues
+      Zipcode: "", // Added Zipcode to defaultValues
       password: "",
       confirm_password: "",
     },
@@ -79,7 +79,7 @@ const OnboardStaff = () => {
   const submitAction = async (data: any) => {
     setIsBusy(true);
     const payload = {
-      address: `${data.street}, ${data.city}, ${data.state}, ${data.zipcode}, ${data.country}`, // Included zipcode in address
+      address: `${data.street}, ${data.city}, ${data.state}, ${data.Zipcode}, ${data.country}`, // Included Zipcode in address
       password: data.password,
       phone_number: data.phone,
     };
@@ -231,7 +231,7 @@ const OnboardStaff = () => {
                     />
                     {/* New Zipcode Field */}
                     <Controller
-                      name="zipcode"
+                      name="Zipcode"
                       control={control}
                       rules={{
                         required: {
@@ -248,7 +248,7 @@ const OnboardStaff = () => {
                           label="Zipcode"
                           labelClassName="text-[#000000B2] fw-500"
                           placeholder="Enter Zipcode"
-                          error={errors.zipcode?.message}
+                          error={errors.Zipcode?.message}
                           type={InputType.text}
                           {...field}
                           ref={null}
