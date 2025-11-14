@@ -35,7 +35,7 @@ const OnboardStaff = () => {
       country: "",
       state: "",
       city: "",
-      Zipcode: "", // Added Zipcode to defaultValues
+      zipcode: "", // Added Zipcode to defaultValues
       password: "",
       confirm_password: "",
     },
@@ -79,9 +79,10 @@ const OnboardStaff = () => {
   const submitAction = async (data: any) => {
     setIsBusy(true);
     const payload = {
-      address: `${data.street}, ${data.city}, ${data.state}, ${data.Zipcode}, ${data.country}`, // Included Zipcode in address
+      address: `${data.street}, ${data.city}, ${data.state}, ${data.country}`, // Included Zipcode in address
       password: data.password,
       phone_number: data.phone,
+      zipcode: data.zipcode,
     };
     try {
       const response = await fetch(`${BASE_URL}/invitation-request/join`, {
@@ -231,7 +232,7 @@ const OnboardStaff = () => {
                     />
                     {/* New Zipcode Field */}
                     <Controller
-                      name="Zipcode"
+                      name="zipcode"
                       control={control}
                       rules={{
                         required: {
@@ -239,17 +240,17 @@ const OnboardStaff = () => {
                           message: "Zipcode is required",
                         },
                         pattern: {
-                          value: /^\d{5}(?:[-\s]\d{4})?$/, // Basic US zipcode regex
+                          value: /^\d{5}(?:[-\s]\d{6})?$/, // Basic US zipcode regex
                           message: "Invalid Zipcode",
                         },
                       }}
                       render={({ field }) => (
                         <TextInput
-                          label="Zipcode"
+                          label="zipcode"
                           labelClassName="text-[#000000B2] fw-500"
                           placeholder="Enter Zipcode"
-                          error={errors.Zipcode?.message}
-                          type={InputType.text}
+                          error={errors.zipcode?.message}
+                          type={InputType.number}
                           {...field}
                           ref={null}
                         />

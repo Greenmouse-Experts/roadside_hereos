@@ -1,6 +1,13 @@
 import happy from "../../../assets/happystate.gif";
+import { useNavigate } from "react-router-dom";
 
 const OnboardSuccess = () => {
+  const navigate = useNavigate();
+
+  const handleLoginRedirect = () => {
+    navigate("/auth/login");
+  };
+
   return (
     <>
       <div className="px-3 pb-6">
@@ -35,6 +42,14 @@ const OnboardSuccess = () => {
             , then log in to complete your KYC and start receiving service
             requests from clients.
           </p>
+          <div className="mt-6 text-center">
+            <button
+              onClick={handleLoginRedirect}
+              className="px-6 py-3 text-white bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+            >
+              Proceed to Login
+            </button>
+          </div>
         </div>
       </div>
     </>
