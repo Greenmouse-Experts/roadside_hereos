@@ -22,70 +22,22 @@ import BlogPage from "./pages/landing/Blog";
 import BlogDetail from "./pages/landing/BlogDetail";
 import PaymentSettlement from "./pages/landing/Payment";
 import CookieConsent from "react-cookie-consent";
-// function CookieConsent() {
-//   const [visible, setVisible] = useState(false);
+import NewCookieConsent from "./lib/components/CookieConsent";
 
-//   useEffect(() => {
-//     const consent = localStorage.getItem("cookie_consent");
-//     if (!consent) {
-//       setVisible(true);
-//     }
-//   }, []);
-
-//   const handleAccept = () => {
-//     localStorage.setItem("cookie_consent", "accepted");
-//     setVisible(false);
-//   };
-
-//   if (!visible) return null;
-
-//   return (
-//     <div
-//       style={{
-//         position: "fixed",
-//         bottom: 0,
-//         left: 0,
-//         right: 0,
-//         background: "#222",
-//         color: "#fff",
-//         padding: "1rem",
-//         zIndex: 1000,
-//         display: "flex",
-//         justifyContent: "center",
-//         alignItems: "center",
-//         flexWrap: "wrap",
-//       }}
-//     >
-//       <span>
-//         We use cookies to improve your experience. By using our site, you agree
-//         to our{" "}
-//         <a
-//           href="/cookie"
-//           style={{ color: "#fff", textDecoration: "underline" }}
-//         >
-//           cookie policy
-//         </a>
-//         .
-//       </span>
-//       <button
-//         onClick={handleAccept}
-//         style={{
-//           marginLeft: "1rem",
-//           background: "#fff",
-//           color: "#222",
-//           border: "none",
-//           borderRadius: "4px",
-//           padding: "0.5rem 1rem",
-//           cursor: "pointer",
-//         }}
-//       >
-//         Accept
-//       </button>
-//     </div>
-//   );
-// }
+function checkCookieConsentStatus() {
+  // Check if cookie_consent_status exists in document.cookie
+  return document.cookie
+    .split(";")
+    .some((cookie) => cookie.trim().startsWith("cookie_consent_status="));
+}
 
 function App() {
+  const [showCookieConsent, setShowCookieConsent] = useState(false);
+
+  useEffect(() => {
+    setShowCookieConsent(!checkCookieConsentStatus());
+  }, []);
+
   return (
     <>
       <ScrollToTop />
@@ -111,10 +63,7 @@ function App() {
         <Route path="/payment-settlement" element={<PaymentSettlement />} />
       </Routes>
       {/*<CookieModal />*/}
-      <CookieConsent>
-        This website uses cookies to enhance the user experience.{" "}
-        {/*<span style={{ fontSize: "10px" }}>This bit of text is smaller :O</span>*/}
-      </CookieConsent>
+      {showCookieConsent && <NewCookieConsent />}
     </>
   );
 }
