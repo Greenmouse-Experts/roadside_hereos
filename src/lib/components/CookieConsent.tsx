@@ -75,19 +75,8 @@ export default function NewCookieConsent() {
                     Required for the website to function properly.
                   </p>
                 </div>
-                <div className="">
-                  <Controller
-                    control={form.control}
-                    name="necessary"
-                    render={({ field }) => {
-                      return (
-                        <>
-                          {/*//@ts-ignore*/}
-                          <Switch {...field} disabled />
-                        </>
-                      );
-                    }}
-                  />
+                <div>
+                  <Switch {...form.register("necessary")} disabled />
                 </div>
               </div>
               <div className="flex items-center">
