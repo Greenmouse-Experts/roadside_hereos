@@ -32,10 +32,16 @@ function checkCookieConsentStatus() {
 }
 
 function App() {
-  const [showCookieConsent, setShowCookieConsent] = useState(false);
+  const [showCookieConsent, setShowCookieConsent] = useState(
+    !checkCookieConsentStatus(),
+  );
 
   useEffect(() => {
-    setShowCookieConsent(!checkCookieConsentStatus());
+    const interval = setInterval(() => {
+      setShowCookieConsent(!checkCookieConsentStatus());
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
 
   return (

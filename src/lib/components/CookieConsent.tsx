@@ -14,30 +14,48 @@ export default function NewCookieConsent() {
       analytics: true,
     },
   });
-  const onSubmit = (data: { necessary: boolean; analytics: boolean }) => {
-    // Helper function to set a cookie with an expiration date
-    const setCookie = (name: string, value: string, days: number) => {
-      let expires = "";
-      if (days) {
-        const date = new Date();
-        date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-        expires = "; expires=" + date.toUTCString();
-      }
-      document.cookie =
-        name + "=" + (value || "") + expires + "; path=/; SameSite=Lax";
-    };
 
-    // Save the form values (necessary and analytics) to a cookie
+  // Helper function to set a cookie with an expiration date
+  const setCookie = (name: string, value: string, days: number) => {
+    let expires = "";
+    if (days) {
+      const date = new Date();
+      date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+      expires = "; expires=" + date.toUTCString();
+    }
+    document.cookie =
+      name + "=" + (value || "") + expires + "; path=/; SameSite=Lax";
+  };
+
+  // Save preferences to cookies
+  const savePreferences = (data: {
+    necessary: boolean;
+    analytics: boolean;
+  }) => {
     const preferencesJson = JSON.stringify(data);
     setCookie("cookie_preferences", preferencesJson, 365); // Save for 1 year
-
-    // Save a separate cookie indicating that consent has been given
     setCookie("cookie_consent_status", "true", 365); // Save for 1 year
     toast.info("Preferences Saved");
-    const closer = document.querySelector("#closeer") as HTMLDivElement;
     // The form has method="dialog", so submitting it will automatically close the dialog.
     // No explicit dialogRef.current.close() is typically needed here.
   };
+
+  const onSubmit = (data: { necessary: boolean; analytics: boolean }) => {
+    savePreferences(data);
+  };
+
+  // Complete Accept All handler
+  const handleAcceptAll = () => {
+    // Accept all cookies (necessary and analytics)
+    const allAccepted = {
+      necessary: true,
+      analytics: true,
+    };
+    savePreferences(allAccepted);
+    dialogRef.current?.close();
+    toast.success("All cookies accepted");
+  };
+
   return (
     <>
       <dialog
@@ -112,13 +130,7 @@ export default function NewCookieConsent() {
             >
               Manage Preferences
             </Button>
-            <Button
-              size={"sm"}
-              onClick={() => {
-                dialogRef.current?.close();
-                console.log(dialogRef.current?.open);
-              }}
-            >
+            <Button size={"sm"} onClick={handleAcceptAll}>
               Accept All{" "}
             </Button>
           </div>
