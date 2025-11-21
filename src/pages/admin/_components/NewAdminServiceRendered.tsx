@@ -90,17 +90,27 @@ interface AdminServiceData {
 }
 
 export type { AdminServiceData };
-export default function NewAdminserviceRendered({ id }: { id }) {
+export default function NewAdminserviceRendered({ id }: { id: string }) {
   const status = ["All", "completed", "pending", "cancelled"] as const;
+  const limit = 10;
+  const [page, setPage] = useState(1);
   const [tab, setTab] = useState<(typeof status)[number]>("All");
-  const query = useQuery<{ message: string; data: AdminServiceData[] }>({
-    queryKey: ["adminService", id, tab],
+  const query = useQuery<{
+    message: string;
+    data: {
+      serviceRequests: AdminServiceData[];
+      total: number;
+    };
+  }>({
+    queryKey: ["adminService", id, tab, page], // Add page to queryKey
     queryFn: async () => {
       const response = await apiClient.get(
         `/service-request/fetch-driver-service/${id}`,
         {
           params: {
             status: tab === "All" ? "" : tab,
+            limit,
+            page: page,
           },
         },
       );
@@ -108,14 +118,24 @@ export default function NewAdminserviceRendered({ id }: { id }) {
     },
   });
 
+  const totalItems = query.data?.data.total || 0;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  const handlePageChange = (newPage: number) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setPage(newPage);
+    }
+  };
+
   return (
     <>
       <div className="p-2 bg-white mx-2 shadow rounded">
         <div className="py-4 px-2">
-          <div className="flex gap-2 items-center border-b border-gray-200">
+          <div className="flex gap-2 items-center border-b border-gray-200 overflow-x-auto">
             {status.map((item) => {
               const selectTab = () => {
                 setTab(item);
+                setPage(1); // Reset page when tab changes
               };
               const isActive = tab === item;
               return (
@@ -123,7 +143,7 @@ export default function NewAdminserviceRendered({ id }: { id }) {
                   type="button"
                   key={"item" + item}
                   onClick={selectTab}
-                  className={`px-4  capitalize py-2 text-sm font-medium rounded-t-md focus:outline-none transition-colors
+                  className={`px-4  capitalize py-2 text-sm font-medium rounded-t-md focus:outline-none transition-colors whitespace-nowrap
                     ${
                       isActive
                         ? "bg-primary text-white shadow -mb-px border-b-2 border-primary"
@@ -138,6 +158,27 @@ export default function NewAdminserviceRendered({ id }: { id }) {
         </div>
       </div>
       <Contents query={query as any} />
+      {totalItems > 0 && (
+        <div className="flex justify-center items-center gap-4 py-4 bg-white mx-2 shadow rounded mt-4">
+          <button
+            onClick={() => handlePageChange(page - 1)}
+            disabled={page === 1 || query.isFetching}
+            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Previous
+          </button>
+          <span className="text-sm font-medium text-gray-700">
+            Page {page} of {totalPages}
+          </span>
+          <button
+            onClick={() => handlePageChange(page + 1)}
+            disabled={page === totalPages || query.isFetching}
+            className="px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-md hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            Next
+          </button>
+        </div>
+      )}
     </>
   );
 }
@@ -151,7 +192,7 @@ const Contents = ({
     };
   }>;
 }) => {
-  if (query.isLoading)
+  if (query.isFetching)
     return (
       <div className="flex flex-col items-center justify-center min-h-[220px] bg-white shadow p-6">
         <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900"></div>
@@ -174,13 +215,12 @@ const Contents = ({
     );
   return (
     <>
-      {query.data?.data.serviceRequests &&
-      query.data.data.serviceRequests.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 bg-gradient-to-br bg-white bg-opacity-70 m-2 shadow-lg rounded-xl">
+      {query.data.data?.serviceRequests?.length > 0 ? (
+        <div className="grid grid-cols-[repeat(auto-fill,minmax(302px,1fr))] gap-6 p-6 bg-gradient-to-br bg-white bg-opacity-70 m-2 shadow-lg rounded-xl">
           {query.data.data.serviceRequests.map((service) => (
             <Link
               to={`/admin/services/${service.serviceRequestId}`}
-              key={service.serviceId}
+              key={service.serviceRequestId}
               className="bg-white shadow-lg rounded-lg p-6 mb-4 border border-gray-200 hover:shadow-xl transition-shadow duration-300"
             >
               <h3 className="text-lg font-semibold text-gray-800 mb-2">
