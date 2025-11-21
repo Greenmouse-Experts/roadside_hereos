@@ -92,7 +92,7 @@ interface AdminServiceData {
 export type { AdminServiceData };
 export default function NewAdminserviceRendered({ id }: { id }) {
   const status = ["All", "completed", "pending", "cancelled"] as const;
-  const [tab, setTab] = useState<(typeof status)[number]>("completed");
+  const [tab, setTab] = useState<(typeof status)[number]>("All");
   const query = useQuery<{ message: string; data: AdminServiceData[] }>({
     queryKey: ["adminService", id, tab],
     queryFn: async () => {
