@@ -13,5 +13,9 @@ export default function GetKycAdmin({ id }: { id: string }) {
       return resp.data;
     },
   });
-  return <div>{JSON.stringify(query.data)}</div>;
+  return (
+    <div className="bg-white p-6 rounded-shadow flex flex-col min-h-[300px] justify-center items-center">
+      <h2 className="text-xl font-bold">Work In Progress</h2>
+    </div>
+  );
 }

@@ -6,6 +6,7 @@ import {
 import { apiClient } from "../../../lib/services/api/serviceApi";
 import { format_time } from "../../../utils/utils";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 interface AdminServiceData {
   id: string;
@@ -175,14 +176,16 @@ const Contents = ({
     <>
       {query.data?.data.serviceRequests &&
       query.data.data.serviceRequests.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 bg-gradient-to-br from-blue-50 to-indigo-100 m-2 shadow-lg rounded-xl">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 bg-gradient-to-br bg-white bg-opacity-70 m-2 shadow-lg rounded-xl">
           {query.data.data.serviceRequests.map((service) => (
-            <li
+            <Link
+              to={`/admin/services/${service.serviceRequestId}`}
               key={service.serviceId}
               className="bg-white shadow-lg rounded-lg p-6 mb-4 border border-gray-200 hover:shadow-xl transition-shadow duration-300"
             >
               <h3 className="text-lg font-semibold text-gray-800 mb-2">
                 {service.name}
+                {/*{service.serviceRequestId}*/}
               </h3>
               <p className="text-gray-700 mb-2">
                 <span
@@ -224,7 +227,7 @@ const Contents = ({
                 </span>{" "}
                 {service.paymentRef}
               </p>
-            </li>
+            </Link>
           ))}
         </div>
       ) : (
