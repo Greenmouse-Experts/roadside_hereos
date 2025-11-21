@@ -19,24 +19,159 @@ import { apiClient } from "../../lib/services/api/serviceApi";
 import { getDriverKyc } from "../../lib/services/api/kycApi";
 import VehicleInfo from "../provider/_components/VehicleInfo";
 import SuspensionLogs from "../provider/_components/SuspensionLogs";
+import GetKycAdmin from "./_components/StaffKycDetails";
+import { useState } from "react";
+import NewAdminserviceRendered from "./_components/NewAdminServiceRendered";
+import NewSuspensionLogs from "./_components/NewSuspensionLogs";
 
 const StaffDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+
+  // const { data: kyc } = useQuery({
+  //   queryKey: ["getStaffKyc"],
+  //   queryFn: () => getDriverKyc(`${id}`),
+  // })z
   const { isLoading, data } = useQuery({
     queryKey: ["getProviders"],
     queryFn: () => getProvidersDetails(`${id}`),
-    // queryFn: async () => {
-    //   let resp = await apiClient.get(
-    //     "https://api.alldrivesos.com/api/kyc/driver/fetch-details/" + id,
-    //   );
-    //   return resp.data;
-    // },
   });
-  const { data: kyc } = useQuery({
-    queryKey: ["getStaffKyc"],
-    queryFn: () => getDriverKyc(`${id}`),
-  });
+  const tab_list = ["Info", "Logs", "Kyc", "Requests"] as const;
+  const [tab, setTab] = useState<(typeof tab_list)[number]>("Info");
+  return (
+    <>
+      {isLoading ? (
+        <>
+          {" "}
+          <div className="py-12 flex justify-center items-center text-black">
+            <div>
+              <div className="flex justify-center">
+                <CurveLoader />
+              </div>
+              <p className="text-center mt-5 fw-500">
+                Fetching Provider Details...
+              </p>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="flex mb-4">
+            <div
+              className="flex gap-x-2 items-center cursor-pointer text-gray-600 hover:text-gray-800 transition-colors"
+              onClick={() => navigate(-1)}
+            >
+              <FaLongArrowAltLeft className="text-lg" />
+              <p className="fw-500">Back to company</p>
+            </div>
+          </div>
+
+          <div className="w-full h-[140px] bg-primary p-4 rounded-t-xl lg:px-8 flex justify-end items-center">
+            <div className="text-white text-right space-y-1">
+              <p className="text-sm opacity-80">
+                Pending Balance:{" "}
+                <span className="text-lg fw-600 ml-2">
+                  {formatAsNgnMoney(data.data.pendingBal) || "$0"}
+                </span>
+              </p>
+              <p className="text-sm opacity-80">
+                Available Balance:{" "}
+                <span className="text-lg fw-600 ml-2">
+                  {formatAsNgnMoney(data.data.walletBal) || "$0"}
+                </span>
+              </p>
+            </div>
+          </div>
+          <div className="lg:flex justify-between items-start -mt-16 px-4 lg:px-8">
+            <div className="flex items-end">
+              <div className="border-4 border-white w-[140px] h-[140px] rounded-full shadow-md">
+                <ProfileAvatar
+                  name={`${data?.data?.fname} ${data?.data?.lname}`}
+                  url={data?.data?.photo}
+                  size={130}
+                  font={35}
+                />
+              </div>
+              <div className="ml-4 pt-10 mt-8">
+                <p className="fw-700 text-xl lg:text-2xl text-gray-800">{`${data?.data?.fname} ${data?.data?.lname}`}</p>
+                <p className="text-sm text-gray-500 fw-500 mt-1">
+                  Service Provider
+                </p>
+                <div className="mt-2">
+                  {data?.data?.isSuspended
+                    ? FormatStatus["inactive"]
+                    : FormatStatus["active"]}
+                </div>
+              </div>
+            </div>
+            <div
+              className="flex items-center gap-2 fw-600 text-blue-gray-300 pt-4 lg:pt-8 cursor-pointer hover:text-blue-gray-800 transition-colors"
+              onClick={() => setShowModal(true)}
+            >
+              <span className="text-lg">
+                {data?.data?.avgRating === null
+                  ? "No Ratings Yet"
+                  : `${data?.data?.avgRating}/5`}
+              </span>
+              {data?.data?.reviewsAvg && (
+                <Rating
+                  value={Number(data?.data?.avgRating) || 0}
+                  ratedColor={"amber"}
+                  className="scale-100"
+                  readonly
+                />
+              )}
+              <span className="text-sm underline hover:no-underline">
+                View Reviews
+              </span>
+            </div>
+          </div>
+        </>
+      )}
+      <div className="py-4 px-2">
+        <div className="flex gap-2 items-center border-b border-gray-200">
+          {tab_list.map((item) => {
+            const selectTab = () => {
+              setTab(item);
+            };
+            const isActive = tab === item;
+            return (
+              <button
+                type="button"
+                key={"item" + item}
+                onClick={selectTab}
+                className={`px-4 py-2 text-sm font-medium rounded-t-md focus:outline-none transition-colors
+                  ${
+                    isActive
+                      ? "bg-primary text-white shadow -mb-px border-b-2 border-primary"
+                      : "bg-transparent text-gray-600 hover:text-primary"
+                  }`}
+              >
+                {item}
+              </button>
+            );
+          })}
+        </div>
+      </div>
+      {tab == "Info" && <Page id={id} data={data} isLoading={isLoading} />}
+      {tab == "Logs" && <NewSuspensionLogs id={id} />}
+      {tab == "Kyc" && <GetKycAdmin id={id} />}
+      {tab == "Requests" && <NewAdminserviceRendered id={id} />}
+    </>
+  );
+};
+
+export default StaffDetail;
+
+const Page = ({
+  id,
+  data,
+  isLoading,
+}: {
+  id: string;
+  data: any;
+  isLoading: boolean;
+}) => {
   const { Dialog, setShowModal } = useDialog();
   return (
     <>
@@ -55,78 +190,9 @@ const StaffDetail = () => {
         )}
         {!isLoading && data && (
           <div>
-            <div className="flex mb-4">
-              <div
-                className="flex gap-x-2 items-center cursor-pointer text-gray-600 hover:text-gray-800 transition-colors"
-                onClick={() => navigate(-1)}
-              >
-                <FaLongArrowAltLeft className="text-lg" />
-                <p className="fw-500">Back to company</p>
-              </div>
-            </div>
             <div className="bg-white rounded-xl shadow-lg min-h-[80vh] overflow-hidden">
               {!isLoading && data && (
                 <div>
-                  <div className="w-full h-[140px] bg-primary p-4 rounded-t-xl lg:px-8 flex justify-end items-center">
-                    <div className="text-white text-right space-y-1">
-                      <p className="text-sm opacity-80">
-                        Pending Balance:{" "}
-                        <span className="text-lg fw-600 ml-2">
-                          {formatAsNgnMoney(data.data.pendingBal) || "$0"}
-                        </span>
-                      </p>
-                      <p className="text-sm opacity-80">
-                        Available Balance:{" "}
-                        <span className="text-lg fw-600 ml-2">
-                          {formatAsNgnMoney(data.data.walletBal) || "$0"}
-                        </span>
-                      </p>
-                    </div>
-                  </div>
-                  <div className="lg:flex justify-between items-start -mt-16 px-4 lg:px-8">
-                    <div className="flex items-end">
-                      <div className="border-4 border-white w-[140px] h-[140px] rounded-full shadow-md">
-                        <ProfileAvatar
-                          name={`${data?.data?.fname} ${data?.data?.lname}`}
-                          url={data?.data?.photo}
-                          size={130}
-                          font={35}
-                        />
-                      </div>
-                      <div className="ml-4 pt-10 mt-8">
-                        <p className="fw-700 text-xl lg:text-2xl text-gray-800">{`${data?.data?.fname} ${data?.data?.lname}`}</p>
-                        <p className="text-sm text-gray-500 fw-500 mt-1">
-                          Service Provider
-                        </p>
-                        <div className="mt-2">
-                          {data?.data?.isSuspended
-                            ? FormatStatus["inactive"]
-                            : FormatStatus["active"]}
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="flex items-center gap-2 fw-600 text-blue-gray-300 pt-4 lg:pt-8 cursor-pointer hover:text-blue-gray-800 transition-colors"
-                      onClick={() => setShowModal(true)}
-                    >
-                      <span className="text-lg">
-                        {data?.data?.avgRating === null
-                          ? "No Ratings Yet"
-                          : `${data?.data?.avgRating}/5`}
-                      </span>
-                      {data?.data?.reviewsAvg && (
-                        <Rating
-                          value={Number(data?.data?.avgRating) || 0}
-                          ratedColor={"amber"}
-                          className="scale-100"
-                          readonly
-                        />
-                      )}
-                      <span className="text-sm underline hover:no-underline">
-                        View Reviews
-                      </span>
-                    </div>
-                  </div>
                   <div className="px-4 lg:px-8 mt-6 pb-6 border-b border-gray-200 grid lg:grid-cols-2 gap-6">
                     <div className="p-4 bg-gray-50 rounded-lg border border-gray-200">
                       <p className="fw-600 text-sm text-gray-500 mb-3 uppercase tracking-wider">
@@ -155,6 +221,7 @@ const StaffDetail = () => {
                       </div>
                     </div>
                   </div>
+
                   <div className="grid lg:grid-cols-2 border-t border-gray-200 mt-6 bg-white">
                     <div className="border-r border-gray-200 p-6">
                       <p className="pb-3 border-b fw-600 text-gray-700 text-lg">
@@ -166,11 +233,11 @@ const StaffDetail = () => {
                     </div>
                     <div className="border-r border-gray-200 p-6">
                       {/*<p className="pb-3 border-b fw-600 text-gray-700 text-lg">
-                        Service Brands
-                      </p>
-                      <div className="pt-4">
-                        <ServiceBrands brands={data?.data?.brands} />
-                      </div>*/}
+                      Service Brands
+                    </p>
+                    <div className="pt-4">
+                      <ServiceBrands brands={data?.data?.brands} />
+                    </div>*/}
 
                       <p className="p-3 border-b-2 fw-500 text-gray-600">
                         Vehicle Info
@@ -226,14 +293,14 @@ const StaffDetail = () => {
                         </p>
                       </div>
                       {/* <div className="flex">
-                        <p className="w-3/12 shrink-0 text-gray-600 ">
-                          Service Fees:
-                        </p>
-                        <div className="fw-500 grid gap-2">
-                          <p>E-Fuel - $45</p>
-                          <p>Towing - $55</p>
-                        </div>
-                      </div> */}
+                      <p className="w-3/12 shrink-0 text-gray-600 ">
+                        Service Fees:
+                      </p>
+                      <div className="fw-500 grid gap-2">
+                        <p>E-Fuel - $45</p>
+                        <p>Towing - $55</p>
+                      </div>
+                    </div> */}
                     </div>
                   </div>
                 </div>
@@ -241,8 +308,7 @@ const StaffDetail = () => {
             </div>
           </div>
         )}
-        <SuspensionLogs id={id} />
-        <div className="p-6">
+        {/*<div className="p-6">
           <p className="pb-3 border-b fw-600 text-gray-700 text-lg">
             Service Rendered
           </p>
@@ -252,7 +318,7 @@ const StaffDetail = () => {
               serviceData={data?.data.serviceRequests as any}
             />
           </div>
-        </div>
+        </div>*/}
         <Dialog title="View Provider Reviews" size="lg">
           <ViewReviewsModal id={`${id}`} />
         </Dialog>
@@ -260,5 +326,3 @@ const StaffDetail = () => {
     </>
   );
 };
-
-export default StaffDetail;

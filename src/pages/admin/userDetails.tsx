@@ -11,6 +11,7 @@ const AdminUserDetails = () => {
     queryFn: () => adminGetUserDetails(`${id}`),
   });
 
+  return <></>;
   return (
     <div>
       {isLoading && (

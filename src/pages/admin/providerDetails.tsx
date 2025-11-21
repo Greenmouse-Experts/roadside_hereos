@@ -37,7 +37,6 @@ const ProviderDetails = () => {
     },
   ];
 
-  console.log(data);
   return (
     <>
       {isLoading && (
