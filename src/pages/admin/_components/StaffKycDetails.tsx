@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "../../../lib/services/api/serviceApi";
+import { format_time } from "../../../utils/utils";
 
 interface ServiceRendered {
   id: string;
@@ -279,21 +280,15 @@ export default function GetKycAdmin({ id }: { id: string }) {
         )}
         {renderDetail(
           "Last Login",
-          kycData.last_login
-            ? new Date(kycData.last_login).toLocaleString()
-            : "N/A",
+          kycData.last_login ? format_time(kycData.last_login) : "N/A",
         )}
         {renderDetail(
           "Created At",
-          kycData.createdAt
-            ? new Date(kycData.createdAt).toLocaleString()
-            : "N/A",
+          kycData.createdAt ? format_time(kycData.createdAt) : "N/A",
         )}
         {renderDetail(
           "Updated At",
-          kycData.updatedAt
-            ? new Date(kycData.updatedAt).toLocaleString()
-            : "N/A",
+          kycData.updatedAt ? format_time(kycData.updatedAt) : "N/A",
         )}
       </div>
     </div>
