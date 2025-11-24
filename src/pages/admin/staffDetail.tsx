@@ -2,7 +2,7 @@ import { BsTelephone } from "react-icons/bs";
 import { AiOutlineMail } from "react-icons/ai";
 import ServiceCategory from "../../lib/components/provider/details/serviceCategory";
 import ServiceBrands from "../../lib/components/provider/details/serviceBrands";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, useSearchParams } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { FaLongArrowAltLeft } from "react-icons/fa";
 import { getProvidersDetails } from "../../lib/services/api/usersApi";
@@ -32,12 +32,16 @@ const StaffDetail = () => {
   //   queryKey: ["getStaffKyc"],
   //   queryFn: () => getDriverKyc(`${id}`),
   // })z
+  const [searchParams, setSearhParam] = useSearchParams();
+  const default_tab = searchParams.get("currTab") as (typeof tab_list)[number];
   const { isLoading, data } = useQuery({
     queryKey: ["getProviders"],
     queryFn: () => getProvidersDetails(`${id}`),
   });
   const tab_list = ["Info", "Logs", "Kyc", "Requests"] as const;
-  const [tab, setTab] = useState<(typeof tab_list)[number]>("Info");
+  const [tab, setTab] = useState<(typeof tab_list)[number]>(
+    default_tab || "Info",
+  );
   return (
     <>
       {isLoading ? (
@@ -133,6 +137,7 @@ const StaffDetail = () => {
           {tab_list.map((item) => {
             const selectTab = () => {
               setTab(item);
+              setSearhParam({ currTab: item });
             };
             const isActive = tab === item;
             return (
