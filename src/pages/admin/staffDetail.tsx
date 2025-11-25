@@ -27,7 +27,7 @@ import NewSuspensionLogs from "./_components/NewSuspensionLogs";
 const StaffDetail = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-
+  const { Dialog, setShowModal } = useDialog();
   // const { data: kyc } = useQuery({
   //   queryKey: ["getStaffKyc"],
   //   queryFn: () => getDriverKyc(`${id}`),
@@ -44,6 +44,9 @@ const StaffDetail = () => {
   );
   return (
     <>
+      <Dialog title="View Provider Reviews" size="lg">
+        <ViewReviewsModal id={`${id}`} />
+      </Dialog>
       {isLoading ? (
         <>
           {" "}
@@ -177,7 +180,6 @@ const Page = ({
   data: any;
   isLoading: boolean;
 }) => {
-  const { Dialog, setShowModal } = useDialog();
   return (
     <>
       <div>
@@ -324,9 +326,6 @@ const Page = ({
             />
           </div>
         </div>*/}
-        <Dialog title="View Provider Reviews" size="lg">
-          <ViewReviewsModal id={`${id}`} />
-        </Dialog>
       </div>
     </>
   );
