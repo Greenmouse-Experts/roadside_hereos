@@ -301,7 +301,7 @@ const ImageView = ({ src, title }: { src: string; title: string }) => {
       <Modal title={title}>
         <img src={src} alt="" />
       </Modal>
-      <div className="" onClick={() => setShowModal(true)}>
+      <div className="w-full h-auto" onClick={() => setShowModal(true)}>
         <img src={src} alt="" className="w-full h-auto object-cover max-h-80" />
       </div>
     </>
