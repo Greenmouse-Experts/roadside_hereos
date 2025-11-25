@@ -1,6 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { apiClient } from "../../../lib/services/api/serviceApi";
 import { format_time } from "../../../utils/utils";
+import useModal from "../../../lib/hooks/useModal";
 
 interface ServiceRendered {
   id: string;
@@ -231,11 +232,7 @@ export default function GetKycAdmin({ id }: { id: string }) {
               <p className="p-3 bg-gray-100 font-medium text-gray-700">
                 Identity Front
               </p>
-              <img
-                src={kycData.identityFront}
-                alt="Identity Front"
-                className="w-full h-auto object-cover max-h-80"
-              />
+              <ImageView title="Identity Front" src={kycData.identityFront} />
             </div>
           ) : (
             <div className="border border-gray-300 rounded-lg p-6 flex items-center justify-center text-gray-500 min-h-[200px]">
@@ -248,11 +245,12 @@ export default function GetKycAdmin({ id }: { id: string }) {
               <p className="p-3 bg-gray-100 font-medium text-gray-700">
                 Identity Back
               </p>
-              <img
+              <ImageView title="Identity Back" src={kycData.identityBack} />
+              {/*<img
                 src={kycData.identityBack}
                 alt="Identity Back"
                 className="w-full h-auto object-cover max-h-80"
-              />
+              />*/}
             </div>
           ) : (
             <div className="border border-gray-300 rounded-lg p-6 flex items-center justify-center text-gray-500 min-h-[200px]">
@@ -294,3 +292,18 @@ export default function GetKycAdmin({ id }: { id: string }) {
     </div>
   );
 }
+
+const ImageView = ({ src, title }: { src: string; title: string }) => {
+  const { Modal, setShowModal } = useModal();
+
+  return (
+    <>
+      <Modal title={title}>
+        <img src={src} alt="" />
+      </Modal>
+      <div className="" onClick={() => setShowModal(true)}>
+        <img src={src} alt="" className="w-full h-auto object-cover max-h-80" />
+      </div>
+    </>
+  );
+};
