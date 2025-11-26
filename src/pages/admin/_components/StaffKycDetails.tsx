@@ -168,7 +168,7 @@ export default function GetKycAdmin({ id }: { id: string }) {
           {renderDetail("State", kycData.state)}
           {renderDetail("Zipcode", kycData.zipcode)}
           {renderDetail("Date of Birth", kycData.dob)}
-          {renderDetail("SSN Last 4", kycData.ssn_last_4)}
+          {/*{renderDetail("SSN Last 4", kycData.ssn_last_4)}*/}
           {renderDetail("Verified", kycData.verified ? "Yes" : "No")}
           {renderDetail("Active", kycData.isActive ? "Yes" : "No")}
           {renderDetail("Suspended", kycData.isSuspended ? "Yes" : "No")}
