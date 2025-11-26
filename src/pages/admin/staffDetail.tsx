@@ -38,7 +38,7 @@ const StaffDetail = () => {
     queryKey: ["getProviders"],
     queryFn: () => getProvidersDetails(`${id}`),
   });
-  const tab_list = ["Info", "Logs", "Kyc", "Requests"] as const;
+  const tab_list = ["Info", "Logs", "KYC", "Requests"] as const;
   const [tab, setTab] = useState<(typeof tab_list)[number]>(
     default_tab || "Info",
   );
@@ -163,7 +163,7 @@ const StaffDetail = () => {
       </div>
       {tab == "Info" && <Page id={id} data={data} isLoading={isLoading} />}
       {tab == "Logs" && <NewSuspensionLogs id={id} />}
-      {tab == "Kyc" && <GetKycAdmin id={id} />}
+      {tab == "KYC" && <GetKycAdmin id={id} />}
       {tab == "Requests" && <NewAdminserviceRendered id={id} />}
     </>
   );
