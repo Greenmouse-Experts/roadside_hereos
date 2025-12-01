@@ -1,7 +1,10 @@
+import { Button } from "@material-tailwind/react";
 import Tabs from "../../lib/components/ui/Tabs";
 import RequestList from "../../lib/components/user/requests/RequestList";
+import { useNavigate } from "react-router-dom";
 
 const UserRequests = () => {
+  const nav = useNavigate();
   const tabs = [
     {
       title: <p>Processing</p>,
@@ -13,7 +16,23 @@ const UserRequests = () => {
     },
     {
       title: <p>UnPaid</p>,
-      content: <RequestList status="Pending" paymentStatus="1" />,
+      content: (
+        <RequestList
+          status="Pending"
+          paymentStatus="Pending"
+          action={(item) => {
+            return (
+              <Button
+                onClick={() => {
+                  nav(`/user/new-request/complete/${item}`);
+                }}
+              >
+                Pay Now
+              </Button>
+            );
+          }}
+        />
+      ),
     },
     {
       title: <p>Fulfilled</p>,

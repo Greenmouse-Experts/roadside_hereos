@@ -12,8 +12,9 @@ import { getMyServices } from "../../../services/api/serviceApi";
 interface Props {
   status: string;
   paymentStatus: string;
+  action?: (item: any) => any;
 }
-const RequestList: FC<Props> = ({ status, paymentStatus }) => {
+const RequestList: FC<Props> = ({ status, paymentStatus, action }) => {
   const [params, setParams] = useState({
     page: 1,
     status: status,
@@ -66,35 +67,50 @@ const RequestList: FC<Props> = ({ status, paymentStatus }) => {
     columnHelper.accessor((row) => row.status, {
       id: "Payment Status",
       header: (info) => info.column.id,
-      cell: (info) => (
-        <div className="fw-600">
-          {
-            FormatStatus[
-              info.getValue()?.toLowerCase() as keyof typeof FormatStatus
-            ]
-          }
-        </div>
-      ),
+      cell: (info) => {
+        return (
+          <>
+            {" "}
+            <div className="fw-600">
+              {
+                FormatStatus[
+                  info.getValue()?.toLowerCase() as keyof typeof FormatStatus
+                ]
+              }
+            </div>
+          </>
+        );
+      },
     }),
     columnHelper.accessor((row) => row.serviceRequestStatus, {
       id: "Status",
       header: (info) => info.column.id,
-      cell: (info) => (
-        <span className="fw-600">
-          {FormatStatus[info.getValue() as keyof typeof FormatStatus]}
-        </span>
-      ),
+      cell: (info) => {
+        return (
+          <>
+            <span className="fw-600">
+              {FormatStatus[info.getValue() as keyof typeof FormatStatus]}
+            </span>
+          </>
+        );
+      },
     }),
     columnHelper.accessor((row) => row.serviceRequestId, {
       id: "Action",
-      cell: (info) => (
-        <p
-          className="fw-600 cursor-pointer underline text-primary"
-          onClick={() => navigate(`/user/requests/${info.getValue()}`)}
-        >
-          View Details
-        </p>
-      ),
+      cell: (info) => {
+        if (action) return action(info.getValue());
+
+        return (
+          <>
+            <p
+              className="fw-600 cursor-pointer underline text-primary"
+              onClick={() => navigate(`/user/requests/${info.getValue()}`)}
+            >
+              View Details
+            </p>
+          </>
+        );
+      },
     }),
   ];
 
