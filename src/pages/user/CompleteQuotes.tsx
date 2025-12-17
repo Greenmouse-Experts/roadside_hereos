@@ -9,6 +9,7 @@ import ViewOnMap from "../../lib/components/landing/services/new-request/forms/V
 import { useTimer } from "react-timer-hook";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
+import PendingDetails from "./components/RequestDetails";
 export interface Quote {
   id: string;
   serviceRequestId: string;
@@ -160,9 +161,10 @@ export default function CompleteQuotes() {
           Cancel
         </Button>
       </div>
+      <PendingDetails id={param.id} />
       <div className="flex flex-col gap-2 p-4 bg-white w-full shadow-xl border rounded-lg">
         <div className="flex items-center mb-2 gap-4">
-          <div>Refreshing in : {formatTimer()}</div>
+          <div>Reloads in: {formatTimer()}</div>
           <div>Radius: {radius} miles</div>
           <span className="ml-auto flex gap-2">
             <button
@@ -170,7 +172,7 @@ export default function CompleteQuotes() {
               className="p-2 bg-blue-500 text-white rounded-md"
               onClick={() => setRadius(radius + 10)}
             >
-              Increase Radius (10)
+              Radius (+10)
             </button>
             <button
               className="p-2 bg-review text-white rounded-md"
