@@ -2,10 +2,36 @@ import { Button } from "@material-tailwind/react";
 import Tabs from "../../lib/components/ui/Tabs";
 import RequestList from "../../lib/components/user/requests/RequestList";
 import { useNavigate } from "react-router-dom";
+import RequestListWithout from "../../lib/components/user/requests/RequestWithout";
 
 const UserRequests = () => {
   const nav = useNavigate();
   const tabs = [
+    {
+      title: <p>Pending</p>,
+      content: (
+        //@ts-ignore
+        <RequestListWithout
+          action={(item) => {
+            return (
+              <>
+                {/*//@ts-ignore*/}
+                <Button
+                  onClick={() => {
+                    nav(
+                      `/user/new-request/complete/${item.serviceName}/quotes/${item.serviceRequestId}`,
+                    );
+                  }}
+                >
+                  Complete
+                </Button>
+              </>
+            );
+          }}
+        />
+      ),
+    },
+    ,
     {
       title: <p>Processing</p>,
       content: <RequestList status="Pending" paymentStatus="Paid" />,

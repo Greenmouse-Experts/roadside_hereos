@@ -1,4 +1,5 @@
 import GeneralNotificationPage from "../../lib/components/shared/NotificationPage";
+import CompleteQuotes from "../../pages/user/CompleteQuotes";
 import CompleteRequests from "../../pages/user/CompleteRequest";
 import UsersHome from "../../pages/user/home";
 import NewRequests from "../../pages/user/new-request";
@@ -66,6 +67,11 @@ export const userRoutes = [
     id: "user13",
     path: "new-request/:id",
     component: <NewRequests />,
+  },
+  {
+    id: "user14",
+    path: "new-request/complete/:name/quotes/:id",
+    component: <CompleteQuotes />,
   },
   {
     id: "user14",

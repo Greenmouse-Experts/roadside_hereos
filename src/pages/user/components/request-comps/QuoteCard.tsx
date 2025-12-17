@@ -8,7 +8,7 @@ import ProfileAvatar from "../../../../lib/components/ui/ProfileAvatar";
 
 export default function QuoteCard(props: {
   quote: Quote;
-  next: () => any;
+  next?: (item?: Quote) => any;
   open: (item: Quote) => any;
 }) {
   const { quote, open, setVendor } = props;
@@ -74,7 +74,7 @@ export default function QuoteCard(props: {
                 );
                 setDriver(quote);
                 console.log(resp.data);
-                props.next();
+                props.next(quote);
               } catch (error: any) {
                 let message = error.response.data.message;
                 if (
@@ -82,7 +82,7 @@ export default function QuoteCard(props: {
                   "One other technician's quote has been selected initially."
                 ) {
                   setDriver(quote);
-                  props.next();
+                  props.next(quote);
                   return;
                 }
               }
