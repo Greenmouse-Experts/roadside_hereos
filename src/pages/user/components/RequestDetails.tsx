@@ -10,9 +10,6 @@ import {
   MapPin,
   FileText,
   Wrench,
-  DollarSign,
-  User,
-  Building,
   Quote,
 } from "lucide-react";
 
@@ -108,16 +105,20 @@ export default function PendingDetails({ id }: { id: string }) {
     label: string;
     value: string | null | undefined;
   }) => (
-    <div className="flex items-center py-3 px-4 border-b border-gray-200 last:border-b-0">
-      <Icon className="h-5 w-5 text-gray-500 mr-3" />
-      <span className="font-semibold text-gray-700">{label}:</span>{" "}
-      <span className="ml-auto text-gray-800">{value || "N/A"}</span>
+    <div className="flex flex-col sm:flex-row sm:items-center py-3 px-4 border-b border-gray-200 last:border-b-0">
+      <div className="flex items-center mb-2 sm:mb-0 sm:w-1/3">
+        <Icon className="h-5 w-5 text-gray-500 mr-3" />
+        <span className="font-semibold text-gray-700">{label}:</span>
+      </div>
+      <span className="md:ml-auto md:text-right text-gray-700 font-medium">
+        {value || "N/A"}
+      </span>
     </div>
   );
 
   return (
-    <div className="mb-6  bg-gray-50 rounded-lg ">
-      <h1 className="text-xl font-semibold text-gray-800 mb-2">
+    <div className="mb-6 bg-gray-50 rounded-lg ">
+      <h1 className="text-xl font-semibold text-gray-800 mb-4 text-center sm:text-left">
         Request Details
       </h1>
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
