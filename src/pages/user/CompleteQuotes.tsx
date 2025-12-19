@@ -10,6 +10,7 @@ import { useTimer } from "react-timer-hook";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@material-tailwind/react";
 import PendingDetails from "./components/RequestDetails";
+import { toast } from "react-toastify";
 export interface Quote {
   id: string;
   serviceRequestId: string;
@@ -153,11 +154,35 @@ export default function CompleteQuotes() {
   const next = (item: Quote) => {
     nav("/user/new-request/complete/" + item.serviceRequestId);
   };
+  const cancel_request = async () => {
+    try {
+      let resp = await apiClient.post(
+        "/service-request/client-cancel/" + param.id,
+        {
+          dissapprovalReason: "",
+        },
+      );
+      nav("/user/new-request");
+      return resp.data;
+    } catch (err) {
+      throw new Error(err);
+    }
+  };
   return (
     <div>
       <div className="flex items-center mb-4 ">
         <h2 className="text-xl font-bold text-primary ">{param.name}</h2>
-        <Button type="reset" onClick={() => {}} className="ml-auto bg-red-500">
+        <Button
+          type="reset"
+          onClick={async () => {
+            toast.promise(cancel_request, {
+              pending: "Canceling...",
+              success: "Canceled!",
+              error: "Failed to cancel",
+            });
+          }}
+          className="ml-auto bg-red-500"
+        >
           Cancel
         </Button>
       </div>
