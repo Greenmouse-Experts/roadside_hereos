@@ -37,7 +37,7 @@ export default function RequestListWithout({
     queryKey: ["getMyService"],
     queryFn: async () => {
       let resp = await apiClient.get(
-        "service-request/user-fetch-details/without-quotes",
+        "service-request/user-fetch-details/without-quote-payments",
       );
       return resp.data;
     },
