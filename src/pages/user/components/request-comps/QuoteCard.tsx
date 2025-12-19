@@ -101,7 +101,7 @@ export default function QuoteCard(props: {
           >
             View On Map
           </button>
-          <button
+          {/*<button
             onClick={async () => {
               setShowModal(true);
             }}
@@ -109,7 +109,7 @@ export default function QuoteCard(props: {
             className="bg-blue-gray-50 hover:bg-blue-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-md transition-colors duration-200 ease-in-out disabled:bg-gray-300 disabled:cursor-not-allowed w-full text-center"
           >
             Info
-          </button>
+          </button>*/}
         </div>
       </div>
     </>
