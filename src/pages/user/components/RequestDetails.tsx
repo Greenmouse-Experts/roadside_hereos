@@ -116,8 +116,8 @@ export default function PendingDetails({ id }: { id: string }) {
   );
 
   return (
-    <div className="mb-6  bg-gray-50 rounded-lg shadow-inner">
-      <h1 className="text-2xl font-bold text-gray-800 mb-4 border-b pb-2">
+    <div className="mb-6  bg-gray-50 rounded-lg ">
+      <h1 className="text-xl font-semibold text-gray-800 mb-2">
         Request Details
       </h1>
       <div className="bg-white shadow-md rounded-lg overflow-hidden">
