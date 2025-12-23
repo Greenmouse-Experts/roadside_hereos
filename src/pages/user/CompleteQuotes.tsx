@@ -159,12 +159,14 @@ export default function CompleteQuotes() {
       let resp = await apiClient.post(
         "/service-request/client-cancel/" + param.id,
         {
-          dissapprovalReason: "",
+          disapprovalReason: "any",
         },
       );
       nav("/user/new-request");
       return resp.data;
     } catch (err) {
+      toast.error(err.response.data.message);
+      // console.log(err.response.data.message);
       throw new Error(err);
     }
   };
@@ -178,7 +180,7 @@ export default function CompleteQuotes() {
             toast.promise(cancel_request, {
               pending: "Canceling...",
               success: "Canceled!",
-              error: "Failed to cancel",
+              // error: "Failed to cancel",
             });
           }}
           className="ml-auto bg-red-500"
