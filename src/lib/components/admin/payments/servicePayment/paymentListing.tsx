@@ -24,13 +24,9 @@ const PaymentListing: FC<Props> = ({ data, count, page, prev, next }) => {
       id: "Amount",
       cell: (info) => <p className="">{formatAsNgnMoney(info.getValue())}</p>,
     }),
-    columnHelper.accessor((row) => row.fname, {
+    columnHelper.accessor((row) => row.name, {
       id: "Customer",
-      cell: (info) => (
-        <p className="">
-          {info.getValue()} {info.row.original.lname}
-        </p>
-      ),
+      cell: (info) => <p className="">{info.row.original.name}</p>,
     }),
     columnHelper.accessor((row) => row.serviceName, {
       id: "Service Category",
