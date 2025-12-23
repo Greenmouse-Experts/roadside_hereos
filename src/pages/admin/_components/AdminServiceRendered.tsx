@@ -103,7 +103,7 @@ export default function AdminServiceRenderd({ id }: { id: string }) {
       total: number;
     };
   }>({
-    queryKey: ["adminService", id, tab, page], // Add page to queryKey
+    queryKey: ["provider-services", id, tab, page], // Add page to queryKey
     queryFn: async () => {
       const response = await apiClient.get(
         `/service-request/fetch-driver-service/${id}`,

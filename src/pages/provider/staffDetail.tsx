@@ -24,6 +24,8 @@ import NewSuspensionLogs from "../admin/_components/NewSuspensionLogs";
 import GetKycAdmin from "../admin/_components/StaffKycDetails";
 import { getStaffDetail } from "../../lib/services/api/companyApi";
 import AdminServiceRenderd from "../admin/_components/AdminServiceRendered";
+import useModal from "../../lib/hooks/useModal";
+import UserAction from "../../lib/components/provider/details/userAction";
 // import NewAdminserviceRendered from "./_components/NewAdminServiceRendered";
 
 const StaffDetail = () => {
@@ -36,7 +38,7 @@ const StaffDetail = () => {
   // })z
   const [searchParams, setSearhParam] = useSearchParams();
   const default_tab = searchParams.get("currTab") as (typeof tab_list)[number];
-  const { isLoading, data } = useQuery({
+  const { isLoading, data, refetch } = useQuery({
     queryKey: ["getProviders"],
     queryFn: () => getDriverKyc(`${id}`),
   });
@@ -44,6 +46,8 @@ const StaffDetail = () => {
   const [tab, setTab] = useState<(typeof tab_list)[number]>(
     default_tab || "Info",
   );
+  const modal = useModal();
+
   return (
     <>
       <Dialog title="View Provider Reviews" size="lg">
@@ -103,16 +107,24 @@ const StaffDetail = () => {
               </div>
               <div className="ml-4 pt-10 mt-8">
                 <p className="fw-700 text-xl lg:text-2xl text-gray-800">{`${data?.data?.fname} ${data?.data?.lname}`}</p>
-                <p className="text-sm text-gray-500 fw-500 mt-1">
+                <p className="text-sm text-gray-500 fw-500 ">
                   Service Provider
                 </p>
-                <div className="mt-2">
+                {/*<div className="mt-2">
                   {data?.data?.isSuspended
                     ? FormatStatus["inactive"]
                     : FormatStatus["active"]}
-                </div>
+                </div>*/}
+                <UserAction
+                  isActive={data?.data?.isActive}
+                  refetch={refetch}
+                  id={data?.data.id}
+                  companyId={data.data.companyId}
+                  suspended={data?.data.isSuspended}
+                />
               </div>
             </div>
+
             <div
               className="flex items-center gap-2 fw-600 text-blue-gray-300 pt-4 lg:pt-8 cursor-pointer hover:text-blue-gray-800 transition-colors"
               onClick={() => setShowModal(true)}
@@ -137,6 +149,8 @@ const StaffDetail = () => {
           </div>
         </>
       )}
+
+      {/*//tablist*/}
       <div className="py-4 px-2">
         <div className="flex gap-2 items-center border-b border-gray-200">
           {tab_list.map((item) => {
