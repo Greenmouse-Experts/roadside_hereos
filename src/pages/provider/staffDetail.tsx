@@ -15,7 +15,7 @@ import useDialog from "../../lib/hooks/useDialog";
 import ViewReviewsModal from "../../lib/components/admin/providers/staff/ViewReviewsModal";
 // import AdminServiceRenderd from "./_components/AdminServiceRendered";
 import { apiClient } from "../../lib/services/api/serviceApi";
-import { getDriverKyc } from "../../lib/services/api/kycApi";
+import { approveDriverKyc, getDriverKyc } from "../../lib/services/api/kycApi";
 import VehicleInfo from "../provider/_components/VehicleInfo";
 import SuspensionLogs from "../provider/_components/SuspensionLogs";
 // import GetKycAdmin from "./_components/StaffKycDetails";
@@ -26,6 +26,8 @@ import { getStaffDetail } from "../../lib/services/api/companyApi";
 import AdminServiceRenderd from "../admin/_components/AdminServiceRendered";
 import useModal from "../../lib/hooks/useModal";
 import UserAction from "../../lib/components/provider/details/userAction";
+import GetKycProvider from "./_components/GetKycProvider";
+import { toast } from "react-toastify";
 // import NewAdminserviceRendered from "./_components/NewAdminServiceRendered";
 
 const StaffDetail = () => {
@@ -42,12 +44,27 @@ const StaffDetail = () => {
     queryKey: ["getProviders"],
     queryFn: () => getDriverKyc(`${id}`),
   });
-  const tab_list = ["Info", "Logs", "Requests"] as const;
+  const tab_list = ["Info", "Logs", "KYC", "Requests"] as const;
   const [tab, setTab] = useState<(typeof tab_list)[number]>(
     default_tab || "Info",
   );
   const modal = useModal();
-
+  const approveKyc = async () => {
+    const payload = {
+      approved: true,
+      reason: "",
+    };
+    await approveDriverKyc(data?.data?.id, payload)
+      .then((res) => {
+        toast.success(res.message);
+        setShowModal(false);
+        refetch();
+        // refetchKyc();
+      })
+      .catch((err: any) => {
+        toast.error(err.response.data.message);
+      });
+  };
   return (
     <>
       <Dialog title="View Provider Reviews" size="lg">
@@ -179,7 +196,7 @@ const StaffDetail = () => {
       </div>
       {tab == "Info" && <Page id={id} data={data} isLoading={isLoading} />}
       {tab == "Logs" && <NewSuspensionLogs id={id} />}
-      {/*{tab == "KYC" && <GetKycAdmin id={id} />}*/}
+      {tab == "KYC" && <GetKycProvider id={id} />}
       {tab == "Requests" && (
         <AdminServiceRenderd
           serviceData={data?.data?.serviceRequests}
