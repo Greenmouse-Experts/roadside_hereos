@@ -120,7 +120,7 @@ export default function NewSuspensionLogs({ id }: { id: string }) {
                     </p>
                   )}
                   <p>
-                    <strong>Created At:</strong>{" "}
+                    <strong>Date: </strong>{" "}
                     {new Date(log.createdAt).toLocaleString()}
                   </p>
                 </div>
