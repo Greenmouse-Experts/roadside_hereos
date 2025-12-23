@@ -95,7 +95,7 @@ const StaffDetail = () => {
               </p>
             </div>
           </div>
-          <div className="lg:flex justify-between items-start -mt-16 px-4 lg:px-8">
+          <div className="lg:flex justify-between items-start -mt-16 mb-4">
             <div className="flex items-end">
               <div className="border-4 border-white w-[140px] h-[140px] rounded-full shadow-md">
                 <ProfileAvatar
