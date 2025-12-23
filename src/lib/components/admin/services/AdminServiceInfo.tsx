@@ -88,6 +88,7 @@ interface Props {
     serviceRequestCreatedAt: string;
     customerId: string;
     driverQuoteId: string;
+    processingFee: null | number; // Added processingFee to the interface
     customer: {
       id: string;
       fname: string;
@@ -192,6 +193,7 @@ const AdminServiceInfo: FC<Props> = ({ data }) => {
     company,
     completionTime,
     timeTaken,
+    processingFee, // Destructure processingFee
   } = data;
 
   const isCompanyAssigned = company && company.name;
@@ -279,6 +281,7 @@ const AdminServiceInfo: FC<Props> = ({ data }) => {
                 </p>
               </div>
             </div>
+
             {completionTime && (
               <div className="flex items-start gap-x-2">
                 <IoMdTime className="text-xl text-indigo-500 mt-1 flex-shrink-0" />
@@ -289,6 +292,17 @@ const AdminServiceInfo: FC<Props> = ({ data }) => {
                   <span className="fw-600 text-base">
                     {format_time(completionTime)}
                   </span>
+                </div>
+              </div>
+            )}
+            {processingFee && ( // Conditionally render processing fee
+              <div className="flex items-start gap-x-2">
+                <HiCurrencyDollar className="text-xl text-indigo-500 mt-1 flex-shrink-0" />
+                <div>
+                  <p className="fw-500 text-sm text-gray-600">Processing Fee</p>
+                  <p className="fw-600 text-base text-gray-800">
+                    {formatAsNgnMoney(processingFee)}
+                  </p>
                 </div>
               </div>
             )}
