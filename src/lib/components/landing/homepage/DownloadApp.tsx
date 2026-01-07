@@ -19,14 +19,18 @@ const DownloadApp = () => {
                 services!
               </p>
               <div className="flex gap-x-4 mt-6">
-                <Link to={""}>
+                <Link
+                  to={
+                    "https://play.google.com/store/apps/details?id=com.alldrivesos.app"
+                  }
+                >
                   <img
                     src={google}
                     alt="google_link"
                     className="w-[150px] h-[50px] object-cover rounded-lg"
                   />
                 </Link>
-                <Link to={""}>
+                <Link to={"https://apps.apple.com/app/id6503254909"}>
                   <img
                     src={apple}
                     alt="apple_link"
