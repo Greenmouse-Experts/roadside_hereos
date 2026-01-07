@@ -8,22 +8,22 @@ import { subscribeNews } from "../../../../services/api/routineApi";
 export const socials = [
   {
     name: "twitter",
-    to: "/",
+    to: "https://x.com/AlldriveSOS",
     icon: <SiTwitter className="lg:text-3xl text-xl" />,
   },
   {
     name: "facebook",
-    to: "/",
+    to: "https://www.facebook.com/AllDriveSOS",
     icon: <SiFacebook className="lg:text-3xl text-xl" />,
   },
   {
     name: "instagram",
-    to: "/",
+    to: "https://www.instagram.com/alldrivesos",
     icon: <BiLogoInstagramAlt className="lg:text-4xl text-xl" />,
   },
   {
     name: "linkedin",
-    to: "/",
+    to: "https://www.linkedin.com/in/alldrivesos",
     icon: <SiLinkedin className="lg:text-3xl text-xl" />,
   },
 ];

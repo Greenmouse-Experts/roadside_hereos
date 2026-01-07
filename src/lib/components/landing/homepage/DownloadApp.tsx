@@ -19,8 +19,20 @@ const DownloadApp = () => {
                 services!
               </p>
               <div className="flex gap-x-4 mt-6">
-                <Link to={''}><img src={google} alt="google_link" className="w-[150px] h-[50px] object-cover rounded-lg" /></Link>
-                <Link to={''}><img src={apple} alt="apple_link" className="w-[150px] h-[50px] object-cover rounded-lg" /></Link>
+                <Link to={""}>
+                  <img
+                    src={google}
+                    alt="google_link"
+                    className="w-[150px] h-[50px] object-cover rounded-lg"
+                  />
+                </Link>
+                <Link to={""}>
+                  <img
+                    src={apple}
+                    alt="apple_link"
+                    className="w-[150px] h-[50px] object-cover rounded-lg"
+                  />
+                </Link>
               </div>
             </div>
           </div>
