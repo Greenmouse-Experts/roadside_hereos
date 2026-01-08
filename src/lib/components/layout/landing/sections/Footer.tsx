@@ -77,7 +77,7 @@ const Footer = () => {
               <ul className="flex gap-x-5 lg:gap-x-4 mt-8">
                 {socials.map((item, i) => (
                   <li className="text-white cursor-pointer" key={i}>
-                    {item.icon}
+                    <Link to={item.to}>{item.icon}</Link>
                   </li>
                 ))}
               </ul>
