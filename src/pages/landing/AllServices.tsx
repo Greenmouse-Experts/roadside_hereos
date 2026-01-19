@@ -1,7 +1,7 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCategories } from "../../lib/services/api/serviceApi";
 import LandingLayout from "../../lib/components/layout/landing";
-import { ServiceCatItem } from "../../types/service";
+import type { ServiceCatItem } from "../../types/service";
 import { useNavigate } from "react-router-dom";
 
 export default function AllServices() {

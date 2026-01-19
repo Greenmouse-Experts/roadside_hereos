@@ -42,6 +42,10 @@ export const FOOTER_LIST = [
     name: "Join Us",
   },
   {
+    url: "/all-services",
+    name: "Call Our Services",
+  },
+  {
     url: "/privacy",
     name: "Policy",
   },
