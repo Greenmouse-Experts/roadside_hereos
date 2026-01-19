@@ -19,7 +19,7 @@ const RequestPage = () => {
   const nav = useNavigate();
   useEffect(() => {
     if (user) {
-      nav("/user/new-request/" + id);
+      nav("/user/services");
     }
   }, [user]);
   // return <div className="bg-brown-800 min-h-screen"></div>;
