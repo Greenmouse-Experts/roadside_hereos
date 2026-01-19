@@ -9,7 +9,7 @@ export const NAV_LIST = [
   },
   {
     url: "/all-services",
-    name: "Call Our Services",
+    name: "Our Services",
   },
   {
     url: "/faqs",
@@ -43,7 +43,7 @@ export const FOOTER_LIST = [
   },
   {
     url: "/all-services",
-    name: "Call Our Services",
+    name: "Our Services",
   },
   {
     url: "/privacy",
