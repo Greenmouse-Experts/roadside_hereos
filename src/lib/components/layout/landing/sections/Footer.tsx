@@ -97,11 +97,11 @@ const Footer = () => {
               <li>
                 <Link to={"/join-us"}>Join Us</Link>
               </li>
-              <li>
+              {/*<li>
                 <Link to={"/request"}>Request a Service</Link>
-              </li>
+              </li>*/}
               <li>
-                <Link to={"/all-services"}>Services</Link>
+                <Link to={"/all-services"}>Request a Services</Link>
               </li>
               <li>
                 <Link to={"/auth/register"}>Signup as a Provider</Link>

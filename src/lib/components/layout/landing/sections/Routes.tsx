@@ -4,13 +4,13 @@ export const NAV_LIST = [
     name: "Home",
   },
   {
-    url: "/request",
+    url: "/all-services",
     name: "Request a Service",
   },
-  {
-    url: "/all-services",
-    name: "Services",
-  },
+  // {
+  //   url: "/all-services",
+  //   name: "Services",
+  // },
   {
     url: "/faqs",
     name: "FAQs",
@@ -43,7 +43,7 @@ export const FOOTER_LIST = [
   },
   {
     url: "/all-services",
-    name: "Services",
+    name: "Request a Service",
   },
   {
     url: "/privacy",
