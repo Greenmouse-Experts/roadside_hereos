@@ -23,6 +23,7 @@ import BlogDetail from "./pages/landing/BlogDetail";
 import PaymentSettlement from "./pages/landing/Payment";
 import CookieConsent from "react-cookie-consent";
 import NewCookieConsent from "./lib/components/CookieConsent";
+import AllServices from "./pages/landing/AllServices";
 
 function checkCookieConsentStatus() {
   // Check if cookie_consent_status exists in document.cookie
@@ -50,6 +51,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/faqs" element={<FaqPage />} />
+        <Route path="/all-services" element={<AllServices />} />
         <Route path="/blog" element={<BlogPage />} />
         <Route path="/blog/:id" element={<BlogDetail />} />
         <Route path="/providers-faqs" element={<ProvidersFaqPage />} />
