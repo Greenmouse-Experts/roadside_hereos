@@ -13,15 +13,16 @@ export default function AllServices() {
 
   return (
     <LandingLayout>
+      <div className=" bg-primary">
+        <div className=" bg-primary box py-20 text-white">
+          <h1 className="text-2xl lg:text-4xl fw-700">All Services</h1>
+          <p className="mt-2 fs-400 fw-500">
+            Explore our full range of roadside assistance services.
+          </p>
+        </div>
+      </div>
       <div className="min-h-screen section bg-[#F8F8F8]">
-        <div className="box ">
-          <div className="mb-10">
-            <h1 className="text-2xl lg:text-4xl fw-700">All Services</h1>
-            <p className="mt-2 fs-400 fw-500">
-              Explore our full range of roadside assistance services.
-            </p>
-          </div>
-
+        <div className="box">
           {isLoading ? (
             <p>Loading services...</p>
           ) : (

@@ -4,8 +4,12 @@ export const NAV_LIST = [
     name: "Home",
   },
   {
-    url: "/all-services",
+    url: "/request",
     name: "Request a Service",
+  },
+  {
+    url: "/all-services",
+    name: "Call Our Services",
   },
   {
     url: "/faqs",
