@@ -101,7 +101,7 @@ const Footer = () => {
                 <Link to={"/request"}>Request a Service</Link>
               </li>
               <li>
-                <Link to={"/all-services"}>Our Services</Link>
+                <Link to={"/all-services"}>Services</Link>
               </li>
               <li>
                 <Link to={"/auth/register"}>Signup as a Provider</Link>
